@@ -1,0 +1,8 @@
+<!--
+  Testing master for daniel.
+ -->
+<launch>
+  <include file="$(find museum_concert)/resources/launch/master.launch"/>
+  <include file="$(find museum_concert)/resources/launch/orchestra.launch"/>
+  <include file="$(find museum_concert)/resources/launch/smach.launch"/>
+</launch>

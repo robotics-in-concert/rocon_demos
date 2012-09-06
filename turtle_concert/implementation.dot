@@ -1,0 +1,58 @@
+digraph hierarchy {
+
+	nodesep=1.0 // increases the separation between nodes
+
+	node [color=Red]
+	edge [color=Blue, style=dashed] //setup options
+
+    // concert clients
+    rocon_app_smach [color=blue, shape=ellipse, label="linux.ros.concert\nrocon_app_smach"]
+    rocon_app_projector [color=blue, shape=ellipse, label="linux.ros.pc\nrocon_app_projector"]
+    rocon_app_teleop [color=blue, shape=ellipse, label="linux.ros.robosem\nrocon_app_teleop"]
+    rocon_app_kobukibot [color=blue, shape=ellipse, label="linux.ros.kobukibot\nrocon_app_kobukibot"]
+    rocon_app_voice [color=blue, shape=ellipse, label="android.ros.xoom\nrocon_app_voice_commander"]
+ 
+    // topics
+    change_background [color=red, shape=box, label="change_background\n[std_msgs/Int8]"]
+    
+    call [color=red, shape=box, label="call\n[std_msgs/Empty]"]
+    dismiss [color=red, shape=box, label="dismiss\n[std_msgs/Empty]"]
+    take_photo [color=red, shape=box, label="take_photo\n[std_msgs/Empty]"]
+    take_pano [color=red, shape=box, label="take_pano\n[std_msgs/Empty]"]
+    photo [color=red, shape=box, label="photo\n[sensor_msgs/Image]"]
+    panorama [color=red, shape=box, label="panorama\n[sensor_msgs/Image]"]
+    
+    clear_cmd_list [color=red, shape=box, label="clear_cmd_list\n[std_msgs/Empty]"]
+    set_cmd_list [color=red, shape=box, label="set_cmd_list\n[std_msgs/Empty]"]
+    recognized_cmd [color=red, shape=box, label="reconized_cmd\n[std_msgs/String]"]
+
+    teleop_cmd [color=red, shape=box, label="teleop_cmd\n[std_msgs/String]"]
+    
+    // links
+	//{rank = same; take_photo take_pano change_background call dismiss photo panorama}
+	//{rank = same; clear_cmd_list set_cmd_list recognized_cmd}
+	rocon_app_smach->{ call dismiss take_photo take_pano }
+	call->rocon_app_kobukibot
+    dismiss->rocon_app_kobukibot
+    take_photo->rocon_app_kobukibot
+    take_pano->rocon_app_kobukibot
+	rocon_app_kobukibot->{ photo panorama }
+	photo->rocon_app_smach
+    panorama->rocon_app_smach
+
+	rocon_app_smach->change_background
+	change_background->rocon_app_projector
+	
+	rocon_app_voice->recognized_cmd
+	recognized_cmd->rocon_app_smach
+    rocon_app_smach->clear_cmd_list
+    clear_cmd_list->rocon_app_voice
+    rocon_app_smach->set_cmd_list
+	set_cmd_list->rocon_app_voice
+	
+    rocon_app_teleop->teleop_cmd
+    teleop_cmd->rocon_app_smach
+	
+	//{rank=same; John Jack} //they have the same rank
+	//John->Jack [dir=both] // but is still on the same level as Jack
+}

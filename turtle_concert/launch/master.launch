@@ -1,0 +1,7 @@
+<!--
+  The concert master/conductor.
+ -->
+<launch>
+  <include file="$(find concert_master)/resources/launch/concert_master.launch"/>
+  <rosparam ns="concert/master" param="name">Turtle Concert</rosparam>
+</launch>

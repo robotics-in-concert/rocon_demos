@@ -1,0 +1,9 @@
+<!--
+  Orchestration
+ -->
+<launch>
+    <node ns="concert" name="orchestration" pkg="rocon_orchestra" type="orchestra.py" output="screen">
+        <param name="link_graph" textfile="$(find museum_concert)/resources/dot/implementation.dot" />
+        <rosparam file="$(find museum_concert)/resources/yaml/implementation.yaml" command="load"/>
+    </node>
+</launch>
