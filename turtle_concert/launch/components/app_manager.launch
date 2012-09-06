@@ -13,6 +13,7 @@
 	<node pkg="rocon_linux_app_manager" type="app_manager.py" name="app_manager" output="screen">
       <rosparam file="$(find turtle_concert)/yaml/app_manager.yaml" command="load"/>
       <param name="name" value="$(arg robot)"/>
+      <param name="robot" value="$(arg robot)"/>
       <param name="app_list_dir" value="$(find turtle_concert)/exchange/app_list"/>
       
 	  <remap from="add_listener" to="zeroconf/add_listener"/>

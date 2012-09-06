@@ -42,7 +42,10 @@ rospy.init_node('clear_turtles')
 rospy.wait_for_service('kill')
 kill_turtle = rospy.ServiceProxy('kill',Kill)
 response=kill_turtle("turtle1")
-#rospy.wait_for_service('spawn')
-#spawn_turtle = rospy.ServiceProxy('spawn',Spawn)
-#response=spawn_turtle(0,0,0.0,"kobuki")
-#response=spawn_turtle(0,0,0.3,"guimul")
+
+# Only because we can't get services publicly exposed yet.
+# The master sync can do it, but am not yet doing it
+rospy.wait_for_service('spawn')
+spawn_turtle = rospy.ServiceProxy('spawn',Spawn)
+response=spawn_turtle(5.4,6.4,0.0,"kobuki")
+response=spawn_turtle(5.4,4.4,0.3,"guimul")

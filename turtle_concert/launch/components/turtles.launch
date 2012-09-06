@@ -1,0 +1,12 @@
+<launch>
+  <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
+  <group ns="turtles">
+    <node pkg="turtlesim" type="turtlesim_node" name="turtles" output="screen">
+      <remap from="/turtles/guimul/pose" to="/guimul/application/pose"/>
+      <remap from="/turtles/guimul/command_velocity" to="/guimul/application/command_velocity"/>
+      <remap from="/turtles/kobuki/pose" to="/kobuki/application/pose"/>
+      <remap from="/turtles/kobuki/command_velocity" to="/kobuki/application/command_velocity"/>
+    </node>
+    <node pkg="turtle_concert" type="init_turtles.py" name="init_turtles"/>
+  </group>
+</launch>

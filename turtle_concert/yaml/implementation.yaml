@@ -1,4 +1,4 @@
 name: "Turtle Concert"
 nodes:
-  - linux.ros.pc.rocon_turtle_kobuki/kobuki
-  - linux.ros.pc.rocon_turtle_guimul/guimul
+  - linux.ros.kobuki.turtle_stroll/turtle_stroll
+  - linux.ros.guimul.turtle_stroll/turtle_stroll

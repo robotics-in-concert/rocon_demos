@@ -2,5 +2,5 @@
   <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
   <include file="$(find turtle_concert)/launch/components/master.launch"/>
   <include file="$(find turtle_concert)/launch/components/orchestra.launch"/>
-  <!-- <include file="$(find turtle_concert)/launch/components/smach.launch"/> -->
+  <include file="$(find turtle_concert)/launch/components/turtles.launch"/>
 </launch>

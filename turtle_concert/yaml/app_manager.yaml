@@ -47,5 +47,4 @@ blacklist: []
 
 # Expecting to find various entities under this directory:
 #
-robot: "pc"
-app_store_url: http://rocon.yujin.com/app_store
+#app_store_url: http://rocon.yujin.com/app_store
