@@ -12,6 +12,7 @@
   <depend package="concert_master"/>
   <depend package="rocon_orchestra"/>
   <depend package="rocon_qorchestra"/>
+  <depend package="turtle_stroll"/>
 </package>
 
 
