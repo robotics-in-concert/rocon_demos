@@ -1,0 +1,11 @@
+<stack>
+  <description brief="simple software demo for rocon's multi-ros framework">
+  A simple software demo for a multi-ros system rocon (multi-hello-world)</description>
+  <author>Maintained by Daniel Stonier</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rocon_tools</url>
+  <depend stack="ros" />
+
+
+</stack>
