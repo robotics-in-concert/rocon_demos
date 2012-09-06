@@ -8,7 +8,10 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/hello_concert</url>
-
+  <depend package="rocon_conductor"/>
+  <depend package="concert_master"/>
+  <depend package="rocon_orchestra"/>
+  <depend package="rocon_qorchestra"/>
 </package>
 
 

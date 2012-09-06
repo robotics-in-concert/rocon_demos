@@ -1,8 +1,11 @@
 <!--
-  Testing master for daniel.
+  Concert ros system
+  
+  Always launch with roslaunch --port=11312
  -->
 <launch>
-  <include file="$(find museum_concert)/resources/launch/master.launch"/>
-  <include file="$(find museum_concert)/resources/launch/orchestra.launch"/>
-  <include file="$(find museum_concert)/resources/launch/smach.launch"/>
+  <env name="ROS_MASTER_URI" value="http://localhost:11312"/>
+  <include file="$(find turtle_concert)/launch/master.launch"/>
+  <include file="$(find turtle_concert)/launch/orchestra.launch"/>
+  <!-- <include file="$(find turtle_concert)/launch/smach.launch"/> -->
 </launch>
