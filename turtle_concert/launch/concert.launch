@@ -1,11 +1,10 @@
 <!--
   Concert ros system
   
-  Always launch with roslaunch --port=11312
  -->
 <launch>
   <env name="ROS_MASTER_URI" value="http://localhost:11312"/>
-  <include file="$(find turtle_concert)/launch/master.launch"/>
-  <include file="$(find turtle_concert)/launch/orchestra.launch"/>
-  <!-- <include file="$(find turtle_concert)/launch/smach.launch"/> -->
+  <include file="$(find turtle_concert)/launch/concert/master.launch"/>
+  <include file="$(find turtle_concert)/launch/concert/orchestra.launch"/>
+  <!-- <include file="$(find turtle_concert)/launch/concert/smach.launch"/> -->
 </launch>
