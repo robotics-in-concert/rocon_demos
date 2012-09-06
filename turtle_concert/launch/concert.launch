@@ -3,8 +3,8 @@
   
  -->
 <launch>
-  <env name="ROS_MASTER_URI" value="http://localhost:11312"/>
-  <include file="$(find turtle_concert)/launch/concert/master.launch"/>
-  <include file="$(find turtle_concert)/launch/concert/orchestra.launch"/>
-  <!-- <include file="$(find turtle_concert)/launch/concert/smach.launch"/> -->
+  <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
+  <include file="$(find turtle_concert)/launch/components/master.launch"/>
+  <include file="$(find turtle_concert)/launch/components/orchestra.launch"/>
+  <!-- <include file="$(find turtle_concert)/launch/components/smach.launch"/> -->
 </launch>
