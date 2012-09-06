@@ -1,0 +1,14 @@
+<package>
+  <description brief="hello_qt">
+
+     hello_qt
+
+  </description>
+  <author>Daniel Stonier</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/hello_qt</url>
+
+</package>
+
+

@@ -1,0 +1,14 @@
+<package>
+  <description brief="hello_concert">
+
+     hello_concert
+
+  </description>
+  <author>Daniel Stonier</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/hello_concert</url>
+
+</package>
+
+
