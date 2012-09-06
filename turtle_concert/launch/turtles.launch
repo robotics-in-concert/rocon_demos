@@ -3,6 +3,6 @@
   <group ns="turtles">
     <node pkg="turtlesim" type="turtlesim_node" name="turtles" output="screen">
     </node>
-    <node pkg="turtle_concert" type="clear_turtles.py" name="clear_turtles"/>
+    <node pkg="turtle_concert" type="init_turtles.py" name="init_turtles"/>
   </group>
 </launch>

@@ -1,0 +1,4 @@
+subscribed_topics:
+  pose: turtlesim/Pose
+published_topics:
+  command_velocity: turtlesim/Velocity
