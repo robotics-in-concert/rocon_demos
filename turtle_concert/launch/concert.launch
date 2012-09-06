@@ -1,7 +1,3 @@
-<!--
-  Concert ros system
-  
- -->
 <launch>
   <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
   <include file="$(find turtle_concert)/launch/components/master.launch"/>

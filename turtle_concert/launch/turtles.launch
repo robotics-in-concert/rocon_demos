@@ -1,0 +1,8 @@
+<launch>
+  <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
+  <group ns="turtles">
+    <node pkg="turtlesim" type="turtlesim_node" name="turtles" output="screen">
+    </node>
+    <node pkg="turtle_concert" type="clear_turtles.py" name="clear_turtles"/>
+  </group>
+</launch>
