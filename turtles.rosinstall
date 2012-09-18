@@ -10,7 +10,6 @@
 {'other': {'local-name': '/opt/ros/fuerte/stacks'}},
 
 # Core Support Stacks
-#{'svn': {'local-name': 'ecl', 'uri': 'https://embedded-control-library.googlecode.com/svn/trunk'}},
 {'git': {'local-name': 'zeroconf_implementations', 'version': 'master', 'uri': 'https://github.com/stonier/zeroconf_implementations.git'}},
 
 # Concert
