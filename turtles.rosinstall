@@ -10,10 +10,8 @@
 {'other': {'local-name': '/opt/ros/fuerte/stacks'}},
 
 # Core Support Stacks
-{'svn': {'local-name': 'ecl', 'uri': 'https://embedded-control-library.googlecode.com/svn/trunk'}},
-#{'git': {'local-name': 'rocon/yujin_comms', 'version': 'master', 'uri': 'git://github.com/yujinrobot/yujin_rocon_comms.git'}},
+#{'svn': {'local-name': 'ecl', 'uri': 'https://embedded-control-library.googlecode.com/svn/trunk'}},
 {'git': {'local-name': 'zeroconf_implementations', 'version': 'master', 'uri': 'https://github.com/stonier/zeroconf_implementations.git'}},
-{'git': {'local-name': 'rocon_tools', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_tools.git'}},
 
 # Concert
 {'git': {'local-name': 'rocon_linux_app_platform', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_linux_app_platform.git'}},
