@@ -10,8 +10,8 @@
 {'other': {'local-name': '/opt/ros/fuerte/stacks'}},
 
 # Zeroconf
-{'git': {'local-name': 'zeroconf_msgs', 'version': 'master', 'uri': 'https://github.com/stonier/zeroconf_msgs.git'}},
-{'git': {'local-name': 'zeroconf_avahi_suite', 'version': 'master', 'uri': 'https://github.com/stonier/zeroconf_avahi_suite.git'}},
+{'git': {'local-name': 'zeroconf_msgs', 'version': 'fuerte', 'uri': 'https://github.com/stonier/zeroconf_msgs.git'}},
+{'git': {'local-name': 'zeroconf_avahi_suite', 'version': 'fuerte', 'uri': 'https://github.com/stonier/zeroconf_avahi_suite.git'}},
 
 # Concert
 {'git': {'local-name': 'rocon_linux_app_platform', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_linux_app_platform.git'}},
