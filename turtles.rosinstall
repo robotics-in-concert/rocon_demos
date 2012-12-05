@@ -15,7 +15,7 @@
 
 # Concert
 {'git': {'local-name': 'rocon_linux_app_platform', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_linux_app_platform.git'}},
-{'git': {'local-name': 'rocon_msgs', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
+{'git': {'local-name': 'rocon_msgs', 'version': 'fuerte', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
 {'git': {'local-name': 'rocon_orchestration', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_orchestration.git'}},
 
 # Demo
