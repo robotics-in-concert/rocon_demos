@@ -2,6 +2,7 @@
 # Before rosinstalling!
 #   sudo apt-get install ros-fuerte-desktop-full
 #   sudo apt-get install ros-fuerte-warehousewg ros-fuerte-multimaster-experimental
+#   sudo apt-get install ros-fuerte-zeroconf-msgs ros-fuerte-zeroconf-avahi-suite
 [
 # Official Ros Stacks
 {'setup-file': {'local-name': '/opt/ros/fuerte/setup.sh'}},
@@ -9,17 +10,13 @@
 {'other': {'local-name': '/opt/ros/fuerte/share'}},
 {'other': {'local-name': '/opt/ros/fuerte/stacks'}},
 
-# Zeroconf
-{'git': {'local-name': 'zeroconf_msgs', 'version': 'fuerte', 'uri': 'https://github.com/stonier/zeroconf_msgs.git'}},
-{'git': {'local-name': 'zeroconf_avahi_suite', 'version': 'fuerte', 'uri': 'https://github.com/stonier/zeroconf_avahi_suite.git'}},
-
 # Concert
-{'git': {'local-name': 'rocon_linux_app_platform', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_linux_app_platform.git'}},
+{'git': {'local-name': 'rocon_linux_app_platform', 'version': 'fuerte', 'uri': 'https://github.com/robotics-in-concert/rocon_linux_app_platform.git'}},
 {'git': {'local-name': 'rocon_msgs', 'version': 'fuerte', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
-{'git': {'local-name': 'rocon_orchestration', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_orchestration.git'}},
+{'git': {'local-name': 'rocon_orchestration', 'version': 'fuerte', 'uri': 'https://github.com/robotics-in-concert/rocon_orchestration.git'}},
 
 # Demo
-{'git': {'local-name': 'rocon_demo', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_demo.git'}}
+{'git': {'local-name': 'rocon_demo', 'version': 'fuerte', 'uri': 'https://github.com/robotics-in-concert/rocon_demo.git'}}
 
 ]
 
