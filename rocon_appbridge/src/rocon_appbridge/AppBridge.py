@@ -10,7 +10,7 @@ class AppBridge(object):
     def __init__(self):
         self.sub ={}
         self.sub['command'] = rospy.Subscriber('command',Command,self.processCommand)
-        self.sub['goto'] = rospy.Subscriber('goto',Command,self.processGoto)
+        self.sub['goto'] = rospy.Subscriber('goto',Goto,self.processGoto)
 
         self.pub = {}
         self.pub['status'] = rospy.Publisher('status',String)
