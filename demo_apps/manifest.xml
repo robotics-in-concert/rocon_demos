@@ -1,0 +1,14 @@
+<package>
+  <description brief="demo_apps">
+
+     demo_apps
+
+  </description>
+  <author>Jihoon</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/demo_apps</url>
+
+</package>
+
+
