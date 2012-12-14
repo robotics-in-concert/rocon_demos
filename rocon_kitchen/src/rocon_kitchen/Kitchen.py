@@ -9,7 +9,7 @@ class Kitchen(object):
     def __init__(self):
         self.pub = {}
         self.pub['status'] = rospy.Publisher('~status',String)
-        self.pub['goto'] = rospy.Publisher('/goto',demo_msgs.Goto)
+        self.pub['goto'] = rospy.Publisher('~goto',demo_msgs.Goto)
 
         self.sub = {}
         self.sub['order'] = rospy.Subscriber('~order',demo_msgs.Order,self.processOrder)
