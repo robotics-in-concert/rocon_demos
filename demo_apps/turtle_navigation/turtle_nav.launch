@@ -1,0 +1,3 @@
+<launch>
+    <include file="$(find rocon_appbridge)/launch/appbridge.launch"/>
+</launch>
