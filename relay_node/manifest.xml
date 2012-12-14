@@ -1,0 +1,16 @@
+<package>
+  <description brief="relay_node">
+
+     relay_node
+
+  </description>
+  <author>Jihoon</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/relay_node</url>
+  <depend package="rospy"/>
+  <depend package="demo_msgs"/>
+
+</package>
+
+
