@@ -10,7 +10,7 @@ class AppBridge(object):
     def __init__(self):
         self.sub ={}
         self.sub['command'] = rospy.Subscriber('command',Command,self.processCommand)
-        self.sub['order'] = rospy.Subscriber('order',Command,self.processOrder)
+        self.sub['goto'] = rospy.Subscriber('gotor',Command,self.processGoto)
 
         self.pub = {}
         self.pub['status'] = rospy.Publisher('status',String)
@@ -30,12 +30,12 @@ class AppBridge(object):
         self.log("Ready")
         rospy.spin()
 
-    def processOrder(self,msg):
+    def processGoto(self,msg):
+        self.log("Received : " + str(msg))
         t = Twist()
         t.angular.z = 1.0
-
-        self.log("Received : " + str(msg))
         self.pub['move_turtle'].publish(t)
+        self.log('Turtle moved')
 
     def processCommand(self,msg):
         self.log("Received : " + str(msg))
