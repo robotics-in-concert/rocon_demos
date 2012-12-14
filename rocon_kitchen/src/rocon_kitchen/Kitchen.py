@@ -1,6 +1,6 @@
 
 import rospy
-from demo_msgs.msg as demo_msgs
+import demo_msgs.msg as demo_msgs
 from std_msgs.msg import String
 
 
@@ -25,6 +25,7 @@ class Kitchen(object):
             c.param = "kitchen"
             rospy.sleep(4)
         """
+        rospy.spin()
 
     def processCommand(self,msg):
         self.log('Got Command : ' + str(msg))
