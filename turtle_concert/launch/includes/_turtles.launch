@@ -1,3 +1,7 @@
+<!--
+  Launches the lovely graphical gui on the concert side to 
+  give the demo some voluptuous viewability. 
+ -->
 <launch>
   <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
   <node ns="turtles" pkg="turtlesim" type="turtlesim_node" name="turtles" output="screen">
