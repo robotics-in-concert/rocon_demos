@@ -9,7 +9,7 @@ nodes:
   - id: guimul
     tuple: linux.ros.pc.turtle_stroll
   - id: turtlesim
-    tuple: linux.ros.pc.turtlesim
+    tuple: linux.ros.pc.turtle_stroll_sim
 topics:
   - id: kobuki_turtlesim_command_velocity
     name: command_velocity
