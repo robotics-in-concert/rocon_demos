@@ -2,6 +2,7 @@
 import rospy
 import demo_msgs.msg as demo_msgs
 from std_msgs.msg import String
+from .order_handler import *
 
 
 class Kitchen(object):
@@ -11,8 +12,10 @@ class Kitchen(object):
         self.task_id = 0
 
         self.pub = {}
+        self.pub['status'] = rospy.Publisher('~status',String)
         self.pub['request_robot'] = rospy.Publisher('/mrh/request_robot',demo_msgs.RequestRobot)
-        self.pub['request_goto'] = rospy.Publisher('/mrh/goto',demo_msgs.MRHGoto)
+        self.pub['request_goto'] = rospy.Publisher('/mrh/request_goto',demo_msgs.RequestGoto)
+        self.pub['release_robot'] = rospy.Publisher('/mrh/release_robot',demo_msgs.ReleaseRobot)
 
         self.sub = {}
         self.sub['order'] = rospy.Subscriber('~order',demo_msgs.Order,self.process_order)
@@ -30,8 +33,8 @@ class Kitchen(object):
 
         #   Start Order Thread
         self.task_id = self.task_id + 1
+        order = OrderHandler(msg.location,msg.beverage,self.task_id,self.pub)
         self.task[self.task_id] = order
-        order = OrderHandler(msg.location,msg.beverage,self.task_id)
         order.start()
 
 
