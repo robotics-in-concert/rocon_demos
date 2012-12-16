@@ -7,36 +7,39 @@ from std_msgs.msg import String
 class Kitchen(object):
     
     def __init__(self):
+        self.task = {}
+        self.task_id = 0
+
         self.pub = {}
-        self.pub['status'] = rospy.Publisher('~status',String)
-        self.pub['goto'] = rospy.Publisher('~goto',demo_msgs.Goto)
+        self.pub['request_robot'] = rospy.Publisher('/mrh/request_robot',demo_msgs.RequestRobot)
+        self.pub['request_goto'] = rospy.Publisher('/mrh/goto',demo_msgs.MRHGoto)
 
         self.sub = {}
-        self.sub['order'] = rospy.Subscriber('~order',demo_msgs.Order,self.processOrder)
-        self.sub['command'] = rospy.Subscriber('~command',demo_msgs.Command,self.processCommand)
+        self.sub['order'] = rospy.Subscriber('~order',demo_msgs.Order,self.process_order)
+#        self.sub['command'] = rospy.Subscriber('~command',demo_msgs.Command,self.processCommand)
+
+        self.sub['response_robot'] = rospy.Subscriber('/mrh/response_robot',demo_msgs.ResponseRobot,self.process_response_robot)
+        self.sub['response_goto'] = rospy.Subscriber('/mrh/response_goto',demo_msgs.ResponseGoto,self.process_response_goto)
+
 
     def spin(self):
-
-        """
-        pub = rospy.Publisher('/command',Command)
-        while not rospy.is_shutdown():
-            c = Command()
-            c.command ="Goto"
-            c.param = "kitchen"
-            rospy.sleep(4)
-        """
         rospy.spin()
 
-    def processCommand(self,msg):
-        self.log('Got Command : ' + str(msg))
-
-    def processOrder(self,msg):
+    def process_order(self,msg):
         self.log('Got order : ' + str(msg))
-        self.log('Sending goto Message' + str(msg))
 
-        go = demo_msgs.Goto()
-        self.pub['goto'].publish(go)
-        self.log('Message Sent')
+        #   Start Order Thread
+        self.task_id = self.task_id + 1
+        self.task[self.task_id] = order
+        order = OrderHandler(msg.location,msg.beverage,self.task_id)
+        order.start()
+
+
+    def process_response_robot(self,msg):
+        self.task[msg.task_id].process_response_robot(msg)
+
+    def process_response_goto(self,msg):
+        self.task[msg.task_id].process_response_goto(msg)
 
 
     def log(self,msg):
