@@ -1,4 +1,43 @@
+# Concert client tuples are of the platform-system-robot-name-app where
+# the name is just a placemarker for the eventual concert client name.
+# All other parts of the tuple are fixed.
+
 name: "Turtle Concert"
 nodes:
-  - linux.ros.turtlebot.turtle_stroll
-  - linux.ros.turtlebot.turtle_stroll
+  - id: kobuki
+    tuple: linux.ros.pc.turtle_stroll
+  - id: guimul
+    tuple: linux.ros.pc.turtle_stroll
+  - id: turtlesim
+    tuple: linux.ros.pc.turtlesim
+topics:
+  - id: kobuki_turtlesim_command_velocity
+    name: command_velocity
+    type: turtlesim/Velocity
+  - id: guimul_turtlesim_command_velocity
+    name: command_velocity
+    type: turtlesim/Velocity
+  - id: turtlesim_kobuki_pose
+    name: turtlesim_kobuki/pose
+    type: turtlesim/Pose
+  - id: turtlesim_guimul_pose
+    name: pose
+    type: turtlesim/Pose
+actions: []
+edges:
+  - start: kobuki
+    finish: kobuki_turtlesim_command_velocity
+  - start: guimul
+    finish: guimul_turtlesim_command_velocity
+  - start: kobuki_turtlesim_command_velocity
+    finish: turtlesim
+  - start: guimul_turtlesim_command_velocity
+    finish: turtlesim
+  - start: turtlesim
+    finish: turtlesim_kobuki_pose
+  - start: turtlesim
+    finish: turtlesim_guimul_pose
+  - start: turtlesim_kobuki_pose
+    finish: kobuki
+  - start: turtlesim_guimul_pose
+    finish: guimul
