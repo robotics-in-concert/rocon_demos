@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="relay_node" type="relay_goto.py" name="relay_adams">
+        <remap from="in" to="/whoola/kitchen/goto"/>
+        <remap from="out" to="/adams/goto"/>
+    </node>
+    <node pkg="relay_node" type="relay_goto.py" name="relay_donizetti">
+        <remap from="in" to="/whoola/kitchen/goto"/>
+        <remap from="out" to="/donizetti/goto"/>
+    </node>
+    <node pkg="relay_node" type="relay_goto.py" name="relay_bach">
+        <remap from="in" to="/whoola/kitchen/goto"/>
+        <remap from="out" to="/bach/goto"/>
+    </node>
+</launch>

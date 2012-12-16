@@ -1,0 +1,17 @@
+<package>
+  <description brief="multi_resource_handler">
+
+     multi_resource_handler
+
+  </description>
+  <author>Jihoon</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/multi_resource_handler</url>
+  <depend package="rospy"/>
+  <depend package="demo_msgs"/>
+  <depend package="geometry_msgs"/>
+
+</package>
+
+
