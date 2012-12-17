@@ -50,7 +50,7 @@ class MultiTurtlebotHandler(object):
 
         location = None
         if msg.location not in self.location:
-            location = self.location['customer']
+            location = self.location['customer1']
         else:
             location = self.location[msg.location]
         self.log("Request move the robot to " + str(location))
