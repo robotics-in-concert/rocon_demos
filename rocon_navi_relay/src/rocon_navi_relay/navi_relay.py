@@ -64,14 +64,15 @@ class NaviRelay(object):
     def _initialise_navigation(self):
         initial_x = rospy.get_param('~initial_x', 0.0)
         initial_y = rospy.get_param('~initial_y', 0.0)
-        initial_z = rospy.get_param('~initial_a', 0.0)
+        initial_a = rospy.get_param('~initial_a', 0.0)
         pwcs = geometry_msgs.PoseWithCovarianceStamped()
         pwcs.pose.pose.position.x = initial_x
         pwcs.pose.pose.position.y = initial_y
-        initialpose_publisher = rospy.Publisher('/initialpose', demo_msgs.ResponseMoveRobot)
-        while initialpose_publisher.get_num_connections() == 0:
-            rospy.sleep(1.0)
-        initialpose_publisher.publish(pwcs)
+        #pwcs.pose.pose.quaternion = tf.transformations
+        #initialpose_publisher = rospy.Publisher('/initialpose', demo_msgs.ResponseMoveRobot)
+        #while initialpose_publisher.get_num_connections() == 0:
+        #    rospy.sleep(1.0)
+        #initialpose_publisher.publish(pwcs)
 
     def spin(self):
         rospy.spin()
