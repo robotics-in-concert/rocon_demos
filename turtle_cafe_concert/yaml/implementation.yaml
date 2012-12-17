@@ -9,10 +9,10 @@ name: "Turtle Cafe Concert"
 nodes:
   - id: adams
     tuple: linux.ros.turtlebot.scoot
-  - id: bach
-    tuple: linux.ros.turtlebot.scoot
-  - id: chopin
-    tuple: linux.ros.turtlebot.scoot
+#  - id: bach
+#    tuple: linux.ros.turtlebot.scoot
+#  - id: chopin
+#    tuple: linux.ros.turtlebot.scoot
   - id: kitchen
     tuple: linux.ros.pc.kitchen
 # Add this one to stop it from starting the solution
