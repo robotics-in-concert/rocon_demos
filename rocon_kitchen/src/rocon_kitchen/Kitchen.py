@@ -20,7 +20,7 @@ class Kitchen(object):
         self.pub['release_robot'] = rospy.Publisher('/mrh/release_robot',ReleaseRobot)
 
         self.sub = {}
-        self.sub['order'] = rospy.Subscriber('~order',Order,self.process_order)
+        self.sub['order'] = rospy.Subscriber('order',Order,self.process_order)
 #        self.sub['command'] = rospy.Subscriber('~command',Command,self.processCommand)
 
         self.sub['response_robot'] = rospy.Subscriber('/mrh/response_robot',ResponseRobot,self.process_response_robot)

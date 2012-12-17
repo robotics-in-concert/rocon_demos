@@ -14,7 +14,5 @@
   </include>
   <include file="$(find turtle_cafe_concert)/launch/includes/_rosbridge.launch">
     <arg name="rosbridge_port" value="9091"/> 
-    <!-- 
-    -->
   </include>
 </launch>

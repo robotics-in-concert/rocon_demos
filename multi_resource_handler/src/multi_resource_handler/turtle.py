@@ -9,7 +9,7 @@ class Turtle(object):
         self.status = status
 
         self.pub = {}
-        self.pub['move_turtle'] = rospy.Publisher('/'+self.name+'/mobile_base/commands/velocity',Twist)
+        self.pub['move_turtle'] = rospy.Publisher(self.name+'/cmd_vel',Twist)
 
     def set_task(self,id):
         self.task_id = id

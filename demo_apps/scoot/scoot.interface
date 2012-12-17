@@ -1,4 +1,4 @@
-publisher: []
-subscriber:
+publishers: []
+subscribers:
   - cmd_vel
-service: []
+services: []

@@ -1,3 +1,4 @@
 <launch>
     <node pkg="rocon_kitchen" type="kitchen.py" name="kitchen"/>
+    <node pkg="multi_resource_handler" type="multi_turtlebot_handler.py" name="mrh"/>
 </launch>
