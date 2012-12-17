@@ -49,6 +49,9 @@ class OrderHandler(threading.Thread):
         self.log("Sending robot to the location : " +str(self.location))
         self.send_robot()
         self.wait_for_state(ROBOT_READY,ROBOT_FAIL)
+        rospy.sleep(5.0)
+        self.send_back_to_station()
+        self.wait_for_state(ROBOT_READY,ROBOT_FAIL)
         self.log("Releasing Robot")
         rospy.sleep(1.0)
         self.release_robot()
@@ -77,7 +80,9 @@ class OrderHandler(threading.Thread):
     def request_drink(self):
         self.pub['request_drink'].publish(RequestDrink(self.task_id,self.beverage))
 
-
+    def send_back_to_station(self):
+        self.pub['request_goto'].publish(RequestGoto(self.task_id,"station"))
+        self.status = WAIT_FOR_ROBOT
 
     def send_robot(self):
         self.pub['request_goto'].publish(RequestGoto(self.task_id,self.location))
