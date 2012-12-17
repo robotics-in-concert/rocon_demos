@@ -7,24 +7,25 @@ nodes:
 #  - id: kitchen
 #    tuple: linux.ros.pc.kitchen
   - id: bach
-    tuple: linux.ros.turtlebot.velocity_listener
+    tuple: linux.ros.turtlebot.scoot
   - id: chopin
-    tuple: linux.ros.turtlebot.velocity_listener
-#topics:
-#  - id: kobuki_command_velocity
-#    type: turtlesim/Velocity
-#  - id: guimul_command_velocity
-#    type: turtlesim/Velocity
-#  - id: kobuki_pose
-#    type: turtlesim/Pose
-#  - id: guimul_pose
-#    type: turtlesim/Pose
+    tuple: linux.ros.turtlebot.scoot
+topics:
+  - id: bach_command_velocity
+    type: geometry_msgs/Twist
+  - id: chopin_command_velocity
+    type: geometry_msgs/Twist
 #actions: []
 #edges:
-#  - start: kobuki
-#    finish: kobuki_command_velocity
-#    remap_from: command_velocity
-#    remap_to: kobuki/command_velocity
+#  - start: bach
+#    finish: bach_command_velocity
+#    remap_from: cmd_vel
+#    remap_to: bach/cmd_vel
+#  - start: chopin
+#    finish: bach_command_velocity
+#    remap_from: cmd_vel
+#    remap_to: bach/cmd_vel
+
 #  - start: guimul
 #    finish: guimul_command_velocity
 #    remap_from: command_velocity

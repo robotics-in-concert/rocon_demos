@@ -3,10 +3,11 @@
  -->
 <launch>
   <arg name="turtle_name" default="turtle" />
-  <arg name="concert_name" value="turtle_concert"/>
+  <arg name="concert_name" value="turtle_cafe_concert"/>
   <include file="$(find concert_client)/launch/client.launch">
     <arg name="robot_name" value="$(arg turtle_name)"/>
-    <arg name="robot_type" value="pc"/>
+    <arg name="robot_type" value="turtlebot"/>
     <arg name="concert_name" value="$(arg concert_name)"/>
+    <arg name="app_dirs" default="$(find demo_apps)"/>
   </include>
 </launch>
