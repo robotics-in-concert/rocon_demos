@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="rocon_navi_relay" name="navi_relay" type="navi_relay.py">
+    </node>
+</launch>
