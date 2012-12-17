@@ -27,8 +27,8 @@ class Turtle(object):
         rmr = RequestMoveRobot()
         rmr.task_id = self.task_id
         if t:
-            rmr.pose.position.x = init[0]
-            rmr.pose.position.y = init[1]
+            rmr.pose.position.x = self.init[0]
+            rmr.pose.position.y = self.init[1]
         else:
             rmr.pose.position.x = loc[0]
             rmr.pose.position.y = loc[1]

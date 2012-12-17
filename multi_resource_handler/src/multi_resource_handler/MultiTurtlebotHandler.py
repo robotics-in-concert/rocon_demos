@@ -18,8 +18,8 @@ class MultiTurtlebotHandler(object):
 
         self.turtle = {}
 #        self.turtle['adam'] = Turtle('turtle1',False)
-        self.turtle['bach'] = Turtle('turtle1',False,[0.0,1.8.0.5])
-        self.turtle['chopin'] = Turtle('turtle2',False[0.0,0.0,0.0])
+        self.turtle['bach'] = Turtle('turtle1',False,[0.0,1.8,0.5])
+        self.turtle['chopin'] = Turtle('turtle2',False,[0.0,0.0,0.0])
 
         self.task = {}
 
