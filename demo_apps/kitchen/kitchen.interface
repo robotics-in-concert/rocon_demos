@@ -1,9 +1,8 @@
 publishers: 
- - turtle1/cmd_vel
- - turtle2/cmd_vel
- - turtle3/cmd_vel
+ - /turtle1/request_move
+ - /turtle2/request_move
 subscribers:
  - order
+ - /turtle1/response_move
+ - /turtle2/response_move
 services: []
-
- 
