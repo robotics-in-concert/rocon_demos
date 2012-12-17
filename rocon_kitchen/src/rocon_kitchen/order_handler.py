@@ -12,15 +12,20 @@ ROBOT_NOT_READY = 5
 ROBOT_DONE = 6
 ROBOT_FAIL = 7
 
+DRINK_READY = 8
+DRINK_NOT_READY = 9
+
 class OrderHandler(threading.Thread):
 
-    def __init__(self,location,beverage,task_id,pub):
+    def __init__(self,location,beverage,task_id,pub,done):
 
         threading.Thread.__init__(self)
         self.location = location
         self.task_id = task_id
         self.beverage = beverage
         self.status = START
+        self.front_status = "WAIT"
+        self.done = done
 
         self.pub = pub
 
@@ -32,26 +37,29 @@ class OrderHandler(threading.Thread):
             self.request_robot()
             self.wait_for_state(ROBOT_ASSIGNED,ROBOT_NOT_ASSIGNED)
         self.log("Robot ready")
-
-        self.log("Call robot")
+        self.log("Calling robot to Kitchen")
         self.call_robot()
-        self.log("Waiting for robot")
+        self.log("Waiting for robot to come kitchen")
         self.wait_for_state(ROBOT_READY,ROBOT_NOT_READY)
 
         # Set drink and..
-        self.log("Setting Drink")
-        rospy.sleep(2.0)
+        self.log("Waiting for Drink")
+        self.request_drink()
+        self.wait_for_state(DRINK_READY,DRINK_NOT_READY)
         self.log("Sending robot to the location : " +str(self.location))
         self.send_robot()
         self.wait_for_state(ROBOT_READY,ROBOT_FAIL)
+        self.log("Releasing Robot")
+        rospy.sleep(1.0)
+        self.release_robot()
 
         if self.status == ROBOT_READY:
             self.log("Delivery Status : Success!") 
         else:
             self.log("Delivery Status : Fail!")
-        self.log("Releasing Robot")
-        self.release_robot()
-    
+
+        self.done(self.task_id)
+
     def request_robot(self):
         self.pub['request_robot'].publish(RequestRobot(self.task_id))
         self.status = WAIT_FOR_ROBOT
@@ -65,6 +73,11 @@ class OrderHandler(threading.Thread):
     def call_robot(self):
         self.pub['request_goto'].publish(RequestGoto(self.task_id,"kitchen"))
         self.status = WAIT_FOR_ROBOT
+
+    def request_drink(self):
+        self.pub['request_drink'].publish(RequestDrink(self.task_id,self.beverage))
+
+
 
     def send_robot(self):
         self.pub['request_goto'].publish(RequestGoto(self.task_id,self.location))
@@ -85,5 +98,9 @@ class OrderHandler(threading.Thread):
             self.log("Robot is not assigned")
             self.status = ROBOT_NOT_ASSIGNED
 
+    def process_response_drink(self,ready):
+        self.status = DRINK_READY
+
     def log(self,msg):
+        self.front_status = msg
         rospy.loginfo("Kitchen["+str(self.task_id)+"] : " + str(msg))
