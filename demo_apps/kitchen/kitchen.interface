@@ -1,9 +1,9 @@
-publisher: 
+publishers: 
  - turtle1/cmd_vel
  - turtle2/cmd_vel
  - turtle3/cmd_vel
-subscriber:
+subscribers:
  - order
-service: []
+services: []
 
  
