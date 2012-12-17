@@ -25,8 +25,9 @@ class MultiTurtlebotHandler(object):
 
         self.location = {}
         self.location['station'] = rospy.get_param('~station',[0, 0]) 
-        self.location['kitchen'] = rospy.get_param('~kitchen',[1, 0]) 
-        self.location['customer'] = rospy.get_param('~customer',[0,1])
+        self.location['kitchen'] = rospy.get_param('~kitchen',[-1.1724, 2.3408]) 
+        self.location['customer1'] = rospy.get_param('~customer1',[-3.60909,-0.09575])
+        self.location['customer2'] = rospy.get_param('~customer2',[-2.9145,1.6521])
 
     def spin(self):
         rospy.spin()
