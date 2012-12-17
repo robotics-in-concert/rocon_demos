@@ -4,4 +4,5 @@
     <include file="$(find turtle_cafe_concert)/launch/includes/_master.launch"/>
     <include file="$(find turtle_cafe_concert)/launch/includes/_orchestra.launch"/>
   </group>
+  <include file="$(find turtle_cafe_concert)/launch/includes/_rosbridge.launch"/>
 </launch>

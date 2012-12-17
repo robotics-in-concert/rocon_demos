@@ -1,8 +1,12 @@
 <launch>
-  <env name="ROS_MASTER_URI" value="http://localhost:11312"/>
+  <!-- <env name="ROS_MASTER_URI" value="http://localhost:11312"/> -->
   <include file="$(find concert_client)/launch/client.launch">
     <arg name="robot_name" value="kitchen"/>
     <arg name="robot_type" value="pc"/>
     <arg name="concert_name" value="turtle_cafe_concert"/>
+    <arg name="app_dirs" default="$(find demo_apps)"/>
+  </include>
+  <include file="$(find turtle_cafe_concert)/launch/includes/_rosbridge.launch">
+    <!-- <arg name="rosbridge_port" value="9091"/> -->
   </include>
 </launch>

@@ -10,6 +10,10 @@ nodes:
     tuple: linux.ros.turtlebot.scoot
   - id: chopin
     tuple: linux.ros.turtlebot.scoot
+  - id: kitchen
+    tuple: linux.ros.pc.kitchen
+  - id: ferganetti
+    tuple: linux.ros.robosem.scoot
 topics:
   - id: bach_command_velocity
     type: geometry_msgs/Twist

@@ -1,0 +1,9 @@
+<!--
+  Web us spiderman! 
+ -->
+<launch>
+  <arg name="rosbridge_port" default="9090" />
+  <node name="rosbridge" pkg="rosbridge_server" type="rosbridge.py" args="--port $(arg rosbridge_port)" />
+  <node name="rosapi" pkg="rosapi" type="rosapi.py" />
+  <!--  <include file="$(find rosbridge_launch)/launch/simple.launch"/>  -->
+</launch>
