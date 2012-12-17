@@ -3,7 +3,6 @@
   
  -->
 <launch>
-  <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
   <include file="$(find concert_master)/launch/master.launch">
     <arg name="concert_name" value="turtle_cafe_concert"/>
   </include>
