@@ -1,17 +1,21 @@
 # Concert client tuples are of the platform-system-robot-name-app where
 # the name is just a placemarker for the eventual concert client name.
 # All other parts of the tuple are fixed.
+#
+# Development is easy to restrict if you just comment out the nodes - 
+# you don't need to comment out the topics, actions or edges 
 
 name: "Turtle Cafe Concert"
 nodes:
-#  - id: adams
-#    tuple: linux.ros.turtlebot.scoot
+  - id: adams
+    tuple: linux.ros.turtlebot.scoot
   - id: bach
     tuple: linux.ros.turtlebot.scoot
-#  - id: chopin
-#    tuple: linux.ros.turtlebot.scoot
-#  - id: kitchen
-#    tuple: linux.ros.pc.kitchen
+  - id: chopin
+    tuple: linux.ros.turtlebot.scoot
+  - id: kitchen
+    tuple: linux.ros.pc.kitchen
+# Add this one to stop it from starting the solution
 #  - id: ferganetti
 #    tuple: linux.ros.robosem.scoot
 topics:
