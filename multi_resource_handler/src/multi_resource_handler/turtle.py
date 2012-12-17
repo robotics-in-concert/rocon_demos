@@ -6,7 +6,7 @@ from geometry_msgs.msg import Twist
 
 class Turtle(object):
 
-    def __init__(self,name,status,init):
+    def __init__(self,name,status):
         self.name = name
         self.status = status
         self.wait = False
@@ -16,27 +16,22 @@ class Turtle(object):
 
         self.sub = {}
         self.sub['response_move_turtle'] = rospy.Subscriber(self.name + '/response_move',ResponseMoveRobot,self.process_response_move_robot)
-        self.init = init
 
 
     def set_task(self,id):
         self.task_id = id
         self.status = True
 
-    def goto(self,loc,t):
+    def goto(self,loc):
         rmr = RequestMoveRobot()
         rmr.task_id = self.task_id
-        if t:
-            rmr.pose.position.x = self.init[0]
-            rmr.pose.position.y = self.init[1]
-        else:
-            rmr.pose.position.x = loc[0]
-            rmr.pose.position.y = loc[1]
-            rmr.pose.position.z = 0 
-            rmr.pose.orientation.x = 0
-            rmr.pose.orientation.y = 0
-            rmr.pose.orientation.z = 0
-            rmr.pose.orientation.w = 1
+        rmr.pose.position.x = loc[0]
+        rmr.pose.position.y = loc[1]
+        rmr.pose.position.z = 0 
+        rmr.pose.orientation.x = 0
+        rmr.pose.orientation.y = 0
+        rmr.pose.orientation.z = 0
+        rmr.pose.orientation.w = 1
         
         self.pub['request_move_turtle'].publish(rmr)
 

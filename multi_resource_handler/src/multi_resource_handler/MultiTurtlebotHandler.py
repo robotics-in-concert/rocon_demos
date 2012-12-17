@@ -18,8 +18,8 @@ class MultiTurtlebotHandler(object):
 
         self.turtle = {}
 #        self.turtle['adam'] = Turtle('turtle1',False)
-        self.turtle['bach'] = Turtle('turtle1',False,[0.0,1.8,0.5])
-        self.turtle['chopin'] = Turtle('turtle2',False,[0.0,0.0,0.0])
+        self.turtle['bach'] = Turtle('turtle1',False)
+        self.turtle['chopin'] = Turtle('turtle2',False)
 
         self.task = {}
 
@@ -55,10 +55,7 @@ class MultiTurtlebotHandler(object):
             location = self.location[msg.location]
         self.log("Request move the robot to " + str(location))
             
-        if msg.location == 'station':
-            self.task[msg.task_id].goto(location,True)
-        else:
-            self.task[msg.task_id].goto(location,False)
+        self.task[msg.task_id].goto(location)
 
         self.log("Robot has arrived to "+ str(msg.location))
         self.pub['response_goto'].publish(ResponseGoto(msg.task_id,True))
