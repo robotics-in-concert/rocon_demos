@@ -8,6 +8,6 @@
     <arg name="robot_name" value="$(arg turtle_name)"/>
     <arg name="robot_type" value="turtlebot"/>
     <arg name="concert_name" value="$(arg concert_name)"/>
-    <arg name="app_dirs" default="$(find demo_apps)"/>
+    <arg name="app_dirs" value="$(find demo_apps)"/>
   </include>
 </launch>
