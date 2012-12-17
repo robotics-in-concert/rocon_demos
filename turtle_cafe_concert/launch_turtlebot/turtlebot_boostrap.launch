@@ -1,3 +1,3 @@
 <launch>
-    <include file="$(find turtlebot_bringup)/launch/experimental_minimal.launch" />
+    <include file="$(find turtle_cafe_concert)/launch_turtlebot/experimental_minimal.launch" />
 </launch>
