@@ -1,6 +1,5 @@
 <!--
   The concert master/conductor components only
-  
  -->
 <launch>
   <env name="ROS_MASTER_URI" value="http://localhost:11311"/>

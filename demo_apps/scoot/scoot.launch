@@ -10,5 +10,10 @@
     <remap from="vel_smoother/smooth_cmd_vel" to="cmd_vel_mux/smoothed_scoot"/>
   </node>
    -->
-  <include file="$(find rocon_navi_relay)/launch/navi_relay.launch"/> 
+  <!-- <include file="$(find rocon_navi_relay)/launch/navi_relay.launch"/> --> 
+  <node pkg="rocon_navi_relay" name="navi_relay" type="navi_relay.py">
+    <param name="initial_x" value="0.0"/>"
+    <param name="initial_y" value="0.0"/>"
+    <param name="initial_a" value="0.0"/>"
+  </node>
 </launch>

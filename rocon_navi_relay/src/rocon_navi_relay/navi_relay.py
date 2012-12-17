@@ -15,6 +15,7 @@ import actionlib
 #import tf
 #from geometry_msgs.msg import Twist
 #from std_msgs.msg import String
+import geometry_msgs.msg as geometry_msgs
 import demo_msgs.msg as demo_msgs
 import move_base_msgs.msg as move_base_msgs
 
@@ -58,6 +59,19 @@ class NaviRelay(object):
         self.actionclient = {}
         self.actionclient['move_base'] = actionlib.SimpleActionClient('move_base', move_base_msgs.MoveBaseAction)
         self.actionclient['move_base'].wait_for_server()
+        self._initialise_navigation
+
+    def _initialise_navigation(self):
+        initial_x = rospy.get_param('~initial_x', 0.0)
+        initial_y = rospy.get_param('~initial_y', 0.0)
+        initial_z = rospy.get_param('~initial_a', 0.0)
+        pwcs = geometry_msgs.PoseWithCovarianceStamped()
+        pwcs.pose.pose.position.x = initial_x
+        pwcs.pose.pose.position.y = initial_y
+        initialpose_publisher = rospy.Publisher('/initialpose', demo_msgs.ResponseMoveRobot)
+        while initialpose_publisher.get_num_connections() == 0:
+            rospy.sleep(1.0)
+        initialpose_publisher.publish(pwcs)
 
     def spin(self):
         rospy.spin()
