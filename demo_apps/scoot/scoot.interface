@@ -1,4 +1,4 @@
 publishers: []
 subscribers:
-  - cmd_vel
+  - vel_smoother/raw_cmd_vel
 services: []
