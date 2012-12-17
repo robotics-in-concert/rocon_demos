@@ -16,10 +16,10 @@ class MultiTurtlebotHandler(object):
         self.pub['response_goto'] = rospy.Publisher('/mrh/response_goto',demo_msgs.ResponseGoto)
 
         self.turtle = {}
-        self.turtle['adam'] = Turtle('adam',True)
-        self.turtle['bach'] = Turtle('bach',False)
-        self.turtle['chopin'] = Turtle('chopin',False)
-        self.turtle['donizetti'] = Turtle('donizetti',True)
+        self.turtle['adam'] = Turtle('turtle1',False)
+        self.turtle['bach'] = Turtle('turtle2',False)
+        self.turtle['chopin'] = Turtle('turtle3',False)
+#$        self.turtle['donizetti'] = Turtle('turtle4',True)
 
         self.task = {}
 
