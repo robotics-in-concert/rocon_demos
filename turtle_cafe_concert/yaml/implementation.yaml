@@ -6,12 +6,12 @@ name: "Turtle Cafe Concert"
 nodes:
 #  - id: adams
 #    tuple: linux.ros.turtlebot.scoot
-#  - id: bach
-#    tuple: linux.ros.turtlebot.scoot
+  - id: bach
+    tuple: linux.ros.turtlebot.scoot
 #  - id: chopin
 #    tuple: linux.ros.turtlebot.scoot
-  - id: kitchen
-    tuple: linux.ros.pc.kitchen
+#  - id: kitchen
+#    tuple: linux.ros.pc.kitchen
 #  - id: ferganetti
 #    tuple: linux.ros.robosem.scoot
 topics:
@@ -27,18 +27,18 @@ actions: []
 edges:
 # Don't actually need to define these (default is to use the robot namespace)
 # but it will currently bug out if we don't
-#  - start: adams_command_velocity
-#    finish: adams
-#    remap_from: /cmd_vel
-#    remap_to: bach/cmd_vel
-#  - start: bach_command_velocity
-#    finish: bach
-#    remap_from: /cmd_vel
-#    remap_to: bach/cmd_vel
-#  - start: chopin_command_velocity
-#    finish: chopin
-#    remap_from: /cmd_vel
-#    remap_to: chopin/cmd_vel
+  - start: adams_command_velocity
+    finish: adams
+    remap_from: vel_smoother/raw_cmd_vel
+    remap_to: adams/cmd_vel
+  - start: bach_command_velocity
+    finish: bach
+    remap_from: vel_smoother/raw_cmd_vel
+    remap_to: bach/cmd_vel
+  - start: chopin_command_velocity
+    finish: chopin
+    remap_from: vel_smoother/raw_cmd_vel
+    remap_to: chopin/cmd_vel
   - start: order
     finish: kitchen
     remap_from: order
