@@ -25,15 +25,15 @@ import move_base_msgs.msg as move_base_msgs
 
 class Job(threading.Thread):
 
-    def __init(self, action_client, result_publisher, task_id, pose, current_task_id):
+    def __init__(self, action_client, result_publisher, task_id, pose, current_task_id):
         threading.Thread.__init__(self)
         self._current_task_id = task_id
         self._result_publisher = result_publisher
         self._action_client = action_client
         self._response = demo_msgs.ResponseMoveRobot()
-        self._response._task_id = task_id
+        self._response.task_id = task_id
         self._response.status = False
-        rospy.loginfo("Sending robot to [%s,%s]" % pose.x, pose.y)
+        rospy.loginfo("Sending robot to [%s,%s]" % (pose.position.x, pose.position.y))
         goal = move_base_msgs.MoveBaseGoal()
         goal.target_pose.header.frame_id = '/map'
         goal.target_pose.header.stamp = rospy.Time.now()
