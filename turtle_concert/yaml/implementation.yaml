@@ -11,33 +11,46 @@ nodes:
   - id: turtlesim
     tuple: linux.ros.pc.turtle_stroll_sim
 topics:
-  - id: kobuki_turtlesim_command_velocity
-    name: command_velocity
+  - id: kobuki_command_velocity
     type: turtlesim/Velocity
-  - id: guimul_turtlesim_command_velocity
-    name: command_velocity
+  - id: guimul_command_velocity
     type: turtlesim/Velocity
-  - id: turtlesim_kobuki_pose
-    name: turtlesim_kobuki/pose
+  - id: kobuki_pose
     type: turtlesim/Pose
-  - id: turtlesim_guimul_pose
-    name: pose
+  - id: guimul_pose
     type: turtlesim/Pose
 actions: []
 edges:
   - start: kobuki
-    finish: kobuki_turtlesim_command_velocity
+    finish: kobuki_command_velocity
+    remap_from: command_velocity
+    remap_to: kobuki/command_velocity
   - start: guimul
-    finish: guimul_turtlesim_command_velocity
-  - start: kobuki_turtlesim_command_velocity
+    finish: guimul_command_velocity
+    remap_from: command_velocity
+    remap_to: guimul/command_velocity
+  - start: kobuki_command_velocity
     finish: turtlesim
-  - start: guimul_turtlesim_command_velocity
+    remap_from: turtle_one/command_velocity
+    remap_to: kobuki/command_velocity
+  - start: guimul_command_velocity
     finish: turtlesim
+    remap_from: turtle_two/command_velocity
+    remap_to: guimul/command_velocity
   - start: turtlesim
-    finish: turtlesim_kobuki_pose
+    finish: kobuki_pose
+    remap_from: turtle_one/pose
+    remap_to: kobuki/pose
   - start: turtlesim
-    finish: turtlesim_guimul_pose
-  - start: turtlesim_kobuki_pose
+    finish: guimul_pose
+    remap_from: turtle_two/pose
+    remap_to: guimul/pose
+  - start: kobuki_pose
     finish: kobuki
-  - start: turtlesim_guimul_pose
+    remap_from: pose
+    remap_to: kobuki/pose
+  - start: guimul_pose
     finish: guimul
+    remap_from: pose
+    remap_to: guimul/pose
+    

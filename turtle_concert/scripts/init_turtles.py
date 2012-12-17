@@ -23,5 +23,5 @@ response = kill_turtle("turtle1")
 # The master sync can do it, but am not yet doing it
 rospy.wait_for_service('spawn')
 spawn_turtle = rospy.ServiceProxy('spawn', turtlesim_srvs.Spawn)
-response = spawn_turtle(5.4,6.4,0.0,"kobuki")
-response = spawn_turtle(5.4,4.4,0.3,"guimul")
+response = spawn_turtle(5.4,6.4,0.0,"turtle_one")
+response = spawn_turtle(5.4,4.4,0.3,"turtle_two")
