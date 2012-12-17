@@ -1,4 +1,5 @@
-publishers: []
+publishers:
+  - result
 subscribers:
-  - vel_smoother/raw_cmd_vel
+  - command
 services: []
