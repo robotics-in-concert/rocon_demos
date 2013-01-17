@@ -16,7 +16,7 @@
 {'git': {'local-name': 'rocon_orchestration', 'version': '0.1.1', 'uri': 'https://github.com/robotics-in-concert/rocon_orchestration.git'}},
 
 # Demo
-{'git': {'local-name': 'rocon_demo', 'version': '0.1.0', 'uri': 'https://github.com/robotics-in-concert/rocon_demo.git'}}
+{'git': {'local-name': 'rocon_demos', 'version': '0.1.0', 'uri': 'https://github.com/robotics-in-concert/rocon_demos.git'}}
 
 ]
 
