@@ -1,0 +1,5 @@
+<launch>
+  <group ns="concert">
+    <include file="includes/_master.launch"/>
+  </group>
+</launch>

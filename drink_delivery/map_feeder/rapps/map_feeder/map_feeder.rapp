@@ -1,0 +1,5 @@
+display: Map Feeder
+description: Provides shared map for the given environment
+platform: linux.ros.pc
+launch:     map_feeder/map_feeder.launch
+interface:  map_feeder/map_feeder.interface
