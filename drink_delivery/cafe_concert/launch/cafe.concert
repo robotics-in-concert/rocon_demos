@@ -1,0 +1,5 @@
+<concert>
+  <launch package="cafe_concert" name="concert.launch" port="11311" />
+  <launch package="waiterbot" name="waiter_client.launch" port="11312" />
+  <launch package="map_feeder" name="map_feeder_client.launch" port="11313" />
+</concert>
