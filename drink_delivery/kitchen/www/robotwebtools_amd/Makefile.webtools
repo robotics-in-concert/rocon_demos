@@ -1,0 +1,30 @@
+all:wviz
+
+export WWW_PATH=$(shell rospack find robotwebtools_amd)/www
+
+create_www_directory = \
+    if ! test -d $(WWW_PATH) ; then \
+        echo " -- Creating www directory $(WWW_PATH)" ; \
+        mkdir $(WWW_PATH) ; \
+    fi;
+
+define link
+    echo "Linking: $1"
+    ln -sf $(shell rosstack find $1) $(WWW_PATH)/
+endef
+    
+
+wviz:
+	$(create_www_directory)
+	@$(call link,rosjs)
+	@$(call link,nav2djs)
+	@$(call link,map2djs)
+	@$(call link,mjpegcanvasjs)
+	@$(call link,actionlibjs)
+	@$(call link,keyboardteleopjs)
+	@$(call link,interactivemarkersjs)
+
+clean:
+	rm -rf $(WWW_PATH)/www
+
+wipe: clean

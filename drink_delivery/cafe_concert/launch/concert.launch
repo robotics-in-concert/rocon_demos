@@ -1,5 +1,5 @@
 <launch>
   <group ns="concert">
-    <include file="includes/_master.launch"/>
+    <include file="$(find cafe_concert)/launch/includes/_master.launch"/>
   </group>
 </launch>

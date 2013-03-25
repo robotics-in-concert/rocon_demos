@@ -1,0 +1,22 @@
+<package>
+  <description brief="robotwebtools_amd">
+
+     robotwebtools_amd
+
+  </description>
+  <author>Jihoon</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robotwebtools_amd</url>
+
+  <depends stack="actionlibjs"/>
+  <depends stack="rosjs"/>
+  <depends stack="interactivemarkersjs"/>
+  <depends stack="mjpegcanvasjs"/>
+  <depends stack="keyboardteleopjs"/>
+  <depends stack="nav2djs"/>
+  <depends stack="map2djs"/>
+
+</package>
+
+

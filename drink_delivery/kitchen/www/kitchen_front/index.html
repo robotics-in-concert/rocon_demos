@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>App Manager Frontend (Beta)</title>
+<!-- load Dojo and the default dojo theme, claro -->
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="../dojo_common/dijit/themes/claro/claro.css"/>
+<script src="../yujin_webtools/config.js"></script>
+<script src="../dojo_common/dojo/dojo.js.uncompressed.js"></script>
+<script>
+    var ros;
+		require({
+                packages: [ 
+                    { name:"roswidgets", location:"rosdojo/widgets"},
+                    { name:"kitchen", location:"kitchen_front/js/kitchen"},
+                ]},
+        [
+            "dojo/parser",
+            "dojo/ready",
+            "dojo/on",
+            "dijit/registry",
+            "roswidgets/ConnectionPanel",
+            "rosjs/ros",
+            "kitchen/KitchenView",
+		],
+        function(parser,ready,on,registry,CPanel,ROS)
+        {
+            var initialize = function() {
+                ros = new ROS();
+                
+                parser.parse();
+            }
+            ready(initialize);
+        }
+        );
+</script>
+</head>
+<body class="claro" style="font: 14px Myriad,Helvetica,Tahoma,Arial,clean,sans-serif;">
+	<div id="headers" class="headers">
+        <img class="logo" src="img/logo.jpg"></img>
+        <p class="logo"> Kitchen Task Manager.</p>
+        <div class="headtools">
+            <div class="connectionpanel" data-dojo-type="roswidgets/ConnectionPanel"></div>
+        </div>
+	</div>
+    <div id="body" class="middlepanel">
+        <div class="middle-main">
+            <div id="leftbody" class="leftbody">
+              <div id="applistview" data-dojo-type="kitchen/KitchenView" data-dojo-props="list_task_topic : '/kitchen/list_tasks'"> </div>
+            </div>
+            <div id="rightbody" class="rightbody">
+            </div>
+        </div>
+        <div class="middle-footer">
+            <center>
+            </center>
+        </div>
+    </div>
+</body>
+</html>

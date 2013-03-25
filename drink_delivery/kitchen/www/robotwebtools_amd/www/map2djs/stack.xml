@@ -1,0 +1,9 @@
+<stack>
+	<description brief="Renders a ROS occupancy grid map into a HTML5 canvas element.">Renders a ROS occupancy grid map into a HTML5 canvas element.</description>
+	<author>Russell Toris</author>
+	<license>BSD</license>  
+	<review status="unreviewed" notes="" />
+	<url>http://ros.org/wiki/map2djs</url>
+
+	<depend stack="ros" />
+</stack>
