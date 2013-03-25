@@ -1,8 +1,8 @@
 <launch>
   <include file="$(find rocon_app_manager)/launch/concert_client.launch">
-    <arg name="robot_name" value="map_feeder"/>
+    <arg name="robot_name" value="cafe_database"/>
     <arg name="robot_type" value="pc"/>
     <arg name="concert_name" value="cafe_concert"/>
-    <arg name="app_lists" value="$(find map_feeder)/rapps/map_feeder.rapps"/>
+    <arg name="app_lists" value="$(find cafe_database)/rapps/cafe_database.rapps"/>
   </include>
 </launch>

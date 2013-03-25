@@ -1,0 +1,5 @@
+display: Cafe Database
+description: Provides shared information for the given environment such as map and location of tables
+platform: linux.ros.pc
+launch:     cafe_database/cafe_database.launch
+interface:  cafe_database/cafe_database.interface
