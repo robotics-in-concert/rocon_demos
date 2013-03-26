@@ -19,10 +19,19 @@ topics:
     type: geometry_msgs/Twist
   - id: waiterbot_motor_power
     type: kobuki_msgs/MotorPower 
+  - id: waiterbot_pose
+    type: geometry_msgs/PoseArray
+  - id: waiterbot_tf
+    type: tf/tfMessage
+
+
   - id: waiterbot1_velocity
     type: geometry_msgs/Twist
   - id: waiterbot1_motor_power
     type: kobuki_msgs/MotorPower 
+  - id: waiterbot1_pose
+    type: geometry_msgs/PoseArray
+
 actions: []
 edges:
 
@@ -30,11 +39,11 @@ edges:
   - start: cafe_database
     finish: cafe_database_map 
     remap_from: map
-    remap_to: cafe/map
+    remap_to: map
   - start: cafe_database
     finish: cafe_database_map_metadata
     remap_from: map_metadata
-    remap_to: cafe/map_metadata
+    remap_to: map_metadata
 
 ## Waiters
   - start: waiter_boy
@@ -45,12 +54,25 @@ edges:
     finish: waiterbot_motor_power 
     remap_from: mobile_base/commands/motor_power
     remap_to: waiter/motor_power
+  - start: waiter_boy
+    finish: waiterbot_pose
+    remap_from: robot_pose
+    remap_to: waiter/robot_pose
+  - start: waiter_boy
+    finish: waiterbot_tf
+    remap_from: tf_combined
+    remap_to: tf_combined
+
 
   - start: waiter_boy1
     finish: waiterbot1_velocity 
     remap_from: mobile_base/commands/velocity
-    remap_to: waiter/cmd_vel
+    remap_to: waiter1/cmd_vel
   - start: waiter_boy1
     finish: waiterbot1_motor_power 
     remap_from: mobile_base/commands/motor_power
-    remap_to: waiter/motor_power
+    remap_to: waiter1/motor_power
+  - start: waiter_boy1
+    finish: waiterbot1_pose
+    remap_from: robot_pose
+    remap_to: waiter1/robot_pose
