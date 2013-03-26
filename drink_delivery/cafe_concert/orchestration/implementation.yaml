@@ -1,0 +1,56 @@
+# Concert client tuples are of the platform-system-robot-name-app where
+# the name is just a placemarker for the eventual concert client name.
+# All other parts of the tuple are fixed.
+
+name: "Cafe Concert"
+nodes:
+  - id: waiter_boy
+    tuple: linux.ros.pc.waiterbot/waiter_soft
+  - id: waiter_boy1
+    tuple: linux.ros.pc.waiterbot/waiter_soft
+  - id: cafe_database
+    tuple: linux.ros.pc.cafe_database/cafe_database
+topics:
+  - id: cafe_database_map
+    type: nav_msgs/OccupancyGrid
+  - id: cafe_database_map_metadata
+    type: nav_msgs/MapMetaData
+  - id: waiterbot_velocity
+    type: geometry_msgs/Twist
+  - id: waiterbot_motor_power
+    type: kobuki_msgs/MotorPower 
+  - id: waiterbot1_velocity
+    type: geometry_msgs/Twist
+  - id: waiterbot1_motor_power
+    type: kobuki_msgs/MotorPower 
+actions: []
+edges:
+
+## Cafe database
+  - start: cafe_database
+    finish: cafe_database_map 
+    remap_from: map
+    remap_to: cafe/map
+  - start: cafe_database
+    finish: cafe_database_map_metadata
+    remap_from: map_metadata
+    remap_to: cafe/map_metadata
+
+## Waiters
+  - start: waiter_boy
+    finish: waiterbot_velocity 
+    remap_from: mobile_base/commands/velocity
+    remap_to: waiter/cmd_vel
+  - start: waiter_boy
+    finish: waiterbot_motor_power 
+    remap_from: mobile_base/commands/motor_power
+    remap_to: waiter/motor_power
+
+  - start: waiter_boy1
+    finish: waiterbot1_velocity 
+    remap_from: mobile_base/commands/velocity
+    remap_to: waiter/cmd_vel
+  - start: waiter_boy1
+    finish: waiterbot1_motor_power 
+    remap_from: mobile_base/commands/motor_power
+    remap_to: waiter/motor_power

@@ -1,4 +1,5 @@
 subscribers: []
 publishers:
   - map
+  - map_metadata
 services: []
