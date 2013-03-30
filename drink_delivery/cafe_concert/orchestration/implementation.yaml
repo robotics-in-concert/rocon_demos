@@ -8,6 +8,8 @@ nodes:
     tuple: linux.ros.pc.waiterbot/waiter_soft
   - id: waiter_boy1
     tuple: linux.ros.pc.waiterbot/waiter_soft
+  - id: waiter_boy2
+    tuple: linux.ros.pc.waiterbot/waiter_soft
   - id: cafe_database
     tuple: linux.ros.pc.cafe_database/cafe_database
 topics:
@@ -21,7 +23,7 @@ topics:
   - id: waiterbot_motor_power
     type: kobuki_msgs/MotorPower 
   - id: waiterbot_pose
-    type: geometry_msgs/PoseArray
+    type: geometry_msgs/PoseStamped
   - id: waiterbot_map
     type: nav_msgs/OccupancyGrid
   - id: waiterbot_map_metadata
@@ -32,12 +34,22 @@ topics:
   - id: waiterbot1_motor_power
     type: kobuki_msgs/MotorPower 
   - id: waiterbot1_pose
-    type: geometry_msgs/PoseArray
+    type: geometry_msgs/PoseStamped
   - id: waiterbot1_map
     type: nav_msgs/OccupancyGrid
   - id: waiterbot1_map_metadata
     type: nav_msgs/MapMetaData
 
+  - id: waiterbot2_velocity
+    type: geometry_msgs/Twist
+  - id: waiterbot2_motor_power
+    type: kobuki_msgs/MotorPower 
+  - id: waiterbot2_pose
+    type: geometry_msgs/PoseStamped
+  - id: waiterbot2_map
+    type: nav_msgs/OccupancyGrid
+  - id: waiterbot2_map_metadata
+    type: nav_msgs/MapMetaData
 
 
 actions: []
@@ -57,15 +69,15 @@ edges:
   - start: waiter_boy
     finish: waiterbot_velocity 
     remap_from: mobile_base/commands/velocity
-    remap_to: waiter/cmd_vel
+    remap_to: waiter_boy/cmd_vel
   - start: waiter_boy
     finish: waiterbot_motor_power 
     remap_from: mobile_base/commands/motor_power
-    remap_to: waiter/motor_power
+    remap_to: waiter_boy/motor_power
   - start: waiter_boy
     finish: waiterbot_pose
     remap_from: robot_pose
-    remap_to: waiter/robot_pose
+    remap_to: waiter_boy/robot_pose
   - start: waiter_boy
     finish: waiterbot_map
     remap_from: map
@@ -79,16 +91,34 @@ edges:
   - start: waiter_boy1
     finish: waiterbot1_velocity 
     remap_from: mobile_base/commands/velocity
-    remap_to: waiter1/cmd_vel
+    remap_to: waiter_boy1/cmd_vel
   - start: waiter_boy1
     finish: waiterbot1_motor_power 
     remap_from: mobile_base/commands/motor_power
-    remap_to: waiter1/motor_power
+    remap_to: waiter_boy1/motor_power
   - start: waiter_boy1
     finish: waiterbot1_pose
     remap_from: robot_pose
-    remap_to: waiter1/robot_pose
+    remap_to: waiter_boy1/robot_pose
   - start: waiter_boy1
     finish: waiterbot1_map
+    remap_from: map
+    remap_to: map
+
+
+  - start: waiter_boy2
+    finish: waiterbot2_velocity 
+    remap_from: mobile_base/commands/velocity
+    remap_to: waiter_boy2/cmd_vel
+  - start: waiter_boy2
+    finish: waiterbot2_motor_power 
+    remap_from: mobile_base/commands/motor_power
+    remap_to: waiter_boy2/motor_power
+  - start: waiter_boy2
+    finish: waiterbot2_pose
+    remap_from: robot_pose
+    remap_to: waiter_boy2/robot_pose
+  - start: waiter_boy2
+    finish: waiterbot2_map
     remap_from: map
     remap_to: map
