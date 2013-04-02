@@ -18,7 +18,7 @@ Demo software for rocon milestones.
 > catkin_init_workspace
 ```
 
-* Check out rocon
+* Checkout rocon
 
 ```
 > cd ~/cafe_solution/src
