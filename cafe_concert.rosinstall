@@ -1,3 +1,8 @@
+# IT IS UNLIKELY YOU WANT TO EDIT THIS FILE BY HAND,
+# UNLESS FOR REMOVING ENTRIES.
+# IF YOU WANT TO CHANGE THE ROS ENVIRONMENT VARIABLES
+# USE THE rosinstall TOOL INSTEAD.
+# IF YOU CHANGE IT, USE rosinstall FOR THE CHANGES TO TAKE EFFECT
 #
 # Hydro development
 # 
@@ -16,14 +21,21 @@
 # Tutorials
 #   sudo apt-get install ros-tutorials common-tutorials
 # 
-[
 # Official Ros Stacks
 
-{'git': {'local-name': 'rocon_multimaster', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/rocon_multimaster.git'}},
-{'git': {'local-name': 'rocon_msgs', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
-{'git': {'local-name': 'rocon_tutorials', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_tutorials.git'}},
-{'git': {'local-name': 'rocon_concert', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_concert.git'}},
-{'git': {'local-name': 'rocon_app_platform', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_app_platform.git'}},
-{'git': {'local-name': 'rocon_rqt_plugins', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_rqt_plugins.git'}},
-{'git': {'local-name': 'rocon_demos', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_demos.git'}}
-]
+
+- git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
+    version: hydro-devel}
+- git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
+    version: hydro-devel}
+- git: {local-name: rocon_tutorials, uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git',
+    version: hydro-devel}
+- git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
+    version: hydro-devel}
+- git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
+    version: hydro-devel}
+- git: {local-name: rocon_rqt_plugins, uri: 'https://github.com/robotics-in-concert/rocon_rqt_plugins.git',
+    version: hydro-devel}
+- git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
+    version: hydro-devel}
+
