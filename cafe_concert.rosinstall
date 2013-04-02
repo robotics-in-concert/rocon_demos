@@ -25,5 +25,5 @@
 {'git': {'local-name': 'rocon_concert', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_concert.git'}},
 {'git': {'local-name': 'rocon_app_platform', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_app_platform.git'}},
 {'git': {'local-name': 'rocon_rqt_plugins', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_rqt_plugins.git'}},
-{'git': {'local-name': 'rocon_demos', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rocon_demos.git'}}
+{'git': {'local-name': 'rocon_demos', 'version': 'hydro-devel', 'uri': 'https://github.com/robotics-in-concert/rocon_demos.git'}}
 ]
