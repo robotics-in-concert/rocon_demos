@@ -47,8 +47,8 @@ Demo software for rocon milestones.
 ```
 
 * In case simple way does not work
-** Don't forget to source the correct setup.bash
-** Run each command separate terminal
+  * Don't forget to source the correct setup.bash
+  * Run each command separate terminal
 
 ```
 > roslaunch cafe_concert concert.launch --port=11311
