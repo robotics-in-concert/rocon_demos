@@ -3,4 +3,5 @@
   <launch package="cafe_database" name="cafe_database_client.launch" port="11312" />
   <launch package="waiterbot" name="waiter_client.launch" port="11313" />
   <launch package="waiterbot" name="waiter_client.launch" port="11314" />
+  <launch package="waiterbot" name="waiter_client.launch" port="11315" />
 </concert>
