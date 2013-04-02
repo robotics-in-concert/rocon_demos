@@ -22,7 +22,7 @@ Demo software for rocon milestones.
 
 ```
 > cd ~/cafe_solution/src
-> rosinstall . https://raw.github.com/robotics-in-concert/rocon_demos/hydro-devel/cafe_concert.rosinstall
+> wstool init . https://raw.github.com/robotics-in-concert/rocon_demos/hydro-devel/cafe_concert.rosinstall
 ```
 
 * For easy way of creating workspace. Check out yujin_tools(https://github.com/yujinrobot/yujin_tools/wiki/yujin-init)
