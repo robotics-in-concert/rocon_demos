@@ -7,6 +7,16 @@ Demo software for rocon milestones.
 
 * Works in Hydro!!!
 
+#### Pre-requisite
+
+```
+sudo apt-get install ros-groovy-turtlebot
+sudo apt-get install ros-groovy-turtlebot-apps
+sudo apt-get install ros-groovy-turtlebot-viz
+rosdep install rocon_hub
+rosdep install rocon_concert
+```
+
 #### Installation ####
 
  * Create a workspace
@@ -59,6 +69,8 @@ Demo software for rocon milestones.
 > rosservice call /concert/start_solution
 ```
 
-#### Visualization ####
+#### Navigation ####
 
-* TODO
+* Waiter_boy  - /waiter_boy/goal_simple
+* Waiter_boy1 - /waiter_boy1/goal_simple
+* Waiter_boy2 - /waiter_boy2/goal_simple
