@@ -40,3 +40,5 @@
     version: hydro-devel}
 - git: {local-name: kobuki, uri: 'https://github.com/yujinrobot/kobuki.git',
     version: hydro-devel}
+- git: {local-name: xacro, uri: 'https://github.com/ros/xacro.git',
+    version: groovy-devel}
