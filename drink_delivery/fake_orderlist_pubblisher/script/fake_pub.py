@@ -1,17 +1,18 @@
 #!/usr/bin/env python
-
 import rospy
 import random
 from cafe_msgs.msg import OrderList, Order, Menu
 
+MENU_NAME = ["Cafe Latte", "Capuccino", "DDal Ba", "Coke", "Americano", "Koreano", "Kobukino", "Sul tang mool"]
+ROBOT_NAME = ["Kobuki", "Guimul", "KobukKobuk","Snail","Jola Bbareun Kobuki","Motorized Kobuki"]
 
 def generateMenus():
     
     menus = []
 
-    for i in range(1,2):
+    for i in range(1,4):
         m = Menu()
-        m.name = "menu" + str(random.randint(0,100))
+        m.name = random.choice(MENU_NAME)
         m.size = random.randint(1,3)
         m.qty = random.randint(1,500)
         menus.append(m)
@@ -22,7 +23,7 @@ def generateFakeOrder(order_num):
     o = Order()
     o.table_id = random.randint(0,10)
     o.menus = generateMenus()
-    o.robot_name = "Kobuki"
+    o.robot_name = random.choice(ROBOT_NAME)
     o.order_id = order_num
     return o
 
@@ -35,8 +36,8 @@ def pubOrderList():
         order_list = OrderList()
         order_list.orders = []
 
-        num_order = random.randint(1,5)
-        for i in range(num_order):
+        list_num = random.randint(1,5)
+        for i in range(list_num):
             order = generateFakeOrder(num_order)
             num_order = num_order + 1
             order_list.orders.append(order)
