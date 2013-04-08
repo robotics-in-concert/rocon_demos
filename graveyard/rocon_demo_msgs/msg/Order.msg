@@ -1,0 +1,2 @@
+string beverage
+string location

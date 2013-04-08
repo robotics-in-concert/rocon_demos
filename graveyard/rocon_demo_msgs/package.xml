@@ -1,0 +1,22 @@
+<package>
+  <name>rocon_demo_msgs</name>
+  <version>0.4.0</version>
+  <description>
+    Concert demo msg types (not very standard).
+  </description>
+  <maintainer email="d.stonier@gmail.com">Daniel Stonier</maintainer>
+  <maintainer email="jihoonlee.in@gmail.com">Jihoon Lee</maintainer>
+  <license>BSD</license>  
+
+  <url type="website">http://www.ros.org/wiki/rocon_demo_msgs</url>
+  <url type="repository">https://github.com/robotics-in-concert/rocon_msgs</url>
+  <url type="bugtracker">https://github.com/robotics-in-concert/rocon_msgs/issues</url>
+  <author email="d.stonier@gmail.com">Daniel Stonier</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+</package>
