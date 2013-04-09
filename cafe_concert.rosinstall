@@ -40,6 +40,8 @@
     version: hydro-devel}
 - git: {local-name: kobuki, uri: 'https://github.com/yujinrobot/kobuki.git',
     version: hydro-devel}
+- git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
+    version: hydro-devel}
 - git: {local-name: xacro, uri: 'https://github.com/ros/xacro.git',
     version: groovy-devel}
 - git: {local-name: robot_pose_publisher, uri: 'https://github.com/jihoonl/robot_pose_publisher',
