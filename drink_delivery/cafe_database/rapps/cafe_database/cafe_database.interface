@@ -2,4 +2,6 @@ subscribers: []
 publishers:
   - map
   - map_metadata
+  - table_marker
+  - table_pose_lists
 services: []

@@ -17,6 +17,10 @@ topics:
     type: nav_msgs/OccupancyGrid
   - id: cafe_database_map_metadata
     type: nav_msgs/MapMetaData
+  - id: cafe_database_table_list
+    type: semantic_region_handler/TablePoseList
+  - id: cafe_database_table_marker_list
+    type: visualization_msgs/MarkerArray 
 
   - id: waiterbot_pose
     type: geometry_msgs/PoseStamped
@@ -70,6 +74,14 @@ edges:
     finish: cafe_database_map_metadata
     remap_from: map_metadata
     remap_to: map_metadata
+  - start: cafe_database
+    finish: cafe_database_table_list
+    remap_from: table_pose_lists
+    remap_to: table_pose_lists
+  - start: cafe_database
+    finish: cafe_database_table_marker_list
+    remap_from: cafe_database/table_marker
+    remap_to: cafe_database/table_marker
 
 ## Waiter
   - start: waiter_boy

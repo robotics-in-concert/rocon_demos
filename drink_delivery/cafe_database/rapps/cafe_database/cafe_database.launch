@@ -2,4 +2,6 @@
   <arg name="map_name" default="$(find cafe_database)/maps/6th_floor_plan.yaml"/>
   <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
   </node>
+
+  <include file="$(find semantic_region_handler)/launch/database_handler.launch"/>
 </launch>
