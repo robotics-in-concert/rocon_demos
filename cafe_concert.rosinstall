@@ -50,3 +50,5 @@
     version: groovy-devel}
 - git: {local-name: ar_track_alvar, uri: 'https://github.com/corot/ar_track_alvar.git',
     version: groovy-devel}
+- git: {local-name: spatial_world_model, uri: 'https://github.com/RobotWebTools/spatial_world_model.git',
+    version: groovy-devel}
