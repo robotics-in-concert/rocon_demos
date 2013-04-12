@@ -77,10 +77,10 @@ edges:
   - start: cafe_database
     finish: cafe_database_table_list
     remap_from: table_pose_lists
-    remap_to: table_pose_lists
+    remap_to: cafe_database/table_pose_lists
   - start: cafe_database
     finish: cafe_database_table_marker_list
-    remap_from: cafe_database/table_marker
+    remap_from: table_marker
     remap_to: cafe_database/table_marker
 
 ## Waiter
