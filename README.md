@@ -42,7 +42,7 @@ rosdep install rocon_concert
 
 ```
 > cd ~/cafe_solution
-> ctkin_make
+> catkin_make
 ```
 
 #### Execution ####
@@ -56,21 +56,3 @@ rosdep install rocon_concert
 > rosservice call /concert/start_solution
 ```
 
-* In case simple way does not work
-  * Don't forget to source the correct setup.bash
-  * Run each command separate terminal
-
-```
-> roslaunch cafe_concert concert.launch --port=11311
-> roslaunch cafe_database cafe_database_client.launch --port=11313
-> roslaunch waiterbot waiter_client.launch --port=11313
-> roslaunch waiterbot waiter_client.launch --port=11314
-> roslaunch waiterbot waiter_client.launch --port=11315
-> rosservice call /concert/start_solution
-```
-
-#### Navigation ####
-
-* Waiter_boy  - /waiter_boy/goal_simple
-* Waiter_boy1 - /waiter_boy1/goal_simple
-* Waiter_boy2 - /waiter_boy2/goal_simple
