@@ -1,0 +1,338 @@
+@-ms-viewport
+{
+	width: 720px;
+}
+
+@-webkit-viewport
+{
+	width: 720px;
+}
+
+@-o-viewport
+{
+	width: 720px;
+}
+
+@-moz-viewport
+{
+	width: 720px;
+}
+
+@viewport
+{
+	width: 720px;
+}
+
+html
+{
+	background: #7F7F7F url("../images/wood_wallpaper_by_stenosis.jpg") repeat left top scroll;
+}
+
+#page
+{
+	z-index: 1;
+	width: 720px;
+	min-height: 1126.9px;
+	padding-bottom: 8.099999999999909px;
+}
+
+#pu2138
+{
+	z-index: 27;
+	width: 0.01px;
+	position: relative;
+	margin-left: 20px;
+	margin-top: 132px;
+}
+
+#u2138
+{
+	z-index: 0;
+	width: 679px;
+	border-style: none;
+	border-color: transparent;
+	background-color: #FFFFFF;
+	opacity: 0.8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+}
+
+#pu2139-4
+{
+	width: 0.01px;
+	padding-bottom: 21.399999999999864px;
+	position: relative;
+	left: 13px;
+	padding-top: 21px;
+	z-index: 2;
+}
+
+#u2139-4
+{
+	z-index: 28;
+	display: block;
+	vertical-align: top;
+	margin-left: 183px;
+	position: relative;
+}
+
+#pu2140-7
+{
+	width: 0.01px;
+	padding-bottom: 36px;
+	margin-left: 7px;
+	margin-top: 48px;
+	position: relative;
+}
+
+#u2140-7
+{
+	z-index: 32;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 170px;
+	margin-right: -10000px;
+	margin-top: 5px;
+}
+
+#u2141-5
+{
+	z-index: 39;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 217px;
+	margin-right: -10000px;
+	margin-top: 17px;
+	left: 420px;
+}
+
+#u2193
+{
+	z-index: 77;
+	width: 160px;
+	margin-left: 395px;
+	margin-top: 35px;
+	position: relative;
+}
+
+#pu2190-6
+{
+	width: 0.01px;
+	margin-left: 91px;
+	margin-top: 18px;
+	position: relative;
+}
+
+#u2190-6
+{
+	z-index: 44;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 130px;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 13px;
+}
+
+#u2192-6
+{
+	z-index: 50;
+	display: block;
+	vertical-align: top;
+	margin-bottom: -2px;
+	position: relative;
+	width: 163px;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 302px;
+}
+
+#u2154
+{
+	z-index: 56;
+	width: 650px;
+	height: 2px;
+	border-style: none;
+	border-color: transparent;
+	background-color: #FFFFFF;
+	margin-top: 129px;
+	position: relative;
+}
+
+#pu2211
+{
+	width: 0.01px;
+	margin-left: 26px;
+	margin-top: 63px;
+	position: relative;
+}
+
+#u2211
+{
+	z-index: 68;
+	width: 165px;
+	padding-bottom: 1px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 4px;
+}
+
+#u2143-6
+{
+	z-index: 69;
+	margin-left: 4px;
+	position: relative;
+}
+
+#u2168
+{
+	z-index: 75;
+	width: 165px;
+	margin-top: 21px;
+	position: relative;
+}
+
+#u2212
+{
+	z-index: 57;
+	width: 179px;
+	padding-bottom: 0px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 440px;
+}
+
+#u2142-6
+{
+	z-index: 58;
+	margin-left: 30px;
+	position: relative;
+}
+
+#u2143-6_img,#u2142-6_img
+{
+	display: block;
+	vertical-align: top;
+}
+
+#u2150
+{
+	z-index: 64;
+	width: 179px;
+	margin-top: 13px;
+	position: relative;
+}
+
+#pu482
+{
+	width: 0.01px;
+	top: -1072px;
+	margin-bottom: -80px;
+	position: relative;
+}
+
+#u482
+{
+	z-index: 6;
+	width: 719px;
+	height: 79px;
+	margin-bottom: -1px;
+	margin-right: -10000px;
+}
+
+#u484
+{
+	z-index: 7;
+	width: 63px;
+	margin-right: -10000px;
+	margin-top: 9px;
+	left: 25px;
+}
+
+#u490-4
+{
+	z-index: 9;
+	width: 368px;
+	min-height: 56px;
+	margin-right: -10000px;
+	margin-top: 15px;
+	left: 88px;
+}
+
+#u491-4
+{
+	z-index: 13;
+	width: 104px;
+	min-height: 21px;
+	margin-right: -10000px;
+	margin-top: 33px;
+	left: 511px;
+}
+
+#u493-4
+{
+	z-index: 17;
+	width: 104px;
+	min-height: 56px;
+	margin-right: -10000px;
+	margin-top: 15px;
+	left: 616px;
+}
+
+#pu852-4
+{
+	width: 0.01px;
+	margin-left: 23px;
+	top: -978px;
+	margin-bottom: -31px;
+	position: relative;
+}
+
+#u852-4
+{
+	z-index: 21;
+	width: 267px;
+	min-height: 23px;
+	margin-right: -10000px;
+	margin-top: 6px;
+}
+
+#u853
+{
+	z-index: 25;
+	width: 211px;
+	margin-right: -10000px;
+	left: 468px;
+}
+
+#u2173
+{
+	z-index: 66;
+	width: 175px;
+	margin-left: 116px;
+	top: -699px;
+	margin-bottom: -175px;
+	position: relative;
+}
+
+#u477-4
+{
+	z-index: 2;
+	width: 678px;
+	min-height: 27px;
+	margin-left: 21px;
+	margin-top: 28px;
+}
+
+#page .verticalspacer
+{
+	clear: both;
+}
+

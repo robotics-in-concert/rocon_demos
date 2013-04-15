@@ -1,0 +1,322 @@
+@-ms-viewport
+{
+	width: 720px;
+}
+
+@-webkit-viewport
+{
+	width: 720px;
+}
+
+@-o-viewport
+{
+	width: 720px;
+}
+
+@-moz-viewport
+{
+	width: 720px;
+}
+
+@viewport
+{
+	width: 720px;
+}
+
+html
+{
+	background: #7F7F7F url("../images/wood_wallpaper_by_stenosis.jpg") repeat left top scroll;
+}
+
+#page
+{
+	z-index: 1;
+	width: 720px;
+	min-height: 1126.9px;
+	padding-bottom: 8.099999999999909px;
+}
+
+#pu2056
+{
+	z-index: 27;
+	width: 0.01px;
+	position: relative;
+	margin-left: 20px;
+	margin-top: 134px;
+}
+
+#u2056
+{
+	z-index: 0;
+	width: 679px;
+	border-style: none;
+	border-color: transparent;
+	background-color: #FFFFFF;
+	opacity: 0.8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+}
+
+#pu2057-4
+{
+	width: 0.01px;
+	position: relative;
+	left: 13px;
+	padding-top: 21px;
+	z-index: 2;
+	padding-bottom: 2px;
+}
+
+#u2057-4
+{
+	z-index: 28;
+	display: block;
+	vertical-align: top;
+	margin-left: 185px;
+	position: relative;
+}
+
+#u2100
+{
+	z-index: 68;
+	width: 650px;
+	height: 2px;
+	border-style: none;
+	border-color: transparent;
+	background-color: #FFFFFF;
+	margin-top: 524px;
+	position: relative;
+}
+
+#pu2092-7
+{
+	width: 0.01px;
+	padding-bottom: 36px;
+	margin-left: 7px;
+	margin-top: 13px;
+	position: relative;
+}
+
+#u2092-7
+{
+	z-index: 32;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 170px;
+	margin-right: -10000px;
+	margin-top: 5px;
+}
+
+#u2099-5
+{
+	z-index: 39;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 217px;
+	margin-right: -10000px;
+	margin-top: 18px;
+	left: 420px;
+}
+
+#pu2210
+{
+	width: 0.01px;
+	margin-left: 8px;
+	margin-top: 3px;
+	position: relative;
+}
+
+#u2210
+{
+	z-index: 59;
+	width: 180px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 4px;
+}
+
+#u2079-6
+{
+	z-index: 60;
+	margin-left: 31px;
+	position: relative;
+}
+
+#u2072
+{
+	z-index: 66;
+	width: 180px;
+	margin-top: 2px;
+	position: relative;
+}
+
+#u2058
+{
+	z-index: 44;
+	width: 223px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 8px;
+	left: 188px;
+}
+
+#u2059
+{
+	z-index: 45;
+	width: 223px;
+	position: relative;
+	margin-right: -10000px;
+}
+
+#u2062
+{
+	z-index: 46;
+	width: 152px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 65px;
+	left: 71px;
+}
+
+#u2060
+{
+	z-index: 48;
+	width: 210px;
+	position: relative;
+	margin-right: -10000px;
+}
+
+#u2209
+{
+	z-index: 50;
+	width: 179px;
+	padding-bottom: 0px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 459px;
+}
+
+#u2077-6
+{
+	z-index: 51;
+	margin-left: 30px;
+	position: relative;
+}
+
+#u2079-6_img,#u2077-6_img
+{
+	display: block;
+	vertical-align: top;
+}
+
+#u2067
+{
+	z-index: 57;
+	width: 179px;
+	top: -1px;
+	margin-bottom: -1px;
+	position: relative;
+}
+
+#pu482
+{
+	width: 0.01px;
+	top: -1074px;
+	margin-bottom: -80px;
+	position: relative;
+}
+
+#u482
+{
+	z-index: 6;
+	width: 719px;
+	height: 79px;
+	margin-bottom: -1px;
+	margin-right: -10000px;
+}
+
+#u484
+{
+	z-index: 7;
+	width: 63px;
+	margin-right: -10000px;
+	margin-top: 9px;
+	left: 25px;
+}
+
+#u490-4
+{
+	z-index: 9;
+	width: 368px;
+	min-height: 56px;
+	margin-right: -10000px;
+	margin-top: 15px;
+	left: 88px;
+}
+
+#u491-4
+{
+	z-index: 13;
+	width: 104px;
+	min-height: 21px;
+	margin-right: -10000px;
+	margin-top: 33px;
+	left: 511px;
+}
+
+#u493-4
+{
+	z-index: 17;
+	width: 104px;
+	min-height: 56px;
+	margin-right: -10000px;
+	margin-top: 15px;
+	left: 616px;
+}
+
+#pu852-4
+{
+	width: 0.01px;
+	margin-left: 23px;
+	top: -980px;
+	margin-bottom: -31px;
+	position: relative;
+}
+
+#u852-4
+{
+	z-index: 21;
+	width: 267px;
+	min-height: 23px;
+	margin-right: -10000px;
+	margin-top: 6px;
+}
+
+#u853
+{
+	z-index: 25;
+	width: 211px;
+	margin-right: -10000px;
+	left: 468px;
+}
+
+#u477-4
+{
+	z-index: 2;
+	width: 678px;
+	min-height: 27px;
+	margin-left: 21px;
+	margin-top: 26px;
+}
+
+#page .verticalspacer
+{
+	clear: both;
+}
+
