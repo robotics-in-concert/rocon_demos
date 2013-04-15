@@ -46,13 +46,21 @@
     version: hydro-devel}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: hydro-devel}
+
+## Catkinzied packages
 - git: {local-name: kobuki, uri: 'https://github.com/yujinrobot/kobuki.git',
     version: hydro-devel}
 - git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
     version: hydro-devel}
 - git: {local-name: xacro, uri: 'https://github.com/ros/xacro.git',
     version: groovy-devel}
+- git: {local-name: executive_smach, uri: 'https://github.com/ros/executive_smach.git',
+    version: hydro-devel}
+
+# Waiterbot dependency
 - git: {local-name: ar_track_alvar, uri: 'https://github.com/corot/ar_track_alvar.git',
     version: groovy-devel}
+
+# Database Dependecny
 - git: {local-name: spatial_world_model, uri: 'https://github.com/RobotWebTools/spatial_world_model.git',
     version: groovy-devel}
