@@ -4,7 +4,7 @@ project(cafe_manager)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS rocon_app_manager rocon_taskcoordinator)
+find_package(catkin REQUIRED COMPONENTS rocon_app_manager)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
