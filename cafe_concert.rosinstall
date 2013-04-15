@@ -64,5 +64,5 @@
     version: groovy-devel}
 
 # Database Dependecny
-- git: {local-name: spatial_world_model, uri: 'https://github.com/RobotWebTools/spatial_world_model.git',
+- git: {local-name: spatial_world_model, uri: 'https://github.com/WorldModel/spatial_world_model.git',
     version: groovy-devel}
