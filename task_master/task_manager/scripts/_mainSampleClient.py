@@ -115,9 +115,10 @@ if __name__ == '__main__':
 		for k in range(robot_num):
 			robot_cnt = k+1	
 			robot_name = "waiter_%d/delivery_order"%robot_cnt
-			RobotStatusList[robot_name]="Idle"
+			RobotStatusList[robot_name]="IDLE"
 			print "Create action client robot_name: ",robot_name
-			waiter_client[robot_name] = actionlib.SimpleActionClient(robot_name,DeliverOrderAction)
+			waiter_client[robot_name] = actionlib.SimpleActionClient(robot_name,
+																	DeliverOrderAction)
 
 		for k in RobotStatusList.keys():
 			waiter_client[k].wait_for_server()
@@ -141,7 +142,7 @@ if __name__ == '__main__':
 			checkRobotStatusFlag = True	
 			while checkRobotStatusFlag and not rospy.is_shutdown():
 				for k in RobotStatusList.keys():
-					if RobotStatusList[k] == "Idle":
+					if RobotStatusList[k] == "IDLE":
 					
 						RobotStatusList[k] = "GO_TO_KITCHEN" 	
 						o.status = Status.GO_TO_KITCHEN
