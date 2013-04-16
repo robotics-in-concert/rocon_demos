@@ -13,6 +13,7 @@ Demo software for rocon milestones.
 sudo apt-get install ros-groovy-turtlebot
 sudo apt-get install ros-groovy-turtlebot-apps
 sudo apt-get install ros-groovy-turtlebot-viz
+sudo apt-get install ros-groovy-rospy-message-converter
 rosdep install rocon_hub
 rosdep install rocon_concert
 ```
