@@ -401,8 +401,6 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 		status = MessageRecvSrv_cmdset.getValue("status")
 		goal_id  = MessageRecvSrv_cmdset.getValue("goal_id")
 		
-		print "Call Status Event", goal_id,status
-
 		if status != "IDLE":
 		##Robot Status update
 			pass
