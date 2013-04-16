@@ -3,7 +3,8 @@ project(arduino_resources)
 
 find_package(catkin REQUIRED COMPONENTS std_msgs message_generation)
 
-add_message_files(FILES Rangers.msg)
+add_message_files(FILES Rangers.msg
+                        RangersFixed.msg)
 
 generate_messages(DEPENDENCIES std_msgs)
 
