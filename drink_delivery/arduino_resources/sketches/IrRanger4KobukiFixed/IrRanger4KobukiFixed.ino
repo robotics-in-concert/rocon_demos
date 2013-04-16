@@ -6,16 +6,12 @@
 
 #include <ros.h>
 #include <ros/time.h>
-#include <kobuki_arduino_msgs/Rangers.h>
-#include <std_msgs/Int16MultiArray.h>
+#include <kobuki_arduino_msgs/RangersFixed.h>
 
 ros::NodeHandle  nh;
-kobuki_arduino_msgs::Rangers rangers_msg;
+kobuki_arduino_msgs::RangersFixed rangers_msg;
 ros::Publisher pub_range( "rangers_data", &rangers_msg);
 
-const int nr_of_irs = 11;
-const int ir_pins[nr_of_irs] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int range_storage[nr_of_irs];
 unsigned long last_rangers_time, rangers_timing, last_blink_time, blink_timing, now;
 boolean led_on;
 int val;
@@ -26,11 +22,9 @@ void setup()
   nh.advertise(pub_range);
   
   rangers_msg.header.frame_id = "kobuki_rangers";
-  rangers_msg.ranges_length = nr_of_irs;
-  rangers_msg.ranges = range_storage;
-  rangers_timing = 50; // publish the range value every 50 milliseconds, since it takes that long for the sensor to stabilize
+  rangers_timing = 500; // ms
   last_rangers_time = 0;
-  blink_timing = 500; // blinking frequency in ms
+  blink_timing = 500; // ms
   last_blink_time = 0;
   pinMode(13, OUTPUT);
   led_on = false;
@@ -38,19 +32,28 @@ void setup()
 
 void loop()
 {
+  // publish the range value every 50 milliseconds,
+  // since it takes that long for the sensor to stabilize
   now = millis();
   if ((now - last_rangers_time) > rangers_timing)
   {
     last_rangers_time = now;
     rangers_msg.header.stamp = nh.now();
-    for (unsigned int ir = 0; ir < nr_of_irs; ++ir)
-    {
-      rangers_msg.ranges[ir] = analogRead(ir_pins[ir]);
-    }   
+    rangers_msg.range1 = analogRead(0);
+    rangers_msg.range2 = analogRead(1);
+    rangers_msg.range3 = analogRead(2);
+    rangers_msg.range4 = analogRead(3);
+    rangers_msg.range5 = analogRead(4);
+    rangers_msg.range6 = analogRead(5);
+    rangers_msg.range7 = analogRead(6);
+    rangers_msg.range8 = analogRead(7);
+    rangers_msg.range9 = analogRead(8);
+    rangers_msg.range10 = analogRead(9);
+    rangers_msg.range11 = analogRead(10);
     pub_range.publish(&rangers_msg);
-    nh.spinOnce();
   }
-   
+  nh.spinOnce();
+    
   // Alive signal
   if ((now - last_blink_time) > blink_timing)
   {
@@ -67,3 +70,4 @@ void loop()
     }
   }
 }
+
