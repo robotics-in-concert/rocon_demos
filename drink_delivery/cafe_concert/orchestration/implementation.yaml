@@ -4,147 +4,95 @@
 
 name: "Cafe Concert"
 nodes:
-  - id: waiter_boy
-    tuple: linux.ros.pc.waiterbot/waiter_soft
-  - id: waiter_boy2
-    tuple: linux.ros.pc.waiterbot/waiter_soft
-  - id: waiter_boy3
-    tuple: linux.ros.pc.waiterbot/waiter_soft
   - id: cafe_database
     tuple: linux.ros.pc.cafe_database/cafe_database
+  - id: cafe_taskcoordinator
+    tuple: linux.ros.pc.cafe_manager/taskcoordinator
+
+  - id: waiterbot
+    tuple: linux.ros.pc.waiterbot/waiter_soft
+#  - id: waiterbot2
+#    tuple: linux.ros.pc.waiterbot/waiter_soft
+#  - id: waiterbot3
+#    tuple: linux.ros.pc.waiterbot/waiter_soft
 topics:
-  - id: cafe_database_map
+## Cafe database - Waiterbot
+  - id: cafe_database_waiterbot_map
     type: nav_msgs/OccupancyGrid
-  - id: cafe_database_map_metadata
+  - id: cafe_database_waiterbot_map_metadata
     type: nav_msgs/MapMetaData
-  - id: cafe_database_table_list
+  - id: cafe_database_waiterbot_table_pose_list
     type: semantic_region_handler/TablePoseList
-  - id: cafe_database_table_marker_list
-    type: visualization_msgs/MarkerArray 
+  - id: cafe_database_waiterbot_ar_marker_list
+    type: ar_track_alvar/AlvarMarkers
 
-  - id: waiterbot_pose
-    type: geometry_msgs/PoseStamped
-  - id: waiterbot_map
-    type: nav_msgs/OccupancyGrid
-  - id: waiterbot_map_metadata
-    type: nav_msgs/MapMetaData
-  - id: waiterbot_simple_goal
-    type: geometry_msgs/PoseStamped
-  - id: waiterbot_initialpose
-    type: geometry_msgs/PoseStamped
+## Task Coordinator - Kitchen Manager
+  - id: taskcoordinator_kitchen_list_order
+    type: cafe_msgs/OrderList
 
-  - id: waiterbot2_pose
-    type: geometry_msgs/PoseStamped
-  - id: waiterbot2_map
-    type: nav_msgs/OccupancyGrid
-  - id: waiterbot2_map_metadata
-    type: nav_msgs/MapMetaData
-  - id: waiterbot2_simple_goal
-    type: geometry_msgs/PoseStamped
-  - id: waiterbot2_initialpose
-    type: geometry_msgs/PoseStamped
-
-  - id: waiterbot3_pose
-    type: geometry_msgs/PoseStamped
-  - id: waiterbot3_map
-    type: nav_msgs/OccupancyGrid
-  - id: waiterbot3_map_metadata
-    type: nav_msgs/MapMetaData
-  - id: waiterbot3_simple_goal
-    type: geometry_msgs/PoseStamped
-  - id: waiterbot3_initialpose
-    type: geometry_msgs/PoseStamped
 
 actions:
-  - id: waiterbot_movebase
-    type: move_base_msgs/MoveBase
-  - id: waiterbot2_movebase
-    type: move_base_msgs/MoveBase
-  - id: waiterbot3_movebase
-    type: move_base_msgs/MoveBase
+## Task Coordinator - User Device
+  - id: taskcoordinator_userdevice_send_order
+    type: cafe_msgs/UserOrder
+## Task Coordinator - Waiterbot
+  - id: taskcoordinator_waiterbot_delivery_order
+    type: cafe_msgs/DeliveryOrder
+
 
 edges:
-
 ## Cafe database
   - start: cafe_database
-    finish: cafe_database_map 
+    finish: cafe_database_waiterbot_map 
     remap_from: map
     remap_to: map
   - start: cafe_database
-    finish: cafe_database_map_metadata
+    finish: cafe_database_waiterbot_map_metadata
     remap_from: map_metadata
     remap_to: map_metadata
   - start: cafe_database
-    finish: cafe_database_table_list
+    finish: cafe_database_waiterbot_table_pose_list
     remap_from: table_pose_lists
     remap_to: cafe_database/table_pose_lists
   - start: cafe_database
-    finish: cafe_database_table_marker_list
+    finish: cafe_database_waiterbot_ar_marker_list
     remap_from: table_marker
     remap_to: cafe_database/table_marker
 
 ## Waiter
-  - start: waiter_boy
-    finish: waiterbot_pose
-    remap_from: robot_pose
-    remap_to: waiter_boy/robot_pose
-  - start: waiter_boy
-    finish: waiterbot_map
+  - start: cafe_database_waiterbot_map
+    finish: waiterbot
     remap_from: map
     remap_to: map
-  - start: waiter_boy
-    finish: waiterbot_movebase
-    remap_from: move_base
-    remap_to: waiter_boy/move_base
-  - start: waiter_boy
-    finish: waiterbot_simple_goal
-    remap_from: move_base_simple/goal
-    remap_to: waiter_boy/goal_simple
-  - start: waiter_boy
-    finish: waiterbot_initialpose
-    remap_from: initialpose
-    remap_to: waiter_boy/initialpose
+  - start: cafe_database_waiterbot_map_metadata
+    finish: waiterbot
+    remap_from: map_metadata
+    remap_to: map_metadata
+  - start: cafe_database_waiterbot_table_pose_list
+    finish: waiterbot
+    remap_from: table_pose_list
+    remap_to: table_pose_list
+  - start: cafe_database_waiterbot_ar_marker_list
+    finish: waiterbot
+    remap_from: ar_marker_list
+    remap_to: ar_marker_list
+  - start: waiterbot
+    finish: taskcoordinator_waiterbot_delivery_order
+    remap_from: delievery_order
+    remap_to: delievery_order
 
-## Waiter1
-  - start: waiter_boy2
-    finish: waiterbot2_pose
-    remap_from: robot_pose
-    remap_to: waiter_boy2/robot_pose
-  - start: waiter_boy2
-    finish: waiterbot2_map
-    remap_from: map
-    remap_to: map
-  - start: waiter_boy2
-    finish: waiterbot2_movebase
-    remap_from: move_base
-    remap_to: waiter_boy2/move_base
-  - start: waiter_boy2
-    finish: waiterbot_simple_goal
-    remap_from: move_base_simple/goal
-    remap_to: waiter_boy2/goal_simple
-  - start: waiter_boy2
-    finish: waiterbot2_initialpose
-    remap_from: initialpose
-    remap_to: waiter_boy2/initialpose
+## Task Coordinator
+  - start: taskcoordinator_waiterbot_delivery_order
+    finish: taskcoordinator
+    remap_from: delievery_order
+    remap_to: delievery_order
+  - start:  taskcoordinator
+    finish: taskcoordinator_userdevice_send_order
+    remap_from: send_order
+    remap_to: send_order
+  - start: taskcoordinator
+    finish: taskcoordinator_kitchen_list_order
+    remap_from: list_order
+    remap_to: list_order
 
-## Waiter3
-  - start: waiter_boy3
-    finish: waiterbot3_pose
-    remap_from: robot_pose
-    remap_to: waiter_boy3/robot_pose
-  - start: waiter_boy3
-    finish: waiterbot3_map
-    remap_from: map
-    remap_to: map
-  - start: waiter_boy3
-    finish: waiterbot3_movebase
-    remap_from: move_base
-    remap_to: waiter_boy3/move_base
-  - start: waiter_boy3
-    finish: waiterbot_simple_goal
-    remap_from: move_base_simple/goal
-    remap_to: waiter_boy3/goal_simple
-  - start: waiter_boy3
-    finish: waiterbot3_initialpose
-    remap_from: initialpose
-    remap_to: waiter_boy3/initialpose
+## Kitchen Manager
