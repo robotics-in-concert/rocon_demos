@@ -7,17 +7,30 @@ import time
 ##ros msg
 import actionlib
 from cafe_msgs.msg import *
+from semantic_region_handler.msg import *
+from ar_track_alvar.msg import *
 
 class WaiterSoftBot(object):
     def __init__(self,robot_name,action_name):
         self.name = robot_name
         self.action_name = action_name
         self.waiter_server = actionlib.SimpleActionServer(self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
+
+        self.subscriber = {}
+        self.subscriber['table_list'] = rospy.Subscriber('table_post_list',TablePoseList,self.process_table_pose)
+        self.subscriber['ar_list'] = rospy.Subscriber('ar_list',AlvarMarkers,self.process_alvar_markers)
         
     def spin(self):
         self.waiter_server.start() 
         rospy.loginfo("Waiterbot has been Started")
         rospy.spin()
+
+    def process_table_pose(self,msg):
+        rospy.loginfo('table_pose message received')
+
+    def process_alvar_markers(self,msg):
+        rospy.loginfo('ar marker message received')
+
 
     def process_status(self,time_range,message,feedback_status):
         k = 0;
@@ -80,7 +93,7 @@ if __name__ == '__main__':
         # Initialize ros node
         rospy.init_node('waiterbot')
 
-        waiter = WaiterSoftBot(rospy.get_name(),"~delivery_order")
+        waiter = WaiterSoftBot(rospy.get_name(),"delivery_order")
         rospy.loginfo('Initialized')
 
         waiter.spin()
