@@ -18,6 +18,8 @@ global goal_handle_list;goal_handle_list = []
 def Recv(data):
 	print "Add goal_handle_list length: ", len(goal_handle_list)
 	goal_handle_list.append(data)
+	
+	
 	print "////////////////////////////////////////////////////////////"
 	print "get_goal_id(): ",data.get_goal_id().id
 	#print "get_goal(): ",data.get_goal(), type(data.get_goal())

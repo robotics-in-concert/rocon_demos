@@ -48,8 +48,8 @@ class WaiterSoftBot(object):
         self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
         
         #In delivery      
-        self.process_status(time_range=[20,30],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
-        self.loginfo(self.name + " : ARRIVE_TABLE")
+        self.process_status(time_range=[10,20],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
+        rospy.loginfo(self.name + " : ARRIVE_TABLE")
         
         # Waiting for user confirmation
         feedback = DeliverOrderFeedback()
@@ -66,7 +66,9 @@ class WaiterSoftBot(object):
         # Returning to Docking
         self.process_status(time_range=[20,30],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
         rospy.loginfo(self.name+ " : END_DELIEVERY_ORDER")
-
+		
+        rospy.sleep(1)
+        
         # Closing off the delivery 
         result = DeliverOrderResult("Success!")
         self.waiter_server.set_succeeded(result)

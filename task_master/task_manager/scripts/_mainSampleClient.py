@@ -13,16 +13,18 @@ import actionlib
 from std_msgs.msg import *
 from cafe_msgs.msg import *
 		
-class CRobotCallBack():
+class CActionClientCallBack():
 	m_name = ""
-	def	__init__(self,name):
+	m_RobotStatusList = {}
+	def	__init__(self,name,RobotStatusList):
 		self.m_name = name
+		self.m_RobotStatusList = RobotStatusList
 		pass
 			
 	def done_cb(self,status,result):
 		print "done_cb: status", status ,type(status)
 		print "done_cb: result", result ,type(result)
-		RobotStatusList[self.m_name] = "IDLE"
+		self.m_RobotStatusList[self.m_name] = "IDLE"
 		pass
 	
 	def active_cb(self,):
@@ -30,33 +32,33 @@ class CRobotCallBack():
 		pass
 	
 	def feedback_cb(self,data):	
-		global RobotStatusList
+		
 		print self.m_name, "feedback_cb: ", data
 		
 		if  data.status == Status.IDLE:
-			RobotStatusList[self.m_name] = "IDLE"
+			self.m_RobotStatusList[self.m_name] = "IDLE"
 		elif data.status == Status.GO_TO_KITCHEN:
-			RobotStatusList[self.m_name] = "GO_TO_KITCHEN"
+			self.m_RobotStatusList[self.m_name] = "GO_TO_KITCHEN"
 		elif data.status == Status.ARRIVE_KITCHEN:
-			RobotStatusList[self.m_name] = "ARRIVE_KITCHEN"
+			self.m_RobotStatusList[self.m_name] = "ARRIVE_KITCHEN"
 		elif data.status == Status.WAITING_FOR_KITCHEN:
-			RobotStatusList[self.m_name] = "WAITING_FOR_KITCHEN"
+			self.m_RobotStatusList[self.m_name] = "WAITING_FOR_KITCHEN"
 		elif data.status == Status.IN_DELIVERY:
-			RobotStatusList[self.m_name] = "IN_DELIVERY"
+			self.m_RobotStatusList[self.m_name] = "IN_DELIVERY"
 		elif data.status == Status.ARRIVE_TABLE:
-			RobotStatusList[self.m_name] = "ARRIVE_TABLE"
+			self.m_RobotStatusList[self.m_name] = "ARRIVE_TABLE"
 		elif data.status == Status.WAITING_FOR_USER_CONFIRMATION:
-			RobotStatusList[self.m_name] = "WAITING_FOR_USER_CONFIRMATION"
+			self.m_RobotStatusList[self.m_name] = "WAITING_FOR_USER_CONFIRMATION"
 		elif data.status == Status.COMPLETE_DELIEVERY:
-			RobotStatusList[self.m_name] = "COMPLETE_DELIEVERY"
+			self.m_RobotStatusList[self.m_name] = "COMPLETE_DELIEVERY"
 		elif data.status == Status.RETURNING_TO_DOCK:
-			RobotStatusList[self.m_name] = "RETURNING_TO_DOCK"
+			self.m_RobotStatusList[self.m_name] = "RETURNING_TO_DOCK"
 		elif data.status == Status.END_DELIEVERY_ORDER:
-			RobotStatusList[self.m_name] = "END_DELIEVERY_ORDER"
+			self.m_RobotStatusList[self.m_name] = "END_DELIEVERY_ORDER"
 		elif data.status == Status.ERROR:
-			RobotStatusList[self.m_name] = "ERROR"
+			self.m_RobotStatusList[self.m_name] = "ERROR"
 		else:
-			RobotStatusList[self.m_name] = "ERROR"
+			self.m_RobotStatusList[self.m_name] = "ERROR"
 		
 			
 		
@@ -149,37 +151,18 @@ if __name__ == '__main__':
 						o.robot_name = k
 					
 						goal=UserOrderGoal(order=o) 
-						pRobotCallBack = CRobotCallBack(k)
+						pActionClientCB = CActionClientCallBack(k,RobotStatusList)
 						
-						waiter_client[k].send_goal(goal,pRobotCallBack.done_cb,
-														pRobotCallBack.active_cb, 
-														pRobotCallBack.feedback_cb)
+						waiter_client[k].send_goal(goal,pActionClientCB.done_cb,
+														pActionClientCB.active_cb, 
+														pActionClientCB.feedback_cb)
 														
 						checkRobotStatusFlag = False
 					
 						break;
 				rospy.sleep(1)
 
-			
-		
-		
-		
-		
-		#send Goal
-		
-		#ThreadFakeFeedbackFunc = threading.Thread(target=FakeFeedbackFunc, args=())
-		#ThreadFakeFeedbackFunc.start()
-			
-		
-		####################################################
-		#user_device_p = rospy.Publisher('user_device_p', Order)
-		#rospy.Subscriber("user_device_order_sub",Order, Recv)
-		#global user_device_action_server;
-		user_device_action_server =  actionlib.ActionServer('send_order',UserOrderAction,Recv)
-		#user_device_action_server.register_goal_callback(Recv)
-		#user_device_action_server.start()
-		####################################################
-		
+
 		while not rospy.is_shutdown():
 			rospy.sleep(1)
 			pass
