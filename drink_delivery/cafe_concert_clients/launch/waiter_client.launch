@@ -3,6 +3,6 @@
     <arg name="robot_name" value="waiterbot"/>
     <arg name="robot_type" value="pc"/>
     <arg name="concert_name" value="cafe_concert"/>
-    <arg name="app_lists" value="$(find waiterbot)/rapps/waiter.rapps"/>
+    <arg name="app_lists" value="$(find cafe_rapps)/rapps/cafe.rapps"/>
   </include>
 </launch>

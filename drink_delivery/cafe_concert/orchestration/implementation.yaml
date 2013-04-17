@@ -5,12 +5,12 @@
 name: "Cafe Concert"
 nodes:
   - id: cafe_database
-    tuple: linux.ros.pc.cafe_database/cafe_database
+    tuple: linux.ros.pc.cafe_rapps/cafe_database
 #  - id: cafe_taskcoordinator
 #    tuple: linux.ros.pc.cafe_manager/taskcoordinator
 
   - id: waiterbot
-    tuple: linux.ros.pc.waiterbot/waiter_soft
+    tuple: linux.ros.pc.cafe_rapps/waiter_soft
 #  - id: waiterbot2
 #    tuple: linux.ros.pc.waiterbot/waiter_soft
 #  - id: waiterbot3

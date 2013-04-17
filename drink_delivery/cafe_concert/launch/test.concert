@@ -2,6 +2,4 @@
   <launch package="cafe_concert" name="concert.launch" port="11311" />
   <launch package="cafe_concert_clients" name="cafe_database_client.launch" port="11312" />
   <launch package="cafe_concert_clients" name="waiter_client.launch" port="11313" />
-  <launch package="cafe_concert_clients" name="waiter_client.launch" port="11314" /> 
-  <launch package="cafe_concert_clients" name="waiter_client.launch" port="11315" /> 
 </concert>
