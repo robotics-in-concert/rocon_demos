@@ -14,6 +14,7 @@ sudo apt-get install ros-groovy-turtlebot
 sudo apt-get install ros-groovy-turtlebot-apps
 sudo apt-get install ros-groovy-turtlebot-viz
 sudo apt-get install ros-groovy-rospy-message-converter
+sudo apt-get install ros-groovy-rocon
 rosdep install rocon_hub
 rosdep install rocon_concert
 ```
