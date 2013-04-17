@@ -15,6 +15,10 @@ nodes:
 #    tuple: linux.ros.pc.waiterbot/waiter_soft
 #  - id: waiterbot3
 #    tuple: linux.ros.pc.waiterbot/waiter_soft
+  
+  - id: customer
+    tuple: linux.ros.pc.cafe_rapps/customer_soft
+
 topics:
 ## Cafe database - Waiterbot
   - id: cafe_database_waiterbot_map
@@ -33,11 +37,12 @@ topics:
 
 actions:
 ## Task Coordinator - User Device
-#  - id: taskcoordinator_userdevice_send_order
-#    type: cafe_msgs/UserOrder
+  - id: taskcoordinator_userdevice_send_order
+    type: cafe_msgs/UserOrder
 ## Task Coordinator - Waiterbot
   - id: taskcoordinator_waiterbot_delivery_order
     type: cafe_msgs/DeliveryOrder
+
 
 
 edges:
@@ -80,6 +85,12 @@ edges:
     finish: taskcoordinator_waiterbot_delivery_order
     remap_from: delivery_order
     remap_to: waiterbot/delivery_order
+
+## Cafe Customer
+  - start: customer 
+    finish: taskcoordinator_userdevice_send_order
+    remap_from: send_order
+    remap_to: taskcoordinator/send_order
 
 ## Task Coordinator
 # - start: taskcoordinator_waiterbot_delivery_order

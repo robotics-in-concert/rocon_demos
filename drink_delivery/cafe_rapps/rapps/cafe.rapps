@@ -1,5 +1,5 @@
 apps:
   - cafe_rapps/cafe_database
   - cafe_rapps/waiter_soft
-#  - cafe_concert/taskcoordinator
-#  - cafe_concert/cafe_customer
+  - cafe_rapps/taskcoordinator
+  - cafe_rapps/customer_soft

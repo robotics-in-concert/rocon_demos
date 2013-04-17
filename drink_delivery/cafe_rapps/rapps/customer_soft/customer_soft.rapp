@@ -1,0 +1,6 @@
+disply: Cafe Customer 
+description: Babo Customer  
+platform: linux.ros.pc
+launch: cafe_rapps/customer_soft.launch
+interface: cafe_rapps/customer_soft.interface
+
