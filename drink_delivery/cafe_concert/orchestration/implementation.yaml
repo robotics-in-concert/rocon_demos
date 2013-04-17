@@ -52,12 +52,12 @@ edges:
     remap_to: map_metadata
   - start: cafe_database
     finish: cafe_database_waiterbot_table_pose_list
-    remap_from: table_pose_lists
-    remap_to: cafe_database/table_pose_lists
+    remap_from: table_pose_list
+    remap_to: cafe_database/table_pose_list
   - start: cafe_database
     finish: cafe_database_waiterbot_ar_marker_list
-    remap_from: table_marker
-    remap_to: cafe_database/table_marker
+    remap_from: ar_marker_list 
+    remap_to: cafe_database/ar_marker_list
 
 ## Waiter
   - start: cafe_database_waiterbot_map
@@ -71,15 +71,15 @@ edges:
   - start: cafe_database_waiterbot_table_pose_list
     finish: waiterbot
     remap_from: table_pose_list
-    remap_to: table_pose_list
+    remap_to: cafe_database/table_pose_list
   - start: cafe_database_waiterbot_ar_marker_list
     finish: waiterbot
     remap_from: ar_marker_list
-    remap_to: ar_marker_list
+    remap_to: cafe_database/ar_marker_list
   - start: waiterbot
     finish: taskcoordinator_waiterbot_delivery_order
-    remap_from: delievery_order
-    remap_to: delievery_order
+    remap_from: delivery_order
+    remap_to: waiterbot/delivery_order
 
 ## Task Coordinator
 # - start: taskcoordinator_waiterbot_delivery_order
