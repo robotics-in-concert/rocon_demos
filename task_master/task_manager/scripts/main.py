@@ -268,10 +268,10 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
 		pass
 		
 	def execute(self,userdata):
-		global MessageRecvSrv_cmdset
-		global MessageRecvSrv_OrderList	
-		global MessageRecvSrv_RemapingList
-		global kitchen_mgr_pub
+        global MessageRecvSrv_cmdset
+        global MessageRecvSrv_OrderList	
+        global MessageRecvSrv_RemapingList
+        global kitchen_mgr_pub
 		
 		#print "MessageRecvSrv_PushOrder Start"
 
@@ -508,7 +508,6 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			#Send result to user device
 			goal_handle = GetGoalHandle(goal_id)
 			_result = UserOrderResult()
-			_feedback.status = status
 			goal_handle.set_succeeded(_result)
 			
 			#Pop order list	
