@@ -272,7 +272,7 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
         global MessageRecvSrv_OrderList	
         global MessageRecvSrv_RemapingList
         global kitchen_mgr_pub
-		
+
 		#print "MessageRecvSrv_PushOrder Start"
 
 		"""
