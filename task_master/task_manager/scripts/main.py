@@ -272,6 +272,7 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
         global MessageRecvSrv_OrderList    
         global MessageRecvSrv_RemapingList
         global kitchen_mgr_pub
+<<<<<<< HEAD
     	
     	#print "MessageRecvSrv_PushOrder Start"
 
@@ -350,6 +351,86 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
     	
     	
     
+=======
+
+		#print "MessageRecvSrv_PushOrder Start"
+
+		"""
+		global MessageRecvSrv_GlobalEvtFlag	
+		ResultCode = 'retry'
+
+		if MessageRecvSrv_GlobalEvtFlag == True:			
+			MessageRecvSrv_GlobalEvtFlag = False
+			MessageRecvSrv = 'failure'
+			return ResultCode
+		"""
+		
+		#assgine Order ID
+		self.m_OrderID+=1
+
+		cmdset = MessageRecvSrv_cmdset.copyCmdset()
+		
+		cmdset.setInt("order_id",self.m_OrderID)
+		MessageRecvSrv_RemapingList[cmdset.getValue("goal_id")] = self.m_OrderID
+		
+		#send message delivery order queue
+		cmdset.setCmdName("DeliveryOrderEvent")
+		EventProc(cmdset)
+		
+		#send message to kitchen mgr
+		o = Order()
+		o.table_id = cmdset.getValue('table_id')
+		
+		#parsing menuse
+		menus = []		
+		strMenu = cmdset.getValue("menus")
+
+		for k in strMenu.split('/'):
+			if len(k) != 0:
+				m = Menu()
+				m.name = str(k.split('_')[0])
+				m.size = int(k.split('_')[1])
+				m.qty = int(k.split('_')[2])
+				menus.append(m)
+				
+		o.menus = menus
+		o.robot_name = "None"
+		o.order_id = cmdset.getValue('order_id')
+		
+		MessageRecvSrv_OrderList.append(o)
+		
+		order_list = OrderList()
+		order_list.orders = MessageRecvSrv_OrderList
+
+		kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+
+		return 'success'
+		
+		
+		#send event
+		
+		##Action
+		#self.m_IsRunning =[True]	
+		#Ret = {}
+		#Thread_GotoDirEx = threading.Thread(target=GotoDirEx, args=(self.m_IsRunning,Ret, 1, 65535, True))
+		#Thread_GotoDirEx.start()		
+		#while self.m_IsRunning[0] == True:
+		#	if RemoteSrv_GlobalEvtFlag == True:				
+		#		RemoteSrv_GlobalEvtFlag = False
+		#		ResultCode =  'failure'
+		#		return ResultCode
+		#	pass		
+		#while Thread_GotoDirEx.isAlive():
+		#	pass
+		#
+		#if Ret['ResultCode'] == 0:
+		#	ResultCode = 'success'
+		#else:
+		#	ResultCode = 'failure'
+		
+		
+	
+>>>>>>> 50bcdc0d94873b2b396697e7355c73b8c9a8ee0b
 class MessageRecvSrv_CallStatusEvent(smach.State):
     m_IsRunning = [True]
     
