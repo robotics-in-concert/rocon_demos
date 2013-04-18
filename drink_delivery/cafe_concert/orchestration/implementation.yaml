@@ -6,8 +6,8 @@ name: "Cafe Concert"
 nodes:
   - id: cafe_database
     tuple: linux.ros.pc.cafe_rapps/cafe_database
-#  - id: cafe_taskcoordinator
-#    tuple: linux.ros.pc.cafe_manager/taskcoordinator
+  - id: cafe_taskcoordinator
+    tuple: linux.ros.pc.cafe_rapps/taskcoordinator
 
   - id: waiterbot
     tuple: linux.ros.pc.cafe_rapps/waiter_soft
@@ -31,8 +31,8 @@ topics:
     type: ar_track_alvar/AlvarMarkers
 
 ## Task Coordinator - Kitchen Manager
-#  - id: taskcoordinator_kitchen_list_order
-#    type: cafe_msgs/OrderList
+  - id: taskcoordinator_kitchen_list_order
+    type: cafe_msgs/OrderList
 
 
 actions:
@@ -90,20 +90,20 @@ edges:
   - start: customer 
     finish: taskcoordinator_userdevice_send_order
     remap_from: send_order
-    remap_to: taskcoordinator/send_order
+    remap_to: cafe_taskcoordinator/send_order
 
 ## Task Coordinator
-# - start: taskcoordinator_waiterbot_delivery_order
-#   finish: taskcoordinator
-#   remap_from: delievery_order
-#   remap_to: delievery_order
-# - start:  taskcoordinator
-#   finish: taskcoordinator_userdevice_send_order
-#   remap_from: send_order
-#   remap_to: send_order
-# - start: taskcoordinator
-#   finish: taskcoordinator_kitchen_list_order
-#   remap_from: list_order
-#   remap_to: list_order
+  - start: taskcoordinator_waiterbot_delivery_order
+    finish: cafe_taskcoordinator
+    remap_from: waiter_1/delivery_order
+    remap_to: waiterbot/delivery_order
+  - start:  cafe_taskcoordinator
+    finish: taskcoordinator_userdevice_send_order
+    remap_from: send_order
+    remap_to: cafe_taskcoordinator/send_order
+  - start: cafe_taskcoordinator
+    finish: taskcoordinator_kitchen_list_order
+    remap_from: list_order
+    remap_to: list_order
 
 ## Kitchen Manager

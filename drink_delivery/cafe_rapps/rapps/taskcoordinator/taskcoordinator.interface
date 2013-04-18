@@ -3,6 +3,6 @@ publishers:
   - list_order
 services: []
 action_clients: 
-  - delievery_order
+  - waiter_1/delivery_order
 action_servers: 
   - send_order

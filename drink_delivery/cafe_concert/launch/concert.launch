@@ -6,4 +6,6 @@
 
 <!--    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find cafe_concert)/rviz/multi_robot.rviz"/>-->
   </group>
+
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
 </launch>
