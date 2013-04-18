@@ -7,6 +7,7 @@ import random
 
 import actionlib
 from cafe_msgs.msg import *
+from std_srvs.srv import *
 
 MENU_NAME = ["Cafe Latte", 
             "Capuccino", 
@@ -32,9 +33,7 @@ def generateMenus():
     
 
 def done_cb(status,result):
-    rospy.loginfo( "done_cb: status", status ,type(status))
-    rospy.loginfo( "done_cb: result", result ,type(result))
-    
+    rospy.loginfo( "done_cb: status : " + str(status) + " result: " + str(result))
     pass
     
 def active_cb():
@@ -42,7 +41,7 @@ def active_cb():
     pass
     
 def feedback_cb(data):
-    rospy.loginfo("feedback_cb: ", data  ,type(data))
+    rospy.loginfo("feedback_cb: %s",str(data.status))
     pass
     
 
@@ -51,6 +50,7 @@ class FakeUser(object):
     def __init__(self,name):
         self.name = name
         self.action_client = actionlib.SimpleActionClient('send_order',UserOrderAction)
+        self.add_ordersrv = rospy.Service('add_order',Empty,self.add_order)
 
     def spin(self):
         rospy.loginfo("Waiting for Task Coordinator")
@@ -61,6 +61,12 @@ class FakeUser(object):
         self.send_order(order)
 
         rospy.spin()
+
+    def add_order(self,req):
+        order = self.create_order()       
+        self.send_order(order)            
+
+        return EmptyResponse()
     
     def create_order(self):
         new_order = Order()
@@ -68,7 +74,6 @@ class FakeUser(object):
         new_order.table_id = random.randrange(1,7)
         new_order.menus = generateMenus()
         new_order.robot_name = ""                
-        new_order.order_id = 0
         new_order.status = Status.IDLE
         
         return new_order
