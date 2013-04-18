@@ -26,10 +26,12 @@ class WaiterSoftBot(object):
         rospy.spin()
 
     def process_table_pose(self,msg):
-        rospy.loginfo('table_pose message received')
+#        rospy.loginfo('table_pose message received')
+        return
 
     def process_alvar_markers(self,msg):
-        rospy.loginfo('ar marker message received')
+#        rospy.loginfo('ar marker message received')
+        return
 
 
     def process_status(self,time_range,message,feedback_status):
@@ -61,7 +63,7 @@ class WaiterSoftBot(object):
         self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
         
         #In delivery      
-        self.process_status(time_range=[10,20],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
+        self.process_status(time_range=[3,5],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
         rospy.loginfo(self.name + " : ARRIVE_TABLE")
         
         # Waiting for user confirmation
@@ -69,7 +71,7 @@ class WaiterSoftBot(object):
         feedback.status = Status.WAITING_FOR_USER_CONFIRMATION    
         self.waiter_server.publish_feedback(feedback)
         
-        self.process_status(time_range=[10,15],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIEVERY)
+        self.process_status(time_range=[4,6],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIEVERY)
         rospy.loginfo(self.name + " : COMPLETE_DELIEVERY")
         
         feedback = DeliverOrderFeedback()
@@ -77,7 +79,7 @@ class WaiterSoftBot(object):
         self.waiter_server.publish_feedback(feedback)
         
         # Returning to Docking
-        self.process_status(time_range=[20,30],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
+        self.process_status(time_range=[2,3],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
         rospy.loginfo(self.name+ " : END_DELIEVERY_ORDER")
 		
         rospy.sleep(1)
