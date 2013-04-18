@@ -17,8 +17,8 @@ class WaiterSoftBot(object):
         self.waiter_server = actionlib.SimpleActionServer(self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
 
         self.subscriber = {}
-        self.subscriber['table_list'] = rospy.Subscriber('table_post_list',TablePoseList,self.process_table_pose)
-        self.subscriber['ar_list'] = rospy.Subscriber('ar_list',AlvarMarkers,self.process_alvar_markers)
+        self.subscriber['table_list'] = rospy.Subscriber('table_pose_list',TablePoseList,self.process_table_pose)
+        self.subscriber['ar_list'] = rospy.Subscriber('ar_marker_list',AlvarMarkers,self.process_alvar_markers)
         
     def spin(self):
         self.waiter_server.start() 
