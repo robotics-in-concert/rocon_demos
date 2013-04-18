@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import rospy
-
 #############################################
 class CCmdSet():
-    global DISCRIMINATOR,VERSION
-    
-    DISCRIMINATOR = 0x9530ed04
-    VERSION = 0x00020002
-    
+  
     from xml.dom.minidom import Document
-    
-    
+   
     #member var
     #header
+    m_ver = "1.11.0000"
     m_cmdname=''
     m_msgtype=''
     m_senderID=''
@@ -26,24 +20,9 @@ class CCmdSet():
     m_cmdID=0
 
     #body
-    m_params = []
-    
+    m_params = []  
     #doc,riml,header,body,params
-    doc = Document()
-
-    # Create the <riml> base element
-    riml = doc.createElement("riml")
-    doc.appendChild(riml)
-
-    # Create the main <header>, <body> <params>element
-    header = doc.createElement("header")
-    riml.appendChild(header)
-
-    body = doc.createElement("body")
-    riml.appendChild(body)
-
-    params = doc.createElement("params")
-    body.appendChild(params)
+    doc = None
 
     def __init__(self,cmdname = "",msgtype="",senderID="",receiverID="", resrcID = 0,usertag="",status = 0,timeout = 0, contentID='',cmdID =0):
        
@@ -140,12 +119,20 @@ class CCmdSet():
         pass
 
     def setInt(self,Name,Value):
-       
+        pTag = self.doc.getElementsByTagName('param')
+        for k in pTag:
+            if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
+                k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                return
+
+        params = self.doc.getElementsByTagName('params')[0]    
+
         paramTag = self.doc.createElement("param")
-        self.params.appendChild(paramTag)
+        params.appendChild(paramTag)
 
         nameTag = self.doc.createElement("name")
         paramTag.appendChild(nameTag)
+
         ptext = self.doc.createTextNode(str(Name))
         nameTag.appendChild(ptext)
 
@@ -162,8 +149,16 @@ class CCmdSet():
         self.parse(self.getCmdSet())
 
     def setBool(self,Name,Value):
+        pTag = self.doc.getElementsByTagName('param')
+        for k in pTag:
+            if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
+                k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                return
+
+        params = self.doc.getElementsByTagName('params')[0]    
+
         paramTag = self.doc.createElement("param")
-        self.params.appendChild(paramTag)
+        params.appendChild(paramTag)
 
         nameTag = self.doc.createElement("name")
         paramTag.appendChild(nameTag)
@@ -181,10 +176,19 @@ class CCmdSet():
         valueTag.appendChild(ptext)
         
         self.parse(self.getCmdSet())
-        
+
+
     def setString(self,Name,Value):
+        pTag = self.doc.getElementsByTagName('param')
+        for k in pTag:
+            if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
+                k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                return
+
+        params = self.doc.getElementsByTagName('params')[0]    
+
         paramTag = self.doc.createElement("param")
-        self.params.appendChild(paramTag)
+        params.appendChild(paramTag)
 
         nameTag = self.doc.createElement("name")
         paramTag.appendChild(nameTag)
@@ -204,8 +208,16 @@ class CCmdSet():
         self.parse(self.getCmdSet())
 
     def setUInt(self,Name,Value):
+        pTag = self.doc.getElementsByTagName('param')
+        for k in pTag:
+            if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
+                k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                return
+
+        params = self.doc.getElementsByTagName('params')[0]    
+
         paramTag = self.doc.createElement("param")
-        self.params.appendChild(paramTag)
+        params.appendChild(paramTag)
 
         nameTag = self.doc.createElement("name")
         paramTag.appendChild(nameTag)
@@ -225,8 +237,16 @@ class CCmdSet():
         self.parse(self.getCmdSet())
 
     def setFloat(self,Name,Value):
+        pTag = self.doc.getElementsByTagName('param')
+        for k in pTag:
+            if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
+                k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                return
+
+        params = self.doc.getElementsByTagName('params')[0]    
+
         paramTag = self.doc.createElement("param")
-        self.params.appendChild(paramTag)
+        params.appendChild(paramTag)
 
         nameTag = self.doc.createElement("name")
         paramTag.appendChild(nameTag)
@@ -258,13 +278,13 @@ class CCmdSet():
 
     def parse(self,data):
         from xml.dom.minidom import parseString
-        global doc
+        #doc = self.doc
         s = unicode(data,'euc-kr').encode('utf-8')  # euc-kr -> utf-8 
         s = s.replace("encoding=\"euc-kr\"", r"")
  
-        doc = parseString(s)
-
-        headerTag = doc.getElementsByTagName('header')[0]
+        self.doc = parseString(s)
+        
+        headerTag = self.doc.getElementsByTagName('header')[0]
         if headerTag.childNodes.length == 11:
 
             i=0
@@ -274,33 +294,43 @@ class CCmdSet():
                 if headerTag.childNodes[i].firstChild != None:
                         NodeValue = headerTag.childNodes[i].firstChild.nodeValue
                 else:
-                        NodeValue = 'None'
+                        NodeValue = None
 
                 if NodeName == "ver":
-                        ver = NodeValue
+                        self.m_ver = NodeValue
+                        self.setHeaderParam("ver",NodeValue)
                 elif NodeName == "cmdname":
                         self.m_cmdname = NodeValue
+                        self.setHeaderParam("cmdname",NodeValue)
                 elif NodeName == "msgtype":
-                        self.m_msgtype = NodeValue 
+                        self.m_msgtype = NodeValue
+                        self.setHeaderParam("msgtype",NodeValue)
                 elif NodeName == "senderID":
                         self.m_senderID = NodeValue
+                        self.setHeaderParam("senderID",NodeValue)
                 elif NodeName == "receiverID":
                         self.m_receiverID = NodeValue
+                        self.setHeaderParam("receiverID",NodeValue)
                 elif NodeName == "usertag":
                        self.m_usertag = (NodeValue )
+                       self.setHeaderParam("usertag",NodeValue)
                 elif NodeName == "status":
                         self.m_status = (NodeValue )
+                        self.setHeaderParam("status",NodeValue)
                 elif NodeName == "timeout":
                         self.m_timeout = (NodeValue )
+                        self.setHeaderParam("timeout",NodeValue)
                 elif NodeName == "contentID":
                         self.m_contentID = NodeValue
+                        self.setHeaderParam("contentID",NodeValue)
                 elif NodeName == "cmdID":
                         self.m_cmdID = (NodeValue )
+                        self.setHeaderParam("cmdID",NodeValue)
                 else:
                         pass
                 i+=1
 
-        bodyTag = doc.getElementsByTagName('body')[0]
+        bodyTag = self.doc.getElementsByTagName('body')[0]
 
 
         if bodyTag.childNodes.length > 0:
@@ -319,14 +349,23 @@ class CCmdSet():
 					if valueTag[0].firstChild != None:
 						if  typeTag[0].firstChild.nodeValue == 'int':
 							param['value'] =  int(valueTag[0].firstChild.nodeValue)
+							
+							
 						elif  typeTag[0].firstChild.nodeValue == 'bool':
 							param['value'] = bool(valueTag[0].firstChild.nodeValue)
+							
+							
 						elif  typeTag[0].firstChild.nodeValue == 'string':
 							param['value'] =  str(valueTag[0].firstChild.nodeValue.encode('utf-8'))
+							
+							
 						elif  typeTag[0].firstChild.nodeValue == 'float':
 							param['value'] =  float(valueTag[0].firstChild.nodeValue)
+							
+							
 						elif  typeTag[0].firstChild.nodeValue == 'unsigned int':
 							param['value'] =  int(valueTag[0].firstChild.nodeValue)
+							
 						else:
 							param['value'] =  valueTag[0].firstChild.nodeValue
 					else:
@@ -347,6 +386,35 @@ class CCmdSet():
 							self.m_params.append(param)
 					i+=1
 
+    def setHeaderParam(self,param, value):
+
+                if param == "ver":
+                        self.m_ver = value
+                elif param == "cmdname":
+                        self.m_cmdname = value
+                elif param == "msgtype":
+                        self.m_msgtype = value
+                elif param == "senderID":
+                        self.m_senderID = value
+                elif param == "receiverID":
+                        self.m_receiverID = value
+                elif param == "usertag":
+                        self.m_usertag = value 
+                elif param == "status":
+                        self.m_status = value
+                elif param == "timeout":
+                        self.m_timeout = value
+                elif param == "contentID":
+                        self.m_contentID = value
+                elif param == "cmdID":
+                        self.m_cmdID = value
+                else:
+                        pass
+
+		pTag = self.doc.getElementsByTagName(param)[0]
+                if value != None:
+                    pTag.firstChild.replaceWholeText(value)
+		
     def setCmdName(self,value):
 		self.m_cmdname=value
 		pTag = self.doc.getElementsByTagName('cmdname')[0]
@@ -388,6 +456,9 @@ class CCmdSet():
 			ArgList.append(i['name'])
 		return ArgList
 
-
-
+    def copyCmdset(self):
+                data = self.getCmdSet()
+                cmdset = CCmdSet()
+                cmdset.parse(data)
+                return cmdset 
 

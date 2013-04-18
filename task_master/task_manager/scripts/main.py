@@ -7,10 +7,12 @@ import smach
 import smach_ros
 import time
 
+
+#
 import commandset
 
+#
 import actionlib
-
 from std_msgs.msg import *
 from cafe_msgs.msg import *
 
@@ -25,10 +27,12 @@ class CActionClientCallBack():
 	m_RobotStatusList = {}
 
 	def	__init__(self,name,RobotStatusList,goal_id):
-
+		
 		self.m_name = name
 		self.m_RobotStatusList = RobotStatusList
 		self.m_goal_id = goal_id
+		print "Create ActionClientCallBack: ", self.m_name, self.m_goal_id
+		
 		
 		pass
 			
@@ -83,6 +87,7 @@ def Recv(data = None, FuncType = "None", arg = {}):
 	 
 	if FuncType == "GoalCB":
 		order = data.get_goal().order
+		
 		cmdset = commandset.CCmdSet("NewOrderEvent",'EVENT_MESSAGE')
 		cmdset.setInt('table_id',order.table_id)
 		cmdset.setString('robot_name',order.robot_name)	
@@ -97,7 +102,7 @@ def Recv(data = None, FuncType = "None", arg = {}):
 			strMenu+= str(k.qty)
 
 		cmdset.setString('menus',strMenu)
-		
+
 	elif FuncType == "FeedbackCB":
 		name = arg["name"]
 		goal_id	= arg["goal_id"]
@@ -130,6 +135,9 @@ def Recv(data = None, FuncType = "None", arg = {}):
 		else:
 			RobotStatusList[name] = "ERROR"
 		
+		cmdset = commandset.CCmdSet("StatusEvent",'EVENT_MESSAGE')
+		cmdset.setString('goal_id',goal_id)
+		cmdset.setString('status',RobotStatusList[name])	
 
 	elif FuncType == "ActiveCB":
 		name = arg["name"]
@@ -143,18 +151,20 @@ def Recv(data = None, FuncType = "None", arg = {}):
 		goal_id	= arg["goal_id"]
 		RobotStatusList	= arg["RobotStatusList"]
 		
+		
 		while RobotStatusList[name] != "END_DELIEVERY_ORDER":
 			print name, "waiting the last feedback callback"
 			rospy.sleep(0.1)
 		
 		RobotStatusList[name] = "IDLE"
 		
-		print "done_cb", name, RobotStatusList
+		print "done_cb", name, goal_id, RobotStatusList
 		
 		cmdset = commandset.CCmdSet("StatusEvent",'EVENT_MESSAGE')
 		cmdset.setString('goal_id',goal_id)
-		cmdset.setString('status',"IDLE")	
-
+		cmdset.setString('status',RobotStatusList[name])	
+		
+	
 	if cmdset != None:	
 		EventProc(cmdset)	
 
@@ -258,14 +268,14 @@ class MessageRecvSrv_Idle(smach.State):
 			cmdset = self.m_cmdsetList.pop(0)
 
 			if cmdset.m_cmdname == 'NewOrderEvent':
-				MessageRecvSrv_cmdset = cmdset				
+				MessageRecvSrv_cmdset = cmdset.copyCmdset()
 				return 'call_order_event'
 
 			elif cmdset.m_cmdname == 'StatusEvent':
-				MessageRecvSrv_cmdset = cmdset
+				MessageRecvSrv_cmdset = cmdset.copyCmdset()
 				return 'call_status_event'
 
-		print "MessageRecvSrv_Idle(smach.State):--------------------------------"
+
 		return 'end'
 
 		
@@ -305,20 +315,23 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
 		
 		#assgine Order ID
 		self.m_OrderID+=1
-		MessageRecvSrv_cmdset.setInt("order_id",self.m_OrderID)
-		MessageRecvSrv_RemapingList[MessageRecvSrv_cmdset.getValue("goal_id")] = self.m_OrderID
+
+		cmdset = MessageRecvSrv_cmdset.copyCmdset()
+		
+		cmdset.setInt("order_id",self.m_OrderID)
+		MessageRecvSrv_RemapingList[cmdset.getValue("goal_id")] = self.m_OrderID
 		
 		#send message delivery order queue
-		MessageRecvSrv_cmdset.setCmdName("DeliveryOrderEvent")
-		EventProc(MessageRecvSrv_cmdset)
+		cmdset.setCmdName("DeliveryOrderEvent")
+		EventProc(cmdset)
 		
 		#send message to kitchen mgr
 		o = Order()
-		o.table_id = MessageRecvSrv_cmdset.getValue('table_id')
+		o.table_id = cmdset.getValue('table_id')
 		
 		#parsing menuse
 		menus = []		
-		strMenu = MessageRecvSrv_cmdset.getValue("menus")
+		strMenu = cmdset.getValue("menus")
 
 		for k in strMenu.split('/'):
 			if len(k) != 0:
@@ -330,7 +343,7 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
 				
 		o.menus = menus
 		o.robot_name = "None"
-		o.order_id = MessageRecvSrv_cmdset.getValue('order_id')
+		o.order_id = cmdset.getValue('order_id')
 		
 		MessageRecvSrv_OrderList.append(o)
 		
@@ -398,15 +411,22 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			return ResultCode
 		"""
 		##Receive Status
-		status = MessageRecvSrv_cmdset.getValue("status")
-		goal_id  = MessageRecvSrv_cmdset.getValue("goal_id")
+		
+		cmdset = MessageRecvSrv_cmdset.copyCmdset()
+		status = cmdset.getValue("status")
+		goal_id  = cmdset.getValue("goal_id")
+		print "Call Status Event", goal_id,status
 		
 		if status != "IDLE":
 		##Robot Status update
+			#goal_handle = PopGoalHandleList(goal_id)
+			#_feedback = UserOrderFeedback()
+			
 			pass
+		
 		else:
 		##Robot Status update
-			print "Call Status Event", goal_id,status
+			
 			#send data to user device
 			goal_handle = PopGoalHandleList(goal_id)
 			_result = UserOrderResult()
@@ -467,7 +487,7 @@ class DeliverySrv_Idle(smach.State):
 		if cmdset.m_cmdname == 'DeliveryOrderEvent':
 			self.m_cmdsetList.append(cmdset) 
 			
-		print "DeliverySrv Push order: ",len(self.m_cmdsetList)	
+		print "DeliverySrv Push order: ",len(self.m_cmdsetList) , cmdset.getValue('goal_id')
 		pass
 		
 	def execute(self, userdata):
@@ -478,10 +498,11 @@ class DeliverySrv_Idle(smach.State):
 					time.sleep(0.01)		
 					pass
 			cmdset = self.m_cmdsetList.pop(0)
-			print "DeliverySrv Pop order: ",len(self.m_cmdsetList)
+			print "DeliverySrv Pop order: ",len(self.m_cmdsetList) , cmdset.getValue('goal_id')
 			
 			if cmdset.m_cmdname == 'DeliveryOrderEvent':
-				DeliverySrv_cmdset = cmdset				
+				DeliverySrv_cmdset = cmdset.copyCmdset()				
+				print "Send Check Robot: ", cmdset.getValue('goal_id'), DeliverySrv_cmdset.getValue('goal_id')
 				return 'check_robot'	
 
 class DeliverySrv_CheckRobot(smach.State):
@@ -511,11 +532,15 @@ class DeliverySrv_CheckRobot(smach.State):
 		"""
 		
 		#cmdset -> Order
+		
+		cmdset = DeliverySrv_cmdset.copyCmdset()
+		print "Recv Check Robot: ", cmdset.getValue('goal_id'), DeliverySrv_cmdset.getValue('goal_id')
+		
 		o = Order()
-		o.table_id = DeliverySrv_cmdset.getValue('table_id')
+		o.table_id = cmdset.getValue('table_id')
 		#parsing menus
 		menus = []		
-		strMenu = DeliverySrv_cmdset.getValue("menus")
+		strMenu = cmdset.getValue("menus")
 		for k in strMenu.split('/'):
 			if len(k) != 0:
 				m = Menu()
@@ -526,25 +551,29 @@ class DeliverySrv_CheckRobot(smach.State):
 						
 		o.menus = menus
 		o.robot_name = "None"
-		o.order_id = DeliverySrv_cmdset.getValue('order_id')
+		o.order_id = cmdset.getValue('order_id')
 		
 		global RobotStatusList
 		#check robot
-		print RobotStatusList
-				
+		
 		checkRobotStatusFlag = True	
 		while checkRobotStatusFlag and not rospy.is_shutdown():
 			for k in RobotStatusList.keys():
 				if RobotStatusList[k] == "IDLE":
-				
+			
 					RobotStatusList[k] = "GO_TO_KITCHEN" 	
 					o.status = Status.GO_TO_KITCHEN
 					o.robot_name = k
-				
-					goal=UserOrderGoal(order=o) 
+					goal=UserOrderGoal(order=o)
+					
+					print  "before Send Goal",k , cmdset.getValue("goal_id")
+					
 					pActionClientCB = CActionClientCallBack(k,
 															RobotStatusList,
-															DeliverySrv_cmdset.getValue("goal_id"))
+															cmdset.getValue("goal_id"))
+					
+					
+					print  "after Send Goal",k , cmdset.getValue("goal_id"), pActionClientCB					
 					
 					waiter_client[k].send_goal(goal,pActionClientCB.done_cb,
 													pActionClientCB.active_cb, 
@@ -553,6 +582,8 @@ class DeliverySrv_CheckRobot(smach.State):
 					checkRobotStatusFlag = False
 				
 					break;
+			
+			print cmdset.getValue('goal_id'), "All robot delivery: ", RobotStatusList
 			rospy.sleep(1)
 		
 		return 'success'	
@@ -573,15 +604,16 @@ def main():
 	print "=========================Main start==============================="
 
 	rospy.init_node('task_coordinator', anonymous = True)	
+	
 	####################################################
 	global user_device_action_server
 	user_device_action_server =  actionlib.ActionServer('send_order',UserOrderAction,GoalCB)
+	####################################################
 	
+	####################################################
 	global kitchen_mgr_pub
 	kitchen_mgr_pub = rospy.Publisher('fake_orderlist',OrderList,latch = True)
 	####################################################
-	
-
 	
 	####################################################
 	#init
@@ -652,9 +684,14 @@ def main():
 		
 		smach.Concurrence.add('MessageRecvSrv', sm_MessageRecvSrv)
 		smach.Concurrence.add('DeliverySrv', sm_DeliverySrv)				
-		
+	
+	sis = smach_ros.IntrospectionServer('task_manager', sm_top, '/SM_ROOT')	
+	sis.start()
+	
 	outcome = sm_top.execute()
-
+	
+	rospy.spin()
+	sis.stop()
 
 
 	print "=========================Main end================================="
