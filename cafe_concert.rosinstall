@@ -22,7 +22,7 @@
 #   sudo apt-get install ros-tutorials common-tutorials
 #
 # Utility packages
-#   sudo apt-get install ros-groovy-robot-pose-publisher ros-groovy-rospy-message-converter
+#   sudo apt-get install ros-groovy-robot-pose-publisher ros-groovy-rospy-message-converter ros-groovy-yujin-maps
 #
 # 
 # Official Ros Stacks
