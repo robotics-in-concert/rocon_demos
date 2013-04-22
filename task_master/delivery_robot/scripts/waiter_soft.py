@@ -7,18 +7,18 @@ import time
 ##ros msg
 import actionlib
 from cafe_msgs.msg import *
-from semantic_region_handler.msg import *
-from ar_track_alvar.msg import *
+#from semantic_region_handler.msg import *
+#from ar_track_alvar.msg import *
 
 class WaiterSoftBot(object):
     def __init__(self,robot_name,action_name):
         self.name = robot_name
         self.action_name = action_name
-        self.waiter_server = actionlib.SimpleActionServer(self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
+        self.waiter_server = actionlib.SimpleActionServer(self.name+'/'+self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
 
-        self.subscriber = {}
-        self.subscriber['table_list'] = rospy.Subscriber('table_pose_list',TablePoseList,self.process_table_pose)
-        self.subscriber['ar_list'] = rospy.Subscriber('ar_marker_list',AlvarMarkers,self.process_alvar_markers)
+        #self.subscriber = {}
+        #self.subscriber['table_list'] = rospy.Subscriber('table_post_list',TablePoseList,self.process_table_pose)
+        #self.subscriber['ar_list'] = rospy.Subscriber('ar_list',AlvarMarkers,self.process_alvar_markers)
         
     def spin(self):
         self.waiter_server.start() 
@@ -26,12 +26,10 @@ class WaiterSoftBot(object):
         rospy.spin()
 
     def process_table_pose(self,msg):
-#        rospy.loginfo('table_pose message received')
-        return
+        rospy.loginfo('table_pose message received')
 
     def process_alvar_markers(self,msg):
-#        rospy.loginfo('ar marker message received')
-        return
+        rospy.loginfo('ar marker message received')
 
 
     def process_status(self,time_range,message,feedback_status):
@@ -53,6 +51,7 @@ class WaiterSoftBot(object):
 
         #Go to kitchen, and return feedback ARRIVE_KITCHEN
         self.process_status(time_range=[5,10],message="GO_TO_KITCHEN",feedback_status=Status.ARRIVE_KITCHEN)
+        #self.process_status(time_range=[2,3],message="GO_TO_KITCHEN",feedback_status=Status.ARRIVE_KITCHEN)
 
         # Waiting for kitchen
         feedback = DeliverOrderFeedback()
@@ -61,9 +60,11 @@ class WaiterSoftBot(object):
         
         #Wait for kitchen     
         self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
+        #self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
         
         #In delivery      
-        self.process_status(time_range=[3,5],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
+        self.process_status(time_range=[10,20],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
+        #self.process_status(time_range=[5,10],message="IN_DELIEVERY",feedback_status=Status.ARRIVE_TABLE)
         rospy.loginfo(self.name + " : ARRIVE_TABLE")
         
         # Waiting for user confirmation
@@ -71,7 +72,8 @@ class WaiterSoftBot(object):
         feedback.status = Status.WAITING_FOR_USER_CONFIRMATION    
         self.waiter_server.publish_feedback(feedback)
         
-        self.process_status(time_range=[4,6],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIEVERY)
+        self.process_status(time_range=[10,15],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIEVERY)
+        #self.process_status(time_range=[3,5],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIEVERY)
         rospy.loginfo(self.name + " : COMPLETE_DELIEVERY")
         
         feedback = DeliverOrderFeedback()
@@ -79,7 +81,8 @@ class WaiterSoftBot(object):
         self.waiter_server.publish_feedback(feedback)
         
         # Returning to Docking
-        self.process_status(time_range=[2,3],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
+        self.process_status(time_range=[20,30],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
+        #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
         rospy.loginfo(self.name+ " : END_DELIEVERY_ORDER")
 		
         rospy.sleep(1)

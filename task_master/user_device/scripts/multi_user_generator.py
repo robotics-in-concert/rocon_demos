@@ -8,6 +8,61 @@ import random
 import actionlib
 from cafe_msgs.msg import *
 
+class CActionClientCallBack():
+	m_user_id = ""
+	
+	def __init__(self, user_id):
+		self.m_user_id = user_id
+    	
+	def done_cb(self,status,result):
+
+		_tempstr = "User%d"%self.m_user_id + " done_cb"
+		rospy.loginfo(_tempstr)
+
+		pass
+	
+	def active_cb(self,):
+
+		_tempstr = "User%d"%self.m_user_id + " active_cb"
+		rospy.loginfo(_tempstr)
+
+		pass
+
+	def feedback_cb(self,data):
+		status = ""
+		if  data.status == Status.IDLE:
+			status = "IDLE"	
+		elif data.status == Status.GO_TO_KITCHEN:
+			status = "GO_TO_KITCHEN"	
+		elif data.status == Status.ARRIVE_KITCHEN:
+			status = "ARRIVE_KITCHEN"		
+		elif data.status == Status.WAITING_FOR_KITCHEN:
+			status = "WAITING_FOR_KITCHEN"	
+		elif data.status == Status.IN_DELIVERY:
+			status = "IN_DELIVERY"
+		elif data.status == Status.ARRIVE_TABLE:
+			status = "ARRIVE_TABLE"
+		elif data.status == Status.WAITING_FOR_USER_CONFIRMATION:
+			status = "WAITING_FOR_USER_CONFIRMATION"
+		elif data.status == Status.COMPLETE_DELIEVERY:
+			status = "COMPLETE_DELIEVERY"
+		elif data.status == Status.RETURNING_TO_DOCK:
+			status = "RETURNING_TO_DOCK"
+		elif data.status == Status.END_DELIEVERY_ORDER:
+			status = "END_DELIEVERY_ORDER"
+		elif data.status == Status.ERROR:
+			status = "ERROR"
+		else:
+			status = "ERROR"
+		
+
+
+		_tempstr = "User%d"%self.m_user_id+ " feedback_cb: "+str(status)
+		rospy.loginfo(_tempstr)
+
+		pass
+
+
 MENU_NAME = ["Cafe Latte", 
 			"Capuccino", 
 			"DDal Ba", 
@@ -26,22 +81,8 @@ def generateMenus():
 		m.size = random.randint(1,3)
 		m.qty = random.randint(1,5)
 		menus.append(m)
-
 	return menus 
-    
-def done_cb(status,result):
-	print "done_cb: status", status ,type(status)
-	print "done_cb: result", result ,type(result)
-	
-	pass
-	
-def active_cb():
-	print "active_cb: "
-	pass
-	
-def feedback_cb(data):
-	print "feedback_cb: ", data  ,type(data)
-	pass
+
 	
 if __name__ == '__main__':
     
@@ -49,14 +90,17 @@ if __name__ == '__main__':
 		print "=========================Main start==============================="
 		rospy.init_node('user_deivce')
 		
-		client = []
-		i = 0
+		client = {}
+		user_id = 0
 		while not rospy.is_shutdown():
 		
-			print i, "Send Goal"
+			print user_id, "User send goal"
 		
-			client.append(actionlib.SimpleActionClient('send_order',UserOrderAction))
-			client[i].wait_for_server()
+			_tempstr = str(user_id)+" User send goal"
+			rospy.loginfo(_tempstr)
+	
+			client[user_id] = (actionlib.SimpleActionClient('send_order',UserOrderAction))
+			client[user_id].wait_for_server()
 	
 			new_order = Order()
 
@@ -66,17 +110,22 @@ if __name__ == '__main__':
 			new_order.order_id = 0
 			new_order.status = Status.IDLE
 			goal=UserOrderGoal(order=new_order) 		
-		
-			client[i].send_goal(goal,done_cb,active_cb, feedback_cb)
-			i+=1
-			
+
+			pActionClientCB = CActionClientCallBack(user_id)			
+			client[user_id].send_goal(goal,pActionClientCB.done_cb,
+											pActionClientCB.active_cb, 
+											pActionClientCB.feedback_cb)
+
+
+			user_id+=1
 			k = 0;
 			timeout = random.randrange(10,15)
 			while k < timeout and not rospy.is_shutdown():
 				k+=1
 				rospy.sleep(1)
-				print "Next New Generation, [%d/%d]"%(k,timeout)	
-		
+				_tempstr = "Next New Generation, [%d/%d]"%(k,timeout)	
+				rospy.loginfo(_tempstr)
+					
 		print "=========================Main end==============================="
 		
 
