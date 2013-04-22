@@ -4,19 +4,4 @@
   <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
   </node>
 
-  <!-- Local database -->
-  <include file="$(find world_listeners)/launch/spatial_world_model.launch">
-    <arg name="host" value="localhost"/>
-    <arg name="user" value="world"/>
-    <arg name="password" value="model"/>
-  </include>
-
-  <!-- Table -->
-  <node pkg="semantic_region_handler" name="table_poller" type="table_poller.py"></node>
-  <node pkg="semantic_region_handler" name="table_handler" type="table_handler.py"/>
-
-  <!-- AR handler -->
-  <node pkg="semantic_region_handler" name="alvar_ar_poller" type="alvar_ar_poller.py"></node>
-  <node pkg="semantic_region_handler" name="alvar_ar_handler" type="alvar_ar_handler.py"/>
-
 </launch>
