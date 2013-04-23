@@ -1,7 +1,6 @@
 <launch>
-  <node pkg="delivery_robot" name="waiterbot" type="waiter_soft.py" output="screen"/>
+  <node pkg="delivery_robot" name="waiterbot" type="new_waiter_soft.py" output="screen"/>
 
-<!-- 
   <include file="$(find kobuki_softnode)/launch/nav.launch"/>
   <node pkg="robot_pose_publisher" name="robot_pose_publisher" type="robot_pose_publisher">
     <rosparam>
@@ -9,5 +8,4 @@
       base_frame: base_footprint
     </rosparam>
   </node>
--->
 </launch>
