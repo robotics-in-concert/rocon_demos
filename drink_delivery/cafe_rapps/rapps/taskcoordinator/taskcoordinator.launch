@@ -1,3 +1,3 @@
 <launch>
-  <node pkg="task_manager" name="cafe_taskcoordinator" type="main.py" output="screen"/>
+  <node pkg="task_manager" name="cafe_taskcoordinator" type="cafe_manager.py" output="screen"/>
 </launch>

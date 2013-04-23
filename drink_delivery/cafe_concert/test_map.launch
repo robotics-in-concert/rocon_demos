@@ -1,5 +1,5 @@
 <launch>
   <include file="$(find kobuki_softnode)/launch/nav_demo.launch">
-    <arg name="map_name" value="$(find cafe_concert)/maps/dorothy_cafe.yaml"/> 
+    <arg name="map_name" value="$(find cafe_concert)/maps/dorothy_cafe_new.yaml"/> 
   </include>
 </launch>
