@@ -14,7 +14,7 @@ class WaiterSoftBot(object):
     def __init__(self,robot_name,action_name):
         self.name = robot_name
         self.action_name = action_name
-        self.waiter_server = actionlib.SimpleActionServer(self.name+'/'+self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
+        self.waiter_server = actionlib.SimpleActionServer(self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
 
         #self.subscriber = {}
         #self.subscriber['table_list'] = rospy.Subscriber('table_post_list',TablePoseList,self.process_table_pose)
