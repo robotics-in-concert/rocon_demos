@@ -71,7 +71,7 @@ class FakeUser(object):
     def create_order(self):
         new_order = Order()
 
-        new_order.table_id = random.randrange(1,7)
+        new_order.table_id = 1 #random.randrange(1,7)
         new_order.menus = generateMenus()
         new_order.robot_name = ""                
         new_order.status = Status.IDLE
