@@ -28,7 +28,7 @@ class CCmdSet():
        
         from xml.dom.minidom import Document
         # Create the <riml> base element
-
+       
         self.doc = Document()
     
         self.riml = self.doc.createElement("riml")
@@ -123,6 +123,10 @@ class CCmdSet():
         for k in pTag:
             if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
                 k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                
+                for l in self.m_params:
+                    if l['name'] == Name:
+                        l['value'] = str(Value)
                 return
 
         params = self.doc.getElementsByTagName('params')[0]    
@@ -146,13 +150,22 @@ class CCmdSet():
         ptext = self.doc.createTextNode(str(Value))
         valueTag.appendChild(ptext)
         
-        self.parse(self.getCmdSet())
+
+        param = {}
+        param['name'] = Name
+        param['type'] = "int"
+        param['value'] = str(Value)
+        self.m_params.append(param)
+        
 
     def setBool(self,Name,Value):
         pTag = self.doc.getElementsByTagName('param')
         for k in pTag:
             if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
                 k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                for l in self.m_params:
+                    if l['name'] == Name:
+                        l['value'] = str(Value)
                 return
 
         params = self.doc.getElementsByTagName('params')[0]    
@@ -175,7 +188,13 @@ class CCmdSet():
         ptext = self.doc.createTextNode(str(Value))
         valueTag.appendChild(ptext)
         
-        self.parse(self.getCmdSet())
+
+        param = {}
+        param['name'] = Name
+        param['type'] = "bool"
+        param['value'] = str(Value)
+        self.m_params.append(param)
+        
 
 
     def setString(self,Name,Value):
@@ -183,6 +202,10 @@ class CCmdSet():
         for k in pTag:
             if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
                 k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                for l in self.m_params:
+                    if l['name'] == Name:
+                        l['value'] = str(Value)
+                
                 return
 
         params = self.doc.getElementsByTagName('params')[0]    
@@ -205,13 +228,23 @@ class CCmdSet():
         ptext = self.doc.createTextNode(str(Value))
         valueTag.appendChild(ptext)
         
-        self.parse(self.getCmdSet())
+
+        param = {}
+        param['name'] = Name
+        param['type'] = "string"
+        param['value'] = str(Value)
+        self.m_params.append(param)
+        
 
     def setUInt(self,Name,Value):
         pTag = self.doc.getElementsByTagName('param')
         for k in pTag:
             if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
                 k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                for l in self.m_params:
+                    if l['name'] == Name:
+                        l['value'] = str(Value)
+                
                 return
 
         params = self.doc.getElementsByTagName('params')[0]    
@@ -234,13 +267,24 @@ class CCmdSet():
         ptext = self.doc.createTextNode(str(Value))
         valueTag.appendChild(ptext)
         
-        self.parse(self.getCmdSet())
+
+        param = {}
+        param['name'] = Name
+        param['type'] = "unsigned int"
+        param['value'] = str(Value)
+        self.m_params.append(param)
+        
 
     def setFloat(self,Name,Value):
+        
+
         pTag = self.doc.getElementsByTagName('param')
         for k in pTag:
             if Name == k.getElementsByTagName('name')[0].firstChild.nodeValue:
                 k.getElementsByTagName('value')[0].firstChild.nodeValue = Value
+                for l in self.m_params:
+                    if l['name'] == Name:
+                        l['value'] = str(Value)
                 return
 
         params = self.doc.getElementsByTagName('params')[0]    
@@ -262,8 +306,13 @@ class CCmdSet():
         paramTag.appendChild(valueTag)
         ptext = self.doc.createTextNode(str(Value))
         valueTag.appendChild(ptext)
+
+        param = {}
+        param['name'] = Name
+        param['type'] = "float"
+        param['value'] = str(Value)
+        self.m_params.append(param)
         
-        self.parse(self.getCmdSet())
         
         
     def printCmdSet(self):
@@ -436,11 +485,26 @@ class CCmdSet():
 		pTag.firstChild.replaceWholeText(value)
          
     def getValue(self,name):
-		self.parse(self.getCmdSet())
+                #self.parse(self.getCmdSet())
 		Value = None
 		for i in self.m_params:
 			if i['name'] == name:
-				Value = i['value']
+				if i['type'] == 'int':
+					Value = int(i['value'])
+
+				elif i['type'] == 'bool':
+					Value = bool(i['value'])
+
+				elif i['type'] == 'float':
+					Value = float(i['value'])
+
+				elif i['type'] == 'str':
+					Value = str(i['value'])
+
+				elif i['type'] == 'unsigned int':
+					Value = int(i['value'])
+				else:					
+					Value = i['value']
 		return Value
 
     def getType(self,name):
@@ -459,6 +523,8 @@ class CCmdSet():
     def copyCmdset(self):
                 data = self.getCmdSet()
                 cmdset = CCmdSet()
+                params = []
+                cmdset.m_params = params
                 cmdset.parse(data)
                 return cmdset 
 
