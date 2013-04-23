@@ -43,6 +43,8 @@ topics:
     type: visualization_msgs/MarkerArray
   - id: cafe_database_ar_marker
     type: visualization_msgs/MarkerArray
+  - id: cafe_database_tf
+    type: tf/tfMessage 
 
 actions:
 ## Task Coordinator - User Device
@@ -80,7 +82,10 @@ edges:
     finish: cafe_database_ar_marker
     remap_from: viz_ar_list
     remap_to: cafe_database/ar_list
-
+  - start: cafe_database
+    finish: cafe_database_tf
+    remap_from: tf
+    remap_to: tf 
 
 ## Waiter
   - start: cafe_database_waiterbot_map
