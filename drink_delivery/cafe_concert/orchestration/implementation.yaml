@@ -34,6 +34,15 @@ topics:
   - id: taskcoordinator_kitchen_list_order
     type: cafe_msgs/OrderList
 
+## Visualization topics in workspace
+ # Waiterbot
+  - id: waiterbot_pose 
+    type: geometry_msgs/PoseStamped
+ # Cafe database
+  - id: cafe_database_table_marker
+    type: visualization_msgs/MarkerArray
+  - id: cafe_database_ar_marker
+    type: visualization_msgs/MarkerArray
 
 actions:
 ## Task Coordinator - User Device
@@ -63,6 +72,15 @@ edges:
     finish: cafe_database_waiterbot_ar_marker_list
     remap_from: ar_marker_list 
     remap_to: cafe_database/ar_marker_list
+  - start: cafe_database
+    finish: cafe_database_table_marker
+    remap_from: table_marker
+    remap_to: cafe_database/table_marker
+  - start: cafe_database
+    finish: cafe_database_ar_marker
+    remap_from: viz_ar_list
+    remap_to: cafe_database/ar_list
+
 
 ## Waiter
   - start: cafe_database_waiterbot_map
@@ -85,6 +103,10 @@ edges:
     finish: taskcoordinator_waiterbot_delivery_order
     remap_from: delivery_order
     remap_to: waiterbot/delivery_order
+  - start: waiterbot
+    finish: waiterbot_pose
+    remap_from: robot_pose
+    remap_to: waiterbot/robot_pose
 
 ## Cafe Customer
   - start: customer 
