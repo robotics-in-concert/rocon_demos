@@ -105,14 +105,14 @@ class WaiterSoftBot(object):
         self.process_status(time_range=[10,15],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.WAITING_FOR_USER_CONFIRMATION)
 
         # Complete Delivery 
-        self.feedback('COMPLETE DELIVERY',Status.COMPLETE_DELIEVERY)
+        self.feedback('COMPLETE DELIVERY',Status.COMPLETE_DELIVERY)
 
         # Returning to Docking
         self.go_to('dock',message="Returning to dock",feedback = Status.RETURNING_TO_DOCK)
-        #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIEVERY_ORDER)
+        #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
 
         # Finishing delivery
-        self.feedback('END DELIVERY',Status.END_DELIEVERY_ORDER)
+        self.feedback('END DELIVERY',Status.END_DELIVERY_ORDER)
 		
         rospy.sleep(1)
         

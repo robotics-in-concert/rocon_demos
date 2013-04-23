@@ -44,12 +44,12 @@ class CActionClientCallBack():
 			status = "ARRIVE_TABLE"
 		elif data.status == Status.WAITING_FOR_USER_CONFIRMATION:
 			status = "WAITING_FOR_USER_CONFIRMATION"
-		elif data.status == Status.COMPLETE_DELIEVERY:
-			status = "COMPLETE_DELIEVERY"
+		elif data.status == Status.COMPLETE_DELIVERY:
+			status = "COMPLETE_DELIVERY"
 		elif data.status == Status.RETURNING_TO_DOCK:
 			status = "RETURNING_TO_DOCK"
-		elif data.status == Status.END_DELIEVERY_ORDER:
-			status = "END_DELIEVERY_ORDER"
+		elif data.status == Status.END_DELIVERY_ORDER:
+			status = "END_DELIVERY_ORDER"
 		elif data.status == Status.ERROR:
 			status = "ERROR"
 		else:
@@ -122,7 +122,7 @@ if __name__ == '__main__':
 			timeout = random.randrange(10,15)
 			while k < timeout and not rospy.is_shutdown():
 				k+=1
-				rospy.sleep(1)
+				rospy.sleep(0.001)
 				_tempstr = "Next New Generation, [%d/%d]"%(k,timeout)	
 				rospy.loginfo(_tempstr)
 					

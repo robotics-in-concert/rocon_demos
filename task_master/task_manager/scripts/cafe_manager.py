@@ -7,8 +7,10 @@ import commandset
 
 #
 import rospy
-import smach
+
 import smach_ros
+import smach
+
 import actionlib
 from cafe_msgs.msg import *
 
@@ -18,24 +20,44 @@ from cafe_msgs.msg import *
 class CActionClientCallBack():
 	m_robot_name = ""
 	m_goal_id = ""
-
+	m_called_last_feedback = False
+	m_repair_cnt = 0
 	def	__init__(self,robot_name,goal_id):
 		
 		self.m_robot_name = robot_name
 		self.m_goal_id = goal_id
-		
-		#print "Create ActionClientCallBack: ", self.m_robot_name, self.m_goal_id
-		_tempstr = "Create ActionClientCallBack: "+ self.m_robot_name+ self.m_goal_id
+		self.m_called_last_feedback = False
+		self.m_repair_cnt = 0
+		_tempstr = "Create ActionClientCallBack: ["+ self.m_robot_name+"] ["+ self.m_goal_id+"]"
 		rospy.loginfo(_tempstr)
 		
 		pass
 			
 	def done_cb(self,status,result):
+		
+		while self.m_called_last_feedback == False:
+			_tempstr = "Waiting feedback cb[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+			rospy.logwarn(_tempstr)
+			rospy.sleep(0.1)
+			
+			if self.m_repair_cnt > 60:
+				_tempstr = "Last Feedback don't called and Repair[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+				rospy.logerr(_tempstr)
+				break;
+			else:
+				self.m_repair_cnt +=1
+				
+		self.m_called_last_feedback = False
+		
 		arg={}
 		arg["robot_name"] = self.m_robot_name
 		arg["goal_id"] = self.m_goal_id							
+		
+		_tempstr = "Call Done Function[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+		rospy.loginfo(_tempstr)
+		
 		Recv(None,"DoneCB",arg)
-
+		
 	def active_cb(self,):
 		arg={}
 		arg["robot_name"] = self.m_robot_name	
@@ -43,14 +65,24 @@ class CActionClientCallBack():
 		Recv(None,"ActiveCB",arg)
 	
 	def feedback_cb(self,data):
+		if data.status == Status.END_DELIVERY_ORDER:
+			_tempstr = "Before Call Last FeedBack Function[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+			rospy.loginfo(_tempstr)
+			
 		arg={}
 		arg["robot_name"] = self.m_robot_name
 		arg["goal_id"] = self.m_goal_id							
 		Recv(data,"FeedbackCB",arg)
+		
+		if data.status == Status.END_DELIVERY_ORDER:
+			_tempstr = "After Call Last FeedBack Function[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+			rospy.loginfo(_tempstr)
+			self.m_called_last_feedback = True
 
 
 #################################################################
 global goal_handle_list; goal_handle_list = {}
+global active_goal_handle_list; active_goal_handle_list = {}
 
 def PushGoalHandleList(goal_handle):
 	global goal_handle_list
@@ -60,12 +92,12 @@ def PushGoalHandleList(goal_handle):
 
 def PopGoalHandleList(goal_id):
 	global goal_handle_list
+	goal_handle_list.pop(goal_id)
 
 def GetGoalHandle(goal_id):
 	global goal_handle_list
 	return goal_handle_list[goal_id]
-	
-		
+
 def GoalCB(data):
 	PushGoalHandleList(data)
 	Recv(data,"GoalCB")
@@ -148,14 +180,10 @@ def EventProc(cmdset):
 	##DeliverySrv			
 	if DeliverySrv_EvtList.keys().count(cmdset.m_cmdname):
 		callSrvCBFlag = False
-		#cmdset.printCmdSet()
-
 		if cmdset.m_cmdname == 'DeliveryOrderEvent' :
 			callSrvCBFlag = True 
-		
 		else:
 			pass
-		
 		if callSrvCBFlag:		
 			for i in range(len(DeliverySrv_CBList)):
 				DeliverySrv_CBList[i](cmdset)
@@ -186,14 +214,14 @@ MessageRecvSrv_EvtList = {'NewOrderEvent':'GlobalEvent', "StatusEvent":"GlobalEv
 global MessageRecvSrv_GlobalEvtFlag; MessageRecvSrv_GlobalEvtFlag = False
 global MessageRecvSrv_cmdset; MessageRecvSrv_cmdset = commandset.CCmdSet()
 global MessageRecvSrv_OrderList; MessageRecvSrv_OrderList = []
-global MessageRecvSrv_RemapingList; MessageRecvSrv_RemapingList = {}
+global MessageRecvSrv_RemappingList; MessageRecvSrv_RemappingList = {}
 
 class MessageRecvSrv_Init(smach.State):
 	def __init__(self):
 		smach.State.__init__(self, outcomes=['success','retry','failure'])
 	
 	def execute(self, userdata):
-		time.sleep(1)
+		time.sleep(0.1)
 		return 'success'
 
 	
@@ -252,7 +280,7 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
 	def execute(self,userdata):
 		global MessageRecvSrv_cmdset
 		global MessageRecvSrv_OrderList	
-		global MessageRecvSrv_RemapingList
+		global MessageRecvSrv_RemappingList
 		global kitchen_mgr_pub
 		"""
 		global MessageRecvSrv_GlobalEvtFlag	
@@ -270,9 +298,10 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
 		cmdset = MessageRecvSrv_cmdset.copyCmdset()
 		
 		cmdset.setInt("order_id",self.m_OrderID)
-
 		goal_id = cmdset.getValue("goal_id")
-		MessageRecvSrv_RemapingList[goal_id] = self.m_OrderID
+		
+		
+		MessageRecvSrv_RemappingList[goal_id] = self.m_OrderID
 		
 		#send message delivery order queue
 		cmdset.setCmdName("DeliveryOrderEvent")
@@ -349,7 +378,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 	def execute(self,userdata):
 		global MessageRecvSrv_cmdset
 		global MessageRecvSrv_OrderList	
-		global MessageRecvSrv_RemapingList
+		global MessageRecvSrv_RemappingList
 		global kitchen_mgr_pub
 		global robot_status_list
 		"""
@@ -369,7 +398,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 		goal_id  = cmdset.getValue("goal_id")
 		status = cmdset.getValue("status")
 		
-		_tempstr = "Call Status Event "+robot_name+" "+goal_id+" "+str(status)
+		_tempstr = "Call Status Event ["+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
 		rospy.loginfo(_tempstr)
 		
 		#set robot status
@@ -387,18 +416,75 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			robot_status_list[robot_name] = "ARRIVE_TABLE"
 		elif status == Status.WAITING_FOR_USER_CONFIRMATION:
 			robot_status_list[robot_name] = "WAITING_FOR_USER_CONFIRMATION"
-		elif status == Status.COMPLETE_DELIEVERY:
-			robot_status_list[robot_name] = "COMPLETE_DELIEVERY"
+		elif status == Status.COMPLETE_DELIVERY:
+			robot_status_list[robot_name] = "COMPLETE_DELIVERY"
 		elif status == Status.RETURNING_TO_DOCK:
 			robot_status_list[robot_name] = "RETURNING_TO_DOCK"
-		elif status == Status.END_DELIEVERY_ORDER:
-			robot_status_list[robot_name] = "END_DELIEVERY_ORDER"
+		elif status == Status.END_DELIVERY_ORDER:
+			robot_status_list[robot_name] = "END_DELIVERY_ORDER"
 		elif status == Status.ERROR:
 			robot_status_list[robot_name] = "ERROR"
 		else:
 			robot_status_list[robot_name] = "ERROR"	
+		
+		
+		#Send result to user device
+		_tempstr = "Start_Time_check [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+		rospy.loginfo(_tempstr)
+		
+		goal_handle = GetGoalHandle(goal_id)
+		
+		_tempstr = "GetGoalHandle(goal_id) [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+		rospy.loginfo(_tempstr)
+		
+		
+		_feedback = UserOrderFeedback()
+		_feedback.status = status
+		goal_handle.publish_feedback(_feedback)
+		
+		_tempstr = "goal_handle.publish_feedback(_feedback) [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+		rospy.loginfo(_tempstr)
+		
+		
+		#send data to kitchen mgr
+			##get order id
+		order_id = MessageRecvSrv_RemappingList[goal_id]
+			##set order status as order id
+		
+		_tempstr = "MessageRecvSrv_RemappingList[goal_id] [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+		rospy.loginfo(_tempstr)
+		
+		for k in MessageRecvSrv_OrderList:
+			if k.order_id == order_id:
+				k.status = status
+				break
+			#send order list
+		
+		order_list = OrderList()
+		order_list.orders = MessageRecvSrv_OrderList
+		kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)	
+		
+		_tempstr = "kitchen_mgr_pub.publish(MessageRecvSrv_OrderList) [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+		rospy.loginfo(_tempstr)
+		
+		if status == Status.IDLE:
+			
+			#Pop order list	
+			order_id = MessageRecvSrv_RemappingList.pop(goal_id)	
 
+			_tempstr = "MessageRecvSrv_RemappingList.pop(goal_id) [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+			rospy.loginfo(_tempstr)		
+			
+			#Pop Goal Handle
+			PopGoalHandleList(goal_id)	
 
+			_tempstr = "PopGoalHandleList(goal_id) [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+			rospy.loginfo(_tempstr)	
+
+		_tempstr = "End_Time_check  [time_check_"+robot_name+"] ["+goal_id+"] ["+str(status)+"]"
+		rospy.loginfo(_tempstr)	
+
+		"""
 		if (status == Status.GO_TO_KITCHEN or 
 			status == Status.ARRIVE_KITCHEN or 
 			status == Status.WAITING_FOR_KITCHEN):
@@ -412,7 +498,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			
 			#send data to kitchen mgr
 				##get order id
-			order_id = MessageRecvSrv_RemapingList[goal_id]
+			order_id = MessageRecvSrv_RemappingList[goal_id]
 				##set order status as order id
 			for k in MessageRecvSrv_OrderList:
 				if k.order_id == order_id:
@@ -435,7 +521,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 		
 			#send data to kitchen mgr
 				##get order id
-			order_id = MessageRecvSrv_RemapingList[goal_id]
+			order_id = MessageRecvSrv_RemappingList[goal_id]
 				##set order status as order id
 			for k in MessageRecvSrv_OrderList:
 				if k.order_id == order_id:
@@ -445,22 +531,14 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			order_list = OrderList()
 			order_list.orders = MessageRecvSrv_OrderList
 			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
-									
-			"""
-			#Pop order list	
-			order_id = MessageRecvSrv_RemapingList.pop[goal_id)
-			for k in MessageRecvSrv_OrderList:
-				if k.order_id == order_id:
-					MessageRecvSrv_OrderList.remove(k)
-					break
-			"""
+			
 			pass
 			
 		elif (status == Status.ARRIVE_TABLE or
 			status == Status.WAITING_FOR_USER_CONFIRMATION or
-			status == Status.COMPLETE_DELIEVERY or
+			status == Status.COMPLETE_DELIVERY or
 			status == Status.RETURNING_TO_DOCK or
-			status == Status.END_DELIEVERY_ORDER):	
+			status == Status.END_DELIVERY_ORDER):	
 
 			#Send result to user device
 			goal_handle = GetGoalHandle(goal_id)
@@ -470,7 +548,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			
 			#send data to kitchen mgr
 				##get order id
-			order_id = MessageRecvSrv_RemapingList[goal_id]
+			order_id = MessageRecvSrv_RemappingList[goal_id]
 				##set order status as order id
 			for k in MessageRecvSrv_OrderList:
 				if k.order_id == order_id:
@@ -490,7 +568,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			goal_handle.set_succeeded(_result)
 			
 			#Pop order list	
-			order_id = MessageRecvSrv_RemapingList.pop(goal_id)
+			order_id = MessageRecvSrv_RemappingList.pop(goal_id)
 			for k in MessageRecvSrv_OrderList:
 				if k.order_id == order_id:
 					MessageRecvSrv_OrderList.remove(k)
@@ -505,7 +583,8 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			
 		else:
 			pass
-
+		"""
+		
 		return 'success'			
 		
 			
@@ -521,7 +600,7 @@ class DeliverySrv_Init(smach.State):
 		smach.State.__init__(self, outcomes=['success','retry','failure'])
 	
 	def execute(self, userdata):
-		time.sleep(1)
+		time.sleep(0.1)
 		return 'success'
 
 	
@@ -537,7 +616,7 @@ class DeliverySrv_Idle(smach.State):
 		if cmdset.m_cmdname == 'DeliveryOrderEvent':
 			self.m_cmdsetList.append(cmdset) 
 			
-		_tempstr = "DeliverySrv Push order: "+str(len(self.m_cmdsetList)) +" "+cmdset.getValue('goal_id')
+		_tempstr = "DeliverySrv Push order: ["+str(len(self.m_cmdsetList)) +"] ["+cmdset.getValue('goal_id')+"]"
 		rospy.loginfo(_tempstr)
 
 		passm_robot_name = ""
@@ -552,13 +631,13 @@ class DeliverySrv_Idle(smach.State):
 					pass
 			cmdset = self.m_cmdsetList.pop(0)
 			
-			_tempstr = "DeliverySrv Pop order: "+ str(len(self.m_cmdsetList)) +" "+ cmdset.getValue('goal_id')
+			_tempstr = "DeliverySrv Pop order: ["+ str(len(self.m_cmdsetList)) +"] ["+ cmdset.getValue('goal_id')+"]"
 			rospy.loginfo(_tempstr)
 			
 			if cmdset.m_cmdname == 'DeliveryOrderEvent':
 				DeliverySrv_cmdset = cmdset.copyCmdset()				
 				
-				_tempstr = "Send Check Robot: " + cmdset.getValue('goal_id') +" "+ DeliverySrv_cmdset.getValue('goal_id')
+				_tempstr = "Send Check Robot: [" + cmdset.getValue('goal_id') +"] ["+ DeliverySrv_cmdset.getValue('goal_id')+"]"
 				rospy.loginfo(_tempstr)
 				
 				return 'check_robot'	
@@ -591,9 +670,10 @@ class DeliverySrv_CheckRobot(smach.State):
 		
 		#cmdset -> Order
 		cmdset = DeliverySrv_cmdset.copyCmdset()
-		_tempstr = "Recv Check Robot: " + cmdset.getValue('goal_id')+" "+ DeliverySrv_cmdset.getValue('goal_id')
+		_tempstr = "Recv Check Robot: [" + cmdset.getValue('goal_id')+"] ["+ DeliverySrv_cmdset.getValue('goal_id')+"]"
 		rospy.loginfo(_tempstr)
-				
+		goal_id = cmdset.getValue("goal_id")
+	
 		o = Order()
 		o.table_id = cmdset.getValue('table_id')
 		#parsing menus
@@ -611,9 +691,10 @@ class DeliverySrv_CheckRobot(smach.State):
 		o.robot_name = "None"
 		o.order_id = cmdset.getValue('order_id')
 		
+		#GetGoalHandle(goal_id):
 		
 		#check robot
-		
+
 		checkRobotStatusFlag = True	
 		while checkRobotStatusFlag and not rospy.is_shutdown():
 			for k in robot_status_list.keys():
@@ -623,34 +704,27 @@ class DeliverySrv_CheckRobot(smach.State):
 					o.status = Status.GO_TO_KITCHEN
 					o.robot_name = k
 					goal=UserOrderGoal(order=o)
-					goal_id = cmdset.getValue("goal_id")
 					
-					_tempstr = "before Send Goal "+ k +" "+ goal_id
+					
+					_tempstr = "before Send Goal ["+ k +"] ["+ goal_id+"]"
 					rospy.loginfo(_tempstr)
 							
 					pActionClientCB = CActionClientCallBack(k,
 															goal_id)
 															
-					_tempstr = "after Send Goal "+ k +" "+ goal_id
+					_tempstr = "after Send Goal ["+ k +"] ["+ goal_id+"]"
 					rospy.loginfo(_tempstr)
 				
 					if pActionClientCB.m_goal_id != cmdset.getValue("goal_id"):
+						_tempstr = "set goal_ id"+ "["+pActionClientCB.m_goal_id+ "] ["+ cmdset.getValue("goal_id")+ "]"
+						rospy.loginfo(_tempstr)
+												
 						pActionClientCB.m_goal_id = cmdset.getValue("goal_id")
-						
-						_tempstr = "set goal_ id"
+						_tempstr = "set goal_ id"+ "["+pActionClientCB.m_goal_id+ "] ["+ cmdset.getValue("goal_id")+ "]"
 						rospy.loginfo(_tempstr)
 						_tempstr = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-						rospy.logerr(_tempstr)
-												
+						rospy.logerr(_tempstr)	
+																
 						#return "failure"
 						
 					waiter_client[k].send_goal(goal,pActionClientCB.done_cb,
@@ -659,10 +733,11 @@ class DeliverySrv_CheckRobot(smach.State):
 									
 					checkRobotStatusFlag = False				
 					break;
+					
 			_tempstr = cmdset.getValue('goal_id')+" "+"All robot delivery: "+str(robot_status_list)
 			rospy.loginfo(_tempstr)
 			
-			rospy.sleep(1)
+			rospy.sleep(0.1)
 		return 'success'	
 #######################################################################################################
 ##Define Action
@@ -683,7 +758,7 @@ def main():
 	
 	####################################################
 	global kitchen_mgr_pub
-	kitchen_mgr_pub = rospy.Publisher('list_order',OrderList,latch = True)
+	kitchen_mgr_pub = rospy.Publisher('/list_order',OrderList,latch = True)
 	####################################################
 	
 	####################################################
@@ -702,13 +777,13 @@ def main():
 			
 			waiter_client[robot_name] = actionlib.SimpleActionClient(robot_name+"/delivery_order",
 																	DeliverOrderAction)
-			waiter_client[robot_name].wait_for_server()															
+			#waiter_client[robot_name].wait_for_server()															
 
 	####################################################
 			
 	sm_top = smach.Concurrence(outcomes=['end'], default_outcome = 'end',  outcome_map = {'end':
 												{'MessageRecvSrv':'end',
-												'DeliverySrv':'end',
+												'DeliverySrv':'end'
 												}})
 	with sm_top:
 		sm_MessageRecvSrv = smach.StateMachine(outcomes = ['end'])
@@ -720,50 +795,47 @@ def main():
 																	'failure':'end', 
 																	'retry':'MessageRecvSrv_Init'})
 			
-			
 			smach.StateMachine.add('MessageRecvSrv_CallOrderEvent', MessageRecvSrv_CallOrderEvent(), 
 														transitions={'success':'MessageRecvSrv_Idle', 
 																	'failure':'end', 
 																	'retry':'MessageRecvSrv_CallOrderEvent'})		
-
 			smach.StateMachine.add('MessageRecvSrv_CallStatusEvent', MessageRecvSrv_CallStatusEvent(), 
 														transitions={'success':'MessageRecvSrv_Idle', 
 																	'failure':'end', 
 																	'retry':'MessageRecvSrv_CallStatusEvent'})	
-			
-			
 			smach.StateMachine.add('MessageRecvSrv_Idle', MessageRecvSrv_Idle(), 
 														transitions={'call_order_event':'MessageRecvSrv_CallOrderEvent',
 																	'call_status_event':'MessageRecvSrv_CallStatusEvent',
 																	'failure':'end', 
 																	'retry':'MessageRecvSrv_Init'})
-			pass
+	
 		with sm_DeliverySrv:
-			
 			smach.StateMachine.add('DeliverySrv_Init', DeliverySrv_Init(), 
 														transitions={'success':'DeliverySrv_Idle', 
 																	'failure':'end', 
 																	'retry':'DeliverySrv_Init'})
-			
 			smach.StateMachine.add('DeliverySrv_CheckRobot', DeliverySrv_CheckRobot(), 
 														transitions={'success':'DeliverySrv_Idle', 
 																	'failure':'end', 
 																	'retry':'DeliverySrv_CheckRobot'})		
-			
 			smach.StateMachine.add('DeliverySrv_Idle', DeliverySrv_Idle(), 
 														transitions={'check_robot':'DeliverySrv_CheckRobot',
 																	'failure':'end', 
 																	'retry':'DeliverySrv_Init'})			
-			pass
+			
 		
 		smach.Concurrence.add('MessageRecvSrv', sm_MessageRecvSrv)
 		smach.Concurrence.add('DeliverySrv', sm_DeliverySrv)				
+
 	
-	#sis = smach_ros.IntrospectionServer('task_manager', sm_top, '/SM_ROOT')	
-	#sis.start()	
+	
+	sis = smach_ros.IntrospectionServer('cafe_manager_viewer', sm_top, '/SM_ROOT')	
+	sis.start()	
+	
 	outcome = sm_top.execute()
+	
 	rospy.spin()
-	#sis.stop()
+	sis.stop()
 
 
 	print "=========================Main end================================="
