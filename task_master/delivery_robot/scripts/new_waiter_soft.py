@@ -16,15 +16,16 @@ class WaiterSoftBot(object):
     def __init__(self,robot_name,action_name):
         self.name = robot_name
         self.action_name = action_name
-        self.waiter_server = actionlib.SimpleActionServer(self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
 
         self.command_base = actionlib.SimpleActionClient('move_base',MoveBaseAction)
         rospy.loginfo('Wait for movebase...')
         self.command_base.wait_for_server()
 
+        self.waiter_server = actionlib.SimpleActionServer(self.action_name,DeliverOrderAction, execute_cb = self.execute_callback,auto_start=False)
+
 
         self.subscriber = {}
-        self.subscriber['table_list'] = rospy.Subscriber('table_post_list',TablePoseList,self.process_table_pose)
+        self.subscriber['table_list'] = rospy.Subscriber('table_pose_list',TablePoseList,self.process_table_pose)
         self.subscriber['ar_list'] = rospy.Subscriber('ar_list',AlvarMarkers,self.process_alvar_markers)
 
         self.table_poses = {}   
@@ -34,27 +35,31 @@ class WaiterSoftBot(object):
         self.ar_init = False
         
     def spin(self):
+
+        while self.ar_init != True and self.table_init != True:
+          rospy.sleep(1)
+
         self.waiter_server.start() 
         rospy.loginfo("Waiterbot has been Started")
         rospy.spin()
 
     def process_table_pose(self,msg):
 
-        if not self.table_init:
-          rospy.loginfo('table_pose message received')
-          
-          for table in msg.tables:
-            pose_stamped = PoseStamped()
-            pose_stamped.pose = table.pose_cov_stamped.pose.pose 
-            pose_stamped.header = table.pose_stamped.header
-            self.table_poses[table.name] = pose_stamped 
+#        if not self.table_init:
+#        rospy.loginfo('table_pose message received')
+        
+        for table in msg.tables:
+          pose_stamped = PoseStamped()
+          pose_stamped.pose = table.pose_cov_stamped.pose.pose 
+          pose_stamped.header = table.pose_cov_stamped.header
+          self.table_poses[table.name] = pose_stamped 
           
           self.table_init = True
 
     def process_alvar_markers(self,msg):
 
-        if not self.ar_init:
-          rospy.loginfo('ar marker message received')
+#        if not self.ar_init:
+#          rospy.loginfo('ar marker message received')
 
           for m in msg.markers:
             self.ar_poses[m.id] = m.pose
@@ -96,7 +101,7 @@ class WaiterSoftBot(object):
         self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.WAITING_FOR_KITCHEN)
         
         #In delivery      
-        self.go_to('table'+data.order.table_id,message="IN DELIVERY",feedback_status = Status.IN_DELIVERY)
+        self.go_to('table'+str(data.order.table_id),message="IN DELIVERY",feedback_status = Status.IN_DELIVERY)
 
         # feedback arrive table
         self.feedback('ARRIVE TABLE',Status.ARRIVE_TABLE)
@@ -108,7 +113,7 @@ class WaiterSoftBot(object):
         self.feedback('COMPLETE DELIVERY',Status.COMPLETE_DELIVERY)
 
         # Returning to Docking
-        self.go_to('dock',message="Returning to dock",feedback = Status.RETURNING_TO_DOCK)
+        self.go_to('dock',message="Returning to dock",feedback_status = Status.RETURNING_TO_DOCK)
         #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
 
         # Finishing delivery
@@ -127,11 +132,11 @@ class WaiterSoftBot(object):
         feedback.status = feedback_status
         self.waiter_server.publish_feedback(feedback)
 
-        goal = MoveBaseGoal(self.poses[target_goal])
+        goal = MoveBaseGoal(self.table_poses[target_goal])
         self.command_base.send_goal(goal)
-        resp = self.command_base.wait_for_result()
+        self.command_base.wait_for_result()
 
-        result = resp.get_result()
+        resp = self.command_base.get_result()
         return True
       
     
