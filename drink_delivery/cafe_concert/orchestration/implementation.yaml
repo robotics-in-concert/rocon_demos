@@ -102,7 +102,7 @@ edges:
     remap_to: cafe_database/table_pose_list
   - start: cafe_database_waiterbot_ar_marker_list
     finish: waiterbot
-    remap_from: ar_marker_list
+    remap_from: ar_list
     remap_to: cafe_database/ar_marker_list
   - start: waiterbot
     finish: taskcoordinator_waiterbot_delivery_order
