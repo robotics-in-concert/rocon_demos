@@ -1,4 +1,5 @@
 <launch>
+  <!--<node pkg="delivery_robot" name="waiterbot" type="waiter_soft.py" output="screen"/>-->
   <node pkg="delivery_robot" name="waiterbot" type="new_waiter_soft.py" output="screen"/>
 
   <include file="$(find kobuki_softnode)/launch/nav.launch"/>

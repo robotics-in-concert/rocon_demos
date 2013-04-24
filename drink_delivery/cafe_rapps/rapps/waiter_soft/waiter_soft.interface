@@ -2,7 +2,7 @@ subscribers:
   - map
   - map_metadata
   - table_pose_list
-  - ar_marker_list
+  - ar_list
 publishers: 
   - robot_pose
 services: []
