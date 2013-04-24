@@ -594,11 +594,14 @@ class DeliverySrv_CheckRobot(smach.State):
 		o.order_id = cmdset.getValue('order_id')
 
 		#check robot
-		checkRobotStatusFlag = True	
+		checkRobotStatusFlag = True
+		timeout = rospy.Duration(1)
+		
 		while checkRobotStatusFlag and not rospy.is_shutdown():
-			for k in robot_status_list.keys():
-				if robot_status_list[k] == "IDLE":
 			
+			for k in robot_status_list.keys():
+				is_ready = robot_status_list[k] == "IDLE" and  waiter_client[k].wait_for_server(timeout)				
+				if is_ready:
 					robot_status_list[k] = "GO_TO_KITCHEN" 	
 					o.status = Status.GO_TO_KITCHEN
 					o.robot_name = k
@@ -613,7 +616,10 @@ class DeliverySrv_CheckRobot(smach.State):
 									
 					checkRobotStatusFlag = False				
 					break;
-
+				#else:
+				#	_tempstr="robot action server is not connected or robot is in %s"%robot_status_list[k]
+				#	rospy.logerr(_tempstr)
+					
 			rospy.sleep(1)
 			
 		return 'success'	
