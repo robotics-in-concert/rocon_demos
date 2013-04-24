@@ -115,14 +115,12 @@ if __name__ == '__main__':
 			client[user_id].send_goal(goal,pActionClientCB.done_cb,
 											pActionClientCB.active_cb, 
 											pActionClientCB.feedback_cb)
-
-
 			user_id+=1
 			k = 0;
 			timeout = random.randrange(10,15)
 			while k < timeout and not rospy.is_shutdown():
 				k+=1
-				rospy.sleep(0.001)
+				rospy.sleep(1)
 				_tempstr = "Next New Generation, [%d/%d]"%(k,timeout)	
 				rospy.loginfo(_tempstr)
 					

@@ -37,7 +37,7 @@ class WaiterSoftBot(object):
         timeout = random.randrange(time_range[0],time_range[1])
         while k < timeout and not rospy.is_shutdown():
             k += 1
-            rospy.sleep(0.1)
+            rospy.sleep(1)
             rospy.loginfo(self.name + " : " +  message +", [%d/%d]"%(k,timeout))
         
         feedback = DeliverOrderFeedback()
@@ -85,7 +85,7 @@ class WaiterSoftBot(object):
         #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
         rospy.loginfo(self.name+ " : END_DELIVERY_ORDER")
 		
-        rospy.sleep(0.1)
+        rospy.sleep(1)
         
         # Closing off the delivery 
         result = DeliverOrderResult("Success!")
