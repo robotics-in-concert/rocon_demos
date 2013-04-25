@@ -635,8 +635,8 @@ class DeliverySrv_CheckRobot(smach.State):
 			
 				is_ready = (robot_status_list[k] == "IDLE" and  
 							waiter_client[k].wait_for_server(timeout) and
-							bool([l in robot_status_list.values() for l in robot_busy_list].count(False)))
-				
+							not bool([l in robot_status_list.values() for l in robot_busy_list].count(True)))
+
 				if is_ready:
 					robot_status_list[k] = "GO_TO_KITCHEN" 	
 					o.status = Status.GO_TO_KITCHEN
@@ -684,7 +684,7 @@ def main():
 	####################################################
 	#init
 	
-	global robot_num; robot_num = rospy.get_param('~robot_num',1)
+	global robot_num; robot_num = rospy.get_param('~robot_num',3)
 
 	global waiter_client; waiter_client = {}
 	global robot_status_list; robot_status_list = {}
