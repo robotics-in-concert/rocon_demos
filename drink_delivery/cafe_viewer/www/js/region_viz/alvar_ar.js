@@ -9,14 +9,14 @@ REGIONVIZ.AlvarAR = function(options) {
 
   options = options || {};
   that.rootObject = options.rootObject;
+  that.ros = options.ros;
   var map_origin = options.map_origin;
-  that.instance_tags = options.instance_tags;
-  that.color = createjs.Graphics.getRGB(0,154,205,0.8);
-  that.worldlib = options.worldlib || new Worldlib({ ros: options.ros});
+  that.color = options.color || createjs.Graphics.getRGB(0,154,205,0.8);
+  that.topicName = options.topicName || '/semantic_map/ar_marker_list';
+  that.topicType = options.topicType || '/ar_track_alvar/AlvarMarkers';
   that.markers = {};
-  that.new_markers = {};
+  that.marker_viz = {}
   that.texts = {};
-  that.new_texts = {};
 
   var stage;
   if (that.rootObject instanceof createjs.Stage) {
@@ -25,19 +25,56 @@ REGIONVIZ.AlvarAR = function(options) {
     stage = that.rootObject.getStage();
   }
 
-  var updates = function() {
-    that.worldlib.worldObjectInstanceTagSearch(that.instance_tags,
-      function(instances)
-      {
-        for(var i in instances) {
-          
-          var func = new ParseDescription(instances[i]);
+  that.sub_armarker = new ROSLIB.Topic({
+    ros: that.ros,
+    name : that.topicName, 
+    messageType : that.topicType,
+  });
 
-          that.worldlib.getWorldObjectDescription(instances[i].description_id,func.parse);
-        }
+  that.sub_armarker.subscribe(function(msg) {
+
+    // removing markers that are gone.
+    for(m in that.markers) {
+      var mk = that.markers[m];
+      var flag = false;
+
+      for(mm in msg.markers) {  if(msg.markers[mm].id == mk.id)  flag = true;  }
+
+      if(!flag)
+      {
+        that.rootObject.removeChild(that.marker_viz[mk.id]);
+        that.rootObject.removeChild(that.texts[mk.id]);
+        delete that.marker_viz[mk.id];
+        delete that.texts[mk.id];
       }
-    );
-  }
+    }
+
+    // adding new markers
+    for(m in msg.markers)
+    {
+      var mk = msg.markers[m];
+      var x = mk.pose.pose.position.x - map_origin.position.x;
+      var y = -(mk.pose.pose.position.y - map_origin.position.y);
+      var o = mk.pose.pose.orientation;
+
+      if(!(mk.id in that.markers)) {
+        var marker = createMarker(x,y,o);
+        var text = createText(x,y,mk.id);
+        that.marker_viz[mk.id] = marker;
+        that.texts[mk.id] = text;
+        that.rootObject.addChild(marker);
+        that.rootObject.addChild(text);
+      }
+      else {
+        that.marker_viz[mk.id].x = x;
+        that.marker_viz[mk.id].y = y;
+        that.marker_viz[mk.id].rotation = getRotation(o);
+        that.texts[mk.id].x = x;
+        that.texts[mk.id].y = y;
+      }
+    }
+    that.markers = msg.markers;
+  });
 
   var createMarker = function(x,y,orientation) {
     var m = new ROS2D.NavigationArrow({
@@ -50,19 +87,7 @@ REGIONVIZ.AlvarAR = function(options) {
     m.x = x;
     m.y = y;
 
-    var quaternion = new ROSLIB.Quaternion(orientation);
-    var yaw_n180 = new ROSLIB.Quaternion({ x : 0, y : 0,z : 1, w : 0});
-    var roll_n180 = new ROSLIB.Quaternion({ x : 1, y : 0,z : 0, w : 0});
-
-    yaw_n180.invert();
-    roll_n180.invert();
-    
-    quaternion.multiply(roll_n180);
-    quaternion.multiply(yaw_n180);
-    quaternion.multiply(yaw_n180);
-
-    var rpy = stage.rosQuaternionToGlobalRPY(quaternion);
-    m.rotation = -rpy.yaw * 180 / Math.PI;
+    m.rotation = getRotation(orientation); 
     m.scaleX = 1.0 / stage.scaleX;
     m.scaleY = 1.0 / stage.scaleY;
 
@@ -80,52 +105,24 @@ REGIONVIZ.AlvarAR = function(options) {
     return text_object;
   }
 
+  var getRotation = function(orientation) {
+    var quaternion = new ROSLIB.Quaternion(orientation);
+    var yaw_n180 = new ROSLIB.Quaternion({ x : 0, y : 0,z : 1, w : 0});
+    var roll_n180 = new ROSLIB.Quaternion({ x : 1, y : 0,z : 0, w : 0});
 
-  var ParseDescription = function(instance) {
-    var parse_desc = this;
-    this.instance = instance;
+    yaw_n180.invert();
+    roll_n180.invert();
+    
+    quaternion.multiply(roll_n180);
+    quaternion.multiply(yaw_n180);
+    quaternion.multiply(yaw_n180);
 
-    this.parse = function(description) {
-      var instance = parse_desc.instance;
-      var region = JSON.parse(description.descriptors[0].data);
-      var marker = region['marker'];
-      var x = marker.pose.pose.position.x - map_origin.position.x;
-      var y = -(marker.pose.pose.position.y - map_origin.position.y);
-      var m = createMarker(x,y,marker.pose.pose.orientation);
-
-      that.new_markers[instance.instance_id] = m;
-      that.new_texts[instance.instance_id] = createText(x,y,marker.id);
-    }
+    var rpy = stage.rosQuaternionToGlobalRPY(quaternion);
+    var rotation = -rpy.yaw * 180 / Math.PI;
+    
+    return rotation;
   }
 
-  var cleanup = function() {
-    for(var m in that.markers)
-    {
-      if(!(c in that.new_markers)) {
-        that.rootObject.removeChild(that.texts[m]);
-        that.rootObject.removeChild(that.markers[m]);
-        delete that.texts[m];
-        delete that.markers[m];
-      }
-    }
-    for(var c in that.new_markers)
-    {
-      if(!(c in that.markers)) {
-        that.texts[c] = that.new_texts[c];
-        that.markers[c] = that.new_markers[c];
-        that.rootObject.addChild(that.markers[c]);
-        that.rootObject.addChild(that.texts[c]);
-      }
-    }
-
-    that.emit('update',that.texts);
-    that.new_texts = {}
-    that.new_markers = {}
-  }
-
-  window.setInterval(updates,1000);
- // window.setTimeout(cleanup,5000);
-  window.setInterval(cleanup,1000);
 };
 
 
