@@ -647,7 +647,7 @@ def main():
 	
 	####################################################
 	#init
-	global robot_num; robot_num = 1
+	global robot_num; robot_num = rospy.get_param('~robot_num',1)
 	global waiter_client; waiter_client = {}
 	global robot_status_list; robot_status_list = {}
 
