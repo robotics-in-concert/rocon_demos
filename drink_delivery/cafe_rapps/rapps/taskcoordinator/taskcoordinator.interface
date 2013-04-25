@@ -4,5 +4,6 @@ publishers:
 services: []
 action_clients: 
   - waiter_1/delivery_order
+  - waiter_2/delivery_order
 action_servers: 
   - send_order
