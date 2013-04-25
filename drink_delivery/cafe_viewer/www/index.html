@@ -19,6 +19,7 @@
     <script type="text/javascript" src="js/region_viz/regionviz.js"></script>
     <script type="text/javascript" src="js/region_viz/circle.js"></script>
     <script type="text/javascript" src="js/region_viz/alvar_ar.js"></script>
+    <script type="text/javascript" src="js/model/Robot.js"></script>
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet"></link>
@@ -62,9 +63,8 @@
 
         viewer = createViewer();
         gridClient = addMap(viewer);
-//        addNavigator(viewer,gridClient);
-//        addAnnotator(viewer,gridClient);
         addRegionViz(viewer,gridClient);
+        addNavigators(viewer,gridClient);
       }
 
       function createViewer() {
@@ -85,8 +85,6 @@
         viewer.scene.mouseEnabled = true;
         createjs.Touch.enable(viewer.scene);
         
-//        viewer.scene.mouseMoveOutside = true;
-
 
         $(window).resize(function(e) {
           var half_window = $(window).height()/2;
@@ -115,18 +113,39 @@
         return gridClient;
       }
 
-      function addNavigator(viewer,gridClient) {
-        var serverName = '/move_base'
-        var actionName = 'move_base_msgs/MoveBaseAction';
-        var navigator;
+      function addNavigators(viewer,gridClient) {
         
-
         gridClient.on('change', function(map_origin) {
-          navigator= new NAV2D.Navigator({
+          var robot1 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            serverName : serverName,
-            actionName : actionName,
+            name       : 'waiterbot',
+            size       : 20,
+            topicName  : 'waiterbot/robot_pose',
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(255,64,128,0.66),
+            rootObject : viewer.scene
+          });
+
+          var robot2 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : 'waiterbot2',
+            size       : 20,
+            topicName  : 'waiterbot2/robot_pose',
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
+            rootObject : viewer.scene
+          });
+
+          var robot3 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : 'waiterbot3',
+            size       : 20,
+            topicName  : 'waiterbot3/robot_pose',
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(64,255,128,0.66),
             rootObject : viewer.scene
           });
         });
@@ -138,13 +157,15 @@
           circle_region_poller = new REGIONVIZ.Circle({
             ros: ros,
             map_origin : map_origin,
-            rootObject : viewer.scene
+            rootObject : viewer.scene,
+            topicName : '/cafe_database/table_pose_list'
           });
 
           ar_region_poller = new REGIONVIZ.AlvarAR({
             ros: ros,
             map_origin : map_origin,
-            rootObject : viewer.scene
+            rootObject : viewer.scene,
+            topicName : '/cafe_database/ar_list',
           });
 
         });

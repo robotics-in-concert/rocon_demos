@@ -61,12 +61,10 @@ REGIONVIZ.Circle = function(options) {
       if(!(t in that.tables)) {
         var circle = createCircle(x,y,r);
         var text = createText(x,y,name);
-        console.log(circle);
         that.circle_viz[name] = circle;
         that.texts[name] = text;
         that.rootObject.addChild(circle);
         that.rootObject.addChild(text);
-        console.log(that.rootObject);
       }
       else {
         that.circle_viz[name].x = x;
