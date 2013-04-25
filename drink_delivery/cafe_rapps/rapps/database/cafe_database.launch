@@ -1,6 +1,6 @@
 <launch>
   <!-- Map server -->
-  <arg name="map_name" default="$(find cafe_concert)/maps/dorothy_cafe_new.yaml"/>
+  <arg name="map_name" default="$(find cafe_concert)/maps/dorothy_cafe_new_polished.yaml"/>
   <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
   </node>
 
