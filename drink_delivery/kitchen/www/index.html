@@ -50,6 +50,18 @@
     var orders_div;
     var hero_div;
 
+    var STATUS_STRING = ['IDLE',
+                         'GO_TO_KITCHEN',
+                         'ARRIVE_KITCHEN',
+                         'WAITING_FOR_KITCHEN',
+                         'IN_DELIVERY',
+                         'ARRIVE TABLE',
+                         'WAITING USER CONFIRM',
+                         'COMPLETE DELIVERY',
+                         'RETURN TO DOCK',
+                         'END DELIVERY',
+                         'ERROR'];
+
     $().ready(function(e){
 
       // setting ros callbacks()
@@ -109,7 +121,7 @@
       rowdiv.className = 'row-fluid';
 
       // create Hero 
-      var hero_element = createHereoDiv(msg.orders[0]);
+      var hero_element = createHeroDiv(msg.orders[0]);
       hero_div.append(hero_element);
 
       for(i in msg.orders) {
@@ -135,7 +147,7 @@
       orders_div.append(rowdiv);
     }
 
-    function createHereoDiv(order)
+    function createHeroDiv(order)
     {
       var externaldiv = document.createElement('div');
 
@@ -146,7 +158,7 @@
       var elements_title = createRow('h5','row-fluid',['Table','Status'],'span6');
       externaldiv.appendChild(elements_title);
 
-      var elements = createRow('div','row-fluid',[order.table_id,order.status],'span6');
+      var elements = createRow('div','row-fluid',[order.table_id,STATUS_STRING[order.status]],'span6');
       externaldiv.appendChild(elements);
 
       var menudiv = createMenuDiv(order.menus);
@@ -167,7 +179,7 @@
       );
       $(li).click(function() {
         hero_div.empty();
-        var hero_element = createHereoDiv(order);
+        var hero_element = createHeroDiv(order);
         hero_div.append(hero_element);
       });
 
@@ -183,10 +195,10 @@
       h.innerHTML = "Order : " + order.order_id;
       div.appendChild(h);
 
-      var elements_title = createRow('h5','row-fluid',['Table','Status'],'span6');
+      var elements_title = createRow('h5','row-fluid',['Table','Status'],'span4');
       div.appendChild(elements_title);
 
-      var elements = createRow('div','row-fluid',[order.table_id,order.status],'span6');
+      var elements = createRow('div','row-fluid',[order.table_id,STATUS_STRING[order.status]],'span4');
       div.appendChild(elements);
 
       var menudiv = createMenuDiv(order.menus);
@@ -199,7 +211,7 @@
 
       $(div).click(function() {
         hero_div.empty();
-        var hero_element = createHereoDiv(order);
+        var hero_element = createHeroDiv(order);
         hero_div.append(hero_element);
 
       });
