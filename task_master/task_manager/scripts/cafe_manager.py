@@ -430,7 +430,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			status == Status.ARRIVE_KITCHEN or 
 			status == Status.WAITING_FOR_KITCHEN):
 			
-			#Send result to user device
+			#send result to user device
 			goal_handle = GetGoalHandle(goal_id)
 			_feedback = UserOrderFeedback()
 			_feedback.status = status
@@ -444,6 +444,7 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			for k in MessageRecvSrv_OrderList:
 				if k.order_id == order_id:
 					k.status = status
+					k.robot_name = robot_name
 					break
 				#send order list
 			order_list = OrderList()
@@ -453,22 +454,27 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			pass
 			
 		elif status == Status.IN_DELIVERY:
-			#Pop order list	
-			order_id = MessageRecvSrv_RemappingList.pop(goal_id)
-			for k in MessageRecvSrv_OrderList:
-				if k.order_id == order_id:
-					MessageRecvSrv_OrderList.remove(k)
-					break
-				#send order list	
-			order_list = OrderList()
-			order_list.orders = MessageRecvSrv_OrderList
-			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
-			
-			#Send result to user device
+			#send result to user device
 			goal_handle = GetGoalHandle(goal_id)
 			_feedback = UserOrderFeedback()
 			_feedback.status = status
 			goal_handle.publish_feedback(_feedback)
+			
+			
+			#send data to kitchen mgr
+				##get order id
+			order_id = MessageRecvSrv_RemappingList[goal_id]
+				##set order status as order id
+			for k in MessageRecvSrv_OrderList:
+				if k.order_id == order_id:
+					k.status = status
+					k.robot_name = robot_name
+					break
+				#send order list
+			order_list = OrderList()
+			order_list.orders = MessageRecvSrv_OrderList
+			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+			
 			pass
 			
 		elif (status == Status.ARRIVE_TABLE or
@@ -482,7 +488,21 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			_feedback = UserOrderFeedback()
 			_feedback.status = status
 			goal_handle.publish_feedback(_feedback)
-				
+			
+			#send data to kitchen mgr
+				##get order id
+			order_id = MessageRecvSrv_RemappingList[goal_id]
+				##set order status as order id
+			for k in MessageRecvSrv_OrderList:
+				if k.order_id == order_id:
+					k.status = status
+					k.robot_name = robot_name
+					break
+				#send order list
+			order_list = OrderList()
+			order_list.orders = MessageRecvSrv_OrderList
+			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)	
+			
 			pass
 			
 		elif status == Status.IDLE:
@@ -490,6 +510,18 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			goal_handle = GetGoalHandle(goal_id)
 			_result = UserOrderResult()
 			goal_handle.set_succeeded(_result)
+
+			#Pop order list	
+			order_id = MessageRecvSrv_RemappingList.pop(goal_id)
+			for k in MessageRecvSrv_OrderList:
+				if k.order_id == order_id:
+					MessageRecvSrv_OrderList.remove(k)
+					break
+				#send order list	
+			order_list = OrderList()
+			order_list.orders = MessageRecvSrv_OrderList
+			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+			
 						
 			#Pop Goal Handle
 			PopGoalHandleList(goal_id)
@@ -596,11 +628,15 @@ class DeliverySrv_CheckRobot(smach.State):
 		#check robot
 		checkRobotStatusFlag = True
 		timeout = rospy.Duration(1)
+		robot_busy_list = ["GO_TO_KITCHEN","ARRIVE_KITCHEN","WAITING_FOR_KITCHEN"]
 		
-		while checkRobotStatusFlag and not rospy.is_shutdown():
-			
+		while checkRobotStatusFlag and not rospy.is_shutdown():	
 			for k in robot_status_list.keys():
-				is_ready = robot_status_list[k] == "IDLE" and  waiter_client[k].wait_for_server(timeout)				
+			
+				is_ready = (robot_status_list[k] == "IDLE" and  
+							waiter_client[k].wait_for_server(timeout) and
+							bool([l in robot_status_list.values() for l in robot_busy_list].count(False)))
+				
 				if is_ready:
 					robot_status_list[k] = "GO_TO_KITCHEN" 	
 					o.status = Status.GO_TO_KITCHEN
@@ -647,7 +683,9 @@ def main():
 	
 	####################################################
 	#init
+	
 	global robot_num; robot_num = rospy.get_param('~robot_num',1)
+
 	global waiter_client; waiter_client = {}
 	global robot_status_list; robot_status_list = {}
 
