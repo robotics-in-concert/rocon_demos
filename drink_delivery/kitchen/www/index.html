@@ -161,6 +161,9 @@
       h1.innerHTML = "Order : " + order.order_id;
       externaldiv.appendChild(h1);
 
+      var elements_robot= createRowLine('Robot : ',order.robot_name);
+      externaldiv.appendChild(elements_robot);
+
       var elements_title = createRow('h5','row-fluid',['Table','Status'],'span6');
       externaldiv.appendChild(elements_title);
 
@@ -170,8 +173,8 @@
       var menudiv = createMenuDiv(order.menus);
       externaldiv.appendChild(menudiv); 
 
-      var elements_robot= createRowLine('Robot : ',order.robot_name);
-      externaldiv.appendChild(elements_robot);
+
+
       
       return externaldiv;
     }
@@ -204,6 +207,9 @@
       h.innerHTML = "Order : " + order.order_id;
       div.appendChild(h);
 
+      var elements_robot= createRowLine('Robot : ',order.robot_name);
+      div.appendChild(elements_robot);
+
       var elements_title = createRow('h5','row-fluid',['Table','Status'],'span4');
       div.appendChild(elements_title);
 
@@ -213,8 +219,8 @@
       var menudiv = createMenuDiv(order.menus);
       div.appendChild(menudiv); 
 
-      var elements_robot= createRowLine('Robot : ',order.robot_name);
-      div.appendChild(elements_robot);
+
+
 
 
       $(div).hover(
