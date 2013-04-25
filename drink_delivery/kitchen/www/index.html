@@ -210,18 +210,14 @@
       var elements_robot= createRowLine('Robot : ',order.robot_name);
       div.appendChild(elements_robot);
 
-      var elements_title = createRow('h5','row-fluid',['Table','Status'],'span4');
-      div.appendChild(elements_title);
+      var elements_table = createRowLine('Table : ' ,order.table_id);
+      div.appendChild(elements_table);
 
-      var elements = createRow('div','row-fluid',[order.table_id,STATUS_STRING[order.status]],'span4');
-      div.appendChild(elements);
+      var elements_status = createRowLine('Status : ',STATUS_STRING[order.status]);
+      div.appendChild(elements_status);
 
       var menudiv = createMenuDiv(order.menus);
       div.appendChild(menudiv); 
-
-
-
-
 
       $(div).hover(
           function() { this.style.background= "gray"; },
@@ -241,13 +237,13 @@
     function createRowLine(name,element)
     {
       var div = createDiv('','row-fluid');
-      var title = document.createElement('h5');
+      var title = document.createElement('strong');
       title.className = 'span4';
       title.innerHTML = name; 
       div.appendChild(title);
 
-      var el = createDiv(element,'span4');
-      el.style.marginTop = '10px';
+      var el = createDiv(element,'span8');
+//      el.style.marginTop = '10px';
       div.appendChild(el);
 
       return div;
