@@ -98,7 +98,7 @@ if __name__ == '__main__':
         # Initialize ros node
         rospy.init_node('waiterbot')
 
-        waiter = WaiterSoftBot(rospy.get_name(),"delivery_order")
+        waiter = WaiterSoftBot(rospy.get_name(),"~delivery_order")
         rospy.loginfo('Initialized')
 
         waiter.spin()
