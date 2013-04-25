@@ -324,13 +324,27 @@ class MessageRecvSrv_CallOrderEvent(smach.State):
 		o.menus = menus
 		o.robot_name = "None"
 		o.order_id = cmdset.getValue('order_id')
+		o.status = Status.IDLE
 		
 		MessageRecvSrv_OrderList.append(o)
 		
 		order_list = OrderList()
 		order_list.orders = MessageRecvSrv_OrderList
 
-		kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+		#sorting
+		order_list.orders = sorted(order_list.orders, key = lambda order: order.status)
+		upperlist = []
+		lowerlist = []
+		for k in order_list.orders:
+			if k.status <= Status.WAITING_FOR_KITCHEN:
+				 upperlist.append(k)
+			else:
+				 lowerlist.append(k)
+		upperlist = sorted(upperlist, key = lambda order: order.order_id)
+		lowerlist = sorted(lowerlist, key = lambda order: order.order_id,reverse=True)
+		order_list.orders = upperlist+lowerlist
+		#
+		kitchen_mgr_pub.publish(order_list)
 
 		return 'success'
 		
@@ -424,8 +438,8 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 			robot_status_list[robot_name] = "ERROR"
 		else:
 			robot_status_list[robot_name] = "ERROR"	
-	
-		
+				
+		#	
 		if (status == Status.GO_TO_KITCHEN or 
 			status == Status.ARRIVE_KITCHEN or 
 			status == Status.WAITING_FOR_KITCHEN):
@@ -446,10 +460,25 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 					k.status = status
 					k.robot_name = robot_name
 					break
+
 				#send order list
 			order_list = OrderList()
 			order_list.orders = MessageRecvSrv_OrderList
-			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+				#sorting
+			order_list.orders = sorted(order_list.orders, key = lambda order: order.status)
+			upperlist = []
+			lowerlist = []
+			for k in order_list.orders:
+				if k.status <= Status.WAITING_FOR_KITCHEN:
+					 upperlist.append(k)
+				else:
+					 lowerlist.append(k)
+			upperlist = sorted(upperlist, key = lambda order: order.order_id)
+			lowerlist = sorted(lowerlist, key = lambda order: order.order_id,reverse=True)
+			order_list.orders = upperlist+lowerlist
+			#
+			kitchen_mgr_pub.publish(order_list)
+
 			
 			pass
 			
@@ -473,7 +502,21 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 				#send order list
 			order_list = OrderList()
 			order_list.orders = MessageRecvSrv_OrderList
-			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+				#sorting
+			order_list.orders = sorted(order_list.orders, key = lambda order: order.status)
+			upperlist = []
+			lowerlist = []
+			for k in order_list.orders:
+				if k.status <= Status.WAITING_FOR_KITCHEN:
+					 upperlist.append(k)
+				else:
+					 lowerlist.append(k)
+			upperlist = sorted(upperlist, key = lambda order: order.order_id)
+			lowerlist = sorted(lowerlist, key = lambda order: order.order_id,reverse=True)
+			order_list.orders = upperlist+lowerlist
+			#
+			kitchen_mgr_pub.publish(order_list)
+
 			
 			pass
 			
@@ -499,9 +542,23 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 					k.robot_name = robot_name
 					break
 				#send order list
+			
 			order_list = OrderList()
 			order_list.orders = MessageRecvSrv_OrderList
-			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)	
+				#sorting
+			order_list.orders = sorted(order_list.orders, key = lambda order: order.status)
+			upperlist = []
+			lowerlist = []
+			for k in order_list.orders:
+				if k.status <= Status.WAITING_FOR_KITCHEN:
+					 upperlist.append(k)
+				else:
+					 lowerlist.append(k)
+			upperlist = sorted(upperlist, key = lambda order: order.order_id)
+			lowerlist = sorted(lowerlist, key = lambda order: order.order_id,reverse=True)
+			order_list.orders = upperlist+lowerlist
+			#
+			kitchen_mgr_pub.publish(order_list)	
 			
 			pass
 			
@@ -517,10 +574,24 @@ class MessageRecvSrv_CallStatusEvent(smach.State):
 				if k.order_id == order_id:
 					MessageRecvSrv_OrderList.remove(k)
 					break
-				#send order list	
+			
+			#send order list	
 			order_list = OrderList()
 			order_list.orders = MessageRecvSrv_OrderList
-			kitchen_mgr_pub.publish(MessageRecvSrv_OrderList)
+				#sorting
+			order_list.orders = sorted(order_list.orders, key = lambda order: order.status)
+			upperlist = []
+			lowerlist = []
+			for k in order_list.orders:
+				if k.status <= Status.WAITING_FOR_KITCHEN:
+					 upperlist.append(k)
+				else:
+					 lowerlist.append(k)
+			upperlist = sorted(upperlist, key = lambda order: order.order_id)
+			lowerlist = sorted(lowerlist, key = lambda order: order.order_id,reverse=True)
+			order_list.orders = upperlist+lowerlist
+			#
+			kitchen_mgr_pub.publish(order_list)	
 			
 						
 			#Pop Goal Handle
@@ -636,7 +707,7 @@ class DeliverySrv_CheckRobot(smach.State):
 				is_ready = (robot_status_list[k] == "IDLE" and  
 							waiter_client[k].wait_for_server(timeout) and
 							not bool([l in robot_status_list.values() for l in robot_busy_list].count(True)))
-
+				
 				if is_ready:
 					robot_status_list[k] = "GO_TO_KITCHEN" 	
 					o.status = Status.GO_TO_KITCHEN
