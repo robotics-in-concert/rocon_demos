@@ -104,7 +104,7 @@ if __name__ == '__main__':
 	
 			new_order = Order()
 
-			new_order.table_id = random.randrange(1,7)
+			new_order.table_id = random.randrange(1,9)
 			new_order.menus = generateMenus()
 			new_order.robot_name = ""				
 			new_order.order_id = 0
