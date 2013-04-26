@@ -100,10 +100,6 @@ edges:
     finish: cafe_database_tf
     remap_from: tf
     remap_to: tf 
-  - start: cafe_database
-    finish: cafe_database_getmap
-    remap_from: static_map
-    remap_to: cafe_database/static_map
 
 ## Cafe Customer
   - start: customer 

@@ -21,6 +21,7 @@
     <script type="text/javascript" src="js/region_viz/circle.js"></script>
     <script type="text/javascript" src="js/region_viz/alvar_ar.js"></script>
     <script type="text/javascript" src="js/model/Robot.js"></script>
+    <script type="text/javascript" src="js/model/OccupancyGridSrvClient.js"></script>
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet"></link>
@@ -101,10 +102,10 @@
       function addMap(viewer) {
         var continuous = false;
 
-        gridClient = new ROS2D.OccupancyGridClient({
+        gridClient = new ROS2D.OccupancyGridSrvClient({
           ros : ros,
+          service : '/map_static',
           rootObject : viewer.scene,
-          continuous : continuous,
         });
 
         // Scale the canvas to fit to the map
