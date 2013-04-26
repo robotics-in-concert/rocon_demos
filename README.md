@@ -10,6 +10,7 @@ Demo software for rocon milestones.
 #### Pre-requisite
 
 ```
+sudo apt-get install postgresql python-psycopg2
 sudo apt-get install ros-groovy-turtlebot
 sudo apt-get install ros-groovy-turtlebot-apps
 sudo apt-get install ros-groovy-turtlebot-viz
