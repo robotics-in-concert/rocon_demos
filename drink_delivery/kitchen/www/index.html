@@ -182,7 +182,7 @@
     function createOrderLi(order) {
       var li = document.createElement('li');
       var p = document.createElement('p');
-      p.innerHTML = "# " + order.order_id + " - Table : " + order.table_id + " - Robot : " + order.robot_name;
+      p.innerHTML = "# " + order.order_id + " - Table : " + order.table_id + " - Robot : " + order.robot_name "<br/> Status : " + STATUS_STRING[order.status];
       li.appendChild(p);
 
       $(li).hover(

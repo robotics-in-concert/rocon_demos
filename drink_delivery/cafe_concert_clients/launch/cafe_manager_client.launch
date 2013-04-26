@@ -4,6 +4,6 @@
         <arg name="robot_type" value="pc"/>
         <arg name="concert_name" value="cafe_concert"/>
         <arg name="app_lists" value="$(find cafe_rapps)/rapps/cafe.rapps"/>
-        <arg name="gateway_watch_loop_period" value="1"/>
+        <arg name="gateway_watch_loop_period" value="10"/>
     </include>
 </launch>
