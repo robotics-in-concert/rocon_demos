@@ -223,6 +223,7 @@ ROS2D.OccupancyGridClient = function(options) {
     // check if we should unsubscribe
     if (!that.continuous) {
       rosTopic.unsubscribe();
+      console.log('Unsub');
     }
   });
 };

@@ -311,6 +311,7 @@ ROSLIB.Ros = function(options) {
   var options = options || {};
   var url = options.url;
   this.socket = null;
+  this.idCounter = 0;
 
   // begin by checking if a URL was given
   if (url) {
