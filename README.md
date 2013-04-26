@@ -54,7 +54,7 @@ rosdep install rocon_concert
 ```
 > source ~/cafe_solution/devel/setup.bash
 > rospack profile
-> rocon_launch cafe_concert cafe.concert -g
+> rocon_launch cafe_concert cafe.concert
 > rosservice call /concert/start_solution
 ```
 
