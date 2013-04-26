@@ -48,6 +48,14 @@ rosdep install rocon_concert
 > catkin_make
 ```
 
+#### Preparation for World Model Database ####
+
+Postgresql setting for spatial world model
+
+#### Semantic Pose Annotation ####
+
+
+
 #### Execution ####
 
 * Simple way to launch for demonstration in one computer
