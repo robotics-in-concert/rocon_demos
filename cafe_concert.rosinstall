@@ -24,7 +24,9 @@
 # Utility packages
 #   sudo apt-get install ros-groovy-robot-pose-publisher ros-groovy-rospy-message-converter ros-groovy-yujin-maps ros-groovy-rosbridge-server ros-groovy-rosbridge-library ros-groovy-rosapi
 #
-# 
+# Waiterbot required packages
+#   sudo apt-get install ros-groovy-rosserial-python 
+#
 # Official Ros Stacks
 
 
@@ -60,6 +62,8 @@
     version: groovy-devel}
 - git: {local-name: robot_pose_publisher, uri: 'https://github.com/jihoonl/robot_pose_publisher.git',
     version: groovy-devel}
+- git: {local-name: navigation, uri: 'https://github.com/corot/navigation.git',
+    version: hydro-devel}
 
 # Database Dependecny
 - git: {local-name: spatial_world_model, uri: 'https://github.com/WorldModel/spatial_world_model.git',
