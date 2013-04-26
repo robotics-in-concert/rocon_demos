@@ -50,15 +50,27 @@ rosdep install rocon_concert
 
 #### Preparation for World Model Database ####
 
-Postgresql setting for spatial world model
+Postgresql setting for spatial world model in local machine. In order to start the cafe demo solution,
+the database should contain 'Dock', 'Kitchen', 'Table1'~'Table8'. Please store the data by following instruction.
 
-#### Semantic Pose Annotation ####
+* Follow the installation instruction in the SWM ros wiki for spatial world model setting.
+  * http://www.ros.org/wiki/spatial_world_model
 
+* Bring up the annotation app.
 
+```
+> roslaunch cafe_rapps annotation.launch
+```
+
+* Bring up the rocon_webnotator table handler interface
+** files:///<PATH_TO_WORKSPACE>/rocon_webnotator/www/table_handler.html
+
+* Annotate 'Dock', 'Kitchen', and Tables.
+* Done.
 
 #### Execution ####
 
-* Simple way to launch for demonstration in one computer
+* Simple way to launch a demo solution in one computer
 
 ```
 > source ~/cafe_solution/devel/setup.bash
@@ -66,4 +78,3 @@ Postgresql setting for spatial world model
 > rocon_launch cafe_concert cafe.concert
 > rosservice call /concert/start_solution
 ```
-
