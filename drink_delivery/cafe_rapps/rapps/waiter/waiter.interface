@@ -1,0 +1,11 @@
+subscribers: 
+  - map
+  - map_metadata
+  - table_pose_list
+  - ar_list
+publishers: 
+  - robot_pose
+services: []
+action_clients: []
+action_servers:
+  - delivery_order
