@@ -65,7 +65,7 @@ the database should contain 'Dock', 'Kitchen', 'Table1'~'Table8'. Please store t
 ```
 
 * Bring up the rocon_webnotator table handler interface
-** files:///<PATH_TO_WORKSPACE>/rocon_webnotator/www/table_handler.html
+** files:///\<PATH_TO_WORKSPACE\>/rocon_webnotator/www/table_handler.html
 
 * Annotate 'Dock', 'Kitchen', and Tables.
 * Done.
