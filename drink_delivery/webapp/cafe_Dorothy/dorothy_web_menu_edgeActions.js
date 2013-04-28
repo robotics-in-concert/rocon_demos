@@ -8,10 +8,10 @@
 ***********************/
 (function($, Edge, compId){
 var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonly used Edge classes
-
+	
    //Edge symbol: 'stage'
    (function(symbolName) {
-    
+   
       Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 0, function(sym, e) {
          sym.stop();
 
@@ -30,35 +30,81 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 		function addCoffeeOrder(coffeeName){
 			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
 			var ordered_coffee_list = stage_symbol.getVariable("ordered_coffee_list");
+
 			if(ordered_coffee_list.length < 7) {
 				ordered_coffee_list.push(coffeeName);
 			}
 			console.log(ordered_coffee_list);
-			
-			//for (var i in ordered_coffee_list) {
-			// console.log("coffee_sel_name"+i.toString(10)+" "+ordered_coffee_list[i]);
-			// stage_symbol.$("coffee_sel"+i.toString(10)).show();
-			// stage_symbol.$("coffee_sel_name"+i.toString(10)).html(ordered_coffee_list[i]);
-			//}
-			
-			var mySymbolObject = stage_symbol.createChildSymbol("coffee_sel0", "stage");
-			var mySymbolElement = mySymbolObject.getSymbolElementNode();
-			stage_symbol.$(mySymbolElement).css({"position":"absolute", "top":"100px", "left":"100px"});
-			stage_symbol.$(mySymbolElement).css("-webkit-transform","scale(3,3)");
-			//stage_symbol.$(mySymbolElement).css("scale(2,2)");
-			stage_symbol.$(mySymbolElement).show();
-			//console.log(mySymbolObject);
-			
+			updateCoffeeOrder();
 		}
 		
-      Symbol.bindElementAction(compId, symbolName, "${_P1M1}", "click", function(sym, e) {
-         // Show an Element.
-         //  (sym.$("name") resolves an Edge Animate element name to a DOM
-         //  element that can be used with jQuery)
-         //sym.$("espresso2").show();
-         addCoffeeOrder("Espresso");
-        
+		function updateCoffeeOrder(){
+			console.log("UpdateCoffeeOrder");
+			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
+			var ordered_coffee_list = stage_symbol.getVariable("ordered_coffee_list");
+			var sum_prices = 0;
 
+			for (var i in ordered_coffee_list) {
+				console.log("coffee_sel_name"+i.toString(10)+" "+ordered_coffee_list[i]);
+				if(ordered_coffee_list[i] == "Espresso")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/espresso.png");
+					stage_symbol.$("coffee_sel"+i.toString(10)).show();
+					sum_prices += 2300;
+
+				}
+				else if(ordered_coffee_list[i] == "Cafe Latte")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafelatte.png");
+					stage_symbol.$("coffee_sel"+i.toString(10)).show();
+					sum_prices += 2700;
+				}
+				else if(ordered_coffee_list[i] == "Cafe Americano")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/americano.png");
+					stage_symbol.$("coffee_sel"+i.toString(10)).show();
+					sum_prices += 2500;
+				}
+				else if(ordered_coffee_list[i] == "Espresso Conpanna")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/espresso conpanna.png");
+					stage_symbol.$("coffee_sel"+i.toString(10)).show();
+					sum_prices += 2500;
+				}
+				stage_symbol.$("coffee_sel_name"+i.toString(10)).show();
+				stage_symbol.$("coffee_sel_name"+i.toString(10)).html(ordered_coffee_list[i]);
+			}
+			var pricewithcomma = "₩ " + sum_prices.toString(10).replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1,'); 
+			stage_symbol.$("Price").html(pricewithcomma);
+		}
+		
+		function delCoffeeOrder(number){
+			console.log("delCoffeeOrder");
+  			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
+  			stage_symbol.$("coffee_sel0").hide();
+         stage_symbol.$("coffee_sel1").hide();
+         stage_symbol.$("coffee_sel2").hide();
+         stage_symbol.$("coffee_sel3").hide();
+         stage_symbol.$("coffee_sel4").hide();
+         stage_symbol.$("coffee_sel5").hide();
+         stage_symbol.$("coffee_sel6").hide();
+         stage_symbol.$("coffee_sel_name0").hide();
+         stage_symbol.$("coffee_sel_name1").hide();
+         stage_symbol.$("coffee_sel_name2").hide();
+         stage_symbol.$("coffee_sel_name3").hide();
+         stage_symbol.$("coffee_sel_name4").hide();
+         stage_symbol.$("coffee_sel_name5").hide();
+         stage_symbol.$("coffee_sel_name6").hide();
+			var ordered_coffee_list = stage_symbol.getVariable("ordered_coffee_list");
+			console.log("number is "+number);
+			ordered_coffee_list.splice(number,1);
+			console.log(ordered_coffee_list);
+
+			updateCoffeeOrder()
+		}
+	
+      Symbol.bindElementAction(compId, symbolName, "${_P1M1}", "click", function(sym, e) {
+         addCoffeeOrder("Espresso");
       });
       //Edge binding end
 
@@ -82,21 +128,30 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       //Edge binding end
 
       Symbol.bindSymbolAction(compId, symbolName, "creationComplete", function(sym, e) {
-         // insert code to be run when the symbol is created here
+        // insert code to be run when the symbol is created here
       	//reference for selected coffee list array
-         sym.setVariable("ordered_coffee_list", new Array());
-          
-          //var ordered_coffee_list = sym.getVariable("ordered_coffee_list");
-          
-          //ordered_coffee_list[0] = "americano";
-          //ordered_coffee_list[1] = "cafelatte";
-      	
-          //console.log(sym.getVariable("ordered_coffee_list"));
-          //console.log(ordered_coffee_list);
-          
-          //sym.setVariable("addCoffeeOrder", function addCoffeeOrder(){
-//  				console.log("addCoffeeOrder function is called");
-  //        });
+		   sym.setVariable("ordered_coffee_list", new Array());
+      
+			function getParam(key){
+				var url = location.href;
+				var parameters = [];    
+				var qs = null;
+				// url has parameter's
+				if ( url.indexOf("?") != -1 ){
+					qs = {};
+					parameters = url.substring(url.indexOf("?")+1, url.length).split("&");
+					for ( var k =0; k < parameters.length; k++ ){
+						if ( parameters[k].split("=")[1].split('').join('').length > 0 ){
+							qs[parameters[k].split("=")[0]] = parameters[k].split("=")[1];
+						}
+					}
+			  }
+			  return qs[key] == undefined ? null : qs[key];
+			}
+			//console.log("mode");
+			sym.$("_01").html(getParam("mode"));
+			//open new window
+			//window.open("http://m.naver.com", "_self");
 
       });
       //Edge binding end
@@ -118,30 +173,6 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          addCoffeeOrder("Cafe Latte");
       });
       //Edge binding end
-
-		function delCoffeeOrder(number){
-  			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
-  			stage_symbol.$("coffee_sel0").hide();
-         stage_symbol.$("coffee_sel1").hide();
-         stage_symbol.$("coffee_sel2").hide();
-         stage_symbol.$("coffee_sel3").hide();
-         stage_symbol.$("coffee_sel4").hide();
-         stage_symbol.$("coffee_sel5").hide();
-         stage_symbol.$("coffee_sel6").hide();
-         stage_symbol.$("coffee_sel7").hide();
-			var ordered_coffee_list = stage_symbol.getVariable("ordered_coffee_list");
-			console.log("number is "+number);
-			ordered_coffee_list.splice(number,1);
-			console.log(ordered_coffee_list);
-
-			for (var i in ordered_coffee_list) {
-			 console.log(ordered_coffee_list[i]);
-			 stage_symbol.$("coffee_sel"+i).show();
-			 stage_symbol.$("coffee_sel"+i).html(ordered_coffee_list[i]);
-			}
-		}
-		
-      
 
       Symbol.bindElementAction(compId, symbolName, "${_coffee_sel1}", "click", function(sym, e) {
          // insert code for mouse click here
@@ -179,21 +210,14 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       });
       //Edge binding end
 
-   })("stage");
-   //Edge symbol end:'stage'
-
-   //=========================================================
-   
-   //Edge symbol: 'cofee_sel0'
-   (function(symbolName) {   
-   
       Symbol.bindElementAction(compId, symbolName, "${_coffee_sel0}", "click", function(sym, e) {
          // insert code for mouse click here
          delCoffeeOrder(0);
-      });
-         //Edge binding end
 
-   })("coffee_sel0");
-   //Edge symbol end:'coffee_sel0'
+      });
+      //Edge binding end
+
+   })("stage");
+   //Edge symbol end:'stage'
 
 })(jQuery, AdobeEdge, "EDGE-1251484");

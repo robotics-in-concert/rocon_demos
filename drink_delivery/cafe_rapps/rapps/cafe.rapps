@@ -5,3 +5,4 @@ apps:
   - cafe_rapps/customer_soft
   - cafe_rapps/annotation
   - cafe_rapps/kitchen
+  - cafe_rapps/waiter
