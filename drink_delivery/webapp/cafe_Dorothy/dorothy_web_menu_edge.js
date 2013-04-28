@@ -157,7 +157,7 @@ var symbols = {
          {
             id:'Price',
             type:'text',
-            rect:['46.6%','85.7%','225px','auto','auto','auto'],
+            rect:['46.2%','85.7%','225px','auto','auto','auto'],
             text:"₩ 20,000",
             font:['Arial, Helvetica, sans-serif',50,"rgba(100,61,23,1.00)","800","none",""]
          },
@@ -169,21 +169,20 @@ var symbols = {
             font:['Arial, Helvetica, sans-serif',25,"rgba(100,61,23,1.00)","800","none",""]
          },
          {
-            id:'cofee_sel0',
-            type:'rect',
-            rect:['21','820','auto','auto','auto','auto']
-         },
-         {
-            id:'Coffee_icon2',
+            id:'coffee_sel0',
+            display:'none',
             type:'image',
-            rect:['-173px','741px','153px','111px','auto','auto'],
-            fill:["rgba(0,0,0,0)",im+"Coffee_icon.png",'0px','0px'],
+            tag:'img',
+            rect:['-2.9%','69.6%','152px','102px','auto','auto'],
+            opacity:1,
+            fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
             transform:[[],[],[],['0.45','0.45']]
          },
          {
             id:'coffee_sel1',
             display:'none',
             type:'image',
+            tag:'img',
             rect:['-2.5%','69.8%','152px','102px','auto','auto'],
             opacity:1,
             fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
@@ -193,6 +192,7 @@ var symbols = {
             id:'coffee_sel2',
             display:'none',
             type:'image',
+            tag:'img',
             rect:['25.6%','69.8%','152px','102px','auto','auto'],
             opacity:1,
             fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
@@ -202,6 +202,7 @@ var symbols = {
             id:'coffee_sel3',
             display:'none',
             type:'image',
+            tag:'img',
             rect:['39.4%','69.8%','152px','102px','auto','auto'],
             opacity:1,
             fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
@@ -211,6 +212,7 @@ var symbols = {
             id:'coffee_sel4',
             display:'none',
             type:'image',
+            tag:'img',
             rect:['53.3%','69.8%','152px','102px','auto','auto'],
             opacity:1,
             fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
@@ -220,6 +222,7 @@ var symbols = {
             id:'coffee_sel5',
             display:'none',
             type:'image',
+            tag:'img',
             rect:['67.8%','69.8%','152px','102px','auto','auto'],
             opacity:1,
             fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
@@ -229,6 +232,7 @@ var symbols = {
             id:'coffee_sel6',
             display:'none',
             type:'image',
+            tag:'img',
             rect:['81.1%','69.8%','152px','102px','auto','auto'],
             opacity:1,
             fill:["rgba(0,0,0,0)",im+"espresso.png",'0px','0px'],
@@ -243,7 +247,7 @@ var symbols = {
          {
             id:'coffee_sel_name1',
             type:'text',
-            rect:['17.2%','77.4%','9.6%','3.7%','auto','auto'],
+            rect:['16.7%','67.8%','9.6%','3.7%','auto','auto'],
             font:['Arial, Helvetica, sans-serif',19.2,"rgba(0,0,0,1)","normal","none",""]
          },
          {
@@ -623,10 +627,7 @@ var symbols = {
             fill:["rgba(0,0,0,0)",im+"a011_anwansoon_non.png",'0px','0px']
          }],
          symbolInstances: [
-         {
-            id:'cofee_sel0',
-            symbolName:'coffee_sel0'
-         }
+
          ]
       },
    states: {
@@ -741,9 +742,12 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "top", '0px']
          ],
-         "${_cafemocha}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
+         "${_sandwitch_emptyCopy}": [
+            ["style", "top", '74.18%'],
+            ["transform", "scaleY", '0.4'],
+            ["transform", "scaleX", '0.4'],
+            ["style", "left", '11.09%'],
+            ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ]
          ],
          "${_coffee_slot2}": [
             ["style", "top", '69.61%'],
@@ -756,13 +760,11 @@ var symbols = {
             ["style", "left", '132.52%'],
             ["style", "top", '119px']
          ],
-         "${_coffee_sel4}": [
-            ["style", "top", '69.63%'],
-            ["transform", "scaleY", '0.45'],
-            ["style", "display", 'none'],
-            ["style", "opacity", '1'],
-            ["style", "left", '53.33%'],
-            ["transform", "scaleX", '0.45']
+         "${_menu-category-sandwich-buffchic_copy}": [
+            ["style", "top", '0px'],
+            ["transform", "scaleX", '1'],
+            ["transform", "scaleY", '1'],
+            ["style", "left", '0px']
          ],
          "${_coffee_sel3}": [
             ["style", "top", '69.63%'],
@@ -894,6 +896,14 @@ var symbols = {
             ["style", "left", '67.33%'],
             ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ]
          ],
+         "${_coffee_sel0}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["style", "display", 'none'],
+            ["style", "opacity", '1'],
+            ["style", "left", '-2.89%'],
+            ["transform", "scaleX", '0.45']
+         ],
          "${_cafelatteCopy}": [
             ["style", "left", '0px'],
             ["style", "top", '0px']
@@ -918,12 +928,6 @@ var symbols = {
             ["style", "left", '25.56%'],
             ["transform", "scaleX", '0.45']
          ],
-         "${_Coffee_icon2}": [
-            ["transform", "scaleX", '0.45'],
-            ["style", "left", '-173px'],
-            ["transform", "scaleY", '0.45'],
-            ["style", "top", '741px']
-         ],
          "${_P3M2}": [
             ["style", "left", '251.75%'],
             ["style", "top", '10.65%']
@@ -942,11 +946,9 @@ var symbols = {
             ["style", "height", '100%'],
             ["style", "width", '100%']
          ],
-         "${_menu-category-sandwich-buffchic_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleX", '1'],
-            ["transform", "scaleY", '1'],
-            ["style", "left", '0px']
+         "${_cafemocha}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
          ],
          "${_P1M1}": [
             ["style", "left", '20px']
@@ -959,23 +961,30 @@ var symbols = {
             ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
-         "${_sandwitch_emptyCopy}": [
-            ["style", "top", '74.18%'],
-            ["transform", "scaleY", '0.4'],
-            ["transform", "scaleX", '0.4'],
-            ["style", "left", '11.09%'],
-            ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ]
-         ],
-         "${_P2M1}": [
-            ["style", "left", '106.1%'],
-            ["style", "top", '119px']
+         "${_menu-category-sandwich-stkchs_copy}": [
+            ["style", "top", '0px'],
+            ["transform", "scaleX", '1'],
+            ["transform", "scaleY", '1'],
+            ["style", "left", '0px']
          ],
          "${_P3M1}": [
             ["style", "left", '205.09%'],
             ["style", "top", '10.65%']
          ],
+         "${_P2M1}": [
+            ["style", "left", '106.1%'],
+            ["style", "top", '119px']
+         ],
          "${_P1M8}": [
             ["style", "left", '76.25%']
+         ],
+         "${_dorothy_cafe}": [
+            ["style", "top", '10px'],
+            ["style", "width", '324px'],
+            ["color", "color", 'rgba(255,255,255,1.00)'],
+            ["style", "height", '59px'],
+            ["style", "left", '89px'],
+            ["style", "font-size", '320%']
          ],
          "${_rocon_logo}": [
             ["style", "-webkit-transform-origin", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
@@ -995,24 +1004,16 @@ var symbols = {
             ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
             ["style", "opacity", '1']
          ],
-         "${_dorothy_cafe}": [
-            ["style", "top", '10px'],
-            ["style", "width", '324px'],
-            ["color", "color", 'rgba(255,255,255,1.00)'],
-            ["style", "height", '59px'],
-            ["style", "left", '89px'],
-            ["style", "font-size", '320%']
-         ],
          "${_P3M4}": [
             ["style", "left", '252%'],
             ["style", "top", '32.55%']
          ],
-         "${_P1M2}": [
-            ["style", "left", '25.14%']
-         ],
          "${_cafemochaCopy}": [
             ["style", "left", '0px'],
             ["style", "top", '0px']
+         ],
+         "${_P1M2}": [
+            ["style", "left", '25.14%']
          ],
          "${_P1M5}": [
             ["style", "left", '21px']
@@ -1129,7 +1130,7 @@ var symbols = {
             ["style", "font-size", '50px'],
             ["color", "color", 'rgba(100,61,23,1.00)'],
             ["style", "font-weight", '800'],
-            ["style", "left", '46.63%'],
+            ["style", "left", '46.21%'],
             ["style", "width", '225px']
          ],
          "${_coffee_sel1}": [
@@ -1179,19 +1180,21 @@ var symbols = {
             ["transform", "scaleY", '1'],
             ["style", "left", '0px']
          ],
-         "${_menu-category-sandwich-stkchs_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleX", '1'],
-            ["transform", "scaleY", '1'],
-            ["style", "left", '0px']
-         ],
-         "${_P1M7}": [
-            ["style", "left", '51.25%']
-         ],
          "${_wood_wallpaper_by_stenosis}": [
             ["style", "height", '1136px'],
             ["style", "left", '0px'],
             ["style", "top", '0px']
+         ],
+         "${_P1M7}": [
+            ["style", "left", '51.25%']
+         ],
+         "${_coffee_sel4}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["style", "display", 'none'],
+            ["style", "opacity", '1'],
+            ["style", "left", '53.33%'],
+            ["transform", "scaleX", '0.45']
          ],
          "${_TextCopy7}": [
             ["style", "top", '134px'],
@@ -1202,12 +1205,12 @@ var symbols = {
             ["style", "font-size", '20px']
          ],
          "${_coffee_sel_name1}": [
-            ["style", "top", '69%'],
+            ["style", "top", '67.78%'],
             ["style", "letter-spacing", '0px'],
             ["style", "font-size", '21px'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
-            ["style", "left", '17.08%'],
+            ["style", "left", '16.67%'],
             ["style", "word-spacing", '0px'],
             ["style", "width", '9.59%']
          ]
@@ -1218,21 +1221,21 @@ var symbols = {
          fromState: "Base State",
          toState: "",
          duration: 2000,
-         autoPlay: true,
+         autoPlay: false,
          timeline: [
-            { id: "eid1902", tween: [ "style", "${_P1M8}", "left", '-22.92%', { fromValue: '76.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1976", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-22.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1991", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-122.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid2007", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid2008", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid2009", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1813", tween: [ "style", "${_coffee_sel2}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
             { id: "eid1915", tween: [ "style", "${_P2M3}", "left", '53.19%', { fromValue: '157.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1967", tween: [ "style", "${_P2M3}", "left", '-46.33%', { fromValue: '53.19%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1982", tween: [ "style", "${_P2M3}", "left", '-46.33%', { fromValue: '-46.33%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1938", tween: [ "style", "${_P3M3}", "left", '102.92%', { fromValue: '203.67%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1968", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '102.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1983", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '3.4%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1942", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1974", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1989", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1896", tween: [ "style", "${_P1M6}", "left", '-72.09%', { fromValue: '27.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1970", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-72.09%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1985", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-171.61%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1908", tween: [ "style", "${_P2M1}", "left", '3.33%', { fromValue: '106.1%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1965", tween: [ "style", "${_P2M1}", "left", '-96.19%', { fromValue: '3.33%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1980", tween: [ "style", "${_P2M1}", "left", '-96.25%', { fromValue: '-96.25%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1817", tween: [ "style", "${_coffee_sel6}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
             { id: "eid1816", tween: [ "style", "${_coffee_sel5}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
             { id: "eid1815", tween: [ "style", "${_coffee_sel4}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
@@ -1242,28 +1245,29 @@ var symbols = {
             { id: "eid1814", tween: [ "style", "${_coffee_sel3}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
             { id: "eid1800", tween: [ "style", "${_COFFEE_TITLE}", "opacity", '0', { fromValue: '0.99000000953674'}], position: 1000, duration: 1000 },
             { id: "eid1801", tween: [ "style", "${_COFFEE_TITLE}", "opacity", '0.000000', { fromValue: '0.000000'}], position: 2000, duration: 0 },
+            { id: "eid1938", tween: [ "style", "${_P3M3}", "left", '102.92%', { fromValue: '203.67%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1968", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '102.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1983", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '3.4%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1900", tween: [ "style", "${_P1M7}", "left", '-47.92%', { fromValue: '51.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1971", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-47.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1986", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-147.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1896", tween: [ "style", "${_P1M6}", "left", '-72.09%', { fromValue: '27.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1970", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-72.09%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1985", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-171.61%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1946", tween: [ "style", "${_P3M2}", "left", '151%', { fromValue: '251.75%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1972", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '151%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1987", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '51.48%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid2007", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid2008", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid2009", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid2086", tween: [ "style", "${_coffee_sel0}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+            { id: "eid1902", tween: [ "style", "${_P1M8}", "left", '-22.92%', { fromValue: '76.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1976", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-22.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1991", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-122.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1808", tween: [ "style", "${_coffee_sel1}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
-            { id: "eid1764", tween: [ "style", "${_P1M2}", "left", '-74.07%', { fromValue: '25.14%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1963", tween: [ "style", "${_P1M2}", "left", '-173.59%', { fromValue: '-74.07%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1978", tween: [ "style", "${_P1M2}", "left", '-173.59%', { fromValue: '-173.59%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1914", tween: [ "style", "${_P2M2}", "left", '28.24%', { fromValue: '132.52%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1969", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '28.24%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1984", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '-71.28%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1950", tween: [ "style", "${_P3M4}", "left", '151.25%', { fromValue: '252%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1975", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '151.25%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1990", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '51.73%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1914", tween: [ "style", "${_P2M2}", "left", '28.24%', { fromValue: '132.52%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1969", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '28.24%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1984", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '-71.28%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1764", tween: [ "style", "${_P1M2}", "left", '-74.07%', { fromValue: '25.14%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1963", tween: [ "style", "${_P1M2}", "left", '-173.59%', { fromValue: '-74.07%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1978", tween: [ "style", "${_P1M2}", "left", '-173.59%', { fromValue: '-173.59%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1762", tween: [ "style", "${_P1M3}", "left", '-47.82%', { fromValue: '51.39%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1964", tween: [ "style", "${_P1M3}", "left", '-147.34%', { fromValue: '-47.82%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1979", tween: [ "style", "${_P1M3}", "left", '-147.34%', { fromValue: '-147.34%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
@@ -1272,57 +1276,9 @@ var symbols = {
             { id: "eid1763", tween: [ "style", "${_P1M1}", "left", '-694px', { fromValue: '20px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1962", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-694px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1977", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-1411px'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1908", tween: [ "style", "${_P2M1}", "left", '3.33%', { fromValue: '106.1%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1965", tween: [ "style", "${_P2M1}", "left", '-96.19%', { fromValue: '3.33%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1980", tween: [ "style", "${_P2M1}", "left", '-96.25%', { fromValue: '-96.25%'}], position: 2000, duration: 0, easing: "easeOutQuint" }         ]
-      }
-   }
-},
-"coffee_sel0": {
-   version: "1.5.0",
-   minimumCompatibleVersion: "1.5.0",
-   build: "1.5.0.217",
-   baseState: "Base State",
-   initialState: "Base State",
-   gpuAccelerate: false,
-   resizeInstances: false,
-   content: {
-   dom: [
-   {
-      rect: ['-39px','-59.1%','152px','102px','auto','auto'],
-      transform: [[],[],[],['0.45','0.45']],
-      id: 'coffee_sel0',
-      opacity: 1,
-      type: 'image',
-      fill: ['rgba(0,0,0,0)','images/espresso.png','0px','0px']
-   }],
-   symbolInstances: [
-   ]
-   },
-   states: {
-      "Base State": {
-         "${_coffee_sel0}": [
-            ["style", "top", '-61.1%'],
-            ["transform", "scaleY", '0.45'],
-            ["style", "display", 'block'],
-            ["style", "opacity", '1'],
-            ["style", "left", '-42px'],
-            ["transform", "scaleX", '0.45']
-         ],
-         "${symbolSelector}": [
-            ["style", "height", '46px'],
-            ["style", "width", '68px']
-         ]
-      }
-   },
-   timelines: {
-      "Default Timeline": {
-         fromState: "Base State",
-         toState: "",
-         duration: 0,
-         autoPlay: false,
-         timeline: [
-            { id: "eid1807", tween: [ "style", "${_coffee_sel0}", "display", 'block', { fromValue: 'block'}], position: 0, duration: 0 }         ]
+            { id: "eid1942", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1974", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1989", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeOutQuint" }         ]
       }
    }
 }
