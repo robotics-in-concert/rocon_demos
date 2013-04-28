@@ -35,15 +35,23 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			}
 			console.log(ordered_coffee_list);
 			
-			for (var i in ordered_coffee_list) {
-			 console.log(ordered_coffee_list[i]);
-			 stage_symbol.$("coffee_sel"+i).show();
-			 stage_symbol.$("coffee_sel"+i).html(ordered_coffee_list[i]);
-			 
-			}
+			//for (var i in ordered_coffee_list) {
+			// console.log("coffee_sel_name"+i.toString(10)+" "+ordered_coffee_list[i]);
+			// stage_symbol.$("coffee_sel"+i.toString(10)).show();
+			// stage_symbol.$("coffee_sel_name"+i.toString(10)).html(ordered_coffee_list[i]);
+			//}
+			
+			var mySymbolObject = stage_symbol.createChildSymbol("coffee_sel0", "stage");
+			var mySymbolElement = mySymbolObject.getSymbolElementNode();
+			stage_symbol.$(mySymbolElement).css({"position":"absolute", "top":"100px", "left":"100px"});
+			stage_symbol.$(mySymbolElement).css("-webkit-transform","scale(3,3)");
+			//stage_symbol.$(mySymbolElement).css("scale(2,2)");
+			stage_symbol.$(mySymbolElement).show();
+			//console.log(mySymbolObject);
+			
 		}
 		
-      Symbol.bindElementAction(compId, symbolName, "${_Group4}", "click", function(sym, e) {
+      Symbol.bindElementAction(compId, symbolName, "${_P1M1}", "click", function(sym, e) {
          // Show an Element.
          //  (sym.$("name") resolves an Edge Animate element name to a DOM
          //  element that can be used with jQuery)
@@ -62,7 +70,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_back_blue}", "click", function(sym, e) {
-         sym.play();
+         sym.playReverse();
 
       });
       //Edge binding end
@@ -93,19 +101,19 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       });
       //Edge binding end
 
-      Symbol.bindElementAction(compId, symbolName, "${_Group3}", "click", function(sym, e) {
+      Symbol.bindElementAction(compId, symbolName, "${_P1M2}", "click", function(sym, e) {
          // insert code for mouse click here
          addCoffeeOrder("Espresso Conpanna");
       });
       //Edge binding end
 
-      Symbol.bindElementAction(compId, symbolName, "${_Group2}", "click", function(sym, e) {
+      Symbol.bindElementAction(compId, symbolName, "${_P1M3}", "click", function(sym, e) {
          // insert code for mouse click here
          addCoffeeOrder("Cafe Americano");
       });
       //Edge binding end
 
-      Symbol.bindElementAction(compId, symbolName, "${_Group}", "click", function(sym, e) {
+      Symbol.bindElementAction(compId, symbolName, "${_P1M4}", "click", function(sym, e) {
          // insert code for mouse click here
          addCoffeeOrder("Cafe Latte");
       });
@@ -133,11 +141,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			}
 		}
 		
-      Symbol.bindElementAction(compId, symbolName, "${_coffee_sel0}", "click", function(sym, e) {
-         // insert code for mouse click here
-         delCoffeeOrder(0);
-      });
-      //Edge binding end
+      
 
       Symbol.bindElementAction(compId, symbolName, "${_coffee_sel1}", "click", function(sym, e) {
          // insert code for mouse click here
@@ -177,5 +181,19 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
    })("stage");
    //Edge symbol end:'stage'
+
+   //=========================================================
+   
+   //Edge symbol: 'cofee_sel0'
+   (function(symbolName) {   
+   
+      Symbol.bindElementAction(compId, symbolName, "${_coffee_sel0}", "click", function(sym, e) {
+         // insert code for mouse click here
+         delCoffeeOrder(0);
+      });
+         //Edge binding end
+
+   })("coffee_sel0");
+   //Edge symbol end:'coffee_sel0'
 
 })(jQuery, AdobeEdge, "EDGE-1251484");
