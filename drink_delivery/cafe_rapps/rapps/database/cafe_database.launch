@@ -5,7 +5,7 @@
   </node>
 
   <include file="$(find semantic_region_handler)/launch/database_handler.launch">
-    <arg name="host" value="192.168.10.136"/>
+    <arg name="host" value="192.168.10.129"/>
   </include>
 
 </launch>

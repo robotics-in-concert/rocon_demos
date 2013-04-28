@@ -16,11 +16,11 @@ nodes:
     tuple: linux.ros.pc.cafe_rapps/kitchen
 
   - id: waiterbot
-    tuple: linux.ros.pc.cafe_rapps/waiter_soft
+    tuple: linux.ros.pc.cafe_rapps/waiter
   - id: waiterbot2
-    tuple: linux.ros.pc.cafe_rapps/waiter_soft
+    tuple: linux.ros.pc.cafe_rapps/waiter
   - id: waiterbot3
-    tuple: linux.ros.pc.cafe_rapps/waiter_soft
+    tuple: linux.ros.pc.cafe_rapps/waiter
   
 topics:
 ## Cafe database - Waiterbot
