@@ -4,7 +4,9 @@
   <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
   </node>
 
-  <include file="$(find semantic_region_handler)/launch/database_handler.launch"/>
+  <include file="$(find semantic_region_handler)/launch/database_handler.launch">
+    <arg name="host" value="192.168.10.136"/>
+  </include>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
     <arg name="port" value="9091" />
   </include>
