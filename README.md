@@ -55,6 +55,8 @@ the database should contain 'Dock', 'Kitchen', 'Table1'~'Table8'. Please store t
 
 * Follow the installation instruction in the SWM ros wiki for spatial world model setting.
   * http://www.ros.org/wiki/spatial_world_model
+  * Postgresql require some configuration to allow remote access. Please check the link below to enable remote access.
+  * https://kb.mediatemple.net/questions/1237/How+do+I+enable+remote+access+to+my+PostgreSQL+server%3F#dv
 
 * Bring up the annotation app.
 
