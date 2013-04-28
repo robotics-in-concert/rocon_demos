@@ -74,8 +74,8 @@
         div.css('margin','10pt');
 
         var width = div.width() - 30;
-        var half_window = $(window).height() - 100;
-        var height = half_window < 500?500:half_window;
+        var half_window = $(document).height() - 100;
+        var height = half_window < 200?200:half_window;
 
         viewer = new ROS2D.Viewer({
           divID : 'view',
@@ -89,8 +89,8 @@
         
 
         $(window).resize(function(e) {
-          var half_window = $(window).height()/2;
-          var height = half_window < 500?500:half_window;
+          var half_window = $(document).height() - 100;
+          var height = half_window < 200?200:half_window;
 
           viewer.resizeCanvas(div.width()-30,height);
           viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
