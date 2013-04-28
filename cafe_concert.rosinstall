@@ -65,6 +65,10 @@
 - git: {local-name: navigation, uri: 'https://github.com/corot/navigation.git',
     version: hydro-devel}
 
-# Database Dependecny
+# Database Dependency
 - git: {local-name: spatial_world_model, uri: 'https://github.com/WorldModel/spatial_world_model.git',
     version: groovy-devel}
+
+# Concert dependency
+- git: {local-name: map_service, uri: 'https://github.com/jihoonl/map_service.git', 
+    version: master}
