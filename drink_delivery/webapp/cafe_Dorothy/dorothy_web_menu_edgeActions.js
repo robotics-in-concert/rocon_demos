@@ -11,10 +11,9 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 	
    //Edge symbol: 'stage'
    (function(symbolName) {
-   
+
       Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 0, function(sym, e) {
          sym.stop();
-
       });
       //Edge binding end
 
@@ -25,7 +24,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
       });
       //Edge binding end
-
+		
 		//When user select coffee, push new coffee order to list and refresh coffee slot
 		function addCoffeeOrder(coffeeName){
 			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
@@ -36,6 +35,17 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			}
 			console.log(ordered_coffee_list);
 			updateCoffeeOrder();
+		}
+		
+		function addSandwichOrder(sandwichName){
+			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
+			var ordered_sandwich_list = stage_symbol.getVariable("ordered_sandwich_list");
+
+			if(ordered_sandwich_list.length < 2) {
+				ordered_sandwich_list.push(sandwichName);
+			}
+			console.log(ordered_sandwich_list);
+			updateSandwichOrder();
 		}
 		
 		function updateCoffeeOrder(){
@@ -49,45 +59,103 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 				if(ordered_coffee_list[i] == "Espresso")
 				{
 					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/espresso.png");
-					stage_symbol.$("coffee_sel"+i.toString(10)).show();
 					sum_prices += 2300;
 
 				}
 				else if(ordered_coffee_list[i] == "Cafe Latte")
 				{
 					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafelatte.png");
-					stage_symbol.$("coffee_sel"+i.toString(10)).show();
 					sum_prices += 2700;
 				}
 				else if(ordered_coffee_list[i] == "Cafe Americano")
 				{
 					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/americano.png");
-					stage_symbol.$("coffee_sel"+i.toString(10)).show();
 					sum_prices += 2500;
 				}
 				else if(ordered_coffee_list[i] == "Espresso Conpanna")
 				{
-					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/espresso conpanna.png");
-					stage_symbol.$("coffee_sel"+i.toString(10)).show();
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/espresso conpanna2.png");
 					sum_prices += 2500;
+				}
+				else if(ordered_coffee_list[i] == "Cappuccino")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cappuccino.png");
+					sum_prices += 2700;
+				}
+				else if(ordered_coffee_list[i] == "Caramel Latte")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafelatte.png");
+					sum_prices += 2800;
+				}
+				else if(ordered_coffee_list[i] == "Hazelnut Latte")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafelatte.png");
+					sum_prices += 2800;
+				}
+				else if(ordered_coffee_list[i] == "Vanilla Latte")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafelatte.png");
+					sum_prices += 3000;
+				}
+				else if(ordered_coffee_list[i] == "Cafe Mocha")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafemocha.png");
+					sum_prices += 3200;
+				}
+				else if(ordered_coffee_list[i] == "Caramel Mocha")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafemocha.png");
+					sum_prices += 3200;
+				}
+				else if(ordered_coffee_list[i] == "White Mocha")
+				{
+					stage_symbol.$("coffee_sel"+i.toString(10)).attr("src","images/cafemocha.png");
+					sum_prices += 3200;
 				}
 				stage_symbol.$("coffee_sel_name"+i.toString(10)).show();
 				stage_symbol.$("coffee_sel_name"+i.toString(10)).html(ordered_coffee_list[i]);
 			}
-			var pricewithcomma = "₩ " + sum_prices.toString(10).replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1,'); 
+			stage_symbol.setVariable("sum_coffee_price",sum_prices);
+			updatePrice();
+		}
+		
+		function updateSandwichOrder(){
+			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
+			var ordered_sandwich_list = stage_symbol.getVariable("ordered_sandwich_list");
+			var sum_prices = 0;
+
+			for (var i in ordered_sandwich_list) {
+				console.log("sandwich_name"+i.toString(10)+" "+ordered_sandwich_list[i]);
+				stage_symbol.$("sandwitch_slot"+i.toString(10)).attr("src","images/sandwitch.png");
+				sum_prices += 4500;
+				stage_symbol.$("sandwich_sel_name"+i.toString(10)).show();
+				stage_symbol.$("sandwich_sel_name"+i.toString(10)).html(ordered_sandwich_list[i]);
+			}
+			stage_symbol.setVariable("sum_sandwich_price",sum_prices);
+			updatePrice();
+		}
+		
+		function updatePrice(){
+			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
+			var sum_coffee_price = stage_symbol.getVariable("sum_coffee_price");
+			var sum_sandwich_price = stage_symbol.getVariable("sum_sandwich_price");
+			console.log("sum_coffee:"+sum_coffee_price);
+			console.log("sum_sandwich_price:"+sum_sandwich_price);
+			var total = sum_coffee_price+sum_sandwich_price;
+			var pricewithcomma = "₩ " + total.toString(10).replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1,'); 
 			stage_symbol.$("Price").html(pricewithcomma);
 		}
 		
 		function delCoffeeOrder(number){
 			console.log("delCoffeeOrder");
   			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
-  			stage_symbol.$("coffee_sel0").hide();
-         stage_symbol.$("coffee_sel1").hide();
-         stage_symbol.$("coffee_sel2").hide();
-         stage_symbol.$("coffee_sel3").hide();
-         stage_symbol.$("coffee_sel4").hide();
-         stage_symbol.$("coffee_sel5").hide();
-         stage_symbol.$("coffee_sel6").hide();
+  			stage_symbol.$("coffee_sel0").attr("src","images/coffee_empty2.png");
+  			stage_symbol.$("coffee_sel1").attr("src","images/coffee_empty2.png");
+  			stage_symbol.$("coffee_sel2").attr("src","images/coffee_empty2.png");
+  			stage_symbol.$("coffee_sel3").attr("src","images/coffee_empty2.png");
+  			stage_symbol.$("coffee_sel4").attr("src","images/coffee_empty2.png");
+  			stage_symbol.$("coffee_sel5").attr("src","images/coffee_empty2.png");
+  			stage_symbol.$("coffee_sel6").attr("src","images/coffee_empty2.png");
          stage_symbol.$("coffee_sel_name0").hide();
          stage_symbol.$("coffee_sel_name1").hide();
          stage_symbol.$("coffee_sel_name2").hide();
@@ -102,6 +170,21 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
 			updateCoffeeOrder()
 		}
+		
+		function delSandwichOrder(number){
+			console.log("delSandwichOrder");
+  			var stage_symbol = Edge.getComposition(compId).getSymbols(symbolName)[0];
+  			stage_symbol.$("sandwitch_slot0").attr("src","images/sandwitch_empty.png");
+  			stage_symbol.$("sandwitch_slot1").attr("src","images/sandwitch_empty.png");
+         stage_symbol.$("sandwich_sel_name0").hide();
+         stage_symbol.$("sandwich_sel_name1").hide();
+			var ordered_sandwich_list = stage_symbol.getVariable("ordered_sandwich_list");
+			console.log("number is "+number);
+			ordered_sandwich_list.splice(number,1);
+			console.log(ordered_sandwich_list);
+
+			updateSandwichOrder();
+		}
 	
       Symbol.bindElementAction(compId, symbolName, "${_P1M1}", "click", function(sym, e) {
          addCoffeeOrder("Espresso");
@@ -109,13 +192,22 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_fron_blue}", "click", function(sym, e) {
-         sym.play();
-         
-
+         //previous position of timeline animation(-1)
+         if(sym.getPosition() == -1)
+         	sym.play(1);
+         else {
+         	sym.play();
+         }
+         //updateCoffeeOrder();
       });
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_back_blue}", "click", function(sym, e) {
+      	//if(sym.getPosition() == 2000) {
+				//sym.stop(1);				         	
+         //}
+        	//else sym.playReverse();
+         //updateCoffeeOrder();
          sym.playReverse();
 
       });
@@ -131,6 +223,9 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
         // insert code to be run when the symbol is created here
       	//reference for selected coffee list array
 		   sym.setVariable("ordered_coffee_list", new Array());
+		   sym.setVariable("ordered_sandwich_list", new Array());
+		   sym.setVariable("sum_coffee_price", 0);
+		   sym.setVariable("sum_sandwich_price", 0);
       
 			function getParam(key){
 				var url = location.href;
@@ -152,7 +247,6 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			sym.$("_01").html(getParam("mode"));
 			//open new window
 			//window.open("http://m.naver.com", "_self");
-
       });
       //Edge binding end
 
@@ -213,6 +307,96 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_coffee_sel0}", "click", function(sym, e) {
          // insert code for mouse click here
          delCoffeeOrder(0);
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P1M5}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("Cappuccino");
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P1M6}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("Caramel Latte");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P1M7}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("Hazelnut Latte");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P1M8}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("Vanilla Latte");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P2M1}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("Cafe Mocha");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P2M2}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("Caramel Mocha");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P2M3}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addCoffeeOrder("White Mocha");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P3M1}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addSandwichOrder("Turkey Bacon Sandwitch");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P3M2}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addSandwichOrder("Cicken Sandwitch");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P3M3}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addSandwichOrder("Roast Beef Sandwitch");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_P3M4}", "click", function(sym, e) {
+         // insert code for mouse click here
+         addSandwichOrder("Hub Tuna Sandwitch");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_sandwitch_slot0}", "click", function(sym, e) {
+         // insert code for mouse click here
+         delSandwichOrder(0);
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_sandwitch_slot1}", "click", function(sym, e) {
+         // insert code for mouse click here
+         delSandwichOrder(1);
 
       });
       //Edge binding end
