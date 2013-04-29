@@ -24,9 +24,6 @@ function processOrderList(msg) {
     var navli = createOrderLi(msg.orders[i]); 
     nav_div.append(navli);
 
-    if(i > 5) {
-      break;
-    }
   }
 }
 
