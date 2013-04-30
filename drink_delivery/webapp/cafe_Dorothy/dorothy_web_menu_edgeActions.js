@@ -11,7 +11,6 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 	
    //Edge symbol: 'stage'
    (function(symbolName) {
-
       Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 0, function(sym, e) {
          sym.stop();
       });
@@ -193,21 +192,16 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
       Symbol.bindElementAction(compId, symbolName, "${_fron_blue}", "click", function(sym, e) {
          //previous position of timeline animation(-1)
-         if(sym.getPosition() == -1)
+         if(sym.getPosition() == -1) {
          	sym.play(1);
+			}
          else {
          	sym.play();
          }
-         //updateCoffeeOrder();
       });
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_back_blue}", "click", function(sym, e) {
-      	//if(sym.getPosition() == 2000) {
-				//sym.stop(1);				         	
-         //}
-        	//else sym.playReverse();
-         //updateCoffeeOrder();
          sym.playReverse();
 
       });
@@ -244,9 +238,43 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			  return qs[key] == undefined ? null : qs[key];
 			}
 			//console.log("mode");
-			sym.$("_01").html(getParam("mode"));
+			var tableID = getParam("tableid");
+			sym.setVariable("tableID", tableID);
+			sym.$("_01").html(tableID);
 			//open new window
 			//window.open("http://m.naver.com", "_self");
+			
+			yepnope({
+         	nope:['include/EventEmitter2/eventemitter2.js'] ,
+         	complete: eventemitterLoaded
+         });
+      
+         yepnope({
+         	nope:['include/roslib.js'] ,
+         	complete: init_ros
+         });
+         
+         function eventemitterLoaded (){
+         	console.log("eventemitter2.js is loaded");
+         }
+         
+         function init_ros (){
+         	console.log("roslib.js is loaded");
+         	var ros = new ROSLIB.Ros();
+         	ros.connect('ws://222.100.124.85:9090');
+         	sym.setVariable("ROS", ros);
+				ros.on('connection',function() {
+				 	console.log('Connection made!');
+				});
+				ros.on('close',function() {
+				 //log.innerHTML += 'Disconnected from ' + host + ' <br/>';
+				});
+
+				ros.on('error', function(error) {
+					 console.log(error);
+			   });
+			   
+			}
       });
       //Edge binding end
 
@@ -398,6 +426,78 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          // insert code for mouse click here
          delSandwichOrder(1);
 
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_accept_blue}", "click", function(sym, e) {
+         // insert code for mouse click here
+         var ros = sym.getVariable("ROS");
+			var UserOrderClient = new ROSLIB.ActionClient({
+			 ros : ros,
+			 serverName : '/send_order',
+			 actionName : 'cafe_msgs/UserOrderAction'
+			});
+			var tableID = sym.getVariable("tableID");
+			var tableID_num = parseInt(tableID);
+			
+			var menus = new Array();
+			var ordered_coffee_list = sym.getVariable("ordered_coffee_list");
+			var ordered_sandwich_list = sym.getVariable("ordered_sandwich_list");
+			for (var i in ordered_coffee_list) {
+				var foundDuplicatedMenu = false;
+				for (var j in menus) {
+					if (ordered_coffee_list[i] == menus[j].name) {
+						menus[j].qty++;
+						foundDuplicatedMenu = true;
+						break;
+					}
+				}
+				if (foundDuplicatedMenu == false) {
+					var menu = new ROSLIB.Message({
+						name : ordered_coffee_list[i],
+						size : 1,
+						qty : 1
+					});
+					menus.push(menu);
+				}
+			}
+			for (var i in ordered_sandwich_list) {
+				var foundDuplicatedMenu = false;
+				for (var j in menus) {
+					if (ordered_sandwich_list[i] == menus[j].name) {
+						menus[j].qty++;
+						foundDuplicatedMenu = true;
+						break;
+					}
+				}
+				if (foundDuplicatedMenu == false) {
+					var menu = new ROSLIB.Message({
+						name : ordered_sandwich_list[i],
+						size : 1,
+						qty : 1
+					});
+					menus.push(menu);
+				}
+			}
+			//console.log(menus);			
+			var goal = new ROSLIB.Goal({
+			 actionClient : UserOrderClient,
+			 goalMessage : {
+				order : {
+				table_id : tableID_num, 
+				menus : menus,
+				}
+			 }
+			});
+			// Print out their output into the terminal.
+			goal.on('feedback', function(feedback) {
+				console.log('Feedback: ' + feedback.sequence);
+			});
+			goal.on('result', function(result) {
+				console.log('Final Result: ' + result.sequence);
+			});
+			console.log("goal.send()");
+			goal.send();
       });
       //Edge binding end
 

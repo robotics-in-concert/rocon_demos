@@ -618,6 +618,14 @@ var symbols = {
             ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
+         "${_TextCopy4}": [
+            ["style", "top", '140px'],
+            ["style", "text-align", 'center'],
+            ["style", "height", '70px'],
+            ["style", "width", '217px'],
+            ["style", "left", '46px'],
+            ["style", "font-size", '20px']
+         ],
          "${_fron_blue}": [
             ["style", "top", '55.7%'],
             ["style", "height", '129px'],
@@ -635,11 +643,11 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "top", '0px']
          ],
-         "${_TextCopy8}": [
-            ["style", "top", '118px'],
-            ["style", "left", '22px'],
-            ["style", "text-align", 'center'],
-            ["style", "font-size", '20px']
+         "${_back_blue}": [
+            ["style", "top", '55.7%'],
+            ["style", "height", '129px'],
+            ["style", "left", '2.64%'],
+            ["style", "width", '129px']
          ],
          "${_dorothy_logo012}": [
             ["style", "height", '55px'],
@@ -695,35 +703,41 @@ var symbols = {
             ["style", "left", '132.52%'],
             ["style", "top", '119px']
          ],
-         "${_coffee_sel4}": [
-            ["style", "top", '69.63%'],
-            ["transform", "scaleY", '0.45'],
-            ["style", "opacity", '1'],
-            ["style", "left", '53.33%'],
-            ["transform", "scaleX", '0.45']
+         "${_menu-category-sandwich-buffchic_copy}": [
+            ["transform", "scaleX", '1'],
+            ["style", "left", '0px'],
+            ["transform", "scaleY", '1'],
+            ["style", "top", '0px']
          ],
          "${_coffee_sel3}": [
             ["style", "top", '69.63%'],
             ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
             ["style", "opacity", '1'],
-            ["style", "left", '39.44%'],
-            ["transform", "scaleX", '0.45']
+            ["style", "left", '39.44%']
          ],
-         "${_P1M3}": [
-            ["style", "left", '51.39%']
+         "${_sandwich_sel_name0}": [
+            ["style", "top", '80.55%'],
+            ["style", "letter-spacing", '0px'],
+            ["style", "width", '18.49%'],
+            ["style", "text-indent", '0px'],
+            ["style", "height", '3.7%'],
+            ["style", "word-spacing", '0px'],
+            ["style", "left", '3.33%'],
+            ["style", "font-size", '21px']
          ],
          "${_coffee_sel5}": [
             ["style", "top", '69.54%'],
             ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
             ["style", "opacity", '1'],
-            ["style", "left", '67.5%'],
-            ["transform", "scaleX", '0.45']
+            ["style", "left", '67.5%']
          ],
          "${_menu-category-sandwich-tuna}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleY", '1'],
+            ["transform", "scaleX", '1'],
             ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
+            ["transform", "scaleY", '1'],
+            ["style", "top", '0px']
          ],
          "${_coffee_sel_name0}": [
             ["style", "top", '67.78%'],
@@ -742,6 +756,16 @@ var symbols = {
             ["style", "right", '32px'],
             ["style", "left", 'auto'],
             ["style", "font-size", '320%']
+         ],
+         "${_coffee_sel_name4}": [
+            ["style", "top", '67.78%'],
+            ["style", "letter-spacing", '0px'],
+            ["style", "font-size", '21px'],
+            ["style", "text-indent", '0px'],
+            ["style", "height", '3.7%'],
+            ["style", "left", '58.89%'],
+            ["style", "word-spacing", '0px'],
+            ["style", "width", '9.59%']
          ],
          "${_accept_blue}": [
             ["style", "top", '81.94%'],
@@ -790,9 +814,8 @@ var symbols = {
             ["style", "text-align", 'center'],
             ["style", "font-size", '20px']
          ],
-         "${_espresso}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
+         "${_P1M2}": [
+            ["style", "left", '25.14%']
          ],
          "${_copyright}": [
             ["style", "top", '97.89%'],
@@ -819,18 +842,6 @@ var symbols = {
             ["style", "word-spacing", '0px'],
             ["style", "width", '18.49%']
          ],
-         "${_Price}": [
-            ["style", "top", '85.74%'],
-            ["style", "width", '225px'],
-            ["color", "color", 'rgba(100,61,23,1.00)'],
-            ["style", "font-weight", '800'],
-            ["style", "left", '46.21%'],
-            ["style", "font-size", '50px']
-         ],
-         "${_cafelatteCopy}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
-         ],
          "${_coffee_sel6}": [
             ["style", "top", '69.63%'],
             ["transform", "scaleY", '0.45'],
@@ -839,16 +850,6 @@ var symbols = {
             ["style", "left", '81.25%'],
             ["transform", "scaleX", '0.45']
          ],
-         "${_sandwich_sel_name0}": [
-            ["style", "top", '80.55%'],
-            ["style", "letter-spacing", '0px'],
-            ["style", "width", '18.49%'],
-            ["style", "text-indent", '0px'],
-            ["style", "height", '3.7%'],
-            ["style", "word-spacing", '0px'],
-            ["style", "left", '3.33%'],
-            ["style", "font-size", '21px']
-         ],
          "${_cafelatteCopy4}": [
             ["style", "left", '0px'],
             ["style", "top", '0px']
@@ -856,16 +857,9 @@ var symbols = {
          "${_coffee_sel0}": [
             ["style", "top", '69.63%'],
             ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
             ["style", "opacity", '1'],
-            ["style", "left", '-2.89%'],
-            ["transform", "scaleX", '0.45']
-         ],
-         "${_coffee_sel2}": [
-            ["style", "top", '69.63%'],
-            ["transform", "scaleY", '0.45'],
-            ["style", "opacity", '1'],
-            ["style", "left", '25.56%'],
-            ["transform", "scaleX", '0.45']
+            ["style", "left", '-2.89%']
          ],
          "${_TextCopy5}": [
             ["style", "top", '141px'],
@@ -875,15 +869,13 @@ var symbols = {
             ["style", "left", '71px'],
             ["style", "width", '168px']
          ],
-         "${_P3M2}": [
-            ["style", "left", '251.75%'],
-            ["style", "top", '10.65%']
-         ],
-         "${_menu-category-sandwich-buffchic_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleY", '1'],
-            ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
+         "${_Price}": [
+            ["style", "top", '85.74%'],
+            ["style", "width", '225px'],
+            ["color", "color", 'rgba(100,61,23,1.00)'],
+            ["style", "font-weight", '800'],
+            ["style", "left", '46.21%'],
+            ["style", "font-size", '50px']
          ],
          "${_P1M6}": [
             ["style", "left", '27.08%']
@@ -893,30 +885,28 @@ var symbols = {
             ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
-         "${_wood_wallpaper_by_stenosis}": [
-            ["style", "height", '1136px'],
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
+         "${_coffee_sel2}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
+            ["style", "opacity", '1'],
+            ["style", "left", '25.56%']
          ],
-         "${_menu-category-sandwich-stkchs_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleY", '1'],
-            ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
+         "${_P1M3}": [
+            ["style", "left", '51.39%']
          ],
          "${_P3M1}": [
             ["style", "left", '205.09%'],
             ["style", "top", '10.65%']
          ],
-         "${_P2M1}": [
-            ["style", "left", '106.1%'],
-            ["style", "top", '119px']
+         "${_P3M2}": [
+            ["style", "left", '251.75%'],
+            ["style", "top", '10.65%']
          ],
-         "${_back_blue}": [
-            ["style", "top", '55.7%'],
-            ["style", "height", '129px'],
-            ["style", "left", '2.64%'],
-            ["style", "width", '129px']
+         "${_wood_wallpaper_by_stenosis}": [
+            ["style", "height", '1136px'],
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
          ],
          "${_dorothy_cafe}": [
             ["style", "top", '10px'],
@@ -925,6 +915,26 @@ var symbols = {
             ["style", "height", '59px'],
             ["style", "left", '89px'],
             ["style", "width", '324px']
+         ],
+         "${_P1M8}": [
+            ["style", "left", '76.25%']
+         ],
+         "${_coffee_sel4}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
+            ["style", "opacity", '1'],
+            ["style", "left", '53.33%']
+         ],
+         "${_cafemochaCopy}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
+         ],
+         "${_TextCopy8}": [
+            ["style", "top", '118px'],
+            ["style", "left", '22px'],
+            ["style", "text-align", 'center'],
+            ["style", "font-size", '20px']
          ],
          "${_rocon_logo}": [
             ["style", "-webkit-transform-origin", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
@@ -948,21 +958,6 @@ var symbols = {
             ["style", "left", '203.67%'],
             ["style", "top", '32.55%']
          ],
-         "${_cafemochaCopy}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
-         ],
-         "${_TextCopy4}": [
-            ["style", "top", '140px'],
-            ["style", "text-align", 'center'],
-            ["style", "height", '70px'],
-            ["style", "width", '217px'],
-            ["style", "left", '46px'],
-            ["style", "font-size", '20px']
-         ],
-         "${_P1M5}": [
-            ["style", "left", '21px']
-         ],
          "${_COFFEE_TITLE}": [
             ["style", "top", '57.55%'],
             ["style", "opacity", '0.99000000953674'],
@@ -973,15 +968,31 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "top", '0px']
          ],
-         "${_P1M4}": [
-            ["style", "left", '75.56%'],
-            ["style", "right", 'auto']
+         "${_cafelatteCopy}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
          ],
          "${_SANDWITCH_TITLE}": [
             ["style", "top", '57.57%'],
             ["style", "opacity", '0'],
             ["style", "left", '34.58%'],
             ["style", "background-size", [100,'auto'], {valueTemplate:'@@0@@% @@1@@'} ]
+         ],
+         "${_espresso}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
+         ],
+         "${_menu-category-sandwich-stkchs_copy}": [
+            ["transform", "scaleX", '1'],
+            ["style", "left", '0px'],
+            ["transform", "scaleY", '1'],
+            ["style", "top", '0px']
+         ],
+         "${_TextCopy2}": [
+            ["style", "top", '114px'],
+            ["style", "left", '4px'],
+            ["style", "text-align", 'center'],
+            ["style", "font-size", '20px']
          ],
          "${_table_no}": [
             ["style", "top", '33px'],
@@ -990,29 +1001,6 @@ var symbols = {
             ["style", "right", '101px'],
             ["style", "left", 'auto'],
             ["style", "font-size", '100%']
-         ],
-         "${_TextCopy13}": [
-            ["style", "top", '118px'],
-            ["style", "text-align", 'center'],
-            ["style", "font-size", '20px'],
-            ["style", "left", '-3px'],
-            ["style", "width", '160px']
-         ],
-         "${_TextCopy2}": [
-            ["style", "top", '114px'],
-            ["style", "left", '4px'],
-            ["style", "text-align", 'center'],
-            ["style", "font-size", '20px']
-         ],
-         "${_coffee_sel_name5}": [
-            ["style", "top", '67.78%'],
-            ["style", "letter-spacing", '0px'],
-            ["style", "width", '9.59%'],
-            ["style", "text-indent", '0px'],
-            ["style", "height", '3.7%'],
-            ["style", "word-spacing", '0px'],
-            ["style", "left", '72.92%'],
-            ["style", "font-size", '21px']
          ],
          "${_TextCopy10}": [
             ["style", "top", '113px'],
@@ -1031,15 +1019,15 @@ var symbols = {
             ["style", "word-spacing", '0px'],
             ["style", "width", '9.59%']
          ],
-         "${_coffee_sel_name4}": [
+         "${_coffee_sel_name5}": [
             ["style", "top", '67.78%'],
             ["style", "letter-spacing", '0px'],
-            ["style", "font-size", '21px'],
+            ["style", "width", '9.59%'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
-            ["style", "left", '58.89%'],
             ["style", "word-spacing", '0px'],
-            ["style", "width", '9.59%']
+            ["style", "left", '72.92%'],
+            ["style", "font-size", '21px']
          ],
          "${_coffee_sel_name6}": [
             ["style", "top", '67.78%'],
@@ -1057,28 +1045,39 @@ var symbols = {
             ["style", "left", '30px'],
             ["style", "font-size", '20px']
          ],
+         "${_TextCopy13}": [
+            ["style", "top", '118px'],
+            ["style", "text-align", 'center'],
+            ["style", "font-size", '20px'],
+            ["style", "left", '-3px'],
+            ["style", "width", '160px']
+         ],
+         "${_P1M4}": [
+            ["style", "left", '75.56%'],
+            ["style", "right", 'auto']
+         ],
+         "${_coffee_sel1}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
+            ["style", "opacity", '1'],
+            ["style", "left", '11.67%']
+         ],
+         "${_P1M1}": [
+            ["style", "left", '20px']
+         ],
+         "${_P3M4}": [
+            ["style", "left", '252%'],
+            ["style", "top", '32.55%']
+         ],
          "${_TextCopy15}": [
             ["style", "top", '118px'],
             ["style", "width", '132px'],
             ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
-         "${_coffee_sel1}": [
-            ["style", "top", '69.63%'],
-            ["transform", "scaleY", '0.45'],
-            ["style", "opacity", '1'],
-            ["style", "left", '11.67%'],
-            ["transform", "scaleX", '0.45']
-         ],
-         "${_P1M2}": [
-            ["style", "left", '25.14%']
-         ],
-         "${_P3M4}": [
-            ["style", "left", '252%'],
-            ["style", "top", '32.55%']
-         ],
-         "${_P1M8}": [
-            ["style", "left", '76.25%']
+         "${_P1M5}": [
+            ["style", "left", '21px']
          ],
          "${_checkout_total}": [
             ["style", "top", '79.66%'],
@@ -1089,13 +1088,14 @@ var symbols = {
             ["style", "width", '199px']
          ],
          "${_menu-category-sandwich-italbmt_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleY", '1'],
+            ["transform", "scaleX", '1'],
             ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
+            ["transform", "scaleY", '1'],
+            ["style", "top", '0px']
          ],
-         "${_P1M1}": [
-            ["style", "left", '20px']
+         "${_P2M1}": [
+            ["style", "left", '106.1%'],
+            ["style", "top", '119px']
          ],
          "${_P1M7}": [
             ["style", "left", '51.25%']
@@ -1142,30 +1142,30 @@ var symbols = {
             { id: "eid1896", tween: [ "style", "${_P1M6}", "left", '-72.09%', { fromValue: '27.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1970", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-72.09%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1985", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-171.61%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1942", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1974", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1989", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1908", tween: [ "style", "${_P2M1}", "left", '3.33%', { fromValue: '106.1%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1965", tween: [ "style", "${_P2M1}", "left", '-96.19%', { fromValue: '3.33%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1980", tween: [ "style", "${_P2M1}", "left", '-96.25%', { fromValue: '-96.25%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid2109", tween: [ "style", "${_coffee_sel6}", "display", 'block', { fromValue: 'block'}], position: 0, duration: 0 },
             { id: "eid1893", tween: [ "style", "${_P1M5}", "left", '-693px', { fromValue: '21px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1973", tween: [ "style", "${_P1M5}", "left", '-1410px', { fromValue: '-693px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1988", tween: [ "style", "${_P1M5}", "left", '-1410px', { fromValue: '-1410px'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1800", tween: [ "style", "${_COFFEE_TITLE}", "opacity", '0', { fromValue: '0.99000000953674'}], position: 1000, duration: 1000 },
             { id: "eid1801", tween: [ "style", "${_COFFEE_TITLE}", "opacity", '0.000000', { fromValue: '0.000000'}], position: 2000, duration: 0 },
-            { id: "eid1908", tween: [ "style", "${_P2M1}", "left", '3.33%', { fromValue: '106.1%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1965", tween: [ "style", "${_P2M1}", "left", '-96.19%', { fromValue: '3.33%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1980", tween: [ "style", "${_P2M1}", "left", '-96.25%', { fromValue: '-96.25%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1763", tween: [ "style", "${_P1M1}", "left", '-694px', { fromValue: '20px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1962", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-694px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1977", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-1411px'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1946", tween: [ "style", "${_P3M2}", "left", '151%', { fromValue: '251.75%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1972", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '151%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1987", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '51.48%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid2007", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid2008", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid2009", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1950", tween: [ "style", "${_P3M4}", "left", '151.25%', { fromValue: '252%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1975", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '151.25%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1990", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '51.73%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1763", tween: [ "style", "${_P1M1}", "left", '-694px', { fromValue: '20px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1962", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-694px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1977", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-1411px'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid2007", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid2008", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid2009", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1938", tween: [ "style", "${_P3M3}", "left", '102.92%', { fromValue: '203.67%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1968", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '102.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1983", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '3.4%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1914", tween: [ "style", "${_P2M2}", "left", '28.24%', { fromValue: '132.52%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1969", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '28.24%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1984", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '-71.28%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
@@ -1180,9 +1180,9 @@ var symbols = {
             { id: "eid1900", tween: [ "style", "${_P1M7}", "left", '-47.92%', { fromValue: '51.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1971", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-47.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1986", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-147.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1938", tween: [ "style", "${_P3M3}", "left", '102.92%', { fromValue: '203.67%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1968", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '102.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1983", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '3.4%'}], position: 2000, duration: 0, easing: "easeOutQuint" }         ]
+            { id: "eid1942", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1974", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1989", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeOutQuint" }         ]
       }
    }
 }
