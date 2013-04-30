@@ -29,10 +29,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap/bootstrap.js"></script>
     <script src="js/bootstrap/bootstrap-button.js"></script>
-    <script src="js/bootstrap/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap/bootstrap-popover.js"></script>
 
-    <script src="js/add_orderlist.js"></script>
 
     <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
 
@@ -49,11 +46,6 @@
 
         initHeader();
         initViewer()
-        
-        nav_div= $('#nav-orders');
-        
-        var nw = $('#nav-wrapper');
-        nw.css('margin-top','20pt');
       });
 
       function initHeader()
@@ -79,11 +71,11 @@
 
       function createViewer() {
         div = $('#view');
-        div.css('margin-top','20pt');
+        div.css('margin','10pt');
 
-        var width = div.width();
-        var half_window = $(document).height() -200;
-        var height = half_window;// < 200?200:half_window;
+        var width = div.width() - 30;
+        var half_window = $(document).height() - 100;
+        var height = half_window < 200?200:half_window;
 
         viewer = new ROS2D.Viewer({
           divID : 'view',
@@ -97,10 +89,10 @@
         
 
         $(window).resize(function(e) {
-          var half_window = $(document).height()-200;
-          var height = half_window;// < 200?200:half_window;
+          var half_window = $(document).height() - 100;
+          var height = half_window < 200?200:half_window;
 
-          viewer.resizeCanvas(width,height);
+          viewer.resizeCanvas(div.width()-30,height);
           viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
         });
 
@@ -181,6 +173,7 @@
         });
       }
 
+
       function settingROSCallbacks()                      
       {
         ros.on('connection',function() {
@@ -189,14 +182,6 @@
                                                      
           $('#connectbtn').attr('disabled',true);
           $('#focusedInput').attr('disabled',true);
-
-
-          var listener = new ROSLIB.Topic({
-            ros : ros,
-            name : order_pub_topic,
-            messageType: order_pub_topic_type
-            });
-          listener.subscribe(processOrderList);
         }
         );
         ros.on('error',function(e) {
@@ -232,17 +217,7 @@
     <!-- Visualizer -->
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span9" id="view"></div>
-        <div id="middle-left" class="span3">
-          <div class="well sidebar-nav" id="nav-wrapper">
-            <center>
-            <h3> Orders </h3>
-            </center>
-            <hr/>
-            <ul id="nav-orders" class"nav nav-list">
-            </ul>
-          </div><!-- well -->
-        </div>
+        <div class="span12" id="view"></div>
       </div>
     </div>
   </body>
