@@ -17,8 +17,7 @@
   <arg name="initial_pose_y" value="2.0"/>
   <arg name="initial_pose_a" value="0.0"/>
 
-  <!--  *********** Turtlebot and 3d sensor ***********  -->
-  <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+  <!--  *********** 3d sensor ***********  -->
   <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
     <arg name="rgb_processing" value="true" />
     <arg name="depth_registration" value="true" />
@@ -46,21 +45,10 @@
   <!--  ************** Rosnav move base ***************  -->
   <include file="$(find waiterbot)/launch/includes/_move_base.launch"/>
 
-  <!--  ****** Geometric and semantic map servers *****  -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find waiterbot)/resources/maps/$(arg map_name).yaml">
-    <param name="frame_id" value="/map"/>
-  </node>
-  <include ns="semantic_map" file="$(find semantic_region_handler)/launch/data_publisher_from_file.launch"/>
-
   <!--  ******************** Amcl *********************  -->
   <include file="$(find waiterbot)/launch/includes/_amcl.launch">
     <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
   </include>
-
-  <!--  ***************** Visualisation *****************
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz" />   -->
-  <node name="cpu_temperature" pkg="waiterbot" type="cpu_temp.sh"/>
-
 </launch>

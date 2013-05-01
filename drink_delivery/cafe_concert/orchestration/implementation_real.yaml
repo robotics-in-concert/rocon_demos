@@ -5,7 +5,7 @@
 name: "Cafe Concert"
 nodes:
   - id: cafe_database
-    tuple: linux.ros.pc.cafe_rapps/cafe_database
+    tuple: linux.ros.database.cafe_rapps/cafe_database
   - id: cafe_taskcoordinator
     tuple: linux.ros.pc.cafe_rapps/taskcoordinator
 
@@ -16,11 +16,11 @@ nodes:
     tuple: linux.ros.pc.cafe_rapps/kitchen
 
   - id: waiterbot
-    tuple: linux.ros.pc.cafe_rapps/waiter
-  - id: waiterbot2
-    tuple: linux.ros.pc.cafe_rapps/waiter
-  - id: waiterbot3
-    tuple: linux.ros.pc.cafe_rapps/waiter
+    tuple: linux.ros.turtlebot.cafe_rapps/waiter
+#  - id: waiterbot2
+#    tuple: linux.ros.pc.cafe_rapps/waiter
+#  - id: waiterbot3
+#    tuple: linux.ros.pc.cafe_rapps/waiter
   
 topics:
 ## Cafe database - Waiterbot
@@ -165,54 +165,54 @@ edges:
     remap_from: robot_pose
     remap_to: waiterbot/robot_pose
 
-## Waiter2
-  - start: cafe_database_waiterbot_map
-    finish: waiterbot2
-    remap_from: map
-    remap_to: map
-  - start: cafe_database_waiterbot_map_metadata
-    finish: waiterbot2
-    remap_from: map_metadata
-    remap_to: map_metadata
-  - start: cafe_database_waiterbot_table_pose_list
-    finish: waiterbot2
-    remap_from: table_pose_list
-    remap_to: cafe_database/table_pose_list
-  - start: cafe_database_waiterbot_ar_marker_list
-    finish: waiterbot2
-    remap_from: ar_list
-    remap_to: cafe_database/ar_marker_list
-  - start: waiterbot2
-    finish: taskcoordinator_waiterbot2_delivery_order
-    remap_from: delivery_order
-    remap_to: waiterbot2/delivery_order
-  - start: waiterbot2
-    finish: waiterbot2_pose
-    remap_from: robot_pose
-    remap_to: waiterbot2/robot_pose
+###Waiter2
+# - start: cafe_database_waiterbot_map
+#   finish: waiterbot2
+#   remap_from: map
+#   remap_to: map
+# - start: cafe_database_waiterbot_map_metadata
+#   finish: waiterbot2
+#   remap_from: map_metadata
+#   remap_to: map_metadata
+# - start: cafe_database_waiterbot_table_pose_list
+#   finish: waiterbot2
+#   remap_from: table_pose_list
+#   remap_to: cafe_database/table_pose_list
+# - start: cafe_database_waiterbot_ar_marker_list
+#   finish: waiterbot2
+#   remap_from: ar_list
+#   remap_to: cafe_database/ar_marker_list
+# - start: waiterbot2
+#   finish: taskcoordinator_waiterbot2_delivery_order
+#   remap_from: delivery_order
+#   remap_to: waiterbot2/delivery_order
+# - start: waiterbot2
+#   finish: waiterbot2_pose
+#   remap_from: robot_pose
+#   remap_to: waiterbot2/robot_pose
 
-## Waiter3
-  - start: cafe_database_waiterbot_map
-    finish: waiterbot3
-    remap_from: map
-    remap_to: map
-  - start: cafe_database_waiterbot_map_metadata
-    finish: waiterbot3
-    remap_from: map_metadata
-    remap_to: map_metadata
-  - start: cafe_database_waiterbot_table_pose_list
-    finish: waiterbot3
-    remap_from: table_pose_list
-    remap_to: cafe_database/table_pose_list
-  - start: cafe_database_waiterbot_ar_marker_list
-    finish: waiterbot3
-    remap_from: ar_list
-    remap_to: cafe_database/ar_marker_list
-  - start: waiterbot3
-    finish: taskcoordinator_waiterbot3_delivery_ordert
-    remap_from: delivery_order
-    remap_to: waiterbot3/delivery_order
-  - start: waiterbot3
-    finish: waiterbot3_pose
-    remap_from: robot_pose
-    remap_to: waiterbot3/robot_pose
+###Waiter3
+# - start: cafe_database_waiterbot_map
+#   finish: waiterbot3
+#   remap_from: map
+#   remap_to: map
+# - start: cafe_database_waiterbot_map_metadata
+#   finish: waiterbot3
+#   remap_from: map_metadata
+#   remap_to: map_metadata
+# - start: cafe_database_waiterbot_table_pose_list
+#   finish: waiterbot3
+#   remap_from: table_pose_list
+#   remap_to: cafe_database/table_pose_list
+# - start: cafe_database_waiterbot_ar_marker_list
+#   finish: waiterbot3
+#   remap_from: ar_list
+#   remap_to: cafe_database/ar_marker_list
+# - start: waiterbot3
+#   finish: taskcoordinator_waiterbot3_delivery_ordert
+#   remap_from: delivery_order
+#   remap_to: waiterbot3/delivery_order
+# - start: waiterbot3
+#   finish: waiterbot3_pose
+#   remap_from: robot_pose
+#   remap_to: waiterbot3/robot_pose
