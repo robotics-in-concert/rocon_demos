@@ -5,7 +5,7 @@
 name: "Cafe Concert"
 nodes:
   - id: cafe_database
-    tuple: linux.ros.pc.cafe_rapps/cafe_database
+    tuple: linux.ros.database.cafe_rapps/cafe_database
   - id: cafe_taskcoordinator
     tuple: linux.ros.pc.cafe_rapps/taskcoordinator
 
