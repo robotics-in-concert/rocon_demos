@@ -10,7 +10,7 @@ nodes:
     tuple: linux.ros.pc.cafe_rapps/taskcoordinator
 
   - id: customer
-    tuple: linux.ros.pc.cafe_rapps/customer_soft
+    tuple: linux.ros.pc.cafe_rapps/multi_customer_soft
 
   - id: kitchen
     tuple: linux.ros.pc.cafe_rapps/kitchen
