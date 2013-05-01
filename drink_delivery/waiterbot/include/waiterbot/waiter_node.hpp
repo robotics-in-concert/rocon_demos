@@ -29,7 +29,7 @@ class WaiterNode
 public:
 
   WaiterNode(std::string name) :
-    as_(nh_, "deliver_order", false),
+    as_(nh_, "delivery_order", false),
     node_name_(name),
     SPOT_BASE_MARKER_TIMEOUT(10.0),
     SPOT_POSE_MARKER_TIMEOUT(15.0)
@@ -83,7 +83,7 @@ protected:
   NavWatchdog nav_watchd_;
   Navigator   navigator_;
 
-  geometry_msgs::PoseStamped             pick_up_pose_;
+  geometry_msgs::PoseStamped             pickup_pose_;
   semantic_region_handler::TablePoseList table_poses_;
 //  ar_track_alvar::AlvarMarker base_marker_;
 //  uint16_t  dock_marker_;   /**< AR marker identifying this robot's docking station */
