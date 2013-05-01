@@ -606,37 +606,46 @@ var symbols = {
             ["style", "left", '-0.85%'],
             ["style", "font-size", '120%'],
             ["style", "top", '94.48%'],
-            ["style", "font-weight", '200'],
+            ["style", "opacity", '1'],
             ["style", "text-align", 'center'],
             ["style", "text-indent", '0%'],
             ["style", "height", '1.74%'],
             ["style", "width", '48.07%'],
             ["style", "word-spacing", '0em'],
-            ["style", "opacity", '1']
+            ["style", "font-weight", '200']
          ],
          "${_TextCopy16}": [
             ["style", "top", '118px'],
             ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
-         "${_TextCopy4}": [
-            ["style", "top", '140px'],
-            ["style", "text-align", 'center'],
-            ["style", "height", '70px'],
-            ["style", "width", '217px'],
-            ["style", "left", '46px'],
-            ["style", "font-size", '20px']
+         "${_status_text}": [
+            ["style", "letter-spacing", '0em'],
+            ["style", "bottom", 'auto'],
+            ["color", "color", 'rgba(100,61,23,0.49)'],
+            ["style", "right", 'auto'],
+            ["style", "left", '0.27%'],
+            ["style", "font-size", '100%'],
+            ["style", "top", '96.55%'],
+            ["style", "font-weight", '200'],
+            ["style", "text-align", 'left'],
+            ["style", "text-indent", '0%'],
+            ["style", "height", '1.74%'],
+            ["style", "width", '99.05%'],
+            ["style", "word-spacing", '0em'],
+            ["style", "opacity", '1']
          ],
-         "${_TextCopy15}": [
-            ["style", "top", '118px'],
-            ["style", "width", '132px'],
-            ["style", "left", '22px'],
-            ["style", "font-size", '20px']
+         "${_fron_blue}": [
+            ["style", "top", '55.7%'],
+            ["style", "height", '129px'],
+            ["style", "right", 'auto'],
+            ["style", "left", '79.72%'],
+            ["style", "width", '129px']
          ],
          "${_TextCopy12}": [
             ["style", "top", '113px'],
-            ["style", "left", '22px'],
             ["style", "text-align", 'center'],
+            ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
          "${_americano}": [
@@ -645,29 +654,29 @@ var symbols = {
          ],
          "${_TextCopy8}": [
             ["style", "top", '118px'],
-            ["style", "left", '22px'],
             ["style", "text-align", 'center'],
+            ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
          "${_dorothy_logo012}": [
-            ["style", "height", '55px'],
             ["style", "top", '13px'],
+            ["style", "height", '55px'],
             ["style", "left", '24px'],
             ["style", "width", '56px']
          ],
          "${_order}": [
             ["style", "top", '79.67%'],
-            ["style", "width", '115px'],
-            ["style", "font-weight", '800'],
-            ["color", "color", 'rgba(100,61,23,1.00)'],
+            ["style", "font-size", '25px'],
             ["style", "right", '13px'],
+            ["color", "color", 'rgba(100,61,23,1.00)'],
+            ["style", "font-weight", '800'],
             ["style", "left", 'auto'],
-            ["style", "font-size", '25px']
+            ["style", "width", '115px']
          ],
          "${_TextCopy}": [
             ["style", "top", '114px'],
-            ["style", "text-align", 'center'],
             ["style", "left", '0px'],
+            ["style", "text-align", 'center'],
             ["style", "font-size", '20px']
          ],
          "${_cafelatteCopy2}": [
@@ -677,19 +686,19 @@ var symbols = {
          "${_TextCopy11}": [
             ["style", "top", '113px'],
             ["style", "text-align", 'center'],
-            ["style", "font-size", '20px'],
+            ["style", "width", '152px'],
             ["style", "left", '0px'],
-            ["style", "width", '152px']
+            ["style", "font-size", '20px']
          ],
          "${_coffee_sel_name3}": [
             ["style", "top", '67.78%'],
             ["style", "letter-spacing", '0px'],
-            ["style", "width", '9.59%'],
+            ["style", "font-size", '21px'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
-            ["style", "word-spacing", '0px'],
             ["style", "left", '44.86%'],
-            ["style", "font-size", '21px']
+            ["style", "word-spacing", '0px'],
+            ["style", "width", '9.59%']
          ],
          "${_cappuccino}": [
             ["style", "left", '0px'],
@@ -705,9 +714,9 @@ var symbols = {
          ],
          "${_menu-category-sandwich-buffchic_copy}": [
             ["style", "top", '0px'],
+            ["transform", "scaleX", '1'],
             ["transform", "scaleY", '1'],
-            ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
+            ["style", "left", '0px']
          ],
          "${_coffee_sel3}": [
             ["style", "top", '69.63%'],
@@ -728,19 +737,19 @@ var symbols = {
          ],
          "${_menu-category-sandwich-tuna}": [
             ["style", "top", '0px'],
+            ["transform", "scaleX", '1'],
             ["transform", "scaleY", '1'],
-            ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
+            ["style", "left", '0px']
          ],
          "${_coffee_sel_name0}": [
             ["style", "top", '67.78%'],
             ["style", "letter-spacing", '0px'],
-            ["style", "font-size", '21px'],
+            ["style", "width", '9.59%'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
-            ["style", "left", '2.64%'],
             ["style", "word-spacing", '0px'],
-            ["style", "width", '9.59%']
+            ["style", "left", '2.64%'],
+            ["style", "font-size", '21px']
          ],
          "${__01}": [
             ["style", "top", '10px'],
@@ -753,12 +762,12 @@ var symbols = {
          "${_coffee_sel_name4}": [
             ["style", "top", '67.78%'],
             ["style", "letter-spacing", '0px'],
-            ["style", "font-size", '21px'],
+            ["style", "width", '9.59%'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
-            ["style", "left", '58.89%'],
             ["style", "word-spacing", '0px'],
-            ["style", "width", '9.59%']
+            ["style", "left", '58.89%'],
+            ["style", "font-size", '21px']
          ],
          "${_accept_blue}": [
             ["style", "top", '81.94%'],
@@ -777,8 +786,8 @@ var symbols = {
          ],
          "${_Text}": [
             ["style", "top", '114px'],
-            ["style", "text-align", 'center'],
             ["style", "left", '33px'],
+            ["style", "text-align", 'center'],
             ["style", "font-size", '20px']
          ],
          "${_espresso_conpanna2}": [
@@ -793,9 +802,9 @@ var symbols = {
             ["style", "top", '134px'],
             ["style", "text-align", 'center'],
             ["style", "height", '70px'],
-            ["style", "width", '226px'],
+            ["style", "font-size", '20px'],
             ["style", "left", '42px'],
-            ["style", "font-size", '20px']
+            ["style", "width", '226px']
          ],
          "${_P2M3}": [
             ["style", "left", '157.08%'],
@@ -803,8 +812,8 @@ var symbols = {
          ],
          "${_TextCopy14}": [
             ["style", "top", '118px'],
-            ["style", "left", '22px'],
             ["style", "text-align", 'center'],
+            ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
          "${_espresso}": [
@@ -813,11 +822,11 @@ var symbols = {
          ],
          "${_copyright}": [
             ["style", "top", '97.89%'],
-            ["style", "font-size", '70%'],
+            ["style", "width", '100%'],
             ["color", "color", 'rgba(100,61,23,0.37)'],
             ["style", "height", '2.11%'],
             ["style", "left", '0.14%'],
-            ["style", "width", '100%']
+            ["style", "font-size", '70%']
          ],
          "${_sandwitch_slot0}": [
             ["style", "top", '74.09%'],
@@ -829,12 +838,12 @@ var symbols = {
          "${_sandwich_sel_name1}": [
             ["style", "top", '80.55%'],
             ["style", "letter-spacing", '0px'],
-            ["style", "font-size", '21px'],
+            ["style", "width", '18.49%'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
-            ["style", "left", '23.88%'],
             ["style", "word-spacing", '0px'],
-            ["style", "width", '18.49%']
+            ["style", "left", '23.88%'],
+            ["style", "font-size", '21px']
          ],
          "${_coffee_sel6}": [
             ["style", "top", '69.63%'],
@@ -848,22 +857,6 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "top", '0px']
          ],
-         "${_status_text}": [
-            ["style", "letter-spacing", '0em'],
-            ["style", "bottom", 'auto'],
-            ["color", "color", 'rgba(100,61,23,0.49)'],
-            ["style", "right", 'auto'],
-            ["style", "left", '0.27%'],
-            ["style", "font-size", '100%'],
-            ["style", "top", '96.55%'],
-            ["style", "opacity", '1'],
-            ["style", "text-align", 'left'],
-            ["style", "text-indent", '0%'],
-            ["style", "height", '1.74%'],
-            ["style", "width", '99.05%'],
-            ["style", "word-spacing", '0em'],
-            ["style", "font-weight", '200']
-         ],
          "${_coffee_sel0}": [
             ["style", "top", '69.63%'],
             ["transform", "scaleY", '0.45'],
@@ -875,9 +868,17 @@ var symbols = {
             ["style", "top", '141px'],
             ["style", "text-align", 'center'],
             ["style", "height", '70px'],
-            ["style", "font-size", '20px'],
+            ["style", "width", '168px'],
             ["style", "left", '71px'],
-            ["style", "width", '168px']
+            ["style", "font-size", '20px']
+         ],
+         "${_Price}": [
+            ["style", "top", '85.74%'],
+            ["style", "font-size", '50px'],
+            ["color", "color", 'rgba(100,61,23,1.00)'],
+            ["style", "font-weight", '800'],
+            ["style", "left", '46.21%'],
+            ["style", "width", '225px']
          ],
          "${_P1M6}": [
             ["style", "left", '27.08%']
@@ -887,14 +888,6 @@ var symbols = {
             ["style", "left", '22px'],
             ["style", "font-size", '20px']
          ],
-         "${_Price}": [
-            ["style", "top", '85.74%'],
-            ["style", "width", '225px'],
-            ["color", "color", 'rgba(100,61,23,1.00)'],
-            ["style", "font-weight", '800'],
-            ["style", "left", '46.21%'],
-            ["style", "font-size", '50px']
-         ],
          "${_coffee_sel2}": [
             ["style", "top", '69.63%'],
             ["transform", "scaleY", '0.45'],
@@ -902,196 +895,18 @@ var symbols = {
             ["style", "opacity", '1'],
             ["style", "left", '25.56%']
          ],
+         "${_Stage}": [
+            ["color", "background-color", 'rgba(255,255,255,1)'],
+            ["style", "overflow", 'hidden'],
+            ["style", "height", '100%'],
+            ["style", "width", '100%']
+         ],
          "${_P3M1}": [
             ["style", "left", '205.09%'],
             ["style", "top", '10.65%']
          ],
-         "${_sandwich_sel_name0}": [
-            ["style", "top", '80.55%'],
-            ["style", "letter-spacing", '0px'],
-            ["style", "width", '18.49%'],
-            ["style", "text-indent", '0px'],
-            ["style", "height", '3.7%'],
-            ["style", "word-spacing", '0px'],
-            ["style", "left", '3.33%'],
-            ["style", "font-size", '21px']
-         ],
-         "${_P3M2}": [
-            ["style", "left", '251.75%'],
-            ["style", "top", '10.65%']
-         ],
-         "${_dorothy_cafe}": [
-            ["style", "top", '10px'],
-            ["style", "font-size", '320%'],
-            ["color", "color", 'rgba(255,255,255,1.00)'],
-            ["style", "height", '59px'],
-            ["style", "left", '89px'],
-            ["style", "width", '324px']
-         ],
-         "${_coffee_sel4}": [
-            ["style", "top", '69.63%'],
-            ["transform", "scaleY", '0.45'],
-            ["transform", "scaleX", '0.45'],
-            ["style", "opacity", '1'],
-            ["style", "left", '53.33%']
-         ],
          "${_P1M5}": [
             ["style", "left", '21px']
-         ],
-         "${_cafemochaCopy}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
-         ],
-         "${_fron_blue}": [
-            ["style", "top", '55.7%'],
-            ["style", "height", '129px'],
-            ["style", "right", 'auto'],
-            ["style", "left", '79.72%'],
-            ["style", "width", '129px']
-         ],
-         "${_P1M8}": [
-            ["style", "left", '76.25%']
-         ],
-         "${_cafelatteCopy}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
-         ],
-         "${_COFFEE_TITLE}": [
-            ["style", "top", '57.55%'],
-            ["style", "opacity", '0.99000000953674'],
-            ["style", "left", '22.36%'],
-            ["style", "background-size", [100,'auto'], {valueTemplate:'@@0@@% @@1@@'} ]
-         ],
-         "${_cafelatte}": [
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
-         ],
-         "${_P3M3}": [
-            ["style", "left", '203.67%'],
-            ["style", "top", '32.55%']
-         ],
-         "${_SANDWITCH_TITLE}": [
-            ["style", "top", '57.57%'],
-            ["style", "opacity", '0'],
-            ["style", "left", '34.58%'],
-            ["style", "background-size", [100,'auto'], {valueTemplate:'@@0@@% @@1@@'} ]
-         ],
-         "${_menu-category-sandwich-stkchs_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleY", '1'],
-            ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
-         ],
-         "${_TextCopy13}": [
-            ["style", "top", '118px'],
-            ["style", "text-align", 'center'],
-            ["style", "font-size", '20px'],
-            ["style", "left", '-3px'],
-            ["style", "width", '160px']
-         ],
-         "${_TextCopy2}": [
-            ["style", "top", '114px'],
-            ["style", "left", '4px'],
-            ["style", "text-align", 'center'],
-            ["style", "font-size", '20px']
-         ],
-         "${_P1M2}": [
-            ["style", "left", '25.14%']
-         ],
-         "${_TextCopy10}": [
-            ["style", "top", '113px'],
-            ["style", "text-align", 'center'],
-            ["style", "font-size", '20px'],
-            ["style", "left", '2px'],
-            ["style", "width", '148px']
-         ],
-         "${_table_no}": [
-            ["style", "top", '33px'],
-            ["style", "bottom", 'auto'],
-            ["color", "color", 'rgba(255,255,255,1.00)'],
-            ["style", "right", '101px'],
-            ["style", "left", 'auto'],
-            ["style", "font-size", '100%']
-         ],
-         "${_coffee_sel_name5}": [
-            ["style", "top", '67.78%'],
-            ["style", "letter-spacing", '0px'],
-            ["style", "width", '9.59%'],
-            ["style", "text-indent", '0px'],
-            ["style", "height", '3.7%'],
-            ["style", "word-spacing", '0px'],
-            ["style", "left", '72.92%'],
-            ["style", "font-size", '21px']
-         ],
-         "${_coffee_sel_name6}": [
-            ["style", "top", '67.78%'],
-            ["style", "letter-spacing", '0em'],
-            ["style", "width", '69px'],
-            ["style", "text-indent", '0%'],
-            ["style", "height", '42px'],
-            ["style", "word-spacing", '0em'],
-            ["style", "left", '87%'],
-            ["style", "font-size", '131.25%']
-         ],
-         "${_TextCopy3}": [
-            ["style", "top", '114px'],
-            ["style", "text-align", 'center'],
-            ["style", "left", '30px'],
-            ["style", "font-size", '20px']
-         ],
-         "${_coffee_sel_name2}": [
-            ["style", "top", '67.78%'],
-            ["style", "letter-spacing", '0px'],
-            ["style", "font-size", '21px'],
-            ["style", "text-indent", '0px'],
-            ["style", "height", '3.7%'],
-            ["style", "left", '30.69%'],
-            ["style", "word-spacing", '0px'],
-            ["style", "width", '9.59%']
-         ],
-         "${_TextCopy9}": [
-            ["style", "top", '113px'],
-            ["style", "text-align", 'center'],
-            ["style", "left", '22px'],
-            ["style", "font-size", '20px']
-         ],
-         "${_coffee_sel1}": [
-            ["style", "top", '69.63%'],
-            ["transform", "scaleY", '0.45'],
-            ["transform", "scaleX", '0.45'],
-            ["style", "opacity", '1'],
-            ["style", "left", '11.67%']
-         ],
-         "${_P2M1}": [
-            ["style", "left", '106.1%'],
-            ["style", "top", '119px']
-         ],
-         "${_P3M4}": [
-            ["style", "left", '252%'],
-            ["style", "top", '32.55%']
-         ],
-         "${_P1M1}": [
-            ["style", "left", '20px']
-         ],
-         "${_back_blue}": [
-            ["style", "top", '55.7%'],
-            ["style", "height", '129px'],
-            ["style", "left", '2.64%'],
-            ["style", "width", '129px']
-         ],
-         "${_checkout_total}": [
-            ["style", "top", '79.66%'],
-            ["style", "font-size", '25px'],
-            ["color", "color", 'rgba(100,61,23,1.00)'],
-            ["style", "font-weight", '800'],
-            ["style", "left", '48.58%'],
-            ["style", "width", '199px']
-         ],
-         "${_menu-category-sandwich-italbmt_copy}": [
-            ["style", "top", '0px'],
-            ["transform", "scaleY", '1'],
-            ["style", "left", '0px'],
-            ["transform", "scaleX", '1']
          ],
          "${_rocon_logo}": [
             ["style", "-webkit-transform-origin", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
@@ -1107,36 +922,221 @@ var symbols = {
             ["style", "top", 'auto'],
             ["transform", "scaleY", '0.4'],
             ["style", "height", '25%'],
-            ["style", "opacity", '1'],
+            ["style", "background-size", [649.65,'auto'], {valueTemplate:'@@0@@px @@1@@'} ],
             ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
-            ["style", "background-size", [649.65,'auto'], {valueTemplate:'@@0@@px @@1@@'} ]
+            ["style", "opacity", '1']
          ],
-         "${_P1M7}": [
-            ["style", "left", '51.25%']
+         "${_dorothy_cafe}": [
+            ["style", "top", '10px'],
+            ["style", "width", '324px'],
+            ["color", "color", 'rgba(255,255,255,1.00)'],
+            ["style", "height", '59px'],
+            ["style", "left", '89px'],
+            ["style", "font-size", '320%']
          ],
-         "${_Stage}": [
-            ["color", "background-color", 'rgba(255,255,255,1)'],
-            ["style", "width", '100%'],
-            ["style", "height", '100%'],
-            ["style", "overflow", 'hidden']
+         "${_cafelatteCopy}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
          ],
-         "${_TextCopy7}": [
-            ["style", "top", '134px'],
-            ["style", "text-align", 'center'],
-            ["style", "height", '70px'],
+         "${_TextCopy15}": [
+            ["style", "top", '118px'],
             ["style", "font-size", '20px'],
-            ["style", "left", '55px'],
-            ["style", "width", '199px']
+            ["style", "left", '22px'],
+            ["style", "width", '132px']
          ],
-         "${_coffee_sel_name1}": [
+         "${_cafemochaCopy}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
+         ],
+         "${_back_blue}": [
+            ["style", "height", '129px'],
+            ["style", "top", '55.7%'],
+            ["style", "left", '2.64%'],
+            ["style", "width", '129px']
+         ],
+         "${_P1M1}": [
+            ["style", "left", '20px']
+         ],
+         "${_P3M4}": [
+            ["style", "left", '252%'],
+            ["style", "top", '32.55%']
+         ],
+         "${_COFFEE_TITLE}": [
+            ["style", "top", '57.55%'],
+            ["style", "opacity", '0.99000000953674'],
+            ["style", "left", '22.36%'],
+            ["style", "background-size", [100,'auto'], {valueTemplate:'@@0@@% @@1@@'} ]
+         ],
+         "${_cafelatte}": [
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
+         ],
+         "${_P2M1}": [
+            ["style", "left", '106.1%'],
+            ["style", "top", '119px']
+         ],
+         "${_SANDWITCH_TITLE}": [
+            ["style", "top", '57.57%'],
+            ["style", "opacity", '0'],
+            ["style", "left", '34.58%'],
+            ["style", "background-size", [100,'auto'], {valueTemplate:'@@0@@% @@1@@'} ]
+         ],
+         "${_TextCopy13}": [
+            ["style", "top", '118px'],
+            ["style", "text-align", 'center'],
+            ["style", "width", '160px'],
+            ["style", "left", '-3px'],
+            ["style", "font-size", '20px']
+         ],
+         "${_TextCopy9}": [
+            ["style", "top", '113px'],
+            ["style", "left", '22px'],
+            ["style", "text-align", 'center'],
+            ["style", "font-size", '20px']
+         ],
+         "${_TextCopy2}": [
+            ["style", "top", '114px'],
+            ["style", "text-align", 'center'],
+            ["style", "left", '4px'],
+            ["style", "font-size", '20px']
+         ],
+         "${_coffee_sel_name2}": [
             ["style", "top", '67.78%'],
             ["style", "letter-spacing", '0px'],
             ["style", "width", '9.59%'],
             ["style", "text-indent", '0px'],
             ["style", "height", '3.7%'],
             ["style", "word-spacing", '0px'],
-            ["style", "left", '16.67%'],
+            ["style", "left", '30.69%'],
             ["style", "font-size", '21px']
+         ],
+         "${_TextCopy10}": [
+            ["style", "top", '113px'],
+            ["style", "text-align", 'center'],
+            ["style", "width", '148px'],
+            ["style", "left", '2px'],
+            ["style", "font-size", '20px']
+         ],
+         "${_table_no}": [
+            ["style", "top", '33px'],
+            ["style", "bottom", 'auto'],
+            ["color", "color", 'rgba(255,255,255,1.00)'],
+            ["style", "right", '101px'],
+            ["style", "left", 'auto'],
+            ["style", "font-size", '100%']
+         ],
+         "${_coffee_sel_name5}": [
+            ["style", "top", '67.78%'],
+            ["style", "letter-spacing", '0px'],
+            ["style", "font-size", '21px'],
+            ["style", "text-indent", '0px'],
+            ["style", "height", '3.7%'],
+            ["style", "left", '72.92%'],
+            ["style", "word-spacing", '0px'],
+            ["style", "width", '9.59%']
+         ],
+         "${_coffee_sel_name6}": [
+            ["style", "top", '67.78%'],
+            ["style", "letter-spacing", '0em'],
+            ["style", "font-size", '131.25%'],
+            ["style", "text-indent", '0%'],
+            ["style", "height", '42px'],
+            ["style", "left", '87%'],
+            ["style", "word-spacing", '0em'],
+            ["style", "width", '69px']
+         ],
+         "${_TextCopy3}": [
+            ["style", "top", '114px'],
+            ["style", "left", '30px'],
+            ["style", "text-align", 'center'],
+            ["style", "font-size", '20px']
+         ],
+         "${_P1M2}": [
+            ["style", "left", '25.14%']
+         ],
+         "${_P3M2}": [
+            ["style", "left", '251.75%'],
+            ["style", "top", '10.65%']
+         ],
+         "${_coffee_sel1}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
+            ["style", "opacity", '1'],
+            ["style", "left", '11.67%']
+         ],
+         "${_menu-category-sandwich-stkchs_copy}": [
+            ["style", "top", '0px'],
+            ["transform", "scaleX", '1'],
+            ["transform", "scaleY", '1'],
+            ["style", "left", '0px']
+         ],
+         "${_P3M3}": [
+            ["style", "left", '203.67%'],
+            ["style", "top", '32.55%']
+         ],
+         "${_coffee_sel4}": [
+            ["style", "top", '69.63%'],
+            ["transform", "scaleY", '0.45'],
+            ["transform", "scaleX", '0.45'],
+            ["style", "opacity", '1'],
+            ["style", "left", '53.33%']
+         ],
+         "${_TextCopy4}": [
+            ["style", "top", '140px'],
+            ["style", "text-align", 'center'],
+            ["style", "height", '70px'],
+            ["style", "font-size", '20px'],
+            ["style", "left", '46px'],
+            ["style", "width", '217px']
+         ],
+         "${_checkout_total}": [
+            ["style", "top", '79.66%'],
+            ["style", "width", '199px'],
+            ["color", "color", 'rgba(100,61,23,1.00)'],
+            ["style", "font-weight", '800'],
+            ["style", "left", '48.58%'],
+            ["style", "font-size", '25px']
+         ],
+         "${_menu-category-sandwich-italbmt_copy}": [
+            ["style", "top", '0px'],
+            ["transform", "scaleX", '1'],
+            ["transform", "scaleY", '1'],
+            ["style", "left", '0px']
+         ],
+         "${_P1M8}": [
+            ["style", "left", '76.25%']
+         ],
+         "${_P1M7}": [
+            ["style", "left", '51.25%']
+         ],
+         "${_sandwich_sel_name0}": [
+            ["style", "top", '80.55%'],
+            ["style", "letter-spacing", '0px'],
+            ["style", "font-size", '21px'],
+            ["style", "text-indent", '0px'],
+            ["style", "height", '3.7%'],
+            ["style", "left", '3.33%'],
+            ["style", "word-spacing", '0px'],
+            ["style", "width", '18.49%']
+         ],
+         "${_TextCopy7}": [
+            ["style", "top", '134px'],
+            ["style", "text-align", 'center'],
+            ["style", "height", '70px'],
+            ["style", "width", '199px'],
+            ["style", "left", '55px'],
+            ["style", "font-size", '20px']
+         ],
+         "${_coffee_sel_name1}": [
+            ["style", "top", '67.78%'],
+            ["style", "letter-spacing", '0px'],
+            ["style", "font-size", '21px'],
+            ["style", "text-indent", '0px'],
+            ["style", "height", '3.7%'],
+            ["style", "left", '16.67%'],
+            ["style", "word-spacing", '0px'],
+            ["style", "width", '9.59%']
          ]
       }
    },
@@ -1147,9 +1147,9 @@ var symbols = {
          duration: 2000,
          autoPlay: false,
          timeline: [
-            { id: "eid1902", tween: [ "style", "${_P1M8}", "left", '-22.92%', { fromValue: '76.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1976", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-22.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1991", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-122.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid2007", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid2008", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid2009", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1915", tween: [ "style", "${_P2M3}", "left", '53.19%', { fromValue: '157.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1967", tween: [ "style", "${_P2M3}", "left", '-46.33%', { fromValue: '53.19%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1982", tween: [ "style", "${_P2M3}", "left", '-46.33%', { fromValue: '-46.33%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
@@ -1168,18 +1168,18 @@ var symbols = {
             { id: "eid1946", tween: [ "style", "${_P3M2}", "left", '151%', { fromValue: '251.75%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1972", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '151%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1987", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '51.48%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1950", tween: [ "style", "${_P3M4}", "left", '151.25%', { fromValue: '252%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1975", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '151.25%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1990", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '51.73%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1900", tween: [ "style", "${_P1M7}", "left", '-47.92%', { fromValue: '51.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1971", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-47.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1986", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-147.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1902", tween: [ "style", "${_P1M8}", "left", '-22.92%', { fromValue: '76.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1976", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-22.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1991", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-122.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1896", tween: [ "style", "${_P1M6}", "left", '-72.09%', { fromValue: '27.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1970", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-72.09%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1985", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-171.61%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1763", tween: [ "style", "${_P1M1}", "left", '-694px', { fromValue: '20px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1962", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-694px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1977", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-1411px'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid2007", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid2008", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid2009", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1942", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1974", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1989", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1914", tween: [ "style", "${_P2M2}", "left", '28.24%', { fromValue: '132.52%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1969", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '28.24%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
             { id: "eid1984", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '-71.28%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
@@ -1191,12 +1191,12 @@ var symbols = {
             { id: "eid1979", tween: [ "style", "${_P1M3}", "left", '-147.34%', { fromValue: '-147.34%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
             { id: "eid1803", tween: [ "style", "${_SANDWITCH_TITLE}", "opacity", '1', { fromValue: '0'}], position: 1000, duration: 1000 },
             { id: "eid1804", tween: [ "style", "${_SANDWITCH_TITLE}", "opacity", '1', { fromValue: '1'}], position: 2000, duration: 0 },
-            { id: "eid1900", tween: [ "style", "${_P1M7}", "left", '-47.92%', { fromValue: '51.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1971", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-47.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1986", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-147.44%'}], position: 2000, duration: 0, easing: "easeOutQuint" },
-            { id: "eid1950", tween: [ "style", "${_P3M4}", "left", '151.25%', { fromValue: '252%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1975", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '151.25%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
-            { id: "eid1990", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '51.73%'}], position: 2000, duration: 0, easing: "easeOutQuint" }         ]
+            { id: "eid1763", tween: [ "style", "${_P1M1}", "left", '-694px', { fromValue: '20px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1962", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-694px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1977", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-1411px'}], position: 2000, duration: 0, easing: "easeOutQuint" },
+            { id: "eid1942", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1974", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+            { id: "eid1989", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeOutQuint" }         ]
       }
    }
 }

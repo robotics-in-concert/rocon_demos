@@ -251,6 +251,8 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			console.log(masterUri);
 			if (masterUri == "")
 				masterUri = "ws://222.100.124.85:9090";
+			else
+				masterUri = "ws://"+masterUri+":9090";
 			sym.$("status_text").html("Concert master address: "+masterUri);
 
 			//open new window
