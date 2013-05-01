@@ -3,6 +3,7 @@ apps:
   - cafe_rapps/waiter_soft
   - cafe_rapps/taskcoordinator
   - cafe_rapps/customer_soft
+  - cafe_rapps/multi_customer_soft
   - cafe_rapps/annotation
   - cafe_rapps/kitchen
   - cafe_rapps/waiter

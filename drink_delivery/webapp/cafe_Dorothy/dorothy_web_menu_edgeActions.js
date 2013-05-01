@@ -220,7 +220,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 		   sym.setVariable("ordered_sandwich_list", new Array());
 		   sym.setVariable("sum_coffee_price", 0);
 		   sym.setVariable("sum_sandwich_price", 0);
-      
+
 			function getParam(key){
 				var url = location.href;
 				var parameters = [];    
@@ -237,34 +237,40 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			  }
 			  return qs[key] == undefined ? null : qs[key];
 			}
-			//console.log("mode");
+
 			var tableID = getParam("tableid");
 			sym.setVariable("tableID", tableID);
 			sym.$("_01").html(tableID);
+			var masterUri = getParam("concertaddress");
+			if (masterUri == null)
+				masterUri = "ws://222.100.124.85:9090";
+			sym.$("status_text").html("Concert master address: "+masterUri);
+
 			//open new window
 			//window.open("http://m.naver.com", "_self");
-			
+
 			yepnope({
          	nope:['include/EventEmitter2/eventemitter2.js'] ,
          	complete: eventemitterLoaded
          });
-      
+
          yepnope({
          	nope:['include/roslib.js'] ,
          	complete: init_ros
          });
-         
+
          function eventemitterLoaded (){
          	console.log("eventemitter2.js is loaded");
          }
-         
+
          function init_ros (){
          	console.log("roslib.js is loaded");
          	var ros = new ROSLIB.Ros();
-         	ros.connect('ws://222.100.124.85:9090');
+         	ros.connect(masterUri);
          	sym.setVariable("ROS", ros);
 				ros.on('connection',function() {
 				 	console.log('Connection made!');
+				 	sym.$("status_text").html("Connected with "+masterUri);
 				});
 				ros.on('close',function() {
 				 //log.innerHTML += 'Disconnected from ' + host + ' <br/>';
@@ -273,8 +279,9 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 				ros.on('error', function(error) {
 					 console.log(error);
 			   });
-			   
+
 			}
+
       });
       //Edge binding end
 
@@ -498,6 +505,12 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			});
 			console.log("goal.send()");
 			goal.send();
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "document", "compositionReady", function(sym, e) {
+         sym.$('Stage').css('background-image','url(images/wood_wallpaper_by_stenosis.jpg)');
+
       });
       //Edge binding end
 

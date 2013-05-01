@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="user_device" name="customer" type="multi_user_generator.py" output="screen"/>
+</launch>
