@@ -15,7 +15,7 @@
 			"timelineColor3":"0x81714f",
 			"animationEnabled":"true",
 			"timelineColor":"0xffd46d"}},
-	"pref__general__codeView":"sectionalView",
+	"pref__general__codeView":"fullView",
 	"Preloader-Default Timeline_playhead_ms":"0",
 	"pref__general__FilterNonAnimatedElements":"false",
 	"expanded:images/":"true",
