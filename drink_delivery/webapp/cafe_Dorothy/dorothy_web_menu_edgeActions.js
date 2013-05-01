@@ -235,14 +235,21 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 						}
 					}
 			  }
-			  return qs[key] == undefined ? null : qs[key];
+			  if (qs == null)
+			  	return "";
+			  else {
+			  	//console.log(qs[key]);
+			  	return qs[key];
+			  }
 			}
 
 			var tableID = getParam("tableid");
+			console.log("tableID" + tableID);
 			sym.setVariable("tableID", tableID);
 			sym.$("_01").html(tableID);
 			var masterUri = getParam("concertaddress");
-			if (masterUri == null)
+			console.log(masterUri);
+			if (masterUri == "")
 				masterUri = "ws://222.100.124.85:9090";
 			sym.$("status_text").html("Concert master address: "+masterUri);
 
@@ -446,7 +453,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			});
 			var tableID = sym.getVariable("tableID");
 			var tableID_num = parseInt(tableID);
-			
+		
 			var menus = new Array();
 			var ordered_coffee_list = sym.getVariable("ordered_coffee_list");
 			var ordered_sandwich_list = sym.getVariable("ordered_sandwich_list");
@@ -498,13 +505,31 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			});
 			// Print out their output into the terminal.
 			goal.on('feedback', function(feedback) {
-				console.log('Feedback: ' + feedback.sequence);
+				//console.log('Feedback :' + feedback.status);
+				if (feedback.status == 1)
+					sym.$("status_text").html("Waiterbot is going to kitchen.");
+				else if (feedback.status == 2)
+					sym.$("status_text").html("Waiterbot is arrived at kitchen.");
+				else if (feedback.status == 3)
+					sym.$("status_text").html("Waiterbot is waiting for foods at kitchen.");
+				else if (feedback.status == 4)
+					sym.$("status_text").html("Waiterbot is in delivery.");
+				else if (feedback.status == 5)
+					sym.$("status_text").html("Waiterbot is arrived at the table.");
+				else if (feedback.status == 5)
+					sym.$("status_text").html("Waiterbot is waiting for user confirmation.");
+				else if (feedback.status == 6)
+					sym.$("status_text").html("Delivery service is completed.");
+				else
+					console.log(feedback.status);
 			});
 			goal.on('result', function(result) {
-				console.log('Final Result: ' + result.sequence);
+				console.log(result);
+				//console.log('Final Result: ' + result.sequence);
 			});
 			console.log("goal.send()");
 			goal.send();
+			sym.$("status_text").html("Order is received.");
       });
       //Edge binding end
 
