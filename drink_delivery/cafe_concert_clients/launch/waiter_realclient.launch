@@ -2,7 +2,7 @@
   <!-- Configuration set in environment -->
   <include file="$(find turtlebot_bringup)/launch/minimal.launch">
     <arg name="robot_name" value="waiterbot"/>
-    <arg name="robot_type" value="pc"/>
+    <arg name="robot_type" value="turtlebot"/>
     <arg name="concert_name" value="cafe_concert"/>
     <arg name="rapp_lists" value="$(find cafe_rapps)/rapps/cafe.rapps"/>
   </include>
