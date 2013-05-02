@@ -1,4 +1,5 @@
 <launch>
+  <param name="/cmd_vel_mux/yaml_cfg_file" value="$(find waiterbot)/param/vel_multiplexer.yaml"/>
   <!-- Configuration set in environment -->
   <include file="$(find turtlebot_bringup)/launch/minimal.launch">
     <arg name="robot_name" value="waiterbot"/>
