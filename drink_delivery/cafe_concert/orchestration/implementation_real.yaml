@@ -23,7 +23,7 @@ nodes:
     tuple: android.*.*.OrderDrinks
     min: 0
   - id: waiterbot
-    tuple: linux.ros.kobuki_soft.cafe_rapps/waiter_soft
+    tuple: linux.ros.turtlebot.cafe_rapps/waiter
     min: 1
     max: 3
   
@@ -151,7 +151,7 @@ edges:
     remap_to: /cafe_database/table_pose_list
   - start: cafe_database_waiterbot_ar_marker_list
     finish: waiterbot
-    remap_from: ar_list
+    remap_from: marker_pose_list 
     remap_to: /cafe_database/ar_marker_list
   - start: waiterbot
     finish: taskcoordinator_waiterbot_delivery_order
