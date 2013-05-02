@@ -82,7 +82,7 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 ** files:///\<PATH_TO_WORKSPACE\>/rocon_webnotator/www/table_handler.html
 
 * Annotate 'Dock', 'Kitchen', and Tables.
-* Done.
+
 
 #### Execution ####
 
