@@ -15,37 +15,18 @@ sudo apt-get install ros-groovy-turtlebot
 sudo apt-get install ros-groovy-turtlebot-apps
 sudo apt-get install ros-groovy-turtlebot-viz
 sudo apt-get install ros-groovy-rospy-message-converter
-sudo apt-get install ros-groovy-rocon
-rosdep install rocon_hub
-rosdep install rocon_concert
+sudo pip install -U yujin_tools
 ```
 
 #### Installation ####
 
- * Create a workspace
-
 ```
-> mkdir -p ~/cafe_solution
-> mkdir -p ~/cafe_solution/src
-> cd ~/cafe_solution/src
-> catkin_init_workspace
-```
-
-* Checkout rocon
-
-```
-> cd ~/cafe_solution/src
-> wstool init . https://raw.github.com/robotics-in-concert/rocon_demos/hydro-devel/cafe_concert.rosinstall
-```
-
-* For easy way of creating workspace. Check out yujin_tools(https://github.com/yujinrobot/yujin_tools/wiki/yujin-init)
-
-
-#### Compilation ####
-
-```
-> cd ~/cafe_solution
-> catkin_make
+> yujin_init_workspace --track=hydro ~/cafe_concert cafe_concert
+> cd ~/cafe_concert
+# Using groovy underlay...for now
+> rosdep install --from-paths src /opt/ros/groovy --ignore-src --rosdistro groovy -y
+> yujin_init_build . /opt/ros/groovy
+> yujin_make
 ```
 
 #### Preparation for World Model Database ####
