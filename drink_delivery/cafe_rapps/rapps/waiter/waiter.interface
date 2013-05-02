@@ -1,8 +1,8 @@
 subscribers: 
   - map
   - map_metadata
-  - semantic_map/table_pose_list
-  - semantic_map/marker_pose_list
+  - table_pose_list
+  - marker_pose_list
 publishers: 
   - robot_pose
 services: []
