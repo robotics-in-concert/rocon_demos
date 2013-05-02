@@ -11,7 +11,7 @@ Demo software for rocon milestones.
 
 ```
 sudo apt-get install ros-groovy-turtlebot ros-groovy-turtlebot-apps ros-groovy-turtlebot-viz
-sudo apt-get install ros-groovy-rospy-message-converter
+sudo apt-get install ros-groovy-rospy-message-converter ros-groovy-rosbridge-suite
 sudo pip install -U yujin_tools
 ```
 
@@ -64,8 +64,6 @@ Finally, restart the server:
 
 ```
 > sudo service postgresql restart
-```
-
 ```
 
 All of these are the brief versions of
