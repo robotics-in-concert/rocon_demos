@@ -72,7 +72,7 @@ All of these are the brief versions of
 
 #### Annotations
 
-Bring up the annotation app.
+Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWORD` env variables if necessary).
 
 ```
 > roslaunch cafe_rapps annotation.launch
