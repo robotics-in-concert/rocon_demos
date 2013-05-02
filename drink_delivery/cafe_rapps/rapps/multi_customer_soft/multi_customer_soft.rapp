@@ -1,6 +1,6 @@
 disply: Cafe Customer 
 description: Babo Customer  
-platform: android.*.*
+platform: linux.ros.soft_customer
 launch: cafe_rapps/multi_customer_soft.launch
 interface: cafe_rapps/customer_soft.interface
 
