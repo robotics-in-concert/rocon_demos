@@ -68,11 +68,11 @@ Finally, restart the server:
 
 ```
 
-All of these are the brief version of what is at http://www.ros.org/wiki/spatial_world_model
-  
-  * Postgresql require some configuration to allow remote access. Please check the link below to enable remote access.
-  * https://kb.mediatemple.net/questions/1237/How+do+I+enable+remote+access+to+my+PostgreSQL+server%3F#dv
+All of these are the brief versions of
 
+ * Ros Wiki : http://www.ros.org/wiki/spatial_world_model
+ * Remote Control : https://kb.mediatemple.net/questions/1237/How+do+I+enable+remote+access+to+my+PostgreSQL+server%3F#dv
+  
 * Bring up the annotation app.
 
 ```
