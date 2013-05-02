@@ -5,7 +5,6 @@ Demo software for rocon milestones.
 
 ## Cafe Concert ##
 
-* Works in Hydro!!!
 
 #### Pre-requisite
 
