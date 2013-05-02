@@ -92,7 +92,7 @@ class WaiterSoftBot(object):
         rospy.loginfo("Order Received : Robotname = %s",data.order.robot_name)
 
         #Go to kitchen, and return feedback ARRIVE_KITCHEN
-        self.go_to('kitchen',message = "GO TO KITCHEN",feedback_status = Status.GO_TO_KITCHEN)
+        self.go_to('pickup',message = "GO TO KITCHEN",feedback_status = Status.GO_TO_KITCHEN)
 
         # feedback arrive kitchen
         self.feedback('ARRIVE KITCHEN',Status.ARRIVE_KITCHEN)
@@ -113,7 +113,7 @@ class WaiterSoftBot(object):
         self.feedback('COMPLETE DELIVERY',Status.COMPLETE_DELIVERY)
 
         # Returning to Docking
-        self.go_to('dock',message="Returning to dock",feedback_status = Status.RETURNING_TO_DOCK)
+        self.go_to('docking',message="Returning to dock",feedback_status = Status.RETURNING_TO_DOCK)
         #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
 
         # Finishing delivery
