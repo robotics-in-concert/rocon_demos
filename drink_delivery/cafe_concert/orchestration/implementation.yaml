@@ -20,7 +20,7 @@ nodes:
     max: 1
     force_name_matching: true
   - id: customer
-    tuple: linux.ros.pc.cafe_rapps/multi_customer_soft
+    tuple: android.*.*.cafe_rapps/multi_customer_soft
     min: 0
   - id: waiterbot
     tuple: linux.ros.turtlebot.cafe_rapps/waiter_soft
