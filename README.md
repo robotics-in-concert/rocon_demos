@@ -72,8 +72,10 @@ All of these are the brief versions of
 
  * Ros Wiki : http://www.ros.org/wiki/spatial_world_model
  * Remote Control : https://kb.mediatemple.net/questions/1237/How+do+I+enable+remote+access+to+my+PostgreSQL+server%3F#dv
-  
-* Bring up the annotation app.
+
+#### Annotations
+
+Bring up the annotation app.
 
 ```
 > roslaunch cafe_rapps annotation.launch
