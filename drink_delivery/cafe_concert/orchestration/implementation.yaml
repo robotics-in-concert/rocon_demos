@@ -6,21 +6,26 @@ name: "Cafe Concert"
 nodes:
   - id: cafe_database
     tuple: linux.ros.database.cafe_rapps/cafe_database
+    min: 1
+    max: 1
+    force_name_matching: true
   - id: cafe_taskcoordinator
     tuple: linux.ros.pc.cafe_rapps/taskcoordinator
-
-  - id: customer
-    tuple: linux.ros.pc.cafe_rapps/multi_customer_soft
-
+    min: 1
+    max: 1
+    force_name_matching: true
   - id: kitchen
     tuple: linux.ros.pc.cafe_rapps/kitchen
-
+    min: 1
+    max: 1
+    force_name_matching: true
+  - id: customer
+    tuple: linux.ros.pc.cafe_rapps/multi_customer_soft
+    min: 0
   - id: waiterbot
-    tuple: linux.ros.pc.cafe_rapps/waiter_soft
-  - id: waiterbot2
-    tuple: linux.ros.pc.cafe_rapps/waiter_soft
-  - id: waiterbot3
-    tuple: linux.ros.pc.cafe_rapps/waiter_soft
+    tuple: linux.ros.turtlebot.cafe_rapps/waiter_soft
+    min: 1
+    max: 3
   
 topics:
 ## Cafe database - Waiterbot
@@ -41,12 +46,12 @@ topics:
  # Waiterbot1
   - id: waiterbot_pose 
     type: geometry_msgs/PoseStamped
- # Waiterbot2
-  - id: waiterbot2_pose 
-    type: geometry_msgs/PoseStamped
- # Waiterbot3
-  - id: waiterbot3_pose 
-    type: geometry_msgs/PoseStamped
+## Waiterbot2
+# - id: waiterbot2_pose 
+#   type: geometry_msgs/PoseStamped
+## Waiterbot3
+# - id: waiterbot3_pose 
+#   type: geometry_msgs/PoseStamped
  # Cafe database
   - id: cafe_database_table_marker
     type: visualization_msgs/MarkerArray
@@ -61,16 +66,8 @@ actions:
   - id: taskcoordinator_userdevice_send_order
     type: cafe_msgs/UserOrder
 
-## Task Coordinator - Waiterbot1
+## Task Coordinator - Waiterbot
   - id: taskcoordinator_waiterbot_delivery_order
-    type: cafe_msgs/DeliveryOrder
-
-## Task Coordinator - Waiterbot2
-  - id: taskcoordinator_waiterbot2_delivery_order
-    type: cafe_msgs/DeliveryOrder
-
-## Task Coordinator - Waiterbot3
-  - id: taskcoordinator_waiterbot3_delivery_order
     type: cafe_msgs/DeliveryOrder
 
 edges:
@@ -78,141 +75,89 @@ edges:
   - start: cafe_database
     finish: cafe_database_waiterbot_map 
     remap_from: map
-    remap_to: map
+    remap_to: /map
   - start: cafe_database
     finish: cafe_database_waiterbot_map_metadata
     remap_from: map_metadata
-    remap_to: map_metadata
+    remap_to: /map_metadata
   - start: cafe_database
     finish: cafe_database_waiterbot_table_pose_list
     remap_from: table_pose_list
-    remap_to: cafe_database/table_pose_list
+    remap_to: /cafe_database/table_pose_list
   - start: cafe_database
     finish: cafe_database_waiterbot_ar_marker_list
     remap_from: ar_marker_list 
-    remap_to: cafe_database/ar_marker_list
+    remap_to: /cafe_database/ar_marker_list
   - start: cafe_database
     finish: cafe_database_table_marker
     remap_from: table_marker
-    remap_to: cafe_database/table_marker
+    remap_to: /cafe_database/table_marker
   - start: cafe_database
     finish: cafe_database_ar_marker
     remap_from: viz_ar_list
-    remap_to: cafe_database/ar_list
+    remap_to: /cafe_database/ar_list
   - start: cafe_database
     finish: cafe_database_tf
     remap_from: tf
-    remap_to: tf 
+    remap_to: /tf 
 
 ## Cafe Customer
   - start: customer 
     finish: taskcoordinator_userdevice_send_order
     remap_from: send_order
-    remap_to: cafe_taskcoordinator/send_order
+    remap_to: /cafe_taskcoordinator/send_order
 
 ## Task Coordinator
   - start: taskcoordinator_waiterbot_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_1/delivery_order
-    remap_to: waiterbot/delivery_order
+    remap_to: /waiterbot/delivery_order
   - start: taskcoordinator_waiterbot2_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_2/delivery_order
-    remap_to: waiterbot2/delivery_order
+    remap_to: /waiterbot2/delivery_order
   - start: taskcoordinator_waiterbot3_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_3/delivery_order
-    remap_to: waiterbot3/delivery_order
+    remap_to: /waiterbot3/delivery_order
 
   - start:  cafe_taskcoordinator
     finish: taskcoordinator_userdevice_send_order
     remap_from: send_order
-    remap_to: cafe_taskcoordinator/send_order
+    remap_to: /cafe_taskcoordinator/send_order
   - start: cafe_taskcoordinator
     finish: taskcoordinator_kitchen_list_order
     remap_from: list_order
-    remap_to: list_order
+    remap_to: /list_order
 
 ## Kitchen Manager
   - start: taskcoordinator_kitchen_list_order
     finish: kitchen
     remap_from: list_order
-    remap_to: list_order
+    remap_to: /list_order
 
 ## Waiter
   - start: cafe_database_waiterbot_map
     finish: waiterbot
     remap_from: map
-    remap_to: map
+    remap_to: /map
   - start: cafe_database_waiterbot_map_metadata
     finish: waiterbot
     remap_from: map_metadata
-    remap_to: map_metadata
+    remap_to: /map_metadata
   - start: cafe_database_waiterbot_table_pose_list
     finish: waiterbot
     remap_from: table_pose_list
-    remap_to: cafe_database/table_pose_list
+    remap_to: /cafe_database/table_pose_list
   - start: cafe_database_waiterbot_ar_marker_list
     finish: waiterbot
     remap_from: ar_list
-    remap_to: cafe_database/ar_marker_list
+    remap_to: /cafe_database/ar_marker_list
   - start: waiterbot
     finish: taskcoordinator_waiterbot_delivery_order
     remap_from: delivery_order
-    remap_to: waiterbot/delivery_order
+    remap_to: delivery_order
   - start: waiterbot
     finish: waiterbot_pose
     remap_from: robot_pose
-    remap_to: waiterbot/robot_pose
-
-## Waiter2
-  - start: cafe_database_waiterbot_map
-    finish: waiterbot2
-    remap_from: map
-    remap_to: map
-  - start: cafe_database_waiterbot_map_metadata
-    finish: waiterbot2
-    remap_from: map_metadata
-    remap_to: map_metadata
-  - start: cafe_database_waiterbot_table_pose_list
-    finish: waiterbot2
-    remap_from: table_pose_list
-    remap_to: cafe_database/table_pose_list
-  - start: cafe_database_waiterbot_ar_marker_list
-    finish: waiterbot2
-    remap_from: ar_list
-    remap_to: cafe_database/ar_marker_list
-  - start: waiterbot2
-    finish: taskcoordinator_waiterbot2_delivery_order
-    remap_from: delivery_order
-    remap_to: waiterbot2/delivery_order
-  - start: waiterbot2
-    finish: waiterbot2_pose
-    remap_from: robot_pose
-    remap_to: waiterbot2/robot_pose
-
-## Waiter3
-  - start: cafe_database_waiterbot_map
-    finish: waiterbot3
-    remap_from: map
-    remap_to: map
-  - start: cafe_database_waiterbot_map_metadata
-    finish: waiterbot3
-    remap_from: map_metadata
-    remap_to: map_metadata
-  - start: cafe_database_waiterbot_table_pose_list
-    finish: waiterbot3
-    remap_from: table_pose_list
-    remap_to: cafe_database/table_pose_list
-  - start: cafe_database_waiterbot_ar_marker_list
-    finish: waiterbot3
-    remap_from: ar_list
-    remap_to: cafe_database/ar_marker_list
-  - start: waiterbot3
-    finish: taskcoordinator_waiterbot3_delivery_ordert
-    remap_from: delivery_order
-    remap_to: waiterbot3/delivery_order
-  - start: waiterbot3
-    finish: waiterbot3_pose
-    remap_from: robot_pose
-    remap_to: waiterbot3/robot_pose
+    remap_to: robot_pose
