@@ -5,13 +5,12 @@ Demo software for rocon milestones.
 
 ## Cafe Concert ##
 
-* Works in Hydro!!!
 
 #### Pre-requisite
 
 ```
 sudo apt-get install ros-groovy-turtlebot ros-groovy-turtlebot-apps ros-groovy-turtlebot-viz
-sudo apt-get install ros-groovy-rospy-message-converter
+sudo apt-get install ros-groovy-rospy-message-converter ros-groovy-rosbridge-suite
 sudo pip install -U yujin_tools
 ```
 
@@ -44,15 +43,36 @@ $ \q
 > git clone https://github.com/WorldModel/spatial_world_model.git
 > cd spatial_world_model/worldlib/scripts/
 > ./setup_world_model -u <username> -p <password>
-
 ```
 
-  * Follow the installation instruction in the SWM ros wiki for spatial world model setting.
-  * http://www.ros.org/wiki/spatial_world_model
-  * Postgresql require some configuration to allow remote access. Please check the link below to enable remote access.
-  * https://kb.mediatemple.net/questions/1237/How+do+I+enable+remote+access+to+my+PostgreSQL+server%3F#dv
+Remote control of postgresql configurations:
 
-* Bring up the annotation app.
+In `/etc/postgresql/9.1/main/pg_hba.conf`
+
+```
+host     world_model     <username>      0.0.0.0/0               md5
+```
+
+In `/etc/postgresql/9.1/main/postgresql.conf`
+
+```
+listen_addresses = '*'
+```
+
+Finally, restart the server:
+
+```
+> sudo service postgresql restart
+```
+
+All of these are the brief versions of
+
+ * Ros Wiki : http://www.ros.org/wiki/spatial_world_model
+ * Remote Control : https://kb.mediatemple.net/questions/1237/How+do+I+enable+remote+access+to+my+PostgreSQL+server%3F#dv
+
+#### Annotations
+
+Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWORD` env variables if necessary).
 
 ```
 > roslaunch cafe_rapps annotation.launch

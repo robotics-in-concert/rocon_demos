@@ -26,6 +26,8 @@
 # Database Dependency
 - git: {local-name: spatial_world_model, uri: 'https://github.com/WorldModel/spatial_world_model.git',
     version: groovy-devel}
+- git: {local-name: rocon_webnotator, uri: 'https://github.com/jihoonl/rocon_webnotator.git',
+    version: master}
 
 # Concert dependency
 - git: {local-name: map_service, uri: 'https://github.com/jihoonl/map_service.git', 
