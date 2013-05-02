@@ -1,59 +1,17 @@
-# IT IS UNLIKELY YOU WANT TO EDIT THIS FILE BY HAND,
-# UNLESS FOR REMOVING ENTRIES.
-# IF YOU WANT TO CHANGE THE ROS ENVIRONMENT VARIABLES
-# USE THE rosinstall TOOL INSTEAD.
-# IF YOU CHANGE IT, USE rosinstall FOR THE CHANGES TO TAKE EFFECT
 #
-# Hydro development
-# 
-# Dependencies
+# Instructions at https://github.com/robotics-in-concert/rocon_demos/blob/hydro-devel/README.md
+#
 
-# Core ros stacks
-#
-#   sudo apt-get install ros-groovy-desktop-full
-#
-# Zeroconf
-#   sudo apt-get install ros-groovy-zeroconf-avahi
-#
-# Monitoring
-#   sudo apt-get install rqt
-#
-# Tutorials
-#   sudo apt-get install ros-tutorials common-tutorials
-#
-# Utility packages
-#   sudo apt-get install ros-groovy-robot-pose-publisher ros-groovy-rospy-message-converter ros-groovy-yujin-maps ros-groovy-rosbridge-server ros-groovy-rosbridge-library ros-groovy-rosapi
-#
-# Waiterbot required packages
-#   sudo apt-get install ros-groovy-rosserial-python 
-#
-# Official Ros Stacks
-
-
-- git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
-    version: hydro-devel}
-- git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
-    version: hydro-devel}
-- git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
-    version: hydro-devel}
-- git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
-    version: hydro-devel}
 - git: {local-name: rocon_database, uri: 'https://github.com/robotics-in-concert/rocon_database.git',
     version: hydro-devel}
 - git: {local-name: rocon_taskcoordinator, uri: 'https://github.com/robotics-in-concert/rocon_taskcoordinator.git',
-    version: hydro-devel}
-- git: {local-name: rocon_rqt_plugins, uri: 'https://github.com/robotics-in-concert/rocon_rqt_plugins.git',
     version: hydro-devel}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: hydro-devel}
 
 ## Catkinzied packages
-- git: {local-name: kobuki, uri: 'https://github.com/yujinrobot/kobuki.git',
-    version: hydro-devel}
 - git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
     version: hydro-devel}
-- git: {local-name: xacro, uri: 'https://github.com/ros/xacro.git',
-    version: groovy-devel}
 - git: {local-name: executive_smach, uri: 'https://github.com/ros/executive_smach.git',
     version: hydro-devel}
 
