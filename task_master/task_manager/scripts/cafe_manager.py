@@ -214,7 +214,7 @@ global MessageRecvSrv_GlobalEvtFlag; MessageRecvSrv_GlobalEvtFlag = False
 global MessageRecvSrv_cmdset; MessageRecvSrv_cmdset = commandset.CCmdSet()
 global MessageRecvSrv_OrderList; MessageRecvSrv_OrderList = []
 global MessageRecvSrv_RemappingList; MessageRecvSrv_RemappingList = {}
-
+global MessageRecvSrv_DisplayOrderTimeInterval; MessageRecvSrv_DisplayOrderTimeInterval = 1; #sec
 class MessageRecvSrv_Init(smach.State):
 	def __init__(self):
 		smach.State.__init__(self, outcomes=['success','retry','failure'])
@@ -228,7 +228,7 @@ class MessageRecvSrv_Idle(smach.State):
 	m_cmdsetList = []
 	
 	def __init__(self):
-		smach.State.__init__(self, outcomes = ['call_order_event','call_status_event', 'retry','failure'])
+		smach.State.__init__(self, outcomes = ['call_order_event','call_status_event','display_order_event', 'retry','failure'])
 		RegEventProc(self.__class__.__name__, self.listener)
 		
 	def listener(self,cmdset):
@@ -241,11 +241,21 @@ class MessageRecvSrv_Idle(smach.State):
 	
 	def execute(self, userdata):
 		global MessageRecvSrv_cmdset
+		global MessageRecvSrv_DisplayOrderTimeInterval
+		DisplayOrderTimeInterval = MessageRecvSrv_DisplayOrderTimeInterval*10
 		
 		while not rospy.is_shutdown():
+			CheckTime = 0
 			while len(self.m_cmdsetList) == 0 and not rospy.is_shutdown():
-					time.sleep(0.01)		
-					pass
+					time.sleep(0.1)
+					
+					CheckTime+=1
+					_tempstr = "Display Order ["+str(CheckTime)+"/"+str(DisplayOrderTimeInterval)+"]"
+					rospy.loginfo(_tempstr)
+					if(CheckTime>=DisplayOrderTimeInterval):
+
+						return 	'display_order_event'	
+
 			cmdset = self.m_cmdsetList.pop(0)
 
 			if cmdset.m_cmdname == 'NewOrderEvent':
@@ -257,7 +267,55 @@ class MessageRecvSrv_Idle(smach.State):
 				return 'call_status_event'
 
 		return 'failure'
+		
+class MessageRecvSrv_DisplayOrderEvent(smach.State):
+	m_IsRunning = [True]
+	
+	def __init__(self):
+		smach.State.__init__(self, outcomes = ['success','retry','failure'])
+		RegEventProc(self.__class__.__name__, self.listener)
 
+	def listener(self,cmdset):
+		
+		global MessageRecvSrv_GlobalEvtFlag
+		if cmdset.m_cmdname ==  'NewOrderEvent':
+			MessageRecvSrv_GlobalEvtFlag = True	 	
+		elif cmdset.m_cmdname ==  'StatusEvent':
+			MessageRecvSrv_GlobalEvtFlag = True	
+		pass
+	
+	def execute(self,userdata):
+		global MessageRecvSrv_OrderList	
+		global kitchen_mgr_pub
+	
+		"""
+		global MessageRecvSrv_GlobalEvtFlag	
+		ResultCode = 'retry'
+
+		if MessageRecvSrv_GlobalEvtFlag == True:			
+			MessageRecvSrv_GlobalEvtFlag = False
+			MessageRecvSrv = 'failure'
+			return ResultCode
+		"""
+		order_list = OrderList()
+		order_list.orders = MessageRecvSrv_OrderList
+
+		#sorting
+		order_list.orders = sorted(order_list.orders, key = lambda order: order.status)
+		upperlist = []
+		lowerlist = []
+		for k in order_list.orders:
+			if k.status <= Status.WAITING_FOR_KITCHEN:
+				 upperlist.append(k)
+			else:
+				 lowerlist.append(k)
+		upperlist = sorted(upperlist, key = lambda order: order.order_id)
+		lowerlist = sorted(lowerlist, key = lambda order: order.order_id,reverse=True)
+		order_list.orders = upperlist+lowerlist
+		#
+		kitchen_mgr_pub.publish(order_list)
+		return 'success'
+	
 		
 class MessageRecvSrv_CallOrderEvent(smach.State):
 	m_IsRunning = [True]
@@ -796,9 +854,16 @@ def main():
 														transitions={'success':'MessageRecvSrv_Idle', 
 																	'failure':'end', 
 																	'retry':'MessageRecvSrv_CallStatusEvent'})	
+			
+			smach.StateMachine.add('MessageRecvSrv_DisplayOrderEvent', MessageRecvSrv_DisplayOrderEvent(), 
+														transitions={'success':'MessageRecvSrv_Idle', 
+																	'failure':'end', 
+																	'retry':'MessageRecvSrv_DisplayOrderEvent'})	
+																																		
 			smach.StateMachine.add('MessageRecvSrv_Idle', MessageRecvSrv_Idle(), 
 														transitions={'call_order_event':'MessageRecvSrv_CallOrderEvent',
 																	'call_status_event':'MessageRecvSrv_CallStatusEvent',
+																	'display_order_event':'MessageRecvSrv_DisplayOrderEvent',
 																	'failure':'end', 
 																	'retry':'MessageRecvSrv_Init'})
 	
