@@ -21,7 +21,7 @@ sudo pip install -U yujin_tools
 > cd ~/cafe_concert
 # Using groovy underlay...for now
 > rosdep install --from-paths src /opt/ros/groovy --ignore-src --rosdistro groovy -y
-> yujin_init_build . /opt/ros/groovy
+> yujin_init_build . -u /opt/ros/groovy
 > yujin_make
 ```
 
