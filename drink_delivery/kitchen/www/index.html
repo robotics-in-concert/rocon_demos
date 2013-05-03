@@ -44,7 +44,7 @@
     var ros = new ROSLIB.Ros();
     var order_pub_topic = "/list_order";
     var order_pub_topic_type = "/cafe_msgs/OrderList";
-    var defaultUrL = 'ws://localhost:9092';
+    var defaultUrL = 'ws://192.168.10.131:9090';
 
     var nav_div;
     var orders_div;
@@ -296,7 +296,7 @@
           <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
           <a class="brand" href="#" style="margin-top:6px">Rocon Cafe Dorothy</a>
           <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
-            <input class="input-large" id="focusedInput" type="text" value="ws://localhost:9092"></input>
+            <input class="input-large" id="focusedInput" type="text" value="ws://192.168.10.131:9090"></input>
             <button id="connectbtn" class="btn btn-primary btn-normal" data-loading-text="Connecting...">Connect</button>
           </p>
         </div>
