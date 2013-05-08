@@ -249,12 +249,12 @@ class MessageRecvSrv_Idle(smach.State):
 			while len(self.m_cmdsetList) == 0 and not rospy.is_shutdown():
 					time.sleep(0.1)
 					
-					CheckTime+=1
-					_tempstr = "Display Order ["+str(CheckTime)+"/"+str(DisplayOrderTimeInterval)+"]"
-					rospy.loginfo(_tempstr)
-					if(CheckTime>=DisplayOrderTimeInterval):
+					#CheckTime+=1
+					#_tempstr = "Display Order ["+str(CheckTime)+"/"+str(DisplayOrderTimeInterval)+"]"
+					#rospy.loginfo(_tempstr)
+					#if(CheckTime>=DisplayOrderTimeInterval):
 
-						return 	'display_order_event'	
+						#return 	'display_order_event'	
 
 			cmdset = self.m_cmdsetList.pop(0)
 
