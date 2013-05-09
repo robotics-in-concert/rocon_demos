@@ -35,7 +35,7 @@ topics:
     type: nav_msgs/MapMetaData
   - id: cafe_database_waiterbot_table_pose_list
     type: semantic_region_handler/TablePoseList
-  - id: cafe_database_waiterbot_ar_marker_list
+  - id: cafe_database_waiterbot_marker_pose_list
     type: ar_track_alvar/AlvarMarkers
 
 ## Task Coordinator - Kitchen Manager
@@ -85,9 +85,9 @@ edges:
     remap_from: table_pose_list
     remap_to: /cafe_database/table_pose_list
   - start: cafe_database
-    finish: cafe_database_waiterbot_ar_marker_list
-    remap_from: ar_marker_list 
-    remap_to: /cafe_database/ar_marker_list
+    finish: cafe_database_waiterbot_marker_pose_list
+    remap_from: marker_pose_list 
+    remap_to: /cafe_database/marker_pose_list
   - start: cafe_database
     finish: cafe_database_table_marker
     remap_from: table_marker
@@ -149,10 +149,10 @@ edges:
     finish: waiterbot
     remap_from: table_pose_list
     remap_to: /cafe_database/table_pose_list
-  - start: cafe_database_waiterbot_ar_marker_list
+  - start: cafe_database_waiterbot_marker_pose_list
     finish: waiterbot
     remap_from: marker_pose_list 
-    remap_to: /cafe_database/ar_marker_list
+    remap_to: /cafe_database/marker_pose_list
   - start: waiterbot
     finish: taskcoordinator_waiterbot_delivery_order
     remap_from: delivery_order
