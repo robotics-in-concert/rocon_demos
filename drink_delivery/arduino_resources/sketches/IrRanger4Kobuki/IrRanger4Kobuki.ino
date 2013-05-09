@@ -1,3 +1,6 @@
+#include <ros.h>
+#include <ArduinoHardware.h>
+
 /* 
  * Modified version of the rosserial IR Ranger example
  * 
@@ -6,11 +9,11 @@
 
 #include <ros.h>
 #include <ros/time.h>
-#include <kobuki_arduino_msgs/Rangers.h>
+#include <arduino_resources/Rangers.h>
 #include <std_msgs/Int16MultiArray.h>
 
 ros::NodeHandle  nh;
-kobuki_arduino_msgs::Rangers rangers_msg;
+arduino_resources::Rangers rangers_msg;
 ros::Publisher pub_range( "rangers_data", &rangers_msg);
 
 const int nr_of_irs = 11;
@@ -28,7 +31,7 @@ void setup()
   rangers_msg.header.frame_id = "kobuki_rangers";
   rangers_msg.ranges_length = nr_of_irs;
   rangers_msg.ranges = range_storage;
-  rangers_timing = 50; // publish the range value every 50 milliseconds, since it takes that long for the sensor to stabilize
+  rangers_timing = 42; // publish ranges at sensors rate of ~24 Hz
   last_rangers_time = 0;
   blink_timing = 500; // blinking frequency in ms
   last_blink_time = 0;
@@ -50,7 +53,7 @@ void loop()
     pub_range.publish(&rangers_msg);
     nh.spinOnce();
   }
-   
+
   // Alive signal
   if ((now - last_blink_time) > blink_timing)
   {

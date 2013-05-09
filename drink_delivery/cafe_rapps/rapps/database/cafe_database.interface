@@ -3,7 +3,7 @@ publishers:
   - map
   - map_metadata
   - table_pose_list
-  - ar_marker_list
+  - marker_pose_list
   - viz_ar_list
   - table_marker
   - tf

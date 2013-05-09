@@ -29,9 +29,6 @@ namespace waiterbot
 class Navigator
 {
 public:
-  const double GO_TO_POSE_TIMEOUT;
-  const double AUTO_DOCKING_TIMEOUT;
-  const double WAIT_FOR_PICKUP_POINT;
 
   enum
   {
@@ -59,7 +56,9 @@ public:
   void enableSafety() { safety_on_pub_.publish(std_msgs::Empty()); };
   void disableSafety() { safety_off_pub_.publish(std_msgs::Empty()); };
 
-  bool dockInBase(const geometry_msgs::PoseStamped& base_abs_pose);
+  bool dockInBase();
+  bool dockInBase(const geometry_msgs::PoseStamped& base_marker_pose);
+  bool dockInBase___(const move_base_msgs::MoveBaseGoal& move_base_goal);
   bool pickUpOrder(const geometry_msgs::PoseStamped& pick_up_pose);
   bool deliverOrder(const geometry_msgs::PoseStamped& table_pose, double table_radius);
 
@@ -200,6 +199,9 @@ private:
   double close_to_pickup_distance_;    /**< At which distance from pickup point switch off recovery behavior */
   double close_to_delivery_distance_;  /**< At which distance from delivery point switch off recovery behavior */
   double tables_serving_distance_;     /**< At which distance from the table we try to serve our orders */
+  double go_to_pose_timeout_;
+  double auto_docking_timeout_;
+  double wait_for_pickup_point_;
 
   uint32_t                   base_marker_id_;
   geometry_msgs::PoseStamped base_rel_pose_;  /**< Docking base ar marker pose relative to the robot */
@@ -225,7 +227,9 @@ private:
   bool shoftRecovery();
   bool hardRecovery();
 
+  tf::StampedTransform getOdomTf();
   tf::StampedTransform getRobotTf();
+  tf::StampedTransform getTf(const std::string& frame_1, const std::string& frame_2);
 
 
   /********************************************************

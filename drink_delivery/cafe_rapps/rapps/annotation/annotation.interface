@@ -3,7 +3,7 @@ publishers:
   - map
   - map_metadata
   - semantic_map/table_pose_list
-  - semantic_map/ar_marker_list
+  - semantic_map/marker_pose_list
   - viz_ar_list
   - table_marker
   - tf

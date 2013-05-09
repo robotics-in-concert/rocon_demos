@@ -12,8 +12,10 @@
 #include <actionlib/server/simple_action_server.h>
 
 #include <kobuki_msgs/SensorState.h>
+#include <kobuki_msgs/DigitalInputEvent.h>
 
 #include <cafe_msgs/Status.h>
+#include <cafe_msgs/Order.h>
 #include <cafe_msgs/DeliverOrderAction.h>
 #include <semantic_region_handler/TablePoseList.h>
 
@@ -46,6 +48,7 @@ public:
   bool leaveNest();
 
   void odometryCB(const nav_msgs::Odometry::ConstPtr& msg);
+  void digitalInputCB(const kobuki_msgs::DigitalInputEvent::ConstPtr& msg);
   void coreSensorsCB(const kobuki_msgs::SensorState::ConstPtr& msg);
   void tablePosesCB(const semantic_region_handler::TablePoseList::ConstPtr& msg);
 
@@ -59,7 +62,7 @@ protected:
   ros::NodeHandle nh_;
   std::string node_name_;
 
-  // NodeHandle instance must be created before this line. Otherwise strange error may occur.
+  // NodeHandle instance must be created before this line. Otherwise strange error may occur
   actionlib::SimpleActionServer<cafe_msgs::DeliverOrderAction> as_;
 
   // create messages that are used to published feedback/result
@@ -72,10 +75,12 @@ protected:
   ros::Publisher led_1_pub_;
   ros::Publisher led_2_pub_;
   ros::Publisher sound_pub_;
+  ros::Publisher table_marker_pub_;
 
   /*********************
   ** Subscribers
   **********************/
+  ros::Subscriber digital_input_sub_;
   ros::Subscriber core_sensors_sub_;
   ros::Subscriber table_poses_sub_;
 
@@ -85,14 +90,33 @@ protected:
 
   geometry_msgs::PoseStamped             pickup_pose_;
   semantic_region_handler::TablePoseList table_poses_;
-//  ar_track_alvar::AlvarMarker base_marker_;
-//  uint16_t  dock_marker_;   /**< AR marker identifying this robot's docking station */
   kobuki_msgs::SensorState core_sensors_;
   cafe_msgs::Order  order_;
   cafe_msgs::Status status_;
+  std::string global_frame_;
+
+  boost::thread order_process_thread_;
+
+  bool debug_mode_;
+  bool initialized_;
+  bool initialized_table_;
+
+  bool wait_for_button_;
+
+  bool processOrder(cafe_msgs::Order& order);
+  bool getReadyToWork();
+  bool waitForPoses();
+  bool waitForButton();
+  bool gotoTable(int table_id);
+  void sendFeedback(int feedback_status);
+  bool setFailure(std::string reason);
 
   bool cleanupAndSuccess();
   bool cleanupAndError();
+
+  //< DEBUG
+  void fakeOrderForEasyDebugging(int order_id, int table_id);
+  //> DEBUG
 };
 
 } /* namespace waiterbot */

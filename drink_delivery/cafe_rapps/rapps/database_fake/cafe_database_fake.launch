@@ -1,0 +1,17 @@
+<launch>
+  <arg name="world_model_host"       value="$(optenv WORLD_MODEL_HOST localhost)"/>
+  <arg name="world_model_username"       value="$(optenv WORLD_MODEL_USERNAME world)"/>
+  <arg name="world_model_password"       value="$(optenv WORLD_MODEL_PASSWORD model)"/>
+
+  <!-- Map server -->
+  <arg name="map_name" default="$(find cafe_concert)/maps/dorothy_cafe_new_polished.yaml"/>
+  <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
+  </node>
+
+  <include file="$(find semantic_region_handler)/launch/database_handler.launch">
+    <arg name="host" value="$(arg world_model_host)"/>
+    <arg name="user" value="$(arg world_model_username)"/>
+    <arg name="password" value="$(arg world_model_password)"/>
+  </include>
+
+</launch>

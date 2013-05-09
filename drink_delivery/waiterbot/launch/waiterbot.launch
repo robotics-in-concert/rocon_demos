@@ -12,7 +12,7 @@
 
 <launch>
   <!-- Name of the map to use (without path nor extension) and initial position -->
-  <arg name="map_name"       default="dorothy_cafe"/>
+  <arg name="map_name"       default="control_room"/>
   <arg name="initial_pose_x" value="2.0"/>
   <arg name="initial_pose_y" value="2.0"/>
   <arg name="initial_pose_a" value="0.0"/>
@@ -28,12 +28,12 @@
   <!--  ************* Kobuki IR half ring *************  -->
   <include file="$(find waiterbot)/launch/includes/_ir_sensors.launch"/>
 
-  <!--  ********** Kobuki mobile base extras **********  
-  <include file="$(find waiterbot)/launch/includes/_safety_ctrl.launch"/>/////////////////////////////////////////////////////-->
-  <param name="cmd_vel_mux/yaml_cfg_file" value="$(find waiterbot)/param/vel_multiplexer.yaml"/>
+  <!--  ********** Kobuki mobile base extras **********  -->
+  <include file="$(find waiterbot)/launch/includes/_safety_ctrl.launch"/>
+  <param name="/cmd_vel_mux/yaml_cfg_file" value="$(find waiterbot)/param/vel_multiplexer.yaml"/>
 
   <!--  ******** Kobuki auto-docking controller *******  -->
-  <include file="$(find kobuki_auto_docking)/launch/minimal.launch"/>
+  <include file="$(find waiterbot)/launch/includes/_autodock.launch"/>
 
   <!--  ********** Alvar AR markers tracker ***********  -->
   <include file="$(find waiterbot)/launch/includes/_ar_tracker.launch">
@@ -41,7 +41,9 @@
   </include>
 
   <!--  ************* Navigation manager **************  -->
-  <include file="$(find waiterbot)/launch/includes/_master_ctrl.launch"/>
+  <include file="$(find waiterbot)/launch/includes/_master_ctrl.launch">
+    <arg name="debug_mode" value="true"/>
+  </include>
 
   <!--  ************** Rosnav move base ***************  -->
   <include file="$(find waiterbot)/launch/includes/_move_base.launch"/>
@@ -50,17 +52,20 @@
   <node name="map_server" pkg="map_server" type="map_server" args="$(find waiterbot)/resources/maps/$(arg map_name).yaml">
     <param name="frame_id" value="/map"/>
   </node>
-  <include ns="semantic_map" file="$(find semantic_region_handler)/launch/data_publisher_from_file.launch"/>
+  <include file="$(find semantic_region_handler)/launch/data_publisher_from_file.launch"/>
+<!-- 
+  <include file="$(find cafe_rapps)/rapps/database/cafe_database.launch"/>-->
 
   <!--  ******************** Amcl *********************  -->
   <include file="$(find waiterbot)/launch/includes/_amcl.launch">
+    <arg name="scan_topic" value="/scan"/>
     <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
   </include>
 
   <!--  ***************** Visualisation *****************
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz" />   -->
-  <node name="cpu_temperature" pkg="waiterbot" type="cpu_temp.sh"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz" />
+  <node name="cpu_temperature" pkg="waiterbot" type="cpu_temp.sh"/>-->
 
 </launch>
