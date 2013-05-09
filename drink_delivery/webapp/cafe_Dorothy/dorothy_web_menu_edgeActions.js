@@ -253,7 +253,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 				masterUri = "ws://222.100.124.85:9090";
 			else
 				masterUri = "ws://"+masterUri+":9090";
-			sym.$("status_text").html("Concert master address: "+masterUri);
+			sym.$("status_text").html("Concert master address: "+masterUri+" version:201305091812");
 
 			//open new window
 			//window.open("http://m.naver.com", "_self");
@@ -446,16 +446,60 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_accept_blue}", "click", function(sym, e) {
-         // insert code for mouse click here
+// play the timeline from the given position (ms or label)
+sym.play(2059);
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "document", "compositionReady", function(sym, e) {
+         sym.$('Stage').css('background-image','url(images/wood_wallpaper_by_stenosis.jpg)');
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 3948, function(sym, e) {
+         // play the timeline from the given position (ms or label)
+         sym.play(3000);
+         // insert code here
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 4950, function(sym, e) {
+         // play the timeline from the given position (ms or label)
+         sym.play(4000);
+         // insert code here
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 5950, function(sym, e) {
+         // play the timeline from the given position (ms or label)
+         sym.play(5000);
+         // insert code here
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_delete}", "click", function(sym, e) {
+         // play the timeline from the given position (ms or label)
+         sym.play(0000);
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_accept_blue2}", "click", function(sym, e) {
+         // play the timeline from the given position (ms or label)
+         sym.play(3000);
+         
          var ros = sym.getVariable("ROS");
 			var UserOrderClient = new ROSLIB.ActionClient({
 			 ros : ros,
-			 serverName : '/send_order',
+			 serverName : '/cafe_taskcoordinator/send_order',
 			 actionName : 'cafe_msgs/UserOrderAction'
 			});
 			var tableID = sym.getVariable("tableID");
 			var tableID_num = parseInt(tableID);
-		
+
 			var menus = new Array();
 			var ordered_coffee_list = sym.getVariable("ordered_coffee_list");
 			var ordered_sandwich_list = sym.getVariable("ordered_sandwich_list");
@@ -510,18 +554,26 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 				//console.log('Feedback :' + feedback.status);
 				if (feedback.status == 1)
 					sym.$("status_text").html("Waiterbot is going to kitchen.");
-				else if (feedback.status == 2)
+				else if (feedback.status == 2) {
+					sym.play(4000);
 					sym.$("status_text").html("Waiterbot is arrived at kitchen.");
+				}
 				else if (feedback.status == 3)
 					sym.$("status_text").html("Waiterbot is waiting for foods at kitchen.");
-				else if (feedback.status == 4)
+				else if (feedback.status == 4) {
+					sym.play(5000);
 					sym.$("status_text").html("Waiterbot is in delivery.");
+				}
 				else if (feedback.status == 5)
 					sym.$("status_text").html("Waiterbot is arrived at the table.");
-				else if (feedback.status == 5)
+				else if (feedback.status == 6) {
 					sym.$("status_text").html("Waiterbot is waiting for user confirmation.");
-				else if (feedback.status == 6)
+					sym.play(6000);
+				}
+				else if (feedback.status == 7) {
 					sym.$("status_text").html("Delivery service is completed.");
+					sym.play(0);
+				}
 				else
 					console.log(feedback.status);
 			});
@@ -532,12 +584,20 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 			console.log("goal.send()");
 			goal.send();
 			sym.$("status_text").html("Order is received.");
+// stop the timeline at the given position (ms or label)
+         
+
       });
       //Edge binding end
 
-      Symbol.bindElementAction(compId, symbolName, "document", "compositionReady", function(sym, e) {
-         sym.$('Stage').css('background-image','url(images/wood_wallpaper_by_stenosis.jpg)');
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 2904, function(sym, e) {
+         sym.stop();
 
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 3000, function(sym, e) {
+         // insert code here
       });
       //Edge binding end
 
