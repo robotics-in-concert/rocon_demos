@@ -22,6 +22,7 @@ class CActionClientCallBack():
 	m_goal_id = ""
 	m_called_last_feedback = False
 	m_repair_cnt = 0
+	m_previous_robot_status = 0
 	def	__init__(self,robot_name,goal_id):
 		
 		self.m_robot_name = robot_name
@@ -57,7 +58,13 @@ class CActionClientCallBack():
 		#_tempstr = "Call Done Function[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
 		#rospy.loginfo(_tempstr)
 		
-		Recv(None,"DoneCB",arg)
+		if self.m_previous_robot_status == Status.GO_TO_KITCHEN:
+			_tempstr = "The Robot occure ERROR [ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+			rospy.logerr(_tempstr)
+			Recv(Status.ERROR,"DoneCB",arg)
+		else:
+			Recv(Status.IDLE,"DoneCB",arg);	
+		#Recv(None,"DoneCB",arg)
 		
 	def active_cb(self,):
 		arg={}
@@ -75,10 +82,13 @@ class CActionClientCallBack():
 		arg["goal_id"] = self.m_goal_id							
 		Recv(data,"FeedbackCB",arg)
 		
+		self.m_previous_robot_status = data.status
+		
 		if data.status == Status.END_DELIVERY_ORDER:
 			self.m_called_last_feedback = True
 			#_tempstr = "After Call Last FeedBack Function[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
 			#rospy.loginfo(_tempstr)
+			
 
 
 #################################################################
@@ -150,7 +160,8 @@ def Recv(data = None, FuncType = "None", arg = {}):
 		cmdset = commandset.CCmdSet("StatusEvent",'EVENT_MESSAGE')
 		cmdset.setString('goal_id',goal_id)
 		cmdset.setString('robot_name',robot_name)
-		cmdset.setInt('status',Status.IDLE)
+	
+		cmdset.setInt('status',data)
 	
 	if cmdset != None:	
 		EventProc(cmdset)	
@@ -761,10 +772,16 @@ class DeliverySrv_CheckRobot(smach.State):
 		
 		while checkRobotStatusFlag and not rospy.is_shutdown():	
 			for k in robot_status_list.keys():
-			
-				is_ready = (robot_status_list[k] == "IDLE" and  
-							waiter_client[k].wait_for_server(timeout) and
-							not bool([l in robot_status_list.values() for l in robot_busy_list].count(True)))
+
+				
+				is_valid_as = waiter_client[k].wait_for_server(timeout) 
+				is_valid_status =not bool([l in robot_status_list.values() for l in robot_busy_list].count(True)) 
+
+				is_ready = robot_status_list[k] == "IDLE" and  is_valid_as and is_valid_status
+				
+				_tempstr = "Robot Name: ["+str(k)+"] [status: "+robot_status_list[k]+"] [Action server: "+str(is_valid_as)+"] [other Status:"+str(is_valid_status)+"]"
+				rospy.loginfo(_tempstr)
+							
 				
 				if is_ready:
 					robot_status_list[k] = "GO_TO_KITCHEN" 	
