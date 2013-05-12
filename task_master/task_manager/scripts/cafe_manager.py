@@ -58,12 +58,14 @@ class CActionClientCallBack():
 		#_tempstr = "Call Done Function[ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
 		#rospy.loginfo(_tempstr)
 		
-		if self.m_previous_robot_status == Status.GO_TO_KITCHEN:
-			_tempstr = "The Robot occure ERROR [ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
-			rospy.logerr(_tempstr)
-			Recv(Status.ERROR,"DoneCB",arg)
-		else:
-			Recv(Status.IDLE,"DoneCB",arg);	
+		#if self.m_previous_robot_status == Status.GO_TO_KITCHEN:
+		#	_tempstr = "The Robot occure ERROR [ "+self.m_robot_name+"] ["+self.m_goal_id +"]"
+		#	rospy.logerr(_tempstr)
+		#	Recv(Status.ERROR,"DoneCB",arg)
+		#else:
+		#	Recv(Status.IDLE,"DoneCB",arg);	
+		
+		Recv(Status.IDLE,"DoneCB",arg);	
 		#Recv(None,"DoneCB",arg)
 		
 	def active_cb(self,):
