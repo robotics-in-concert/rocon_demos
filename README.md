@@ -10,7 +10,7 @@ Demo software for rocon milestones.
 
 ```
 sudo apt-get install ros-groovy-turtlebot ros-groovy-turtlebot-apps ros-groovy-turtlebot-viz
-sudo apt-get install ros-groovy-rospy-message-converter ros-groovy-rosbridge-suite
+sudo apt-get install ros-groovy-rospy-message-converter ros-groovy-rosbridge-suite ros-groovy-rosserial-python
 sudo pip install -U yujin_tools
 ```
 
