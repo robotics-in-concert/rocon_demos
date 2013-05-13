@@ -4,7 +4,7 @@
   <arg name="world_model_password"       value="$(optenv WORLD_MODEL_PASSWORD model)"/>
 
   <!-- Map server -->
-  <arg name="map_name" default="$(find cafe_concert)/maps/edu_room.yaml"/>
+  <arg name="map_name" default="$(find cafe_concert)/maps/edu_room_cropped.yaml"/>
   <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
   </node>
 
