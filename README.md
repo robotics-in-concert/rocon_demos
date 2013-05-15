@@ -29,7 +29,7 @@ sudo pip install -U yujin_tools
 #### Preparation for World Model Database ####
 
 Postgresql setting for spatial world model in local machine. In order to start the cafe demo solution,
-the database should contain 'Dock', 'Kitchen', 'Table1'~'Table8'. Please store the data by following instruction.
+the database should contain 'docking', 'pickup', 'table1'~'table8'. Please store the data by following instruction.
 
 ```
 > sudo apt-get install postgresql python-psycopg2
