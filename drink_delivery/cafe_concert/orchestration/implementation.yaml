@@ -20,10 +20,10 @@ nodes:
     max: 1
     force_name_matching: true
   - id: customer
-    tuple: android.*.*.OrderDrinks
-    min: 0
-#    tuple: linux.ros.soft_customer.cafe_rapps/multi_customer_soft
-#    min: 1
+#    tuple: android.*.*.OrderDrinks
+#    min: 0
+    tuple: linux.ros.soft_customer.cafe_rapps/multi_customer_soft
+    min: 1
   - id: waiterbot
     tuple: linux.ros.kobuki_soft.cafe_rapps/waiter_soft
     min: 1
