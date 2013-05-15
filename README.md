@@ -82,7 +82,8 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 * Bring up the rocon_webnotator table handler interface
 ** files:///\<PATH_TO_WORKSPACE\>/rocon_webnotator/www/table_handler.html
 
-* Annotate 'Dock', 'Kitchen', and Tables.
+* Annotate 'docking', 'pickup', and Tables.
+* Video demo : http://files.yujinrobot.com/rocon/demos/cafeconcert/annotation.ogv
 
 
 #### Execution ####
@@ -98,4 +99,4 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 
 * Kitchen interface : files:///\<PATH_TO_WORKSPACE\>/rocon_demos/drink_delivery/kitchen/www/index.html
 * Cafe Viewer interface : files:///\<PATH_TO_WORKSPACE\>/rocon_demos/drink_delivery/cafe_viewer/www/index.html
-
+* video demo : http://files.yujinrobot.com/rocon/demos/cafeconcert/cafe_concert.ogv
