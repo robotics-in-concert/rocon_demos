@@ -96,3 +96,7 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 > rocon_launch cafe_concert cafe.concert
 > rosservice call /concert/start_solution
 ```
+
+* Kitchen interface : files:///\<PATH_TO_WORKSPACE\>/rocon_demos/drink_delivery/kitchen/www/index.html
+* Cafe Viewer interface : files:///\<PATH_TO_WORKSPACE\>/rocon_demos/drink_delivery/cafe_viewer/www/index.html
+
