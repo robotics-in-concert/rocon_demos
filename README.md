@@ -76,7 +76,7 @@ All of these are the brief versions of
 Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWORD` env variables if necessary).
 
 ```
-> roslaunch cafe_rapps annotation.launch
+> roslaunch cafe_rapps annotation_fake.launch
 ```
 
 * Bring up the rocon_webnotator table handler interface
@@ -90,6 +90,7 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 * Simple way to launch a demo solution in one computer
 
 ```
+> echo "source ~/cafe_concert/devel/setup.bash" >> ~/.bashrc
 > source ~/cafe_solution/devel/setup.bash
 > rospack profile
 > rocon_launch cafe_concert cafe.concert
