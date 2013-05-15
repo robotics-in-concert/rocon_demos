@@ -92,7 +92,7 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 
 ```
 > echo "source ~/cafe_concert/devel/setup.bash" >> ~/.bashrc
-> source ~/cafe_solution/devel/setup.bash
+> source ~/cafe_concert/devel/setup.bash
 > rospack profile
 > rocon_launch cafe_concert cafe.concert
 ```
