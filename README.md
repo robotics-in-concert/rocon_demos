@@ -1,4 +1,4 @@
 rocon_webinterfaces
 ===================
 
-Repository 
+Collection of web interfaces
