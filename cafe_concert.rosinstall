@@ -20,8 +20,6 @@
     version: hydro-devel}
 - git: {local-name: ar_track_alvar, uri: 'https://github.com/corot/ar_track_alvar.git',
     version: groovy-devel}
-- git: {local-name: robot_pose_publisher, uri: 'https://github.com/jihoonl/robot_pose_publisher.git',
-    version: groovy-devel}
 - git: {local-name: navigation, uri: 'https://github.com/ros-planning/navigation.git',
     version: hydro-devel}
 
