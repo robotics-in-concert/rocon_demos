@@ -98,6 +98,6 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 > rocon_launch cafe_concert cafe.concert
 ```
 
-* Kitchen interface : files:///\<PATH_TO_WORKSPACE\>/rocon_demos/drink_delivery/kitchen/www/index.html
-* Cafe Viewer interface : files:///\<PATH_TO_WORKSPACE\>/rocon_demos/drink_delivery/cafe_viewer/www/index.html
+* Kitchen interface : files:///\<PATH_TO_WORKSPACE\>/rocon_webinterfaces/cafe_concert/kitchen/www/index.html
+* Cafe Viewer interface : files:///\<PATH_TO_WORKSPACE\>/rocon_webinterfaces/cafe_concert/cafe_viewer/www/index.html
 * video demo : http://files.yujinrobot.com/rocon/demos/cafeconcert/cafe_concert.ogv

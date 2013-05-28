@@ -8,6 +8,8 @@
     version: hydro-devel}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: hydro-devel}
+- git: {local-name: rocon_webinterfaces, uri: 'https://github.com/robotics-in-concert/rocon_webinterfaces.git',
+    version: hydro-devel}
 
 ## Catkinzied packages
 - git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
@@ -32,3 +34,6 @@
 # Concert dependency
 - git: {local-name: map_service, uri: 'https://github.com/jihoonl/map_service.git', 
     version: master}
+
+
+
