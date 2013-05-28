@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <title>Rocon - Cafe Viewer</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ROS related -->
+    <script type="text/javascript" src="js/easeljs/easeljs.js"></script>
+    <script type="text/javascript" src="js/eventemitter2/eventemitter2.js"></script>
+    <script type="text/javascript" src="js/ros/roslib.js"></script>
+    <script type="text/javascript" src="js/ros/ros2d.js"></script>
+    <script type="text/javascript" src="js/ros/nav2d.js"></script>
+    <script type="text/javascript" src="js/ros/worldlib.js"></script>
+    <script type="text/javascript" src="js/annotator/annotator.js"></script>
+    <script type="text/javascript" src="js/annotator/circle.js"></script>
+    <script type="text/javascript" src="js/region_viz/regionviz.js"></script>
+    <script type="text/javascript" src="js/region_viz/circle.js"></script>
+    <script type="text/javascript" src="js/region_viz/alvar_ar.js"></script>
+    <script type="text/javascript" src="js/model/Robot.js"></script>
+    <script type="text/javascript" src="js/model/OccupancyGridSrvClient.js"></script>
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet"></link>
+    <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.js"></script>
+    <script src="js/bootstrap/bootstrap-button.js"></script>
+
+    <script src="js/add_orderlist.js"></script>
+
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
+
+    <script type="text/javascript">
+      var ros = new ROSLIB.Ros();
+      var defaultUrL = 'ws://192.168.10.131:9090';
+      var viewer;
+      var gridClient;
+      var circle_region_poller;
+      var ar_region_poller;
+      var annotator;
+
+      $().ready(function(e) {
+
+        initHeader();
+        initViewer()
+        
+        nav_div= $('#nav-orders');
+        
+        var nw = $('#nav-wrapper');
+        nw.css('margin-top','20pt');
+      });
+
+      function initHeader()
+      {
+        settingROSCallbacks();
+
+        ros.connect(defaultUrL);
+
+        $('#connectbtn').on('click',function(e) {
+            var va = $('#focusedInput').val();
+            ros.connect(va);
+            return false;
+        });
+      }
+
+      function initViewer() {
+
+        viewer = createViewer();
+        gridClient = addMap(viewer);
+        addRegionViz(viewer,gridClient);
+        addNavigators(viewer,gridClient);
+      }
+
+      function createViewer() {
+        div = $('#view');
+        div.css('margin-top','20pt');
+
+        var width = div.width();
+        var half_window = $(document).height() -200;
+        var height = half_window;// < 200?200:half_window;
+
+        viewer = new ROS2D.Viewer({
+          divID : 'view',
+          width: width,
+          height: height,
+          background: '#DDDDDD'
+        });
+
+        viewer.scene.mouseEnabled = true;
+        createjs.Touch.enable(viewer.scene);
+        
+
+        $(window).resize(function(e) {
+          var half_window = $(document).height()-200;
+          var height = half_window;// < 200?200:half_window;
+
+          viewer.resizeCanvas(width,height);
+          viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
+        });
+
+        return viewer;
+      }
+
+      function addMap(viewer) {
+        var continuous = false;
+
+        gridClient = new ROS2D.OccupancyGridSrvClient({
+          ros : ros,
+          service : '/map_static',
+          rootObject : viewer.scene,
+        });
+
+        // Scale the canvas to fit to the map
+        gridClient.on('change', function(map_origin) {
+          viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
+        });
+        return gridClient;
+      }
+
+      function addNavigators(viewer,gridClient) {
+        
+        gridClient.on('change', function(map_origin) {
+          var robot1 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : 'waiterbot',
+            size       : 20,
+            topicName  : 'waiterbot/robot_pose',
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(255,64,128,0.66),
+            rootObject : viewer.scene
+          });
+
+          var robot2 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : 'waiterbot2',
+            size       : 20,
+            topicName  : 'waiterbot2/robot_pose',
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
+            rootObject : viewer.scene
+          });
+
+          var robot3 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : 'waiterbot3',
+            size       : 20,
+            topicName  : 'waiterbot3/robot_pose',
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(64,255,128,0.66),
+            rootObject : viewer.scene
+          });
+        });
+      }
+
+      function addRegionViz(viewer,gridClient)
+      {
+        gridClient.on('change', function(map_origin) {
+          circle_region_poller = new REGIONVIZ.Circle({
+            ros: ros,
+            map_origin : map_origin,
+            rootObject : viewer.scene,
+            topicName : '/cafe_database/table_pose_list'
+          });
+
+          ar_region_poller = new REGIONVIZ.AlvarAR({
+            ros: ros,
+            map_origin : map_origin,
+            rootObject : viewer.scene,
+            topicName : '/cafe_database/ar_marker_list',
+          });
+
+        });
+      }
+
+      function settingROSCallbacks()                      
+      {
+        ros.on('connection',function() {
+          console.log("Connected");
+          // subscribe to order list
+                                                     
+          $('#connectbtn').attr('disabled',true);
+          $('#focusedInput').attr('disabled',true);
+
+
+          var listener = new ROSLIB.Topic({
+            ros : ros,
+            name : order_pub_topic,
+            messageType: order_pub_topic_type
+            });
+          listener.subscribe(processOrderList);
+        }
+        );
+        ros.on('error',function(e) {
+          console.log("Error!",e);
+        }
+        );
+                                                     
+        ros.on('close',function() {
+          console.log("Connection Close!");
+          $('#connectbtn').attr('disabled',false);
+          $('#focusedInput').attr('disabled',false);
+        }
+        );
+
+      }
+
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
+          <a class="brand" href="#" style="margin-top:6px">Cafe Viewer</a>
+          <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
+            <input class="input-large" id="focusedInput" type="text" value="ws://192.168.10.131:9090"></input>
+            <button id="connectbtn" class="btn btn-primary btn-normal" data-loading-text="Connecting...">Connect</button>
+          </p>
+        </div>
+      </div>
+
+    <!-- Visualizer -->
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9" id="view"></div>
+        <div id="middle-left" class="span3">
+          <div class="well sidebar-nav" id="nav-wrapper">
+            <center>
+            <h3> Orders </h3>
+            </center>
+            <hr/>
+            <ul id="nav-orders" class"nav nav-list">
+            </ul>
+          </div><!-- well -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

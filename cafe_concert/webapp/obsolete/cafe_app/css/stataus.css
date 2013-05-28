@@ -1,0 +1,281 @@
+@-ms-viewport
+{
+	width: 720px;
+}
+
+@-webkit-viewport
+{
+	width: 720px;
+}
+
+@-o-viewport
+{
+	width: 720px;
+}
+
+@-moz-viewport
+{
+	width: 720px;
+}
+
+@viewport
+{
+	width: 720px;
+}
+
+html
+{
+	background: #7F7F7F url("../images/wood_wallpaper_by_stenosis.jpg") repeat left top scroll;
+}
+
+#page
+{
+	z-index: 1;
+	width: 720px;
+	min-height: 1126.9px;
+	padding-bottom: 8.099999999999909px;
+}
+
+#pu482
+{
+	width: 0.01px;
+	position: relative;
+}
+
+#u482
+{
+	z-index: 6;
+	width: 719px;
+	height: 79px;
+	margin-bottom: -1px;
+	margin-right: -10000px;
+}
+
+#u484
+{
+	z-index: 7;
+	width: 63px;
+	margin-right: -10000px;
+	margin-top: 9px;
+	left: 25px;
+}
+
+#u490-4
+{
+	z-index: 9;
+	width: 368px;
+	min-height: 56px;
+	margin-right: -10000px;
+	margin-top: 15px;
+	left: 88px;
+}
+
+#u491-4
+{
+	z-index: 13;
+	width: 104px;
+	min-height: 21px;
+	margin-right: -10000px;
+	margin-top: 33px;
+	left: 511px;
+}
+
+#u493-4
+{
+	z-index: 17;
+	width: 104px;
+	min-height: 56px;
+	margin-right: -10000px;
+	margin-top: 15px;
+	left: 616px;
+}
+
+#pu852-4
+{
+	width: 0.01px;
+	margin-left: 23px;
+	margin-top: 15px;
+	position: relative;
+}
+
+#u852-4
+{
+	z-index: 21;
+	width: 267px;
+	min-height: 23px;
+	margin-right: -10000px;
+	margin-top: 6px;
+}
+
+#u853
+{
+	z-index: 25;
+	width: 211px;
+	margin-right: -10000px;
+	left: 468px;
+}
+
+#u2248
+{
+	z-index: 33;
+	width: 223px;
+	margin-left: 25px;
+	margin-top: 14px;
+	position: relative;
+}
+
+#u2249
+{
+	z-index: 34;
+	width: 223px;
+	position: relative;
+	margin-right: -10000px;
+}
+
+#u2252
+{
+	z-index: 35;
+	width: 152px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 66px;
+	left: 71px;
+}
+
+#u2250
+{
+	z-index: 37;
+	width: 210px;
+	position: relative;
+	margin-right: -10000px;
+}
+
+#pu2256-6
+{
+	width: 0.01px;
+	padding-bottom: 4px;
+	margin-left: 76px;
+	position: relative;
+}
+
+#u2256-6
+{
+	z-index: 39;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 115px;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 21px;
+}
+
+#u2257-6
+{
+	z-index: 45;
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 143px;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 432px;
+}
+
+#u2274
+{
+	z-index: 63;
+	width: 195px;
+	margin-left: 63px;
+	margin-top: 171px;
+	position: relative;
+}
+
+#pu2268-6
+{
+	width: 0.01px;
+	margin-left: 76px;
+	margin-top: 8px;
+	position: relative;
+}
+
+#u2268-6
+{
+	z-index: 57;
+	display: block;
+	vertical-align: top;
+	margin-bottom: -2px;
+	position: relative;
+	width: 136px;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 11px;
+}
+
+#u2262-6
+{
+	z-index: 51;
+	display: block;
+	vertical-align: top;
+	margin-bottom: -1px;
+	position: relative;
+	width: 115px;
+	margin-right: -10000px;
+	margin-top: 4px;
+	left: 446px;
+}
+
+#u2243
+{
+	z-index: 27;
+	width: 178px;
+	margin-left: 287px;
+	top: -641px;
+	margin-bottom: -44px;
+	position: relative;
+}
+
+#u2258
+{
+	z-index: 29;
+	width: 178px;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	margin-left: 491px;
+	top: -381px;
+	margin-bottom: -111px;
+	position: relative;
+}
+
+#u2263
+{
+	z-index: 31;
+	width: 178px;
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+	margin-left: 287px;
+	top: -74px;
+	margin-bottom: -44px;
+	position: relative;
+}
+
+#u477-4
+{
+	z-index: 2;
+	width: 678px;
+	min-height: 27px;
+	margin-left: 21px;
+	margin-top: 281px;
+}
+
+#page .verticalspacer
+{
+	clear: both;
+}
+
