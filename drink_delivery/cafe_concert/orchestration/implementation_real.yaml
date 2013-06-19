@@ -115,11 +115,11 @@ edges:
   - start: taskcoordinator_waiterbot2_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_2/delivery_order
-    remap_to: /waiterbot2/delivery_order
+    remap_to: /waiterbot1/delivery_order
   - start: taskcoordinator_waiterbot3_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_3/delivery_order
-    remap_to: /waiterbot3/delivery_order
+    remap_to: /waiterbot2/delivery_order
 
   - start:  cafe_taskcoordinator
     finish: taskcoordinator_userdevice_send_order
