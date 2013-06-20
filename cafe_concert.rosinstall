@@ -3,37 +3,37 @@
 #
 
 - git: {local-name: rocon_database, uri: 'https://github.com/robotics-in-concert/rocon_database.git',
-    version: hydro-devel}
+    version: cafe_concert}
 - git: {local-name: rocon_taskcoordinator, uri: 'https://github.com/robotics-in-concert/rocon_taskcoordinator.git',
-    version: hydro-devel}
+    version: cafe_concert}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
-    version: hydro-devel}
+    version: cafe_concert}
 - git: {local-name: rocon_webinterfaces, uri: 'https://github.com/robotics-in-concert/rocon_webinterfaces.git',
-    version: master}
+    version: cafe_concert}
 
 ## Catkinzied packages
-- git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
-    version: hydro-devel}
-- git: {local-name: executive_smach, uri: 'https://github.com/ros/executive_smach.git',
-    version: hydro-devel}
+- git: {local-name: turtlebot, uri: 'https://github.com/jihoonl/turtlebot.git',
+    version: cafe_concert}
+- git: {local-name: executive_smach, uri: 'https://github.com/jihoonl/executive_smach.git',
+    version: cafe_concert}
 
 # Waiterbot dependency
 - git: {local-name: kobuki-x, uri: 'https://github.com/yujinrobot/kobuki-x.git',
-    version: hydro-devel}
+    version: cafe_concert}
 - git: {local-name: ar_track_alvar, uri: 'https://github.com/corot/ar_track_alvar.git',
     version: groovy-devel}
 - git: {local-name: navigation, uri: 'https://github.com/ros-planning/navigation.git',
     version: groovy-devel-catkinized}
 
 # Database Dependency
-- git: {local-name: spatial_world_model, uri: 'https://github.com/WorldModel/spatial_world_model.git',
-    version: groovy-devel}
+- git: {local-name: spatial_world_model, uri: 'https://github.com/jihoonl/spatial_world_model.git',
+    version: cafe_concert}
 - git: {local-name: rocon_webnotator, uri: 'https://github.com/jihoonl/rocon_webnotator.git',
-    version: master}
+    version: cafe_concert}
 
 # Concert dependency
 - git: {local-name: map_service, uri: 'https://github.com/jihoonl/map_service.git', 
-    version: master}
+    version: cafe_concert}
 
 
 
