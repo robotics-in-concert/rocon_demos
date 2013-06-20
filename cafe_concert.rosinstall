@@ -21,9 +21,9 @@
 - git: {local-name: kobuki-x, uri: 'https://github.com/yujinrobot/kobuki-x.git',
     version: cafe_concert}
 - git: {local-name: ar_track_alvar, uri: 'https://github.com/corot/ar_track_alvar.git',
-    version: groovy-devel}
-- git: {local-name: navigation, uri: 'https://github.com/ros-planning/navigation.git',
-    version: groovy-devel-catkinized}
+    version: cafe_concert}
+- git: {local-name: navigation, uri: 'https://github.com/corot/navigation.git',
+    version: cafe_concert}
 
 # Database Dependency
 - git: {local-name: spatial_world_model, uri: 'https://github.com/jihoonl/spatial_world_model.git',
