@@ -24,6 +24,8 @@
     version: cafe_concert}
 - git: {local-name: navigation, uri: 'https://github.com/corot/navigation.git',
     version: cafe_concert}
+- git: {local-name: bosch_drivers, uri: 'https://github.com/corot/bosch_drivers.git',
+    version: cafe_concert}
 
 # Database Dependency
 - git: {local-name: spatial_world_model, uri: 'https://github.com/jihoonl/spatial_world_model.git',
