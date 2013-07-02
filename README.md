@@ -11,7 +11,7 @@ Demo software for rocon milestones.
 ```
 sudo apt-get install ros-groovy-turtlebot ros-groovy-turtlebot-apps ros-groovy-turtlebot-viz
 sudo apt-get install ros-groovy-turtlesim ros-groovy-rospy-message-converter ros-groovy-rosbridge-suite
-sudo apt-get install ros-groovy-robot-pose-publisher ros-groovy-depth-image-proc
+sudo apt-get install ros-groovy-robot-pose-publisher ros-groovy-depth-image-proc ros-groovy-yujin-maps
 sudo pip install -U yujin_tools
 ```
 
