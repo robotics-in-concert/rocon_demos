@@ -36,6 +36,8 @@
 # Concert dependency
 - git: {local-name: map_service, uri: 'https://github.com/jihoonl/map_service.git', 
     version: cafe_concert}
+- git: {local-name: kobuki_softnode, uri: 'https://github.com/yujinrobot/kobuki_softnode.git',
+    version: cafe_concert}
 
 
 
