@@ -3,6 +3,8 @@
 ##
 ##  SHOULD USE up link for up-to-date version
 ##
+### Deb dependency
+### ros-hydro-unique-identifier
 
 
 # Waiterbot
@@ -24,7 +26,6 @@
     version: hydro-devel}
 
 ## Rocon dependency
-# ros-hydro-unique-identifier
 
 - git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
     version: hydro-devel}
