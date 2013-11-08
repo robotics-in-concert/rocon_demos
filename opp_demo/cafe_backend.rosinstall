@@ -1,4 +1,3 @@
-
 ## Cafe backend system  
 
 ## Rocon dependency
@@ -21,11 +20,11 @@
 
 ## Map/Annotation database
 # ros-hydro-map-store
-- git: {local-name: yocs_msgs, uri: 'https://github.com/corot/annotations_store.git',
+- git: {local-name: annotations_store, uri: 'https://github.com/corot/annotations_store.git',
     version: hydro-devel}
 - git: {local-name: yocs_msgs, uri: 'https://github.com/yujinrobot/yocs_msgs.git',
     version: hydro-devel}
 
 ## Web interface 
 - git: {local-name: rocon_webinterfaces, uri: 'https://github.com/robotics-in-concert/rocon_webinterfaces.git',
-    version: hydro-devel}
+    version: master}
