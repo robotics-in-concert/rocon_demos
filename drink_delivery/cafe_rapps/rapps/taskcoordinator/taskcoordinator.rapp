@@ -1,6 +1,6 @@
 disply: Cafe Task Coordinator
 description: The task manager receives orders from customers and re-distributes to kitchen manager and select the pair robot for the order
-platform: linux.ros.pc
+platform: linux.*.ros.pc
 launch: cafe_rapps/taskcoordinator.launch
 interface: cafe_rapps/taskcoordinator.interface
 

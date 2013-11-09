@@ -1,5 +1,5 @@
 display: Cafe Database Annotator
 description: Provides shared information for the given environment such as map and location of tables and provide annotation handle
-platform: linux.ros.pc
+platform: linux.*.ros.pc
 launch:     cafe_rapps/annotation.launch
 interface:  cafe_rapps/annotation.interface

@@ -1,6 +1,6 @@
 apps:
-  - cafe_rapps/cafe_database
-  - cafe_rapps/cafe_database_fake
+  - name: cafe_rapps/cafe_database
+    share: 2
   - cafe_rapps/waiter_soft
   - cafe_rapps/taskcoordinator
   - cafe_rapps/customer_soft
