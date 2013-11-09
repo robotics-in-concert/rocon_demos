@@ -4,7 +4,7 @@
 ##  SHOULD USE up link for up-to-date version
 ##
 ### Deb dependency
-### ros-hydro-unique-identifier
+### ros-hydro-unique-identifier ros-hydro-rocon
 
 
 # Waiterbot
