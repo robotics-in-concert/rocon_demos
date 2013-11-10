@@ -8,10 +8,4 @@
   <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_name)">
   </node>
 
-  <include file="$(find semantic_region_handler)/launch/database_handler.launch">
-    <arg name="host" value="$(arg world_model_host)"/>
-    <arg name="user" value="$(arg world_model_username)"/>
-    <arg name="password" value="$(arg world_model_password)"/>
-  </include>
-
 </launch>
