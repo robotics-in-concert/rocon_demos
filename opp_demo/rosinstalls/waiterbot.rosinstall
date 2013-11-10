@@ -6,6 +6,11 @@
 ### Deb dependency
 ### ros-hydro-unique-identifier ros-hydro-rocon
 
+# Turtlebot
+- git: {local-name: turtlebot_apps, uri: 'https://github.com/turtlebot/turtlebot_apps.git',
+    version: rapp_Fix}
+- git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
+    version: hydro-devel}
 
 # Waiterbot
 - git: {local-name: kobuki-x, uri: 'https://github.com/yujinrobot/kobuki-x.git',
