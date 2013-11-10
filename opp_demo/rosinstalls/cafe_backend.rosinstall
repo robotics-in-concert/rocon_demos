@@ -1,4 +1,5 @@
 ## Cafe backend system  
+## ros-hydro-smach-ros ros-hydro-rosbridge-suite
 
 ## Rocon dependency
 - git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
