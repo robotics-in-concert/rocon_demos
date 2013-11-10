@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="map_service" name="map_relay_service" type="map_service_relay.py"/>
+<!--    <node pkg="map_service" name="map_relay_service" type="map_service_relay.py"/>-->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
       <arg name="port" value="9092" />
     </include>

@@ -1,6 +1,6 @@
 <launch>
     <include file="$(find concert_master)/launch/concert_master.launch">
-        <arg name="concert_name" value="Concert Tutorial"/>
+        <arg name="concert_name" value="OPP Concert"/>
     </include>
     <group ns="concert">
         <node pkg="concert_service_manager" name="add_service" type="add_service_from_file.py">
@@ -11,8 +11,12 @@
             <param name="filename" value="$(find concert_service)/services/chatter.service"/>
         </node>
         
-	<node pkg="concert_service_manager" name="add_service3" type="add_service_from_file.py">
+      	<node pkg="concert_service_manager" name="add_service3" type="add_service_from_file.py">
             <param name="filename" value="$(find opp_demo)/services/teleop.service"/>
+        </node>
+
+        <node pkg="concert_service_manager" name="add_service4" type="add_service_from_file.py">
+            <param name="filename" value="$(find opp_demo)/services/cafe_delivery.service"/>
         </node>
     </group>
 </launch>

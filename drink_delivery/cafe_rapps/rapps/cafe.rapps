@@ -1,6 +1,6 @@
 apps:
   - name: cafe_rapps/cafe_database
     share: 2
-  - cafe_rapps/taskcoordinator
-  - cafe_rapps/kitchen
-  - cafe_rapps/waiter
+  - name: cafe_rapps/taskcoordinator
+  - name: cafe_rapps/kitchen
+  - name: cafe_rapps/waiter

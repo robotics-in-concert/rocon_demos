@@ -5,22 +5,22 @@
 name: "Cafe Concert"
 nodes:
   - id: cafe_database
-    tuple: linux.ros.database.cafe_rapps/cafe_database
+    tuple: linux.*.ros.database.cafe_rapps/cafe_database
     min: 1
     max: 1
     force_name_matching: true
   - id: cafe_taskcoordinator
-    tuple: linux.ros.pc.cafe_rapps/taskcoordinator
+    tuple: linux.*.ros.pc.cafe_rapps/taskcoordinator
     min: 1
     max: 1
     force_name_matching: true
   - id: kitchen
-    tuple: linux.ros.pc.cafe_rapps/kitchen
+    tuple: linux.*.ros.pc.cafe_rapps/kitchen
     min: 1
     max: 1
     force_name_matching: true
   - id: waiterbot
-    tuple: linux.ros.turtlebot.cafe_rapps/waiter
+    tuple: linux.*.ros.turtlebot.cafe_rapps/waiter
     min: 1
     max: 3
   
