@@ -1,5 +1,0 @@
-display: Waiterbot
-description: The turtlebot navigate around the cafe to serve beverages. Fake version
-platform: linux.*.ros.pc
-launch: cafe_rapps/waiter_soft.launch
-interface: cafe_rapps/waiter_soft.interface

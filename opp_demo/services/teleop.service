@@ -2,4 +2,5 @@ name: Teleop
 description: Teleop robot 
 author: YujinRobot
 priority: 2
-launcher: 'roslaunch opp_demo teleop.launch'
+launcher_type: roslaunch
+launcher: opp_demo/teleop

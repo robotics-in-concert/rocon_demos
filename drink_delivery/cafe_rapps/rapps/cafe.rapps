@@ -1,10 +1,6 @@
 apps:
   - name: cafe_rapps/cafe_database
     share: 2
-  - cafe_rapps/waiter_soft
   - cafe_rapps/taskcoordinator
-  - cafe_rapps/customer_soft
-  - cafe_rapps/multi_customer_soft
-  - cafe_rapps/annotation
   - cafe_rapps/kitchen
   - cafe_rapps/waiter
