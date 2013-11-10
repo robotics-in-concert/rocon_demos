@@ -13,6 +13,9 @@
     version: hydro-devel}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: hydro-devel}
+- git: {local-name: rocon_tutorials, uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git',
+    version: hydro-devel}
+
 
 ## Task coordinator
 - git: {local-name: rocon_taskcoordinator, uri: 'https://github.com/robotics-in-concert/rocon_taskcoordinator.git',
@@ -21,7 +24,7 @@
 ## Map/Annotation database
 # ros-hydro-map-store
 - git: {local-name: annotations_store, uri: 'https://github.com/corot/annotations_store.git',
-    version: master}
+    version: hydro-devel}
 - git: {local-name: yocs_msgs, uri: 'https://github.com/yujinrobot/yocs_msgs.git',
     version: hydro-devel}
 
