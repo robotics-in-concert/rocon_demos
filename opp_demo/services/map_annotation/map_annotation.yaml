@@ -1,9 +1,7 @@
-name: "Teleop"
+name: "Map Annotation"
 nodes:
-  - id: robot
-    tuple: linux.*.ros.turtlebot.turtlebot_core_apps/android_teleop
-topics:
-  - id: teleop
-    type: geometry_msgs/Twist
+  - id: database
+    tuple: linux.*.ros.database.cafe_rapps/map_database
+topics: []
 actions: []
 edges: []

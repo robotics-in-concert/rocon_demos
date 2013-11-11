@@ -1,5 +1,5 @@
 apps:
-  - name: cafe_rapps/cafe_database
+  - name: cafe_rapps/map_database
     share: 2
   - name: cafe_rapps/taskcoordinator
   - name: cafe_rapps/kitchen
