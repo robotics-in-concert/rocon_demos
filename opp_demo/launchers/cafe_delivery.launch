@@ -1,5 +1,0 @@
-<launch>
-  <node pkg="concert_service" name="cafe_delivery" type="static_link_graph_service.py" output="screen">
-    <param name="filename" value="$(find opp_demo)/yaml/cafe_delivery_implementation.yaml"/>
-  </node>
-</launch>
