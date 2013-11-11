@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="concert_service_roslaunch" name="map_annotation_node" type="static_link_graph_service.py">
+    <param name="filename" value="$(find opp_demo)/services/map_annotation/map_annotation.yaml"/>
+  </node>
+</launch>
