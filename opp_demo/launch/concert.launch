@@ -3,6 +3,5 @@
         <arg name="concert_name" value="OPP Concert"/>
         <arg name="service_lists" value="opp_demo/opp_demo.services"/>
         <arg name="concert_auto_invite" value="true"/>
-        <arg name="concert_roles_and_apps" value="opp_demo opp_roles_and_apps"/>
     </include>
 </launch>
