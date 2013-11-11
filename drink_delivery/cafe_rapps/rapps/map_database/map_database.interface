@@ -1,0 +1,11 @@
+publishers:
+  - /tf
+  - tf_changes
+  - /tf_changes
+  - map
+subscribers: []
+services:
+  - list_maps
+  - publish_map
+action_clients: []
+action_servers: []

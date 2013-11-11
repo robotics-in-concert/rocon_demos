@@ -1,0 +1,26 @@
+<!--
+  Right now, the android app is hard coded to look for /cmd_vel as the input
+  topic.
+ -->
+<launch>
+  <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
+       relative to which show the map on screnn (logically we use /map) -->
+  <node pkg="tf" type="static_transform_publisher" name="dummy_map_tf_broadcaster"
+       args="0 0 0 0 0 0 map dummy_tf 10" />
+
+  <!-- *************************** Maps *************************** -->
+  <param name="warehouse_host" value="localhost"/>
+  <!-- <param name="warehouse_port" value="27018"/>  27017 is default, use a private one to avoid error 48 conflicts -->
+  <node name="mongo" type="mongo_wrapper_ros.py" pkg="warehouse_ros" output="log">
+    <param name="db_path"        value="warehouse_data"/>
+    <param name="overwrite"      value="false"/>
+  </node>
+  
+  <node ns="map_store" pkg="map_store" type="map_manager" name="map_manager" output="screen"/>
+
+  <!-- *********************** Annotations ************************ -->
+  <node ns="annotations" pkg="annotations_store" type="annotations_manager" name="annotations_manager" output="screen"/>
+
+  <!--  ******************** View Annotations ******************** 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_core_apps)/rapps/android_map_annotation/view_annotations.rviz"/> -->
+</launch>
