@@ -1,23 +1,24 @@
 publishers:
   - /tf
 # Annotation manager
-  - walls
   - visual_markers
-  - columns 
-  - markers
-  - tables
+  - walls_out
+  - columns_out
+  - markers_out
+  - tables_out
 # Map store
   - map
 subscribers:
 # Annotation manager
-  - walls
-  - columns
-  - markers
-  - tables
+  - walls_in
+  - columns_in
+  - markers_in
+  - tables_in
 services:
 # Annotation manager
   - publish_annotations
   - save_annotations
+  - rename_annotations
   - delete_annotations
 # Map store
   - delete_map
