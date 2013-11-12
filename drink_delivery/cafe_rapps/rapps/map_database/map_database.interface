@@ -8,6 +8,7 @@ publishers:
   - tables_out
 # Map store
   - map
+  - map_metadata
 subscribers:
 # Annotation manager
   - walls_in

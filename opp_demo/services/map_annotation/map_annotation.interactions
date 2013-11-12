@@ -22,10 +22,10 @@
         - remap_from: save_annotations
           remap_to: /database/save_annotations
         - remap_from: markers
-          remap_to: /database/markers
+          remap_to: /database/markers_in
         - remap_from: tables
-          remap_to: /database/tables
+          remap_to: /database/tables_in
         - remap_from: columns
-          remap_to: /database/columns
+          remap_to: /database/columns_in
         - remap_from: walls
-          remap_to: /database/walls
+          remap_to: /database/walls_in

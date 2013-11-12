@@ -16,6 +16,9 @@ topics:
 
   - id: map
     type: nav_msgs/OccupancyGrid
+  - id: map_metadata
+    type: nav_msgs/MapMetaData
+
 actions: []
 services:
   - id: pub_annotation
@@ -81,6 +84,10 @@ edges:
     finish: map
     remap_from: map
     remap_to: /map
+  - start: database            
+    finish: map_metadata
+    remap_from: map_metadata
+    remap_to: /map_metadata
 
 ## Service remapping
   - start: database

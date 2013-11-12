@@ -3,6 +3,7 @@ import rospy
 import yaml
 import concert_service_roslaunch
 import map_store.srv
+import annotations_store.srv
 
 from concert_msgs.srv import *
 from concert_msgs.msg import *
@@ -52,8 +53,10 @@ if __name__ == '__main__':
     rospy.rostime.wallsleep(5.0)  # human time
     if map_id:
         rospy.loginfo("Loading map : " + str(map_id))
-        srv = rospy.ServiceProxy('/database/publish_map',map_store.srv.PublishMap)
-        srv(map_id)
+        map_load = rospy.ServiceProxy('/database/publish_map',map_store.srv.PublishMap)
+        anno_load = rospy.ServiceProxy('/database/publish_annotations',annotations_store.srv.PublishAnnotations)
+        map_load(map_id)
+        anno_load(map_id)
     else:
         rospy.loginfo("No map ID")
     rospy.spin()
