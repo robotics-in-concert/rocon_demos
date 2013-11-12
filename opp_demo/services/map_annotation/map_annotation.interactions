@@ -1,11 +1,31 @@
 - role: 'Cafe Manager'
   remocon_apps:
-    - name: rocon_interactions/listener
+    - name: com.github.robotics_in_concert.rocon_android_apps.map_annotation.MainActivity
       platform_info:
-        os: "*" 
-        version: "*" 
-        system: ros 
-        platform: pc
-      display_name: Listener
-      description: For dudes wanting to listen to dudettes.
-      max: -1
+        os: android
+        version: "*"
+        system: ros
+        platform: smart_device
+      display_name: Map Annotation
+      description: Add semantic information to a metric map
+      icon:
+        resource_name: concert_roles/map_annotation_icon.png
+      parameters: "{pickup_point: pickup, map_frame: /map}"
+      max: 1
+      remappings:
+        - remap_from: map
+          remap_to: /database/map
+        - remap_from: list_maps
+          remap_to: /database/list_maps
+        - remap_from: publish_map
+          remap_to: /database/publish_map
+        - remap_from: save_annotations
+          remap_to: /database/save_annotations
+        - remap_from: markers
+          remap_to: /database/markers
+        - remap_from: tables
+          remap_to: /database/tables
+        - remap_from: columns
+          remap_to: /database/columns
+        - remap_from: walls
+          remap_to: /database/walls
