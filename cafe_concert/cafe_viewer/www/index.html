@@ -36,7 +36,7 @@
 
     <script type="text/javascript">
       var ros = new ROSLIB.Ros();
-      var defaultUrL = 'ws://192.168.10.131:9090';
+      var defaultUrL = 'ws://192.168.0.131:9090';
       var viewer;
       var gridClient;
       var circle_region_poller;
@@ -108,9 +108,9 @@
       function addMap(viewer) {
         var continuous = false;
 
-        gridClient = new ROS2D.OccupancyGridSrvClient({
+        gridClient = new ROS2D.OccupancyGridClient({
           ros : ros,
-          service : '/map_static',
+          service : '/map',
           rootObject : viewer.scene,
         });
 
@@ -127,9 +127,9 @@
           var robot1 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            name       : 'waiterbot',
+            name       : 'chopin',
             size       : 20,
-            topicName  : 'waiterbot/robot_pose',
+            topicName  : '/chopin/robot_pose',
             topicType  : 'geometry_msgs/PoseStamped',
             fillColor  : createjs.Graphics.getRGB(255,64,128,0.66),
             rootObject : viewer.scene
@@ -138,14 +138,15 @@
           var robot2 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            name       : 'waiterbot2',
+            name       : 'elgar',
             size       : 20,
-            topicName  : 'waiterbot2/robot_pose',
+            topicName  : '/elgar/robot_pose',
             topicType  : 'geometry_msgs/PoseStamped',
             fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
             rootObject : viewer.scene
           });
 
+          /*
           var robot3 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
@@ -155,7 +156,7 @@
             topicType  : 'geometry_msgs/PoseStamped',
             fillColor  : createjs.Graphics.getRGB(64,255,128,0.66),
             rootObject : viewer.scene
-          });
+          });*/
         });
       }
 
@@ -166,14 +167,14 @@
             ros: ros,
             map_origin : map_origin,
             rootObject : viewer.scene,
-            topicName : '/cafe_database/table_pose_list'
+            topicName : '/database/tables_out'
           });
 
           ar_region_poller = new REGIONVIZ.AlvarAR({
             ros: ros,
             map_origin : map_origin,
             rootObject : viewer.scene,
-            topicName : '/cafe_database/ar_marker_list',
+            topicName : '/database/markers_out',
           });
 
         });
@@ -221,7 +222,7 @@
           <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
           <a class="brand" href="#" style="margin-top:6px">Cafe Viewer</a>
           <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
-            <input class="input-large" id="focusedInput" type="text" value="ws://192.168.10.131:9090"></input>
+            <input class="input-large" id="focusedInput" type="text" value="ws://192.168.0.131:9090"></input>
             <button id="connectbtn" class="btn btn-primary btn-normal" data-loading-text="Connecting...">Connect</button>
           </p>
         </div>

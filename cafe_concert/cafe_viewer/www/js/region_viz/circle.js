@@ -12,8 +12,8 @@ REGIONVIZ.Circle = function(options) {
   that.rootObject = options.rootObject;
   var map_origin = options.map_origin;
   that.color = options.color || createjs.Graphics.getRGB(138,54,15,0.6);
-  that.topicName = options.topicName || '/semantic_map/table_pose_list';
-  that.topicType = options.topicType || '/semantic_region_handler/TablePoseList';
+  that.topicName = options.topicName || '/table_pose_list';
+  that.topicType = options.topicType || '/yocs_msgs/TableList';
   that.tables = [];
   that.circle_viz = {};
   that.texts = {};
@@ -52,9 +52,9 @@ REGIONVIZ.Circle = function(options) {
     for(t in msg.tables) 
     {
       var table = msg.tables[t];
-      var x = table.pose_cov_stamped.pose.pose.position.x - map_origin.position.x;
-      var y = -(table.pose_cov_stamped.pose.pose.position.y - map_origin.position.y);
-      var o = table.pose_cov_stamped.pose.pose.orientation;
+      var x = table.pose.pose.pose.position.x - map_origin.position.x;
+      var y = -(table.pose.pose.pose.position.y - map_origin.position.y);
+      var o = table.pose.pose.pose.orientation;
       var r = table.radius;
       var name = table.name;
 
