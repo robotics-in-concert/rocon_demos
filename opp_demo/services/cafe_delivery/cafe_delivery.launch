@@ -1,5 +1,6 @@
 <launch>
-  <node pkg="concert_service_roslaunch" name="cafe_delivery" type="static_link_graph_service.py">
+  <node pkg="opp_demo" name="cafe_delivery" type="start_cafe_delivery.py">
     <param name="filename" value="$(find opp_demo)/services/cafe_delivery/cafe_delivery.yaml"/>
+    <param name="map_id" value=""/>
   </node>
 </launch>
