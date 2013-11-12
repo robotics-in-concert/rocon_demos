@@ -53,7 +53,9 @@ if __name__ == '__main__':
     rospy.rostime.wallsleep(5.0)  # human time
     if map_id:
         rospy.loginfo("Loading map : " + str(map_id))
+        rospy.wait_for_service('/database/publish_map')
         map_load = rospy.ServiceProxy('/database/publish_map',map_store.srv.PublishMap)
+        rospy.wait_for_service('/database/publish_annotations')
         anno_load = rospy.ServiceProxy('/database/publish_annotations',annotations_store.srv.PublishAnnotations)
         map_load(map_id)
         anno_load(map_id)
