@@ -4,7 +4,7 @@
 
 name: "Cafe Concert"
 nodes:
-  - id: cafe_database
+  - id: database
     tuple: linux.*.ros.database.cafe_rapps/map_database
     min: 1
     max: 1
@@ -14,141 +14,134 @@ nodes:
     min: 1
     max: 1
     force_name_matching: true
-  - id: kitchen
-    tuple: linux.*.ros.pc.cafe_rapps/kitchen
-    min: 1
-    max: 1
-    force_name_matching: true
-  - id: waiterbot
-    tuple: linux.*.ros.turtlebot.cafe_rapps/waiter
-    min: 1
-    max: 3
+#  - id: kitchen
+#    tuple: linux.*.ros.pc.cafe_rapps/kitchen
+#    min: 1
+#    max: 1
+#    force_name_matching: true
+#  - id: waiterbot
+#    tuple: linux.*.ros.turtlebot.cafe_rapps/waiter
+#    min: 2
+#    max: 2
   
-topics: []
-## Cafe database - Waiterbot
-# - id: cafe_database_waiterbot_map
-#   type: nav_msgs/OccupancyGrid
-# - id: cafe_database_waiterbot_map_metadata
-#   type: nav_msgs/MapMetaData
-# - id: cafe_database_waiterbot_table_pose_list
-#   type: semantic_region_handler/TablePoseList
-# - id: cafe_database_waiterbot_marker_pose_list
-#   type: ar_track_alvar/AlvarMarkers
+topics:
+################# Map Database
+  - id: annotation_columns
+    type: yocs_msgs/ColumnList
+  - id: annotation_visual_marker
+    type: visualization_msgs/MarkerArray
+  - id: annotation_walls
+    type: yocs_msgs/WallList
+  - id: annotation_markers
+    type: ar_track_alvar/AlvarMarkers
+  - id: annotation_tables
+    type: yocs_msgs/TableList
 
-###Task Coordinator - Kitchen Manager
-# - id: taskcoordinator_kitchen_list_order
-#   type: cafe_msgs/OrderList
-
-###Visualization topics in workspace
-## Waiterbot1
-# - id: waiterbot_pose 
-#   type: geometry_msgs/PoseStamped
-###Waiterbot2
-##- id: waiterbot2_pose 
-##  type: geometry_msgs/PoseStamped
-###Waiterbot3
-##- id: waiterbot3_pose 
-##  type: geometry_msgs/PoseStamped
-## Cafe database
-# - id: cafe_database_table_marker
-#   type: visualization_msgs/MarkerArray
-# - id: cafe_database_ar_marker
-#   type: visualization_msgs/MarkerArray
-# - id: cafe_database_tf
-#   type: tf/tfMessage 
-
+  - id: map
+    type: nav_msgs/OccupancyGrid
 
 actions: []
-###Task Coordinator - User Device
-# - id: taskcoordinator_userdevice_send_order
-#   type: cafe_msgs/UserOrder
+services:
+################ Map Database 
+  - id: pub_annotation
+    type: annotations_store/PublishAnnotations
+  - id: save_annotation
+    type: annotations_store/SaveAnnotations
+  - id: del_annotation 
+    type: annotations_store/DeleteAnnotations
+  - id: del_map
+    type: map_store/DeleteMap
+  - id: dynamic_map
+    type: nav_msgs/GetMap
+  - id: rename_map
+    type: map_store/RenameMap
+  - id: pub_map
+    type: map_store/PublishMap 
+  - id: list_maps
+    type: map_store/ListMaps 
 
-###Task Coordinator - Waiterbot
-# - id: taskcoordinator_waiterbot_delivery_order
-#   type: cafe_msgs/DeliveryOrder
+edges: 
+# Publishers
+  - start: database
+    finish: annotation_visual_marker
+    remap_from: visual_markers
+    remap_to: /database/visual_markers
 
-edges: []
-###Cafe database
-# - start: cafe_database
-#   finish: cafe_database_waiterbot_map 
-#   remap_from: map
-#   remap_to: /map
-# - start: cafe_database
-#   finish: cafe_database_waiterbot_map_metadata
-#   remap_from: map_metadata
-#   remap_to: /map_metadata
-# - start: cafe_database
-#   finish: cafe_database_waiterbot_table_pose_list
-#   remap_from: table_pose_list
-#   remap_to: /cafe_database/table_pose_list
-# - start: cafe_database
-#   finish: cafe_database_waiterbot_marker_pose_list
-#   remap_from: marker_pose_list 
-#   remap_to: /cafe_database/marker_pose_list
-# - start: cafe_database
-#   finish: cafe_database_table_marker
-#   remap_from: table_marker
-#   remap_to: /cafe_database/table_marker
-# - start: cafe_database
-#   finish: cafe_database_ar_marker
-#   remap_from: viz_ar_list
-#   remap_to: /cafe_database/ar_list
-# - start: cafe_database
-#   finish: cafe_database_tf
-#   remap_from: tf
-#   remap_to: /tf 
+  - start: database
+    finish: annotations_columns
+    remap_from: columns_out
+    remap_to: /database/columns_out
+  - start: database
+    finish: annotation_walls
+    remap_from: walls_out
+    remap_to: /database/walls_out
+  - start: database
+    finish: annotation_markers
+    remap_from: markers_out
+    remap_to: /database/markers_out
+  - start: database
+    finish: annotation_tables
+    remap_from: tables_out
+    remap_to: /database/tables_out
 
-###Task Coordinator
-# - start: taskcoordinator_waiterbot_delivery_order
-#   finish: cafe_taskcoordinator
-#   remap_from: waiter_1/delivery_order
-#   remap_to: /waiterbot/delivery_order
-# - start: taskcoordinator_waiterbot2_delivery_order
-#   finish: cafe_taskcoordinator
-#   remap_from: waiter_2/delivery_order
-#   remap_to: /waiterbot1/delivery_order
-# - start: taskcoordinator_waiterbot3_delivery_order
-#   finish: cafe_taskcoordinator
-#   remap_from: waiter_3/delivery_order
-#   remap_to: /waiterbot2/delivery_order
+# Subscribers
+  - start: annotations_columns
+    finish: database 
+    remap_from: columns_in 
+    remap_to: /database/columns_in
+  - start: annotation_walls
+    finish: database
+    remap_from: walls_in
+    remap_to: /database/walls_in
+  - start: annotation_markers
+    finish: database
+    remap_from: markers_in
+    remap_to: /database/markers_in
+  - start: annotation_tables
+    finish: database
+    remap_from: tables_in
+    remap_to: /database/tables_in
 
-# - start:  cafe_taskcoordinator
-#   finish: taskcoordinator_userdevice_send_order
-#   remap_from: send_order
-#   remap_to: /cafe_taskcoordinator/send_order
-# - start: cafe_taskcoordinator
-#   finish: taskcoordinator_kitchen_list_order
-#   remap_from: list_order
-#   remap_to: /list_order
+# map store
+  - start: database
+    finish: map
+    remap_from: map
+    remap_to: /database/map
 
-###Kitchen Manager
-# - start: taskcoordinator_kitchen_list_order
-#   finish: kitchen
-#   remap_from: list_order
-#   remap_to: /list_order
-
-###Waiter
-# - start: cafe_database_waiterbot_map
-#   finish: waiterbot
-#   remap_from: map
-#   remap_to: /map
-# - start: cafe_database_waiterbot_map_metadata
-#   finish: waiterbot
-#   remap_from: map_metadata
-#   remap_to: /map_metadata
-# - start: cafe_database_waiterbot_table_pose_list
-#   finish: waiterbot
-#   remap_from: table_pose_list
-#   remap_to: /cafe_database/table_pose_list
-# - start: cafe_database_waiterbot_marker_pose_list
-#   finish: waiterbot
-#   remap_from: marker_pose_list 
-#   remap_to: /cafe_database/marker_pose_list
-# - start: waiterbot
-#   finish: taskcoordinator_waiterbot_delivery_order
-#   remap_from: delivery_order
-#   remap_to: delivery_order
-# - start: waiterbot
-#   finish: waiterbot_pose
-#   remap_from: robot_pose
-#   remap_to: robot_pose
+## Service remapping
+  - start: database
+    finish: pub_annotation
+    remap_from: publish_annotations
+    remap_to: /database/publish_annotations
+  - start: database
+    finish: save_annotation
+    remap_from: save_annotations
+    remap_to: /database/save_annotations
+  - start: database
+    finish: rename_annotation
+    remap_from: rename_annotations
+    remap_to: /database/rename_annotations
+  - start: database
+    finish: del_annotation 
+    remap_from: delete_annotations
+    remap_to: /database/delete_annotations
+  - start: database
+    finish: del_map
+    remap_from: delete_map
+    remap_to: /database/delete_map
+  - start: database
+    finish: dynamic_map 
+    remap_from: dynamic_map 
+    remap_to: /database/dynamic_map
+  - start: database
+    finish: rename_map 
+    remap_from: rename_map 
+    remap_to: /database/rename_map
+  - start: database
+    finish: pub_map 
+    remap_from: publish_map 
+    remap_to: /database/publish_map
+  - start: database
+    finish: list_maps 
+    remap_from: list_maps 
+    remap_to: /database/list_maps
