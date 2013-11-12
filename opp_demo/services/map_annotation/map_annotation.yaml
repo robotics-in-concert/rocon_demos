@@ -59,20 +59,20 @@ edges:
     remap_to: /database/tables_out
 
 # Subscribers
-  - start: database
-    finish: annotations_columns
+  - start: annotations_columns
+    finish: database 
     remap_from: columns_in 
     remap_to: /database/columns_in
-  - start: database
-    finish: annotation_walls
+  - start: annotation_walls
+    finish: database
     remap_from: walls_in
     remap_to: /database/walls_in
-  - start: database
-    finish: annotation_markers
+  - start: annotation_markers
+    finish: database
     remap_from: markers_in
     remap_to: /database/markers_in
-  - start: database
-    finish: annotation_tables
+  - start: annotation_tables
+    finish: database
     remap_from: tables_in
     remap_to: /database/tables_in
 
