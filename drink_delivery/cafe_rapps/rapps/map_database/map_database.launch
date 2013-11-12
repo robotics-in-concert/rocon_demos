@@ -16,10 +16,11 @@
     <param name="overwrite"      value="false"/>
   </node>
   
-  <node ns="map_store" pkg="map_store" type="map_manager" name="map_manager" output="screen"/>
+  <node pkg="map_store" type="map_manager" name="map_manager" output="screen"/>
 
   <!-- *********************** Annotations ************************ -->
-  <node ns="annotations" pkg="annotations_store" type="annotations_manager" name="annotations_manager" output="screen"/>
+  <node pkg="annotations_store" type="annotations_manager" name="annotations_manager" output="screen">
+  </node>
 
   <!--  ******************** View Annotations ******************** 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_core_apps)/rapps/android_map_annotation/view_annotations.rviz"/> -->

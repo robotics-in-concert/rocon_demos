@@ -1,34 +1,29 @@
 publishers:
   - /tf
 # Annotation manager
-  - annotations/warehouse/annotations_store/walls/inserts
-  - annotations/walls
-  - annotations/visual_markers
-  - annotations/warehouse/annotations_store/markers/inserts
-  - annotations/columns 
-  - annotations/markers
-  - annotations/warehouse/annotations_store/tables/inserts
-  - annotations/warehouse/annotations_store/columns/inserts
-  - annotations/tables
+  - walls
+  - visual_markers
+  - columns 
+  - markers
+  - tables
 # Map store
-  - map_store/warehouse/map_store/maps/inserts
-  - map_store/map
+  - map
 subscribers:
 # Annotation manager
-  - annotations/walls
-  - annotations/columns
-  - annotations/markers
-  - annotations/tables
+  - walls
+  - columns
+  - markers
+  - tables
 services:
 # Annotation manager
-  - annotations/publish_annotations
-  - annotations/save_annotations
-  - annotations/delete_annotations
+  - publish_annotations
+  - save_annotations
+  - delete_annotations
 # Map store
-  - map_store/delete_map
-  - map_store/dynamic_map
-  - map_store/rename_map
-  - map_store/publish_map
-  - map_store/list_maps
+  - delete_map
+  - dynamic_map
+  - rename_map
+  - publish_map
+  - list_maps
 action_clients: []
 action_servers: []
