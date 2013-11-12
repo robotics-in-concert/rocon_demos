@@ -1,0 +1,19 @@
+- role: 'Cafe Manager'
+  remocon_apps:
+    - name: com.github.robotics_in_concert.rocon_android_apps.map_annotation.MainActivity
+      platform_info:
+        os: android
+        version: "*"
+        system: ros
+        platform: smart_device
+      display_name: Teleop Robot
+      description: Teleoperate a turtlebot 
+      icon:
+        resource_name: concert_roles/map_annotation_icon.png
+      parameters: "{pickup_point: pickup, map_frame: /map}"
+      max: 1
+      remappings:
+        - remap_from: cmd_vel
+          remap_to: /robot_teleop/cmd_vel
+        - remap_from: image_color 
+          remap_to: /robot_teleop/image_color/compressed_throttle

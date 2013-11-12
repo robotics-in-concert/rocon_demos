@@ -5,5 +5,15 @@ nodes:
 topics:
   - id: teleop
     type: geometry_msgs/Twist
+  - id: image
+    type: sensor_msgs/CompressedImage
 actions: []
-edges: []
+edges: 
+  - start: robot
+    finish: teleop
+    remap_from: android/virtual_joystick/cmd_vel
+    remap_to: /robot_teleop/cmd_vel
+  - start: robot
+    finish: image 
+    remap_from: camera/rgb/image_color/compressed_throttle 
+    remap_to: /robot_teleop/image_color/compressed_throttle
