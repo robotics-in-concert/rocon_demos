@@ -4,4 +4,10 @@
         <arg name="service_lists" value="opp_demo/opp_demo.services"/>
         <arg name="concert_auto_invite" value="true"/>
     </include>
+    <group ns="concert">
+      <node pkg="rocon_tf_reconstructor" name="rocon_tf_reconstructor" type="rocon_tf_reconstructor"/>
+      <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+    </group>
+
+
 </launch>

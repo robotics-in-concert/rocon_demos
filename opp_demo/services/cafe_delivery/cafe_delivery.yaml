@@ -19,10 +19,10 @@ nodes:
 #    min: 1
 #    max: 1
 #    force_name_matching: true
-#  - id: waiterbot
-#    tuple: linux.*.ros.turtlebot.cafe_rapps/waiter
-#    min: 2
-#    max: 2
+  - id: waiterbot
+    tuple: linux.*.ros.turtlebot.cafe_rapps/waiter
+    min: 1
+    max: 1
   
 topics:
 ################# Map Database
@@ -40,7 +40,17 @@ topics:
   - id: map
     type: nav_msgs/OccupancyGrid
 
-actions: []
+############### Task coordinator
+  - id: taskcoordinator_kitchen_list_order
+    type: cafe_msgs/OrderList
+
+actions:
+############### Task coordinator
+  - id: taskcoordinator_userdevice_send_order
+    type: cafe_msgs/UserOrder
+  - id: taskcoordinator_waiterbot_delivery_order
+    type: cafe_msgs/DeliveryOrder
+
 services:
 ################ Map Database 
   - id: pub_annotation
@@ -106,7 +116,7 @@ edges:
   - start: database
     finish: map
     remap_from: map
-    remap_to: /database/map
+    remap_to: /map
 
 ## Service remapping
   - start: database
@@ -145,3 +155,40 @@ edges:
     finish: list_maps 
     remap_from: list_maps 
     remap_to: /database/list_maps
+
+## Waiterbot
+  - start: map
+    finish: waiterbot
+    remap_from: map
+    remap_to: /map
+  - start: annotation_tables
+    finish: waiterbot
+    remap_from: table_pose_list
+    remap_to: /database/tables_out
+  - start: annotation_markers
+    finish: waiterbot
+    remap_from: marker_pose_list
+    remap_to: /database/markers_out
+
+## Task Coordinator
+  - start: taskcoordinator_waiterbot_delivery_order
+    finish: cafe_taskcoordinator
+    remap_from: waiter_1/delivery_order
+    remap_to: /adams/delivery_order
+  - start: taskcoordinator_waiterbot_delivery_order
+    finish: cafe_taskcoordinator
+    remap_from: waiter_2/delivery_order
+    remap_to: /chopin/delivery_order
+  - start: taskcoordinator_waiterbot_delivery_order
+    finish: cafe_taskcoordinator
+    remap_from: waiter_3/delivery_order
+    remap_to: /elgar/delivery_order
+
+  - start: cafe_taskcoordinator
+    finish: taskcoordinator_userdevice_send_order
+    remap_from: send_order
+    remap_to: /cafe/send_order
+  - start: cafe_taskcoordinator
+    finish: taskcoordinator_userdevice_send_order
+    remap_from: list_order
+    remap_to: /cafe/list_order

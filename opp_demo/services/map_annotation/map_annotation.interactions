@@ -1,4 +1,4 @@
-- role: 'Cafe Manager'
+- role: 'Admin'
   remocon_apps:
     - name: com.github.robotics_in_concert.rocon_android_apps.map_annotation.MainActivity
       platform_info:

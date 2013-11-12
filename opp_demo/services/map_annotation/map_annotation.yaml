@@ -80,7 +80,7 @@ edges:
   - start: database
     finish: map
     remap_from: map
-    remap_to: /database/map
+    remap_to: /map
 
 ## Service remapping
   - start: database
