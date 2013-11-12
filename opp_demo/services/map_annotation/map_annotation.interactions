@@ -14,7 +14,7 @@
       max: 1
       remappings:
         - remap_from: map
-          remap_to: /database/map
+          remap_to: /map
         - remap_from: list_maps
           remap_to: /database/list_maps
         - remap_from: publish_map

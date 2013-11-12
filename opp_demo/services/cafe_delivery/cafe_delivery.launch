@@ -1,6 +1,6 @@
 <launch>
   <node pkg="opp_demo" name="cafe_delivery" type="start_cafe_delivery.py">
     <param name="filename" value="$(find opp_demo)/services/cafe_delivery/cafe_delivery.yaml"/>
-    <param name="map_id" value=""/>
+    <param name="map_id" value="34d253c0-8090-4129-a7e9-56a225c782a3"/>
   </node>
 </launch>

@@ -2,7 +2,7 @@
 import rospy
 import yaml
 import concert_service_roslaunch
-import map_store
+import map_store.srv
 
 from concert_msgs.srv import *
 from concert_msgs.msg import *
@@ -39,16 +39,21 @@ if __name__ == '__main__':
     filename = rospy.get_param('~filename')
     name, impl = load_linkgraph_from_file(filename)
     sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, impl)
+
+    rospy.rostime.wallsleep(3.0)  # human time
     sgsh.request_resources(True)
 
     rospy.on_shutdown(sgsh.shutdown)
 
-    map_id = rospy.get_param('map_id',None)
+    map_id = rospy.get_param('~map_id',None)
 
     #  It is hack to wait until the map database is up.
     #  The proper way to do is wait until the service obtained the all resources and request to load a map
     rospy.rostime.wallsleep(5.0)  # human time
     if map_id:
+        rospy.loginfo("Loading map : " + str(map_id))
         srv = rospy.ServiceProxy('/database/publish_map',map_store.srv.PublishMap)
         srv(map_id)
+    else:
+        rospy.loginfo("No map ID")
     rospy.spin()
