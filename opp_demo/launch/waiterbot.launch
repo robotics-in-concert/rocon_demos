@@ -1,6 +1,6 @@
 <launch>
   <include file="$(find turtlebot_bringup)/launch/minimal_with_appmanager.launch">
     <arg name="hub_whitelist" value="OPP Concert"/>
-    <arg name="rapp_lists" value="rocon_apps/rocon.rapps;turtlebot_bringup/turtlebot.rapps;cafe_rapps/cafe.rapps"/>
+    <arg name="rapp_lists" value="rocon_apps/rocon.rapps;cafe_rapps/cafe.rapps"/>
   </include>
 </launch>
