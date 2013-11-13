@@ -826,7 +826,7 @@ def main():
 	
 	####################################################
 	global kitchen_mgr_pub
-	kitchen_mgr_pub = rospy.Publisher('/list_order',OrderList,latch = True)
+	kitchen_mgr_pub = rospy.Publisher('list_order',OrderList,latch = True)
 	####################################################
 	
 	####################################################
