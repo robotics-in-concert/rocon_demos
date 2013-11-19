@@ -18,7 +18,7 @@
 - git: {local-name: ar_track_alvar, uri: 'https://github.com/corot/ar_track_alvar.git',
     version: rocon_demo_201311}
 - git: {local-name: bosch_drivers, uri: 'https://github.com/corot/bosch_drivers.git',
-    version: master}
+    version: rocon_demo_201311}
 - git: {local-name: yocs_msgs, uri: 'https://github.com/yujinrobot/yocs_msgs.git',
     version: rocon_demo_201311}
 - git: {local-name: yujin_ocs, uri: 'https://github.com/yujinrobot/yujin_ocs.git',

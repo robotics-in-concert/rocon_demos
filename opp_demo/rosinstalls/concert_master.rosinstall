@@ -9,7 +9,7 @@
     version: rocon_demo_201311}
 - git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
     version: rocon_demo_201311}
-- git: {local-name: rocon_rqt_plugins, uri: 'https://github.com/robotics-in-concert/rocon_rqt_plugins.git',
+- git: {local-name: rocon_qt_gui, uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git',
     version: rocon_demo_201311}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: rocon_demo_201311}
