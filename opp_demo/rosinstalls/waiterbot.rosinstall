@@ -23,7 +23,7 @@
     version: rocon_demo_201311}
 - git: {local-name: yujin_ocs, uri: 'https://github.com/yujinrobot/yujin_ocs.git',
     version: rocon_demo_201311}
-- git: {local-name: navigation, uri: 'https://github.com/corot/navigation.git',
+- git: {local-name: navigation, uri: 'https://github.com/yujinrobot/navigation.git',
     version: rocon_demo_201311}
 
 # Cafe dependencies
