@@ -4,7 +4,8 @@
 ##  SHOULD USE up link for up-to-date version
 ##
 ### Deb dependency
-### ros-hydro-unique-identifier ros-hydro-rocon
+### ros-hydro-unique-identifier ros-hydro-rocon ros-hydro-turtlebot ros-hydro-turtlebot-apps
+
 
 # Turtlebot
 - git: {local-name: turtlebot_apps, uri: 'https://github.com/turtlebot/turtlebot_apps.git',
