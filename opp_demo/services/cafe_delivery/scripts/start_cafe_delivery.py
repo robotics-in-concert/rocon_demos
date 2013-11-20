@@ -39,7 +39,10 @@ if __name__ == '__main__':
     rospy.init_node('start_cafe_delivery', anonymous=True)
     filename = rospy.get_param('~filename')
     name, impl = load_linkgraph_from_file(filename)
-    sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, impl)
+    name = rospy.get_param("name")
+    uuid = rospy.get_param("uuid")
+    description = rospy.get_param("description")
+    sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, uuid, description, impl)
 
     rospy.rostime.wallsleep(3.0)  # human time
     sgsh.request_resources(True)
