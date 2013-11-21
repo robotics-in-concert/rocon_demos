@@ -1,6 +1,7 @@
 name: Teleop
-description: Teleop robot 
+description: "Teleop robot with android"
 author: YujinRobot
 priority: 2
 launcher_type: roslaunch
 launcher: opp_demo/teleop
+interactions: opp_demo/teleop
