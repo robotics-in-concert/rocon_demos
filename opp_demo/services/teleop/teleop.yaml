@@ -9,8 +9,8 @@ topics:
     type: sensor_msgs/CompressedImage
 actions: []
 edges: 
-  - start: teleop
-    finish: robot
+  - start: robot
+    finish: teleop
     remap_from: android/virtual_joystick/cmd_vel
     remap_to: /robot_teleop/cmd_vel
   - start: robot

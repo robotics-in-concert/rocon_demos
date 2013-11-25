@@ -1,6 +1,6 @@
 - role: 'Cafe Manager'
   remocon_apps:
-    - name: com.github.robotics_in_concert.rocon_android_apps.map_annotation.MainActivity
+    - name: com.github.rosjava.android_apps.teleop.MainActivity
       platform_info:
         os: android
         version: "*"
@@ -9,8 +9,7 @@
       display_name: Teleop Robot
       description: Teleoperate a turtlebot 
       icon:
-        resource_name: concert_roles/map_annotation_icon.png
-      parameters: "{pickup_point: pickup, map_frame: /map}"
+        resource_name: turtlebot_core_apps/android_teleop_bubble_icon.png
       max: 1
       remappings:
         - remap_from: cmd_vel
