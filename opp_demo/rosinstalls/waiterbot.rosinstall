@@ -8,9 +8,9 @@
 
 # Turtlebot
 - git: {local-name: turtlebot_apps, uri: 'https://github.com/turtlebot/turtlebot_apps.git',
-    version: rapp_Fix}
+    version: hydro-devel}
 - git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
-    version: rapplist_fix}
+    version: hydro-devel}
 
 # Waiterbot
 - git: {local-name: kobuki-x, uri: 'https://github.com/yujinrobot/kobuki-x.git',
@@ -23,7 +23,7 @@
     version: hydro-devel}
 - git: {local-name: yujin_ocs, uri: 'https://github.com/yujinrobot/yujin_ocs.git',
     version: hydro-devel}
-- git: {local-name: navigation, uri: 'https://github.com/corot/navigation.git',
+- git: {local-name: navigation, uri: 'https://github.com/yujinrobot/navigation.git',
     version: hydro-devel}
 
 # Cafe dependencies
