@@ -1,0 +1,24 @@
+- role: 'Cafe Manager'
+  remocon_apps:
+    - name: com.github.rosjava.android_apps.make_a_map.MainActivity
+      platform_info:
+        os: android
+        version: "*"
+        system: ros
+        platform: smart_device
+      display_name: Make a Map with Robot
+      description: SLAM robot 
+      icon:
+        resource_name: turtlebot_core_apps/map.jpg
+      max: 1
+      remappings:
+        - remap_from: cmd_vel
+          remap_to: /robot_makemap/cmd_vel
+        - remap_from: image_color 
+          remap_to: /robot_makemap/image_color/compressed_throttle
+        - remap_from: scan
+          remap_to: /robot_makemap/scan
+        - remap_from: map
+          remap_to: /robot_makemap/map
+        - remap_from: save_map
+          remap_to: /database/save_map

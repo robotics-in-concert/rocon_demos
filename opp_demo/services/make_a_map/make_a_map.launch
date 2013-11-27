@@ -1,0 +1,15 @@
+<launch>
+  <node pkg="concert_service_roslaunch" name="make_a_map_node" type="static_link_graph_service.py">
+    <param name="filename" value="$(find opp_demo)/services/make_a_map/make_a_map.yaml"/>
+  </node>
+
+  <!-- Map saver -->
+  <!-- This node is to work around the limitation of service flipping. -->
+  <param name="warehouse_host" value="localhost"/>
+  <param name="warehouse_port" value="27017"/>
+  <node pkg="map_store" type="map_saver" name="map_saver" output="screen">
+    <remap from="dynamic_map" to="/database/dynamic_map_in"/>
+    <remap from="map" to="/database/map_in"/>
+    <remap from="save_map" to="/database/save_map"/>
+  </node>
+</launch>
