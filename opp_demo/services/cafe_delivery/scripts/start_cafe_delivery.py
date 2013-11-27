@@ -47,8 +47,6 @@ if __name__ == '__main__':
     rospy.rostime.wallsleep(3.0)  # human time
     sgsh.request_resources(True)
 
-    rospy.on_shutdown(sgsh.shutdown)
-
     map_id = rospy.get_param('~map_id',None)
 
     #  It is hack to wait until the map database is up.
