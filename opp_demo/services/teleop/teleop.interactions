@@ -12,7 +12,7 @@
         resource_name: turtlebot_core_apps/android_teleop_bubble_icon.png
       max: 1
       remappings:
-        - remap_from: cmd_vel
+        - remap_from: android/virtual_joystick/cmd_vel
           remap_to: /robot_teleop/cmd_vel
-        - remap_from: image_color 
+        - remap_from: camera/rgb/image_color/compressed_throttle
           remap_to: /robot_teleop/image_color/compressed_throttle
