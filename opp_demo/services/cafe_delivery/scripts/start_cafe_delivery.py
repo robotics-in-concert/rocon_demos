@@ -2,50 +2,26 @@
 import rospy
 import yaml
 import concert_service_roslaunch
+import concert_service_utilities
 import map_store.srv
 import annotations_store.srv
 
 from concert_msgs.srv import *
 from concert_msgs.msg import *
 
-def load_linkgraph_from_file(filename):
-    lg = LinkGraph() 
-    name = "None"
-
-    with open(filename) as f:
-        impl = yaml.load(f)
-        name = impl['name'] 
-        
-        for node in impl['nodes']:
-            node['min'] = node['min'] if 'min' in node else 1
-            node['max'] = node['max'] if 'max' in node else 1
-            node['force_name_matching'] = node['force_name_matching'] if 'force_name_matching' in node else False
-
-            lg.nodes.append(LinkNode(node['id'], node['tuple'], node['min'], node['max'], node['force_name_matching']))
-        for topic in impl['topics']:
-            lg.topics.append(LinkConnection(topic['id'], topic['type']))
-
-        if 'service' in impl:
-            for service in impl['services']:
-                lg.services.append(LinkConnection(service['id'], service['type']))
-        for action in impl['actions']:
-            lg.actions.append(LinkConnection(action['id'], action['type']))
-        for edge in impl['edges']:
-            lg.edges.append(LinkEdge(edge['start'], edge['finish'], edge['remap_from'], edge['remap_to']))
-
-    return name, lg
-
 if __name__ == '__main__':
     rospy.init_node('start_cafe_delivery', anonymous=True)
+    (name, description, uuid) = concert_service_utilities.get_service_info()
     filename = rospy.get_param('~filename')
-    name, impl = load_linkgraph_from_file(filename)
-    name = rospy.get_param("name")
-    uuid = rospy.get_param("uuid")
-    description = rospy.get_param("description")
-    sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, uuid, description, impl)
+    impl_name, impl = concert_service_roslaunch.load_linkgraph_from_file(filename)
+
+    if not name:
+        name = impl_name        
+
+    sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, description, uuid, impl)
 
     rospy.rostime.wallsleep(3.0)  # human time
-    sgsh.request_resources(True)
+    sgsh._request_resources(True)
 
     map_id = rospy.get_param('~map_id',None)
 
