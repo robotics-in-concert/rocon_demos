@@ -21,7 +21,7 @@ if __name__ == '__main__':
     sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, description, uuid, impl)
 
     rospy.rostime.wallsleep(3.0)  # human time
-    sgsh._request_resources(True)
+#sgsh._request_resources(True)
 
     map_id = rospy.get_param('~map_id',None)
 
@@ -38,4 +38,4 @@ if __name__ == '__main__':
         anno_load(map_id)
     else:
         rospy.loginfo("No map ID")
-    rospy.spin()
+    sgsh.spin()
