@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <name>rocon_vending_machine</name>
+  <version>0.0.0</version>
+  <description>Control software for the automated and concert-ready vending machine</description>
+  <maintainer email="marcus.liebhardt@yujinrobot.com">Marcus Liebhardt</maintainer>
+  <author email="marcus.liebhardt@yujinrobot.com">Marcus Liebhardt</author>
+  
+  <license>BSD</license>
+  
+  <url type="website">http://ros.org/wiki/rocon_vending_machine</url>
+  <url type="repository">https://github.com/robotics-in-concert/concert_apps</url>
+  <url type="bugtracker">https://github.com/robotics-in-concert/concert_apps</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  
+  <run_depend>actionlib_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+</package>
