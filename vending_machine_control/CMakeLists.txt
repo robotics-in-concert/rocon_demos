@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(rocon_vending_machine)
+project(vending_machine_control)
 
 find_package(catkin REQUIRED COMPONENTS actionlib_msgs
                                         message_generation
@@ -22,18 +22,14 @@ catkin_package(CATKIN_DEPENDS actionlib_msgs
                               message_runtime
                               std_msgs)
 
-install(PROGRAMS scripts/rocon_vending_machine
+install(PROGRAMS scripts/vending_machine.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-#############
-## Testing ##
-#############
+install(DIRECTORY launch
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_vending_machine_control.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
-
-## Add folders to be run by python nosetests
-# catkin_add_nosetests(test)
+if(CATKIN_ENABLE_TESTING)
+    find_package(rostest REQUIRED)
+#    catkin_add_nosetests(test)
+    add_rostest(test/rostest/test_vending_machine/test_vending_machine.test)
+endif()

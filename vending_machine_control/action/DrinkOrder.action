@@ -1,16 +1,13 @@
-rocon_vending_machine/DrinkType[] drink_types
+vending_machine_control/DrinkType[] drink_types
 int32[] drink_amounts
 
 ---
 
-std_msgs/String order_status
+vending_machine_control/DrinkType[] delivered_drink_types
+int32[] delivered_drink_amounts
+
+vending_machine_control/ErrorCodes[] error_code
 
 ---
 
-rocon_vending_machine/DrinkType[] delivered_drink_types
-int32[] delivered_drink_amounts
-
-rocon_vending_machine/DrinkType[] remaining_drink_types
-int32[] remaining_drink_amounts
-
-rocon_vending_machine/ErrorCodes[] error_code
+std_msgs/String order_status
