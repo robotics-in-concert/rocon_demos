@@ -1,5 +1,8 @@
-*.py[co]
+*.py[cod]
 *.sw[op]
+
+# C extensions
+*.so
 
 # Packages
 *.egg
@@ -20,9 +23,12 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
+nosetests.xml
 
-#Translations
+# Translations
 *.mo
 
-#Mr Developer
+# Mr Developer
 .mr.developer.cfg
+.project
+.pydevproject

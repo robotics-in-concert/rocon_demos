@@ -101,3 +101,4 @@ Bring up the annotation app (set `WORLD_MODEL_USERNAME` and `WORLD_MODEL_PASSWOR
 * Kitchen interface : files:///\<PATH_TO_WORKSPACE\>/rocon_webinterfaces/cafe_concert/kitchen/www/index.html
 * Cafe Viewer interface : files:///\<PATH_TO_WORKSPACE\>/rocon_webinterfaces/cafe_concert/cafe_viewer/www/index.html
 * video demo : http://files.yujinrobot.com/rocon/demos/cafeconcert/cafe_concert.ogv
+

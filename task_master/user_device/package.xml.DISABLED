@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>user_device</name>
+  <version>0.0.0</version>
+  <description>user_device</description>
+
+  <author email="dwlee@yujinrobot.com">Jihoon Lee</author>
+  <maintainer email="dwlee@yujinrobot.com">Jihoon Lee</maintainer>
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_srvs</run_depend>
+
+</package>

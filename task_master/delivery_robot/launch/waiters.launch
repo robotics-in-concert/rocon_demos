@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="delivery_robot" name="waiter_1" type="waiter_soft.py"/>
+    <!--<node pkg="delivery_robot" name="waiter_2" type="waiter_soft.py"/>-->
+    <!--<node pkg="delivery_robot" name="waiter_3" type="waiter_soft.py"/>-->
+    <!--<node pkg="delivery_robot" name="waiter_4" type="waiter_soft.py"/>-->
+    <!--<node pkg="delivery_robot" name="waiter_5" type="waiter_soft.py"/>-->
+</launch>
