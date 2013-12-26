@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>vending_machine_ar_client</name>
+  <version>0.0.0</version>
+  <description>
+    The vending_machine_ar_client package contains a client for the vending machine manager for ordering drinks
+    based on detected AR markers.
+  </description>
+  <maintainer email="marcus.liebhardt@yujinrobot.com">Marcus Liebhardt</maintainer>
+  <author email="marcus.liebhardt@yujinrobot.com">Marcus Liebhardt</author>
+  <license>BSD</license>
+  <url type="website">http://ros.org/wiki/vending_machine_ar_client</url>
+  <url type="repository">https://github.com/robotics-in-concert/rocon_demos</url>
+  <url type="bugtracker">https://github.com/robotics-in-concert/rocon_demos</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <run_depend>actionlib</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+  <run_depend>ar_track_alvar</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>uvc_camera</run_depend>
+  <run_depend>vending_machine_control</run_depend>
+</package>
