@@ -1,0 +1,113 @@
+@-ms-viewport
+{
+	width: 720px;
+}
+
+@-webkit-viewport
+{
+	width: 720px;
+}
+
+@-o-viewport
+{
+	width: 720px;
+}
+
+@-moz-viewport
+{
+	width: 720px;
+}
+
+@viewport
+{
+	width: 720px;
+}
+
+html
+{
+	background: #7F7F7F url("../images/wood_wallpaper_by_stenosis.jpg") repeat left top scroll;
+}
+
+#page
+{
+	z-index: 1;
+	width: 678px;
+	min-height: 846.8500000000001px;
+	padding: 280px 21px 9.149999999999864px;
+}
+
+#u459
+{
+	z-index: 6;
+	width: 293px;
+	margin-left: 192px;
+	position: relative;
+}
+
+#u466-9
+{
+	z-index: 10;
+	width: 591px;
+	min-height: 111px;
+	background-color: transparent;
+	color: #603813;
+	text-align: center;
+	margin-left: 53px;
+	margin-top: 16px;
+	position: relative;
+}
+
+#u466-9:hover
+{
+	padding-top: 0px;
+	padding-bottom: 0px;
+	min-height: 111px;
+	margin: 16px 0px 0px 53px;
+}
+
+#u466-2
+{
+	font-size: 70px;
+	line-height: 1;
+	font-weight: bold;
+}
+
+#u466
+{
+	font-weight: normal;
+}
+
+#u466-4
+{
+	font-size: 80px;
+	line-height: 1;
+	font-weight: bold;
+}
+
+#u466-7
+{
+	font-size: 20px;
+}
+
+#u464
+{
+	z-index: 8;
+	width: 313px;
+	margin-left: 192px;
+	margin-top: 249px;
+	position: relative;
+}
+
+#u450-4
+{
+	z-index: 2;
+	width: 678px;
+	min-height: 27px;
+	margin-top: 30px;
+}
+
+#page .verticalspacer
+{
+	clear: both;
+}
+

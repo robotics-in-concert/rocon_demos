@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package>
+  <name>kitchen</name>
+  <version>0.0.0</version>
+  <description>The kitchen package</description>
+  <maintainer email="jihoonlee.in@gmail.com">Jihoon Lee</maintainer>
+  <license>BSD</license>
+
+  <!-- <url type="website">http://ros.org/wiki/kitchen</url> -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>rosbridge_server</run_depend>
+</package>
