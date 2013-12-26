@@ -1,0 +1,5 @@
+int32 value
+
+int32 SUCCESS=1
+int32 DELIVERY_FAILURE=-1
+int32 OUT_OF_STOCK=-2

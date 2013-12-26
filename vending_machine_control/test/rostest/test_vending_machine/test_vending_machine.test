@@ -1,0 +1,5 @@
+<launch>
+  <node name="vending_machine" pkg="vending_machine_control" type="vending_machine.py"/>
+
+  <test test-name="test_vending_machine" pkg="vending_machine_control" type="test_vending_machine.py"/>
+</launch>
