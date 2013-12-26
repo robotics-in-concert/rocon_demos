@@ -1,17 +1,16 @@
 #
 # License: BSD
-#   https://raw.github.com/robotics-in-concert/rocon_app_platform/license/LICENSE
+#   https://raw.github.com/robotics-in-concert/rocon_demos/license/LICENSE
 #
 
 import actionlib
 import rospy
-#import vending_machine_control.action as vending_machine_actions
 import vending_machine_control.msg as vending_machine_msgs
 import std_msgs.msg as std_msgs
 
-class VendingMachine(object):
+class VendingMachineManager(object):
     """
-        Vending machine control
+        Vending machine manager
     """
     def __init__(self):
         '''
@@ -36,8 +35,8 @@ class VendingMachine(object):
         self.server.start()
 
         ''' configure available drinks '''
-        self.drink1 = vending_machine_msgs.DrinkType.COKE
-        self.drink2 = vending_machine_msgs.DrinkType.MAX
+        self.drink1 = rospy.get_param("~drink1", vending_machine_msgs.DrinkType.COKE)
+        self.drink2 = rospy.get_param("~drink2", vending_machine_msgs.DrinkType.MAX)
 
     def _arduinoOrderResultCB(self, data):
         processed_order = int()
@@ -57,7 +56,6 @@ class VendingMachine(object):
         feedback.order_status.data = "Processing orders ..."
         self.server.publish_feedback(feedback)
         rospy.loginfo(str(feedback.order_status.data))
-        print goal
         ''' parse goal and send order to Arduino '''
         all_orders_processed = False
         orders = []
@@ -135,4 +133,3 @@ class VendingMachine(object):
         else:
             rospy.logerr("Unknown drink type '" + str(drink) + "'")
             return ""
-

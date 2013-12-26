@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # License: BSD
-#   https://raw.github.com/robotics-in-concert/concert_apps/license/LICENSE
+#   https://raw.github.com/robotics-in-concert/rocon_demos/license/LICENSE
 #
 
 import sys

@@ -1,0 +1,10 @@
+<launch>
+  <!-- Fake vending machine manager for testing -->
+  <node name="vending_machine_manager" pkg="vending_machine_ar_client" type="fake_vm_manager.py"/>
+  
+  <!-- Vending machine manager AR-based ordering client -->
+  <node name="vending_machine_ar_client" pkg="vending_machine_ar_client" type="vending_machine_ar_client_node.py"/>
+
+  <!-- ROS test -->
+<!--   <test test-name="test_vm_client" pkg="vending_machine_ar_client" type="test_vm_client.py"/> -->
+</launch>

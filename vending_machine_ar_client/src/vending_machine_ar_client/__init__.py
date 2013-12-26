@@ -4,4 +4,4 @@
 #   https://raw.github.com/robotics-in-concert/rocon_demos/license/LICENSE
 #
 
-from .vending_machine_manager import VendingMachineManager
+from .vending_machine_ar_client import VendingMachineARClient
