@@ -3,8 +3,7 @@ project(vending_machine_control)
 
 find_package(catkin REQUIRED COMPONENTS actionlib_msgs
                                         message_generation
-                                        std_msgs
-                                        rospy)
+                                        std_msgs)
 
 catkin_python_setup()
 
@@ -22,7 +21,7 @@ catkin_package(CATKIN_DEPENDS actionlib_msgs
                               message_runtime
                               std_msgs)
 
-install(PROGRAMS scripts/vending_machine.py
+install(PROGRAMS scripts/vending_machine_manager.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(DIRECTORY launch
