@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.8.3)
+project(dummy_ces_tablet)
+
+find_package(catkin REQUIRED COMPONENTS
+  rospy
+  waiterbot_msgs
+)
+
+catkin_python_setup()
+
+catkin_package()
