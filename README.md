@@ -1,6 +1,6 @@
 ## Installation
 
-### Preparation
+### Basic Preparation
 
 ```
 > sudo apt-get update
