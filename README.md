@@ -6,6 +6,7 @@
 > sudo apt-get update
 > sudo apt-get install python-wstool python-rosdep ros-hydro-catkin
 > sudo apt-get install --only-upgrade ros-hydro-*
+> sudo pip install -U yujin_tools
 > rosdep update
 ```
 
