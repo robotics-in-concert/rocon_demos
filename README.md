@@ -51,7 +51,7 @@ This needs to include a few message repos that rosjava needs to generate.
 > yujin_make
 ```
 
-### Android Demo Apps
+### Rocon Android Workspace
 
 ```
 > yujin_init_workspace -j5 ~/android_apps https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/rocon_android.rosinstall
