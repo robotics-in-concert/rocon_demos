@@ -34,7 +34,7 @@
 ### Android Core Workspace
 
 ```
-> yujin_init_workspace -j5 ~/android android_core
+> yujin_init_workspace -j5 ~/android android
 > yujin_init_build --underlays="~/rosjava/devel" .
 > yujin_make
 ```
@@ -44,7 +44,7 @@
 This needs to include a few message repos that rosjava needs to generate.
 
 ```
-> yujin_init_workspace -j5 ~/rocon_rosjava https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/rocon_rosjava.rosinstall
+> yujin_init_workspace -j5 ~/rocon_rosjava rocon-rosjava
 > cd ~/rocon_rosjava
 > yujin_init_build --underlays="~/rosjava/devel;~/rocon/devel" .
 > yujin_make --install-rosdeps
@@ -54,7 +54,7 @@ This needs to include a few message repos that rosjava needs to generate.
 ### Rocon Android Workspace
 
 ```
-> yujin_init_workspace -j5 ~/rocon_android https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/rocon_android.rosinstall
+> yujin_init_workspace -j5 ~/rocon_android rocon-android
 > yujin_init_build --underlays="~/android/devel;~/rocon_rosjava/devel;~/rosjava/devel;~/rocon/devel" .
 > yujin_make
 ```
