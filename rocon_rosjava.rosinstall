@@ -8,6 +8,9 @@
 {'git': {'local-name': 'rosjava_extras', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_extras.git'}},
 {'git': {'local-name': 'zeroconf_jmdns_suite', 'version': 'hydro', 'uri':'https://github.com/rosjava/zeroconf_jmdns_suite.git'}},
 {'git': {'local-name': 'rosjava', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava.git'}},
+{'git': {'local-name': 'annotation_store', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/annotation_store.git'}},
+{'git': {'local-name': 'map_store', 'version': 'hydro-devel', 'uri':'https://github.com/ros-planning/map_store.git'}},
+{'git': {'local-name': 'yocs_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/yujinrobot/yocs_msgs.git'}},
 {'git': {'local-name': 'rocon_rosjava_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/rocon_rosjava_msgs'}},
 ]
 
