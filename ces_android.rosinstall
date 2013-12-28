@@ -1,0 +1,7 @@
+# Follow install instructions in the README.md next to this file.
+[
+{'git': {'local-name': 'android_apps', 'version': 'master', 'uri':'https://github.com/rosjava/android_apps.git'}},
+{'git': {'local-name': 'android_remocons', 'version': 'master', 'uri':'https://github.com/rosjava/android_remocons.git'}},
+{'git': {'local-name': 'rocon_demos', 'version': 'ces_android', 'uri':'https://github.com/robotics-in-concert/rocon_demos'}},
+]
+

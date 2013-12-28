@@ -1,8 +1,0 @@
-# Install this on top of rosjava core and rocon workspaces
-[
-{'git': {'local-name': 'annotations_store', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/annotations_store.git'}},
-{'git': {'local-name': 'map_store', 'version': 'hydro-devel', 'uri':'https://github.com/ros-planning/map_store.git'}},
-{'git': {'local-name': 'yocs_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/yujinrobot/yocs_msgs.git'}},
-{'git': {'local-name': 'rocon_rosjava_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/rocon_rosjava_msgs'}},
-]
-
