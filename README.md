@@ -40,7 +40,7 @@ Currently includes android apps and remocons, simply because I'm likely to make 
 
 ## Usage
 
-* Setup a core rocon workspace
+### Rocon Workspace
 
 ```
 > yujin_init_workspace -j5 ~/rocon rocon-devel
@@ -53,7 +53,9 @@ Currently includes android apps and remocons, simply because I'm likely to make 
 > . .bashrc
 ```
 
-* Start the app manager
+### Launching Programs
+
+From the rocon workspace:
 
 ```
 > roslaunch rocon_app_manager standalone.launch --screen
