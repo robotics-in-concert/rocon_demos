@@ -2,7 +2,9 @@
 
 ### Basic Preparation
 
-Install [android studio](http://wiki.ros.org/android/Android Studio/Download). Make sure to install the versions of the sdk build tools (18.1.1) and api's (13, 15, 18) as recommended.
+* Install [android studio](http://wiki.ros.org/android/Android Studio/Download).
+* Don't forget to follow instructions for sdk installs (sdk build tools 18.1.1, api's 13, 15, 18).
+* Start android studio one time and update to the latest studio version.
 
 ```
 > sudo apt-get update
