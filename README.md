@@ -48,6 +48,8 @@ This includes message repos (rocon_msgs, yocs_msgs) that rosjava needs to genera
 
 ### Ces Android Workspace
 
+Currently includes android apps and remocons, simply because I'm likely to make fixes on them while doing this:
+
 ```
 > yujin_init_workspace -j5 ~/ces_android ces-android
 > yujin_init_build --underlays="~/android/devel;~/rocon_rosjava_msgs/devel;~/rosjava/devel" .
