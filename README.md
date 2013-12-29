@@ -64,3 +64,7 @@ From the rocon workspace:
 * In android studio, deploy the listener apk. 
 * Start the listener app on the android 
 * Connect to your ros master's ip
+
+## Alternatives
+
+Read these [instructions](https://github.com/robotics-in-concert/rocon_demos/blob/ces_android/docs/full_sources_installation.md) for a full source installation.
