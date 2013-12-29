@@ -3,7 +3,6 @@ project(dummy_ces_tablet)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
-  waiterbot_msgs
 )
 
 catkin_python_setup()
