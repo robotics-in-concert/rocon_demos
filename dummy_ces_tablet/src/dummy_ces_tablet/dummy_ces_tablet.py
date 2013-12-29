@@ -13,24 +13,28 @@ class DummyTablet(object):
         self._srv_start = rospy.Service('start_order', std_srvs.srv.Empty, self.process_start_service)
         self._pub_drink_order = rospy.Publisher('drink_order', waiterbot_msgs.msg.DrinkOrder) 
         self._sub_drink_order_feedback = rospy.Subscriber('drink_order_feedback',waiterbot_msgs.msg.DrinkOrderFeedback, self.process_drink_order_feedback)
+        self.waited_feedback = None
 
     def process_start_service(self, req):
         
-        #  send go to vm command
-        rospy.loginfo("Sending goto VM command")
-        self.send_command(1)
-            
-        #  wait for vm arrival feedback
-        rospy.loginfo("Waiting for feedback message")
-        self.wait_for_feedback(waiterbot_msgs.msg.DrinkOrderFeedback.VM_ARRIVAL)
+        try:
+            #  send go to vm command
+            rospy.loginfo("Sending goto VM command")
+            self.send_command(1)
+                
+            #  wait for vm arrival feedback
+            rospy.loginfo("Waiting for feedback message")
+            self.wait_for_feedback(waiterbot_msgs.msg.DrinkOrderFeedback.VM_ARRIVAL)
 
-        #  send go to origin command
-        rospy.loginfo("Sending goto origin command")
-        self.send_command(2)
+            #  send go to origin command
+            rospy.loginfo("Sending goto origin command")
+            self.send_command(2)
 
-        #  wait for origin arrival feedback
-        rospy.loginfo("Waiting for feedback message")
-        self.wait_for_feedback(waiterbot_msgs.msg.DrinkOrderFeedback.ORIGIN_ARRIVAL)
+            #  wait for origin arrival feedback
+            rospy.loginfo("Waiting for feedback message")
+            self.wait_for_feedback(waiterbot_msgs.msg.DrinkOrderFeedback.ORIGIN_ARRIVAL)
+        except Exception as e:
+            rospy.loginfo("Error : " + str(e))
 
         rospy.loginfo("Done!")
 
@@ -41,7 +45,6 @@ class DummyTablet(object):
         self._pub_drink_order.publish(m)
 
     def wait_for_feedback(self, feedback):
-
         self.waited_feedback = feedback
         self.is_received = False
 
@@ -55,6 +58,8 @@ class DummyTablet(object):
             rospy.loginfo("Feedback : " + str(msg.feedback))
             rospy.loginfo("Message  : " + str(msg.message))
 
+            if msg.feedback == msg.CANCEL:
+                raise Exception("Goal Canceled : " + str(msg.message))
 
     def spin(self):
         rospy.loginfo("Initialized")
