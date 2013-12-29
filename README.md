@@ -15,17 +15,6 @@
 > rosdep update
 ```
 
-### Rosjava Core Workspace
-
-
-```
-> yujin_init_workspace -j5 ~/rosjava rosjava-core
-> cd ~/rosjava
-> yujin_init_build .
-> yujin_make --install-rosdeps
-> yujin_make
-```
-
 ### Rocon Rosjava Msgs Workspace
 
 This includes message repos (rocon_msgs, yocs_msgs) that rosjava needs to generate.
@@ -33,16 +22,8 @@ This includes message repos (rocon_msgs, yocs_msgs) that rosjava needs to genera
 ```
 > yujin_init_workspace -j5 ~/rocon_rosjava_msgs rocon-rosjava-msgs
 > cd ~/rocon_rosjava_msgs
-> yujin_init_build --underlays="~/rosjava/devel" .
+> yujin_init_build .
 > yujin_make --install-rosdeps
-> yujin_make
-```
-
-### Android Core Workspace
-
-```
-> yujin_init_workspace -j5 ~/android android-core
-> yujin_init_build --underlays="~/rosjava/devel" .
 > yujin_make
 ```
 
@@ -52,6 +33,32 @@ Currently includes android apps and remocons, simply because I'm likely to make 
 
 ```
 > yujin_init_workspace -j5 ~/ces_android ces-android
-> yujin_init_build --underlays="~/android/devel;~/rocon_rosjava_msgs/devel;~/rosjava/devel" .
+> cd ~/ces_android
+> yujin_init_build --underlays="~/rocon_rosjava_msgs/devel" .
 > yujin_make
 ```
+
+## Usage
+
+* Setup a core rocon workspace
+
+```
+> yujin_init_workspace -j5 ~/rocon rocon-devel
+> cd ~/rocon
+> yujin_init_build  .
+> yujin_make --install-rosdeps
+> yujin_make
+> echo export ROS_MASTER_URI=http://192.168.1.3:11311 >> .bashrc
+> echo export ROS_IP=192.168.1.3 >> .bashrc
+> . .bashrc
+```
+
+* Start the app manager
+
+```
+> roslaunch rocon_app_manager standalone.launch --screen
+```
+
+* In android studio, deploy the listener apk. 
+* Start the listener app on the android 
+* Connect to your ros master's ip
