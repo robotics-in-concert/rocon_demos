@@ -9,17 +9,10 @@ project(colour_signal)
 # Dependencies
 ##############################################################################
 
-find_package(catkin REQUIRED COMPONENTS)
+find_package(catkin REQUIRED COMPONENTS roscpp)
 find_package(OpenCV REQUIRED)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
-
-##############################################################################
-# Project Configuration
-##############################################################################
-
-add_subdirectory(include)
-add_subdirectory(src)
 
 ##############################################################################
 # Package
@@ -29,7 +22,12 @@ catkin_package(
         INCLUDE_DIRS include
         DEPENDS OpenCV
         LIBRARIES ${PROJECT_NAME}
-        CATKIN_DEPENDS
+        CATKIN_DEPENDS roscpp
         )
 
+##############################################################################
+# Project Configuration
+##############################################################################
 
+add_subdirectory(include)
+add_subdirectory(src)
