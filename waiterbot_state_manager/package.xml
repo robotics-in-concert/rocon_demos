@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>waiterbot_state_manager</name>
+  <version>0.0.0</version>
+  <description>Waiterbot's state manager</description>
+  <maintainer email="marcus.liebhardt@yujinrobot.com">Marcus Liebhardt</maintainer>
+  <author email="marcus.liebhardt@yujinrobot.com">Marcus Liebhardt</author>  
+  <license>BSD</license>  
+  <url type="website">http://ros.org/wiki/waiterbot_state_manager</url>
+  <url type="repository">https://github.com/robotics-in-concert/rocon_demos</url>
+  <url type="bugtracker">https://github.com/robotics-in-concert/rocon_demos</url>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+<!--   <build_depend>rostest</build_depend> -->
+
+  <run_depend>std_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>rosserial_python</run_depend>
+  <run_depend>waiterbot_msgs</run_depend>
+</package>
