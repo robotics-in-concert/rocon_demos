@@ -1,0 +1,6 @@
+<!-- 
+  Waiterbot Babo version!
+  -->
+<launch>
+  <node pkg="dummy_ces_tablet" name="dummy_waiter" type="dummy_waiter.py"/>
+</launch>

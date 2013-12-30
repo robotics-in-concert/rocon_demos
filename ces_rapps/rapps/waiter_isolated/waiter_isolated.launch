@@ -1,0 +1,6 @@
+<!-- 
+  Waiterbot Isolated version!
+  -->
+<launch>
+  <include file="$(find waiterbot_ctrl_nowirelss)/launch/waiterbot_app.launch"/>
+</launch>

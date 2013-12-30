@@ -1,0 +1,6 @@
+display: WaiterIsolated
+description: Waiterbot no wireless version
+platform: linux.*.ros.waiterbot
+launch: ces_rapps/waiter_isolated.launch
+interface: ces_rapps/waiter_isolated.interface
+icon: ces_rapps/waiter.png
