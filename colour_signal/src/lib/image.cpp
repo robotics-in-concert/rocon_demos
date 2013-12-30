@@ -21,6 +21,17 @@ namespace colour_signal
  ** Colour Image
  *****************************************************************************/
 
+ColourImage::ColourImage(const std::string& filename)
+{
+  image = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
+}
+
+ColourImage::ColourImage(const cv::Mat& image) : image(image) {}
+
+/*****************************************************************************
+ ** Bgr8 Image
+ *****************************************************************************/
+
 Bgr8Image::Bgr8Image(const unsigned int &width, const unsigned int &height)
 {
   image.create(height, width, CV_8UC3); // CV_8UC4 is rgba8
@@ -37,5 +48,4 @@ Mono8Image::Mono8Image(const unsigned int &width, const unsigned int &height)
   image = cv::Scalar(128);
 }
 
-}
-
+} // namepsace colour_signal

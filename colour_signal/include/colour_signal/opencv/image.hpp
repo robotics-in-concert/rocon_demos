@@ -21,6 +21,7 @@
 *****************************************************************************/
 
 #include <opencv2/opencv.hpp>
+//#include <opencv2/highgui/highgui.hpp>
 #include "encodings.hpp"
 #include "text.hpp"
 #include "circle.hpp"
@@ -34,6 +35,28 @@ namespace colour_signal {
 /*****************************************************************************
 ** Images
 *****************************************************************************/
+
+class ColourImage {
+public:
+  ColourImage(const std::string& filename);
+  ColourImage(const cv::Mat& image);
+
+  unsigned int width() const { return image.cols; }
+  unsigned int height() const { return image.rows; }
+
+  const cv::Mat& cvImageObject() const { return image; }
+
+  void save(const std::string& filename) {
+    // This actually returns an int (for errors I guess), but can't find any
+    // docs on the int values it represents.
+    // todo : upgrade this to opencv2 functions
+    // cvSaveImage(filename.c_str(),image);
+  }
+
+protected:
+  cv::Mat image;
+};
+
 
 template <typename Derived>
 class Image {
@@ -70,13 +93,6 @@ private:
 };
 
 /*****************************************************************************
-** Typedefs
-*****************************************************************************/
-
-typedef Bgr8Image ColourImage;
-typedef Mono8Image GrayScaleImage;
-
-/*****************************************************************************
 ** Template Implementations
 *****************************************************************************/
 
@@ -99,7 +115,6 @@ template <typename Colour>
 void Image<Derived>::draw(const Circle<Colour> &circle, const unsigned int &u, const unsigned int &v) {
   cv::circle(image, cv::Point(u, v), circle.radius, CvColour<Colour,encoding>::value(), circle.thickness, circle.line_type);
 }
-
 
 } // namespace colour_signal
 

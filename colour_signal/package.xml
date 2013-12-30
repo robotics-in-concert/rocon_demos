@@ -16,7 +16,10 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
+  <build_depend>ecl_command_line</build_depend>
+  <build_depend>opencv2</build_depend>
   
   <run_depend>roscpp</run_depend>
+  <run_depend>ecl_command_line</run_depend>
   <run_depend>opencv2</run_depend>
 </package>
