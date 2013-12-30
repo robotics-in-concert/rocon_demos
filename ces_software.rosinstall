@@ -1,6 +1,6 @@
 # Follow install instructions in the README.md next to this file.
 [
-{'git': {'local-name': 'kobuki_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/kobuki_msgs.git'}},
+{'git': {'local-name': 'kobuki_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/yujinrobot/kobuki_msgs.git'}},
 {'git': {'local-name': 'rocon_demo_msgs', 'version': 'hydro-devel', 'uri':'https://github.com/robotics-in-concert/rocon_demo_msgs.git'}},
 {'git': {'local-name': 'ces_software', 'version': 'ces_software', 'uri':'https://github.com/robotics-in-concert/rocon_demos'}},
 ]
