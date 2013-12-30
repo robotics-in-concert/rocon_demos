@@ -9,9 +9,10 @@ project(colour_signal)
 # Dependencies
 ##############################################################################
 
-find_package(catkin REQUIRED COMPONENTS 
-    )
-include_directories(include ${catkin_INCLUDE_DIRS})
+find_package(catkin REQUIRED COMPONENTS)
+find_package(OpenCV REQUIRED)
+
+include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 
 ##############################################################################
 # Project Configuration
@@ -26,8 +27,9 @@ add_subdirectory(src)
 
 catkin_package(
         INCLUDE_DIRS include
+        DEPENDS OpenCV
         LIBRARIES ${PROJECT_NAME}
-	CATKIN_DEPENDS 
+        CATKIN_DEPENDS
         )
 
 
