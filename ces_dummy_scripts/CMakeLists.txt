@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(dummy_ces_tablet)
+project(ces_dummy_scripts)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
