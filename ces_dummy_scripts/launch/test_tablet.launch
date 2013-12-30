@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find rocon_app_manager)/launch/standalone.launch">
+    <arg name="rapp_lists" value="rocon_apps/rocon.rapps;ces_rapps/ces.rapps"/>
+    <arg name="robot_name" value="hola"/>
+  </include>
+</launch>
