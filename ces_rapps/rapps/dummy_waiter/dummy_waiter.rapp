@@ -1,0 +1,6 @@
+display: Dummy Waiter 
+description: Waiterbot no wireless version
+platform: linux.*.ros.pc
+launch: ces_rapps/dummy_waiter.launch
+interface: ces_rapps/dummy_waiter.interface
+icon: ces_rapps/dummy_waiter.png

@@ -1,0 +1,6 @@
+<!-- 
+  Waiterbot Babo version!
+  -->
+<launch>
+  <node pkg="ces_dummy_scripts" name="dummy_waiter" type="dummy_waiter_state.py" output="screen"/>
+</launch>

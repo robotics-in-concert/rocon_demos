@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="colour_signal" type="colour_signal_node" name="colour_signal_node">
+    <!--<remap from="chatter" to="babbler"</remap>-->
+  </node>
+</launch>

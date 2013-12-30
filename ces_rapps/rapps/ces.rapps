@@ -1,0 +1,5 @@
+# CES rapps. If no share variable is specified, it defaults to 1.
+
+apps:
+  - name: ces_rapps/waiter_isolated
+  - name: ces_rapps/dummy_waiter

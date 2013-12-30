@@ -5,34 +5,37 @@
 #
 
 import rospy
-import waiterbot_msgs.msg
+import std_msgs.msg
 
 class DummyWaiter(object):
 
     def __init__(self):
-        self._sub_drink_order = rospy.Subscriber("drink_order", waiterbot_msgs.msg.DrinkOrder,self._process_drink_order)
-        self._pub_drink_order_feedback = rospy.Publisher("drink_order_feedback", waiterbot_msgs.msg.DrinkOrderFeedback)
-
-        self._command_string = ["GO_TO_VM", "GO_TO_ORIGIN"]
+        self._sub_drink_order = rospy.Subscriber("drink_order", std_msgs.msg.UInt16MultiArray,self._process_drink_order)
+        self._pub_drink_ar    = rospy.Publisher("drink_ar",std_msgs.msg.UInt16)
+        self._pub_drink_dispensed = rospy.Publisher("drink_dispensed", std_msgs.msg.Empty)
+        self._pub_status_message = rospy.Publisher("waiterbot_debug", std_msgs.msg.String)
 
     def _process_drink_order(self, msg):
-        self.log("Received command : " + str(self._command_string[msg.command-1]))
+        self.log("Received drink order : " + str(msg.data))
 
-        self.log("Sending accept message")
-        self._send_feedback(waiterbot_msgs.msg.DrinkOrderFeedback.ACCEPTED, "")
-    
-        self.log("Navigating...")
-        rospy.sleep(2.0)
-        self.log("Send Arrival message")
+        rospy.sleep(1)
+        self.log("Sending drink ar")
+        self._pub_drink_ar.puslish(1)
+        rospy.sleep(1)
+        self.log("Sending drink dispensed")
+        self._pub_drink_dispensed()
 
-        arrival_feedback = None
+        self.log("Sending next ar")
+        seelf._pub_drink_dispensed(2)
+        rospy.sleep(1)
+        self.log("Sending drink dispensed")
+        self._pub_drink_dispensed()
+        rospy.sleep(1)
 
-        if msg.command == waiterbot_msgs.msg.GO_TO_VM:
-            arrival_feedback = waiterbot_msgs.msg.DrinkOrderFeedback.VM_ARRIVAL
-        else:
-            arrival_feedback = waiterbot_msgs.msg.DrinkOrderFeedback.ORIGIN_ARRIVAL
-            
-        self._send_feedback(arrival_feedback, "")
+        self.log("Navigating to Origin...now")
+
+
+
 
     def _send_feedback(self, feedback, message):
         self._pub_drink_order_feedback(feedback, message)
@@ -40,6 +43,7 @@ class DummyWaiter(object):
 
     def log(self, msg):
         rospy.loginfo("Dummy Waiter : " +str(msg))
+        self._pub_status_message.publish(str(msg))
 
     def spin(self):
         rospy.spin()
