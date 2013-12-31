@@ -4,3 +4,4 @@ apps:
   - name: ces_rapps/waiter_isolated
   - name: ces_rapps/dummy_waiter
   - name: ces_rapps/android_make_a_map
+  - name: ces_rapps/android_map_manager

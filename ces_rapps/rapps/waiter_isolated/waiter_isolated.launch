@@ -14,7 +14,7 @@
   -->
 <launch>
 
-<!--  <include file="$(find wateribot_states)/launch/state.launch"/>-->
+  <include file="$(find waiterbot_state_manager)/launch/state_manager.launch"/>
 
   <!-- 3d sensor is used for both colour singal and waiterbot controller -->
   <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
