@@ -54,7 +54,7 @@
   <node pkg="map_store" type="map_saver" name="map_saver" output="screen"/>
 
   <!-- *************************** Joystick ***************************** -->
-  <include file="$(waiterbot_ctrl_no_wireliess)/launch/includes/_xbox360_joystick.launch"/>
+  <include file="$(find waiterbot_ctrl_nowireless)/launch/includes/_xbox360_joystick.launch"/>
 
 
 </launch>
