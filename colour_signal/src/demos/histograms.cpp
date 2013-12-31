@@ -1,5 +1,5 @@
 /**
- * @file src/demos/image_scan.cpp
+ * @file src/demos/histograms.cpp
  *
  * @brief Test the image thresholding functions with a test image.
  **/
@@ -28,19 +28,27 @@ using colour_signal::Bgr8Image;
 
 int main(int argc, char **argv) {
 
-  ColourImage red_image("./led-red.jpg");
-  ColourImage blue_image("./led-blue.jpg");
-  ColourImage green_image("./led-green.jpg");
-  ColourImage reference_image("./led-reference.jpg");
+  /*********************
+  ** Args
+  **********************/
+  ecl::CmdLine cmd("This is a simple interface for testing bgr and hsv histograms.",' ',"0.1");
+  ecl::SwitchArg switch_hsv("c","hsv","Convert images from bgr to hsv.",false);
+  cmd.add(switch_hsv);
+  cmd.parse(argc, argv);
+
+  ColourImage red_image("./led-red.jpg", switch_hsv.getValue());
+  ColourImage blue_image("./led-blue.jpg", switch_hsv.getValue());
+  ColourImage green_image("./led-green.jpg", switch_hsv.getValue());
+  ColourImage reference_image("./led-reference.jpg", switch_hsv.getValue());
 
 //  Bgr8Image red_image; red_image.fill<colour_signal::Red>();
 //  Bgr8Image blue_image; blue_image.fill<colour_signal::Blue>();
 //  Bgr8Image green_image; green_image.fill<colour_signal::Green>();
 
-  colour_signal::HistogramAnalytics red_histograms(red_image.bgrHistograms());
-  colour_signal::HistogramAnalytics blue_histograms(blue_image.bgrHistograms());
-  colour_signal::HistogramAnalytics green_histograms(green_image.bgrHistograms());
-  colour_signal::HistogramAnalytics reference_histograms(reference_image.bgrHistograms());
+  colour_signal::HistogramAnalytics red_histograms(red_image.histograms());
+  colour_signal::HistogramAnalytics blue_histograms(blue_image.histograms());
+  colour_signal::HistogramAnalytics green_histograms(green_image.histograms());
+  colour_signal::HistogramAnalytics reference_histograms(reference_image.histograms());
 
   /*********************
   ** Showtime

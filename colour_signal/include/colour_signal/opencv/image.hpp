@@ -7,6 +7,15 @@
  *
  *   m = Scalar(b,g,r) -> note that for colour images, order is b,g,r!
  *
+ * @todo This is really quite a mess - would like to work out a useful
+ * Image class framework at some point in time. Mostly we need to handle
+ *
+ * - bgr8
+ * - mono8
+ * - hsv(8)
+ *
+ * We typically never deal with alpha in the robotics world.
+ *
  * @todo This would be useful in yocs.
  **/
 /*****************************************************************************
@@ -63,24 +72,6 @@ public:
     // cvSaveImage(filename.c_str(),image);
   }
 
-  std::vector<cv::Mat> bgrHistograms() const {
-    std::vector<cv::Mat> bgr_planes, bgr_histograms;
-    split(image, bgr_planes);
-    int number_of_bins = 256;
-    float range[] = { 0, 256 };
-    const float* histRange = { range };
-    bool uniform = true; bool do_not_accumulate = false;
-    cv::Mat b_hist, g_hist, r_hist;
-    /// Compute the histograms:
-    cv::calcHist( &bgr_planes[0], 1, 0, cv::Mat(), b_hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
-    cv::calcHist( &bgr_planes[1], 1, 0, cv::Mat(), g_hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
-    cv::calcHist( &bgr_planes[2], 1, 0, cv::Mat(), r_hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
-
-    bgr_histograms.push_back(b_hist);
-    bgr_histograms.push_back(g_hist);
-    bgr_histograms.push_back(r_hist);
-    return bgr_histograms;
-  }
   /**
    * Not really the greatest place to have drawing functions. Always best to
    * separate container vs algorithm vs debugging concerns. But this ain't no
@@ -88,7 +79,6 @@ public:
    *
    * http://docs.opencv.org/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html
    */
-
   template<typename Colour>
   void fill();
   template<typename Colour>
@@ -101,15 +91,56 @@ protected:
 };
 
 class ColourImage : public Image<ColourImage> {
+
 public:
-  ColourImage(const std::string& filename);
-  ColourImage(const cv::Mat& image);
+  ColourImage(const std::string& filename, bool convert_to_hsv = false);
   std::string filename() const {
     return _filename;
   }
 
+  bool bgrType() const { return not converted_to_hsv; }
+  bool hsvType() const { return converted_to_hsv; }
+
+  /**
+   * @brief Get histograms of the three channels.
+   *
+   * These will return bgr, or hsv histograms depending on the image storage type.
+   * Remember that hue histograms have range [0,179], all others [0, 255]
+   *
+   * @return vector of histograms in single column cv::Mat format.
+   */
+  std::vector<cv::Mat> histograms() const {
+    std::vector<cv::Mat> planes, generated_histograms;
+    split(image, planes);
+    for (unsigned int i = 0; i < planes.size(); ++i) {
+      int number_of_bins = 255;
+      if (i == 0 && converted_to_hsv) {
+        // hue histograms only have range [0, 179]
+        number_of_bins = 179;
+      }
+      float range[] = { 0, number_of_bins }; // 1 bin for each value...
+      const float* histRange = { range };
+      bool uniform = true; bool do_not_accumulate = false;
+      cv::Mat hist;
+      cv::calcHist( &planes[i], 1, 0, cv::Mat(), hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
+      generated_histograms.push_back(hist);
+    }
+//    /// Compute the histograms:
+//    cv::calcHist( &bgr_planes[0], 1, 0, cv::Mat(), b_hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
+//    cv::calcHist( &bgr_planes[1], 1, 0, cv::Mat(), g_hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
+//    cv::calcHist( &bgr_planes[2], 1, 0, cv::Mat(), r_hist, 1, &number_of_bins, &histRange, uniform, do_not_accumulate );
+//
+//    generated__histograms.push_back(b_hist);
+//    generated_histograms.push_back(g_hist);
+//    generated_histograms.push_back(r_hist);
+    return generated_histograms;
+  }
+
 protected:
   std::string _filename;
+
+private:
+  const bool converted_to_hsv;  // todo rubbish...should really work out a compatible way of working with 3-channel encoding types as below.
 };
 
 class Bgr8Image : public Image<Bgr8Image> {
