@@ -28,8 +28,6 @@ class DummyNavCtrl(object):
 
     def spin(self):
         while not rospy.is_shutdown():
-            rospy.loginfo("DummyNavCtrl: Idling.")
-
             if self._nav_goal:
                 msg = waiterbot_msgs.NavCtrlStatus()
                 if self._nav_goal == waiterbot_msgs.NavCtrlGoTo.GO_TO_VM:
@@ -40,8 +38,10 @@ class DummyNavCtrl(object):
                     rospy.loginfo("DummyNavCtrl: Arrived at the origin.")
                 self._pub_nav_ctrl_status.publish(msg)
                 self._nav_goal = None
-
-            rospy.sleep(0.1)
+                rospy.sleep(0.1)
+            else:
+                rospy.loginfo("DummyNavCtrl: Idling.")
+                rospy.sleep(1.0)
 
 if __name__ == '__main__':
   rospy.init_node('dummy_nav_ctrl')

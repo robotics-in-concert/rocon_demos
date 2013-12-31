@@ -1,0 +1,10 @@
+<launch>
+  <!-- state manager -->
+  <include file="$(find waiterbot_state_manager)/launch/state_manager.launch"/>
+
+  <!-- dummy navigation control -->
+  <node pkg="waiterbot_state_manager" name="dummy_nav_ctrl" type="dummy_nav_ctrl.py"/>
+
+  <!-- dummy navigation control -->
+  <node pkg="waiterbot_state_manager" name="dummy_vm_feedback" type="dummy_vm_feedback.py"/>
+</launch>
