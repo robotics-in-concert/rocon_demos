@@ -1,6 +1,6 @@
 <launch>
   <!-- USB cam driver -->
-  <node name="uvc_camera" pkg="uvc_camera" type="uvc_camera_node"/>
+  <node name="uvc_camera" pkg="uvc_camera" type="uvc_camera_node" required="true"/>
   
   <!-- AR tracker -->
   <arg name="marker_size" default="6.9" />
@@ -9,11 +9,13 @@
   <arg name="cam_image_topic" default="image_raw" />
   <arg name="cam_info_topic" default="camera_info" />
   <arg name="output_frame" default="/camera" />
-  <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen"
+  <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect"
         args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame)" />
   
   <!-- Vending machine manager AR-based ordering client -->
-  <node name="vending_machine_ar_client" pkg="vending_machine_ar_client" type="vending_machine_ar_client_node.py">
+  <node name="vending_machine_ar_client" pkg="vending_machine_ar_client" type="vending_machine_ar_client_node.py"
+        required="true">
     <remap from="arduino/order_feedback" to="vending_machine/order_feedback"/>
+    <param name="order_idle_time" value="1.0"/>
   </node>
 </launch>

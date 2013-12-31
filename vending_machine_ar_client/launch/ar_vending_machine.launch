@@ -1,0 +1,7 @@
+<launch>
+  <!-- Vending machine control (Arduino controller + manager) -->
+  <include file="$(find vending_machine_control)/launch/vending_machine.launch"/>
+  
+  <!-- AR tracker + order client -->
+  <include file="$(find vending_machine_ar_client)/launch/ar_ordering.launch"/>
+</launch>
