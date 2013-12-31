@@ -3,8 +3,8 @@
 from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
-d = generate_distutils_setup(packages=['ces_dummy_scripts'],
+d = generate_distutils_setup(packages=['waiterbot_state_manager'],
                              package_dir={'': 'src'},
-                             requires=['rospy','std_srvs', 'std_msgs','waiterbot_msgs','kobuki_msgs'])
+                             requires=['rospy'])
 
 setup(**d)

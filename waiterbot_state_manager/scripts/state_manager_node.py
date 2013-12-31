@@ -5,9 +5,9 @@
 #
 
 import rospy
-import ces_dummy_scripts
+import waiterbot_state_manager
 
 if __name__ == '__main__':
-    rospy.init_node('dummy_ces_waiter_node')
-    dummy_waiter = ces_dummy_scripts.DummyWaiter() 
-    dummy_waiter.spin()
+  rospy.init_node('waiterbot_state_manager')
+  state_manager = waiterbot_state_manager.StateManager()
+  state_manager.spin()
