@@ -17,25 +17,37 @@ class DummyWaiter(object):
 
     def _process_drink_order(self, msg):
         self.log("Received drink order : " + str(msg.data))
+        
+        self.log("Move to VM")
+        rospy.sleep(2)
+        self.log("Arrival VM")
 
         rospy.sleep(1)
-        self.log("Sending drink ar")
-        self._pub_drink_ar.puslish(1)
+        self.log("Sending drink ar 1")        
+        self._pub_drink_ar.publish(1)
+        rospy.sleep(2)
+        self.log("drink 1 dispensed")
+        
         rospy.sleep(1)
+        self.log("Sending drink ar 1")        
+        self._pub_drink_ar.publish(1)
+        rospy.sleep(2)
+        self.log("drink 1 dispensed")
+        
+        rospy.sleep(1)
+        self.log("Sending drink ar 2")        
+        self._pub_drink_ar.publish(2)
+        rospy.sleep(2)
+        self.log("drink 2 dispensed")
+        
         self.log("Sending drink dispensed")
-        self._pub_drink_dispensed()
-
-        self.log("Sending next ar")
-        seelf._pub_drink_dispensed(2)
-        rospy.sleep(1)
-        self.log("Sending drink dispensed")
-        self._pub_drink_dispensed()
-        rospy.sleep(1)
+        
+        self._pub_drink_dispensed.publish()
 
         self.log("Navigating to Origin...now")
-
-
-
+        rospy.sleep(3)
+        self.log("Arrival Oringin")
+        
 
     def _send_feedback(self, feedback, message):
         self._pub_drink_order_feedback(feedback, message)
