@@ -18,7 +18,7 @@ class DummyVMFeedback(object):
                                                         self._vmFeedbackEnableCB)
         self._processing_enabled = False
         self._pub_vm_feedback_result = rospy.Publisher('vm_feedback_proc/result', std_msgs.Bool, latch=True)
-        self._recognition_time = rospy.get_param("recognition_time", rospy.Duration(1.0))
+        self._recognition_time = rospy.Duration(rospy.get_param("recognition_time", 1.0))
         self._recognition_start = rospy.Time.now()
 
     def _vmFeedbackEnableCB(self, msg):
