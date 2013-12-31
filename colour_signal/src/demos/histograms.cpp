@@ -13,6 +13,7 @@
 #include "../../include/colour_signal/opencv/image.hpp"
 #include "../../include/colour_signal/opencv/text.hpp"
 #include "../../include/colour_signal/opencv/colours.hpp"
+#include "../../include/colour_signal/histogram_analytics.hpp"
 
 /*****************************************************************************
 ** Namespaces
@@ -36,10 +37,33 @@ int main(int argc, char **argv) {
 //  Bgr8Image blue_image; blue_image.fill<colour_signal::Blue>();
 //  Bgr8Image green_image; green_image.fill<colour_signal::Green>();
 
-  red_image.showHistograms("Red");
-  blue_image.showHistograms("Blue");
-  green_image.showHistograms("Green");
-  reference_image.showHistograms("Reference");
+  colour_signal::HistogramAnalytics red_histograms(red_image.bgrHistograms());
+  colour_signal::HistogramAnalytics blue_histograms(blue_image.bgrHistograms());
+  colour_signal::HistogramAnalytics green_histograms(green_image.bgrHistograms());
+  colour_signal::HistogramAnalytics reference_histograms(reference_image.bgrHistograms());
+
+  /*********************
+  ** Showtime
+  **********************/
+
+  cv::namedWindow("Red", CV_WINDOW_AUTOSIZE );
+  cv::namedWindow("Green", CV_WINDOW_AUTOSIZE );
+  cv::namedWindow("Blue", CV_WINDOW_AUTOSIZE );
+  cv::namedWindow("Reference", CV_WINDOW_AUTOSIZE );
+  cv::imshow("Red", red_image.cvImageObject() );
+  cv::imshow("Green", green_image.cvImageObject() );
+  cv::imshow("Blue", blue_image.cvImageObject() );
+  cv::imshow("Reference", reference_image.cvImageObject() );
+
+  red_histograms.showHistograms("Red");
+  blue_histograms.showHistograms("Blue");
+  green_histograms.showHistograms("Green");
+  reference_histograms.showHistograms("Reference");
+
+  /*********************
+  ** Cleanup
+  **********************/
+
   cv::waitKey(0);
   cv::destroyWindow("Red");
   cv::destroyWindow("Blue");
@@ -49,19 +73,6 @@ int main(int argc, char **argv) {
   cv::destroyWindow("Histograms [Blue]");
   cv::destroyWindow("Histograms [Green]");
   cv::destroyWindow("Histograms [Reference]");
-
-  /*********************
-  ** ShowTime
-  **********************/
-//  std::string window_name("Colour Images");
-//  cv::namedWindow(window_name.c_str());
-//  cv::imshow(window_name, red_image.cvImageObject());
-//  cv::waitKey(0); // wait for a user keypress
-//  cv::imshow(window_name, blue_image.cvImageObject());
-//  cv::waitKey(0); // wait for a user keypress
-//  cv::imshow(window_name, green_image.cvImageObject());
-//  cv::waitKey(0); // wait for a user keypress
-//  cv::destroyWindow(window_name.c_str());
 
   return 0;
 }
