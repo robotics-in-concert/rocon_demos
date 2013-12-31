@@ -113,9 +113,14 @@ class StateManager(object):
             msg = std_msgs.Bool()
             msg.data = True
             self._pub_vm_feedback_enable.publish(msg)
+            # send the first order
+            drink_order_msg = std_msgs.UInt16()
+            drink_order_msg. data = self._drink_order.pop()
+            self._pub_drink_ar.publish(drink_order_msg)
 
         if self._drink_dispensed:
             self._drink_dispensed = False
+            # send remaining orders
             if len(self._drink_order) > 0:
                 drink_order_msg = std_msgs.UInt16()
                 drink_order_msg. data = self._drink_order.pop()
