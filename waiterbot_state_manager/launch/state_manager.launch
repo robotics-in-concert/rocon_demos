@@ -1,0 +1,12 @@
+<launch>
+  <!-- state manager -->
+  <node pkg="waiterbot_state_manager" name="waiterbot_state_manager" type="state_manager_node.py">
+    <remap from="android_ui/drink_order" to="drink_order"/>
+    <remap from="android_ui/drink_ar" to="drink_ar"/>
+    <remap from="android_ui/drinks_dispensed" to="drinks_dispensed"/>
+    <remap from="android_ui/tray_empty" to="tray_empty"/>
+    <!-- TODO: Add nav control and colour detection remappings -->
+<!--     <remap from="" to=""/> -->
+    <remap from="waiterbot_state_manager/debug" to="waiterbot_debug"/>
+  </node>
+</launch>

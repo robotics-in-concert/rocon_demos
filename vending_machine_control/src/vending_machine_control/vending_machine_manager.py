@@ -7,6 +7,7 @@ import actionlib
 import rospy
 import vending_machine_control.msg as vending_machine_msgs
 import std_msgs.msg as std_msgs
+import utils
 
 class VendingMachineManager(object):
     """
@@ -60,7 +61,7 @@ class VendingMachineManager(object):
         all_orders_processed = False
         orders = []
         for type in goal.drink_types:
-            if self.verifyDrinkType(type.drink_type):
+            if utils.verifyDrinkType(type.drink_type, self.drink1, self.drink2):
                 drink_amount = goal.drink_amounts[goal.drink_types.index(type)]
                 for x in range (0, drink_amount):
                     orders.append(type.drink_type)
@@ -71,7 +72,7 @@ class VendingMachineManager(object):
                 if self.order_processed:
                     ''' publish next order '''
                     self.current_order = orders.pop()
-                    feedback.order_status.data = "Processing order: " + self.getDrinkName(self.current_order)
+                    feedback.order_status.data = "Processing order: " + utils.getDrinkName(self.current_order)
                     self.server.publish_feedback(feedback)
                     rospy.loginfo(str(feedback.order_status.data))
                     new_order = std_msgs.Int8()
@@ -100,36 +101,3 @@ class VendingMachineManager(object):
     def spin(self):
         while not rospy.is_shutdown():
             rospy.sleep(1.0)
-
-##############################################################################
-# Utils
-##############################################################################
-    '''
-        Checks, if drink number matches the knows drinks
-    '''
-    def verifyDrinkType(self, drink):
-        if drink == vending_machine_msgs.DrinkType.COKE or \
-            drink == vending_machine_msgs.DrinkType.CIDER or \
-            drink == vending_machine_msgs.DrinkType.MAX:
-            if drink == self.drink1 or drink == self.drink2:
-                return True
-            else:
-                rospy.logwarn("Drink type '" + self.getDrinkName(drink) + "' currently not available.")
-                return False
-        else:
-            rospy.logerr("Unknown drink type '" + str(drink) + "'")
-            return False
-
-    '''
-        Returns the name of the drink type
-    '''
-    def getDrinkName(self, drink):
-        if drink == vending_machine_msgs.DrinkType.COKE:
-            return "Coke"
-        elif drink == vending_machine_msgs.DrinkType.CIDER:
-            return "Cider"
-        elif drink == vending_machine_msgs.DrinkType.MAX:
-            return "Max"
-        else:
-            rospy.logerr("Unknown drink type '" + str(drink) + "'")
-            return ""

@@ -8,6 +8,7 @@ import actionlib_msgs.msg as actionlib_msgs
 import ar_track_alvar.msg as ar_track_alvar_msgs
 import rospy
 import vending_machine_control.msg as vending_machine_msgs
+from vending_machine_control import utils
 import std_msgs.msg as std_msgs
 
 class VendingMachineARClient(object):
@@ -21,7 +22,7 @@ class VendingMachineARClient(object):
     _last_order = None
     _ready_for_next_order = False
     ''' idle time in between orders to avoid multiple triggers of the same order '''
-    _order_idle_time = rospy.Duration(1.0)
+    _order_idle_time = None
     _time_last_order_processed = None
 
     def __init__(self):
@@ -36,6 +37,8 @@ class VendingMachineARClient(object):
 
         self._time_last_order_processed = rospy.Time.now()
         self._sub_marker = rospy.Subscriber('ar_pose_marker', ar_track_alvar_msgs.AlvarMarkers, self._ARMarkerCB)
+        self._order_idle_time = rospy.Duration(rospy.get_param("~order_idle_time", 1.0))
+
 
     def _ARMarkerCB(self, msg):
         '''
@@ -46,22 +49,19 @@ class VendingMachineARClient(object):
                 if len(msg.markers) > 0:
                     goal = vending_machine_msgs.DrinkOrderGoal()
                     for marker in msg.markers:
-                        if marker.id != 0:
-                            drink_type = vending_machine_msgs.DrinkType()
-                            if marker.id == vending_machine_msgs.DrinkType.COKE:
-                                drink_type.drink_type = vending_machine_msgs.DrinkType.COKE
-                            elif marker.id == vending_machine_msgs.DrinkType.CIDER:
-                                drink_type.drink_type = vending_machine_msgs.DrinkType.CIDER
-                            elif marker.id == vending_machine_msgs.DrinkType.MAX:
-                                drink_type.drink_type = vending_machine_msgs.DrinkType.MAX
-                            else:
-                                rospy.logerror("Unknown drink ID '" + str(msg.id) + "'. Aborting order!")
-                                return
+                        drink_type = vending_machine_msgs.DrinkType()
+                        if marker.id == vending_machine_msgs.DrinkType.COKE:
+                            drink_type.drink_type = vending_machine_msgs.DrinkType.COKE
+                        elif marker.id == vending_machine_msgs.DrinkType.CIDER:
+                            drink_type.drink_type = vending_machine_msgs.DrinkType.CIDER
+                        elif marker.id == vending_machine_msgs.DrinkType.MAX:
+                            drink_type.drink_type = vending_machine_msgs.DrinkType.MAX
                         else:
-                            rospy.logwarn("Invalid drink ID (id = 0). Discarding message.")
+                            rospy.logwarn("Unknown drink ID '" + str(marker.id) + "'. Skipping order.")
                             return
                         goal.drink_types.append(drink_type)
                         goal.drink_amounts.append(1)
+                        rospy.loginfo("Added drink '" + utils.getDrinkName(drink_type.drink_type) + "' to order.")
                     self._client.send_goal(goal)
                     self._goal_sent = True
                 else:
@@ -69,7 +69,7 @@ class VendingMachineARClient(object):
             else:
                 rospy.logdebug("Waiting a bit before processing next order.")
         else:
-            rospy.logwarn("Vending machine client not yet connected.")
+            rospy.logdebug("Vending machine client not yet connected or ready.")
 
     def spin(self):
         while not rospy.is_shutdown():
