@@ -4,6 +4,7 @@
 #
 
 import rospy
+import kobuki_msgs.msg as kobuki_msgs
 import std_msgs.msg as std_msgs
 import waiterbot_msgs.msg as waiterbot_msgs
 
@@ -17,35 +18,51 @@ class StateManager(object):
 #    __slots__ = ['state_customer_ordering', 'state_goto_vm', 'state_vm_ordering', 'state_goto_customer']
 
     def __init__(self):
+        self._initVariables()
         self._initialiseRosComms()
         self._initStates()
+
+    '''
+        Initialise all used variables
+    '''
+    def _initVariables(self):
+        self._drink_order = []
+        self._order_received = False
+        self._tray_empty = False
+        self.goto_goal_published = False
+        self.goto_goal_reached = False
+        self._confirm_button_pressed = False
+        self._vm_feedback_proc_enabled = False
+        self._drink_dispensed = False
+        self._drinks_dispensed = False
 
     '''
         ROS Comms
     '''
     def _initialiseRosComms(self):
-        ''' Android UI communication '''
+        # Android UI communication
         self._sub_drink_order = rospy.Subscriber('android_ui/drink_order', std_msgs.UInt16MultiArray,
                                                  self._drinkOrderCB)
         self._pub_drink_ar = rospy.Publisher('android_ui/drink_ar', std_msgs.UInt16, latch=True)
         self._pub_drinks_dispensed = rospy.Publisher('android_ui/drinks_dispensed', std_msgs.Empty, latch=True)
-        self._drink_order = []
-        self._order_received = False
-        ''' Waiterbot navigation controller communication '''
+        self._pub_tray_empty = rospy.Publisher('android_ui/tray_empty', std_msgs.Empty, latch=True)
+        # Waiterbot navigation controller communication
         self._pub_nav_ctrl_goal = rospy.Publisher('waiterbot_nav_control/goto', waiterbot_msgs.NavCtrlGoTo, latch=True)
         self._sub_nav_ctrl_status = rospy.Subscriber('waiterbot_nav_control/status', waiterbot_msgs.NavCtrlStatus,
                                                      self._navCtrlStatusCB)
-        self.goto_goal_published = False
-        self.goto_goal_reached = False
-        ''' Vending machine feedback processor communication '''
+
+        # Vending machine feedback processor communication
         self._pub_vm_feedback_enable = rospy.Publisher('vm_feedback_proc/enable', std_msgs.Bool, latch=True)
         self._sub_vm_feedback_result = rospy.Subscriber('vm_feedback_proc/result', std_msgs.Bool,
                                                         self._vmFeedbackResultCB)
-        self._vm_feedback_proc_enabled = False
-        self._drink_dispensed = False
-        self._drinks_dispensed = False
-        ''' Debug/monitoring output '''
+
+        # Debug/monitoring output
         self._pub_state_manager_debug = rospy.Publisher('~debug', std_msgs.String, latch=True)
+        # Button monitoring
+        self._sub_buttons = rospy.Subscriber('mobile_base/events/digital_inputs', kobuki_msgs.DigitalInputEvent,
+                                             self._buttonCB)
+        self._pub_cancel_order = rospy.Publisher('~order_cancelled', std_msgs.Empty, latch=True)
+
 
     def _drinkOrderCB(self, msg):
         if not self._order_received:
@@ -68,6 +85,15 @@ class StateManager(object):
         if msg.data and not self._drink_dispensed:
             self._drink_dispensed = True
 
+    def _buttonCB(self, msg):
+        if not msg.values[0]:
+            self._confirm_button_pressed = True
+        else:
+            self._confirm_button_pressed = False
+        if not msg.values[1]: # red button aka cancel button pressed
+            self._current_state == self._state_reset
+            self._publishCurrentStateChange()
+
     '''
         States
     '''
@@ -76,6 +102,7 @@ class StateManager(object):
         self._state_goto_vm = "StateGoToVM"
         self._state_vm_ordering = "StateVmOrdering"
         self._state_goto_customer = "StateGoToCustomer"
+        self._state_reset = "StateReset"
         self._current_state = self._state_customer_ordering
 
     def _stateCustomerOrdering(self):
@@ -154,15 +181,31 @@ class StateManager(object):
             self._pub_nav_ctrl_goal.publish(msg)
             self.goto_goal_published = True
 
+        if self._confirm_button_pressed:
+            self.goto_goal_reached = True
+            empty_msg = std_msgs.Empty()
+            self._pub_tray_empty.publish(empty_msg)
+            rospy.loginfo('State Manager: Robot tray has been emptied.')
+
         if self.goto_goal_reached:
             self.goto_goal_reached = False
             self.goto_goal_published = False
             self._current_state = self._state_customer_ordering
             self._publishCurrentStateChange()
 
+    def _stateReset(self):
+        empty_msg = std_msgs.Empty()
+        self._pub_cancel_order(empty_msg)
+        self._initVariables()
+        self._current_state == self._state_customer_ordering
+        self._publishCurrentStateChange()
+
+
     def spin(self):
         while not rospy.is_shutdown():
-            if self._current_state == self._state_customer_ordering:
+            if self._current_state == self._state_reset:
+                self._stateReset()
+            elif self._current_state == self._state_customer_ordering:
                 self._stateCustomerOrdering()
             elif self._current_state == self._state_goto_vm:
                 self._stateGoToVM()

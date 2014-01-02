@@ -42,7 +42,7 @@ namespace colour_signal {
  * @param image : colour image to process (must be converted to hsv).
  * @return three percentages for blue, green, red.
  */
-std::vector<float> spliceLightSignal(ColourImage &image);
+std::vector<float> spliceLightSignal(Hsv8Image &image);
 
 } // namespace colour_signal
 

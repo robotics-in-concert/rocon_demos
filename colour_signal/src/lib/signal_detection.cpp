@@ -16,11 +16,7 @@
 
 namespace colour_signal {
 
-std::vector<float> spliceLightSignal(ColourImage &image) {
-// could auto-convert if someone does pass in a bgr type, but not important.
-  ecl_assert_throw( image.hsvType(), ecl::StandardException(LOC,ecl::InvalidInputError,
-                    std::string("Only hsv image types allowed")));
-
+std::vector<float> spliceLightSignal(Hsv8Image &image) {
   // hue histogram
   cv::Mat histogram = image.histograms()[0];
   float blue_count = 0, green_count = 0, red_count = 0, pixel_count = 0;

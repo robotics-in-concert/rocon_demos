@@ -4,12 +4,14 @@
   <arg name="colour_signal_difference_threshold" default="30"/>
   <arg name="colour_signal_frames_in_image_window" default="5"/>
   <arg name="colour_signal_image_topic" default="image"/>
+  <arg name="colour_signal_auto_enable" default="false"/>
 
   <!-- ****************************** Nodes ************************************ -->
   <node pkg="colour_signal" type="node" name="colour_signal_node">
-    <param name="selected_hue" value="$(arg colour_signal_selected_hue"/>
-    <param name="difference_threshold" value="$(arg colour_signal_difference_threshold"/>
-    <param name="frames_in_image_window" value="$(arg colour_signal_frames_in_image_window"/>
-    <param name="image_topic" value="$(arg colour_signal_image_topic"/>
+    <param name="selected_hue" value="$(arg colour_signal_selected_hue)"/>
+    <param name="difference_threshold" value="$(arg colour_signal_difference_threshold)"/>
+    <param name="frames_in_image_window" value="$(arg colour_signal_frames_in_image_window)"/>
+    <param name="image_topic" value="$(arg colour_signal_image_topic)"/>
+    <param name="auto_enable" value="$(arg colour_signal_auto_enable)"/>
   </node>
 </launch>

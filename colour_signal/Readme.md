@@ -1,5 +1,18 @@
 ## Colour Signal
 
+### Overview
+
+Converts an incoming image stream to hsv format and produces a histogram of the hue. It then looks internally into the percentage of pixels that fall into narrow bounds around blue, green and red hues (since they are are led hues) and compares the difference of the selected hue with the others.
+
+If the difference is significant, it registers it as a led signal.
+
+### Usage
+
+Include `standalone.launch` or `waiterbot.launch` in your own launcher and configure it via the supplied args. You will
+need to configure the image_topic handle and remap your own handles to its enable and result publishers.
+
+Don't forget to enable/disable it for only the periods where you want to actually detect led signals otherwise you will do alot of processing and consume alot of socket bandwidth for no reason (it disables the subscriber when not in use).
+
 ### Topics
 
 These are the topics for the main launcher (`standalone.launch`).
@@ -23,7 +36,7 @@ These are the topics for the main launcher (`standalone.launch`).
   * `hues.launch` : calculates and displays the percentage of bgr hues in the reference images.
   * `debug.launch` : runs the actual node with a fake publisher that switches the signal image every few seconds.
 
-Use standalone.launch by including it and configuring the parameters via the supplied arg handles.
+Use standalone.launch by including it and configuring the parameters via the supplied _args_.
 
 ### Parameters
 
