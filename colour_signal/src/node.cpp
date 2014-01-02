@@ -11,6 +11,7 @@
 ** Includes
 *****************************************************************************/
 
+#include <deque>
 #include <ros/ros.h>
 #include <std_msgs/Bool.h>
 #include <sensor_msgs/Image.h>
@@ -26,6 +27,7 @@
 class Jagi {
 public:
   static const unsigned int threshold = 30;
+  static const unsigned int frames_in_image_window = 5;  // number of frames to parse before making a decision (robustify against bad images).
 
   Jagi() : _enabled(false), _signalled(false) {}
 
@@ -56,6 +58,33 @@ public:
   }
 
 private:
+  /**
+   *
+   * @param new_signal : the last signal to come in.
+   * @return true if the signal state changed.
+   */
+  bool _updateSignalState(const bool new_signal) {
+    _recent_signals.push_back(new_signal);
+    if (_recent_signals.size() == frames_in_image_window ) {
+      _recent_signals.pop_front();
+      bool s = _recent_signals.at(0);
+      bool dirty_signal = false;
+      for (unsigned int i = 0; i < _recent_signals.size(); ++i ) {
+        if(_recent_signals.at(i) != s) {
+          dirty_signal = true;
+          break;
+        }
+      }
+      if (!dirty_signal) {
+        if(s != _signalled) {
+          // signal state changed.
+          _signalled = s;
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   void imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
     if ( !_enabled ) {
       return;
@@ -76,17 +105,11 @@ private:
     colour_signal::ColourImage image(cv_ptr->image, convert_to_hsv);
     std::vector<float> hues = colour_signal::spliceLightSignal(image);
     float average_green_difference = (2*hues.at(1) - hues.at(0) - hues.at(2))*100.0/2.0;
-    bool last_signal_state = _signalled;
-    if (average_green_difference > threshold) {
-      _signalled = true;
-    } else {
-      _signalled = false;
-    }
-    if (last_signal_state != _signalled) {
+    if (_updateSignalState(average_green_difference > threshold)) { // signal state changed
       if(_signalled) {
-        ROS_INFO_STREAM("ColourSignal : detected");
+        ROS_INFO_STREAM("ColourSignal : signal detected");
       } else {
-        ROS_INFO_STREAM("ColourSignal : lost");
+        ROS_INFO_STREAM("ColourSignal : signal lost");
       }
       std_msgs::Bool msg;
       msg.data = _signalled;
@@ -107,6 +130,7 @@ private:
       _enabled = false;
     }
   }
+  std::deque<bool> _recent_signals;
   bool _enabled;
   bool _signalled;
   ros::Publisher _result_publisher;
