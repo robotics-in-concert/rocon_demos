@@ -23,7 +23,6 @@ class DummyAndroidUI(object):
         self._pub_tray_empty = rospy.Subscriber('android_ui/tray_empty', std_msgs.Empty, self._trayEmptyCB)
         self._ar_marker = None
         self._ar_marker_received = False
-        self._drinks_pickup_time = rospy.Duration(rospy.get_param("drinks_pickup_time", 2.0))
         self._drink_order = []
         i = int()
         for i in str(drink_order):

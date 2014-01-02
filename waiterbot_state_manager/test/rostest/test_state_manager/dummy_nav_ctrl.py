@@ -17,6 +17,7 @@ class DummyNavCtrl(object):
         self._pub_nav_ctrl_status = rospy.Publisher('waiterbot_nav_control/status', waiterbot_msgs.NavCtrlStatus,
                                                     latch=True)
         self._nav_goal = None
+        self._nav_time = rospy.Duration(rospy.get_param("nav_time", 2.0))
 
     def _navCtrlGoToCB(self, msg):
         if msg.goal == waiterbot_msgs.NavCtrlGoTo.GO_TO_VM:
@@ -29,6 +30,8 @@ class DummyNavCtrl(object):
     def spin(self):
         while not rospy.is_shutdown():
             if self._nav_goal:
+                rospy.loginfo("DummyNavCtrl: Moving to goal (waiting time = " + str(self._nav_time.to_sec()) + ").")
+                rospy.sleep(self._nav_time)
                 msg = waiterbot_msgs.NavCtrlStatus()
                 if self._nav_goal == waiterbot_msgs.NavCtrlGoTo.GO_TO_VM:
                     msg.status_code = waiterbot_msgs.NavCtrlStatus.VM_ARRIVAL

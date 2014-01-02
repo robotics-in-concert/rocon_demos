@@ -86,12 +86,17 @@ class StateManager(object):
             self._drink_dispensed = True
 
     def _buttonCB(self, msg):
+        # green button aka confirm button pressed
         if not msg.values[0]:
             self._confirm_button_pressed = True
+            rospy.loginfo('State Manager: Confirm button pressed.')
         else:
             self._confirm_button_pressed = False
-        if not msg.values[1]: # red button aka cancel button pressed
-            self._current_state == self._state_reset
+
+        # red button aka cancel button pressed
+        if not msg.values[1]:
+            rospy.loginfo('State Manager: Cancel button pressed.')
+            self._current_state = self._state_reset
             self._publishCurrentStateChange()
 
     '''
@@ -187,17 +192,24 @@ class StateManager(object):
             self._pub_tray_empty.publish(empty_msg)
             rospy.loginfo('State Manager: Robot tray has been emptied.')
 
-        if self.goto_goal_reached:
+        if self.goto_goal_reached and self._confirm_button_pressed:
             self.goto_goal_reached = False
             self.goto_goal_published = False
+            self._confirm_button_pressed = False
             self._current_state = self._state_customer_ordering
             self._publishCurrentStateChange()
 
     def _stateReset(self):
+        if self._vm_feedback_proc_enabled:
+            # disable VM feedback processing
+            msg = std_msgs.Bool()
+            msg.data = False
+            self._pub_vm_feedback_enable.publish(msg)
+            self._vm_feedback_proc_enabled = False
         empty_msg = std_msgs.Empty()
-        self._pub_cancel_order(empty_msg)
+        self._pub_cancel_order.publish(empty_msg)
         self._initVariables()
-        self._current_state == self._state_customer_ordering
+        self._current_state = self._state_customer_ordering
         self._publishCurrentStateChange()
 
 

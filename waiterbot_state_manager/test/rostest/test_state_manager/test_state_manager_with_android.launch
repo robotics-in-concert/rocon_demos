@@ -4,13 +4,14 @@
 
   <!-- dummy navigation control -->
   <node pkg="waiterbot_state_manager" name="dummy_nav_ctrl" type="dummy_nav_ctrl.py">
+    <param name="nav_time" value="2.0"/>
     <remap from="waiterbot_nav_control/goto" to="goto"/>
     <remap from="waiterbot_nav_control/status" to="status"/>
   </node>
 
   <!-- dummy vm feedback -->
   <node pkg="waiterbot_state_manager" name="dummy_vm_feedback" type="dummy_vm_feedback.py">
-    <param name="recognition_time" value="10.0"/>
+    <param name="recognition_time" value="2.0"/>
     <remap from="android_ui/drink_ar" to="drink_ar"/>
     <remap from="vm_feedback_proc/enable" to="vm_feedback_enable"/>
     <remap from="vm_feedback_proc/result" to="vm_feedback_result"/>
