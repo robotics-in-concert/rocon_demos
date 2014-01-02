@@ -6,6 +6,8 @@
 
 import argparse
 import numpy
+import sys
+
 import rospy
 import std_msgs.msg as std_msgs
 
@@ -16,16 +18,19 @@ class DummyAndroidUI(object):
     def __init__(self, drink_order):
         self._pub_drink_order = rospy.Publisher('android_ui/drink_order', std_msgs.UInt16MultiArray, latch=True)
         self._sub_drink_ar = rospy.Subscriber('android_ui/drink_ar', std_msgs.UInt16, self._drinkARCB)
-        self._ar_marker = None
-        self._ar_marker_received = False
         self._sub_drinks_dispensed = rospy.Subscriber('android_ui/drinks_dispensed', std_msgs.Empty,
                                                       self._drinksDispensedCB)
+        self._pub_tray_empty = rospy.Subscriber('android_ui/tray_empty', std_msgs.Empty, self._trayEmptyCB)
+        self._ar_marker = None
+        self._ar_marker_received = False
+        self._drinks_pickup_time = rospy.Duration(rospy.get_param("drinks_pickup_time", 2.0))
         self._drink_order = []
         i = int()
         for i in str(drink_order):
             self._drink_order.append(i)
         rospy.loginfo("DummyAndroidUI: Will order drinks " + str(self._drink_order) + ".")
         self._drinks_dispensed = False
+        self._tray_empty = False
         self._state_drink_order = "StateDrinkOrder"
         self._state_waiting_for_ar = "StateWaitingForAR"
         self._state_drinks_ready = "StateDrinksReady"
@@ -37,6 +42,9 @@ class DummyAndroidUI(object):
 
     def _drinksDispensedCB(self, msg):
         self._drinks_dispensed = True
+
+    def _trayEmptyCB(self, msg):
+        self._tray_empty = True
 
     def spin(self):
         while not rospy.is_shutdown():
@@ -59,8 +67,13 @@ class DummyAndroidUI(object):
                     rospy.loginfo("DummyAndroidUI: Waiting for AR markers ...")
                     rospy.sleep(1.0)
             elif self._current_state == self._state_drinks_ready:
-                rospy.loginfo("DummyAndroidUI: Drinks ready. Drink ordering done.")
-                break
+                if self._tray_empty:
+                    self._tray_empty = False
+                    rospy.loginfo("DummyAndroidUI: Customer(s) picked up all drinks. Drink delivery done.")
+                    break
+                else:
+                    rospy.loginfo("DummyAndroidUI: Waiting for customer(s) to pick up the drinks.")
+                    rospy.sleep(1.0)
             else:
                 rospy.logerror("DummyAndroidUI: Invalid state. Exiting.")
                 break
@@ -71,7 +84,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Android drink ordering UI simulation')
     help_str = 'list of integer representing the drink order - each digit in the whole number represents one drink'
     parser.add_argument('drink_order', type=int, help=help_str)
-    args = parser.parse_args()
+    rosargs = rospy.myargv(sys.argv)
+    args = parser.parse_args(rosargs[1:])
 
     android_ui = DummyAndroidUI(args.drink_order)
     android_ui.spin()

@@ -1,0 +1,13 @@
+<launch>
+  <!-- Android test -->
+  <include file="$(find waiterbot_state_manager)/test/test_state_manager/test_state_manager_with_android.launch"/>
+  
+  <!-- dummy Android UI -->
+  <node pkg="waiterbot_state_manager" name="dummy_android_ui" type="dummy_android_ui.py" args="123">
+    <remap from="android_ui/drink_order" to="drink_order"/>
+    <remap from="android_ui/drink_ar" to="drink_ar"/>
+    <remap from="android_ui/drinks_dispensed" to="drinks_dispensed"/>
+    <remap from="android_ui/tray_empty" to="tray_empty"/>
+<!--     <remap from="android_ui/order_cancelled" to="order_cancelled"/> -->
+  </node>
+</launch>

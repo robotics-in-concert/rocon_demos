@@ -14,8 +14,9 @@
 
 <!--   <build_depend>rostest</build_depend> -->
 
-  <run_depend>std_msgs</run_depend>
+  <run_depend>kobuki_msgs</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>rosserial_python</run_depend>
+  <run_depend>std_msgs</run_depend>
   <run_depend>waiterbot_msgs</run_depend>
 </package>
