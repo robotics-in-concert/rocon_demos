@@ -13,10 +13,8 @@
 
   -->
 <launch>
-
+  <!-- State manager -->
   <include file="$(find waiterbot_state_manager)/launch/state_manager.launch"/>
-  <!-- Use this for Android tests -->
-<!--   <include file="$(find waiterbot_state_manager)/test/rostest/test_state_manager/test_state_manager_with_android.launch"/> -->
 
   <!-- 3d sensor is used for both colour singal and waiterbot controller -->
   <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
