@@ -148,6 +148,7 @@ private:
       _enabled = false;
     }
   }
+
   int _param_difference_threshold;
   int _param_frames_in_image_window;
   std::string _param_image_topic;
