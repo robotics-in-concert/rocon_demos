@@ -1,5 +1,0 @@
-<launch>
-  <node pkg="image_view" type="image_view" name="view_led_images">
-    <remap from="image_view" to="/fake_led_publisher/image"/>
-  </node>
-</launch>

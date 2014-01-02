@@ -94,9 +94,9 @@ class ColourImage : public Image<ColourImage> {
 
 public:
   ColourImage(const std::string& filename, bool convert_to_hsv = false);
-  std::string filename() const {
-    return _filename;
-  }
+  ColourImage(const cv::Mat& img, bool convert_to_hsv = false);
+
+  std::string filename() const { return _filename; }
 
   bool bgrType() const { return not converted_to_hsv; }
   bool hsvType() const { return converted_to_hsv; }

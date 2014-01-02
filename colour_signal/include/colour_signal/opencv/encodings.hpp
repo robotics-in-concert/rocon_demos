@@ -23,6 +23,7 @@ namespace colour_signal {
 enum Encoding {
   bgr8,    // CV_8UC3
   // rgb8, // CV_8UC4
+  hsv8,
   mono8
 };
 

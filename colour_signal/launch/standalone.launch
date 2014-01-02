@@ -2,8 +2,4 @@
   <node pkg="colour_signal" type="node" name="colour_signal_node">
     <!--<remap from="chatter" to="babbler"</remap>-->
   </node>
-  <!-- 
-  <node pkg="colour_signal" type="fake_publisher" name="fake_led_publisher">
-  </node>
-   -->
 </launch>

@@ -41,6 +41,16 @@ ColourImage::ColourImage(const std::string& filename, bool convert_to_hsv)
 //  }
 }
 
+ColourImage::ColourImage(const cv::Mat& img, bool convert_to_hsv)
+  : converted_to_hsv(convert_to_hsv)
+{
+  if(convert_to_hsv) {
+    cv::cvtColor(img, image, CV_BGR2HSV);
+  } else {
+    image = img;
+  }
+}
+
 /*****************************************************************************
  ** Bgr8 Image
  *****************************************************************************/
