@@ -1,8 +1,8 @@
 <launch>
-  <node pkg="colour_signal" type="node" name="colour_signal_node">
-    <remap from="colour_signal_node/image" to="/fake_led_publisher/image"/>
-    <rosparam param="auto_enable">true</rosparam>
-  </node>
+  <include file="$(find colour_signal)/launch/standalone.launch">
+    <arg name="colour_signal_image_topic" value="/fake_led_publisher/image"/>
+    <arg name="colour_signal_auto_enable" value="true"/>
+  </include>
   <node pkg="colour_signal" type="fake_publisher" name="fake_led_publisher">
     <rosparam param="signal_image" subst_value="true">$(find colour_signal)/images/led-green.jpg</rosparam>
     <rosparam param="reference_image" subst_value="true">$(find colour_signal)/images/led-reference.jpg</rosparam>
