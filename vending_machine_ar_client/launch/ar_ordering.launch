@@ -1,7 +1,7 @@
 <launch>
   <!-- USB cam driver -->
   <node name="uvc_camera" pkg="uvc_camera" type="uvc_camera_node" required="true">
-    <param name="device" value="/dev/video1"/>
+    <param name="device" value="/dev/video0"/>
   </node>
   
   <!-- AR tracker -->
@@ -19,6 +19,6 @@
   <node name="vending_machine_ar_client" pkg="vending_machine_ar_client" type="vending_machine_ar_client_node.py"
         required="true">
     <remap from="arduino/order_feedback" to="vending_machine/order_feedback"/>
-    <param name="order_idle_time" value="1.0"/>
+    <param name="order_idle_time" value="3.0"/>
   </node>
 </launch>
