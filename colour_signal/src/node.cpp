@@ -41,6 +41,8 @@ public:
     **********************/
     ros::param::param<int>("~difference_threshold", _param_difference_threshold, 30);
     ros::param::param<int>("~frames_in_image_window", _param_frames_in_image_window, 5);  // number of frames to parse before making a decision (robustify against bad images).
+    ros::param::param<std::string>("~selected_hue", _param_selected_hue, "green");  // hue to select for detecting the signal state.
+    ros::param::param<std::string>("~image_topic", _param_image_topic, "image");
 
     /*********************
     ** Parameters
@@ -81,6 +83,26 @@ private:
     }
     return false;
   }
+
+  /**
+   * Accepts the b, g, r hue percentages and calculates
+   * a percentage difference between the selected hue and
+   * the others.
+   * @param hues
+   * @return true if threshold is exceeded (signal accepted)
+   */
+  bool _isSignalDetected(const std::vector<float>& hues) {
+    float average_difference;
+    if (_param_selected_hue == "blue") {
+      average_difference = (2*hues.at(0) - hues.at(1) - hues.at(2))*100.0/2.0;
+    } else if(_param_selected_hue == "green") {
+      average_difference = (2*hues.at(1) - hues.at(0) - hues.at(2))*100.0/2.0;
+    } else {
+      average_difference = (2*hues.at(2) - hues.at(0) - hues.at(1))*100.0/2.0;
+    }
+    return average_difference > _param_difference_threshold;
+  }
+
   void imageCallback(const sensor_msgs::Image::ConstPtr &msg) {
     if ( !_enabled ) {
       return;
@@ -100,8 +122,8 @@ private:
     bool convert_to_hsv = true;
     colour_signal::ColourImage image(cv_ptr->image, convert_to_hsv);
     std::vector<float> hues = colour_signal::spliceLightSignal(image);
-    float average_green_difference = (2*hues.at(1) - hues.at(0) - hues.at(2))*100.0/2.0;
-    if (_updateSignalState(average_green_difference > _param_difference_threshold)) { // signal state changed
+    bool signal_detected =_isSignalDetected(hues);
+    if (_updateSignalState(signal_detected)) { // signal state changed
       if(_signalled) {
         ROS_INFO_STREAM("ColourSignal : signal detected");
       } else {
@@ -118,7 +140,7 @@ private:
     if (msg->data) {
       ROS_INFO_STREAM("ColourSignal : enabled");
       ros::NodeHandle private_node_handle("~");
-      _image_subscriber = private_node_handle.subscribe("image", 10, &Jagi::imageCallback, this);
+      _image_subscriber = private_node_handle.subscribe(_param_image_topic, 10, &Jagi::imageCallback, this);
       _enabled = true;
     } else {
       ROS_INFO_STREAM("ColourSignal : disabled");
@@ -128,6 +150,8 @@ private:
   }
   int _param_difference_threshold;
   int _param_frames_in_image_window;
+  std::string _param_image_topic;
+  std::string _param_selected_hue;
   std::deque<bool> _recent_signals;
   bool _enabled;
   bool _signalled;
