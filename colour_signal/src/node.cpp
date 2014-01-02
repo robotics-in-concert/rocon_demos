@@ -119,8 +119,7 @@ private:
       ROS_ERROR("cv_bridge exception: %s", e.what());
       return;
     }
-    bool convert_to_hsv = true;
-    colour_signal::ColourImage image(cv_ptr->image, convert_to_hsv);
+    colour_signal::Hsv8Image image(cv_ptr->image);
     std::vector<float> hues = colour_signal::spliceLightSignal(image);
     bool signal_detected =_isSignalDetected(hues);
     if (_updateSignalState(signal_detected)) { // signal state changed

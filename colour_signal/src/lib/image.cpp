@@ -18,20 +18,15 @@ namespace colour_signal
 {
 
 /*****************************************************************************
- ** Colour Image
+ ** Hsv8Image Image
  *****************************************************************************/
 
-ColourImage::ColourImage(const std::string& filename, bool convert_to_hsv)
-  : converted_to_hsv(convert_to_hsv)
+Hsv8Image::Hsv8Image(const std::string& filename)
 {
 //  std::cout << "Loading image" << std::endl;
   //image = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
-  if(convert_to_hsv) {
-    cv::Mat bgr_image = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
-    cv::cvtColor(bgr_image, image, CV_BGR2HSV);
-  } else {
-    image = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
-  }
+  cv::Mat bgr_image = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
+  cv::cvtColor(bgr_image, image, CV_BGR2HSV);
 //  std::cout << "  Filename: " << filename << std::endl;
 //  if ( image.data == NULL ) {
 //    std::cout << "  Reading image failed" << std::endl;
@@ -41,15 +36,18 @@ ColourImage::ColourImage(const std::string& filename, bool convert_to_hsv)
 //  }
 }
 
-ColourImage::ColourImage(const cv::Mat& img, bool convert_to_hsv)
-  : converted_to_hsv(convert_to_hsv)
+/**
+ * This assumes you are pumping in an appropriate bgr8 mat.
+ *
+ * todo : we should find a way of checking the mat encoding.
+ *
+ * @param img
+ */
+Hsv8Image::Hsv8Image(const cv::Mat& img)
 {
-  if(convert_to_hsv) {
-    cv::cvtColor(img, image, CV_BGR2HSV);
-  } else {
-    image = img;
-  }
+  cv::cvtColor(img, image, CV_BGR2HSV);
 }
+
 
 /*****************************************************************************
  ** Bgr8 Image
@@ -59,6 +57,11 @@ Bgr8Image::Bgr8Image(const unsigned int &width, const unsigned int &height)
 {
   image.create(height, width, CV_8UC3); // CV_8UC4 is rgba8
   image = CvColour<Black, bgr8>::value(); // default fill black
+}
+
+Bgr8Image::Bgr8Image(const std::string& filename)
+{
+  image = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
 }
 
 /*****************************************************************************

@@ -18,8 +18,7 @@
 ** Namespaces
 *****************************************************************************/
 
-using colour_signal::ColourImage;
-using colour_signal::Bgr8Image;
+using colour_signal::Hsv8Image;
 
 /*****************************************************************************
 ** Main
@@ -50,10 +49,10 @@ int main(int argc, char **argv) {
   ROS_INFO_STREAM("FakeLed : loading image [" << red_image_filename << "]");
   ROS_INFO_STREAM("FakeLed : loading image [" << reference_image_filename << "]");
 
-  ColourImage blue_image(blue_image_filename, true);
-  ColourImage green_image(green_image_filename, true);
-  ColourImage red_image(red_image_filename, true);
-  ColourImage reference_image(reference_image_filename, true);
+  Hsv8Image blue_image(blue_image_filename);
+  Hsv8Image green_image(green_image_filename);
+  Hsv8Image red_image(red_image_filename);
+  Hsv8Image reference_image(reference_image_filename);
 
   std::vector<float> red_image_hues = colour_signal::spliceLightSignal(red_image);
   std::vector<float> blue_image_hues = colour_signal::spliceLightSignal(blue_image);
