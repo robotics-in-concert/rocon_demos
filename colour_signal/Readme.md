@@ -8,7 +8,7 @@ If the difference is significant, it registers it as a led signal.
 
 ### Usage
 
-Include `standalone.launch` in your own launcher and configure it via the supplied args. You will
+Include `standalone.launch` or `waiterbot.launch` in your own launcher and configure it via the supplied args. You will
 need to configure the image_topic handle and remap your own handles to its enable and result publishers.
 
 Don't forget to enable/disable it for only the periods where you want to actually detect led signals otherwise you will do alot of processing and consume alot of socket bandwidth for no reason (it disables the subscriber when not in use).
