@@ -8,6 +8,8 @@
 ** Includes
 *****************************************************************************/
 
+#include <ros/ros.h>
+#include <ros/package.h>
 #include <string>
 #include "../../include/colour_signal/opencv/image.hpp"
 #include "../../include/colour_signal/signal_detection.hpp"
@@ -26,13 +28,32 @@ using colour_signal::Bgr8Image;
 int main(int argc, char **argv) {
 
   /*********************
-  ** Args
+  ** Ros
   **********************/
+  ros::init(argc, argv, "hues");
+  ros::NodeHandle private_node_handle("~");
 
-  ColourImage red_image("./led-red.jpg", true);
-  ColourImage blue_image("./led-blue.jpg", true);
-  ColourImage green_image("./led-green.jpg", true);
-  ColourImage reference_image("./led-reference.jpg", true);
+  /*********************
+  ** Images
+  **********************/
+  std::string reference_image_filename, blue_image_filename, green_image_filename, red_image_filename;
+  blue_image_filename = ros::package::getPath("colour_signal") + "/images/led-blue.jpg";
+  green_image_filename = ros::package::getPath("colour_signal") + "/images/led-green.jpg";
+  red_image_filename = ros::package::getPath("colour_signal") + "/images/led-red.jpg";
+  reference_image_filename = ros::package::getPath("colour_signal") + "/images/led-reference.jpg";
+
+  /*********************
+  ** Images
+  **********************/
+  ROS_INFO_STREAM("FakeLed : loading image [" << blue_image_filename << "]");
+  ROS_INFO_STREAM("FakeLed : loading image [" << green_image_filename << "]");
+  ROS_INFO_STREAM("FakeLed : loading image [" << red_image_filename << "]");
+  ROS_INFO_STREAM("FakeLed : loading image [" << reference_image_filename << "]");
+
+  ColourImage blue_image(blue_image_filename, true);
+  ColourImage green_image(green_image_filename, true);
+  ColourImage red_image(red_image_filename, true);
+  ColourImage reference_image(reference_image_filename, true);
 
   std::vector<float> red_image_hues = colour_signal::spliceLightSignal(red_image);
   std::vector<float> blue_image_hues = colour_signal::spliceLightSignal(blue_image);
@@ -42,21 +63,21 @@ int main(int argc, char **argv) {
   /*********************
   ** Pretty Print
   **********************/
-  std::cout << "Blue Image Hues [BGR]" << std::endl;
+  ROS_INFO_STREAM("Blue Image Hues [BGR]");
   for(unsigned int i = 0; i < blue_image_hues.size(); ++i) {
-    std::cout << "  : " << blue_image_hues.at(i)*100.0 << "% " << std::endl;
+    ROS_INFO_STREAM("  : " << blue_image_hues.at(i)*100.0 << "% ");
   }
-  std::cout << "Green Image Hues [BGR]" << std::endl;
+  ROS_INFO_STREAM("Green Image Hues [BGR]");
   for(unsigned int i = 0; i < green_image_hues.size(); ++i) {
-    std::cout << "  : " << green_image_hues.at(i)*100.0 << "% " << std::endl;
+    ROS_INFO_STREAM("  : " << green_image_hues.at(i)*100.0 << "% ");
   }
-  std::cout << "Red Image Hues [BGR]" << std::endl;
+  ROS_INFO_STREAM("Red Image Hues [BGR]");
   for(unsigned int i = 0; i < red_image_hues.size(); ++i) {
-    std::cout << "  : " << red_image_hues.at(i)*100.0 << "% " << std::endl;
+    ROS_INFO_STREAM("  : " << red_image_hues.at(i)*100.0 << "% ");
   }
-  std::cout << "Reference Image Hues [BGR]" << std::endl;
+  ROS_INFO_STREAM("Reference Image Hues [BGR]");
   for(unsigned int i = 0; i < reference_image_hues.size(); ++i) {
-    std::cout << "  : " << reference_image_hues.at(i)*100.0 << "% " << std::endl;
+    ROS_INFO_STREAM("  : " << reference_image_hues.at(i)*100.0 << "% ");
   }
   return 0;
 }

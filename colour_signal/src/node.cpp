@@ -26,9 +26,6 @@
 
 class Jagi {
 public:
-  static const unsigned int threshold = 30;
-  static const unsigned int frames_in_image_window = 5;  // number of frames to parse before making a decision (robustify against bad images).
-
   Jagi() : _enabled(false), _signalled(false) {}
 
   void init(ros::NodeHandle &private_node_handle) {
@@ -40,6 +37,12 @@ public:
     // _image_subscriber configured when enabling.
 
     /*********************
+    ** Params
+    **********************/
+    ros::param::param<int>("~difference_threshold", _param_difference_threshold, 30);
+    ros::param::param<int>("~frames_in_image_window", _param_frames_in_image_window, 5);  // number of frames to parse before making a decision (robustify against bad images).
+
+    /*********************
     ** Parameters
     **********************/
     bool auto_enable = false;
@@ -49,13 +52,6 @@ public:
     enableCallback(auto_enable_msg);
   }
 
-  void spin() {
-    ros::spin();
-//    while (ros::ok()) {
-//      todo rate sleep
-//      ros::spinOnce();
-//    }
-  }
 
 private:
   /**
@@ -65,7 +61,7 @@ private:
    */
   bool _updateSignalState(const bool new_signal) {
     _recent_signals.push_back(new_signal);
-    if (_recent_signals.size() == frames_in_image_window ) {
+    if (_recent_signals.size() == _param_frames_in_image_window ) {
       _recent_signals.pop_front();
       bool s = _recent_signals.at(0);
       bool dirty_signal = false;
@@ -105,7 +101,7 @@ private:
     colour_signal::ColourImage image(cv_ptr->image, convert_to_hsv);
     std::vector<float> hues = colour_signal::spliceLightSignal(image);
     float average_green_difference = (2*hues.at(1) - hues.at(0) - hues.at(2))*100.0/2.0;
-    if (_updateSignalState(average_green_difference > threshold)) { // signal state changed
+    if (_updateSignalState(average_green_difference > _param_difference_threshold)) { // signal state changed
       if(_signalled) {
         ROS_INFO_STREAM("ColourSignal : signal detected");
       } else {
@@ -130,6 +126,8 @@ private:
       _enabled = false;
     }
   }
+  int _param_difference_threshold;
+  int _param_frames_in_image_window;
   std::deque<bool> _recent_signals;
   bool _enabled;
   bool _signalled;
@@ -146,6 +144,6 @@ int main(int argc, char **argv) {
   ros::NodeHandle private_node_handle("~");
   Jagi jagi;
   jagi.init(private_node_handle);
-  jagi.spin();
+  ros::spin();
   return 0;
 }
