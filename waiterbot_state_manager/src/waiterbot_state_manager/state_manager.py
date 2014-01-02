@@ -58,11 +58,11 @@ class StateManager(object):
 
         # Debug/monitoring output
         self._pub_state_manager_debug = rospy.Publisher('~debug', std_msgs.String, latch=True)
+
         # Button monitoring
-        self._sub_buttons = rospy.Subscriber('mobile_base/events/digital_inputs', kobuki_msgs.DigitalInputEvent,
+        self._sub_buttons = rospy.Subscriber('kobuki/digital_input_events', kobuki_msgs.DigitalInputEvent,
                                              self._buttonCB)
         self._pub_cancel_order = rospy.Publisher('~order_cancelled', std_msgs.Empty, latch=True)
-
 
     def _drinkOrderCB(self, msg):
         if not self._order_received:
@@ -77,9 +77,15 @@ class StateManager(object):
             if self._current_state == self._state_goto_vm:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.VM_ARRIVAL:
                     self.goto_goal_reached = True
+                    self._publishDebugMsg('State Manager: Reached vending machine.')
             elif self._current_state == self._state_goto_customer:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.ORIGIN_ARRIVAL:
                     self.goto_goal_reached = True
+                    self._publishDebugMsg('State Manager: Reached customer.')
+            if msg.status_code == waiterbot_msgs.NavCtrlStatus.ERROR:
+                self._publishDebugMsg('State Manager: Navigation control reported an error.')
+                self._current_state = self._state_reset
+                self._publishCurrentStateChange()
 
     def _vmFeedbackResultCB(self, msg):
         if msg.data and not self._drink_dispensed:
@@ -89,13 +95,13 @@ class StateManager(object):
         # green button aka confirm button pressed
         if not msg.values[0]:
             self._confirm_button_pressed = True
-            rospy.loginfo('State Manager: Confirm button pressed.')
+            self._publishDebugMsg('State Manager: Confirm button pressed.')
         else:
             self._confirm_button_pressed = False
 
         # red button aka cancel button pressed
         if not msg.values[1]:
-            rospy.loginfo('State Manager: Cancel button pressed.')
+            self._publishDebugMsg('State Manager: Confirm button pressed.')
             self._current_state = self._state_reset
             self._publishCurrentStateChange()
 
@@ -226,7 +232,7 @@ class StateManager(object):
             elif self._current_state == self._state_goto_customer:
                 self._stateGoToCustomer()
             else:
-                rospy.logerror("State not valid! Exiting ...")
+                rospy.logerror("State Manager: State not valid! Exiting ...")
                 return
             self._publishCurrentState()
             rospy.sleep(0.5)
@@ -245,3 +251,9 @@ class StateManager(object):
         msg.data = "Changing to state '" + self._current_state + "'."
         self._pub_state_manager_debug.publish(msg)
         rospy.loginfo('State Manager: ' + msg.data)
+
+    def _publishDebugMsg(self, msg):
+        string_msg = std_msgs.String()
+        string_msg.data = msg
+        self._pub_state_manager_debug.publish(string_msg)
+        rospy.loginfo('State Manager: ' + string_msg.data)

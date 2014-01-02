@@ -5,8 +5,8 @@
   <!-- dummy navigation control -->
   <node pkg="waiterbot_state_manager" name="dummy_nav_ctrl" type="dummy_nav_ctrl.py">
     <param name="nav_time" value="2.0"/>
-    <remap from="waiterbot_nav_control/goto" to="goto"/>
-    <remap from="waiterbot_nav_control/status" to="status"/>
+    <remap from="waiterbot_nav_control/goto" to="nav_ctrl_goto"/>
+    <remap from="waiterbot_nav_control/status" to="nav_ctrl_status"/>
   </node>
 
   <!-- dummy vm feedback -->

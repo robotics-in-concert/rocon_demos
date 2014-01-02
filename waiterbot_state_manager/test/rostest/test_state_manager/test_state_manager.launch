@@ -8,6 +8,6 @@
     <remap from="android_ui/drink_ar" to="drink_ar"/>
     <remap from="android_ui/drinks_dispensed" to="drinks_dispensed"/>
     <remap from="android_ui/tray_empty" to="tray_empty"/>
-<!--     <remap from="android_ui/order_cancelled" to="order_cancelled"/> -->
+    <remap from="android_ui/order_cancelled" to="order_cancelled"/>
   </node>
 </launch>

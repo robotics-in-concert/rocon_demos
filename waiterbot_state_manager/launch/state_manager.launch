@@ -5,12 +5,13 @@
     <remap from="android_ui/drink_ar" to="drink_ar"/>
     <remap from="android_ui/drinks_dispensed" to="drinks_dispensed"/>
     <remap from="android_ui/tray_empty" to="tray_empty"/>
-    <remap from="waiterbot_nav_control/goto" to="goto"/>
-    <remap from="waiterbot_nav_control/status" to="status"/>
+    <remap from="waiterbot_nav_control/goto" to="nav_ctrl_goto"/>
+    <remap from="waiterbot_nav_control/status" to="nav_ctrl_status"/>
     <remap from="waiterbot_state_manager/debug" to="waiterbot_debug"/>
     <remap from="vm_feedback_proc/enable" to="vm_feedback_enable"/>
     <remap from="vm_feedback_proc/result" to="vm_feedback_result"/>
     <remap from="waiterbot_state_manager/order_cancelled" to="order_cancelled"/>
     <remap from="waiterbot_state_manager/debug" to="waiterbot_debug"/>
+    <remap from="kobuki/digital_input_events" to="mobile_base/events/digital_input"/>
   </node>
 </launch>
