@@ -13,7 +13,7 @@
 
   -->
 <launch>
-  <!-- State manager -->
+
   <include file="$(find waiterbot_state_manager)/launch/state_manager.launch"/>
 
   <!-- 3d sensor is used for both colour singal and waiterbot controller -->
@@ -29,7 +29,14 @@
     <arg name="scan_processing"                 value="true" />
   </include>
 
-<!--  <include file="$(find colour_signal)/launch/signal.launch"/>-->
+  <include file="$(find colour_signal)/launch/standalone.launch">
+   <arg name="colour_signal_image_topic" value="/whoola/camera/rgb/image_rect_color"/>
+   <arg name="colour_signal_selected_hue" value="green"/>
+   <arg name="colour_signal_difference_threshold" value="30"/>
+   <arg name="colour_signal_frames_in_image_window" value="3"/>
+   <arg name="colour_signal_auto_enable" value="false"/>
+  </include>
+
   <include file="$(find waiterbot_ctrl_nowireless)/launch/rapp.launch">
     <arg name="start_3dsensor" value="false"/>
   </include>
