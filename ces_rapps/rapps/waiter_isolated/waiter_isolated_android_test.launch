@@ -1,0 +1,17 @@
+<!-- 
+  Waiterbot Isolated version!
+
+  To start waiterbot. 
+
+  > rocon_launch turtlebot_bringup bringup.concert 
+
+  rapp_list = ces_rapps/ces.rapps
+
+  - state machine
+  - 3dsensor
+  - colour detector
+
+  -->
+<launch>
+  <include file="$(find waiterbot_state_manager)/test/rostest/test_state_manager/test_state_manager_with_android.launch"/>
+</launch>
