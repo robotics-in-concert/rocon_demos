@@ -2,5 +2,17 @@
   Waiterbot Babo version!
   -->
 <launch>
-  <node pkg="ces_dummy_scripts" name="dummy_waiter" type="dummy_waiter_state.py" output="screen"/>
+  <!-- dummy waiterbot state manager -->
+<!--   <node pkg="ces_dummy_scripts" name="dummy_waiter" type="dummy_waiter_state.py"/> -->
+  
+  <!-- real waiterbot state manager with dummy navigation control and VM feedback processor -->
+  <include file="$(find waiterbot_state_manager)/launch/state_manager_android_test.launch">
+<!--     <remap from="" to=""/> -->
+<!--     <remap from="" to=""/> -->
+<!--     <remap from="" to=""/> -->
+<!--     <remap from="" to=""/> -->
+<!--     <remap from="" to=""/> -->
+<!--     <remap from="" to=""/> -->
+<!--     <remap from="" to=""/> -->
+  </include>
 </launch>

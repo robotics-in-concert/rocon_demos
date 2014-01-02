@@ -11,13 +11,13 @@
 
 int PIN_DRINK1 = 2;
 int PIN_DRINK2 = 3;
-int PIN_ORDER_FEEDBACK = 4;
-int PIN_NEOPIXEL = 6;
+int PIN_NEOPIXEL = 4; // neopixel
 int drink_order;
 bool drink_ordered;
-bool order_feedback;
+bool dispensing_drink;
 int trigger_time = 500;
 int dispensing_time = 4000;
+int elapsed_drink_time = 0;
 int dispensed_signal_time = 1000;
 
 // Parameter 1 = number of pixels in strip
@@ -31,21 +31,24 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(40, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ8
 
 void drinkCB( const std_msgs::Int8& msg)
 {
-  if (msg.data == 1)
+  if (!drink_ordered) // only trigger dispensing, if it is not already in progress
   {
-    drink_order = 1;
-    digitalWrite(PIN_DRINK1, HIGH);   // blink the led
+    if (msg.data == 1)
+    {
+      drink_order = 1;
+      digitalWrite(PIN_DRINK1, HIGH); // blink the led
+    }
+    else if (msg.data == 2)
+    {
+      drink_order = 2;
+      digitalWrite(PIN_DRINK2, HIGH); // blink the led
+    }
+    else
+    {
+      drink_order = -1;
+    }
+    drink_ordered = true;
   }
-  else if (msg.data == 2)
-  {
-    drink_order = 2;
-    digitalWrite(PIN_DRINK2, HIGH);   // blink the led
-  }
-  else
-  {
-    drink_order = -1;
-  }
-  drink_ordered = true;
 }
 
 ros::Subscriber<std_msgs::Int8> sub_drink_order("~drink_order", drinkCB );
@@ -57,51 +60,84 @@ void setup()
 {
   pinMode(PIN_DRINK1, OUTPUT);
   pinMode(PIN_DRINK2, OUTPUT);
-  pinMode(PIN_ORDER_FEEDBACK, OUTPUT);
   nh.initNode();
   drink_ordered = false;
+  dispensing_drink = false;
+  elapsed_drink_time = 0;
   drink_order = -1;
-  order_feedback = false;
   nh.subscribe(sub_drink_order);
-//  nh.subscribe(sub_order_feedback);
   nh.advertise(pub_order_result);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
   
-  while(!nh.connected()){nh.spinOnce();};
+  while(!nh.connected())
+  {
+    nh.spinOnce();
+    // blink orange to signal controller is not connected to ROS yet
+    colorFlush(strip.Color(255, 165, 0), 500);
+    colorFlush(strip.Color(0, 0, 0), 0);
+    delay(500);
+  }
+  
   nh.getParam("~trigger_time", &trigger_time, 1);
   nh.getParam("~dispensing_time", &dispensing_time, 1);
   nh.getParam("~dispensed_signal_time", &dispensed_signal_time, 1);
+  delay(500); // give some time to retrieve the parameters
+    
+  // blink green to signal controller is connected to ROS and fully ready
+  colorFlush(strip.Color(0, 255, 0), 500);
+  colorFlush(strip.Color(0, 0, 0), 0);
 }
 
 void loop()
 {
   nh.spinOnce(); // checks for orders
   
-  if (drink_ordered)
+  if (nh.connected())
   {
-    delay(trigger_time); // keep drink triggers on long enough for the VM to trigger
-    
-    if (drink_order == 1)
+    if (dispensing_drink)
     {
-      digitalWrite(PIN_DRINK1, LOW); // turn off output
+      if (elapsed_drink_time >= dispensing_time)
+      {
+        colorFlush(strip.Color(0, 0, 255), dispensed_signal_time); // signal drink has been dispensed    
+        colorFlush(strip.Color(0, 0, 0), 0); // signal drink has been dispensed
+        order_result_msg.data = drink_order;
+        pub_order_result.publish( &order_result_msg ); // send out message about dispensed drink
+        
+        elapsed_drink_time = 0;
+        dispensing_drink = false;
+        drink_ordered = false;
+      }
+      else
+      {
+        elapsed_drink_time += 500;
+        delay(500);
+      }
     }
-    else if (drink_order == 2)
+    else if (drink_ordered)
     {
-      digitalWrite(PIN_DRINK2, LOW); // turn off output
+      delay(trigger_time); // keep drink triggers on long enough for the VM to trigger
+      
+      if (drink_order == 1)
+      {
+        digitalWrite(PIN_DRINK1, LOW); // turn off output
+      }
+      else if (drink_order == 2)
+      {
+        digitalWrite(PIN_DRINK2, LOW); // turn off output
+      }
+      dispensing_drink = true;
     }
-    
-    delay(dispensing_time); // wait for the VM to dispense the drink
-    
-    colorFlush(strip.Color(0, 0, 255), dispensed_signal_time); // signal drink has been dispensed    
-    colorFlush(strip.Color(0, 0, 0), 0); // signal drink has been dispensed
-    order_result_msg.data = drink_order;
-    pub_order_result.publish( &order_result_msg ); // send out message about dispensed drink
-    
-    drink_ordered = false;
+    else
+    {
+      delay(500);
+    }
   }
   else
   {
+     // blink orange to signal controller is not connected anymore
+    colorFlush(strip.Color(255, 165, 0), 500);
+    colorFlush(strip.Color(0, 0, 0), 0);
     delay(500);
   }
 }

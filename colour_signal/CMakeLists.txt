@@ -9,7 +9,15 @@ project(colour_signal)
 # Dependencies
 ##############################################################################
 
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED COMPONENTS 
+    roscpp
+    ecl_command_line
+    std_msgs
+    ecl_exceptions
+    sensor_msgs
+    cv_bridge
+)
+
 find_package(OpenCV REQUIRED)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
@@ -22,7 +30,13 @@ catkin_package(
         INCLUDE_DIRS include
         DEPENDS OpenCV
         LIBRARIES ${PROJECT_NAME}
-        CATKIN_DEPENDS roscpp
+        CATKIN_DEPENDS
+            roscpp
+            ecl_command_line
+            std_msgs
+            ecl_exceptions
+            sensor_msgs
+            cv_bridge
         )
 
 ##############################################################################

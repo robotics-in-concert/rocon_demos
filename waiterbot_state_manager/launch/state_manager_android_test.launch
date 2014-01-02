@@ -1,0 +1,12 @@
+<launch>
+  <!-- state manager -->
+  <include file="$(find waiterbot_state_manager)/launch/state_manager.launch"/>
+
+  <!-- dummy navigation control -->
+  <node pkg="waiterbot_state_manager" name="dummy_nav_ctrl" type="dummy_nav_ctrl.py"/>
+
+  <!-- dummy vm feedback -->
+  <node pkg="waiterbot_state_manager" name="dummy_vm_feedback" type="dummy_vm_feedback.py">
+    <param name="recognition_time" value="10.0"/>
+  </node>
+</launch>

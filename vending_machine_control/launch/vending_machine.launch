@@ -4,11 +4,11 @@
   <node name="vending_machine" pkg="rosserial_python" type="serial_node.py" args="/dev/arduino_yun" required="true">
     <!-- Parameter values are time in milliseconds -->
     <param name="trigger_time" value="500"/>
-    <param name="dispensing_time" value="4000"/>
+    <param name="dispensing_time" value="8000"/>
     <param name="dispensed_signal_time" value="1000"/>
   </node>
   
-  <!-- Action server interface for vending machine ordering -->
+  <!-- Action server interface for placing orders with the vending machine -->
   <node name="vending_machine_manager" pkg="vending_machine_control" type="vending_machine_manager.py">
     <remap from="arduino/drink_order" to="vending_machine/drink_order"/>
     <remap from="arduino/order_result" to="vending_machine/order_result"/>
