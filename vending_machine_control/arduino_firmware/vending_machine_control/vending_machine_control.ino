@@ -74,7 +74,8 @@ void setup()
   {
     nh.spinOnce();
     // blink orange to signal controller is not connected to ROS yet
-    colorFlush(strip.Color(255, 165, 0), 500);
+//    colorFlush(strip.Color(255, 165, 0), 500);
+    colorFlush(strip.Color(0, 255, 0), 500);
     colorFlush(strip.Color(0, 0, 0), 0);
     delay(500);
   }
@@ -85,7 +86,7 @@ void setup()
   delay(500); // give some time to retrieve the parameters
     
   // blink green to signal controller is connected to ROS and fully ready
-  colorFlush(strip.Color(0, 255, 0), 500);
+  colorFlush(strip.Color(255, 0, 0), 500);
   colorFlush(strip.Color(0, 0, 0), 0);
 }
 
@@ -99,7 +100,8 @@ void loop()
     {
       if (elapsed_drink_time >= dispensing_time)
       {
-        colorFlush(strip.Color(0, 0, 255), dispensed_signal_time); // signal drink has been dispensed    
+//        colorFlush(strip.Color(0, 0, 255), dispensed_signal_time); // signal drink has been dispensed
+        colorFlush(strip.Color(0, 255, 0), dispensed_signal_time);
         colorFlush(strip.Color(0, 0, 0), 0); // signal drink has been dispensed
         order_result_msg.data = drink_order;
         pub_order_result.publish( &order_result_msg ); // send out message about dispensed drink
@@ -136,7 +138,8 @@ void loop()
   else
   {
      // blink orange to signal controller is not connected anymore
-    colorFlush(strip.Color(255, 165, 0), 500);
+//    colorFlush(strip.Color(255, 165, 0), 500);
+    colorFlush(strip.Color(0, 255, 0), 500);
     colorFlush(strip.Color(0, 0, 0), 0);
     delay(500);
   }

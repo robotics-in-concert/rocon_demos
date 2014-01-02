@@ -14,6 +14,6 @@
     <remap from="arduino/order_result" to="vending_machine/order_result"/>
     <!-- set available drink types (see vending_machine_control/DrinkType.msg for available options) -->
     <param name="drink1" value="1"/>
-    <param name="drink2" value="3"/>
+    <param name="drink2" value="2"/>
   </node>
 </launch>
