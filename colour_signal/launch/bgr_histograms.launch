@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="colour_signal" type="histograms" name="histograms">
+    <rosparam param="convert_to_hsv">false</rosparam>
+  </node>
+</launch>

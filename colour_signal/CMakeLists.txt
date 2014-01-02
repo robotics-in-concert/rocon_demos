@@ -11,6 +11,7 @@ project(colour_signal)
 
 find_package(catkin REQUIRED COMPONENTS 
     roscpp
+    roslib
     ecl_command_line
     std_msgs
     ecl_exceptions
@@ -32,6 +33,7 @@ catkin_package(
         LIBRARIES ${PROJECT_NAME}
         CATKIN_DEPENDS
             roscpp
+            roslib
             ecl_command_line
             std_msgs
             ecl_exceptions
@@ -45,3 +47,10 @@ catkin_package(
 
 add_subdirectory(include)
 add_subdirectory(src)
+
+##############################################################################
+# Installation
+##############################################################################
+
+install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(DIRECTORY images DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

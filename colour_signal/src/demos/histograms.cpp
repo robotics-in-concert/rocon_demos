@@ -8,8 +8,9 @@
 ** Includes
 *****************************************************************************/
 
+#include <ros/ros.h>
+#include <ros/package.h>
 #include <string>
-#include <ecl/command_line.hpp>
 #include "../../include/colour_signal/opencv/image.hpp"
 #include "../../include/colour_signal/opencv/text.hpp"
 #include "../../include/colour_signal/opencv/colours.hpp"
@@ -29,17 +30,30 @@ using colour_signal::Bgr8Image;
 int main(int argc, char **argv) {
 
   /*********************
-  ** Args
+  ** Ros
   **********************/
-  ecl::CmdLine cmd("This is a simple interface for testing bgr and hsv histograms.",' ',"0.1");
-  ecl::SwitchArg switch_hsv("c","hsv","Convert images from bgr to hsv.",false);
-  cmd.add(switch_hsv);
-  cmd.parse(argc, argv);
+  ros::init(argc, argv, "histograms");
+  ros::NodeHandle private_node_handle("~");
 
-  ColourImage red_image("./led-red.jpg", switch_hsv.getValue());
-  ColourImage blue_image("./led-blue.jpg", switch_hsv.getValue());
-  ColourImage green_image("./led-green.jpg", switch_hsv.getValue());
-  ColourImage reference_image("./led-reference.jpg", switch_hsv.getValue());
+  /*********************
+  ** Params
+  **********************/
+  bool convert_to_hsv;
+  ros::param::param<bool>("~convert_to_hsv", convert_to_hsv, false);
+
+  /*********************
+  ** Images
+  **********************/
+  std::string reference_image_filename, blue_image_filename, green_image_filename, red_image_filename;
+  blue_image_filename = ros::package::getPath("colour_signal") + "/images/led-blue.jpg";
+  green_image_filename = ros::package::getPath("colour_signal") + "/images/led-green.jpg";
+  red_image_filename = ros::package::getPath("colour_signal") + "/images/led-red.jpg";
+  reference_image_filename = ros::package::getPath("colour_signal") + "/images/led-reference.jpg";
+
+  ColourImage red_image(red_image_filename, convert_to_hsv);
+  ColourImage blue_image(blue_image_filename, convert_to_hsv);
+  ColourImage green_image(green_image_filename, convert_to_hsv);
+  ColourImage reference_image(reference_image_filename, convert_to_hsv);
 
 //  Bgr8Image red_image; red_image.fill<colour_signal::Red>();
 //  Bgr8Image blue_image; blue_image.fill<colour_signal::Blue>();
@@ -71,7 +85,7 @@ int main(int argc, char **argv) {
   /*********************
   ** Cleanup
   **********************/
-
+  // a ros::spin() doesn't work - images don't get shown properly. Not sure why.
   cv::waitKey(0);
   cv::destroyWindow("Red");
   cv::destroyWindow("Blue");
