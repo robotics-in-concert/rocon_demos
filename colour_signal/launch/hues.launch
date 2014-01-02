@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="colour_signal" type="hues" name="hues"/>
+</launch>

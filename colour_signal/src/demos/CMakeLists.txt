@@ -15,3 +15,4 @@ endmacro()
 ###############################################################################
 
 colour_signal_add_utility(histograms)
+colour_signal_add_utility(hues)

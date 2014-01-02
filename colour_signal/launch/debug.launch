@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="colour_signal" type="node" name="colour_signal_node">
+    <remap from="colour_signal_node/image" to="/fake_led_publisher/image"/>
+    <rosparam param="auto_enable">true</rosparam>
+  </node>
+  <node pkg="colour_signal" type="fake_publisher" name="fake_led_publisher">
+    <rosparam param="signal_image" subst_value="true">$(find colour_signal)/images/led-green.jpg</rosparam>
+    <rosparam param="reference_image" subst_value="true">$(find colour_signal)/images/led-reference.jpg</rosparam>
+  </node>
+  <node pkg="image_view" type="image_view" name="view_led_images">
+    <remap from="image" to="/fake_led_publisher/image"/>
+  </node>
+</launch>

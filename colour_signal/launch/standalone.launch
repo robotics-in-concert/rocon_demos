@@ -1,5 +1,15 @@
 <launch>
-  <node pkg="colour_signal" type="colour_signal_node" name="colour_signal_node">
-    <!--<remap from="chatter" to="babbler"</remap>-->
+  <!-- ************************* Public Arguments ****************************** -->
+  <arg name="colour_signal_selected_hue" default="green"/>
+  <arg name="colour_signal_difference_threshold" default="30"/>
+  <arg name="colour_signal_frames_in_image_window" default="5"/>
+  <arg name="colour_signal_image_topic" default="image"/>
+
+  <!-- ****************************** Nodes ************************************ -->
+  <node pkg="colour_signal" type="node" name="colour_signal_node">
+    <param name="selected_hue" value="$(arg colour_signal_selected_hue"/>
+    <param name="difference_threshold" value="$(arg colour_signal_difference_threshold"/>
+    <param name="frames_in_image_window" value="$(arg colour_signal_frames_in_image_window"/>
+    <param name="image_topic" value="$(arg colour_signal_image_topic"/>
   </node>
 </launch>
