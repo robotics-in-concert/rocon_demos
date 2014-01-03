@@ -42,7 +42,7 @@ public:
     ros::param::param<int>("~difference_threshold", _param_difference_threshold, 30);
     ros::param::param<int>("~frames_in_image_window", _param_frames_in_image_window, 5);  // number of frames to parse before making a decision (robustify against bad images).
     ros::param::param<std::string>("~selected_hue", _param_selected_hue, "green");  // hue to select for detecting the signal state.
-    ros::param::param<std::string>("~image_topic", _param_image_topic, "image");
+    ros::param::param<std::string>("~image_topic", _param_image_topic, "image"); // non-private image topic name
 
     /*********************
     ** Parameters
@@ -138,8 +138,8 @@ private:
   void enableCallback(const std_msgs::Bool::ConstPtr &msg) {
     if (msg->data) {
       ROS_INFO_STREAM("ColourSignal : enabled");
-      ros::NodeHandle private_node_handle("~");
-      _image_subscriber = private_node_handle.subscribe(_param_image_topic, 10, &Jagi::imageCallback, this);
+      ros::NodeHandle node_handle;
+      _image_subscriber = node_handle.subscribe(_param_image_topic, 10, &Jagi::imageCallback, this);
       _enabled = true;
     } else {
       ROS_INFO_STREAM("ColourSignal : disabled");

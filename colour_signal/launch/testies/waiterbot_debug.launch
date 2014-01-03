@@ -4,17 +4,19 @@
   directory of this package.
  -->
 <launch>
-  <arg name="colour_signal_image_topic" value="/whoola/camera/rgb/image_rect_color"/>
+  <arg name="colour_signal_image_topic" value="camera/rgb/image_rect_color"/>
   
-  <include file="$(find colour_signal)/launch/standalone.launch">
-    <arg name="colour_signal_image_topic" value="$(arg colour_signal_image_topic)"/>
-    <arg name="colour_signal_selected_hue" value="green"/>
-    <arg name="colour_signal_difference_threshold" value="30"/>
-    <arg name="colour_signal_frames_in_image_window" value="5"/>
-    <arg name="colour_signal_auto_enable" value="true"/>
-  </include>
-  <node pkg="rosbag" type="play" name="player" args="--quiet $(find colour_signal)/green_switching.bag"/>
-  <node pkg="image_view" type="image_view" name="view_led_images">
-    <remap from="image" to="$(arg colour_signal_image_topic)"/>
-  </node>
+  <group ns="whoola">
+	<include file="$(find colour_signal)/launch/standalone.launch">
+	  <arg name="colour_signal_image_topic" value="$(arg colour_signal_image_topic)"/>
+	  <arg name="colour_signal_selected_hue" value="green"/>
+	  <arg name="colour_signal_difference_threshold" value="30"/>
+	  <arg name="colour_signal_frames_in_image_window" value="5"/>
+	  <arg name="colour_signal_auto_enable" value="true"/>
+	</include>
+	<node pkg="rosbag" type="play" name="player" args="--quiet $(find colour_signal)/green_switching.bag"/>
+	<node pkg="image_view" type="image_view" name="view_led_images">
+	  <remap from="image" to="$(arg colour_signal_image_topic)"/>
+	</node>
+  </group>
 </launch>

@@ -1,6 +1,6 @@
 <launch>
   <include file="$(find colour_signal)/launch/standalone.launch">
-    <arg name="colour_signal_image_topic" value="/whoola/camera/rgb/image_rect_color"/>
+    <arg name="colour_signal_image_topic" value="camera/rgb/image_rect_color"/>
     <arg name="colour_signal_selected_hue" value="green"/>
     <arg name="colour_signal_difference_threshold" value="30"/>
     <arg name="colour_signal_frames_in_image_window" value="5"/>
