@@ -13,9 +13,11 @@ No problem.
 
 * We need more information than the magnitude of the distance.
 * This is ok, we can use the position x, y, z and still avoid the orientation.
- * Lots of extra power in these extra variables!
-* Calculation of angles and target relative pose (position and heading) example code in the script.
+ * Lots of extra power in these extra variables! See the google drawing:
 
+https://docs.google.com/a/yujinrobot.com/drawings/d/1zEwZM1QMsz9F_NJ6jWP-5vxME7HIXXL_2q45sDt81_w/edit?usp=sharing
+
+* Example calculation of angles and target relative pose (position and heading) in the script.
 
 ## Usage
 
