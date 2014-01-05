@@ -1,0 +1,28 @@
+<!-- Dummies to test ces_demo rapp -->
+<launch>
+  <group ns="whoola">
+    <!-- dummy navigation control -->
+  <!--   <node pkg="waiterbot_state_manager" name="dummy_nav_ctrl" type="dummy_nav_ctrl.py"> -->
+  <!--     <param name="nav_time" value="2.0"/> -->
+  <!--     <remap from="waiterbot_nav_control/goto" to="nav_ctrl_goto"/> -->
+  <!--     <remap from="waiterbot_nav_control/status" to="nav_ctrl_status"/> -->
+  <!--   </node> -->
+  
+    <!-- dummy vm feedback -->
+    <node pkg="waiterbot_state_manager" name="dummy_vm_feedback" type="dummy_vm_feedback.py">
+      <param name="recognition_time" value="1.0"/>
+      <remap from="android_ui/drink_ar" to="drink_ar"/>
+      <remap from="vm_feedback_proc/enable" to="colour_signal_node/enable"/>
+      <remap from="vm_feedback_proc/result" to="colour_signal_node/result"/>
+    </node>
+    
+    <!-- dummy Android UI -->
+    <node pkg="waiterbot_state_manager" name="dummy_android_ui" type="dummy_android_ui.py" args="123">
+      <remap from="android_ui/drink_order" to="drink_order"/>
+      <remap from="android_ui/drink_ar" to="drink_ar"/>
+      <remap from="android_ui/drinks_dispensed" to="drinks_dispensed"/>
+      <remap from="android_ui/tray_empty" to="tray_empty"/>
+      <remap from="android_ui/order_cancelled" to="order_cancelled"/>
+    </node>
+  </group>
+</launch>

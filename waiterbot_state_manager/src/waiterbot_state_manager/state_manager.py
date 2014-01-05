@@ -30,7 +30,7 @@ class StateManager(object):
         self._drink_order = []
         self._order_received = False
         self._tray_empty = False
-        self.goto_goal_published = False
+        self._goto_goal_published = False
         self.goto_goal_reached = False
         self._confirm_button_pressed = False
         self._vm_feedback_proc_enabled = False
@@ -76,7 +76,7 @@ class StateManager(object):
         Callbacks
     '''
     def _drinkOrderCB(self, msg):
-        if not self._order_received:
+        if not self._order_received: # only store new order, if old one has been processed
             for order in msg.data:
                 self._drink_order.append(order)
             rospy.loginfo('State Manager: Received drink order: ' + str(self._drink_order))
@@ -84,7 +84,7 @@ class StateManager(object):
             self._order_received = True
 
     def _navCtrlStatusCB(self, msg):
-        if self.goto_goal_published:
+        if self._goto_goal_published:
             if self._current_state == self._state_goto_vm:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.VM_ARRIVAL:
                     self.goto_goal_reached = True
@@ -134,21 +134,21 @@ class StateManager(object):
     def _stateCustomerOrdering(self):
         ''' Waits for receiving the drink order from the Android UI '''
 
-        if self._order_received:  # only store new order, if old one has been processed
+        if self._order_received:
             self._current_state = self._state_goto_vm
             self._publishCurrentStateChange()
 
     def _stateGoToVM(self):
         ''' Triggers navigation control to move the robot to the vending machine '''
 
-        if not self.goto_goal_published:
+        if not self._goto_goal_published:
             msg = waiterbot_msgs.NavCtrlGoTo()
             msg.goal = waiterbot_msgs.NavCtrlGoTo.GO_TO_VM
             self._pub_nav_ctrl_goal.publish(msg)
-            self.goto_goal_published = True
+            self._goto_goal_published = True
 
         if self.goto_goal_reached:
-            self.goto_goal_published = False
+            self._goto_goal_published = False
             self.goto_goal_reached = False
             self._current_state = self._state_vm_ordering
             self._publishCurrentStateChange()
@@ -201,11 +201,11 @@ class StateManager(object):
     def _stateGoToCustomer(self):
         ''' Triggers navigation control to move the robot to the customer's place '''
 
-        if not self.goto_goal_published:
+        if not self._goto_goal_published:
             msg = waiterbot_msgs.NavCtrlGoTo()
             msg.goal = waiterbot_msgs.NavCtrlGoTo.GO_TO_ORIGIN
             self._pub_nav_ctrl_goal.publish(msg)
-            self.goto_goal_published = True
+            self._goto_goal_published = True
 
         if self._confirm_button_pressed:
             self.goto_goal_reached = True
@@ -215,7 +215,7 @@ class StateManager(object):
 
         if self.goto_goal_reached and self._confirm_button_pressed:
             self.goto_goal_reached = False
-            self.goto_goal_published = False
+            self._goto_goal_published = False
             self._confirm_button_pressed = False
             self._current_state = self._state_customer_ordering
             self._publishCurrentStateChange()
@@ -249,14 +249,25 @@ class StateManager(object):
                 empty_msg = std_msgs.Empty()
                 self._pub_initialise.publish(empty_msg)
                 self._initialisation_triggered = True
+            # when on the way to customer stop moving
+            if self._goto_goal_published:
+                self.goto_goal_reached = True
 
         if self._initialised:
             self._playSound()
             self._initialised = False
+            # go to customer
+            msg = waiterbot_msgs.NavCtrlGoTo()
+            msg.goal = waiterbot_msgs.NavCtrlGoTo.GO_TO_VM
+            self._pub_nav_ctrl_goal.publish(msg)
+            self._goto_goal_published = True
+
+        if self.goto_goal_reached:
+            self.goto_goal_reached = False
+            self._goto_goal_published = False
             self._initialisation_triggered = False
             self._current_state = self._state_customer_ordering
             self._publishCurrentStateChange()
-        pass
 
     def spin(self):
         while not rospy.is_shutdown():
