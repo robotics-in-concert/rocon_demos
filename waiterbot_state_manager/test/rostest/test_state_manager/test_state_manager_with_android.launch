@@ -11,9 +11,9 @@
 
   <!-- dummy vm feedback -->
   <node pkg="waiterbot_state_manager" name="dummy_vm_feedback" type="dummy_vm_feedback.py">
-    <param name="recognition_time" value="2.0"/>
+    <param name="recognition_time" value="1.0"/>
     <remap from="android_ui/drink_ar" to="drink_ar"/>
-    <remap from="vm_feedback_proc/enable" to="vm_feedback_enable"/>
-    <remap from="vm_feedback_proc/result" to="vm_feedback_result"/>
+    <remap from="vm_feedback_proc/enable" to="colour_signal_node/enable"/>
+    <remap from="vm_feedback_proc/result" to="colour_signal_node/result"/>
   </node>
 </launch>

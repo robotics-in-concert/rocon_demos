@@ -3,6 +3,7 @@
 #   https://raw.github.com/robotics-in-concert/rocon_demos/license/LICENSE
 #
 
+import subprocess
 import rospy
 import kobuki_msgs.msg as kobuki_msgs
 import std_msgs.msg as std_msgs
@@ -35,6 +36,8 @@ class StateManager(object):
         self._vm_feedback_proc_enabled = False
         self._drink_dispensed = False
         self._drinks_dispensed = False
+        self._initialisation_triggered = False
+        self._initialised = False
 
     '''
         ROS Comms
@@ -64,6 +67,14 @@ class StateManager(object):
                                              self._buttonCB)
         self._pub_cancel_order = rospy.Publisher('~order_cancelled', std_msgs.Empty, latch=True)
 
+        # Initialisation
+        self._pub_initialise = rospy.Publisher('init_pose_manager/initialise', std_msgs.Empty, latch=True)
+        self._sub_initialised = rospy.Subscriber('init_pose_manager/initialised', std_msgs.Empty,
+                                                 self._initialisedCB)
+
+    '''
+        Callbacks
+    '''
     def _drinkOrderCB(self, msg):
         if not self._order_received:
             for order in msg.data:
@@ -77,13 +88,13 @@ class StateManager(object):
             if self._current_state == self._state_goto_vm:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.VM_ARRIVAL:
                     self.goto_goal_reached = True
-                    self._publishDebugMsg('State Manager: Reached vending machine.')
+                    self._publishDebugMsg('Reached vending machine.')
             elif self._current_state == self._state_goto_customer:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.ORIGIN_ARRIVAL:
                     self.goto_goal_reached = True
-                    self._publishDebugMsg('State Manager: Reached customer.')
+                    self._publishDebugMsg('Reached customer.')
             if msg.status_code == waiterbot_msgs.NavCtrlStatus.ERROR:
-                self._publishDebugMsg('State Manager: Navigation control reported an error.')
+                self._publishDebugMsg('Navigation control reported an error.')
                 self._current_state = self._state_reset
                 self._publishCurrentStateChange()
 
@@ -95,15 +106,18 @@ class StateManager(object):
         # green button aka confirm button pressed
         if not msg.values[0]:
             self._confirm_button_pressed = True
-            self._publishDebugMsg('State Manager: Confirm button pressed.')
-        else:
-            self._confirm_button_pressed = False
+            self._publishDebugMsg('Confirm button pressed.')
 
         # red button aka cancel button pressed
         if not msg.values[1]:
-            self._publishDebugMsg('State Manager: Confirm button pressed.')
+            self._publishDebugMsg('Confirm button pressed.')
             self._current_state = self._state_reset
             self._publishCurrentStateChange()
+
+    def _initialisedCB(self, msg):
+        if not self._initialised:
+            self._initialised = True
+            self._publishDebugMsg("Robot pose initialised.")
 
     '''
         States
@@ -114,7 +128,8 @@ class StateManager(object):
         self._state_vm_ordering = "StateVmOrdering"
         self._state_goto_customer = "StateGoToCustomer"
         self._state_reset = "StateReset"
-        self._current_state = self._state_customer_ordering
+        self._state_initialisation = "StateInitialisation"
+        self._current_state = self._state_initialisation
 
     def _stateCustomerOrdering(self):
         ''' Waits for receiving the drink order from the Android UI '''
@@ -196,7 +211,7 @@ class StateManager(object):
             self.goto_goal_reached = True
             empty_msg = std_msgs.Empty()
             self._pub_tray_empty.publish(empty_msg)
-            rospy.loginfo('State Manager: Robot tray has been emptied.')
+            self._publishDebugMsg('State Manager: Robot tray has been emptied.')
 
         if self.goto_goal_reached and self._confirm_button_pressed:
             self.goto_goal_reached = False
@@ -206,23 +221,49 @@ class StateManager(object):
             self._publishCurrentStateChange()
 
     def _stateReset(self):
+        # disable VM feedback processing, if running
         if self._vm_feedback_proc_enabled:
-            # disable VM feedback processing
             msg = std_msgs.Bool()
             msg.data = False
             self._pub_vm_feedback_enable.publish(msg)
             self._vm_feedback_proc_enabled = False
+
+        # let others (e.g. Android UI, navigation controller) now about the cancelled order
         empty_msg = std_msgs.Empty()
         self._pub_cancel_order.publish(empty_msg)
+
+        # reset all variables
         self._initVariables()
-        self._current_state = self._state_customer_ordering
+
+        # change state
+        self._current_state = self._state_initialisation
         self._publishCurrentStateChange()
 
+    def _stateInitialisation(self):
+        ''' Initialises the robot '''
+        # if green/confirmation button was pressed
+        if self._confirm_button_pressed:
+            self._confirm_button_pressed = False
+            # trigger initialisation
+            if not self._initialisation_triggered:
+                empty_msg = std_msgs.Empty()
+                self._pub_initialise.publish(empty_msg)
+                self._initialisation_triggered = True
+
+        if self._initialised:
+            self._playSound()
+            self._initialised = False
+            self._initialisation_triggered = False
+            self._current_state = self._state_customer_ordering
+            self._publishCurrentStateChange()
+        pass
 
     def spin(self):
         while not rospy.is_shutdown():
             if self._current_state == self._state_reset:
                 self._stateReset()
+            elif self._current_state == self._state_initialisation:
+                self._stateInitialisation()
             elif self._current_state == self._state_customer_ordering:
                 self._stateCustomerOrdering()
             elif self._current_state == self._state_goto_vm:
@@ -257,3 +298,9 @@ class StateManager(object):
         string_msg.data = msg
         self._pub_state_manager_debug.publish(string_msg)
         rospy.loginfo('State Manager: ' + string_msg.data)
+
+    def _playSound(self):
+        path = subprocess.check_output(["rospack", "find", "waiterbot_state_manager"]).replace("\n", "")
+        script = path + "/scripts/play_sound.bash"
+        file = path + "/resources/kaku.wav"
+        subprocess.call([script, file])
