@@ -1,12 +1,12 @@
 <launch>
   <!-- USB cam driver -->
   <node name="uvc_camera" pkg="uvc_camera" type="uvc_camera_node" required="true">
-    <param name="device" value="/dev/video0"/>
+    <param name="device" value="/dev/video1"/>
   </node>
   
   <!-- AR tracker -->
   <!-- print-outs -->
-  <arg name="marker_size" default="7.1" /> <!-- e.g. 6.9 (print-outs), 7.1 (tablet) -->
+  <arg name="marker_size" value="7.9" /> <!-- e.g. 6.9 (print-outs), 7.1 (tablet) -->
   <arg name="max_new_marker_error" default="0.08" />
   <arg name="max_track_error" default="0.2" />
   <arg name="cam_image_topic" default="image_raw" />

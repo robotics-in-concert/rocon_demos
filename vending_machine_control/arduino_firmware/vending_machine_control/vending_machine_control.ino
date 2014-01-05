@@ -9,14 +9,14 @@
 #include <std_msgs/Empty.h>
 #include <std_msgs/Int8.h>
 
-int PIN_DRINK1 = 2;
-int PIN_DRINK2 = 3;
-int PIN_NEOPIXEL = 4; // neopixel
+int PIN_NEOPIXEL = 5;
+int PIN_DRINK1 = 6;
+int PIN_DRINK2 = 7;
 int drink_order;
 bool drink_ordered;
 bool dispensing_drink;
 int trigger_time = 500;
-int dispensing_time = 4000;
+int dispensing_time = 10000;
 int elapsed_drink_time = 0;
 int dispensed_signal_time = 1000;
 
@@ -74,8 +74,7 @@ void setup()
   {
     nh.spinOnce();
     // blink orange to signal controller is not connected to ROS yet
-//    colorFlush(strip.Color(255, 165, 0), 500);
-    colorFlush(strip.Color(0, 255, 0), 500);
+    colorFlush(strip.Color(255, 165, 0), 500);
     colorFlush(strip.Color(0, 0, 0), 0);
     delay(500);
   }
@@ -83,10 +82,10 @@ void setup()
   nh.getParam("~trigger_time", &trigger_time, 1);
   nh.getParam("~dispensing_time", &dispensing_time, 1);
   nh.getParam("~dispensed_signal_time", &dispensed_signal_time, 1);
-  delay(500); // give some time to retrieve the parameters
+  delay(1000); // give some time to retrieve the parameters
     
-  // blink green to signal controller is connected to ROS and fully ready
-  colorFlush(strip.Color(255, 0, 0), 500);
+  // blink white to signal controller is connected to ROS and fully ready
+  colorFlush(strip.Color(255, 255, 255), 500);
   colorFlush(strip.Color(0, 0, 0), 0);
 }
 
@@ -100,7 +99,6 @@ void loop()
     {
       if (elapsed_drink_time >= dispensing_time)
       {
-//        colorFlush(strip.Color(0, 0, 255), dispensed_signal_time); // signal drink has been dispensed
         colorFlush(strip.Color(0, 255, 0), dispensed_signal_time);
         colorFlush(strip.Color(0, 0, 0), 0); // signal drink has been dispensed
         order_result_msg.data = drink_order;
@@ -138,8 +136,7 @@ void loop()
   else
   {
      // blink orange to signal controller is not connected anymore
-//    colorFlush(strip.Color(255, 165, 0), 500);
-    colorFlush(strip.Color(0, 255, 0), 500);
+    colorFlush(strip.Color(255, 165, 0), 500);
     colorFlush(strip.Color(0, 0, 0), 0);
     delay(500);
   }
