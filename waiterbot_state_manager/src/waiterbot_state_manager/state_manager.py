@@ -258,7 +258,7 @@ class StateManager(object):
             self._initialised = False
             # go to customer
             msg = waiterbot_msgs.NavCtrlGoTo()
-            msg.goal = waiterbot_msgs.NavCtrlGoTo.GO_TO_VM
+            msg.goal = waiterbot_msgs.NavCtrlGoTo.GO_TO_ORIGIN
             self._pub_nav_ctrl_goal.publish(msg)
             self._goto_goal_published = True
 
