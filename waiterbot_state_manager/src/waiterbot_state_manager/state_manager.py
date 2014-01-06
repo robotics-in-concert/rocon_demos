@@ -89,9 +89,10 @@ class StateManager(object):
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.VM_ARRIVAL:
                     self.goto_goal_reached = True
                     self._publishDebugMsg('Reached vending machine.')
-            elif self._current_state == self._state_goto_customer:
+            elif self._current_state == self._state_goto_customer\
+                 or self._current_state == self._state_initialisation:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.ORIGIN_ARRIVAL:
-                    self.goto_goal_reached = True
+                    self._goto_goal_reached = True
                     self._publishDebugMsg('Reached customer.')
             if msg.status_code == waiterbot_msgs.NavCtrlStatus.ERROR:
                 self._publishDebugMsg('Navigation control reported an error.')
@@ -147,9 +148,9 @@ class StateManager(object):
             self._pub_nav_ctrl_goal.publish(msg)
             self._goto_goal_published = True
 
-        if self.goto_goal_reached:
+        if self._goto_goal_reached:
             self._goto_goal_published = False
-            self.goto_goal_reached = False
+            self._goto_goal_reached = False
             self._current_state = self._state_vm_ordering
             self._publishCurrentStateChange()
 
@@ -208,13 +209,13 @@ class StateManager(object):
             self._goto_goal_published = True
 
         if self._confirm_button_pressed:
-            self.goto_goal_reached = True
+            self._goto_goal_reached = True
             empty_msg = std_msgs.Empty()
             self._pub_tray_empty.publish(empty_msg)
             self._publishDebugMsg('State Manager: Robot tray has been emptied.')
 
-        if self.goto_goal_reached and self._confirm_button_pressed:
-            self.goto_goal_reached = False
+        if self._goto_goal_reached and self._confirm_button_pressed:
+            self._goto_goal_reached = False
             self._goto_goal_published = False
             self._confirm_button_pressed = False
             self._current_state = self._state_customer_ordering
@@ -251,7 +252,7 @@ class StateManager(object):
                 self._initialisation_triggered = True
             # when on the way to customer stop moving
             if self._goto_goal_published:
-                self.goto_goal_reached = True
+                self._goto_goal_reached = True
 
         if self._initialised:
             self._playSound()
@@ -262,8 +263,8 @@ class StateManager(object):
             self._pub_nav_ctrl_goal.publish(msg)
             self._goto_goal_published = True
 
-        if self.goto_goal_reached:
-            self.goto_goal_reached = False
+        if self._goto_goal_reached:
+            self._goto_goal_reached = False
             self._goto_goal_published = False
             self._initialisation_triggered = False
             self._current_state = self._state_customer_ordering
