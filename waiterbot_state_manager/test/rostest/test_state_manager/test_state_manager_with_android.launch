@@ -19,7 +19,7 @@
   
   <!-- dummy green button -->
   <!--
-  <node pkg="waiterbot_state_manager" name="dummy_green_button" type="dummy_green_button.py">
+  <node pkg="waiterbot_state_manager" name="dummy_green_button" type="dummy_green_button.py" output="screen">
     <remap from="waiterbot_nav_control/status" to="nav_ctrl_status"/>
   </node>
   -->
@@ -27,7 +27,7 @@
 
   <!-- dummy red button -->
   <!--
-  <node pkg="waiterbot_state_manager" name="dummy_red_button" type="dummy_red_button.py">
+  <node pkg="waiterbot_state_manager" name="dummy_red_button" type="dummy_red_button.py" output="screen">
   </node>
   -->
   
