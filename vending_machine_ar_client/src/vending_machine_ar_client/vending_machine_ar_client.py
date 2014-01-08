@@ -17,13 +17,6 @@ class VendingMachineARClient(object):
         
         Each recognised marker is turned into one order (action goal)
     """
-    _client = None
-    _goal_sent = False
-    _last_order = None
-    _ready_for_next_order = False
-    ''' idle time in between orders to avoid multiple triggers of the same order '''
-    _order_idle_time = None
-    _time_last_order_processed = None
 
     def __init__(self):
         '''
@@ -35,10 +28,11 @@ class VendingMachineARClient(object):
         if not self._client.wait_for_server(rospy.Duration(2.0)):
             raise EnvironmentError("Couldn't not connect to vending machine manager ('" + action_server_name + "')")
 
+        self._goal_sent = False
+        self._ready_for_next_order = False
         self._time_last_order_processed = rospy.Time.now()
         self._sub_marker = rospy.Subscriber('ar_pose_marker', ar_track_alvar_msgs.AlvarMarkers, self._ARMarkerCB)
         self._order_idle_time = rospy.Duration(rospy.get_param("~order_idle_time", 1.0))
-
 
     def _ARMarkerCB(self, msg):
         '''
@@ -77,4 +71,5 @@ class VendingMachineARClient(object):
                 if self._client.get_state() == actionlib_msgs.GoalStatus.SUCCEEDED:
                     self._time_last_order_processed = rospy.Time.now()
                     self._goal_sent = False
+                    rospy.loginfo("AR ordering client: Order processed.")
             rospy.sleep(0.5)
