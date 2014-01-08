@@ -12,30 +12,44 @@ class DummyWaiter(object):
     def __init__(self):
         self._sub_drink_order = rospy.Subscriber("drink_order", std_msgs.msg.UInt16MultiArray,self._process_drink_order)
         self._pub_drink_ar    = rospy.Publisher("drink_ar",std_msgs.msg.UInt16)
-        self._pub_drink_dispensed = rospy.Publisher("drink_dispensed", std_msgs.msg.Empty)
+        self._pub_drinks_dispensed = rospy.Publisher("drinks_dispensed", std_msgs.msg.Empty)
         self._pub_status_message = rospy.Publisher("waiterbot_debug", std_msgs.msg.String)
 
     def _process_drink_order(self, msg):
         self.log("Received drink order : " + str(msg.data))
-
+        
+        self.log("Move to VM")
+        for k in range(1,3):
+            rospy.sleep(1)
+            self.log("Arrival VM[3/%d]"%k)        
+        self.log("Arrival VM")
+        
         rospy.sleep(1)
-        self.log("Sending drink ar")
-        self._pub_drink_ar.puslish(1)
+        self.log("Sending drink ar 1")        
+        self._pub_drink_ar.publish(1)
+        rospy.sleep(2)
+        self.log("drink 1 dispensed")
+        
         rospy.sleep(1)
-        self.log("Sending drink dispensed")
-        self._pub_drink_dispensed()
-
-        self.log("Sending next ar")
-        seelf._pub_drink_dispensed(2)
+        self.log("Sending drink ar 1")        
+        self._pub_drink_ar.publish(1)
+        rospy.sleep(2)
+        self.log("drink 1 dispensed")
+        
         rospy.sleep(1)
-        self.log("Sending drink dispensed")
-        self._pub_drink_dispensed()
-        rospy.sleep(1)
+        self.log("Sending drink ar 2")        
+        self._pub_drink_ar.publish(2)
+        rospy.sleep(2)
+        self.log("drink 2 dispensed")
+        
+        self.log("Sending drinks dispensed")
+        
+        self._pub_drinks_dispensed.publish()
 
         self.log("Navigating to Origin...now")
-
-
-
+        rospy.sleep(3)
+        self.log("Arrival Oringin")
+        
 
     def _send_feedback(self, feedback, message):
         self._pub_drink_order_feedback(feedback, message)
