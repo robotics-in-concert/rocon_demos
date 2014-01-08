@@ -16,4 +16,22 @@
     <remap from="vm_feedback_proc/enable" to="colour_signal_node/enable"/>
     <remap from="vm_feedback_proc/result" to="colour_signal_node/result"/>
   </node>
+  
+  <!-- dummy green button -->
+  <!--
+  <node pkg="waiterbot_state_manager" name="dummy_green_button" type="dummy_green_button.py">
+    <remap from="waiterbot_nav_control/status" to="nav_ctrl_status"/>
+  </node>
+  -->
+
+
+  <!-- dummy red button -->
+  <!--
+  <node pkg="waiterbot_state_manager" name="dummy_red_button" type="dummy_red_button.py">
+  </node>
+  -->
+  
+
+  
+  
 </launch>
