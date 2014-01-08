@@ -31,7 +31,7 @@ class StateManager(object):
         self._order_received = False
         self._tray_empty = False
         self._goto_goal_published = False
-        self.goto_goal_reached = False
+        self._goto_goal_reached = False
         self._confirm_button_pressed = False
         self._vm_feedback_proc_enabled = False
         self._drink_dispensed = False
@@ -87,7 +87,7 @@ class StateManager(object):
         if self._goto_goal_published:
             if self._current_state == self._state_goto_vm:
                 if msg.status_code == waiterbot_msgs.NavCtrlStatus.VM_ARRIVAL:
-                    self.goto_goal_reached = True
+                    self._goto_goal_reached = True
                     self._publishDebugMsg('Reached vending machine.')
             elif self._current_state == self._state_goto_customer\
                  or self._current_state == self._state_initialisation:
