@@ -38,6 +38,7 @@ class StateManager(object):
         self._drinks_dispensed = False
         self._initialisation_triggered = False
         self._initialised = False
+        self._last_vmfeedback = False
 
     '''
         ROS Comms
@@ -100,8 +101,9 @@ class StateManager(object):
                 self._publishCurrentStateChange()
 
     def _vmFeedbackResultCB(self, msg):
-        if msg.data and not self._drink_dispensed:
+        if self._last_vmfeedback == True and msg.data == False and not self._drink_dispensed:
             self._drink_dispensed = True
+        self._last_vmfeedback = msg.data
 
     def _buttonCB(self, msg):
         # green button aka confirm button pressed
