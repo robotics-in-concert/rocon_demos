@@ -2,5 +2,5 @@ disply: Cafe Kitchen
 description: Kitchen Chicken
 platform: linux.*.ros.pc
 launch: cafe_rapps/kitchen.launch
-interface: cafe_rapps/kitchen.interface
+public_interface: cafe_rapps/kitchen.interface
 
