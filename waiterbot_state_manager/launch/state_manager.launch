@@ -20,5 +20,7 @@
     <remap from="waiterbot_state_manager/order_cancelled" to="order_cancelled"/>
     <remap from="waiterbot_state_manager/debug" to="waiterbot_debug"/>
     <remap from="kobuki/digital_input_events" to="/mobile_base/events/digital_input"/>
+    <remap from="init_pose_manager/initialise" to="initialise_pose"/>
+    <remap from="init_pose_manager/initialised" to="pose_initialised"/>
   </node>
 </launch>

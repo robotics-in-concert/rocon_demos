@@ -3,7 +3,7 @@
 
   To start waiterbot. 
 
-  > rocon_launch turtlebot_bringup bringup.concert 
+  > roslaunch waiterbot_bringup minimal_with_appmanager.launch --screen
 
   rapp_list = ces_rapps/ces.rapps
 
