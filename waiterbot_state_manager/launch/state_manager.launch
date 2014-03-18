@@ -1,6 +1,13 @@
 <launch>
   <!-- state manager -->
   <node pkg="waiterbot_state_manager" name="waiterbot_state_manager" type="state_manager_node.py">
+    <!--
+      Expected signal time for drink dispensing in seconds;
+      Needs to be larger than VM's dispense signal time, see 'dispensed_signal_time' parameter in
+      vending_machine_control/vending_machine.launch 
+      -->
+    <param name="vm_feedback_signal_duration" value="1.5" />
+
     <remap from="android_ui/drink_order" to="drink_order"/>
     <remap from="android_ui/drink_ar" to="drink_ar"/>
     <remap from="android_ui/drinks_dispensed" to="drinks_dispensed"/>

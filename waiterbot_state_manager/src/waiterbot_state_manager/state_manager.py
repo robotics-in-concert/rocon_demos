@@ -19,6 +19,7 @@ class StateManager(object):
 
     def __init__(self):
         self._initVariables()
+        self._getRosParams()
         self._initialiseRosComms()
         self._initStates()
 
@@ -35,6 +36,13 @@ class StateManager(object):
         self._vm_feedback_proc_enabled = False
         self._drink_dispensed = False
         self._drinks_dispensed = False
+        self._vm_feedback_on_time = rospy.Time.now()
+
+    '''
+        ROS parameters
+    '''
+    def _getRosParams(self):
+        self._vm_feedback_signal_duration = rospy.Duration(rospy.get_param('~vm_feedback_signal_duration', 2.0))
 
     '''
         ROS Comms
@@ -89,6 +97,7 @@ class StateManager(object):
 
     def _vmFeedbackResultCB(self, msg):
         if msg.data and not self._drink_dispensed:
+            self._vm_feedback_on_time = rospy.Time.now()
             self._drink_dispensed = True
 
     def _buttonCB(self, msg):
@@ -157,16 +166,19 @@ class StateManager(object):
             self._pub_drink_ar.publish(drink_order_msg)
 
         if self._drink_dispensed:
-            self._drink_dispensed = False
             # send remaining orders
             if len(self._drink_order) > 0:
-                drink_order_msg = std_msgs.UInt16()
-                drink_order_msg. data = self._drink_order.pop()
-                self._pub_drink_ar.publish(drink_order_msg)
+                # Since the colour signal detection fluctuates, we wait for a certain time before considering it valid. 
+                if (rospy.Time.now() - self._vm_feedback_on_time) > self._vm_feedback_signal_duration:
+                    drink_order_msg = std_msgs.UInt16()
+                    drink_order_msg. data = self._drink_order.pop()
+                    self._pub_drink_ar.publish(drink_order_msg)
+                    self._drink_dispensed = False
             elif len(self._drink_order) == 0:
                 self._drinks_dispensed = True
 
         if self._drinks_dispensed:
+            self._drink_dispensed = False
             self._drinks_dispensed = False
             self._order_received = False # reset, since all ordered drinks have been dispensed
 
