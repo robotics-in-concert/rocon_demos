@@ -1,6 +1,6 @@
 display:      Make A Map
 description:  Make a map by driving a TurtleBot from an Android device.
-platform:     linux.*.ros.waiterbot
+compatibility: rocon:/waiterbot|turtlebot
 launch:       ces_rapps/android_make_a_map.launch
 public_interface:    ces_rapps/android_make_a_map.interface
 icon:         ces_rapps/make_a_map_bubble_icon.png
