@@ -2,7 +2,7 @@ display:      Map Manager
 description:  Manage the map database for your TurtleBot maps
 platform:     linux.*.ros.waiterbot
 launch:       ces_rapps/android_map_manager.launch
-interface:    ces_rapps/android_map_manager.interface
+public_interface:    ces_rapps/android_map_manager.interface
 icon:         turtlebot_core_apps/map_manager_bubble_icon.png
 pairing_clients:
   - type: android
