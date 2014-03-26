@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>cafe_solution</name>
+  <version>0.0.0</version>
+  <description>The cafe_solution package</description>
+
+  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>

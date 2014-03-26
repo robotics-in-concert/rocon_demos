@@ -8,9 +8,6 @@
   <license>BSD</license>
 
   <!-- <url type="website">http://ros.org/wiki/cafe_rapps</url> -->
-
-  <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
-
   <buildtool_depend>catkin</buildtool_depend>
 
 
@@ -19,6 +16,5 @@
     <rocon_app>rapps/map_database/map_database.rapp</rocon_app>
     <rocon_app>rapps/taskcoordinator/taskcoordinator.rapp</rocon_app>
     <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
-
   </export>
 </package>

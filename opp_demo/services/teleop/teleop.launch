@@ -1,5 +1,0 @@
-<launch>
-  <node pkg="concert_service_roslaunch" name="teleop_service_node" type="static_link_graph_service.py">
-    <param name="filename" value="$(find opp_demo)/services/teleop/teleop.yaml"/>
-  </node>
-</launch>

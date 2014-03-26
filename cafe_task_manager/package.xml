@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <package>
-  <name>opp_demo</name>
+  <name>task_manager</name>
   <version>0.0.0</version>
-  <description>The opp_demo package</description>
+  <description>The task_manager package</description>
 
-  <maintainer email="jihoonl@todo.todo">jihoonl</maintainer>
+  <maintainer email="dwlee@todo.todo">dwlee</maintainer>
 
-  <license>TODO</license>
+  <license>BSD</license>
 
+  <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <run_depend>map_store</run_depend>
-  <run_depend>annotations_store</run_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>actionlib</run_depend>
+  <run_depend>rospy</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
