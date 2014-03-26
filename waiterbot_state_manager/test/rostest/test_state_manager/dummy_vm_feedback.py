@@ -20,7 +20,7 @@ class DummyVMFeedback(object):
         self._pub_vm_feedback_result = rospy.Publisher('vm_feedback_proc/result', std_msgs.Bool, latch=True)
         # subscribe to the order message (aka AR marker) in order to know when to start the recognition
         self._sub_vm_feedback_enable = rospy.Subscriber('android_ui/drink_ar', std_msgs.UInt16, self._drinkARCB)
-        self._recognition_time = rospy.Duration(rospy.get_param("recognition_time", 10.0))
+        self._recognition_time = rospy.Duration(rospy.get_param("~recognition_time", 10.0))
         self._order_time = rospy.Time()
         self._new_order = False
 
