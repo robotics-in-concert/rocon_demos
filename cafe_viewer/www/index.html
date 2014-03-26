@@ -33,10 +33,11 @@
     <script src="js/add_orderlist.js"></script>
 
     <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
+    <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
 
     <script type="text/javascript">
       var ros = new ROSLIB.Ros();
-      var defaultUrL = 'ws://192.168.0.131:9090';
+      var defaultUrL = rocon_interations.rosbridge_uri;
       var viewer;
       var gridClient;
       var circle_region_poller;

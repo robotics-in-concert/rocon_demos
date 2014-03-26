@@ -15,6 +15,7 @@
     <script src="js/bootstrap/bootstrap-button.js"></script>
     <script src="js/eventemitter2/eventemitter2.js"></script>
     <script src="js/ros/roslib.js"></script>
+    <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -42,9 +43,12 @@
     <script text="text/javascript">
 
     var ros = new ROSLIB.Ros();
-    var order_pub_topic = "/cafe/list_order";
     var order_pub_topic_type = "/cafe_msgs/OrderList";
-    var defaultUrL = 'ws://192.168.10.131:9090';
+    var defaultUrL = rocon_interactions.rosbridge_uri;
+
+    var order_pub_topic = "list_order";
+    if(topic_name in rocon_interactions.remapings)
+      order_pub_topic = rocon_interactions.remapings[topic_name];
 
     var nav_div;
     var orders_div;
