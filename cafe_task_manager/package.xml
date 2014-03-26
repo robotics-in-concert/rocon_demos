@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package>
-  <name>task_manager</name>
+  <name>cafe_task_manager</name>
   <version>0.0.0</version>
-  <description>The task_manager package</description>
+  <description>The cafe_task_manager package</description>
 
-  <maintainer email="dwlee@todo.todo">dwlee</maintainer>
+  <maintainer email="dwlee@yujinrobot.com">DongWook Lee</maintainer>
 
   <license>BSD</license>
 

@@ -5,12 +5,11 @@
 name: "Cafe Concert"
 nodes:
   - id: database
-    tuple: linux.*.ros.database.cafe_rapps/map_database
+    uri: rocon:/pc/map_database#cafe_rapps/map_database
   - id: cafe_taskcoordinator
-    tuple: linux.*.ros.pc.cafe_rapps/taskcoordinator
-#  - id: kitchen
-#    tuple: linux.*.ros.pc.cafe_rapps/kitchen
+    uri: rocon:/pc#cafe_rapps/taskcoordinator
   - id: waiterbot
+    uri: rocon:/waiterbot#cafe_rapps/waiter
     tuple: linux.*.ros.turtlebot.cafe_rapps/waiter
   
 topics:

@@ -11,5 +11,6 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <export>
+    <rocon_service>services/cafe_delivery/cafe_delivery.service</rocon_service>
   </export>
 </package>
