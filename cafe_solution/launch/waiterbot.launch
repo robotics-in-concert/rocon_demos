@@ -1,6 +1,7 @@
 <launch>
   <include file="$(find turtlebot_bringup)/launch/minimal_with_appmanager.launch">
     <arg name="hub_whitelist" value="Cafe Concert"/>
+    <arg name="robot_type" value="waiterbot|turtlebot|kobuki"/>
     <arg name="rapp_package_whitelist" value="[rocon_apps, cafe_rapps]"/>
   </include>
 </launch>
