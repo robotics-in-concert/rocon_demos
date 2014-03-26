@@ -1,8 +1,8 @@
 display:      Map Annotation
 description:  Add semantic information to a metric map.
-platform:     linux.*.ros.database
+compatibility: rocon:/pc
 launch:       cafe_rapps/map_database.launch
-interface:    cafe_rapps/map_database.interface
+public_interface:    cafe_rapps/map_database.interface
 icon:         cafe_rapps/map_annotation_icon.png
 pairing_clients:
   - type: android

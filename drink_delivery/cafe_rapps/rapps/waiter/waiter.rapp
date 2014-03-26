@@ -1,5 +1,5 @@
 display: Waiterbot
 description: The turtlebot navigate around the cafe to serve beverages. 
-platform: linux.*.ros.turtlebot
+compatibility: rocon:/waiterbot
 launch: cafe_rapps/waiter.launch
-interface: cafe_rapps/waiter.interface
+public_interface: cafe_rapps/waiter.interface
