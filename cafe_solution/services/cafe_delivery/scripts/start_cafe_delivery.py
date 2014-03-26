@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import yaml
-import concert_service_roslaunch
+import concert_service_link_graph
 import concert_service_utilities
 import map_store.srv
 import annotations_store.srv
@@ -13,12 +13,12 @@ if __name__ == '__main__':
     rospy.init_node('start_cafe_delivery', anonymous=True)
     (name, description, uuid) = concert_service_utilities.get_service_info()
     filename = rospy.get_param('~filename')
-    impl_name, impl = concert_service_roslaunch.load_linkgraph_from_file(filename)
+    impl_name, impl = concert_service_link_graph.load_linkgraph_from_file(filename)
 
     if not name:
         name = impl_name        
 
-    sgsh =  concert_service_roslaunch.StaticLinkGraphHandler(name, description, uuid, impl)
+    sgsh =  concert_service_link_graph.StaticLinkGraphHandler(name, description, uuid, impl)
 
     rospy.rostime.wallsleep(3.0)  # human time
 #sgsh._request_resources(True)
