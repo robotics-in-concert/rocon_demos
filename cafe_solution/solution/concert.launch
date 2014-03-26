@@ -1,7 +1,7 @@
 <launch>
     <include file="$(find concert_master)/launch/concert_master.launch">
         <arg name="concert_name" value="Cafe Concert"/>
-        <arg name="services" value="cafe_solution/opp_demo.services"/>
+        <arg name="services" value="cafe_solution/cafe.services"/>
         <arg name="conductor_auto_invite" value="true"/>
     </include>
     <group ns="concert">

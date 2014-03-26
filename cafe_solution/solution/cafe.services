@@ -1,2 +1,2 @@
 - resource_name: rocon_service_admin/admin
-- resource_name: cafe_solution/cafe_delivery
+#- resource_name: cafe_solution/cafe_delivery
