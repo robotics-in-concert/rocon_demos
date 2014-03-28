@@ -6,6 +6,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
+    <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
 
     <!-- ROS related -->
     <script type="text/javascript" src="js/easeljs/easeljs.js"></script>
@@ -33,7 +34,7 @@
 
     <script type="text/javascript">
       var ros = new ROSLIB.Ros();
-      var defaultUrL = 'ws://192.168.10.129:9091';
+      var defaultUrL = rocon_interactions.rosbridge_uri;
       var viewer;
       var gridClient;
       var circle_region_poller;
