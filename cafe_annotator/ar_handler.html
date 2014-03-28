@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <title>Rocon - Semantic Annotator</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ROS related -->
+    <script type="text/javascript" src="js/easeljs/easeljs.js"></script>
+    <script type="text/javascript" src="js/eventemitter2/eventemitter2.js"></script>
+    <script type="text/javascript" src="js/ros/roslib.js"></script>
+    <script type="text/javascript" src="js/ros/ros2d.js"></script>
+    <script type="text/javascript" src="js/ros/nav2d.js"></script>
+    <script type="text/javascript" src="js/ros/worldlib.js"></script>
+    <script type="text/javascript" src="js/annotator/annotator.js"></script>
+    <script type="text/javascript" src="js/annotator/ar_marker.js"></script>
+    <script type="text/javascript" src="js/region_viz/regionviz.js"></script>
+    <script type="text/javascript" src="js/region_viz/circle.js"></script>
+    <script type="text/javascript" src="js/region_viz/alvar_ar.js"></script>
+    <script type="text/javascript" src="js/model/OccupancyGridSrvClient.js"></script>
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet"></link>
+    <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.js"></script>
+    <script src="js/bootstrap/bootstrap-button.js"></script>
+
+
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
+
+    <script type="text/javascript">
+      var ros = new ROSLIB.Ros();
+      var defaultUrL = 'ws://192.168.10.129:9091';
+      var viewer;
+      var gridClient;
+      var circle_region_poller;
+      var ar_region_poller;
+      var annotator;
+      var worldlib;
+      var adder_table_srv;
+      var remove_table_srv;
+      var adder_ar_srv;
+      var remove_ar_srv;
+
+      $().ready(function(e) {
+
+        initHeader();
+        initViewer()
+      });
+
+      function initHeader()
+      {
+        settingROSCallbacks();
+
+//        ros.connect(defaultUrL);
+
+        $('#connectbtn').on('click',function(e) {
+            var va = $('#focusedInput').val();
+            ros.connect(va);
+            return false;
+        });
+      }
+
+      function initViewer() {
+
+        viewer = createViewer();
+        gridClient = addMap(viewer);
+//        addNavigator(viewer,gridClient);
+        addAnnotator(viewer,gridClient);
+        addRegionViz(viewer,gridClient);
+
+        $('#adder_table_button').on('click',function(e){
+            var text = $('#adder_table_input').val();
+            var circle = annotator.selected; 
+
+            if(circle != null) {
+              console.log(circle);
+              storeCircle(text,circle);
+              annotator.clear();
+            }
+        });
+
+        $('#adder_ar_button').on('click',function(e) {
+            var text = $('#adder_ar_input').val();
+            var z = $('#adder_ar_z_input').val();
+            var marker = annotator.selected;
+
+            if(marker != null) {
+              storeAlvarAR(text,z,marker);
+              annotator.clear();
+            }
+        });
+      }
+
+      function createViewer() {
+        div = $('#view');
+        div.css('margin','10pt');
+
+        var width = div.width() - 30;
+        var half_window = $(window).height() - 300;
+        var height = half_window < 200?200:half_window;
+
+        viewer = new ROS2D.Viewer({
+          divID : 'view',
+          width: width,
+          height: height,
+          background: '#DDDDDD'
+        });
+
+        viewer.scene.mouseEnabled = true;
+        createjs.Touch.enable(viewer.scene);
+        
+//        viewer.scene.mouseMoveOutside = true;
+
+
+        $(window).resize(function(e) {
+          var half_window = $(window).height() - 300;
+          var height = half_window < 200?200:half_window;
+
+          viewer.resizeCanvas(div.width()-30,height);
+          viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
+        });
+
+        return viewer;
+      }
+
+      function addMap(viewer) {
+        var continuous = false;
+
+        gridClient = new ROS2D.OccupancyGridSrvClient({
+          ros : ros,
+          rootObject : viewer.scene,
+        });
+
+        // Scale the canvas to fit to the map
+        gridClient.on('change', function(map_origin) {
+          viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
+        });
+        return gridClient;
+      }
+
+      function addNavigator(viewer,gridClient) {
+        var serverName = '/move_base'
+        var actionName = 'move_base_msgs/MoveBaseAction';
+        var navigator;
+        
+
+        gridClient.on('change', function(map_origin) {
+          navigator= new NAV2D.Navigator({
+            ros: ros,
+            map_origin : map_origin,
+            serverName : serverName,
+            actionName : actionName,
+            rootObject : viewer.scene
+          });
+        });
+      }
+
+      function addAnnotator(viewer,gridClient) {
+
+        gridClient.on('change', function(map_origin) {
+            annotator = new ANNOTATOR.AlvarAr({
+              ros: ros,
+              map_origin : map_origin,
+              rootObject : viewer.scene
+            });
+        });
+      }
+
+      function addRegionViz(viewer,gridClient)
+      {
+        worldlib = new Worldlib({ ros: ros});
+
+        gridClient.on('change', function(map_origin) {
+          ar_region_poller = new REGIONVIZ.AlvarAR({
+            ros: ros,
+            map_origin : map_origin,
+            worldlib : worldlib,
+            instance_tags : ['concert','landmarks'],
+            rootObject : viewer.scene
+          });
+
+          ar_region_poller.on('update',function(texts) {
+            $('#instances_ar').empty();
+            for(key in texts) {
+              var btn = createButton(key + " : " + texts[key].text,remove_ar_srv);
+              $('#instances_ar').append(btn);
+            }
+          });
+        });
+      }
+
+      function createButton(name,remove_srv) 
+      {
+        var btn = document.createElement('button');
+        btn.className = 'btn btn-primary btn-large';
+        btn.id = 'btn'+name;
+        btn.innerHTML = name;
+
+        btn.addEventListener('dblclick',function(event) {
+            console.log(this.innerHTML);
+            var id = parseInt(this.innerHTML);
+            var req = new ROSLIB.ServiceRequest({
+              instance_id : id,
+            });
+
+            remove_srv.callService(req,function(resp) {
+              console.log(resp);
+              });
+        });
+
+        return btn;
+      }
+
+      function storeCircle(text,circle) 
+      {
+        var req = new ROSLIB.ServiceRequest({
+          name : text,
+          pose_stamped : {
+            header : {
+              frame_id : 'map'
+            },
+            pose : {
+              position : {
+                x : circle.x,
+                y : circle.y,
+                z : 0
+              },
+              orientation : {
+                x : 0,
+                y : 0,
+                z : 0,
+                w : 1,
+              },
+            },
+          },
+          region : {
+            radius : circle.radius,
+          }
+        });
+
+        adder_table_srv.callService(req,function(resp) {
+            console.log(resp);
+        });
+      }
+
+      function storeAlvarAR(text,z,marker) {
+        var req = new ROSLIB.ServiceRequest({
+          name : text,
+          pose_stamped : {
+            header : {
+              frame_id : 'map',
+            }
+          },
+          region : {
+            marker : {
+              id: parseInt(text),
+              confidence: 100,
+              header : {
+                frame_id : 'map',
+              },
+              pose : {
+                header : {
+                  frame_id : 'map',
+                },
+                pose : {
+                  position : {
+                    x : marker.x,
+                    y : marker.y,
+                    z : parseFloat(z),
+                  },
+                  orientation : marker.orientation,
+                },
+              },
+            },
+          }
+        });
+        adder_ar_srv.callService(req,function(resp) {
+            console.log(resp);
+        });
+      }
+
+      function settingROSCallbacks()                      
+      {
+        ros.on('connection',function() {
+          console.log("Connected");
+          // subscribe to order list
+                                                     
+          $('#connectbtn').attr('disabled',true);
+          $('#focusedInput').attr('disabled',true);
+        }
+        );
+        ros.on('error',function(e) {
+          console.log("Error!",e);
+        }
+        );
+                                                     
+        ros.on('close',function() {
+          console.log("Connection Close!");
+          $('#connectbtn').attr('disabled',false);
+          $('#focusedInput').attr('disabled',false);
+        }
+        );
+
+        adder_table_srv = new ROSLIB.Service({
+          ros: ros,
+          name : '/add_table_region',
+          serviceType: 'semantic_region_handler/AddSemanticRegion'
+        });
+
+        remove_table_srv = new ROSLIB.Service({
+          ros: ros,
+          name : '/remove_table_region',
+          serviceType: 'semantic_region_handler/RemoveSemanticRegion'
+        });
+
+        adder_ar_srv = new ROSLIB.Service({
+          ros: ros,
+          name : '/add_ar_marker',
+          serviceType: 'semantic_region_handler/AddSemanticRegion'
+        });
+
+        remove_ar_srv = new ROSLIB.Service({
+          ros: ros,
+          name : '/remove_ar_marker',
+          serviceType: 'semantic_region_handler/RemoveSemanticRegion'
+        });
+      }
+
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
+          <a class="brand" href="#" style="margin-top:6px">Rocon WebNotator</a>
+          <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
+            <input class="input-large" id="focusedInput" type="text" value="ws://192.168.10.129:9091"></input>
+            <button id="connectbtn" class="btn btn-primary btn-normal" data-loading-text="Connecting...">Connect</button>
+          </p>
+        </div>
+      </div>
+
+    <!-- Visualizer -->
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12" id="view"></div>
+      </div>
+      <div class="row-fluid">
+        <div class="span6" id="adder_ar">
+          <div class="row-fluid">
+            <p class="span3"> Unique ID :      </p>
+            <input class="input-primary input-large" style="margin-top:-5px"id="adder_ar_input" type="text" value="<unique_id>"></input>
+          </div>
+          <div class="row-fluid">
+            <p class="span3"> Height :      </p>
+            <input class="span3 input-primary input-large" style="margin-top:-5px"id="adder_ar_z_input" type="text" value="<Z value>"></input>
+          </div>
+          <div class="row-fluid">
+            <div class="span3"></div>
+            <button id="adder_ar_button" class="span3 btn btn-primary btn-normal" data-loading-text="">Add Alvar AR</button>
+          </div>
+        </div>
+        <div class="span6" id="instances_ar"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
