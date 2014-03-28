@@ -52,6 +52,40 @@ if(qs==null)
 return"";else{return qs[key];}}
 yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});
 
+yepnope({nope:['include/eventemitter2.js'], complete:emitterLoaded});
+
+function emitterLoaded()
+{
+  yepnope({nope:['include/roslib.js'],complete:rosLoaded});
+}
+
+function rosLoaded()
+{
+  yepnope({nope:['http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js'], complete:interationLoaded});
+}
+
+function interationLoaded()
+{
+  console.log("Display Name  : " + rocon_interactions.display_name);
+  console.log("Rosbridge URI : " + rocon_interactions.rosbridge_uri);
+  console.log("Parameters   : " + JSON.stringify(rocon_interactions.parameters))
+  console.log("Remappings   : " + JSON.stringify(rocon_interactions.remappings))
+  
+  sym.setVariable("masterURI", rosbridge_uri);
+  sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:20140328");
+
+  var table_id = rocon_interactions.parameters['table_id'] 
+  sym.setVariable('tableID', table_id);
+  sym.$("_01").html(tableID);
+
+  var send_order_remapped = rocon_interactions.remappings['send_order'];
+  console.log("Send Order has remapped into ",send_order_remapped);
+  sym.setVariable('send_order', send_order_remapped); 
+
+  init_ros();
+}
+
+/*
 function yamljsLoaded()
 {
   console.log("yaml.min.js is loaded");
@@ -80,13 +114,15 @@ function eventemitterLoaded()
 {
     console.log("eventemitter2.js is loaded");
     yepnope({nope:['include/roslib.js'],complete:init_ros});
-}
+}*/
 
 function init_ros() 
 {
-  console.log("roslib.js is loaded");
-  var ros=new ROSLIB.Ros();ros.connect(sym.getVariable("masterURI"));
+  var masterUri = sy.getVariable('masterURI');
+  var ros=new ROSLIB.Ros();
+  ros.connect(masterUri));
   sym.setVariable("ROS",ros);
+
   ros.on('connection',function()
     {
       console.log('Connection made!');
