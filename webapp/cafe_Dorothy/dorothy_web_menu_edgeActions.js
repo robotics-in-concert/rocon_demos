@@ -50,9 +50,9 @@ Symbol.bindTriggerAction(compId,symbolName,"Default Timeline",2000,function(sym,
 Symbol.bindSymbolAction(compId,symbolName,"creationComplete",function(sym,e){sym.setVariable("ordered_coffee_list",new Array());sym.setVariable("ordered_sandwich_list",new Array());sym.setVariable("sum_coffee_price",0);sym.setVariable("sum_sandwich_price",0);sym.setVariable("masterURI","ws://222.100.124.85:9090");sym.setVariable("tableID","00");function getParam(key){var url=location.href;var parameters=[];var qs=null;if(url.indexOf("?")!=-1){qs={};parameters=url.substring(url.indexOf("?")+1,url.length).split("&");for(var k=0;k<parameters.length;k++){if(parameters[k].split("=")[1].split('').join('').length>0){qs[parameters[k].split("=")[0]]=parameters[k].split("=")[1];}}}
 if(qs==null)
 return"";else{return qs[key];}}
-yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});
+//yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});
 
-yepnope({nope:['include/eventemitter2.js'], complete:emitterLoaded});
+yepnope({nope:['include/EventEmitter2/eventemitter2.js'], complete:emitterLoaded});
 
 function emitterLoaded()
 {
@@ -71,12 +71,12 @@ function interationLoaded()
   console.log("Parameters   : " + JSON.stringify(rocon_interactions.parameters))
   console.log("Remappings   : " + JSON.stringify(rocon_interactions.remappings))
   
-  sym.setVariable("masterURI", rosbridge_uri);
+  sym.setVariable("masterURI", rocon_interactions.rosbridge_uri);
   sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:20140328");
 
-  var table_id = rocon_interactions.parameters['table_id'] 
+  var table_id = rocon_interactions.parameters['table_id'];
   sym.setVariable('tableID', table_id);
-  sym.$("_01").html(tableID);
+  sym.$("_01").html(table_id);
 
   var send_order_remapped = rocon_interactions.remappings['send_order'];
   console.log("Send Order has remapped into ",send_order_remapped);
@@ -118,9 +118,9 @@ function eventemitterLoaded()
 
 function init_ros() 
 {
-  var masterUri = sy.getVariable('masterURI');
+  var masterUri = sym.getVariable('masterURI');
   var ros=new ROSLIB.Ros();
-  ros.connect(masterUri));
+  ros.connect(masterUri);
   sym.setVariable("ROS",ros);
 
   ros.on('connection',function()
