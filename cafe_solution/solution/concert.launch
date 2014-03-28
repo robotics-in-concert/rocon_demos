@@ -4,6 +4,7 @@
         <arg name="concert_name" value="Cafe Concert"/>
         <arg name="services" value="cafe_solution/cafe.services"/>
         <arg name="conductor_auto_invite" value="true"/>
+        <arg name="rosbridge_address" value="$(arg rosbridge_address)"/>
     </include>
     <group ns="concert">
       <node pkg="rocon_tf_reconstructor" name="rocon_tf_reconstructor" type="rocon_tf_reconstructor"/>
