@@ -50,9 +50,52 @@ Symbol.bindTriggerAction(compId,symbolName,"Default Timeline",2000,function(sym,
 Symbol.bindSymbolAction(compId,symbolName,"creationComplete",function(sym,e){sym.setVariable("ordered_coffee_list",new Array());sym.setVariable("ordered_sandwich_list",new Array());sym.setVariable("sum_coffee_price",0);sym.setVariable("sum_sandwich_price",0);sym.setVariable("masterURI","ws://222.100.124.85:9090");sym.setVariable("tableID","00");function getParam(key){var url=location.href;var parameters=[];var qs=null;if(url.indexOf("?")!=-1){qs={};parameters=url.substring(url.indexOf("?")+1,url.length).split("&");for(var k=0;k<parameters.length;k++){if(parameters[k].split("=")[1].split('').join('').length>0){qs[parameters[k].split("=")[0]]=parameters[k].split("=")[1];}}}
 if(qs==null)
 return"";else{return qs[key];}}
-yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});function eventemitterLoaded(){console.log("eventemitter2.js is loaded");yepnope({nope:['include/roslib.js'],complete:init_ros});}
-function yamljsLoaded(){console.log("yaml.min.js is loaded");var urlParams=unescape(getParam("params"));console.log(urlParams);var param_yaml=jsyaml.safeLoad(urlParams,jsyaml.DEFAULT_FULL_SCHEMA);var masterIP=param_yaml["masterip"];var bridgePORT=param_yaml["bridgeport"];sym.setVariable("masterURI","ws://"+masterIP+":"+bridgePORT);console.log(sym.getVariable("masterURI"));sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:201311112027");var tableID=param_yaml["tableid"];sym.setVariable("tableID",tableID);console.log(sym.getVariable("tableID"));sym.$("_01").html(tableID);var urlRemaps=unescape(getParam("remaps"));console.log(urlRemaps);var remaps_yaml=jsyaml.safeLoad(urlRemaps,jsyaml.DEFAULT_FULL_SCHEMA);console.log(remaps_yaml);sym.setVariable("send_order",remaps_yaml["send_order"]);console.log(sym.getVariable("send_order"));yepnope({nope:['include/EventEmitter2/eventemitter2.js'],complete:eventemitterLoaded});}
-function init_ros(){console.log("roslib.js is loaded");var ros=new ROSLIB.Ros();ros.connect(sym.getVariable("masterURI"));sym.setVariable("ROS",ros);ros.on('connection',function(){console.log('Connection made!');sym.$("status_text").html("Connected with "+masterUri);});ros.on('close',function(){});ros.on('error',function(error){console.log(error);});}});
+yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});
+
+function yamljsLoaded()
+{
+  console.log("yaml.min.js is loaded");
+  var urlParams=unescape(getParam("params"));
+  console.log(urlParams);
+  var param_yaml=jsyaml.safeLoad(urlParams,jsyaml.DEFAULT_FULL_SCHEMA);
+  var masterIP=param_yaml["masterip"];
+  var bridgePORT=param_yaml["bridgeport"];
+  sym.setVariable("masterURI","ws://"+masterIP+":"+bridgePORT);
+  console.log(sym.getVariable("masterURI"));
+  sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:201311112027");
+  var tableID=param_yaml["tableid"];
+  sym.setVariable("tableID",tableID);
+  console.log(sym.getVariable("tableID"));
+  sym.$("_01").html(tableID);
+  var urlRemaps=unescape(getParam("remaps"));
+  console.log(urlRemaps);
+  var remaps_yaml=jsyaml.safeLoad(urlRemaps,jsyaml.DEFAULT_FULL_SCHEMA);
+  console.log(remaps_yaml);
+  sym.setVariable("send_order",remaps_yaml["send_order"]);
+  console.log(sym.getVariable("send_order"));
+  yepnope({nope:['include/EventEmitter2/eventemitter2.js'],complete:eventemitterLoaded});
+}
+
+function eventemitterLoaded()
+{
+    console.log("eventemitter2.js is loaded");
+    yepnope({nope:['include/roslib.js'],complete:init_ros});
+}
+
+function init_ros() 
+{
+  console.log("roslib.js is loaded");
+  var ros=new ROSLIB.Ros();ros.connect(sym.getVariable("masterURI"));
+  sym.setVariable("ROS",ros);
+  ros.on('connection',function()
+    {
+      console.log('Connection made!');
+      sym.$("status_text").html("Connected with "+masterUri);
+    });
+  ros.on('close',function(){});
+  ros.on('error',function(error){console.log(error);});
+}
+});
 //Edge binding end
 Symbol.bindElementAction(compId,symbolName,"${_P1M2}","click",function(sym,e){addCoffeeOrder("Espresso Conpanna");});
 //Edge binding end
