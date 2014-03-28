@@ -13,5 +13,6 @@
 
   <export>
     <rocon_service>services/cafe_delivery/cafe_delivery.service</rocon_service>
+    <rocon_service>services/cafe_annotations/cafe_annotations.service</rocon_service>
   </export>
 </package>

@@ -1,0 +1,8 @@
+- name: 'http://chimek.yujinrobot.com/rocon/cafe_solution/cafe_annotator/table_handler.html'
+  role: 'Cafe Manager'
+  compatibility: rocon://pc
+  display_name: Cafe Annotator
+  description: Annotates tables and ar marker
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__

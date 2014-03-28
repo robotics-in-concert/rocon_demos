@@ -19,7 +19,7 @@
   <node pkg="map_store" type="map_manager" name="map_manager" output="screen"/>
 
   <!-- *********************** Annotations ************************ -->
-  <node pkg="annotations_store" type="annotations_manager" name="annotations_manager" output="screen">
+  <node pkg="rocon_annotations" type="annotations_manager" name="annotations_manager" output="screen">
   </node>
 
   <!--  ******************** View Annotations ******************** 

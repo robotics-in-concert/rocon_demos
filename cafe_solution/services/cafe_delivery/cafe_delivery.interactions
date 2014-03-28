@@ -28,9 +28,6 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-  remappings:
-    - remap_from: list_order
-      remap_to: /cafe/list_order
 - name: 'http://chimek.yujinrobot.com/rocon/cafe_solution/kitchen/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
@@ -39,7 +36,6 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    tableid: 1
   remappings:
     - remap_from: list_order
       remap_to: /cafe/list_order
