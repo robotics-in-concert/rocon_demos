@@ -1,5 +1,5 @@
 free_thresh: 0.196
-image: cropped.pgm
+image: controlroom.pgm
 negate: 0
 occupied_thresh: 0.65
 origin: [-5.799999999999999, -2.8000000000000007, 0.0]

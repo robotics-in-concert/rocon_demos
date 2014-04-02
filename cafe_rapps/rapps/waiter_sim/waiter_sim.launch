@@ -1,5 +1,6 @@
 <launch>
   <include file="$(find kobuki_softapps)/launch/nav.launch"/>
+  <node pkg="cafe_rapps" name="waiter_soft" type="waiter_soft.py" output="screen"/>
   <node pkg="robot_pose_publisher" name="robot_pose_publisher" type="robot_pose_publisher">
     <rosparam>
       is_stamped: true
