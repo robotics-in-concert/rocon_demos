@@ -1,6 +1,0 @@
-disply: Cafe Kitchen
-description: Kitchen Chicken
-compatibility: rocon:/pc
-launch: cafe_rapps/kitchen.launch
-public_interface: cafe_rapps/kitchen.interface
-

@@ -4,8 +4,3 @@ compatibility: rocon:/pc
 launch:       cafe_rapps/map_database.launch
 public_interface:    cafe_rapps/map_database.interface
 icon:         cafe_rapps/map_annotation_icon.png
-pairing_clients:
-  - type: android
-    manager:
-      api-level: 9
-      intent-action: com.github.robotics_in_concert.rocon_android_apps.map_annotation.MainActivity

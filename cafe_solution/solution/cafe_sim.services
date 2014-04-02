@@ -1,5 +1,3 @@
 - resource_name: rocon_service_admin/admin
 - resource_name: cafe_solution/cafe_delivery
-  override:
-    launcher: cafe_solution/cafe_delivery_sim 
 - resource_name: cafe_solution/cafe_annotations

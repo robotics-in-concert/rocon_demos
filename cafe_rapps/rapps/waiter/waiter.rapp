@@ -1,5 +1,5 @@
-display: Waiterbot
-description: The turtlebot navigate around the cafe to serve beverages. 
-compatibility: rocon:/waiterbot
-launch: cafe_rapps/waiter.launch
+display: Waiter
+description: The robot navigate around the cafe to serve beverages. 
+#compatibility: rocon:/waiterbot
+#launch: cafe_rapps/waiter.launch
 public_interface: cafe_rapps/waiter.interface
