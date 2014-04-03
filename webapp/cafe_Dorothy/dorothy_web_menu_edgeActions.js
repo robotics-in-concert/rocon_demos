@@ -74,7 +74,7 @@ function interationLoaded()
   sym.setVariable("masterURI", rocon_interactions.rosbridge_uri);
   sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:20140328");
 
-  var table_id = rocon_interactions.parameters['table_id'];
+  var table_id = rocon_interactions.parameters['tableid']; 
   sym.setVariable('tableID', table_id);
   sym.$("_01").html(table_id);
 
