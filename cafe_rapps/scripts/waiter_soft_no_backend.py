@@ -47,11 +47,14 @@ class WaiterSoftBot(object):
     def execute_callback(self,data):
         #print data, type(data), dir(data)
         #print type(data._connection_header)
+        time_start = 3
+        time_end = 3
+
+
         rospy.loginfo("Order Received : Robotname = %s",data.order.robot_name)
 
         #Go to kitchen, and return feedback ARRIVE_KITCHEN
-        self.process_status(time_range=[5,10],message="GO_TO_KITCHEN",feedback_status=Status.ARRIVE_KITCHEN)
-        #self.process_status(time_range=[2,3],message="GO_TO_KITCHEN",feedback_status=Status.ARRIVE_KITCHEN)
+        self.process_status(time_range=[time_start,time_end],message="GO_TO_KITCHEN",feedback_status=Status.ARRIVE_KITCHEN)
 
         # Waiting for kitchen
         feedback = DeliverOrderFeedback()
@@ -59,12 +62,10 @@ class WaiterSoftBot(object):
         self.waiter_server.publish_feedback(feedback)
         
         #Wait for kitchen     
-        self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
-        #self.process_status(time_range=[1,3],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
+        self.process_status(time_range=[time_start,time_end],message="WAITING_FOR_KITCHEN",feedback_status=Status.IN_DELIVERY)
         
         #In delivery      
-        self.process_status(time_range=[10,20],message="IN_DELIVERY",feedback_status=Status.ARRIVE_TABLE)
-        #self.process_status(time_range=[5,10],message="IN_DELIVERY",feedback_status=Status.ARRIVE_TABLE)
+        self.process_status(time_range=[time_start,time_end],message="IN_DELIVERY",feedback_status=Status.ARRIVE_TABLE)
         rospy.loginfo(self.name + " : ARRIVE_TABLE")
         
         # Waiting for user confirmation
@@ -72,8 +73,7 @@ class WaiterSoftBot(object):
         feedback.status = Status.WAITING_FOR_USER_CONFIRMATION    
         self.waiter_server.publish_feedback(feedback)
         
-        self.process_status(time_range=[10,15],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIVERY)
-        #self.process_status(time_range=[3,5],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIVERY)
+        self.process_status(time_range=[time_start,time_end],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.COMPLETE_DELIVERY)
         rospy.loginfo(self.name + " : COMPLETE_DELIVERY")
         
         feedback = DeliverOrderFeedback()
@@ -81,8 +81,7 @@ class WaiterSoftBot(object):
         self.waiter_server.publish_feedback(feedback)
         
         # Returning to Docking
-        self.process_status(time_range=[20,30],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
-        #self.process_status(time_range=[5,10],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
+        self.process_status(time_range=[time_start,time_end],message="RETURNING TO DOCK", feedback_status=Status.END_DELIVERY_ORDER)
         rospy.loginfo(self.name+ " : END_DELIVERY_ORDER")
 		
         rospy.sleep(1)
@@ -98,7 +97,7 @@ if __name__ == '__main__':
         # Initialize ros node
         rospy.init_node('waiterbot')
 
-        waiter = WaiterSoftBot(rospy.get_name(),"~delivery_order")
+        waiter = WaiterSoftBot(rospy.get_name(),"delivery_order")
         rospy.loginfo('Initialized')
 
         waiter.spin()

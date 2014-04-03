@@ -4,26 +4,26 @@
 
 name: "Cafe Concert"
 nodes:
-#  - id: database
-#    uri: rocon:/pc/map_database#cafe_rapps/map_database
+  - id: database
+    uri: rocon:/pc/map_database#cafe_rapps/map_database
   - id: cafe_taskcoordinator
     uri: rocon:/pc#cafe_rapps/taskcoordinator
   - id: waiterbot
-    uri: rocon:/pc#cafe_rapps/waiter_sim
+    uri: rocon:/pc/kobuki#cafe_rapps/waiter
     min: 1
     max: 3
 topics:
 ################# Map Database
-  - id: annotation_columns
-    type: yocs_msgs/ColumnList
-  - id: annotation_visual_marker
-    type: visualization_msgs/MarkerArray
-  - id: annotation_walls
-    type: yocs_msgs/WallList
-  - id: annotation_markers
-    type: ar_track_alvar/AlvarMarkers
-  - id: annotation_tables
-    type: yocs_msgs/TableList
+# - id: annotation_columns
+#   type: yocs_msgs/ColumnList
+# - id: annotation_visual_marker
+#   type: visualization_msgs/MarkerArray
+# - id: annotation_walls
+#   type: yocs_msgs/WallList
+# - id: annotation_markers
+#   type: ar_track_alvar/AlvarMarkers
+# - id: annotation_tables
+#   type: yocs_msgs/TableList
 
   - id: map
     type: nav_msgs/OccupancyGrid
@@ -43,64 +43,64 @@ actions:
 
 services:
 ################ Map Database 
-  - id: pub_annotation
-    type: annotations_store/PublishAnnotations
-  - id: save_annotation
-    type: annotations_store/SaveAnnotations
-  - id: del_annotation 
-    type: annotations_store/DeleteAnnotations
-  - id: del_map
-    type: map_store/DeleteMap
-  - id: dynamic_map
-    type: nav_msgs/GetMap
-  - id: rename_map
-    type: map_store/RenameMap
-  - id: pub_map
-    type: map_store/PublishMap 
-  - id: list_maps
-    type: map_store/ListMaps 
+# - id: pub_annotation
+#   type: annotations_store/PublishAnnotations
+# - id: save_annotation
+#   type: annotations_store/SaveAnnotations
+# - id: del_annotation 
+#   type: annotations_store/DeleteAnnotations
+# - id: del_map
+#   type: map_store/DeleteMap
+# - id: dynamic_map
+#   type: nav_msgs/GetMap
+# - id: rename_map
+#   type: map_store/RenameMap
+# - id: pub_map
+#   type: map_store/PublishMap 
+# - id: list_maps
+#   type: map_store/ListMaps 
 
 edges: 
 # Publishers
-  - start: database
-    finish: annotation_visual_marker
-    remap_from: visual_markers
-    remap_to: /database/visual_markers
+# - start: database
+#   finish: annotation_visual_marker
+#   remap_from: visual_markers
+#   remap_to: /database/visual_markers
 
-  - start: database
-    finish: annotations_columns
-    remap_from: columns_out
-    remap_to: /database/columns_out
-  - start: database
-    finish: annotation_walls
-    remap_from: walls_out
-    remap_to: /database/walls_out
-  - start: database
-    finish: annotation_markers
-    remap_from: markers_out
-    remap_to: /database/markers_out
-  - start: database
-    finish: annotation_tables
-    remap_from: tables_out
-    remap_to: /database/tables_out
+# - start: database
+#   finish: annotations_columns
+#   remap_from: columns_out
+#   remap_to: /database/columns_out
+# - start: database
+#   finish: annotation_walls
+#   remap_from: walls_out
+#   remap_to: /database/walls_out
+# - start: database
+#   finish: annotation_markers
+#   remap_from: markers_out
+#   remap_to: /database/markers_out
+# - start: database
+#   finish: annotation_tables
+#   remap_from: tables_out
+#   remap_to: /database/tables_out
 
 # Subscribers
-  - start: annotations_columns
-    finish: database 
-    remap_from: columns_in 
-    remap_to: /database/columns_in
-  - start: annotation_walls
-    finish: database
-    remap_from: walls_in
-    remap_to: /database/walls_in
-  - start: annotation_markers
-    finish: database
-    remap_from: markers_in
-    remap_to: /database/markers_in
-  - start: annotation_tables
-    finish: database
-    remap_from: tables_in
-    remap_to: /database/tables_in
+# - start: annotations_columns
+#   finish: database 
+#   remap_from: columns_in 
+#   remap_to: /database/columns_in
+# - start: annotation_walls
+#   finish: database
+#   remap_from: walls_in
+#   remap_to: /database/walls_in
+# - start: annotation_markers
+#   finish: database
+#   remap_from: markers_in
+#   remap_to: /database/markers_in
+# - start: annotation_tables
+#   finish: database
+#   remap_from: tables_in
+#   remap_to: /database/tables_in
 
 # map store
   - start: database
@@ -113,42 +113,42 @@ edges:
     remap_to: /map_metadata
 
 ## Service remapping
-  - start: database
-    finish: pub_annotation
-    remap_from: publish_annotations
-    remap_to: /database/publish_annotations
-  - start: database
-    finish: save_annotation
-    remap_from: save_annotations
-    remap_to: /database/save_annotations
-  - start: database
-    finish: rename_annotation
-    remap_from: rename_annotations
-    remap_to: /database/rename_annotations
-  - start: database
-    finish: del_annotation 
-    remap_from: delete_annotations
-    remap_to: /database/delete_annotations
-  - start: database
-    finish: del_map
-    remap_from: delete_map
-    remap_to: /database/delete_map
-  - start: database
-    finish: dynamic_map 
-    remap_from: dynamic_map 
-    remap_to: /database/dynamic_map
-  - start: database
-    finish: rename_map 
-    remap_from: rename_map 
-    remap_to: /database/rename_map
-  - start: database
-    finish: pub_map 
-    remap_from: publish_map 
-    remap_to: /database/publish_map
-  - start: database
-    finish: list_maps 
-    remap_from: list_maps 
-    remap_to: /database/list_maps
+# - start: database
+#   finish: pub_annotation
+#   remap_from: publish_annotations
+#   remap_to: /database/publish_annotations
+# - start: database
+#   finish: save_annotation
+#   remap_from: save_annotations
+#   remap_to: /database/save_annotations
+# - start: database
+#   finish: rename_annotation
+#   remap_from: rename_annotations
+#   remap_to: /database/rename_annotations
+# - start: database
+#   finish: del_annotation 
+#   remap_from: delete_annotations
+#   remap_to: /database/delete_annotations
+# - start: database
+#   finish: del_map
+#   remap_from: delete_map
+#   remap_to: /database/delete_map
+# - start: database
+#   finish: dynamic_map 
+#   remap_from: dynamic_map 
+#   remap_to: /database/dynamic_map
+# - start: database
+#   finish: rename_map 
+#   remap_from: rename_map 
+#   remap_to: /database/rename_map
+# - start: database
+#   finish: pub_map 
+#   remap_from: publish_map 
+#   remap_to: /database/publish_map
+# - start: database
+#   finish: list_maps 
+#   remap_from: list_maps 
+#   remap_to: /database/list_maps
 
 ## Waiterbot
   - start: map
@@ -160,28 +160,28 @@ edges:
     remap_from: map_metadata
     remap_to: /map_metadata
 
-  - start: annotation_tables
-    finish: waiterbot
-    remap_from: table_pose_list
-    remap_to: /database/tables_out
-  - start: annotation_markers
-    finish: waiterbot
-    remap_from: marker_pose_list
-    remap_to: /database/markers_out
+# - start: annotation_tables
+#   finish: waiterbot
+#   remap_from: table_pose_list
+#   remap_to: /database/tables_out
+# - start: annotation_markers
+#   finish: waiterbot
+#   remap_from: marker_pose_list
+#   remap_to: /database/markers_out
 
 ## Task Coordinator
   - start: taskcoordinator_waiterbot_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_1/delivery_order
-    remap_to: /adams/delivery_order
-  - start: taskcoordinator_waiterbot_delivery_order
-    finish: cafe_taskcoordinator
-    remap_from: waiter_2/delivery_order
-    remap_to: /chopin/delivery_order
-  - start: taskcoordinator_waiterbot_delivery_order
-    finish: cafe_taskcoordinator
-    remap_from: waiter_3/delivery_order
-    remap_to: /elgar/delivery_order
+    remap_to: /kobuki/delivery_order
+# - start: taskcoordinator_waiterbot_delivery_order
+#   finish: cafe_taskcoordinator
+#   remap_from: waiter_2/delivery_order
+#   remap_to: /chopin/delivery_order
+# - start: taskcoordinator_waiterbot_delivery_order
+#   finish: cafe_taskcoordinator
+#   remap_from: waiter_3/delivery_order
+#   remap_to: /elgar/delivery_order
 
   - start: cafe_taskcoordinator
     finish: taskcoordinator_userdevice_send_order
