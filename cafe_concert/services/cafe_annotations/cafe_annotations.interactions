@@ -1,4 +1,4 @@
-- name: 'http://chimek.yujinrobot.com/rocon/cafe_solution/cafe_annotator/table_handler.html'
+- name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/cafe_annotator/table_handler.html'
   role: 'Cafe Manager'
   compatibility: rocon://pc
   display_name: Cafe Annotator

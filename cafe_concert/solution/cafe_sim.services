@@ -1,0 +1,5 @@
+- resource_name: concert_service_admin/admin
+- resource_name: cafe_concert/cafe_delivery
+  overrides:
+    launcher: cafe_concert/cafe_delivery_sim 
+- resource_name: cafe_concert/cafe_annotations

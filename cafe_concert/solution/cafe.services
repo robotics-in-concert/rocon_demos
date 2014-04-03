@@ -1,0 +1,3 @@
+- resource_name: concert_service_admin/admin
+- resource_name: cafe_concert/cafe_delivery
+- resource_name: cafe_concert/cafe_annotations

@@ -4,7 +4,7 @@ import yaml
 import concert_service_link_graph
 import concert_service_utilities
 import map_store.srv
-import annotations_store.srv
+#import annotations_store.srv
 
 from concert_msgs.srv import *
 from concert_msgs.msg import *
@@ -32,10 +32,10 @@ if __name__ == '__main__':
         rospy.loginfo("Loading map : " + str(map_id))
         rospy.wait_for_service('/database/publish_map')
         map_load = rospy.ServiceProxy('/database/publish_map',map_store.srv.PublishMap)
-        rospy.wait_for_service('/database/publish_annotations')
-        anno_load = rospy.ServiceProxy('/database/publish_annotations',annotations_store.srv.PublishAnnotations)
+#rospy.wait_for_service('/database/publish_annotations')
+#anno_load = rospy.ServiceProxy('/database/publish_annotations',annotations_store.srv.PublishAnnotations)
         map_load(map_id)
-        anno_load(map_id)
+#anno_load(map_id)
     else:
         rospy.loginfo("No map ID")
     sgsh.spin()

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>cafe_solution</name>
+  <name>cafe_concert</name>
   <version>0.0.0</version>
-  <description>The cafe_solution package</description>
+  <description>The cafe_concert package</description>
 
   <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
 
@@ -12,7 +12,7 @@
   <run_depend>concert_service_link_graph</run_depend>
 
   <export>
-    <rocon_service>services/cafe_delivery/cafe_delivery.service</rocon_service>
-    <rocon_service>services/cafe_annotations/cafe_annotations.service</rocon_service>
+    <concert_service>services/cafe_delivery/cafe_delivery.service</concert_service>
+    <concert_service>services/cafe_annotations/cafe_annotations.service</concert_service>
   </export>
 </package>
