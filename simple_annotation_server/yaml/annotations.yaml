@@ -2,7 +2,7 @@ ar_markers: []
 columns: []
 tables:
 - height: 0.0
-  name: t123123123
+  name: test_table
   pose:
     header:
       frame_id: ''

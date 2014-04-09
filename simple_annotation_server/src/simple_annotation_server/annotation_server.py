@@ -6,7 +6,7 @@
 
 import rospy
 import ar_track_alvar.msg as ar_msgs
-import yocs_msgs.srv as yocs_srvs
+import simple_annotation_msgs.srv as annotation_srvs
 import yocs_msgs.msg as yocs_msgs
 
 from .utils import load_annotations_from_file, write_annotations_into_file
@@ -41,30 +41,30 @@ class SimpleAnnotationServer(object):
 
     def _init_services(self):
         self.service = {}
-        self.service['tables'] = rospy.Service('save_tables', yocs_srvs.SaveTables, self._process_save_tables)
-        self.service['ar_markers'] = rospy.Service('save_ar_markers', yocs_srvs.SaveARMarkers, self._process_save_ar_markers)
-        self.service['columns'] = rospy.Service('save_columns', yocs_srvs.SaveColumns, self._process_save_columns)
-        self.service['walls'] = rospy.Service('save_walls', yocs_srvs.SaveWalls, self._process_save_walls)
+        self.service['tables'] = rospy.Service('save_tables', annotation_srvs.SaveTables, self._process_save_tables)
+        self.service['ar_markers'] = rospy.Service('save_ar_markers', annotation_srvs.SaveARMarkers, self._process_save_ar_markers)
+        self.service['columns'] = rospy.Service('save_columns', annotation_srvs.SaveColumns, self._process_save_columns)
+        self.service['walls'] = rospy.Service('save_walls', annotation_srvs.SaveWalls, self._process_save_walls)
 
     def _process_save_tables(self, req):
         self.annotation['tables'] = req.data
         self.update()
-        return yocs_srvs.SaveTablesResponse(True)
+        return annotation_srvs.SaveTablesResponse(True)
 
     def _process_save_columns(self, req):
         self.annotation['columns'] = req.data
         self.update()
-        return yocs_srvs.SaveColumnsResponse(True)
+        return annotation_srvs.SaveColumnsResponse(True)
 
     def _process_save_ar_markers(self, req):
         self.annotation['ar_markers'] = req.data
         self.update()
-        return yocs_srvs.SaveARMarkersResponse(True)
+        return annotation_srvs.SaveARMarkersResponse(True)
 
     def _process_save_walls(self, req):
         self.annotation['walls'] = req.data
         self.update()
-        return yocs_srvs.SaveWallsResponse(True)
+        return annotation_srvs.SaveWallsResponse(True)
 
     def publish_annotations(self):
         # Tables

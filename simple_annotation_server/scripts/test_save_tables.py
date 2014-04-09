@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from yocs_msgs.msg import TableList, Table
-from yocs_msgs.srv import SaveTables
+from simple_annotation_msgs.srv import SaveTables
 
 if __name__ == '__main__':
     rospy.init_node('test_save_tables')

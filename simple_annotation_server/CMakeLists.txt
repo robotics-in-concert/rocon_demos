@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(simple_annotation_server)
 
-find_package(catkin REQUIRED COMPONENTS rospy ar_track_alvar yocs_msgs)
+find_package(catkin REQUIRED COMPONENTS rospy ar_track_alvar yocs_msgs simple_annotation_msgs)
 
 catkin_package()
 catkin_python_setup()
