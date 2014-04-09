@@ -5,13 +5,13 @@
 #
 
 import rospy 
-import yocs_simple_annotation_server
+import simple_annotation_server
 
 if __name__ == '__main__':
 
     rospy.init_node('simple_annotation_server')
 
-    server = yocs_simple_annotation_server.SimpleAnnotationServer() 
+    server = simple_annotation_server.SimpleAnnotationServer() 
 
     if not server.init():
         server.logerr("Failed to initialize")
