@@ -1,7 +1,7 @@
 ar_markers: []
 columns: []
 tables:
-- height: 0.0
+- height: 1.0
   name: test_table
   pose:
     header:
@@ -15,5 +15,5 @@ tables:
       pose:
         orientation: {w: 0.0, x: 0.0, y: 0.0, z: 0.0}
         position: {x: 0.0, y: 0.0, z: 0.0}
-  radius: 0.0
+  radius: 1.0
 walls: []

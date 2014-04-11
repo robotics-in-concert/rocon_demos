@@ -7,6 +7,7 @@
 import rospy
 import ar_track_alvar.msg as ar_msgs
 import simple_annotation_msgs.srv as annotation_srvs
+from visualization_msgs.msg import Marker, MarkerArray
 import yocs_msgs.msg as yocs_msgs
 
 from .utils import load_annotations_from_file, write_annotations_into_file
@@ -38,6 +39,8 @@ class SimpleAnnotationServer(object):
         self.publisher['ar_markers'] = rospy.Publisher('ar_markers', ar_msgs.AlvarMarkers, latch=True)
         self.publisher['columns'] = rospy.Publisher('columns', yocs_msgs.ColumnList, latch=True)
         self.publisher['walls'] = rospy.Publisher('walls', yocs_msgs.WallList, latch=True)
+
+        self.publisher['viz_markers'] = rospy.Publisher('viz_markers', MarkerArray, latch=True)
 
     def _init_services(self):
         self.service = {}
@@ -87,8 +90,58 @@ class SimpleAnnotationServer(object):
         message.obstacles = self.annotation['walls']
         self.publisher['walls'].publish(message)
 
+    def publish_visualization_markers(self):
+        m_array = MarkerArray()
+    
+        id = 1
+
+        # Table
+        for t in self.annotation['tables']:
+            m = Marker()
+            m.header.frame_id = '/map'
+            m.ns = 'marker'
+            m.id = id
+            id = id +1
+
+            m.type = Marker.CYLINDER
+            m.action = Marker.ADD
+            m.pose = t.pose.pose.pose
+            m.pose.position.z = m.pose.position.z + t.height / 2
+            m.scale.x = t.radius
+            m.scale.y = t.radius
+            m.scale.z = t.height
+            m.color.r = 1.0
+            m.color.g = 0.0
+            m.color.b = 0.0
+            m.color.a = 1.0
+
+            m_array.markers.append(m)
+
+        # AR Marker
+        for a in self.annotation['ar_markers']:
+            m = Marker()
+            m.header.frame_id = '/map'
+            m.ns = 'marker'
+            m.id = id
+            id = id + 1
+
+            m.type = Marker.ARROW
+            m.action = Marker.ADD
+            m.pose = a.pose.pose
+            m.scale.x = 0.5
+            m.scale.y = 0.5
+            m.scale.z = 0.5
+            m.color.r = 0.0
+            m.color.g = 1.0
+            m.color.b = 1.0
+            m.color.a = 1.0
+            m_array.markers.append(m)
+
+        self.publisher['viz_markers'].publish(m_array)
+
     def update(self):
         self.publish_annotations()
+        self.publish_visualization_markers()
         write_annotations_into_file(self.annotation, self.filename)
         self.loginfo('Annotations have been updated.')
 
@@ -97,6 +150,7 @@ class SimpleAnnotationServer(object):
 
     def spin(self):
         self.publish_annotations()
+        self.publish_visualization_markers()
         rospy.spin()
 
     def loginfo(self, msg):
