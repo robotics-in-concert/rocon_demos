@@ -1,7 +1,0 @@
-name: Cafe Annotations
-description: "Annotate table and ar marker"
-author: Jihoon Lee
-priority: 3
-#launcher_type: roslaunch
-#launcher: 
-interactions: cafe_concert/cafe_annotations

@@ -14,6 +14,6 @@
   <export>
     <concert_service>services/cafe_delivery/cafe_delivery.service</concert_service>
     <concert_service>services/cafe_delivery_sim/cafe_delivery_sim.service</concert_service>
-    <concert_service>services/cafe_annotations/cafe_annotations.service</concert_service>
+    <concert_service>services/cafe_database/cafe_database.service</concert_service>
   </export>
 </package>
