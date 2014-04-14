@@ -106,7 +106,9 @@ class SimpleAnnotationServer(object):
             m.type = Marker.CYLINDER
             m.action = Marker.ADD
             m.pose = t.pose.pose.pose
-            m.pose.position.z = m.pose.position.z + t.height / 2
+            m.pose.position.x = t.pose.pose.pose.position.x
+            m.pose.position.y = t.pose.pose.pose.position.y
+            m.pose.position.z = t.pose.pose.pose.position.z + t.height / 2
             m.scale.x = t.radius
             m.scale.y = t.radius
             m.scale.z = t.height
@@ -116,6 +118,28 @@ class SimpleAnnotationServer(object):
             m.color.a = 1.0
 
             m_array.markers.append(m)
+
+            m = Marker()
+            m.header.frame_id = '/map'
+            m.ns = 'marker'
+            m.id = id
+            id = id +1
+
+            m.type = Marker.TEXT_VIEW_FACING
+            m.action = Marker.ADD
+            m.pose.position.x = t.pose.pose.pose.position.x
+            m.pose.position.y = t.pose.pose.pose.position.y
+            m.pose.position.z = t.pose.pose.pose.position.z + t.height / 2
+            m.scale.x = t.radius
+            m.scale.y = t.radius
+            m.scale.z = t.height
+            m.color.r = 1.0
+            m.color.g = 0.0
+            m.color.b = 0.0
+            m.color.a = 1.0
+
+            m_array.markers.append(m)
+
 
         # AR Marker
         for a in self.annotation['ar_markers']:
@@ -136,6 +160,28 @@ class SimpleAnnotationServer(object):
             m.color.b = 1.0
             m.color.a = 1.0
             m_array.markers.append(m)
+
+            m = Marker()
+            m.header.frame_id = '/map'
+            m.ns = 'marker'
+            m.id = id
+            id = id +1
+
+            m.type = Marker.TEXT_VIEW_FACING
+            m.action = Marker.ADD
+            m.pose.position.x = a.pose.pose.position.x
+            m.pose.position.y = a.pose.pose.position.y
+            m.pose.position.z = a.pose.pose.position.z + 0.5
+            m.scale.x = t.radius
+            m.scale.y = t.radius
+            m.scale.z = t.height
+            m.color.r = 1.0
+            m.color.g = 0.0
+            m.color.b = 0.0
+            m.color.a = 1.0
+
+            m_array.markers.append(m)
+
 
         self.publisher['viz_markers'].publish(m_array)
 
