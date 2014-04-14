@@ -174,9 +174,9 @@ class SimpleAnnotationServer(object):
             m.pose.position.x = a.pose.pose.position.x
             m.pose.position.y = a.pose.pose.position.y
             m.pose.position.z = a.pose.pose.position.z + 0.5
-            m.scale.x = 0.1 
-            m.scale.y = 0.1
-            m.scale.z = 0.1
+            m.scale.x = 0.3 
+            m.scale.y = 0.3
+            m.scale.z = 0.3
             m.color.r = 1.0
             m.color.g = 1.0
             m.color.b = 1.0
