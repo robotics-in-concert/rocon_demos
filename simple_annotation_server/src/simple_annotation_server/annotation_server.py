@@ -115,7 +115,7 @@ class SimpleAnnotationServer(object):
             m.color.r = 1.0
             m.color.g = 0.0
             m.color.b = 0.0
-            m.color.a = 1.0
+            m.color.a = 0.5
 
             m_array.markers.append(m)
 
@@ -127,15 +127,16 @@ class SimpleAnnotationServer(object):
 
             m.type = Marker.TEXT_VIEW_FACING
             m.action = Marker.ADD
+            m.text = t.name
             m.pose.position.x = t.pose.pose.pose.position.x
             m.pose.position.y = t.pose.pose.pose.position.y
             m.pose.position.z = t.pose.pose.pose.position.z + t.height / 2
-            m.scale.x = t.radius
-            m.scale.y = t.radius
-            m.scale.z = t.height
+            m.scale.x = 0.3 
+            m.scale.y = 0.3
+            m.scale.z = 0.3
             m.color.r = 1.0
-            m.color.g = 0.0
-            m.color.b = 0.0
+            m.color.g = 1.0
+            m.color.b = 1.0
             m.color.a = 1.0
 
             m_array.markers.append(m)
@@ -158,7 +159,7 @@ class SimpleAnnotationServer(object):
             m.color.r = 0.0
             m.color.g = 1.0
             m.color.b = 1.0
-            m.color.a = 1.0
+            m.color.a = 0.5
             m_array.markers.append(m)
 
             m = Marker()
@@ -168,21 +169,22 @@ class SimpleAnnotationServer(object):
             id = id +1
 
             m.type = Marker.TEXT_VIEW_FACING
+            m.text = a.id
             m.action = Marker.ADD
             m.pose.position.x = a.pose.pose.position.x
             m.pose.position.y = a.pose.pose.position.y
             m.pose.position.z = a.pose.pose.position.z + 0.5
-            m.scale.x = t.radius
-            m.scale.y = t.radius
-            m.scale.z = t.height
+            m.scale.x = 0.1 
+            m.scale.y = 0.1
+            m.scale.z = 0.1
             m.color.r = 1.0
-            m.color.g = 0.0
-            m.color.b = 0.0
+            m.color.g = 1.0
+            m.color.b = 1.0
             m.color.a = 1.0
 
             m_array.markers.append(m)
 
-
+        self.loginfo('publish viz_markers')
         self.publisher['viz_markers'].publish(m_array)
 
     def update(self):
