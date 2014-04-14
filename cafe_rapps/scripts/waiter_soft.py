@@ -27,7 +27,7 @@ class WaiterSoftBot(object):
         self.subscriber['table_list'] = rospy.Subscriber('table_pose_list',yocs_msgs.TableList,self.process_table_pose)
         self.subscriber['ar_list'] = rospy.Subscriber('ar_list',AlvarMarkers,self.process_alvar_markers)
 
-        self.table_poses = {}   
+        self.table_poses = {}
         self.table_init = False
 
         self.ar_poses = {}   

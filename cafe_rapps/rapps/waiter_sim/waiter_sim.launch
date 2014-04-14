@@ -1,5 +1,4 @@
 <launch>
-<!--
   <include file="$(find kobuki_softapps)/launch/nav.launch"/>
   <node pkg="robot_pose_publisher" name="robot_pose_publisher" type="robot_pose_publisher">
     <rosparam>
@@ -7,6 +6,5 @@
       base_frame: base_footprint
     </rosparam>
   </node>
-  -->
   <node pkg="cafe_rapps" name="waiter_soft" type="waiter_soft_no_backend.py" output="screen"/>
 </launch>
