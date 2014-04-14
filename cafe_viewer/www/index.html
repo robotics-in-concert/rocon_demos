@@ -169,8 +169,8 @@
 
       function addRegionViz(viewer,gridClient)
       {
-        var table_topic = rocon_interactions.remappings['tables'] | 'tables';
-        var ar_marker_topic = rocon_interactions.remappings['ar_markers'] | 'ar_markers';
+        var table_topic = rocon_interactions.remappings['tables'] || 'tables';
+        var ar_marker_topic = rocon_interactions.remappings['ar_markers'] || 'ar_markers';
         gridClient.on('change', function(map_origin) {
           circle_region_poller = new REGIONVIZ.Circle({
             ros: ros,
