@@ -17,7 +17,7 @@ class RemoteOrderManager(object):
 
     def _init_rosapis(self):
         self.publisher = {}
-        self.publisher['remote_order_status'] = rospy.Publisher('/cafe/remote_order_status', cafe_msgs.RemoteOrderStatus, latch=True)
+        self.publisher['remote_order_status'] = rospy.Publisher('/cafe/remote_order_status', cafe_msgs.RemoteOrderStatus)
         self.publisher['remote_order_list'] = rospy.Publisher('/cafe/remote_order_list', cafe_msgs.RemoteOrderList, latch=True)
 
         self.subscriber = {}
@@ -40,6 +40,7 @@ class RemoteOrderManager(object):
         self.lock.release()
 
     def process_remote_order_update(self, msg):
+        self.loginfo('Update Received')
         if not msg.name in self.orders:
             self.logwarn('order from [%s] is not placed yet. Dropping the update..'%msg.name) 
             return
@@ -50,8 +51,8 @@ class RemoteOrderManager(object):
         self.publisher['remote_order_status'].publish(self.orders[msg.name].status)
 
         if msg.status == cafe_msgs.RemoteOrderStatus.ORDER_PICKED_UP:
-            self.loginfo('Order from [%s] has been picked up. Clearing..'%msg.name)
             del self.orders[msg.name]
+            self.loginfo('Order from [%s] has been picked up. Clearing..'%msg.name)
 
         self.update()
         self.lock.release()
