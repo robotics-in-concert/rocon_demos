@@ -10,7 +10,7 @@ var STATUS_STRING = ['IDLE',
                      'END DELIVERY',
                      'ERROR'];
 
-var order_pub_topic = "/list_order";
+var order_pub_topic = rocon_interactions.remappings['list_order'] | 'list_order';
 var order_pub_topic_type = "/cafe_msgs/OrderList";
 
 var nav_div;

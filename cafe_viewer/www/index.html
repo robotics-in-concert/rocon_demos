@@ -30,14 +30,17 @@
     <script src="js/bootstrap/bootstrap.js"></script>
     <script src="js/bootstrap/bootstrap-button.js"></script>
 
-    <script src="js/add_orderlist.js"></script>
 
     <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
     <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
 
+    <script src="js/add_orderlist.js"></script>
+
     <script type="text/javascript">
       var ros = new ROSLIB.Ros();
       var defaultUrL = rocon_interactions.rosbridge_uri;
+      var robot1 = rocon_interactions.parameters['robot1'];
+      var robot2 = rocon_interactions.parameters['robot2'];
       var viewer;
       var gridClient;
       var circle_region_poller;
@@ -123,14 +126,17 @@
       }
 
       function addNavigators(viewer,gridClient) {
+
+        var robot1_pose_topic = '/' + robot1 + '/robot_pose';
+        var robot2_pose_topic = '/' + robot2 + '/robot_pose';
         
         gridClient.on('change', function(map_origin) {
           var robot1 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            name       : 'chopin',
+            name       : robot1,
             size       : 20,
-            topicName  : '/chopin/robot_pose',
+            topicName  : robot1_pose_topic, 
             topicType  : 'geometry_msgs/PoseStamped',
             fillColor  : createjs.Graphics.getRGB(255,64,128,0.66),
             rootObject : viewer.scene
@@ -139,9 +145,9 @@
           var robot2 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            name       : 'elgar',
+            name       : robot2,
             size       : 20,
-            topicName  : '/elgar/robot_pose',
+            topicName  : robot2_pose_topic,
             topicType  : 'geometry_msgs/PoseStamped',
             fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
             rootObject : viewer.scene
@@ -163,19 +169,21 @@
 
       function addRegionViz(viewer,gridClient)
       {
+        var table_topic = rocon_interactions.remappings['tables'] | 'tables';
+        var ar_marker_topic = rocon_interactions.remappings['ar_markers'] | 'ar_markers';
         gridClient.on('change', function(map_origin) {
           circle_region_poller = new REGIONVIZ.Circle({
             ros: ros,
             map_origin : map_origin,
             rootObject : viewer.scene,
-            topicName : '/database/tables_out'
+            topicName : table_topic 
           });
 
           ar_region_poller = new REGIONVIZ.AlvarAR({
             ros: ros,
             map_origin : map_origin,
             rootObject : viewer.scene,
-            topicName : '/database/markers_out',
+            topicName : ar_marker_topic
           });
 
         });
