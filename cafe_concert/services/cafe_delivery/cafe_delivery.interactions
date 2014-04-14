@@ -28,6 +28,15 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
+    robot1: elgar
+    robot2: chopin
+  remappings:
+    - remap_from: tables
+      remap_to: /annotation/tables
+    - remap_from: ar_markers
+      remap_to: /annotation/ar_markers
+    - remap_from: list_order
+      remap_to: /cafe/list_order
 - name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
