@@ -127,6 +127,8 @@
 
       function addNavigators(viewer,gridClient) {
 
+        var robot1_name = robot1;
+        var robot2_name = robot2;
         var robot1_pose_topic = '/' + robot1 + '/robot_pose';
         var robot2_pose_topic = '/' + robot2 + '/robot_pose';
         
@@ -134,7 +136,7 @@
           var robot1 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            name       : robot1,
+            name       : robot1_name,
             size       : 20,
             topicName  : robot1_pose_topic, 
             topicType  : 'geometry_msgs/PoseStamped',
@@ -145,7 +147,7 @@
           var robot2 = new ROS2D.Robot({
             ros: ros,
             map_origin : map_origin,
-            name       : robot2,
+            name       : robot2_name,
             size       : 20,
             topicName  : robot2_pose_topic,
             topicType  : 'geometry_msgs/PoseStamped',
