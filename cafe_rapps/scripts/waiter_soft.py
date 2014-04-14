@@ -49,8 +49,8 @@ class WaiterSoftBot(object):
         
         for table in msg.tables:
           pose_stamped = PoseStamped()
-          pose_stamped.pose = table.pose_cov_stamped.pose.pose 
-          pose_stamped.header = table.pose_cov_stamped.header
+          pose_stamped.pose = table.pose.pose.pose 
+          pose_stamped.header = table.pose.header
           self.table_poses[table.name] = pose_stamped 
           
         self.table_init = True
@@ -106,7 +106,7 @@ class WaiterSoftBot(object):
         self.feedback('ARRIVE TABLE',Status.ARRIVE_TABLE)
 
         # Waiting for user confirmation
-        self.process_status(time_range=[10,15],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.WAITING_FOR_USER_CONFIRMATION)
+        self.process_status(time_range=[1,3],message="WAITING FOR USER CONFIRMATION",feedback_status=Status.WAITING_FOR_USER_CONFIRMATION)
 
         # Complete Delivery 
         self.feedback('COMPLETE DELIVERY',Status.COMPLETE_DELIVERY)
