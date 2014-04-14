@@ -108,7 +108,7 @@ class SimpleAnnotationServer(object):
             m.pose = t.pose.pose.pose
             m.pose.position.x = t.pose.pose.pose.position.x
             m.pose.position.y = t.pose.pose.pose.position.y
-            m.pose.position.z = t.pose.pose.pose.position.z + t.height / 2
+            m.pose.position.z = t.height / 2
             m.scale.x = t.radius
             m.scale.y = t.radius
             m.scale.z = t.height
@@ -130,7 +130,7 @@ class SimpleAnnotationServer(object):
             m.text = t.name
             m.pose.position.x = t.pose.pose.pose.position.x
             m.pose.position.y = t.pose.pose.pose.position.y
-            m.pose.position.z = t.pose.pose.pose.position.z + t.height / 2
+            m.pose.position.z = t.height / 2 + 0.5
             m.scale.x = 0.3 
             m.scale.y = 0.3
             m.scale.z = 0.3
@@ -169,7 +169,7 @@ class SimpleAnnotationServer(object):
             id = id +1
 
             m.type = Marker.TEXT_VIEW_FACING
-            m.text = a.id
+            m.text = str(a.id)
             m.action = Marker.ADD
             m.pose.position.x = a.pose.pose.position.x
             m.pose.position.y = a.pose.pose.position.y
