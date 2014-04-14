@@ -53,7 +53,7 @@ class WaiterSoftBot(object):
           pose_stamped.header = table.pose_cov_stamped.header
           self.table_poses[table.name] = pose_stamped 
           
-          self.table_init = True
+        self.table_init = True
 
     def process_alvar_markers(self,msg):
 
