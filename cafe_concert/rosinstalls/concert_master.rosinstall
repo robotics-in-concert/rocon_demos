@@ -6,7 +6,7 @@
 - git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
     version: hydro-devel}
 - git: {local-name: concert_scheduling, uri: 'https://github.com/robotics-in-concert/concert_scheduling.git',
-    version: hydro-devel}
+    version: master}
 - git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
     version: hydro-devel}
 - git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
