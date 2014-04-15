@@ -1,4 +1,3 @@
-
 (function($,Edge,compId){var Composition=Edge.Composition,Symbol=Edge.Symbol;
 //Edge symbol: 'stage'
 (function(symbolName){Symbol.bindTriggerAction(compId,symbolName,"Default Timeline",0,function(sym,e){sym.stop();});
@@ -74,7 +73,7 @@ function interationLoaded()
   sym.setVariable("masterURI", rocon_interactions.rosbridge_uri);
   sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:20140328");
 
-  var table_id = rocon_interactions.parameters['tableid']; 
+  var table_id = rocon_interactions.parameters['extra_data']; 
   sym.setVariable('tableID', table_id);
   sym.$("_01").html(table_id);
 
