@@ -1,17 +1,23 @@
 ## Rocon dependency
-# ros-hydro-unique-identifier
+# ros-hydro-unique-identifier ros-hydro-ar-track-alvar ros-hydro-bondpy ros-hydro-rocon
 
 - git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
     version: hydro-devel}
 - git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
     version: hydro-devel}
+- git: {local-name: concert_scheduling, uri: 'https://github.com/robotics-in-concert/concert_scheduling.git',
+    version: hydro-devel}
 - git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
     version: hydro-devel}
 - git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
     version: hydro-devel}
-- git: {local-name: rocon_rqt_plugins, uri: 'https://github.com/robotics-in-concert/rocon_rqt_plugins.git',
+- git: {local-name: rocon_qt_gui, uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git',
     version: hydro-devel}
-- git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
-    version: hydro-devel}
+- git: {local-name: cafe_concert, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
+    version: cafe_concert}
 - git: {local-name: rocon_tutorials, uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git',
+    version: hydro-devel}
+- git: {local-name: rocon_demo_msgs, uri: 'https://github.com/robotics-in-concert/rocon_demo_msgs.git',
+    version: hydro-devel}
+- git: {local-name: yocs_msgs, uri: 'https://github.com/yujinrobot/yocs_msgs.git',
     version: hydro-devel}
