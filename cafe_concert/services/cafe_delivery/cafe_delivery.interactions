@@ -16,7 +16,7 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    tableid: 1
+    extra_data: 1
   remappings:
     - remap_from: send_order
       remap_to: /cafe/send_order
