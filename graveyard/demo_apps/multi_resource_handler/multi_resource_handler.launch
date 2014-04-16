@@ -1,3 +1,0 @@
-<launch>
-    <node pkg="multi_resource_handler" type="multi_resource_handler.py" name="mrh"/>
-</launch>

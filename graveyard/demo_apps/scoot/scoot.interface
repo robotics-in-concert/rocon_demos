@@ -1,5 +1,0 @@
-publishers:
-  - result
-subscribers:
-  - command
-services: []

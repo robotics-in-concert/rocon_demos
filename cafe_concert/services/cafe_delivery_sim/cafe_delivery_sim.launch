@@ -1,9 +1,0 @@
-<launch>
-  <node pkg="concert_service_link_graph" name="cafe_delivery" type="static_link_graph_service.py">
-    <param name="filename" value="$(find cafe_concert)/services/cafe_delivery_sim/cafe_delivery_sim.link_graph"/>
-    <!--<param name="map_id" value="8e49c0c6-46b2-4ecb-be14-5864b3ba22a7"/>-->
-    <!--<param name="map_id" value="34d253c0-8090-4129-a7e9-56a225c782a3"/>-->
-  </node>
-  <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
-  </node>
-</launch>

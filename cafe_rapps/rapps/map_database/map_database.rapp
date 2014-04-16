@@ -1,6 +1,0 @@
-display:      Map Annotation
-description:  Add semantic information to a metric map.
-compatibility: rocon:/pc
-launch:       cafe_rapps/map_database.launch
-public_interface:    cafe_rapps/map_database.interface
-icon:         cafe_rapps/map_annotation_icon.png
