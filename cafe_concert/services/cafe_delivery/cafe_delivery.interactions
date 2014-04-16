@@ -37,6 +37,8 @@
       remap_to: /annotation/ar_markers
     - remap_from: list_order
       remap_to: /cafe/list_order
+    - remap_from: list_remote_order
+      remap_to: /cafe/remote_order_list
 - name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
