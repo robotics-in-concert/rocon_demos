@@ -1,5 +1,0 @@
-display: Waiter Sim
-description: The simulated waiter navigate around the cafe to serve beverages. 
-compatibility: rocon:/pc
-launch: cafe_rapps/waiter_sim.launch
-parent_name: cafe_rapps/waiter

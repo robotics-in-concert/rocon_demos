@@ -1,6 +1,0 @@
-<launch>
-    <node pkg="rocon_kitchen" type="kitchen.py" name="kitchen">
-        <remap from="order" to="/kitchen/order"/>
-    </node>
-    <node pkg="multi_resource_handler" type="multi_turtlebot_handler.py" name="mrh"/>
-</launch>

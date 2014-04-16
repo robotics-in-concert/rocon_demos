@@ -1,5 +1,0 @@
-<launch>
-  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
-  <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
-  </node>
-</launch>

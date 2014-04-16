@@ -1,7 +1,0 @@
-<launch>
-  <!-- <env name="ROS_MASTER_URI" value="http://localhost:11313"/> -->
-  <env name="ROS_HOSTNAME" value="bach"/> 
-  <include file="$(find turtle_cafe_concert)/launch/includes/_turtlebot.launch">
-    <arg name="turtle_name" value="bach" />
-  </include>
-</launch>
