@@ -28,7 +28,7 @@ https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/cafe_concert/c
 ### Test with rocon_remocon
 
 <pre>
- > ./rocon_remocon
+ > rocon_remocon
 </pre>
 
 #### Cafe Viewer
