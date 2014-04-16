@@ -13,7 +13,11 @@ var STATUS_STRING = ['IDLE',
 var order_pub_topic = rocon_interactions.remappings['list_order'] || 'list_order';
 var order_pub_topic_type = "/cafe_msgs/OrderList";
 
+var remote_order_pub_topic = rocon_interactions.remappings['list_remote_order'] || 'list_remote_order';
+var remote_order_pub_topic_type = "/cafe_msgs/RemoteOrderList";
+
 var nav_div;
+var remote_nav_div;
 
 function processOrderList(msg) {
 
@@ -45,3 +49,30 @@ function createOrderLi(order) {
                                                                                                                                                               
   return li;
 }
+
+function processRemoteOrderList(msg) {
+	var i;
+	console.log("Call processRemoteOrderList");
+	remote_nav_div.empty();
+	for(i in msg.remote_orders) {
+		var navli = createRemoteOrderLi(msg.remote_orders[i]); 
+		remote_nav_div.append(navli);
+	}
+}
+
+function createRemoteOrderLi(order){
+	order.order_id = "Remote";
+	order.table_id = "remote order";
+   var li = document.createElement('li');
+   var p = document.createElement('p');
+   p.innerHTML = "<b>Name: </b>" + order.name +
+	   				"<br/><b>Order Time: </b>" + order.time + 
+			       "<br/><b>Estimated Time: </b>" + order.estimated_arrival+" min." +  
+			       "<br/><b>Status : </b>" + STATUS_STRING[order.status];
+   li.appendChild(p);
+   $(li).hover(
+        function() { this.style.background= "gray"; },
+        function() { this.style.background= "";     }
+    );
+    return li;
+  }
