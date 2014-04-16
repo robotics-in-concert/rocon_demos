@@ -3,7 +3,7 @@
 
 ## Preparation
 
-- install
+#### install
 
 <pre>
 > sudo apt-get install ros-hydro-turtlebot ros-hydro-rocon ros-hydro-unique-identifier ros-hydro-bondpy ros-hydro-ar-track-alvar ros-hydro-kobuki-soft
@@ -17,9 +17,10 @@ https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/cafe_concert/c
 
 - Compile it
 
-- Starts up Concert Master
+- Starts up Cafe simulation
 
 <pre>
 > rocon_launch cafe_concert cafe_sim.concert --screen
 </pre>
+
 
