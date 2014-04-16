@@ -10,6 +10,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>concert_service_link_graph</run_depend>
+  <run_depend>kobuki_soft</run_depend>
 
   <export>
     <concert_service>services/cafe_delivery/cafe_delivery.service</concert_service>
