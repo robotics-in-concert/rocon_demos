@@ -29,7 +29,7 @@
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
     robot1: elgar
-    robot2: chopin
+    robot2: zach 
   remappings:
     - remap_from: tables
       remap_to: /annotation/tables
