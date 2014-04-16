@@ -48,3 +48,5 @@
   remappings:
     - remap_from: list_order
       remap_to: /cafe/list_order
+    - remap_from: list_remote_order
+      remap_to: /cafe/remote_order_list
