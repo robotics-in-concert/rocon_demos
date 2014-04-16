@@ -44,6 +44,6 @@ https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/cafe_concert/c
 * Customer -> Cafe Dorothy Delivery Order
 
  
-![](imgs/remocon.png)  ![](imgs/deliveryorerapp.png) ![](imgs/viewer.png)
+![](imgs/remocon.png)  ![](imgs/deliveryorerapp.png) ![](imgs/viewer.png) ![](imgs/kitchen.png)
 
 
