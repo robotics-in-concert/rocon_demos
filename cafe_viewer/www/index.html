@@ -53,6 +53,7 @@
         initViewer()
         
         nav_div= $('#nav-orders');
+        remote_nav_div =$('#remote-nav-orders'); 
         
         var nw = $('#nav-wrapper');
         nw.css('margin-top','20pt');
@@ -207,6 +208,14 @@
             messageType: order_pub_topic_type
             });
           listener.subscribe(processOrderList);
+          
+          var remote_listener = new ROSLIB.Topic({
+              ros : ros,
+              name : remote_order_pub_topic,
+              messageType: remote_order_pub_topic_type
+              });
+          remote_listener.subscribe(processRemoteOrderList);
+          
         }
         );
         ros.on('error',function(e) {
@@ -249,7 +258,16 @@
             <h3> Orders </h3>
             </center>
             <hr/>
-            <ul id="nav-orders" class"nav nav-list">
+            <ul id="nav-orders">
+            </ul>
+          </div><!-- well -->
+          
+          <div class="well sidebar-nav" id="nav-wrapper">
+            <center>
+            <h3> Remote Orders </h3>
+            </center>
+            <hr/>
+            <ul id="remote-nav-orders">
             </ul>
           </div><!-- well -->
         </div>
