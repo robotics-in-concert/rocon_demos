@@ -1,6 +1,6 @@
 <launch>
-  <arg name="map_file" default="$(find cafe_concert)/maps/dorothy_cafe_new.yaml"/>
-  <arg name="annotation_file" default="$(find cafe_concert)/annotations/dorothy.yaml"/>
+  <arg name="map_file" default="$(find cafe_concert)/maps/controlroom.yaml"/>
+  <arg name="annotation_file" default="$(find cafe_concert)/annotations/controlroom.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
        relative to which show the map on screnn (logically we use /map) -->
