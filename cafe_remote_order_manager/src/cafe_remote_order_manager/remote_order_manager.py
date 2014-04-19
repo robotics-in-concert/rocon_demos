@@ -32,8 +32,9 @@ class RemoteOrderManager(object):
             self.logwarn('order from [%s] is in preparation already. Dropping the new order..'%msg.name)
             return
         self.lock.acquire()
-        self.orders[msg.name] = msg
-        self.orders[msg.name].status = cafe_msgs.RemoteOrderStatus.ORDER_RECEIVED
+        msg.status = cafe_msgs.RemoteOrderStatus.ORDER_RECEIVED 
+        time = rospy.Time.now()
+        self.orders[msg.name] = (msg, time) 
         self.update()
         self.loginfo('Order from [%s] has been placed'%msg.name)
         self.publisher['remote_order_status'].publish(self.orders[msg.name].status)
@@ -46,9 +47,11 @@ class RemoteOrderManager(object):
             return
             
         self.lock.acquire()
-        self.orders[msg.name].status = msg.status
-        self.orders[msg.name].estimated_arrival = msg.estimated_arrival
-        self.publisher['remote_order_status'].publish(self.orders[msg.name].status)
+        (order, time) = self.orders[msg.name]
+        order.status = msg.status
+        order.estimated_arrival = msg.estimated_arrival
+        self.orders[msg.name] = (order, time)
+        self.publisher['remote_order_status'].publish(order.status)
 
         if msg.status == cafe_msgs.RemoteOrderStatus.ORDER_PICKED_UP:
             del self.orders[msg.name]
@@ -58,13 +61,23 @@ class RemoteOrderManager(object):
         self.lock.release()
     
     def update(self):
-        order_list = self.orders.values()
+        order_list = [order for order, time in self.orders.values()]
         self.publisher['remote_order_list'].publish(order_list)
 
     def spin(self):
         # Publishes the empty latch topic
         self.publisher['remote_order_list'].publish(cafe_msgs.RemoteOrderList())
-        rospy.spin()
+
+        six_min = rospy.Duration(60 * 6)
+        while not rospy.is_shutdown():
+            
+            outdated_order = [ order for order, time in self.orders.values() if ((time + six_min) < rospy.Time.now())]
+
+            for o in outdated_order:
+                del self.orders[o.name]
+
+            rospy.sleep(30)
+
 
     def loginfo(self, msg):
         rospy.loginfo('Remote Order Manager : ' + str(msg))
