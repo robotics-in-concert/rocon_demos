@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>cafe_devices_manager</name>
+  <version>0.1.0</version>
+  <description>The cafe_devices_manager package</description>
+  <maintainer email="dwlee@yujinrobot.com">dwlee</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>cafe_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>cafe_msgs</run_depend>
+  <run_depend>rocon_device_msgs</run_depend>
+  <run_depend>rocon_hue</run_depend>
+  <run_depend>rospy</run_depend>
+
+
+
+  <export>
+  </export>
+</package>
