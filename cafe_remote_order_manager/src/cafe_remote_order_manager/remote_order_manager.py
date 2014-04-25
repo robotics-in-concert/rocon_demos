@@ -37,7 +37,7 @@ class RemoteOrderManager(object):
         self.orders[msg.name] = (msg, time) 
         self.update()
         self.loginfo('Order from [%s] has been placed'%msg.name)
-        self.publisher['remote_order_status'].publish(self.orders[msg.name].status)
+        self.publisher['remote_order_status'].publish(self.orders[msg.name][0].status)
         self.lock.release()
 
     def process_remote_order_update(self, msg):
@@ -70,14 +70,14 @@ class RemoteOrderManager(object):
 
         six_min = rospy.Duration(60 * 6)
         while not rospy.is_shutdown():
-            
             outdated_order = [ order for order, time in self.orders.values() if ((time + six_min) < rospy.Time.now())]
 
             for o in outdated_order:
+                rospy.loginfo('Remote Order Manager : outdated order' + str(o.name))
                 del self.orders[o.name]
+                self.update()
 
             rospy.sleep(30)
-
 
     def loginfo(self, msg):
         rospy.loginfo('Remote Order Manager : ' + str(msg))
