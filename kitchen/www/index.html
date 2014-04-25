@@ -45,14 +45,21 @@
     var ros = new ROSLIB.Ros();
     var order_pub_topic_type = "/cafe_msgs/OrderList";
     var remote_order_pub_topic_type = "/cafe_msgs/RemoteOrderList";
+    var remote_order_update_pub_topic_type = "/cafe_msgs/RemoteOrderUpdate";
+    
     var defaultUrL = rocon_interactions.rosbridge_uri;
     var order_pub_topic = "list_order";
     var remote_order_pub_topic = "list_remote_order";
+    var remote_order_update_pub_topic = "remote_order_update";
+    
     if(order_pub_topic in rocon_interactions.remappings)
       order_pub_topic = rocon_interactions.remappings[order_pub_topic];
     
     if(remote_order_pub_topic in rocon_interactions.remappings)
       remote_order_pub_topic = rocon_interactions.remappings[remote_order_pub_topic];
+    
+    if(remote_order_update_pub_topic in rocon_interactions.remappings)
+    	remote_order_update_pub_topic = rocon_interactions.remappings[remote_order_update_pub_topic];
 
     var nav_div;
     var remote_nav_div;
@@ -111,6 +118,13 @@
             messageType: remote_order_pub_topic_type
             });
         remote_listener.subscribe(processRemoteOrderList);
+        
+        var remote_update_listener = new ROSLIB.Topic({
+            ros : ros,
+            name : remote_order_update_pub_topic,
+            messageType: remote_order_update_pub_topic_type
+            });
+        remote_update_listener.subscribe(processRemoteOrderUpdate);
 
         $('#connectbtn').attr('disabled',true);
         $('#focusedInput').attr('disabled',true);
@@ -127,6 +141,16 @@
         $('#focusedInput').attr('disabled',false);
       }
       );
+    }
+    function processRemoteOrderUpdate(msg){
+    	console.log(msg.status)
+    	console.log(msg.estimated_arrival)
+    	console.log(msg.name)
+    	
+    	$('.'+msg.name).innerHTML = "<b>Name: </b>" + msg.name +
+	       "<br/><b>Estimated Time: </b>" + msg.estimated_arrival+" min." +  
+	       "<br/><b>Status : </b>" + STATUS_STRING[msg.status];
+    	
     }
     
     function processRemoteOrderList(msg) {
@@ -161,8 +185,8 @@
     	order.table_id = "remote order";
        var li = document.createElement('li');
        var p = document.createElement('p');
+       p.className = order.name
        p.innerHTML = "<b>Name: </b>" + order.name +
-    	   				"<br/><b>Order Time: </b>" + order.time + 
 				       "<br/><b>Estimated Time: </b>" + order.estimated_arrival+" min." +  
 				       "<br/><b>Status : </b>" + STATUS_STRING[order.status];
        li.appendChild(p);
