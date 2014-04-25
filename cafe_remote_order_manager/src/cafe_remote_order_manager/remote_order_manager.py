@@ -68,7 +68,7 @@ class RemoteOrderManager(object):
         # Publishes the empty latch topic
         self.publisher['remote_order_list'].publish(cafe_msgs.RemoteOrderList())
 
-        six_min = rospy.Duration(60 * 6)
+        six_min = rospy.Duration(60 * 2)
         while not rospy.is_shutdown():
             outdated_order = [ order for order, time in self.orders.values() if ((time + six_min) < rospy.Time.now())]
 
