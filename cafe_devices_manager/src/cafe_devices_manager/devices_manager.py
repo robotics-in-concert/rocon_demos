@@ -69,12 +69,9 @@ class DevicesManager():
 
     def update(self, data):
         on_ordering = []
-        on_waitting_kitchen = []
         for order in data.orders:
             if order.status is self.IDLE or order.status is self.GO_TO_KITCHEN:
                 on_ordering.append(order)
-            elif order.status is self.IN_DELIVERY:
-                on_waitting_kitchen.append(order)
 
         #set the kitchen hue
         if self.KITCHEN_BULB_ID in self.hues:
@@ -91,15 +88,6 @@ class DevicesManager():
                 self.hues[self.KITCHEN_BULB_ID].state.sat = int(float(self.MAX_SAT) / self.MAX_ORDER_NUM * on_ordering_num)
                 self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
             self.publisher['set_hue_hsv'].publish(self.hues[self.KITCHEN_BULB_ID])
-
-            on_waitting_kitchen_number = len(on_waitting_kitchen)
-            rospy.loginfo("kitchen waitting: %d" % on_waitting_kitchen_number)
-            if on_waitting_kitchen_number:
-                self.hues[self.KITCHEN_BULB_ID].state.mode = rocon_device_msgs.HueState().LSELECT
-                rospy.loginfo("kitchen waitting: %d" % on_waitting_kitchen_number)
-            else:
-                self.hues[self.KITCHEN_BULB_ID].state.mode = rocon_device_msgs.HueState().NONE
-            self.publisher['set_hue_mode'].publish(self.hues[self.KITCHEN_BULB_ID])
 
     def spin(self):
         while not rospy.is_shutdown():
