@@ -39,6 +39,8 @@
       remap_to: /cafe/list_order
     - remap_from: list_remote_order
       remap_to: /cafe/remote_order_list
+    - remap_from: remote_order_update
+      remap_to: /cafe/remote_order_update
 - name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
@@ -52,3 +54,5 @@
       remap_to: /cafe/list_order
     - remap_from: list_remote_order
       remap_to: /cafe/remote_order_list
+    - remap_from: remote_order_update
+      remap_to: /cafe/remote_order_update
