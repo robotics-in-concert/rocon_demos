@@ -20,11 +20,7 @@
   remappings:
     - remap_from: send_order
       remap_to: /cafe/send_order
-- name: 'http:// function processRemoteOrderUpdate(msg){
-    	$('.'+msg.name).innerHTML = "<b>Name: </b>" + msg.name +
-	       "<br/><b>Estimated Time: </b>" + msg.estimated_arrival+" min." +  
-	       "<br/><b>Status : </b>" + STATUS_STRING[msg.status];
-    }/rocon/cafe_concert/cafe_viewer/www/index.html'
+- name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/cafe_viewer/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Monitor
