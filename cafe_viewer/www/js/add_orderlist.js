@@ -16,6 +16,9 @@ var order_pub_topic_type = "/cafe_msgs/OrderList";
 var remote_order_pub_topic = rocon_interactions.remappings['list_remote_order'] || 'list_remote_order';
 var remote_order_pub_topic_type = "/cafe_msgs/RemoteOrderList";
 
+var remote_order_pub_topic = rocon_interactions.remappings['remote_order_update'] || 'remote_order_update';
+var remote_order_pub_topic_type = "/cafe_msgs/RemoteOrderUpdate";
+
 var nav_div;
 var remote_nav_div;
 
@@ -50,6 +53,12 @@ function createOrderLi(order) {
   return li;
 }
 
+function processRemoteOrderUpdate(msg){
+	$('.'+msg.name).innerHTML = "<b>Name: </b>" + msg.name +
+       "<br/><b>Estimated Time: </b>" + msg.estimated_arrival+" min." +  
+       "<br/><b>Status : </b>" + STATUS_STRING[msg.status];
+}
+
 function processRemoteOrderList(msg) {
 	var i;
 	console.log("Call processRemoteOrderList");
@@ -66,7 +75,6 @@ function createRemoteOrderLi(order){
    var li = document.createElement('li');
    var p = document.createElement('p');
    p.innerHTML = "<b>Name: </b>" + order.name +
-	   				"<br/><b>Order Time: </b>" + order.time + 
 			       "<br/><b>Estimated Time: </b>" + order.estimated_arrival+" min." +  
 			       "<br/><b>Status : </b>" + STATUS_STRING[order.status];
    li.appendChild(p);

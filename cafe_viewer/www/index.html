@@ -216,6 +216,13 @@
               });
           remote_listener.subscribe(processRemoteOrderList);
           
+          var remote_update_listener = new ROSLIB.Topic({
+              ros : ros,
+              name : remote_order_update_pub_topic,
+              messageType: remote_order_update_pub_topic_type
+              });
+          remote_update_listener.subscribe(processRemoteOrderUpdate);
+          
         }
         );
         ros.on('error',function(e) {
