@@ -6,7 +6,7 @@
   max: -1
   icon:
     resource_name: rocon_icons/google.png
-- name: 'http://192.168.10.128/rocon/cafe_concert/webapp/cafe_Dorothy/dorothy_web_menu.html'
+- name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/webapp/cafe_Dorothy/dorothy_web_menu.html'
   role: 'Customer'
   compatibility: rocon:/pc
   display_name: Cafe Dorothy Delivery Order
@@ -20,7 +20,11 @@
   remappings:
     - remap_from: send_order
       remap_to: /cafe/send_order
-- name: 'http://192.168.10.128/rocon/cafe_concert/cafe_viewer/www/index.html'
+- name: 'http:// function processRemoteOrderUpdate(msg){
+    	$('.'+msg.name).innerHTML = "<b>Name: </b>" + msg.name +
+	       "<br/><b>Estimated Time: </b>" + msg.estimated_arrival+" min." +  
+	       "<br/><b>Status : </b>" + STATUS_STRING[msg.status];
+    }/rocon/cafe_concert/cafe_viewer/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Monitor
@@ -41,7 +45,7 @@
       remap_to: /cafe/remote_order_list
     - remap_from: remote_order_update
       remap_to: /cafe/remote_order_update
-- name: 'http://192.168.10.128/rocon/cafe_concert/kitchen/www/index.html'
+- name: 'http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html'
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Kitchen 
