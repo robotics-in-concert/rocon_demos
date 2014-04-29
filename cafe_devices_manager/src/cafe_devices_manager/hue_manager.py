@@ -60,7 +60,6 @@ class HueManager():
                 self.publisher['set_hue_hsv'].publish(hue)
             return
         elif not len(data.hue_list):
-            rospy.loginfo("NO Hue...")
             self.hues_init = False
             self.hues = {}
             return
@@ -76,7 +75,6 @@ class HueManager():
         #set the kitchen hue
         if self.KITCHEN_BULB_ID in self.hues:
             on_ordering_num = len(on_ordering)
-            rospy.loginfo("order number: %d" % on_ordering_num)
             if on_ordering_num > self.MAX_ORDER_NUM:
                 on_ordering_num = self.MAX_ORDER_NUM
 

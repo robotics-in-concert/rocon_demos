@@ -1,8 +1,14 @@
 <launch>
   <arg name="list_order" default="list_order"/>
+  <arg name="table_id" default="1"/>
+  
   <node name="rocon_hue_bridge" pkg="rocon_hue" type="rocon_hue_bridge.py">
   </node>
   <node name="hue_manager" pkg="cafe_devices_manager" type="hue_manager.py">
     <remap from="list_order" to="$(arg list_order)"/>
+  </node>
+  <node name="auto_door_manager" pkg="cafe_devices_manager" type="auto_door_manager.py">
+    <remap from="list_order" to="$(arg list_order)"/>
+    <param name="table_id" value="$(arg table_id)" />
   </node>
 </launch>
