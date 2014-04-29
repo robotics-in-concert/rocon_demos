@@ -1,6 +1,8 @@
 <launch>
+  <arg name="list_order" default="list_order"/>
   <node name="rocon_hue_bridge" pkg="rocon_hue" type="rocon_hue_bridge.py">
   </node>
-  <node name="devices_manager" pkg="cafe_devices_manager" type="devices_manager">
+  <node name="hue_manager" pkg="cafe_devices_manager" type="hue_manager.py">
+    <remap from="list_order" to="$(arg list_order)"/>
   </node>
 </launch>
