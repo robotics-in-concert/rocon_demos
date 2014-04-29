@@ -9,7 +9,7 @@ import cafe_msgs.msg as cafe_msgs
 import rocon_device_msgs.msg as rocon_device_msgs
 
 
-class DevicesManager():
+class HueManager():
     #common
     MAX_ORDER_NUM = 3
     #bulbid
@@ -43,11 +43,11 @@ class DevicesManager():
         self.publisher = {}
         self.hues = {}
         self.hues_init = False
-        self.subscriber['list_order'] = rospy.Subscriber('/cafe/list_order', cafe_msgs.OrderList, self.update)
-        self.subscriber['hue_order'] = rospy.Subscriber('/hue_list', rocon_device_msgs.HueArray, self.hue_update)
+        self.subscriber['list_order'] = rospy.Subscriber('list_order', cafe_msgs.OrderList, self.update)
+        self.subscriber['hue_order'] = rospy.Subscriber('hue_list', rocon_device_msgs.HueArray, self.hue_update)
 
-        self.publisher['set_hue_hsv'] = rospy.Publisher('/set_hue_color_hsv', rocon_device_msgs.Hue)
-        self.publisher['set_hue_mode'] = rospy.Publisher('/set_hue_color_mode', rocon_device_msgs.Hue)
+        self.publisher['set_hue_hsv'] = rospy.Publisher('set_hue_color_hsv', rocon_device_msgs.Hue)
+        self.publisher['set_hue_mode'] = rospy.Publisher('set_hue_color_mode', rocon_device_msgs.Hue)
         pass
 
     def hue_update(self, data):
@@ -81,6 +81,7 @@ class DevicesManager():
                 on_ordering_num = self.MAX_ORDER_NUM
 
             if on_ordering_num:
+                self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_BLUE
                 self.hues[self.KITCHEN_BULB_ID].state.sat = int(float(self.MAX_SAT) / self.MAX_ORDER_NUM * on_ordering_num)
                 self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
             else:

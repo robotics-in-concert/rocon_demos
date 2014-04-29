@@ -10,5 +10,5 @@ import cafe_devices_manager
 if __name__ == '__main__':
 
     rospy.init_node('cafe_remote_order_manager')
-    manager = cafe_devices_manager.DevicesManager()
+    manager = cafe_devices_manager.HueManager()
     manager.spin()
