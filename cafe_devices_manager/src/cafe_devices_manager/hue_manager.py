@@ -11,7 +11,7 @@ import rocon_device_msgs.msg as rocon_device_msgs
 
 class HueManager():
     #common
-    MAX_ORDER_NUM = 3
+    MAX_ORDER_NUM = 2
     #bulbid
     TABLE_BULB_ID = 1
     KITCHEN_BULB_ID = 2
@@ -78,9 +78,17 @@ class HueManager():
             if on_ordering_num > self.MAX_ORDER_NUM:
                 on_ordering_num = self.MAX_ORDER_NUM
 
-            if on_ordering_num:
+            if on_ordering_num is 1:
+                self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_GREEN
+                self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
+                self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
+            elif on_ordering_num is 2:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_BLUE
-                self.hues[self.KITCHEN_BULB_ID].state.sat = int(float(self.MAX_SAT) / self.MAX_ORDER_NUM * on_ordering_num)
+                self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
+                self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
+            elif on_ordering_num is 3:
+                self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_RED
+                self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
                 self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
             else:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_BLUE
