@@ -6,6 +6,7 @@
 
 import rospy
 import cafe_msgs.msg as cafe_msgs
+import std_msgs.msg as std_msgs
 
 
 class AutoDoorManager():
@@ -28,28 +29,25 @@ class AutoDoorManager():
         self.door_status = False
         self.table_id = 1
         self.subscriber['list_order'] = rospy.Subscriber('list_order', cafe_msgs.OrderList, self.update)
+        self.publisher['door_ctrl'] = rospy.Publisher('door_ctrl', std_msgs.Bool)
 
     def set_table_id(self, table_id):
+        rospy.loginfo("Table ID: " + str(table_id))
         self.table_id = table_id
 
     def update(self, data):
         in_delivery = []
         for order in data.orders:
-            if order.status is self.IN_DELIVERY or order.status is self.RETURNING_TO_DOCK and order.table_id is self.table_id:
+            if (order.status is self.IN_DELIVERY or order.status is self.RETURNING_TO_DOCK) and order.table_id is self.table_id:
                 in_delivery.append(order)
 
         if len(in_delivery) and not self.door_status:
-            print "open the door"
-            """
-            publish the open msg
-            """
+            self.publisher['door_ctrl'].publish(std_msgs.Bool(True))
             self.door_status = True
+
         elif not len(in_delivery) and self.door_status:
-            print "close the door"
+            self.publisher['door_ctrl'].publish(std_msgs.Bool(False))
             self.door_status = False
-            """
-            publish the close msg
-            """
 
     def spin(self):
         """
