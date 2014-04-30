@@ -11,7 +11,7 @@ import rocon_device_msgs.msg as rocon_device_msgs
 
 class HueManager():
     #common
-    MAX_ORDER_NUM = 2
+    MAX_ORDER_NUM = 3
     #bulbid
     TABLE_BULB_ID = 1
     KITCHEN_BULB_ID = 2
@@ -31,7 +31,7 @@ class HueManager():
     ERROR = 10
 
     #color
-    COLOR_H_RED = 0
+    COLOR_H_RED = 65534
     COLOR_H_GREEN = 25500
     COLOR_H_BLUE = 46920
     MAX_SAT = 255
@@ -81,19 +81,20 @@ class HueManager():
             if on_ordering_num is 1:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_GREEN
                 self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
-                self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
+                self.hues[self.KITCHEN_BULB_ID].state.bri = self.MAX_BRI
             elif on_ordering_num is 2:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_BLUE
                 self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
-                self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
-            elif on_ordering_num is 3:
+                self.hues[self.KITCHEN_BULB_ID].state.bri = self.MAX_BRI
+            elif on_ordering_num > 2:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_RED
                 self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
-                self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
+                self.hues[self.KITCHEN_BULB_ID].state.bri = self.MAX_BRI
+               
             else:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_BLUE
-                self.hues[self.KITCHEN_BULB_ID].state.sat = int(float(self.MAX_SAT) / self.MAX_ORDER_NUM * on_ordering_num)
-                self.hues[self.KITCHEN_BULB_ID].state.bri = int(float(self.MAX_BRI) / self.MAX_ORDER_NUM * on_ordering_num)
+                self.hues[self.KITCHEN_BULB_ID].state.sat = 0
+                self.hues[self.KITCHEN_BULB_ID].state.bri = 0
             self.publisher['set_hue_hsv'].publish(self.hues[self.KITCHEN_BULB_ID])
 
     def spin(self):
