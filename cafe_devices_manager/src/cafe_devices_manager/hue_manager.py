@@ -52,7 +52,7 @@ class HueManager():
 
     def hue_update(self, data):
         if not self.hues_init and len(data.hue_list):
-            rospy.loginfo("Yes Hue...")
+            self.loginfo("Yes Hue...")
             self.hues_init = True
             for hue in data.hue_list:
                 hue.state.sat = 0
@@ -96,6 +96,10 @@ class HueManager():
                 self.hues[self.KITCHEN_BULB_ID].state.sat = 0
                 self.hues[self.KITCHEN_BULB_ID].state.bri = 0
             self.publisher['set_hue_hsv'].publish(self.hues[self.KITCHEN_BULB_ID])
+
+    def loginfo(self, msg):
+        rospy.loginfo('Hue Manager : ' + str(msg))
+
 
     def spin(self):
         while not rospy.is_shutdown():
