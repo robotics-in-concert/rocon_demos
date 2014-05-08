@@ -6,6 +6,6 @@
         <arg name="concert_whitelist" value="$(optenv HUB_WHITELIST Cafe Concert)"/>
         <arg name="robot_type" value="pc"/>
         <arg name="rapp_package_whitelist" value="[rocon_apps, cafe_rapps]"/>
-        <arg name="gateway_watch_loop_period" value="1"/>
+        <arg name="concert_watch_period" value="1"/>
     </include>
 </launch>
