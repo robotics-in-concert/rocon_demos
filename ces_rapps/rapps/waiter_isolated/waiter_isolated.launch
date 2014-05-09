@@ -1,9 +1,10 @@
+<launch>
 <!-- 
   Waiterbot Isolated version!
 
   To start waiterbot. 
 
-  > roslaunch waiterbot_bringup minimal_with_appmanager.launch --screen
+  > roslaunch waiterbot_bringup minimal_with_appmanager.launch 
 
   rapp_list = ces_rapps/ces.rapps
 
@@ -11,8 +12,7 @@
   - 3dsensor
   - colour detector
 
-  -->
-<launch>
+-->
 
   <include file="$(find waiterbot_state_manager)/launch/state_manager.launch"/>
 

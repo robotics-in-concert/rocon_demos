@@ -16,12 +16,10 @@
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>waiterbot_ctrl_nowireless</run_depend>
   <export>
-  <!--
-    <rocon_app>rapps/android_make_a_map/android_make_a_map.rapp</rocon_app>
+  <!--  <rocon_app>rapps/android_make_a_map/android_make_a_map.rapp</rocon_app>
     <rocon_app>rapps/android_map_manager/android_map_manager.rapp</rocon_app>
-    <rocon_app>rapps/dummy_waiter/dummy_waiter.rapp</rocon_app>
+    <rocon_app>rapps/dummy_waiter/dummy_waiter.rapp</rocon_app>-->
     <rocon_app>rapps/waiter_isolated/waiter_isolated.rapp</rocon_app>
-    -->
   </export>
 
 </package>
