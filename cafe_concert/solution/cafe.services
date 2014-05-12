@@ -8,3 +8,4 @@
 - resource_name: concert_service_teleop/teleop
   overrides:
     priority: 3
+#- resource_name: cafe_concert/vm_delivery

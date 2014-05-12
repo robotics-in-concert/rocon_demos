@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="concert_service_link_graph" name="cafe_delivery" type="static_link_graph_service.py">
+    <param name="filename" value="$(find cafe_concert)/services/vm_delivery/vm_delivery.link_graph"/>
+  </node>
+</launch>

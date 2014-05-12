@@ -1,5 +1,5 @@
 <launch>
-  <arg name="is_sim" default="$(optenv IS_SIM true)"/>
+  <arg name="is_sim" default="$(optenv IS_SIM false)"/>
   <arg name="annotation_file" default="$(find cafe_concert)/annotations/dorothy.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
 

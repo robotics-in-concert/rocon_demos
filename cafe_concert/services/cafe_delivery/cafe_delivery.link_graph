@@ -8,6 +8,8 @@ nodes:
     uri: rocon:/pc#cafe_rapps/taskcoordinator
   - id: waiterbot
     uri: rocon:/waiterbot#cafe_rapps/waiter
+    min: 1
+    max: 2
 topics:
 ################# Map Database
   - id: annotation_columns
@@ -58,14 +60,19 @@ edges:
     remap_to: /annotation/ar_markers
 
 ## Task Coordinator
-# - start: taskcoordinator_waiterbot_delivery_order
-#   finish: cafe_taskcoordinator
-#   remap_from: waiter_1/delivery_order
-#   remap_to: /kobuki/delivery_order
   - start: taskcoordinator_waiterbot_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_1/delivery_order
-    remap_to: /elgar/delivery_order
+    remap_to: /adams/delivery_order
+#  - start: taskcoordinator_waiterbot_delivery_order
+#    finish: cafe_taskcoordinator
+#    remap_from: waiter_2/delivery_order
+#    remap_to: /elgar/delivery_order
+  - start: taskcoordinator_waiterbot_delivery_order
+    finish: cafe_taskcoordinator
+    remap_from: waiter_3/delivery_order
+    remap_to: /zach/delivery_order
+
 # - start: taskcoordinator_waiterbot_delivery_order
 #   finish: cafe_taskcoordinator
 #   remap_from: waiter_3/delivery_order

@@ -1,5 +1,5 @@
 <launch>
-  <arg name="map_file" default="$(find cafe_concert)/maps/cm_new.yaml"/>
+  <arg name="map_file" default="$(find cafe_concert)/maps/croom.yaml"/>
   <arg name="annotation_file" default="$(find cafe_concert)/annotations/controlroom.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
