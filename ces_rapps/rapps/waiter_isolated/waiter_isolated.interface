@@ -1,5 +1,9 @@
 publishers:
-  - drink_order_feedback
+  - drink_ar 
+  - drinks_dispensed
+  - tray_empty
+  - waiterbot_debug
+  - order_cancelled
 subscribers: 
-  - drink_order
+  - drink_order 
 services: []

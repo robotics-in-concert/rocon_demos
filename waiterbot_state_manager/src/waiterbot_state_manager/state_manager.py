@@ -299,7 +299,7 @@ class StateManager(object):
             else:
                 rospy.logerror("State Manager: State not valid! Exiting ...")
                 return
-            self._publishCurrentState()
+            #self._publishCurrentState()
             rospy.sleep(0.5)
 
     '''
