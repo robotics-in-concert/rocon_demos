@@ -8,4 +8,4 @@ author: Jihoon
 priority: 2
 launcher_type: roslaunch
 launcher: cafe_concert/vm_delivery
-#interactions: cafe_concert/vm_delivery
+interactions: cafe_concert/vm_delivery

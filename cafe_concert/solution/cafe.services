@@ -1,11 +1,15 @@
 - resource_name: concert_service_admin/admin
-- resource_name: cafe_concert/cafe_delivery
-  overrides:
-    priority: 1
-- resource_name: cafe_concert/cafe_database
-  overrides:
-    priority: 1
+#- resource_name: cafe_concert/cafe_delivery
+#  overrides:
+#    priority: 1
+#- resource_name: cafe_concert/cafe_database
+#  overrides:
+#    priority: 1
 - resource_name: concert_service_teleop/teleop
   overrides:
     priority: 3
-#- resource_name: cafe_concert/vm_delivery
+    interactions: cafe_concert/teleop
+    parameters: cafe_concert/teleop
+- resource_name: cafe_concert/vm_delivery
+  overrides:
+    priority: 1

@@ -1,0 +1,32 @@
+- name: com.github.robotics_in_concert.rocon_demo.waiterbot_order_app.CesDemoOrderApp 
+  compatibility: rocon:/*/*/hydro/jellybean|ice_cream_sandwich|kitkat
+  role: 'Customer'
+  display_name: Vending Machine Orderer 
+  description: Interacts with Vending machine 
+  max: 1
+  remappings:
+    - remap_from: drink_order
+      remap_to: /vm_order/drink_order
+    - remap_from: drink_ar
+      remap_to: /vm_order/drink_ar 
+    - remap_from: drinks_dispensed
+      remap_to: /vm_order/drinks_dispensed
+    - remap_from: waiterbot_debug
+      remap_to: /vm_order/waiterbot_debug
+    - remap_from: tray_empty
+      remap_to: /vm_order/tray_empty
+    - remap_from: order_cancelled
+      remap_to: /vm_order/order_cancelled
+  icon:
+    resource_name: rocon_icons/map_annotation_icon.png 
+
+# A true interaction pair
+- name: com.github.rosjava.android_remocons.listener.Listener
+  role: Android Pairing
+  compatibility: rocon:/*/*/hydro|indigo/ice_cream_sandwich|jellybean
+  display_name: Pairing Listener
+  description: A android listener for testing pairing.
+  max: -1
+  remappings:
+    - remap_from: chatter
+      remap_to: /conversation/chatter

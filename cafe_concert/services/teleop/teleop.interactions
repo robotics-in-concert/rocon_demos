@@ -1,0 +1,8 @@
+- name: concert_teleop
+  role: 'Cafe Manager'
+  compatibility: rocon:/pc/*/hydro|indigo/*
+  display_name: Concert Teleop
+  description: Select and teleop a robot in the concert
+  max: -1
+  parameters:
+    capture_timeout: 45.0

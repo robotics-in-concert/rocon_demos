@@ -6,6 +6,42 @@ name: "VM Concert"
 nodes:
   - id: waiterbot
     uri: rocon:/waiterbot/whoola#ces_rapps/waiter_isolated
-topics: []
+topics: 
+  - id: order
+    type: std_msgs/UInt16MultiArray
+  - id: ar
+    type: std_msgs/UInt16
+  - id: dispensed
+    type: std_msgs/Empty
+  - id: empty
+    type: std_msgs/Empty
+  - id: debug
+    type: std_msgs/String
+  - id: cancelled
+    type: std_msgs/Empty
 actions: []
-edges: [] 
+edges:
+  - start: order
+    finish: waiterbot
+    remap_from: drink_order
+    remap_to: /vm_order/drink_order
+  - start: waiterbot 
+    finish: ar 
+    remap_from: drink_ar
+    remap_to: /vm_order/drink_ar
+  - start: waiterbot
+    finish: dispensed
+    remap_from: drinks_dispensed
+    remap_to: /vm_order/drinks_dispensed
+  - start: waiterbot
+    finish: empty
+    remap_from: tray_empty
+    remap_to: /vm_order/tray_empty
+  - start: waiterbot
+    finish: debug
+    remap_from: waiterbot_debug
+    remap_to: /vm_order/waiterbot_debug
+  - start: waiterbot
+    finish: cancelled
+    remap_from: order_cancelled
+    remap_to: /vm_order/order_cancelled
