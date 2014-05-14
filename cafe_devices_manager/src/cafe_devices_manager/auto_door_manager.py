@@ -38,7 +38,7 @@ class AutoDoorManager():
     def update(self, data):
         in_delivery = []
         for order in data.orders:
-            if (order.status is self.IN_DELIVERY or order.status is self.RETURNING_TO_DOCK) and order.table_id is self.table_id:
+            if (order.status >= self.IN_DELIVERY and  order.status <= self.RETURNING_TO_DOCK) and order.table_id is self.table_id:
                 in_delivery.append(order)
 
         if len(in_delivery) and not self.door_status:
