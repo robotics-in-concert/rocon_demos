@@ -16,8 +16,8 @@ var order_pub_topic_type = "/cafe_msgs/OrderList";
 var remote_order_pub_topic = rocon_interactions.remappings['list_remote_order'] || 'list_remote_order';
 var remote_order_pub_topic_type = "/cafe_msgs/RemoteOrderList";
 
-var remote_order_pub_topic = rocon_interactions.remappings['remote_order_update'] || 'remote_order_update';
-var remote_order_pub_topic_type = "/cafe_msgs/RemoteOrderUpdate";
+var remote_order_update_pub_topic = rocon_interactions.remappings['remote_order_update'] || 'remote_order_update';
+var remote_order_update_pub_topic_type = "/cafe_msgs/RemoteOrderUpdate";
 
 var nav_div;
 var remote_nav_div;
