@@ -1,4 +1,4 @@
-- name: web_url(http://www.google.com)
+#- name: web_url(http://www.google.com)
   role: 'Customer'
   compatibility: rocon:/pc
   display_name: 'Web Search'
@@ -6,7 +6,9 @@
   max: -1
   icon:
     resource_name: rocon_icons/google.png
+#- name: web_app(http://localhost/cafe_concert_webinterfaces/webapp/cafe_Dorothy/dorothy_web_menu.html)
 - name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/webapp/cafe_Dorothy/dorothy_web_menu.html)
+
   role: 'Customer'
   compatibility: rocon:/pc
   display_name: Cafe Dorothy Delivery Order
@@ -20,7 +22,8 @@
   remappings:
     - remap_from: send_order
       remap_to: /cafe/send_order
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/cafe_viewer/www/index.html)
+#- name: web_app(http://localhost/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
+- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Monitor
@@ -31,6 +34,8 @@
     robot1: adams
     robot2: zach 
   remappings:
+    - remap_from: map
+      remap_to: /viewer_map
     - remap_from: tables
       remap_to: /annotation/tables
     - remap_from: ar_markers
@@ -41,7 +46,8 @@
       remap_to: /cafe/remote_order_list
     - remap_from: remote_order_update
       remap_to: /cafe/remote_order_update
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html)
+#- name: web_app(http://localhost/cafe_concert_webinterfaces/kitchen/www/index.html)
+- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/kitchen/www/index.html)
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Kitchen 

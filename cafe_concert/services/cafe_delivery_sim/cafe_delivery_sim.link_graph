@@ -8,7 +8,7 @@ nodes:
     uri: rocon:/pc/cafe_backend#cafe_rapps/taskcoordinator
   - id: waiterbot
     uri: rocon:/pc/*#cafe_rapps/waiter
-    min: 1
+    min: 2
     max: 2
 topics:
 ################# Map Database
@@ -63,7 +63,7 @@ edges:
   - start: taskcoordinator_waiterbot_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_1/delivery_order
-    remap_to: /elgar/delivery_order
+    remap_to: /adams/delivery_order
   - start: taskcoordinator_waiterbot_delivery_order
     finish: cafe_taskcoordinator
     remap_from: waiter_2/delivery_order
