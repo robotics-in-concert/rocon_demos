@@ -64,12 +64,7 @@
         settingROSCallbacks();
 
         ros.connect(defaultUrL);
-
-        $('#connectbtn').on('click',function(e) {
-            var va = $('#focusedInput').val();
-            ros.connect(va);
-            return false;
-        });
+        $('#focusedInput').val(''+defaultUrL);
       }
 
       function initViewer() {
@@ -112,10 +107,11 @@
 
       function addMap(viewer) {
         var continuous = false;
+        var map_topic = rocon_interactions.remappings['map'] || 'map';
 
         gridClient = new ROS2D.OccupancyGridClient({
           ros : ros,
-          service : '/map',
+          topic : map_topic,
           rootObject : viewer.scene,
         });
 
@@ -155,31 +151,21 @@
             fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
             rootObject : viewer.scene
           });
-
-          /*
-          var robot3 = new ROS2D.Robot({
-            ros: ros,
-            map_origin : map_origin,
-            name       : 'waiterbot3',
-            size       : 20,
-            topicName  : 'waiterbot3/robot_pose',
-            topicType  : 'geometry_msgs/PoseStamped',
-            fillColor  : createjs.Graphics.getRGB(64,255,128,0.66),
-            rootObject : viewer.scene
-          });*/
         });
       }
 
       function addRegionViz(viewer,gridClient)
       {
         var table_topic = rocon_interactions.remappings['tables'] || 'tables';
+        var order_topic = rocon_interactions.remappings['list_order'] || 'list_order';
         var ar_marker_topic = rocon_interactions.remappings['ar_markers'] || 'ar_markers';
         gridClient.on('change', function(map_origin) {
           circle_region_poller = new REGIONVIZ.Circle({
             ros: ros,
             map_origin : map_origin,
             rootObject : viewer.scene,
-            topicName : table_topic 
+            tableTopicName : table_topic,
+            orderTopicName : order_topic
           });
 
           ar_region_poller = new REGIONVIZ.AlvarAR({
@@ -197,8 +183,8 @@
         ros.on('connection',function() {
           console.log("Connected");
           // subscribe to order list
-                                                     
-          $('#connectbtn').attr('disabled',true);
+                                                             
+          $('#focusedInput').val('Connected');
           $('#focusedInput').attr('disabled',true);
 
 
@@ -232,8 +218,7 @@
                                                      
         ros.on('close',function() {
           console.log("Connection Close!");
-          $('#connectbtn').attr('disabled',false);
-          $('#focusedInput').attr('disabled',false);
+          $('#focusedInput').val('Disconnected');
         }
         );
 
@@ -250,7 +235,6 @@
           <a class="brand" href="#" style="margin-top:6px">Cafe Viewer</a>
           <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
             <input class="input-large" id="focusedInput" type="text" value=""></input>
-            <button id="connectbtn" class="btn btn-primary btn-normal" data-loading-text="Connecting...">Connect</button>
           </p>
         </div>
       </div>
@@ -280,5 +264,10 @@
         </div>
       </div>
     </div>
+    <hr/>
+    <footer>
+      <img style="width:90px; height:25px;" src="img/yujin_logo.jpg"></img>
+      &copy 2014
+    </footer>
   </body>
 </html>

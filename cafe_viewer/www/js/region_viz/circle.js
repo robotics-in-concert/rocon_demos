@@ -12,11 +12,16 @@ REGIONVIZ.Circle = function(options) {
   that.rootObject = options.rootObject;
   var map_origin = options.map_origin;
   that.color = options.color || createjs.Graphics.getRGB(138,54,15,0.6);
-  that.topicName = options.topicName || '/table_pose_list';
-  that.topicType = options.topicType || '/yocs_msgs/TableList';
+  that.pulseColor = createjs.Graphics.getRGB(138,150,15,0.6);
+  that.waitColor = createjs.Graphics.getRGB(200,54,15,0.6);
+  that.tableTopicName = options.tableTopicName || '/table_pose_list';
+  that.tabletopicType = options.tableTopicType || '/yocs_msgs/TableList';
+  that.orderTopicName = options.orderTopicName || 'list_order';
+  that.orderTopicType = options.orderTopicType || '/cafe_msgs/OrderList';
   that.tables = [];
   that.circle_viz = {};
   that.texts = {};
+  that.is_initialized = false;
 
   var stage;
   if (that.rootObject instanceof createjs.Stage) {
@@ -24,12 +29,18 @@ REGIONVIZ.Circle = function(options) {
   } else {
     stage = that.rootObject.getStage();
   }
-
-
+  
+  that.sub_orders = new ROSLIB.Topic({
+    ros: that.ros,
+    name : that.orderTopicName,
+    messageType : that.orderTopicType
+  });
+  
+ 
   that.sub_table = new ROSLIB.Topic({
     ros: that.ros,
-    name : that.topicName,
-    messageType : that.topicType
+    name : that.tableTopicName,
+    messageType : that.tableTopicType
   });
 
   // assumes all tables' name are unique
@@ -59,7 +70,7 @@ REGIONVIZ.Circle = function(options) {
       var name = table.name;
 
       if(!(t in that.tables)) {
-        var circle = createCircle(x,y,r);
+        var circle = createCircle(x,y,r, name);
         var text = createText(x,y,name);
         that.circle_viz[name] = circle;
         that.texts[name] = text;
@@ -74,14 +85,80 @@ REGIONVIZ.Circle = function(options) {
       }
     }
     that.tables = msg.tables;
+    that.is_initialized = true;
+    console.log('Viewer : Annotations initialized');
+  });
+  
+  that.sub_orders.subscribe(function(msg) {
+    console.log(msg);
+    if(that.is_initialized == false) {
+      console.log('Viewer : Annotations are not initialized yet');
+      return;
+    }
+    
+    // determine whether tables should pulse or not
+    var pulse = {};
+    for(o in msg.orders) {
+      var order = msg.orders[o];
+      var circle_name = 'table' + order.table_id;
+      var circle = that.circle_viz[circle_name];
+      if(order.status == 0) {
+        pulse[circle_name] = 'on_wait';
+      }        
+      else if(order.status >= 1 && order.status <= 5) {
+         pulse[circle_name] = 'on_serve';
+      }  
+    }
+    
+    for(c in that.circle_viz) {
+      var circle = that.circle_viz[c];
+
+      if(c in pulse) {
+        if(pulse[c] == 'on_wait') {
+          circle.graphics.clear().beginFill(that.waitColor).drawCircle(0,0,circle.radius);
+        }
+        else if(pulse[c] == 'on_serve') {
+          circle.graphics.clear().beginFill(that.pulseColor).drawCircle(0,0,circle.radius);
+          circle.is_pulse = true;
+        }
+      }else {
+        circle.graphics.clear().beginFill(that.color).drawCircle(0,0,circle.radius);
+        circle.is_pulse = false;        
+      }
+    }
   });
 
 
-  var createCircle = function(x,y,radius) {
+
+  var createCircle = function(x,y,radius, name) {
     var circle = new createjs.Shape();
     circle.graphics.beginFill(that.color).drawCircle(0,0,radius);
     circle.x = x;
     circle.y = y;
+    circle.radius = radius;
+    circle.name = name;
+    circle.is_pulse = false;
+    circle.defaultScaleX = circle.scaleX;
+    circle.defaultScaleY = circle.scaleY;
+    circle.growCount = 0;
+    circle.growing = true;
+    
+    createjs.Ticker.addEventListener('tick', function() {
+      if(circle.is_pulse) {
+        if (circle.growing) {
+          circle.scaleX *= 1.025;
+          circle.scaleY *= 1.025;
+          circle.growing = (++circle.growCount < 10);
+        } else {
+          circle.scaleX /= 1.025;
+          circle.scaleY /= 1.025;
+          circle.growing = (--circle.growCount < 0);
+        }
+      }else {
+        circle.scaleX = circle.defaultScaleX;
+        circle.scaleY = circle.defaultScaleY;
+      }
+    });     
 
     return circle;
   }
@@ -96,7 +173,6 @@ REGIONVIZ.Circle = function(options) {
     text_object.textBaseline = "center";
     return text_object;
   }
-
 };
 
 
