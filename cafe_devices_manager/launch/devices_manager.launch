@@ -1,7 +1,17 @@
 <launch>
+  
   <arg name="list_order" default="list_order"/>
   <arg name="remote_order_list" default="remote_order_list"/>
+
+  <!-- mandatory parameters -->
   <arg name="table_id" default="1"/>
+  <arg name="arduino_ip"                        default="192.168.10.227"/> <!-- IP of the Arduino Yun -->
+  <arg name="door_ctrl_io_port"                 default="11"/> <!-- number of the port the remote is connected to -->
+  <arg name="timer_ctrl"                        default="false"/> <!-- timer or open/close mode -->
+  <!-- optional parameters -->
+  <arg name="open_door_trigger_duration"        default="2.0"/> <!-- signal duration required for opening the door -->
+  <arg name="close_door_trigger_duration"       default="1.0"/> <!-- signal duration required for closing the door -->
+  <arg name="open_door_trigger_duration_timer"  default="1.0"/> <!-- signal duration required for opening the door in timer mode-->
 
   <!--hue manager-->
   
@@ -15,6 +25,12 @@
   
   <!--auto door manager-->
   <include file="$(find rocon_auto_door)/launch/auto_door.launch">
+    <arg name="arduino_ip"                        value="$(arg arduino_ip)"/>
+    <arg name="door_ctrl_io_port"                 value="$(arg door_ctrl_io_port)"/>
+    <arg name="timer_ctrl"                        value="$(arg timer_ctrl)"/>
+    <arg name="open_door_trigger_duration"        value="$(arg open_door_trigger_duration)"/>
+    <arg name="close_door_trigger_duration"       value="$(arg close_door_trigger_duration)"/>
+    <arg name="open_door_trigger_duration_timer"  value="$(arg open_door_trigger_duration_timer)"/>
   </include>
 
   <node name="auto_door_manager" pkg="cafe_devices_manager" type="auto_door_manager.py">
