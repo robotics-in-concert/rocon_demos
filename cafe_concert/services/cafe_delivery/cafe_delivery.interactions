@@ -1,4 +1,4 @@
-#- name: web_url(http://www.google.com)
+- name: web_url(http://www.google.com)
   role: 'Customer'
   compatibility: rocon:/pc
   display_name: 'Web Search'
@@ -8,7 +8,6 @@
     resource_name: rocon_icons/google.png
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/webapp/cafe_Dorothy/dorothy_web_menu.html)
 - name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/webapp/cafe_Dorothy/dorothy_web_menu.html)
-
   role: 'Customer'
   compatibility: rocon:/pc
   display_name: Cafe Dorothy Delivery Order
