@@ -43,7 +43,11 @@ class HueManager():
         self.publisher = {}
         self.hues = {}
         self.hues_init = False
-        self.subscriber['list_order'] = rospy.Subscriber('list_order', cafe_msgs.OrderList, self.update)
+        self.local_order_num = 0
+        self.remote_order_num = 0
+        self.total_order_num = 0
+        self.subscriber['list_order'] = rospy.Subscriber('list_order', cafe_msgs.OrderList, self.local_order_update)
+        self.subscriber['remote_order_list'] = rospy.Subscriber('remote_order_list', cafe_msgs.RemoteOrderList, self.remote_order_update)
         self.subscriber['hue_order'] = rospy.Subscriber('hue_list', rocon_device_msgs.HueArray, self.hue_update)
 
         self.publisher['set_hue_hsv'] = rospy.Publisher('set_hue_color_hsv', rocon_device_msgs.Hue)
@@ -66,27 +70,22 @@ class HueManager():
         for hue in data.hue_list:
             self.hues[hue.light_id] = hue
 
-    def update(self, data):
-        on_ordering = []
-        for order in data.orders:
-            if order.status is self.IDLE or order.status is self.GO_TO_KITCHEN:
-                on_ordering.append(order)
+    def hue_color_update(self):
 
-        #set the kitchen hue
         if self.KITCHEN_BULB_ID in self.hues:
-            on_ordering_num = len(on_ordering)
-            if on_ordering_num > self.MAX_ORDER_NUM:
-                on_ordering_num = self.MAX_ORDER_NUM
-
-            if on_ordering_num is 1:
+            self.total_order_num = self.remote_order_num + self.local_order_num
+            if self.total_order_num > self.MAX_ORDER_NUM:
+                self.total_order_num = self.MAX_ORDER_NUM
+            
+            if self.total_order_num is 1:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_GREEN
                 self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
                 self.hues[self.KITCHEN_BULB_ID].state.bri = self.MAX_BRI
-            elif on_ordering_num is 2:
+            elif self.total_order_num is 2:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_BLUE
                 self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
                 self.hues[self.KITCHEN_BULB_ID].state.bri = self.MAX_BRI
-            elif on_ordering_num > 2:
+            elif self.total_order_num > 2:
                 self.hues[self.KITCHEN_BULB_ID].state.hue = self.COLOR_H_RED
                 self.hues[self.KITCHEN_BULB_ID].state.sat = self.MAX_SAT
                 self.hues[self.KITCHEN_BULB_ID].state.bri = self.MAX_BRI
@@ -96,10 +95,26 @@ class HueManager():
                 self.hues[self.KITCHEN_BULB_ID].state.sat = 0
                 self.hues[self.KITCHEN_BULB_ID].state.bri = 0
             self.publisher['set_hue_hsv'].publish(self.hues[self.KITCHEN_BULB_ID])
+                        
+    def remote_order_update(self, data):
+        on_remote_ordering = []
+        for order in data.remote_orders:
+            if order.status is self.IDLE or order.status is self.GO_TO_KITCHEN:
+                on_remote_ordering.append(order)
+        self.remote_order_num = len(on_remote_ordering)
+        self.hue_color_update()
+
+        pass
+    def local_order_update(self, data):
+        on_local_ordering = []
+        for order in data.orders:
+            if order.status is self.IDLE or order.status is self.GO_TO_KITCHEN:
+                on_local_ordering.append(order)
+        self.local_order_num = len(on_local_ordering)
+        self.hue_color_update()
 
     def loginfo(self, msg):
         rospy.loginfo('Hue Manager : ' + str(msg))
-
 
     def spin(self):
         while not rospy.is_shutdown():

@@ -1,5 +1,6 @@
 <launch>
   <arg name="list_order" default="list_order"/>
+  <arg name="remote_order_list" default="remote_order_list"/>
   <arg name="table_id" default="1"/>
 
   <!--hue manager-->
@@ -8,6 +9,7 @@
   </node>
   <node name="hue_manager" pkg="cafe_devices_manager" type="hue_manager.py">
     <remap from="list_order" to="$(arg list_order)"/>
+    <remap from="remote_order_list" to="$(arg remote_order_list)"/>
   </node>
   
   

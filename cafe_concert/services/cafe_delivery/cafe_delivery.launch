@@ -7,12 +7,10 @@
 
   <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
   </node>
-    
-  
   
   <include file="$(find cafe_devices_manager)/launch/devices_manager.launch">
     <arg name="list_order" value="/cafe/list_order"/>
+    <arg name="remote_order_list" value="/cafe/remote_order_list"/>
     <arg name="table_id" value="1"/>
-  </include>
- 
+  </include> 
 </launch>
