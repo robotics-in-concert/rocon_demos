@@ -1,11 +1,13 @@
 <launch>
-  <arg name="is_sim" default="$(optenv IS_SIM false)"/>
+  <arg name="is_sim" default="$(optenv IS_SIM true)"/>
   <arg name="annotation_file" default="$(find cafe_concert)/annotations/dorothy.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
 
 
   <arg     if="$(arg is_sim)" name="map_file" value="$(find cafe_concert)/maps/dorothy_cafe_new_polished.yaml"/>
   <arg unless="$(arg is_sim)" name="map_file" value="$(find cafe_concert)/maps/dorothy_cafe_new.yaml"/>
+
+  <arg name="viewer_map" value="$(find cafe_concert)/maps/dorothy_clean.yaml"/>
 
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
        relative to which show the map on screnn (logically we use /map) -->
@@ -17,6 +19,13 @@
     <remap from="map" to="/map"/>
     <remap from="map_metadata" to="/map_metadata"/>
     <remap from="static_map" to="/static_map"/>
+  </node>
+
+  <node pkg="map_server" type="map_server" name="map_server_viewer" args="$(arg viewer_map)">
+    <param name="frame_id" value="/viewer_map"/>
+    <remap from="map" to="/viewer_map"/>
+    <remap from="map_metadata" to="/viewer_map_metadata"/>
+    <remap from="static_map" to="/viewer_static_map"/>
   </node>
 
   <!-- *********************** Annotations ************************ -->
