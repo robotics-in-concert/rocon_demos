@@ -51,6 +51,7 @@ if(qs==null)
 return"";else{return qs[key];}}
 //yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});
 
+$(head).append('<meta name="viewport" content="user-scalable=0 maximum-scale=1.0">');
 yepnope.errorTimeout = 20000; // increase of time out for low speed network
 
 yepnope({nope:['include/EventEmitter2/eventemitter2.js'], complete:emitterLoaded});
@@ -90,9 +91,7 @@ function rosLoaded()
 
 function interationLoaded()
 {
-  if (rocon_interactions.display_name != null)
-	console.log("Display Name  : " + rocon_interactions.display_name);
-	
+  console.log("Display Name  : " + rocon_interactions.display_name);
   console.log("Rosbridge URI : " + rocon_interactions.rosbridge_uri);
   console.log("Parameters   : " + JSON.stringify(rocon_interactions.parameters))
   console.log("Remappings   : " + JSON.stringify(rocon_interactions.remappings))
