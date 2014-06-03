@@ -50,20 +50,49 @@ Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 2000, function(
 Symbol.bindSymbolAction(compId, symbolName, "creationComplete", function(sym,e){sym.setVariable("ordered_coffee_list",new Array());sym.setVariable("ordered_sandwich_list",new Array());sym.setVariable("sum_coffee_price",0);sym.setVariable("sum_sandwich_price",0);sym.setVariable("masterURI","ws://222.100.124.85:9090");sym.setVariable("tableID","00");function getParam(key){var url=location.href;var parameters=[];var qs=null;if(url.indexOf("?")!=-1){qs={};parameters=url.substring(url.indexOf("?")+1,url.length).split("&");for(var k=0;k<parameters.length;k++){if(parameters[k].split("=")[1].split('').join('').length>0){qs[parameters[k].split("=")[0]]=parameters[k].split("=")[1];}}}
 if(qs==null)
 return"";else{return qs[key];}}
+$("head").append('<meta name="viewport" content="user-scalable=0">'); //for preventing of user scalability
+yepnope.errorTimeout = 20000; // increase of time out for low speed network
+
 yepnope({nope:['include/EventEmitter2/eventemitter2.js'],complete:emitterLoaded});
 function emitterLoaded()
 {
-	yepnope({nope:['include/roslib.js'],complete:rosLoaded});
+  yepnope({ test:window.ROSLIB,
+            nope:'http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js',
+            complete:function(){
+                if(window.ROSLIB != undefined){
+                    rosLoaded();
+                }
+                else{
+                    yepnope("include/roslib.js");
+                    sym.$("status_text").html("roslib is not loading.Please refresh");
+                }
+            },
+            
+            });
 }
 function rosLoaded()
 {
-	yepnope({nope:['http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js'],complete:interationLoaded});
+  yepnope({test:window.rocon_interactions,
+           nope:'http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js',
+           complete: function(){
+               if(window.rocon_interactions != undefined){
+                interationLoaded();
+               }
+               else{
+                   yepnope("include/interactions.js");
+                   sym.$("status_text").html("rocon interaction is not loading.Please refresh");
+               } 
+           },
+           });
 }
+
+
 function interationLoaded()
 {if(rocon_interactions.display_name!=null)
 console.log("Display Name  : "+rocon_interactions.display_name);console.log("Rosbridge URI : "+rocon_interactions.rosbridge_uri);console.log("Parameters   : "+JSON.stringify(rocon_interactions.parameters))
 console.log("Remappings   : "+JSON.stringify(rocon_interactions.remappings))
 sym.setVariable("masterURI",rocon_interactions.rosbridge_uri);sym.$("status_text").html("Concert master address: "+sym.getVariable("masterURI")+" version:20140328");var table_id=rocon_interactions.parameters['extra_data'];sym.setVariable('tableID',table_id);sym.$("_01").html(table_id);var send_order_remapped=rocon_interactions.remappings['send_order'];console.log("Send Order has remapped into ",send_order_remapped);sym.setVariable('send_order',send_order_remapped);init_ros();}
+
 function init_ros()
 {var masterUri=sym.getVariable('masterURI');var ros=new ROSLIB.Ros();ros.connect(masterUri);sym.setVariable("ROS",ros);ros.on('connection',function()
 {console.log('Connection made!');sym.$("status_text").html("Connected with "+masterUri);});ros.on('close',function(){});ros.on('error',function(error){console.log(error);});}});
