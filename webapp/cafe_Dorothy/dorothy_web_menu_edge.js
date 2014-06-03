@@ -1,2 +1,2062 @@
+/**
+ * Adobe Edge: symbol definitions
+ */
+(function($, Edge, compId){
+//images folder
+var im='images/';
 
-(function($,Edge,compId){var _=null,y=true,n=false,qc='easeInOutCubic',e179='${_fron_blue}',e94='${_TextCopy8}',xw='max-width',d='display',e95='${_coffee_sel_name2}',i='none',e97='${_cafelatteCopy2}',e196='${_s1p1Copy}',e197='${_s1p2Copy2}',e99='${_cafemocha}',e189='${_P2M2}',e101='${_coffee_sel3}',x61='bold',e209='${_P1M8}',e102='${_coffee_sel_name0}',e103='${_coffee_sel2}',ta='text-align',e105='${_cafemochaCopy2}',x90='stage',e106='${_TextCopy14}',e180='${_P1M2}',x6='%',zx='scaleX',e110='${_cafelatteCopy}',e175='${_YUJINMASTER}',e177='${_Text4}',x115='@@0@@px @@1@@',e113='${_dorothy_cafe}',e215='${_deleteCopy2}',e114='${_cafemochaCopy}',o='opacity',oo='-o-transform-origin',e206='${_s1p1Copy2}',e207='${_a4_nomal_png_a}',e208='${_Rectangle}',x108='rgba(100,61,23,0.37)',x122='rgba(100,61,23,0.49)',e119='${_menu-category-sandwich-italbmt_copy}',e145='${_TextCopy9}',x2='3.0.0.322',e121='${_oder_management}',b='block',e219='${_Text4Copy}',e123='${_status_text}',x72='rgba(57,35,13,1.00)',e153='${_americano}',e188='${_back_blue}',e125='${_dorothy_logo012}',e126='${_order}',e195='${_YUJINMASTER_DESC}',e129='${_coffee_sel_name3}',lf='left',e165='${_coffee_sel_name5}',e132='${_coffee_sel5}',e159='${_menu-category-sandwich-tuna}',x92='auto',e134='${__01}',e135='${_coffee_sel_name4}',e218='${_accept_blue}',tp='top',e137='${_Text}',ov='overflow',e225='${_s1p4}',t='transform',e170='${_Text2Copy}',x3='rgba(0,0,0,0)',e142='${_coffee_sel0}',e143='${_TextCopy5}',x='text',e187='${_ROCON_BANK_CARD}',m='rect',h='height',x13='70',x80='40',x19='50',rt='right',e204='${_SANDWITCH_TITLE}',qob='easeOutBounce',e211='${_Kobuki_00}',e210='${_s1p1}',l='normal',e158='${_TextCopy3}',e160='${_coffee_sel1}',e163='${_checkout_total}',x31='20',x81='30',e168='${_s1p4Copy2}',e147='${_sandwitch_slot1}',e182='${_yujinrobot_innoteam_header_white}',e93='${_Text6Copy}',x127='rgba(100,61,23,1.00)',e96='${_TextCopy}',e98='${_cappuccino}',e174='${_P1M1}',e100='${_coffee_sel4}',e213='${_P1M3}',bt='bottom',x155='rgba(255,255,255,1)',e156='${_Stage}',e181='${_P2M3}',e191='${_s1p3}',e107='${_copyright}',e173='${_ROCON_BANK_DESC}',x117='rgba(0,0,0,0.00)',e176='${_coffee_sel6}',e111='${_Text7Copy}',e164='${_cafelatteCopy4}',e186='${_P1M6}',x17='25',e190='${_P3M1}',x1='3.0.0',e146='${_TextCopy13}',p='px',bc='border-color',e118='${_coffee_sel_name6}',e120='${_TextCopy7}',x23='120',or='-webkit-transform-origin',x14='800',x58='700',e149='${_TextCopy16}',e150='${_TextCopy4}',a='Base State',e124='${_TextCopy12}',e224='${_s1p3Copy}',x91='rgba(255,255,255,1.00)',e226='${_Text6Copy2}',e128='${_TextCopy11}',e223='${_P1M7}',e199='${_Text3}',x109='rgba(160,160,160,1.00)',e130='${_menu-category-sandwich-buffchic_copy}',e221='${_P3M4}',bp='background-position',e217='${_P3M3}',e212='${__03_pp_anwansoon}',e131='${_sandwich_sel_name0}',e214='${_Text7Copy2}',dt='Default Timeline',bg='background-color',x116='@@0@@% @@1@@%',e133='${_rocon_logo}',x55='rgba(57,35,13,1)',e216='${_accept_blue_payment}',x71='rgba(67,222,254,1.00)',e201='${_P2M1}',e148='${_TextCopy15}',x7='500',x22='19.2',x9='200',x11='100',e139='${_TextCopy6}',e203='${_s1p4Copy}',zy='scaleY',x60='220',e162='${_espresso}',e198='${_P3M2}',e104='${_espresso_conpanna2}',e194='${_s1p2Copy}',e140='${_sandwitch_slot0}',e222='${_s1p2}',g='image',po='center',e193='${_P1M5}',e141='${_sandwich_sel_name1}',e192='${_Text4Copy2}',xc='rgba(0,0,0,1)',x77='150',e185='${_COFFEE_TITLE}',e184='${_accept}',x183='@@0@@px @@1@@px',e144='${_TextCopy17}',e178='${__114_anwansoonfge}',e172='${_acceptCopy}',fs='font-size',e171='${_Text5Copy2}',e169='${_P1M4}',ql='linear',e166='${_menu-category-sandwich-stkchs_copy}',e161='${_Price}',x74='320',e200='${__410_anwansoon2}',e151='${_cafelatte}',e202='${_nfc_logo}',x57='400',om='-ms-transform-origin',e205='${_Rectangle2Copy2}',e152='${_TextCopy2}',x157='scroll',e154='${_TextCopy10}',x8='Arial, Helvetica, sans-serif',mw='min-width',bsz='background-size',s='style',oz='-moz-transform-origin',e138='${_table_no}',w='width',e136='${_header}',e220='${_s1p3Copy2}',on='msTransformOrigin',e112='${_Text5Copy}',c='color',e167='${_coffee_sel_name1}';var im='images/';var g28='back_blue.png',g78='dorothy_logo01.png',g51='menu-category-sandwich-stkchs%20copy.png',g29='espresso.png',g65='03_pp_anwansoon.png',g49='menu-category-sandwich-buffchic%20copy.png',g15='sandwitch_empty.png',g67='410_anwansoon.png',g21='coffee_empty2.png',g47='menu-category-sandwich-italbmt%20copy.png',g25='u617-6.png',g37='cafelatte.png',g26='accept_blue.png',g27='fron_blue.png',g4='a4_nomal_png_c.png',g68='Kobuki_00.png',g89='yujinrobot_innoteam_header_white.png',g38='cappuccino.png',g87='accept.png',g85='0034_anwansoon.png',g84='0030_anwansoon.png',g24='u616-6.png',g35='americano.png',g43='cafemocha.png',g70='a4_nomal_png_a.png',g83='delete.png',g66='nfc_logo.png',g33='espresso%20conpanna2.png',g53='menu-category-sandwich-tuna.png',g69='114_anwansoonfge.png';var s16="Checkout Total",s59="Order Complete",s79="Select a payment method ",s45="카라멜 모카<br>Caramel Mocha<br>₩ 3,200",s10="Status: ",s12="Copyright YUJIN ROBOT co., Ltd. All rights reserved including the right of reproduction in whole or in part in any form. mobile",s20="Place Order",s56="Thank you!<br> Come again!",s75="01",s73="Dorothy..Cafe",s48="터키 베이컨 샌드위치<br>Turkey Bacon Sandwich<br>₩ 4,500",s39="카푸치노<br>Cappuccino<br>₩ 2,700",s86="ROCON BANK<br>1234-2345-3456-4567",s82="Cacel",s34="카페 아메리카노<br>Cafe Americano<br>₩ 2,500",s5="ROCON Order Management System",s63="Preparing Order",s40="카라멜 라떼<br>Caramel Latte<br>₩ 2,800",s46="화이트 모카<br>White Mocha<br>₩ 3,200",s76="Table",s54="허브참치 샌드위치<br>Herb Tuna Sandwich<br>₩ 4,500",s50="닭가슴살 샌드위치<br>Chicken Sandwich<br>₩ 4,500",s62="Order Processing",s64="Serving Order",s36="카페 라떼<br>Cafe Latte<br>₩ 2,700",s32="에스프레소 꼰빠냐<br>Espresso Conpanna<br>₩ 2,500",s30="에스프레소<br>Espresso<br>₩ 2,300",s52="로스트 비프 샌드위치<br>Roast Beef Sandwich<br>₩ 4,500",s18="₩ 0",s88="YUJIN Mastercard<br>1234-2345-3456-4567",s42="바닐라 라떼<br>Vanilla Latte<br>₩ 3,000",s41="헤이즐넛 라떼<br>Hazelnut Latte<br>₩ 2,800",s44="카페 모카<br>Cafe Mocha<br>₩ 3,200";var fonts={};var P=Edge.P,T=Edge.T,A=Edge.A;var opts={};var resources=[];var symbols={"stage":{v:x1,mv:x1,b:x2,bS:a,stf:i,cg:i,iS:a,gpu:n,rI:n,cn:{dom:[{id:'rocon_logo',t:g,r:['21.7%','84%','111.2%','284px','auto','auto'],o:1,f:[x3,im+g4,'50%','50%','649.65px','auto'],tf:[[],[],[],['0.4','0.4']]},{id:'oder_management',t:x,r:['-10px','93.2%','48.1%','19px','auto','auto'],o:1,text:s5,align:"center",n:[x8,[x7,x6],"rgba(100,61,23,1.00)",x9,i,l]},{id:'status_text',t:x,r:['8px','94.6%','99.1%','19px','auto','auto'],o:1,text:s10,align:"left",n:[x8,[x11,x6],"rgba(100,61,23,1.00)",x9,i,l]},{id:'copyright',t:x,r:['0.1%','98%','100%','24px','auto','auto'],text:s12,align:"center",n:[x8,[x13,x6],"rgba(100,61,23,0.37)",x14,i,l]},{id:'sandwitch_slot0',t:g,tag:'img',r:['-81px','76.8%','322px','322px','auto','auto'],f:[x3,im+g15,'50%','50%','322px','322px'],tf:[[],[],[],['0.4','0.4']]},{id:'sandwitch_slot1',t:g,tag:'img',r:['10.5%','76.9%','322px','322px','auto','auto'],f:[x3,im+g15,'50%','50%','322px','322px'],tf:[[],[],[],['0.4','0.4']]},{id:'checkout_total',t:x,r:['48%','81.3%','199px','auto','auto','auto'],text:s16,n:[x8,x17,"rgba(100,61,23,1.00)",x14,i,""]},{id:'Price',t:x,r:['45.6%','86.2%','225px','auto','auto','auto'],text:s18,n:[x8,x19,"rgba(100,61,23,1.00)",x14,i,""]},{id:'order',t:x,r:['auto','81.3%','160px','auto','8px','auto'],text:s20,n:[x8,x17,"rgba(100,61,23,1.00)",x14,i,""]},{id:'coffee_sel0',t:g,tag:'img',r:['-28px','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel1',t:g,tag:'img',r:['10.6%','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel2',t:g,tag:'img',r:['24.5%','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel3',t:g,tag:'img',r:['38.4%','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel4',t:g,tag:'img',r:['52.3%','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel5',t:g,tag:'img',r:['66.5%','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel6',v:b,t:g,tag:'img',r:['80.2%','70.7%','152px','102px','auto','auto'],o:1,f:[x3,im+g21,'0px','0px'],tf:[[],[],[],['0.45','0.45']]},{id:'coffee_sel_name0',t:x,r:['1.6%','69.3%','9.6%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'sandwich_sel_name0',t:x,r:['2.8%','82%','18.5%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'sandwich_sel_name1',t:x,r:['23.3%','82%','18.5%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'coffee_sel_name1',t:x,r:['15.6%','69.3%','9.6%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'coffee_sel_name2',t:x,r:['29.7%','69.3%','9.6%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'coffee_sel_name3',t:x,r:['43.8%','69.3%','9.6%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'coffee_sel_name4',t:x,r:['57.9%','69.3%','9.6%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'coffee_sel_name5',t:x,r:['71.9%','69.3%','9.6%','42px','auto','auto'],n:[x8,x22,xc,l,i,""]},{id:'coffee_sel_name6',t:x,r:['86%','69.3%','69px','42px','auto','auto'],n:[x8,[x23,x6],xc,l,i,""]},{id:'COFFEE_TITLE',t:g,r:['21.6%','53.4%','55.6%','86px','auto','auto'],f:[x3,im+g24,'50%','50%','400px','auto']},{id:'SANDWITCH_TITLE',v:b,t:g,r:['33.8%','51.5%','31.1%','10%','auto','auto'],f:[x3,im+g25,'50%','50%','224px','auto']},{id:'accept_blue',t:g,r:['auto','83.1%','129px','129px','28px','auto'],f:[x3,im+g26,'0px','0px'],filter:[0,0,1,1,0,0,0,0,"rgba(0,0,0,0)",0,0,0]},{id:'fron_blue',v:b,t:g,r:['auto','51.9%','129px','129px','22px','auto'],o:1,f:[x3,im+g27,'0px','0px'],filter:[0,0,1,1,0,0,0,0,"rgba(0,0,0,0)",0,0,0]},{id:'back_blue',v:i,t:g,r:['14px','734px','129px','129px','auto','auto'],o:1,f:[x3,im+g28,'0px','0px'],filter:[0,0,1,1,0,0,0,0,"rgba(0,0,0,0)",0,0,0]},{id:'P1M1',t:'group',r:['20px','8.6%','152','184','auto','auto'],c:[{id:'espresso',t:g,r:['0px','0%','152px','102px','auto','auto'],f:[x3,im+g29,'0px','0px']},{id:'Text',t:x,r:['33px','62%','auto','auto','auto','auto'],text:s30,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P1M2',t:'group',r:['25.1%','8.6%','180','184','auto','auto'],c:[{id:'TextCopy',t:x,r:['0px','62%','auto','auto','auto','auto'],text:s32,align:"center",n:[x8,x31,xc,l,i,""]},{id:'espresso_conpanna2',t:g,r:['14px','0%','152px','102px','auto','auto'],f:[x3,im+g33,'0px','0px']}]},{id:'P1M3',t:'group',r:['51.4%','8.6%','150','207','auto','auto'],c:[{id:'TextCopy2',t:x,r:['4px','55.1%','auto','auto','auto','auto'],text:s34,align:"center",n:[x8,x31,xc,l,i,""]},{id:'americano',t:g,r:['0px','0%','150px','102px','auto','auto'],f:[x3,im+g35,'0px','0px']}]},{id:'P1M4',t:'group',r:['-123.2%','8.6%','152','207','auto','auto'],c:[{id:'TextCopy3',t:x,r:['30px','55.1%','auto','auto','auto','auto'],text:s36,align:"center",n:[x8,x31,xc,l,i,""]},{id:'cafelatte',t:g,r:['0px','0%','152px','102px','auto','auto'],f:[x3,im+g37,'0px','0px']}]},{id:'P1M5',t:'group',r:['21px','29.4%','151','183','auto','auto'],c:[{id:'cappuccino',t:g,r:['0px','0%','151px','102px','auto','auto'],f:[x3,im+g38,'0px','0px']},{id:'TextCopy9',t:x,r:['22px','61.8%','auto','auto','auto','auto'],text:s39,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P1M6',t:'group',r:['27.1%','29.4%','152','183','auto','auto'],c:[{id:'TextCopy10',t:x,r:['2px','61.8%','148px','auto','auto','auto'],text:s40,align:"center",n:[x8,x31,xc,l,i,""]},{id:'cafelatteCopy',t:g,r:['0px','0%','152px','102px','auto','auto'],f:[x3,im+g37,'0px','0px']}]},{id:'P1M7',t:'group',r:['51.3%','29.4%','152','183','auto','auto'],c:[{id:'TextCopy11',t:x,r:['0px','61.8%','152px','auto','auto','auto'],text:s41,align:"center",n:[x8,x31,xc,l,i,""]},{id:'cafelatteCopy2',t:g,r:['0px','0%','152px','102px','auto','auto'],f:[x3,im+g37,'0px','0px']}]},{id:'P1M8',t:'group',r:['76.3%','29.4%','152','183','auto','auto'],c:[{id:'TextCopy12',t:x,r:['22px','61.8%','auto','auto','auto','auto'],text:s42,align:"center",n:[x8,x31,xc,l,i,""]},{id:'cafelatteCopy4',t:g,r:['0px','0%','152px','102px','auto','auto'],f:[x3,im+g37,'0px','0px']}]},{id:'P2M1',t:'group',r:['26.7%','25.3%','154','188','auto','auto'],c:[{id:'cafemocha',t:g,r:['0px','0%','154px','112px','auto','auto'],f:[x3,im+g43,'0px','0px']},{id:'TextCopy8',t:x,r:['22px','62.8%','auto','auto','auto','auto'],text:s44,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P2M2',t:'group',r:['26.7%','25.3%','154','188','auto','auto'],c:[{id:'cafemochaCopy',t:g,r:['0px','0%','154px','112px','auto','auto'],f:[x3,im+g43,'0px','0px']},{id:'TextCopy13',t:x,r:['-3px','62.8%','auto','auto','auto','auto'],text:s45,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P2M3',t:'group',r:['26.7%','25.3%','154','188','auto','auto'],c:[{id:'cafemochaCopy2',t:g,r:['0px','0%','154px','112px','auto','auto'],f:[x3,im+g43,'0px','0px']},{id:'TextCopy14',t:x,r:['22px','62.8%','auto','auto','auto','auto'],text:s46,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P3M1',v:b,t:'group',r:['102.9%','8.6%','308','210','auto','auto'],c:[{id:'menu-category-sandwich-italbmt_copy',t:g,r:['0px','0%','308px','140px','auto','auto'],f:[x3,im+g47,'0px','0px']},{id:'TextCopy4',t:x,r:['46px','66.7%','217px','70px','auto','auto'],text:s48,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P3M2',v:b,t:'group',r:['151.3%','8.6%','308','211','auto','auto'],c:[{id:'menu-category-sandwich-buffchic_copy',t:g,r:['0px','0%','308px','140px','auto','auto'],f:[x3,im+g49,'0px','0px']},{id:'TextCopy5',t:x,r:['71px','66.8%','168px','70px','auto','auto'],text:s50,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P3M3',v:b,t:'group',r:['102.9%','30.2%','308','204','auto','auto'],c:[{id:'menu-category-sandwich-stkchs_copy',t:g,r:['0px','0%','308px','140px','auto','auto'],f:[x3,im+g51,'0px','0px']},{id:'TextCopy7',t:x,r:['55px','65.7%','199px','70px','auto','auto'],text:s52,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'P3M4',v:b,t:'group',r:['151.3%','30.2%','308','204','auto','auto'],c:[{id:'menu-category-sandwich-tuna',t:g,r:['0px','0%','308px','140px','auto','auto'],f:[x3,im+g53,'0px','0px']},{id:'TextCopy6',t:x,r:['42px','65.7%','226px','70px','auto','auto'],text:s54,align:"center",n:[x8,x31,xc,l,i,""]}]},{id:'Rectangle',v:i,t:m,r:['-0.8%','798px','100.4%','506px','auto','auto'],o:0.9,f:[x55],s:[0,"rgba(0,0,0,0.00)",i]},{id:'Text2Copy',v:i,t:x,r:['11.9%','823px','76.1%','13.6%','auto','auto'],text:s56,align:"center",n:[x8,[x57,x6],"rgba(255,255,255,1.00)",x58,i,l]},{id:'Text3',v:i,t:x,r:['118px','285','auto','auto','auto','auto'],text:s59,align:"center",n:[x8,[x60,x6],"rgba(57,35,13,1.00)",x61,i,l]},{id:'Text4',v:i,t:x,r:['auto','283px','225px','auto','4.6%','auto'],text:s62,align:"center",n:[x8,[x60,x6],"rgba(57,35,13,1)",x61,i,l]},{id:'Text4Copy',v:i,t:x,r:['auto','705px','182px','56px','6.9%','auto'],text:s63,align:"center",n:[x8,[x60,x6],"rgba(57,35,13,1)",x61,i,l]},{id:'Text4Copy2',v:i,t:x,r:['71px','705px','182px','56px','auto','auto'],text:s64,align:"center",n:[x8,[x60,x6],"rgba(57,35,13,1)",x61,i,l]},{id:'_03_pp_anwansoon',v:i,t:g,r:['20px','114px','154px','154px','auto','auto'],f:[x3,im+g65,'0px','0px']},{id:'nfc_logo',v:i,t:g,r:['137px','164px','200px','55px','auto','auto'],f:[x3,im+g66,'0px','0px']},{id:'_410_anwansoon2',v:i,t:g,r:['auto','499px','199px','199px','6.4%','auto'],f:[x3,im+g67,'0px','0px']},{id:'Kobuki_00',v:i,t:g,r:['63px','473px','195px','239px','auto','auto'],f:[x3,im+g68,'0px','0px']},{id:'_114_anwansoonfge',v:i,t:g,r:['auto','150px','130px','130px','18.3%','auto'],f:[x3,im+g69,'0px','0px']},{id:'a4_nomal_png_a',v:i,t:g,r:['auto','105px','104px','163px','8.2%','auto'],f:[x3,im+g70,'0px','0px']},{id:'s1p1',v:i,t:'ellipse',r:['39.7%','289px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p2',v:i,t:'ellipse',r:['46.3%','290px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p3',v:i,t:'ellipse',r:['53.1%','290px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p4',v:i,t:'ellipse',r:['59.8%','290px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p1Copy',v:i,t:'ellipse',r:['78.3%','337px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p2Copy',v:i,t:'ellipse',r:['78.3%','380px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p3Copy',v:i,t:'ellipse',r:['78.3%','423px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p4Copy',v:i,t:'ellipse',r:['78.3%','465px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p1Copy2',v:i,t:'ellipse',r:['59.9%','582px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p2Copy2',v:i,t:'ellipse',r:['53.2%','582px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p3Copy2',v:i,t:'ellipse',r:['46.4%','582px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'s1p4Copy2',v:i,t:'ellipse',r:['39.7%','582px','21px','22px','auto','auto'],br:["50%","50%","50%","50%"],f:[x71],s:[0,"rgba(0, 0, 0, 0)",i],filter:[0,0,1,1,0,0,0,7.1664663461538,"rgba(0,0,0,0)",0,0,0]},{id:'header',t:m,r:['0px','0px','2391px','80px','auto','auto'],o:0.9,f:[x72],s:[0,"rgba(57,35,13,1.00)",i]},{id:'dorothy_cafe',t:x,r:['89px','10px','324px','59px','auto','auto'],text:s73,align:"center",n:[x8,[x74,x6],"rgba(255,255,255,1.00)",x14,i,l]},{id:'_01',t:x,r:['auto','10px','auto','auto','32px','auto'],text:s75,align:"center",n:[x8,[x74,x6],"rgba(255,255,255,1.00)",x14,i,l]},{id:'table_no',t:x,r:['auto','25px','auto','auto','101px','auto'],text:s76,align:"center",n:[x8,[x77,x6],"rgba(255,255,255,1.00)",x14,i,l]},{id:'dorothy_logo012',t:g,r:['24px','13px','56px','55px','auto','auto'],f:[x3,im+g78,'0px','0px']},{id:'Rectangle2Copy2',v:i,t:m,r:['0%','80px','100%','61.8%','auto','auto'],o:0.9,f:[x72],s:[0,"rgba(57,35,13,1.00)",i]},{id:'Text5Copy2',v:i,t:x,r:['14%','352px','70.8%','6.8%','auto','auto'],text:s79,align:"center",n:[x8,x80,"rgba(255,255,255,1.00)",l,i,""]},{id:'Text6Copy2',v:i,t:x,r:['auto','45.1%','auto','auto','15.6%','auto'],text:s20,align:"left",n:[x8,x81,"rgba(255,255,255,1.00)",x14,i,l]},{id:'Text7Copy2',v:i,t:x,r:['19.6%','45.1%','auto','auto','auto','auto'],text:s82,align:"left",n:[x8,x81,"rgba(255,255,255,1.00)",x14,i,l]},{id:'deleteCopy2',v:i,t:g,r:['15.5%','49.5%','145px','144px','auto','auto'],f:[x3,im+g83,'0px','0px']},{id:'accept_blue_payment',v:i,t:g,r:['auto','49.5%','145px','145px','17.2%','auto'],f:[x3,im+g26,'0px','0px']},{id:'ROCON_BANK_CARD',v:b,t:g,r:['52px','-649px','145px','145px','auto','auto'],f:[x3,im+g84,'0px','0px']},{id:'YUJINMASTER',v:b,t:g,r:['1282px','-199px','145px','145px','auto','auto'],f:[x3,im+g85,'0px','0px']},{id:'ROCON_BANK_DESC',v:b,t:x,r:['294px','-622px','454px','auto','auto','auto'],text:s86,align:"left",n:[x8,x80,"rgba(160,160,160,1.00)",l,i,l]},{id:'accept',v:b,t:g,r:['43px','-601px','63px','63px','auto','auto'],f:[x3,im+g87,'0px','0px']},{id:'acceptCopy',v:i,t:g,r:['46px','-601px','63px','63px','auto','auto'],f:[x3,im+g87,'0px','0px']},{id:'YUJINMASTER_DESC',v:b,t:x,r:['298px','-478px','454px','auto','auto','auto'],text:s88,align:"left",n:[x8,x80,"rgba(160,160,160,1.00)",l,i,l]},{id:'yujinrobot_innoteam_header_white',v:i,t:g,r:['21%','80.8%','57.9%','9.2%','auto','auto'],o:1,f:[x3,im+g89,'0px','0px','100%','100.05%']}],sI:[]},s:{},tl:{"Default Timeline":{fS:a,tS:"",d:10500,a:y,tt:[]}}}};var S1=symbols[x90];var tl0=S1.tl[dt].tt,st1=S1.s[a]={},A1=A(_,tl0,st1);A1.A(e93).P(tp,-16.65,_,_,"%").P(d,i).P(c,x91,c).P(rt,20.83).P(lf,x92).P(fs,30,_,_,p);A1.A(e94).P(tp,62.77,_,_,"%").P(ta,po).P(lf,22,_,_,p).P(fs,20);A1.A(e95).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,p).P(w,9.59,_,_,"%").P("text-indent",0,_,_,p).P(h,42).P("word-spacing",0).P(lf,29.66,_,_,"%").P(fs,21,_,_,p);A1.A(e96).P(tp,61.96,_,_,"%").P(lf,0,_,_,p).P(ta,po).P(fs,20);A1.A(e97).P(lf,0).P(tp,0,_,_,"%");A1.A(e98).P(lf,0).P(tp,0,_,_,"%");A1.A(e99).P(lf,0).P(tp,0,_,_,"%");A1.A(e100).P(tp,70.74,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,52.3,_,_,"%");A1.A(e101).P(tp,70.74,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,38.41,_,_,"%");A1.A(e102).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,p).P(w,9.59,_,_,"%").P("text-indent",0,_,_,p).P(h,42).P("word-spacing",0).P(lf,1.61,_,_,"%").P(fs,21,_,_,p);A1.A(e103).P(tp,70.74,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,24.53,_,_,"%");A1.A(e104).P(lf,14).P(tp,0,_,_,"%");A1.A(e105).P(lf,0).P(tp,0,_,_,"%");A1.A(e106).P(tp,62.77,_,_,"%").P(ta,po).P(lf,22,_,_,p).P(fs,20);A1.A(e107).P(tp,98,_,_,"%").P(w,100).P(c,x108,c).P(h,24,_,_,p).P(lf,0.14,_,_,"%").P(fs,70);A1.A(e110).P(lf,0).P(tp,0,_,_,"%");A1.A(e111).P(tp,-16.65,_,_,"%").P(d,i).P(c,x91,c).P(lf,17.64).P(fs,30,_,_,p);A1.A(e112).P(tp,-521).P(w,70.84,_,_,"%").P(d,i).P(h,6.79).P(c,x91,c).P(lf,14.03).P(fs,40,_,_,p);A1.A(e113).P(tp,10).P(w,324).P(c,x91,c).P(h,59).P(lf,89).P(fs,320,_,_,"%");A1.A(e114).P(lf,0).P(tp,0,_,_,"%");A1.A(e118).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,"em").P(fs,131.25,_,_,"%").P("text-indent",0).P(h,42,_,_,p).P(lf,85.97,_,_,"%").P("word-spacing",0,_,_,"em").P(w,69,_,_,p);A1.A(e119).P(zx,1,t,_,"").P(tp,0,_,_,"%").P(lf,0,_,_,p).P(zy,1,t,_,"");A1.A(e120).P(tp,65.69,_,_,"%").P(ta,po).P(h,70,_,_,p).P(w,199).P(lf,55).P(fs,20);A1.A(e121).P("letter-spacing",0,_,_,"em").P(bt,x92).P(c,x122,c).P(rt,x92).P(lf,-10,_,_,p).P(fs,120,_,_,"%").P(tp,93.15).P(o,1,_,_,"").P(ta,po).P("text-indent",0,_,_,"%").P(h,20,_,_,p).P(w,48.07,_,_,"%").P("word-spacing",0,_,_,"em").P("font-weight",200,_,_,"");A1.A(e123).P("letter-spacing",0,_,_,"em").P(bt,x92).P(c,x122,c).P(rt,x92).P(lf,8,_,_,p).P(fs,100,_,_,"%").P(tp,94.64).P("font-weight",200,_,_,"").P(ta,lf).P("text-indent",0,_,_,"%").P(h,20,_,_,p).P(w,99.05,_,_,"%").P("word-spacing",0,_,_,"em").P(o,1,_,_,"");A1.A(e124).P(tp,61.75,_,_,"%").P(ta,po).P(lf,22,_,_,p).P(fs,20);A1.A(e125).P(tp,13).P(h,55).P(lf,24).P(w,56);A1.A(e126).P(tp,81.26,_,_,"%").P(fs,25,_,_,p).P(rt,8).P(c,x127,c).P("font-weight",800,_,_,"").P(lf,x92).P(w,160,_,_,p);A1.A(e128).P(tp,61.75,_,_,"%").P(ta,po).P(w,152,_,_,p).P(lf,0).P(fs,20);A1.A(e129).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,p).P(fs,21).P("text-indent",0).P(h,42).P(lf,43.83,_,_,"%").P("word-spacing",0,_,_,p).P(w,9.59,_,_,"%");A1.A(e130).P(zx,1,t,_,"").P(tp,0,_,_,"%").P(lf,0,_,_,p).P(zy,1,t,_,"");A1.A(e131).P(tp,81.98,_,_,"%").P("letter-spacing",0,_,_,p).P(fs,21).P("text-indent",0).P(h,42).P(lf,2.75,_,_,"%").P("word-spacing",0,_,_,p).P(w,18.49,_,_,"%");A1.A(e132).P(tp,70.67,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,66.47,_,_,"%");A1.A(e133).P(or,[50,50],_,x116).P(oz,[50,50],_,x116).P(om,[50,50],_,x116).P(on,[50,50],_,x116).P(oo,[50,50],_,x116).P(bt,x92).P(zx,0.4,t,_,"").P(rt,x92).P(lf,21.68,_,_,"%").P(w,111.17).P(tp,83.96).P(zy,0.4,t,_,"").P(h,284,_,_,p).P(bsz,[649.65,'auto'],_,x115).P(bp,[50,50],_,x116).P(o,1,_,_,"");A1.A(e134).P(tp,10).P(bt,x92).P(c,x91,c).P(rt,32).P(lf,x92).P(fs,320,_,_,"%");A1.A(e135).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,p).P(w,9.59,_,_,"%").P("text-indent",0,_,_,p).P(h,42).P("word-spacing",0).P(lf,57.86,_,_,"%").P(fs,21,_,_,p);A1.A(e136).P(bg,x72,c).P(tp,0).P(o,0.9,_,_,"").P(h,80,_,_,p).P(bc,x72,c).P(lf,0).P(w,2391);A1.A(e137).P(tp,61.96,_,_,"%").P(lf,33,_,_,p).P(ta,po).P(fs,20);A1.A(e138).P(tp,25).P(bt,x92).P(c,x91,c).P(rt,101).P(lf,x92).P(fs,150,_,_,"%");A1.A(e139).P(tp,65.69,_,_,"%").P(ta,po).P(h,70,_,_,p).P(fs,20).P(lf,42).P(w,226);A1.A(e140).P(tp,76.82,_,_,"%").P(zy,0.4,t,_,"").P(zx,0.4,t).P(lf,-81,_,_,p).P(bp,[50,50],_,x116);A1.A(e141).P(tp,81.98,_,_,"%").P("letter-spacing",0,_,_,p).P(w,18.49,_,_,"%").P("text-indent",0,_,_,p).P(h,42).P("word-spacing",0).P(lf,23.31,_,_,"%").P(fs,21,_,_,p);A1.A(e142).P(tp,70.74,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,-28,_,_,p);A1.A(e143).P(tp,66.82,_,_,"%").P(ta,po).P(h,70,_,_,p).P(w,168).P(lf,71).P(fs,20);A1.A(e144).P(tp,118).P(lf,22).P(fs,20);A1.A(e145).P(tp,61.75,_,_,"%").P(lf,22,_,_,p).P(ta,po).P(fs,20);A1.A(e146).P(tp,62.77,_,_,"%").P(ta,po).P(w,160,_,_,p).P(lf,-3).P(fs,20);A1.A(e147).P(tp,76.89,_,_,"%").P(zy,0.4,t,_,"").P(zx,0.4,t).P(lf,10.51,_,_,"%").P(bp,[50,50],_,x116);A1.A(e148).P(tp,118).P(fs,20).P(lf,22).P(w,132);A1.A(e149).P(tp,118).P(lf,22).P(fs,20);A1.A(e150).P(tp,66.67,_,_,"%").P(ta,po).P(h,70,_,_,p).P(fs,20).P(lf,46).P(w,217);A1.A(e151).P(lf,0).P(tp,0,_,_,"%");A1.A(e152).P(tp,55.07,_,_,"%").P(ta,po).P(lf,4,_,_,p).P(fs,20);A1.A(e153).P(lf,0).P(tp,0,_,_,"%");A1.A(e154).P(tp,61.75,_,_,"%").P(ta,po).P(w,148,_,_,p).P(lf,2).P(fs,20);A1.A(e156).P(bg,x155,c).P(mw,100,_,_,"%").P(ov,x157).P(h,1414,_,_,p).P(xw,100,_,_,"%").P(w,100);A1.A(e158).P(tp,55.07,_,_,"%").P(lf,30,_,_,p).P(ta,po).P(fs,20);A1.A(e159).P(zx,1,t,_,"").P(tp,0,_,_,"%").P(lf,0,_,_,p).P(zy,1,t,_,"");A1.A(e160).P(tp,70.74,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,10.64,_,_,"%");A1.A(e161).P(tp,86.15,_,_,"%").P(fs,50,_,_,p).P(c,x127,c).P("font-weight",800,_,_,"").P(lf,45.63,_,_,"%").P(w,225,_,_,p);A1.A(e162).P(lf,0).P(tp,0,_,_,"%");A1.A(e163).P(tp,81.27,_,_,"%").P(w,199,_,_,p).P(c,x127,c).P("font-weight",800,_,_,"").P(lf,48,_,_,"%").P(fs,25,_,_,p);A1.A(e164).P(lf,0).P(tp,0,_,_,"%");A1.A(e165).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,p).P(fs,21).P("text-indent",0).P(h,42).P(lf,71.89,_,_,"%").P("word-spacing",0,_,_,p).P(w,9.59,_,_,"%");A1.A(e166).P(zx,1,t,_,"").P(tp,0,_,_,"%").P(lf,0,_,_,p).P(zy,1,t,_,"");A1.A(e167).P(tp,69.26,_,_,"%").P("letter-spacing",0,_,_,p).P(fs,21).P("text-indent",0).P(h,42).P(lf,15.64,_,_,"%").P("word-spacing",0,_,_,p).P(w,9.59,_,_,"%");A1.A(e168).P(bg,x71,c).P(tp,582).P(o,1,_,_,"").P(h,22,_,_,p).P("filter.blur",7.17,"subproperty").P(lf,39.72,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(9,i).T(9.75,b);A1.A(e169).P(rt,x92).P(lf,75.56,_,_,"%").T(0,-23.64,1,qc).T(1,-123.16,1).T(2,-123.16);A1.A(e170).P(tp,875).P(w,99.05,_,_,"%").P(h,6.08).P(c,x91,c).P("font-weight",700,_,_,"").P(lf,0.81,_,_,"%").P(fs,400).P(d,i).T(7,b);A1.A(e171).P(ta,po).P(h,6.79,_,_,"%").P(c,x91,c).P(fs,40,_,_,p).P(d,i).T(3.25,b).T(3.758,b).T(5.191,i).T(8.191,i).P(tp,-697).T(3.25,120,0.821,qob).P(lf,7.92,_,_,"%").T(4.07,7.92).P(w,83.07).T(4.07,83.07);A1.A(e172).P(h,63).P(w,63).P(d,i).T(4.25,b).T(5.191,i).P(lf,46).T(4.07,48,0.179,qob).P(tp,-601).T(4.07,388,0.179);A1.A(e173).P(ta,lf).P(c,x109,c).P(lf,294).P(w,454).P(d,b).T(5.191,i).P(o,1,_,_,"").T(4.07,0.5,0.179,qob).P(tp,-622,_,_,p).T(3.25,225,0.821);A1.A(e174).P(lf,20).T(0,-694,1,qc).T(1,-1411,1).T(2,-1411);A1.A(e175).P(h,145).P(w,145).P(tp,-505).T(3.25,343,0.821,qob).P(o,0.3,_,_,"").T(4.07,1,0.179).P(lf,132,_,_,p).T(3.25,132).P(d,b).T(5.191,i);A1.A(e176).P(tp,70.74,_,_,"%").P(zy,0.45,t,_,"").P(zx,0.45,t).P(o,1).P(lf,80.22,_,_,"%").P(d,b).T(0,b);A1.A(e177).P(tp,283).P(bt,x92).P(rt,4.58,_,_,"%").P(lf,x92).P(w,225,_,_,p).P(d,i).T(7,b).P(o,0.2,_,_,"").T(7,1,1,ql);A1.A(e178).P(tp,150).P(bt,x92).P(h,130).P(rt,18.33,_,_,"%").P(lf,x92).P(w,130,_,_,p).P(d,i).T(7,b).P(o,0.2,_,_,"").T(7,1,1,ql);A1.A(e179).P(tp,51.9,_,_,"%").P(h,129,_,_,p).P(rt,22).P(lf,x92).P(w,129).P(d,b).T(2,i).T(7,i).P(o,1,_,_,"").T(1,0,1,ql).P("filter.saturate",1,"subproperty").T(1,0,1);A1.A(e180).P(lf,25.14,_,_,"%").T(0,-74.07,1,qc).T(1,-173.59,1).T(2,-173.59);A1.A(e181).P(tp,8.42,_,_,"%").P(lf,157.08).T(0,53.19,1,qc).T(1,-46.33,1).T(2,-46.33);A1.A(e182).P(tp,79.77,_,_,"%").P(rt,x92).P(h,9.19).P(o,1,_,_,"").P(lf,20.97,_,_,"%").P(w,57.92).P(bp,[0.01,-0.03],_,x183).T(8,[0.01,-0.03]).P(d,i).T(0,i).T(7,b);A1.A(e184).P(h,63).P(lf,43).P(w,63).P(d,b).T(4.25,i).T(5.191,i).P(tp,-601).T(3.25,247,0.821,qob);A1.A(e185).P(tp,53.38,_,_,"%").P(bsz,[400,'auto'],_,x115).P(lf,21.6).P(bp,[50,50],_,x116).P(o,1,_,_,"").T(1,0,1,ql).T(2,0);A1.A(e186).P(tp,29.43,_,_,"%").P(lf,27.08).T(0,-72.09,1,qc).T(1,-171.61,1).T(2,-171.61);A1.A(e187).P(h,145).P(w,145).P(tp,-649).T(3.25,198,0.821,qob).P(o,1,_,_,"").T(4.07,0.3,0.179).P(lf,130,_,_,p).T(3.25,130).P(d,b).T(5.191,i);A1.A(e188).P(tp,734).P(h,129).P(lf,14).P(w,129).P(d,i).T(0,i).T(0.049,b).T(7,i).P(o,0,_,_,"").T(0,1,1,ql).P("filter.saturate",0,"subproperty").T(0,1,1);A1.A(e189).P(tp,8.42,_,_,"%").P(lf,132.52).T(0,28.24,1,qc).T(1,-71.28,1).T(2,-71.28);A1.A(e190).P(tp,8.56,_,_,"%").P(lf,205.09).T(0,104.34,1,qc).T(1,4.82,1).T(2,4.82).P(d,b).T(7,i);A1.A(e191).P(bg,x71,c).P(tp,290).P("filter.blur",7.17,"subproperty").P(h,22).P(o,1,_,_,"").P(lf,53.13,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(7,i).T(7.5,b);A1.A(e192).P(tp,705).P(h,56).P(lf,71).P(d,i).T(7,b).P(o,0.2,_,_,"").T(7,0.2).T(9,1,1,ql).P(w,200,_,_,p).T(10,200);A1.A(e193).P(tp,29.43,_,_,"%").P(lf,21,_,_,p).T(0,-693,1,qc).T(1,-1410,1).T(2,-1410);A1.A(e194).P(bg,x71,c).P(tp,380).P(o,1,_,_,"").P(h,22,_,_,p).P("filter.blur",7.17,"subproperty").P(lf,78.33,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(8,i).T(8.25,b);A1.A(e195).P(ta,lf).P(c,x109,c).P(lf,298).P(w,454).P(d,b).T(5.191,i).P(o,0.5,_,_,"").T(4.07,1,0.179,qob).P(tp,-478,_,_,p).T(3.25,370,0.821);A1.A(e196).P(tp,337).P(bg,x71,c).P(h,22).P("filter.blur",7.17,"subproperty").P(lf,78.33,_,_,"%").P(w,21,_,_,p).P(d,i).T(8,b).P(o,1,_,_,"").T(8,1);A1.A(e197).P(bg,x71,c).P(tp,582).P(o,1,_,_,"").P(h,22,_,_,p).P("filter.blur",7.17,"subproperty").P(lf,53.19,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(9,i).T(9.25,b);A1.A(e198).P(tp,8.56,_,_,"%").P(lf,251.75).T(0,151,1,qc).T(1,51.48,1).T(2,51.48).P(d,b).T(7,i);A1.A(e199).P(c,x72,c).P(tp,283).T(10.5,283).P(lf,57).T(7,57).P(d,i).T(7,b);A1.A(e200).P(tp,499).P(bt,x92).P(h,199).P(rt,6.39,_,_,"%").P(lf,x92).P(w,199,_,_,p).P(d,i).T(7,b).P(o,0.2,_,_,"").T(7,0.2).T(8,1,1,ql);A1.A(e201).P(tp,8.42,_,_,"%").P(lf,106.1).T(0,3.33,1,qc).T(1,-96.19,1).T(2,-96.25,_,_,-96.25);A1.A(e202).P(tp,164).P(h,55).P(lf,137).P(w,200).P(d,i).T(7,b);A1.A(e203).P(bg,x71,c).P(tp,465).P(o,1,_,_,"").P(h,22,_,_,p).P("filter.blur",7.17,"subproperty").P(lf,78.33,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(8,i).T(8.75,b);A1.A(e204).P(tp,51.48,_,_,"%").P(h,10).P(bsz,[224,'auto'],_,x115).P(bp,[50,50],_,x116).P(lf,33.82).P(d,b).T(7,i).P(o,0,_,_,"").T(1,1,1,ql).T(2,1);A1.A(e205).P(bg,x72,c).P(o,0.9,_,_,"").P(lf,0,_,_,"%").P(bc,x72,c).P(d,i).T(3.25,b).T(3.758,b).T(5.191,i).T(8.191,i).P(tp,-794,_,_,p).T(3.25,79,0.821,qob);A1.A(e206).P(tp,582).P(bg,x71,c).P(h,22).P("filter.blur",7.17,"subproperty").P(lf,59.86,_,_,"%").P(w,21,_,_,p).P(d,i).T(9,b).P(o,1,_,_,"").T(9,1);A1.A(e207).P(tp,105).P(bt,x92).P(h,163).P(rt,8.19,_,_,"%").P(lf,x92).P(w,104,_,_,p).P(d,i).T(7,b).P(o,0.2,_,_,"").T(7,1,1,ql);A1.A(e208).P(h,506).P(bc,x117,c).P(w,100.41,_,_,"%").P(d,i).T(7,b).P(o,0.9,_,_,"").T(9.95,1,0.05,ql).P(lf,-0.27,_,_,"%").T(7,-0.27).P(tp,796,_,_,p).T(7,796);A1.A(e209).P(tp,29.43,_,_,"%").P(lf,76.25).T(0,-22.92,1,qc).T(1,-122.44,1).T(2,-122.44);A1.A(e210).P(tp,289).P(bg,x71,c).P(h,22).P("filter.blur",7.17,"subproperty").P(lf,39.66,_,_,"%").P(w,21,_,_,p).P(d,i).T(7,b).P(o,1,_,_,"").T(7,1);A1.A(e211).P(tp,473).P(h,239).P(lf,63).P(w,195).P(d,i).T(7,b).P(o,0.2,_,_,"").T(7,0.2).T(9,1,1,ql);A1.A(e212).P(tp,114).P(h,154).P(lf,20).P(w,154).P(d,i).T(7,b);A1.A(e213).P(lf,51.39,_,_,"%").T(0,-47.82,1,qc).T(1,-147.34,1).T(2,-147.34);A1.A(e214).P(c,x91,c).P(lf,19.58,_,_,"%").P(fs,30,_,_,p).P(tp,-16.65,_,_,"%").T(3.25,45.12,0.821,qob).P(d,i).T(3.25,b).T(3.758,b).T(5.191,i).T(8.191,i);A1.A(e215).P(h,144).P(lf,15.48,_,_,"%").P(w,145,_,_,p).P(tp,-12.19,_,_,"%").T(3.25,49.55,0.821,qob).P(d,i).T(3.25,b).T(3.758,b).T(5.191,i).T(8.191,i);A1.A(e216).P(h,145).P(rt,17.22,_,_,"%").P(lf,x92).P(w,145,_,_,p).P(d,i).T(3.25,b).T(3.758,b).T(5.191,i).T(8.191,i).P(tp,-12.19,_,_,"%").T(3.25,49.55,0.821,qob);A1.A(e217).P(tp,30.21,_,_,"%").P(d,b).T(7,i).P(lf,203.67).T(0,102.92,1,qc).T(1,3.4,1).T(2,3.4);A1.A(e218).P(tp,83.11,_,_,"%").P(h,129,_,_,p).P(rt,28).P(lf,x92).P(w,129).P(o,1,_,_,"").T(0,1).T(2.5,0.5).T(3.25,0.5).P("filter.saturate",1,"subproperty").T(0,1).T(2.5,0);A1.A(e219).P(tp,705).P(bt,x92).P(h,56).P(lf,x92).P(d,i).T(7,b).P(rt,6.64,_,_,"%").T(10,6.64).P(o,0.2,_,_,"").T(7,0.2).T(8,1,1,ql).P(w,200,_,_,p).T(10,200);A1.A(e220).P(bg,x71,c).P(tp,582).P(o,1,_,_,"").P(h,22,_,_,p).P("filter.blur",7.17,"subproperty").P(lf,46.39,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(9,i).T(9.5,b);A1.A(e221).P(tp,30.21,_,_,"%").P(lf,252).T(0,151.25,1,qc).T(1,51.73,1).T(2,51.73).P(d,b).T(7,i);A1.A(e222).P(bg,x71,c).P(tp,290).P("filter.blur",7.17,"subproperty").P(h,22).P(o,1,_,_,"").P(lf,46.33,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(7,i).T(7.25,b);A1.A(e223).P(tp,29.43,_,_,"%").P(lf,51.25).T(0,-47.92,1,qc).T(1,-147.44,1).T(2,-147.44);A1.A(e224).P(bg,x71,c).P(tp,423).P(o,1,_,_,"").P(h,22,_,_,p).P("filter.blur",7.17,"subproperty").P(lf,78.33,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(8,i).T(8.5,b);A1.A(e225).P(bg,x71,c).P(tp,290).P("filter.blur",7.17,"subproperty").P(h,22).P(o,1,_,_,"").P(lf,59.8,_,_,"%").P(w,21,_,_,p).P(d,i).T(0,i).T(7,i).T(7.75,b);A1.A(e226).P(c,x91,c).P(rt,15.56,_,_,"%").P(lf,x92).P(fs,30,_,_,p).P(d,i).T(3.25,b).T(3.758,b).T(5.191,i).T(8.191,i).P(tp,-16.65,_,_,"%").T(3.25,45.12,0.821,qob);Edge.registerCompositionDefn(compId,symbols,fonts,resources,opts);$(window).ready(function(){Edge.launchComposition(compId);});})(jQuery,AdobeEdge,"EDGE-1251484");
+var fonts = {};
+var opts = {};
+var resources = [
+];
+var symbols = {
+"stage": {
+    version: "3.0.0",
+    minimumCompatibleVersion: "3.0.0",
+    build: "3.0.0.322",
+    baseState: "Base State",
+    scaleToFit: "none",
+    centerStage: "none",
+    initialState: "Base State",
+    gpuAccelerate: false,
+    resizeInstances: false,
+    content: {
+            dom: [
+            {
+                id: 'rocon_logo',
+                type: 'image',
+                rect: ['21.7%', '84%','111.2%','284px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"a4_nomal_png_c.png",'50%','50%','649.65px','auto'],
+                transform: [[],[],[],['0.4','0.4']]
+            },
+            {
+                id: 'oder_management',
+                type: 'text',
+                rect: ['-10px', '93.2%','48.1%','19px','auto', 'auto'],
+                opacity: 1,
+                text: "ROCON Order Management System",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [500, "%"], "rgba(100,61,23,1.00)", "200", "none", "normal"]
+            },
+            {
+                id: 'status_text',
+                type: 'text',
+                rect: ['8px', '94.6%','99.1%','19px','auto', 'auto'],
+                opacity: 1,
+                text: "Status: ",
+                align: "left",
+                font: ['Arial, Helvetica, sans-serif', [100, "%"], "rgba(100,61,23,1.00)", "200", "none", "normal"]
+            },
+            {
+                id: 'copyright',
+                type: 'text',
+                rect: ['0.1%', '98%','100%','24px','auto', 'auto'],
+                text: "Copyright YUJIN ROBOT co., Ltd. All rights reserved including the right of reproduction in whole or in part in any form. mobile",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [70, "%"], "rgba(100,61,23,0.37)", "800", "none", "normal"]
+            },
+            {
+                id: 'sandwitch_slot0',
+                type: 'image',
+                tag: 'img',
+                rect: ['-81px', '76.8%','322px','322px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"sandwitch_empty.png",'50%','50%','322px','322px'],
+                transform: [[],[],[],['0.4','0.4']]
+            },
+            {
+                id: 'sandwitch_slot1',
+                type: 'image',
+                tag: 'img',
+                rect: ['10.5%', '76.9%','322px','322px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"sandwitch_empty.png",'50%','50%','322px','322px'],
+                transform: [[],[],[],['0.4','0.4']]
+            },
+            {
+                id: 'checkout_total',
+                type: 'text',
+                rect: ['48%', '81.3%','199px','auto','auto', 'auto'],
+                text: "Checkout Total",
+                font: ['Arial, Helvetica, sans-serif', 25, "rgba(100,61,23,1.00)", "800", "none", ""]
+            },
+            {
+                id: 'Price',
+                type: 'text',
+                rect: ['45.6%', '86.2%','225px','auto','auto', 'auto'],
+                text: "₩ 0",
+                font: ['Arial, Helvetica, sans-serif', 50, "rgba(100,61,23,1.00)", "800", "none", ""]
+            },
+            {
+                id: 'order',
+                type: 'text',
+                rect: ['auto', '81.3%','160px','auto','8px', 'auto'],
+                text: "Place Order",
+                font: ['Arial, Helvetica, sans-serif', 25, "rgba(100,61,23,1.00)", "800", "none", ""]
+            },
+            {
+                id: 'coffee_sel0',
+                type: 'image',
+                tag: 'img',
+                rect: ['-28px', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel1',
+                type: 'image',
+                tag: 'img',
+                rect: ['10.6%', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel2',
+                type: 'image',
+                tag: 'img',
+                rect: ['24.5%', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel3',
+                type: 'image',
+                tag: 'img',
+                rect: ['38.4%', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel4',
+                type: 'image',
+                tag: 'img',
+                rect: ['52.3%', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel5',
+                type: 'image',
+                tag: 'img',
+                rect: ['66.5%', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel6',
+                display: 'block',
+                type: 'image',
+                tag: 'img',
+                rect: ['80.2%', '70.7%','152px','102px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"coffee_empty2.png",'0px','0px'],
+                transform: [[],[],[],['0.45','0.45']]
+            },
+            {
+                id: 'coffee_sel_name0',
+                type: 'text',
+                rect: ['1.6%', '69.3%','9.6%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'sandwich_sel_name0',
+                type: 'text',
+                rect: ['2.8%', '82%','18.5%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'sandwich_sel_name1',
+                type: 'text',
+                rect: ['23.3%', '82%','18.5%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'coffee_sel_name1',
+                type: 'text',
+                rect: ['15.6%', '69.3%','9.6%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'coffee_sel_name2',
+                type: 'text',
+                rect: ['29.7%', '69.3%','9.6%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'coffee_sel_name3',
+                type: 'text',
+                rect: ['43.8%', '69.3%','9.6%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'coffee_sel_name4',
+                type: 'text',
+                rect: ['57.9%', '69.3%','9.6%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'coffee_sel_name5',
+                type: 'text',
+                rect: ['71.9%', '69.3%','9.6%','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', 19.2, "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'coffee_sel_name6',
+                type: 'text',
+                rect: ['86%', '69.3%','69px','42px','auto', 'auto'],
+                font: ['Arial, Helvetica, sans-serif', [120, "%"], "rgba(0,0,0,1)", "normal", "none", ""]
+            },
+            {
+                id: 'COFFEE_TITLE',
+                type: 'image',
+                rect: ['21.6%', '53.4%','55.6%','86px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"u616-6.png",'50%','50%','400px','auto']
+            },
+            {
+                id: 'SANDWITCH_TITLE',
+                display: 'block',
+                type: 'image',
+                rect: ['33.8%', '51.5%','31.1%','10%','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"u617-6.png",'50%','50%','224px','auto']
+            },
+            {
+                id: 'accept_blue',
+                type: 'image',
+                rect: ['auto', '83.1%','129px','129px','28px', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"accept_blue.png",'0px','0px'],
+                filter: [0, 0, 1, 1, 0, 0, 0, 0, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 'fron_blue',
+                display: 'block',
+                type: 'image',
+                rect: ['auto', '51.9%','129px','129px','22px', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"fron_blue.png",'0px','0px'],
+                filter: [0, 0, 1, 1, 0, 0, 0, 0, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 'back_blue',
+                display: 'none',
+                type: 'image',
+                rect: ['14px', '734px','129px','129px','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"back_blue.png",'0px','0px'],
+                filter: [0, 0, 1, 1, 0, 0, 0, 0, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 'P1M1',
+                type: 'group',
+                rect: ['20px', '8.6%','152','184','auto', 'auto'],
+                c: [
+                {
+                    id: 'espresso',
+                    type: 'image',
+                    rect: ['0px', '0%','152px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"espresso.png",'0px','0px']
+                },
+                {
+                    id: 'Text',
+                    type: 'text',
+                    rect: ['33px', '62%','auto','auto','auto', 'auto'],
+                    text: "에스프레소<br>Espresso<br>₩ 2,300",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P1M2',
+                type: 'group',
+                rect: ['25.1%', '8.6%','180','184','auto', 'auto'],
+                c: [
+                {
+                    id: 'TextCopy',
+                    type: 'text',
+                    rect: ['0px', '62%','auto','auto','auto', 'auto'],
+                    text: "에스프레소 꼰빠냐<br>Espresso Conpanna<br>₩ 2,500",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                },
+                {
+                    id: 'espresso_conpanna2',
+                    type: 'image',
+                    rect: ['14px', '0%','152px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"espresso%20conpanna2.png",'0px','0px']
+                }]
+            },
+            {
+                id: 'P1M3',
+                type: 'group',
+                rect: ['51.4%', '8.6%','150','207','auto', 'auto'],
+                c: [
+                {
+                    id: 'TextCopy2',
+                    type: 'text',
+                    rect: ['4px', '55.1%','auto','auto','auto', 'auto'],
+                    text: "카페 아메리카노<br>Cafe Americano<br>₩ 2,500",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                },
+                {
+                    id: 'americano',
+                    type: 'image',
+                    rect: ['0px', '0%','150px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"americano.png",'0px','0px']
+                }]
+            },
+            {
+                id: 'P1M4',
+                type: 'group',
+                rect: ['-123.2%', '8.6%','152','207','auto', 'auto'],
+                c: [
+                {
+                    id: 'TextCopy3',
+                    type: 'text',
+                    rect: ['30px', '55.1%','auto','auto','auto', 'auto'],
+                    text: "카페 라떼<br>Cafe Latte<br>₩ 2,700",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                },
+                {
+                    id: 'cafelatte',
+                    type: 'image',
+                    rect: ['0px', '0%','152px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafelatte.png",'0px','0px']
+                }]
+            },
+            {
+                id: 'P1M5',
+                type: 'group',
+                rect: ['21px', '29.4%','151','183','auto', 'auto'],
+                c: [
+                {
+                    id: 'cappuccino',
+                    type: 'image',
+                    rect: ['0px', '0%','151px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cappuccino.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy9',
+                    type: 'text',
+                    rect: ['22px', '61.8%','auto','auto','auto', 'auto'],
+                    text: "카푸치노<br>Cappuccino<br>₩ 2,700",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P1M6',
+                type: 'group',
+                rect: ['27.1%', '29.4%','152','183','auto', 'auto'],
+                c: [
+                {
+                    id: 'TextCopy10',
+                    type: 'text',
+                    rect: ['2px', '61.8%','148px','auto','auto', 'auto'],
+                    text: "카라멜 라떼<br>Caramel Latte<br>₩ 2,800",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                },
+                {
+                    id: 'cafelatteCopy',
+                    type: 'image',
+                    rect: ['0px', '0%','152px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafelatte.png",'0px','0px']
+                }]
+            },
+            {
+                id: 'P1M7',
+                type: 'group',
+                rect: ['51.3%', '29.4%','152','183','auto', 'auto'],
+                c: [
+                {
+                    id: 'TextCopy11',
+                    type: 'text',
+                    rect: ['0px', '61.8%','152px','auto','auto', 'auto'],
+                    text: "헤이즐넛 라떼<br>Hazelnut Latte<br>₩ 2,800",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                },
+                {
+                    id: 'cafelatteCopy2',
+                    type: 'image',
+                    rect: ['0px', '0%','152px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafelatte.png",'0px','0px']
+                }]
+            },
+            {
+                id: 'P1M8',
+                type: 'group',
+                rect: ['76.3%', '29.4%','152','183','auto', 'auto'],
+                c: [
+                {
+                    id: 'TextCopy12',
+                    type: 'text',
+                    rect: ['22px', '61.8%','auto','auto','auto', 'auto'],
+                    text: "바닐라 라떼<br>Vanilla Latte<br>₩ 3,000",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                },
+                {
+                    id: 'cafelatteCopy4',
+                    type: 'image',
+                    rect: ['0px', '0%','152px','102px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafelatte.png",'0px','0px']
+                }]
+            },
+            {
+                id: 'P2M1',
+                type: 'group',
+                rect: ['26.7%', '25.3%','154','188','auto', 'auto'],
+                c: [
+                {
+                    id: 'cafemocha',
+                    type: 'image',
+                    rect: ['0px', '0%','154px','112px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafemocha.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy8',
+                    type: 'text',
+                    rect: ['22px', '62.8%','auto','auto','auto', 'auto'],
+                    text: "카페 모카<br>Cafe Mocha<br>₩ 3,200",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P2M2',
+                type: 'group',
+                rect: ['26.7%', '25.3%','154','188','auto', 'auto'],
+                c: [
+                {
+                    id: 'cafemochaCopy',
+                    type: 'image',
+                    rect: ['0px', '0%','154px','112px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafemocha.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy13',
+                    type: 'text',
+                    rect: ['-3px', '62.8%','auto','auto','auto', 'auto'],
+                    text: "카라멜 모카<br>Caramel Mocha<br>₩ 3,200",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P2M3',
+                type: 'group',
+                rect: ['26.7%', '25.3%','154','188','auto', 'auto'],
+                c: [
+                {
+                    id: 'cafemochaCopy2',
+                    type: 'image',
+                    rect: ['0px', '0%','154px','112px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"cafemocha.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy14',
+                    type: 'text',
+                    rect: ['22px', '62.8%','auto','auto','auto', 'auto'],
+                    text: "화이트 모카<br>White Mocha<br>₩ 3,200",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P3M1',
+                display: 'block',
+                type: 'group',
+                rect: ['102.9%', '8.6%','308','210','auto', 'auto'],
+                c: [
+                {
+                    id: 'menu-category-sandwich-italbmt_copy',
+                    type: 'image',
+                    rect: ['0px', '0%','308px','140px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"menu-category-sandwich-italbmt%20copy.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy4',
+                    type: 'text',
+                    rect: ['46px', '66.7%','217px','70px','auto', 'auto'],
+                    text: "터키 베이컨 샌드위치<br>Turkey Bacon Sandwich<br>₩ 4,500",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P3M2',
+                display: 'block',
+                type: 'group',
+                rect: ['151.3%', '8.6%','308','211','auto', 'auto'],
+                c: [
+                {
+                    id: 'menu-category-sandwich-buffchic_copy',
+                    type: 'image',
+                    rect: ['0px', '0%','308px','140px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"menu-category-sandwich-buffchic%20copy.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy5',
+                    type: 'text',
+                    rect: ['71px', '66.8%','168px','70px','auto', 'auto'],
+                    text: "닭가슴살 샌드위치<br>Chicken Sandwich<br>₩ 4,500",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P3M3',
+                display: 'block',
+                type: 'group',
+                rect: ['102.9%', '30.2%','308','204','auto', 'auto'],
+                c: [
+                {
+                    id: 'menu-category-sandwich-stkchs_copy',
+                    type: 'image',
+                    rect: ['0px', '0%','308px','140px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"menu-category-sandwich-stkchs%20copy.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy7',
+                    type: 'text',
+                    rect: ['55px', '65.7%','199px','70px','auto', 'auto'],
+                    text: "로스트 비프 샌드위치<br>Roast Beef Sandwich<br>₩ 4,500",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'P3M4',
+                display: 'block',
+                type: 'group',
+                rect: ['151.3%', '30.2%','308','204','auto', 'auto'],
+                c: [
+                {
+                    id: 'menu-category-sandwich-tuna',
+                    type: 'image',
+                    rect: ['0px', '0%','308px','140px','auto', 'auto'],
+                    fill: ["rgba(0,0,0,0)",im+"menu-category-sandwich-tuna.png",'0px','0px']
+                },
+                {
+                    id: 'TextCopy6',
+                    type: 'text',
+                    rect: ['42px', '65.7%','226px','70px','auto', 'auto'],
+                    text: "허브참치 샌드위치<br>Herb Tuna Sandwich<br>₩ 4,500",
+                    align: "center",
+                    font: ['Arial, Helvetica, sans-serif', 20, "rgba(0,0,0,1)", "normal", "none", ""]
+                }]
+            },
+            {
+                id: 'Rectangle',
+                display: 'none',
+                type: 'rect',
+                rect: ['-0.8%', '798px','100.4%','506px','auto', 'auto'],
+                opacity: 0.9,
+                fill: ["rgba(57,35,13,1)"],
+                stroke: [0,"rgba(0,0,0,0.00)","none"]
+            },
+            {
+                id: 'Text2Copy',
+                display: 'none',
+                type: 'text',
+                rect: ['11.9%', '823px','76.1%','13.6%','auto', 'auto'],
+                text: "Thank you!<br> Come again!",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [400, "%"], "rgba(255,255,255,1.00)", "700", "none", "normal"]
+            },
+            {
+                id: 'Text3',
+                display: 'none',
+                type: 'text',
+                rect: ['118px', '285','auto','auto','auto', 'auto'],
+                text: "Order Complete",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [220, "%"], "rgba(57,35,13,1.00)", "bold", "none", "normal"]
+            },
+            {
+                id: 'Text4',
+                display: 'none',
+                type: 'text',
+                rect: ['auto', '283px','225px','auto','4.6%', 'auto'],
+                text: "Order Processing",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [220, "%"], "rgba(57,35,13,1)", "bold", "none", "normal"]
+            },
+            {
+                id: 'Text4Copy',
+                display: 'none',
+                type: 'text',
+                rect: ['auto', '705px','182px','56px','6.9%', 'auto'],
+                text: "Preparing Order",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [220, "%"], "rgba(57,35,13,1)", "bold", "none", "normal"]
+            },
+            {
+                id: 'Text4Copy2',
+                display: 'none',
+                type: 'text',
+                rect: ['71px', '705px','182px','56px','auto', 'auto'],
+                text: "Serving Order",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [220, "%"], "rgba(57,35,13,1)", "bold", "none", "normal"]
+            },
+            {
+                id: '_03_pp_anwansoon',
+                display: 'none',
+                type: 'image',
+                rect: ['20px', '114px','154px','154px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"03_pp_anwansoon.png",'0px','0px']
+            },
+            {
+                id: 'nfc_logo',
+                display: 'none',
+                type: 'image',
+                rect: ['137px', '164px','200px','55px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"nfc_logo.png",'0px','0px']
+            },
+            {
+                id: '_410_anwansoon2',
+                display: 'none',
+                type: 'image',
+                rect: ['auto', '499px','199px','199px','6.4%', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"410_anwansoon.png",'0px','0px']
+            },
+            {
+                id: 'Kobuki_00',
+                display: 'none',
+                type: 'image',
+                rect: ['63px', '473px','195px','239px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"Kobuki_00.png",'0px','0px']
+            },
+            {
+                id: '_114_anwansoonfge',
+                display: 'none',
+                type: 'image',
+                rect: ['auto', '150px','130px','130px','18.3%', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"114_anwansoonfge.png",'0px','0px']
+            },
+            {
+                id: 'a4_nomal_png_a',
+                display: 'none',
+                type: 'image',
+                rect: ['auto', '105px','104px','163px','8.2%', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"a4_nomal_png_a.png",'0px','0px']
+            },
+            {
+                id: 's1p1',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['39.7%', '289px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p2',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['46.3%', '290px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p3',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['53.1%', '290px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p4',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['59.8%', '290px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p1Copy',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['78.3%', '337px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p2Copy',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['78.3%', '380px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p3Copy',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['78.3%', '423px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p4Copy',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['78.3%', '465px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p1Copy2',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['59.9%', '582px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p2Copy2',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['53.2%', '582px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p3Copy2',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['46.4%', '582px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 's1p4Copy2',
+                display: 'none',
+                type: 'ellipse',
+                rect: ['39.7%', '582px','21px','22px','auto', 'auto'],
+                borderRadius: ["50%", "50%", "50%", "50%"],
+                fill: ["rgba(67,222,254,1.00)"],
+                stroke: [0,"rgba(0, 0, 0, 0)","none"],
+                filter: [0, 0, 1, 1, 0, 0, 0, 7.1664663461538, "rgba(0,0,0,0)", 0, 0, 0]
+            },
+            {
+                id: 'header',
+                type: 'rect',
+                rect: ['0px', '0px','2391px','80px','auto', 'auto'],
+                opacity: 0.9,
+                fill: ["rgba(57,35,13,1.00)"],
+                stroke: [0,"rgba(57,35,13,1.00)","none"]
+            },
+            {
+                id: 'dorothy_cafe',
+                type: 'text',
+                rect: ['89px', '10px','324px','59px','auto', 'auto'],
+                text: "Dorothy..Cafe",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [320, "%"], "rgba(255,255,255,1.00)", "800", "none", "normal"]
+            },
+            {
+                id: '_01',
+                type: 'text',
+                rect: ['auto', '10px','auto','auto','32px', 'auto'],
+                text: "01",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [320, "%"], "rgba(255,255,255,1.00)", "800", "none", "normal"]
+            },
+            {
+                id: 'table_no',
+                type: 'text',
+                rect: ['auto', '25px','auto','auto','101px', 'auto'],
+                text: "Table",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', [150, "%"], "rgba(255,255,255,1.00)", "800", "none", "normal"]
+            },
+            {
+                id: 'dorothy_logo012',
+                type: 'image',
+                rect: ['24px', '13px','56px','55px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"dorothy_logo01.png",'0px','0px']
+            },
+            {
+                id: 'Rectangle2Copy2',
+                display: 'none',
+                type: 'rect',
+                rect: ['0%', '80px','100%','61.8%','auto', 'auto'],
+                opacity: 0.9,
+                fill: ["rgba(57,35,13,1.00)"],
+                stroke: [0,"rgba(57,35,13,1.00)","none"]
+            },
+            {
+                id: 'Text5Copy2',
+                display: 'none',
+                type: 'text',
+                rect: ['14%', '352px','70.8%','6.8%','auto', 'auto'],
+                text: "Select a payment method ",
+                align: "center",
+                font: ['Arial, Helvetica, sans-serif', 40, "rgba(255,255,255,1.00)", "normal", "none", ""]
+            },
+            {
+                id: 'Text6Copy2',
+                display: 'none',
+                type: 'text',
+                rect: ['auto', '45.1%','auto','auto','15.6%', 'auto'],
+                text: "Place Order",
+                align: "left",
+                font: ['Arial, Helvetica, sans-serif', 30, "rgba(255,255,255,1.00)", "800", "none", "normal"]
+            },
+            {
+                id: 'Text7Copy2',
+                display: 'none',
+                type: 'text',
+                rect: ['19.6%', '45.1%','auto','auto','auto', 'auto'],
+                text: "Cancel",
+                align: "left",
+                font: ['Arial, Helvetica, sans-serif', 30, "rgba(255,255,255,1.00)", "800", "none", "normal"]
+            },
+            {
+                id: 'deleteCopy2',
+                display: 'none',
+                type: 'image',
+                rect: ['15.5%', '49.5%','145px','144px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"delete.png",'0px','0px']
+            },
+            {
+                id: 'accept_blue_payment',
+                display: 'none',
+                type: 'image',
+                rect: ['auto', '49.5%','145px','145px','17.2%', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"accept_blue.png",'0px','0px']
+            },
+            {
+                id: 'ROCON_BANK_CARD',
+                display: 'block',
+                type: 'image',
+                rect: ['52px', '-649px','145px','145px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"0030_anwansoon.png",'0px','0px']
+            },
+            {
+                id: 'YUJINMASTER',
+                display: 'block',
+                type: 'image',
+                rect: ['1282px', '-199px','145px','145px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"0034_anwansoon.png",'0px','0px']
+            },
+            {
+                id: 'ROCON_BANK_DESC',
+                display: 'block',
+                type: 'text',
+                rect: ['294px', '-622px','454px','auto','auto', 'auto'],
+                text: "YUJIN MasterCard<br>1234-2345-3456-4567",
+                align: "left",
+                font: ['Arial, Helvetica, sans-serif', 40, "rgba(160,160,160,1.00)", "normal", "none", "normal"]
+            },
+            {
+                id: 'accept',
+                display: 'block',
+                type: 'image',
+                rect: ['43px', '-601px','63px','63px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"accept.png",'0px','0px']
+            },
+            {
+                id: 'acceptCopy',
+                display: 'none',
+                type: 'image',
+                rect: ['46px', '-601px','63px','63px','auto', 'auto'],
+                fill: ["rgba(0,0,0,0)",im+"accept.png",'0px','0px']
+            },
+            {
+                id: 'YUJINMASTER_DESC',
+                display: 'block',
+                type: 'text',
+                rect: ['298px', '-478px','454px','auto','auto', 'auto'],
+                text: "ROCON BANK<br>1234-2345-3456-4567",
+                align: "left",
+                font: ['Arial, Helvetica, sans-serif', 40, "rgba(160,160,160,1.00)", "normal", "none", "normal"]
+            },
+            {
+                id: 'yujinrobot_innoteam_header_white',
+                display: 'none',
+                type: 'image',
+                rect: ['21%', '80.8%','57.9%','9.2%','auto', 'auto'],
+                opacity: 1,
+                fill: ["rgba(0,0,0,0)",im+"yujinrobot_innoteam_header_white.png",'0px','0px','100%','100.05%']
+            }],
+            symbolInstances: [
+
+            ]
+        },
+    states: {
+        "Base State": {
+            "${_s1p4Copy2}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '582px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "height", '22px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '39.72%'],
+                ["style", "width", '21px']
+            ],
+            "${_TextCopy9}": [
+                ["style", "top", '61.75%'],
+                ["style", "text-align", 'center'],
+                ["style", "left", '22px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_Text5Copy2}": [
+                ["style", "top", '-697px'],
+                ["style", "width", '83.07%'],
+                ["style", "text-align", 'center'],
+                ["style", "height", '6.79%'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "left", '7.92%'],
+                ["style", "font-size", '40px']
+            ],
+            "${_sandwitch_slot1}": [
+                ["style", "top", '76.89%'],
+                ["transform", "scaleY", '0.4'],
+                ["transform", "scaleX", '0.4'],
+                ["style", "left", '10.51%'],
+                ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ]
+            ],
+            "${_Text6Copy2}": [
+                ["style", "top", '-16.65%'],
+                ["style", "display", 'none'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "right", '17.08%'],
+                ["style", "left", 'auto'],
+                ["style", "font-size", '30px']
+            ],
+            "${_s1p4}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '290px'],
+                ["style", "opacity", '1'],
+                ["style", "height", '22px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "left", '59.8%'],
+                ["style", "width", '21px']
+            ],
+            "${_s1p3Copy}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '423px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "height", '22px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '78.33%'],
+                ["style", "width", '21px']
+            ],
+            "${_sandwich_sel_name1}": [
+                ["style", "top", '81.98%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "font-size", '21px'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "left", '23.31%'],
+                ["style", "word-spacing", '0px'],
+                ["style", "width", '18.49%']
+            ],
+            "${_oder_management}": [
+                ["style", "letter-spacing", '0em'],
+                ["style", "bottom", 'auto'],
+                ["color", "color", 'rgba(100,61,23,0.49)'],
+                ["style", "right", 'auto'],
+                ["style", "left", '-10px'],
+                ["style", "font-size", '120%'],
+                ["style", "top", '93.15%'],
+                ["style", "font-weight", '200'],
+                ["style", "text-align", 'center'],
+                ["style", "text-indent", '0%'],
+                ["style", "height", '20px'],
+                ["style", "width", '48.07%'],
+                ["style", "word-spacing", '0em'],
+                ["style", "opacity", '1']
+            ],
+            "${_s1p2}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '290px'],
+                ["style", "opacity", '1'],
+                ["style", "height", '22px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "left", '46.33%'],
+                ["style", "width", '21px']
+            ],
+            "${_P3M4}": [
+                ["style", "top", '30.21%'],
+                ["style", "left", '252%'],
+                ["style", "display", 'block']
+            ],
+            "${_TextCopy16}": [
+                ["style", "top", '118px'],
+                ["style", "left", '22px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_TextCopy4}": [
+                ["style", "top", '66.67%'],
+                ["style", "text-align", 'center'],
+                ["style", "height", '70px'],
+                ["style", "width", '217px'],
+                ["style", "left", '46px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_TextCopy15}": [
+                ["style", "top", '118px'],
+                ["style", "width", '132px'],
+                ["style", "left", '22px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_s1p3Copy2}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '582px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "height", '22px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '46.39%'],
+                ["style", "width", '21px']
+            ],
+            "${_Text6Copy}": [
+                ["style", "top", '-16.65%'],
+                ["style", "display", 'none'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "right", '20.83%'],
+                ["style", "left", 'auto'],
+                ["style", "font-size", '30px']
+            ],
+            "${_TextCopy12}": [
+                ["style", "top", '61.75%'],
+                ["style", "left", '22px'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px']
+            ],
+            "${_americano}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_Text4Copy}": [
+                ["style", "top", '705px'],
+                ["style", "display", 'none'],
+                ["style", "opacity", '0.2'],
+                ["style", "bottom", 'auto'],
+                ["style", "height", '56px'],
+                ["style", "right", '6.64%'],
+                ["style", "left", 'auto'],
+                ["style", "width", '200px']
+            ],
+            "${_accept_blue}": [
+                ["style", "top", '83.11%'],
+                ["subproperty", "filter.saturate", '1'],
+                ["style", "opacity", '1'],
+                ["style", "height", '129px'],
+                ["style", "right", '28px'],
+                ["style", "left", 'auto'],
+                ["style", "width", '129px']
+            ],
+            "${_header}": [
+                ["color", "background-color", 'rgba(57,35,13,1.00)'],
+                ["style", "top", '0px'],
+                ["color", "border-color", 'rgba(57,35,13,1.00)'],
+                ["style", "height", '80px'],
+                ["style", "opacity", '0.9'],
+                ["style", "left", '0px'],
+                ["style", "width", '2391px']
+            ],
+            "${_TextCopy8}": [
+                ["style", "top", '62.77%'],
+                ["style", "left", '22px'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px']
+            ],
+            "${_dorothy_logo012}": [
+                ["style", "height", '55px'],
+                ["style", "top", '13px'],
+                ["style", "left", '24px'],
+                ["style", "width", '56px']
+            ],
+            "${_s1p1Copy2}": [
+                ["style", "top", '582px'],
+                ["style", "opacity", '1'],
+                ["style", "display", 'none'],
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "height", '22px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "left", '59.86%'],
+                ["style", "width", '21px']
+            ],
+            "${_yujinrobot_innoteam_header_white}": [
+                ["style", "top", '79.77%'],
+                ["style", "display", 'none'],
+                ["style", "background-position", [0.01,-0.03], {valueTemplate:'@@0@@px @@1@@px'} ],
+                ["style", "right", 'auto'],
+                ["style", "height", '9.19%'],
+                ["style", "opacity", '1'],
+                ["style", "left", '20.97%'],
+                ["style", "width", '57.92%']
+            ],
+            "${_order}": [
+                ["style", "top", '81.26%'],
+                ["style", "width", '160px'],
+                ["style", "font-weight", '800'],
+                ["color", "color", 'rgba(100,61,23,1.00)'],
+                ["style", "right", '8px'],
+                ["style", "left", 'auto'],
+                ["style", "font-size", '25px']
+            ],
+            "${_TextCopy}": [
+                ["style", "top", '61.96%'],
+                ["style", "text-align", 'center'],
+                ["style", "left", '0px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_Text7Copy2}": [
+                ["style", "top", '-16.65%'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "left", '18.19%'],
+                ["style", "font-size", '30px']
+            ],
+            "${_cafelatteCopy2}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_TextCopy11}": [
+                ["style", "top", '61.75%'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px'],
+                ["style", "left", '0px'],
+                ["style", "width", '152px']
+            ],
+            "${_coffee_sel_name3}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "width", '9.59%'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "word-spacing", '0px'],
+                ["style", "left", '43.83%'],
+                ["style", "font-size", '21px']
+            ],
+            "${_cappuccino}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_Text3}": [
+                ["style", "top", '283px'],
+                ["style", "display", 'none'],
+                ["style", "left", '57px'],
+                ["color", "color", 'rgba(57,35,13,1.00)']
+            ],
+            "${_cafemocha}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_P1M3}": [
+                ["style", "left", '51.39%']
+            ],
+            "${_P1M1}": [
+                ["style", "left", '20px']
+            ],
+            "${_menu-category-sandwich-buffchic_copy}": [
+                ["style", "top", '0%'],
+                ["transform", "scaleY", '1'],
+                ["style", "left", '0px'],
+                ["transform", "scaleX", '1']
+            ],
+            "${_coffee_sel3}": [
+                ["style", "top", '70.74%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '38.41%']
+            ],
+            "${_Rectangle}": [
+                ["style", "top", '796px'],
+                ["style", "height", '506px'],
+                ["style", "opacity", '0.9'],
+                ["style", "display", 'none'],
+                ["color", "border-color", 'rgba(0,0,0,0.00)'],
+                ["style", "left", '-0.27%'],
+                ["style", "width", '100.41%']
+            ],
+            "${_Kobuki_00}": [
+                ["style", "top", '473px'],
+                ["style", "display", 'none'],
+                ["style", "height", '239px'],
+                ["style", "opacity", '0.2'],
+                ["style", "left", '63px'],
+                ["style", "width", '195px']
+            ],
+            "${_coffee_sel_name5}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "width", '9.59%'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "word-spacing", '0px'],
+                ["style", "left", '71.89%'],
+                ["style", "font-size", '21px']
+            ],
+            "${_sandwich_sel_name0}": [
+                ["style", "top", '81.98%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "width", '18.49%'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "word-spacing", '0px'],
+                ["style", "left", '2.75%'],
+                ["style", "font-size", '21px']
+            ],
+            "${_coffee_sel5}": [
+                ["style", "top", '70.67%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '66.47%']
+            ],
+            "${_menu-category-sandwich-tuna}": [
+                ["style", "top", '0%'],
+                ["transform", "scaleY", '1'],
+                ["style", "left", '0px'],
+                ["transform", "scaleX", '1']
+            ],
+            "${_P1M8}": [
+                ["style", "top", '29.43%'],
+                ["style", "left", '76.25%']
+            ],
+            "${__03_pp_anwansoon}": [
+                ["style", "top", '114px'],
+                ["style", "height", '154px'],
+                ["style", "display", 'none'],
+                ["style", "left", '20px'],
+                ["style", "width", '154px']
+            ],
+            "${_rocon_logo}": [
+                ["style", "-webkit-transform-origin", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
+                ["style", "-moz-transform-origin", [50,50],{valueTemplate:'@@0@@% @@1@@%'}],
+                ["style", "-ms-transform-origin", [50,50],{valueTemplate:'@@0@@% @@1@@%'}],
+                ["style", "msTransformOrigin", [50,50],{valueTemplate:'@@0@@% @@1@@%'}],
+                ["style", "-o-transform-origin", [50,50],{valueTemplate:'@@0@@% @@1@@%'}],
+                ["style", "bottom", 'auto'],
+                ["transform", "scaleX", '0.4'],
+                ["style", "right", 'auto'],
+                ["style", "left", '21.68%'],
+                ["style", "width", '111.17%'],
+                ["style", "top", '83.96%'],
+                ["transform", "scaleY", '0.4'],
+                ["style", "height", '284px'],
+                ["style", "opacity", '1'],
+                ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
+                ["style", "background-size", [649.65,'auto'], {valueTemplate:'@@0@@px @@1@@'} ]
+            ],
+            "${__01}": [
+                ["style", "top", '10px'],
+                ["style", "bottom", 'auto'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "right", '32px'],
+                ["style", "left", 'auto'],
+                ["style", "font-size", '320%']
+            ],
+            "${_coffee_sel_name0}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "font-size", '21px'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "left", '1.61%'],
+                ["style", "word-spacing", '0px'],
+                ["style", "width", '9.59%']
+            ],
+            "${_accept_blue_payment}": [
+                ["style", "top", '-12.19%'],
+                ["style", "display", 'none'],
+                ["style", "height", '145px'],
+                ["style", "right", '17.22%'],
+                ["style", "left", 'auto'],
+                ["style", "width", '145px']
+            ],
+            "${_coffee_sel_name4}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "font-size", '21px'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "left", '57.86%'],
+                ["style", "word-spacing", '0px'],
+                ["style", "width", '9.59%']
+            ],
+            "${_P3M2}": [
+                ["style", "top", '8.56%'],
+                ["style", "left", '251.75%'],
+                ["style", "display", 'block']
+            ],
+            "${_P1M4}": [
+                ["style", "left", '75.56%'],
+                ["style", "right", 'auto']
+            ],
+            "${_coffee_sel2}": [
+                ["style", "top", '70.74%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '24.53%']
+            ],
+            "${_Text}": [
+                ["style", "top", '61.96%'],
+                ["style", "text-align", 'center'],
+                ["style", "left", '33px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_SANDWITCH_TITLE}": [
+                ["style", "top", '51.48%'],
+                ["style", "opacity", '0'],
+                ["style", "display", 'block'],
+                ["style", "height", '10%'],
+                ["style", "background-size", [224,'auto'], {valueTemplate:'@@0@@px @@1@@'} ],
+                ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
+                ["style", "left", '33.82%']
+            ],
+            "${_espresso_conpanna2}": [
+                ["style", "left", '14px'],
+                ["style", "top", '0%']
+            ],
+            "${_cafemochaCopy2}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_TextCopy6}": [
+                ["style", "top", '65.69%'],
+                ["style", "text-align", 'center'],
+                ["style", "height", '70px'],
+                ["style", "width", '226px'],
+                ["style", "left", '42px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_P2M3}": [
+                ["style", "top", '8.42%'],
+                ["style", "left", '157.08%']
+            ],
+            "${_TextCopy14}": [
+                ["style", "top", '62.77%'],
+                ["style", "left", '22px'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px']
+            ],
+            "${_s1p3}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '290px'],
+                ["style", "opacity", '1'],
+                ["style", "height", '22px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "left", '53.13%'],
+                ["style", "width", '21px']
+            ],
+            "${_espresso}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_acceptCopy}": [
+                ["style", "top", '-601px'],
+                ["style", "display", 'none'],
+                ["style", "height", '63px'],
+                ["style", "left", '46px'],
+                ["style", "width", '63px']
+            ],
+            "${_copyright}": [
+                ["style", "top", '98%'],
+                ["style", "font-size", '70%'],
+                ["color", "color", 'rgba(100,61,23,0.37)'],
+                ["style", "height", '24px'],
+                ["style", "left", '0.14%'],
+                ["style", "width", '100%']
+            ],
+            "${_coffee_sel6}": [
+                ["style", "top", '70.74%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '80.22%'],
+                ["style", "display", 'block']
+            ],
+            "${_P2M1}": [
+                ["style", "top", '8.42%'],
+                ["style", "left", '106.1%']
+            ],
+            "${_sandwitch_slot0}": [
+                ["style", "top", '76.82%'],
+                ["transform", "scaleY", '0.4'],
+                ["transform", "scaleX", '0.4'],
+                ["style", "left", '-81px'],
+                ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ]
+            ],
+            "${_ROCON_BANK_DESC}": [
+                ["style", "top", '-622px'],
+                ["style", "text-align", 'left'],
+                ["style", "display", 'block'],
+                ["color", "color", 'rgba(160,160,160,1.00)'],
+                ["style", "opacity", '1'],
+                ["style", "left", '294px'],
+                ["style", "width", '454px']
+            ],
+            "${__410_anwansoon2}": [
+                ["style", "top", '499px'],
+                ["style", "opacity", '0.2'],
+                ["style", "display", 'none'],
+                ["style", "bottom", 'auto'],
+                ["style", "height", '199px'],
+                ["style", "right", '6.39%'],
+                ["style", "left", 'auto'],
+                ["style", "width", '199px']
+            ],
+            "${_s1p2Copy2}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '582px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "height", '22px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '53.19%'],
+                ["style", "width", '21px']
+            ],
+            "${_s1p1Copy}": [
+                ["style", "top", '337px'],
+                ["style", "opacity", '1'],
+                ["style", "display", 'none'],
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "height", '22px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "left", '78.33%'],
+                ["style", "width", '21px']
+            ],
+            "${_cafelatteCopy}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_YUJINMASTER}": [
+                ["style", "top", '-505px'],
+                ["style", "display", 'block'],
+                ["style", "height", '145px'],
+                ["style", "opacity", '0.3'],
+                ["style", "left", '132px'],
+                ["style", "width", '145px']
+            ],
+            "${_Text7Copy}": [
+                ["style", "top", '-16.65%'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "left", '17.64%'],
+                ["style", "font-size", '30px']
+            ],
+            "${_cafelatteCopy4}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_YUJINMASTER_DESC}": [
+                ["style", "top", '-478px'],
+                ["style", "text-align", 'left'],
+                ["style", "display", 'block'],
+                ["color", "color", 'rgba(160,160,160,1.00)'],
+                ["style", "opacity", '0.5'],
+                ["style", "left", '298px'],
+                ["style", "width", '454px']
+            ],
+            "${_coffee_sel0}": [
+                ["style", "top", '70.74%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '-28px']
+            ],
+            "${_accept}": [
+                ["style", "top", '-601px'],
+                ["style", "display", 'block'],
+                ["style", "height", '63px'],
+                ["style", "left", '43px'],
+                ["style", "width", '63px']
+            ],
+            "${_TextCopy5}": [
+                ["style", "top", '66.82%'],
+                ["style", "text-align", 'center'],
+                ["style", "height", '70px'],
+                ["style", "font-size", '20px'],
+                ["style", "left", '71px'],
+                ["style", "width", '168px']
+            ],
+            "${_P1M5}": [
+                ["style", "top", '29.43%'],
+                ["style", "left", '21px']
+            ],
+            "${_Text5Copy}": [
+                ["style", "top", '-521px'],
+                ["style", "font-size", '40px'],
+                ["style", "height", '6.79%'],
+                ["style", "display", 'none'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "left", '14.03%'],
+                ["style", "width", '70.84%']
+            ],
+            "${_Text4}": [
+                ["style", "top", '283px'],
+                ["style", "opacity", '0.2'],
+                ["style", "bottom", 'auto'],
+                ["style", "display", 'none'],
+                ["style", "right", '4.58%'],
+                ["style", "left", 'auto'],
+                ["style", "width", '225px']
+            ],
+            "${_P1M6}": [
+                ["style", "top", '29.43%'],
+                ["style", "left", '27.08%']
+            ],
+            "${_TextCopy17}": [
+                ["style", "top", '118px'],
+                ["style", "left", '22px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_back_blue}": [
+                ["style", "top", '734px'],
+                ["subproperty", "filter.saturate", '0'],
+                ["style", "display", 'none'],
+                ["style", "height", '129px'],
+                ["style", "opacity", '0'],
+                ["style", "left", '14px'],
+                ["style", "width", '129px']
+            ],
+            "${_P2M2}": [
+                ["style", "top", '8.42%'],
+                ["style", "left", '132.52%']
+            ],
+            "${_P3M1}": [
+                ["style", "top", '8.56%'],
+                ["style", "left", '205.09%'],
+                ["style", "display", 'block']
+            ],
+            "${_ROCON_BANK_CARD}": [
+                ["style", "top", '-649px'],
+                ["style", "display", 'block'],
+                ["style", "height", '145px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '130px'],
+                ["style", "width", '145px']
+            ],
+            "${_Text4Copy2}": [
+                ["style", "top", '705px'],
+                ["style", "height", '56px'],
+                ["style", "display", 'none'],
+                ["style", "opacity", '0.2'],
+                ["style", "left", '71px'],
+                ["style", "width", '200px']
+            ],
+            "${_dorothy_cafe}": [
+                ["style", "top", '10px'],
+                ["style", "font-size", '320%'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "height", '59px'],
+                ["style", "left", '89px'],
+                ["style", "width", '324px']
+            ],
+            "${_s1p2Copy}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '380px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "height", '22px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '78.33%'],
+                ["style", "width", '21px']
+            ],
+            "${_deleteCopy2}": [
+                ["style", "top", '-12.19%'],
+                ["style", "height", '144px'],
+                ["style", "display", 'none'],
+                ["style", "left", '15.48%'],
+                ["style", "width", '145px']
+            ],
+            "${_TextCopy13}": [
+                ["style", "top", '62.77%'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px'],
+                ["style", "left", '-3px'],
+                ["style", "width", '160px']
+            ],
+            "${_P1M2}": [
+                ["style", "left", '25.14%']
+            ],
+            "${_fron_blue}": [
+                ["style", "top", '51.9%'],
+                ["subproperty", "filter.saturate", '1'],
+                ["style", "opacity", '1'],
+                ["style", "display", 'block'],
+                ["style", "height", '129px'],
+                ["style", "right", '22px'],
+                ["style", "left", 'auto'],
+                ["style", "width", '129px']
+            ],
+            "${__114_anwansoonfge}": [
+                ["style", "top", '150px'],
+                ["style", "opacity", '0.2'],
+                ["style", "display", 'none'],
+                ["style", "bottom", 'auto'],
+                ["style", "height", '130px'],
+                ["style", "right", '18.33%'],
+                ["style", "left", 'auto'],
+                ["style", "width", '130px']
+            ],
+            "${_COFFEE_TITLE}": [
+                ["style", "top", '53.38%'],
+                ["style", "opacity", '1'],
+                ["style", "background-size", [400,'auto'], {valueTemplate:'@@0@@px @@1@@'} ],
+                ["style", "background-position", [50,50], {valueTemplate:'@@0@@% @@1@@%'} ],
+                ["style", "left", '21.6%']
+            ],
+            "${_cafelatte}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_nfc_logo}": [
+                ["style", "top", '164px'],
+                ["style", "height", '55px'],
+                ["style", "display", 'none'],
+                ["style", "left", '137px'],
+                ["style", "width", '200px']
+            ],
+            "${_s1p4Copy}": [
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "display", 'none'],
+                ["style", "top", '465px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "height", '22px'],
+                ["style", "opacity", '1'],
+                ["style", "left", '78.33%'],
+                ["style", "width", '21px']
+            ],
+            "${_Text2Copy}": [
+                ["style", "top", '875px'],
+                ["style", "display", 'none'],
+                ["style", "font-size", '400%'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "height", '6.08%'],
+                ["style", "font-weight", '700'],
+                ["style", "left", '0.81%'],
+                ["style", "width", '99.05%']
+            ],
+            "${_Rectangle2Copy2}": [
+                ["color", "background-color", 'rgba(57,35,13,1.00)'],
+                ["style", "top", '-794px'],
+                ["style", "display", 'none'],
+                ["color", "border-color", 'rgba(57,35,13,1.00)'],
+                ["style", "left", '0%'],
+                ["style", "opacity", '0.9']
+            ],
+            "${_TextCopy2}": [
+                ["style", "top", '55.07%'],
+                ["style", "left", '4px'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px']
+            ],
+            "${_a4_nomal_png_a}": [
+                ["style", "top", '105px'],
+                ["style", "opacity", '0.2'],
+                ["style", "display", 'none'],
+                ["style", "bottom", 'auto'],
+                ["style", "height", '163px'],
+                ["style", "right", '8.19%'],
+                ["style", "left", 'auto'],
+                ["style", "width", '104px']
+            ],
+            "${_TextCopy10}": [
+                ["style", "top", '61.75%'],
+                ["style", "text-align", 'center'],
+                ["style", "font-size", '20px'],
+                ["style", "left", '2px'],
+                ["style", "width", '148px']
+            ],
+            "${_menu-category-sandwich-stkchs_copy}": [
+                ["style", "top", '0%'],
+                ["transform", "scaleY", '1'],
+                ["style", "left", '0px'],
+                ["transform", "scaleX", '1']
+            ],
+            "${_s1p1}": [
+                ["style", "top", '289px'],
+                ["style", "opacity", '1'],
+                ["style", "display", 'none'],
+                ["color", "background-color", 'rgba(67,222,254,1.00)'],
+                ["style", "height", '22px'],
+                ["subproperty", "filter.blur", '7.17px'],
+                ["style", "left", '39.66%'],
+                ["style", "width", '21px']
+            ],
+            "${_coffee_sel_name6}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0em'],
+                ["style", "width", '69px'],
+                ["style", "text-indent", '0%'],
+                ["style", "height", '42px'],
+                ["style", "word-spacing", '0em'],
+                ["style", "left", '85.97%'],
+                ["style", "font-size", '131.25%']
+            ],
+            "${_TextCopy3}": [
+                ["style", "top", '55.07%'],
+                ["style", "text-align", 'center'],
+                ["style", "left", '30px'],
+                ["style", "font-size", '20px']
+            ],
+            "${_coffee_sel_name2}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "font-size", '21px'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "left", '29.66%'],
+                ["style", "word-spacing", '0px'],
+                ["style", "width", '9.59%']
+            ],
+            "${_Price}": [
+                ["style", "top", '86.15%'],
+                ["style", "width", '225px'],
+                ["color", "color", 'rgba(100,61,23,1.00)'],
+                ["style", "font-weight", '800'],
+                ["style", "left", '45.63%'],
+                ["style", "font-size", '50px']
+            ],
+            "${_coffee_sel1}": [
+                ["style", "top", '70.74%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '10.64%']
+            ],
+            "${_cafemochaCopy}": [
+                ["style", "left", '0px'],
+                ["style", "top", '0%']
+            ],
+            "${_P3M3}": [
+                ["style", "display", 'block'],
+                ["style", "left", '203.67%'],
+                ["style", "top", '30.21%']
+            ],
+            "${_status_text}": [
+                ["style", "letter-spacing", '0em'],
+                ["style", "bottom", 'auto'],
+                ["color", "color", 'rgba(100,61,23,0.49)'],
+                ["style", "right", 'auto'],
+                ["style", "left", '8px'],
+                ["style", "font-size", '100%'],
+                ["style", "top", '94.64%'],
+                ["style", "opacity", '1'],
+                ["style", "text-align", 'left'],
+                ["style", "text-indent", '0%'],
+                ["style", "height", '20px'],
+                ["style", "width", '99.05%'],
+                ["style", "word-spacing", '0em'],
+                ["style", "font-weight", '200']
+            ],
+            "${_Stage}": [
+                ["color", "background-color", 'rgba(255,255,255,1)'],
+                ["style", "min-width", '100%'],
+                ["style", "overflow", 'scroll'],
+                ["style", "height", '1414px'],
+                ["style", "max-width", '100%'],
+                ["style", "width", '100%']
+            ],
+            "${_checkout_total}": [
+                ["style", "top", '81.27%'],
+                ["style", "font-size", '25px'],
+                ["color", "color", 'rgba(100,61,23,1.00)'],
+                ["style", "font-weight", '800'],
+                ["style", "left", '48%'],
+                ["style", "width", '199px']
+            ],
+            "${_menu-category-sandwich-italbmt_copy}": [
+                ["style", "top", '0%'],
+                ["transform", "scaleY", '1'],
+                ["style", "left", '0px'],
+                ["transform", "scaleX", '1']
+            ],
+            "${_coffee_sel4}": [
+                ["style", "top", '70.74%'],
+                ["transform", "scaleY", '0.45'],
+                ["transform", "scaleX", '0.45'],
+                ["style", "opacity", '1'],
+                ["style", "left", '52.3%']
+            ],
+            "${_P1M7}": [
+                ["style", "top", '29.43%'],
+                ["style", "left", '51.25%']
+            ],
+            "${_table_no}": [
+                ["style", "top", '25px'],
+                ["style", "bottom", 'auto'],
+                ["color", "color", 'rgba(255,255,255,1.00)'],
+                ["style", "right", '101px'],
+                ["style", "left", 'auto'],
+                ["style", "font-size", '150%']
+            ],
+            "${_TextCopy7}": [
+                ["style", "top", '65.69%'],
+                ["style", "text-align", 'center'],
+                ["style", "height", '70px'],
+                ["style", "font-size", '20px'],
+                ["style", "left", '55px'],
+                ["style", "width", '199px']
+            ],
+            "${_coffee_sel_name1}": [
+                ["style", "top", '69.26%'],
+                ["style", "letter-spacing", '0px'],
+                ["style", "width", '9.59%'],
+                ["style", "text-indent", '0px'],
+                ["style", "height", '42px'],
+                ["style", "word-spacing", '0px'],
+                ["style", "left", '15.64%'],
+                ["style", "font-size", '21px']
+            ]
+        }
+    },
+    timelines: {
+        "Default Timeline": {
+            fromState: "Base State",
+            toState: "",
+            duration: 10500,
+            autoPlay: true,
+            timeline: [
+                { id: "dg15", tween: [ "style", "${_acceptCopy}", "display", 'block', { fromValue: 'none'}], position: 4250, duration: 0 },
+                { id: "dg16", tween: [ "style", "${_acceptCopy}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg173", tween: [ "style", "${_s1p2}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg174", tween: [ "style", "${_s1p2}", "display", 'none', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg175", tween: [ "style", "${_s1p2}", "display", 'block', { fromValue: 'none'}], position: 7250, duration: 0 },
+                { id: "dg33", tween: [ "style", "${__114_anwansoonfge}", "opacity", '1', { fromValue: '0.2'}], position: 7000, duration: 1000 },
+                { id: "dg63", tween: [ "subproperty", "${_back_blue}", "filter.saturate", '1', { fromValue: '0'}], position: 0, duration: 1000 },
+                { id: "dg47", tween: [ "style", "${_accept}", "display", 'none', { fromValue: 'block'}], position: 4250, duration: 0 },
+                { id: "dg48", tween: [ "style", "${_accept}", "display", 'none', { fromValue: 'none'}], position: 5191, duration: 0 },
+                { id: "dg67", tween: [ "style", "${_P3M1}", "left", '104.34%', { fromValue: '205.09%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg68", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '104.34%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg69", tween: [ "style", "${_P3M1}", "left", '4.82%', { fromValue: '4.82%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg179", tween: [ "style", "${_s1p3Copy}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg180", tween: [ "style", "${_s1p3Copy}", "display", 'none', { fromValue: 'none'}], position: 8000, duration: 0 },
+                { id: "dg181", tween: [ "style", "${_s1p3Copy}", "display", 'block', { fromValue: 'none'}], position: 8500, duration: 0 },
+                { id: "dg56", tween: [ "style", "${_ROCON_BANK_CARD}", "opacity", '0.3', { fromValue: '1'}], position: 4070, duration: 179, easing: "easeOutBounce" },
+                { id: "dg123", tween: [ "style", "${_Rectangle}", "left", '-0.27%', { fromValue: '-0.27%'}], position: 7000, duration: 0 },
+                { id: "dg26", tween: [ "style", "${_YUJINMASTER}", "opacity", '1', { fromValue: '0.3'}], position: 4070, duration: 179, easing: "easeOutBounce" },
+                { id: "dg189", tween: [ "style", "${_Text6Copy2}", "top", '45.12%', { fromValue: '-16.65%'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg74", tween: [ "style", "${_Text4Copy2}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg152", tween: [ "style", "${_P3M3}", "display", 'none', { fromValue: 'block'}], position: 7000, duration: 0 },
+                { id: "dg20", tween: [ "style", "${_ROCON_BANK_DESC}", "opacity", '0.5', { fromValue: '1'}], position: 4070, duration: 179, easing: "easeOutBounce" },
+                { id: "dg28", tween: [ "style", "${_YUJINMASTER}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0, easing: "easeOutBounce" },
+                { id: "dg64", tween: [ "style", "${_P2M2}", "left", '28.24%', { fromValue: '132.52%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg65", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '28.24%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg66", tween: [ "style", "${_P2M2}", "left", '-71.28%', { fromValue: '-71.28%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg159", tween: [ "subproperty", "${_accept_blue}", "filter.saturate", '1', { fromValue: '1'}], position: 0, duration: 0 },
+                { id: "dg160", tween: [ "subproperty", "${_accept_blue}", "filter.saturate", '0', { fromValue: '1'}], position: 2500, duration: 0 },
+                { id: "dg4", tween: [ "style", "${_P1M4}", "left", '-23.64%', { fromValue: '75.56%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg5", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-23.64%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg6", tween: [ "style", "${_P1M4}", "left", '-123.16%', { fromValue: '-123.16%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg99", tween: [ "style", "${__410_anwansoon2}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg57", tween: [ "style", "${_ROCON_BANK_CARD}", "left", '130px', { fromValue: '130px'}], position: 3250, duration: 0, easing: "easeOutBounce" },
+                { id: "dg45", tween: [ "style", "${_yujinrobot_innoteam_header_white}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg46", tween: [ "style", "${_yujinrobot_innoteam_header_white}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg41", tween: [ "style", "${_P2M3}", "left", '53.19%', { fromValue: '157.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg42", tween: [ "style", "${_P2M3}", "left", '-46.33%', { fromValue: '53.19%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg43", tween: [ "style", "${_P2M3}", "left", '-46.33%', { fromValue: '-46.33%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg62", tween: [ "style", "${_back_blue}", "opacity", '1', { fromValue: '0'}], position: 0, duration: 1000 },
+                { id: "dg52", tween: [ "style", "${_P1M6}", "left", '-72.09%', { fromValue: '27.08%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg53", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-72.09%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg54", tween: [ "style", "${_P1M6}", "left", '-171.61%', { fromValue: '-171.61%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg87", tween: [ "style", "${_s1p1Copy}", "display", 'block', { fromValue: 'none'}], position: 8000, duration: 0 },
+                { id: "dg166", tween: [ "style", "${_s1p3Copy2}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg167", tween: [ "style", "${_s1p3Copy2}", "display", 'none', { fromValue: 'none'}], position: 9000, duration: 0 },
+                { id: "dg168", tween: [ "style", "${_s1p3Copy2}", "display", 'block', { fromValue: 'none'}], position: 9500, duration: 0 },
+                { id: "dg84", tween: [ "style", "${_YUJINMASTER_DESC}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg147", tween: [ "style", "${_accept_blue_payment}", "display", 'block', { fromValue: 'none'}], position: 3250, duration: 0 },
+                { id: "dg148", tween: [ "style", "${_accept_blue_payment}", "display", 'block', { fromValue: 'block'}], position: 3758, duration: 0 },
+                { id: "dg149", tween: [ "style", "${_accept_blue_payment}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg150", tween: [ "style", "${_accept_blue_payment}", "display", 'none', { fromValue: 'none'}], position: 8191, duration: 0 },
+                { id: "dg162", tween: [ "style", "${_Text4Copy}", "right", '6.64%', { fromValue: '6.64%'}], position: 10000, duration: 0 },
+                { id: "eid2474", tween: [ "style", "${_Text6Copy2}", "right", '17.08%', { fromValue: '17.08%'}], position: 3758, duration: 0 },
+                { id: "dg37", tween: [ "subproperty", "${_fron_blue}", "filter.saturate", '0', { fromValue: '1'}], position: 1000, duration: 1000 },
+                { id: "eid2473", tween: [ "style", "${_Text7Copy2}", "left", '18.19%', { fromValue: '18.19%'}], position: 3758, duration: 0 },
+                { id: "dg185", tween: [ "style", "${_Text6Copy2}", "display", 'block', { fromValue: 'none'}], position: 3250, duration: 0 },
+                { id: "dg186", tween: [ "style", "${_Text6Copy2}", "display", 'block', { fromValue: 'block'}], position: 3758, duration: 0 },
+                { id: "dg187", tween: [ "style", "${_Text6Copy2}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg188", tween: [ "style", "${_Text6Copy2}", "display", 'none', { fromValue: 'none'}], position: 8191, duration: 0 },
+                { id: "dg112", tween: [ "style", "${_Rectangle2Copy2}", "display", 'block', { fromValue: 'none'}], position: 3250, duration: 0 },
+                { id: "dg113", tween: [ "style", "${_Rectangle2Copy2}", "display", 'block', { fromValue: 'block'}], position: 3758, duration: 0 },
+                { id: "dg114", tween: [ "style", "${_Rectangle2Copy2}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg115", tween: [ "style", "${_Rectangle2Copy2}", "display", 'none', { fromValue: 'none'}], position: 8191, duration: 0 },
+                { id: "dg182", tween: [ "style", "${_s1p4}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg183", tween: [ "style", "${_s1p4}", "display", 'none', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg184", tween: [ "style", "${_s1p4}", "display", 'block', { fromValue: 'none'}], position: 7750, duration: 0 },
+                { id: "dg116", tween: [ "style", "${_Rectangle2Copy2}", "top", '79px', { fromValue: '-794px'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg163", tween: [ "style", "${_Text4Copy}", "opacity", '0.2', { fromValue: '0.2'}], position: 7000, duration: 0 },
+                { id: "dg164", tween: [ "style", "${_Text4Copy}", "opacity", '1', { fromValue: '0.2'}], position: 8000, duration: 1000 },
+                { id: "dg172", tween: [ "style", "${_P3M4}", "display", 'none', { fromValue: 'block'}], position: 7000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg8", tween: [ "style", "${_Text5Copy2}", "display", 'block', { fromValue: 'none'}], position: 3250, duration: 0 },
+                { id: "dg9", tween: [ "style", "${_Text5Copy2}", "display", 'block', { fromValue: 'block'}], position: 3758, duration: 0 },
+                { id: "dg10", tween: [ "style", "${_Text5Copy2}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg11", tween: [ "style", "${_Text5Copy2}", "display", 'none', { fromValue: 'none'}], position: 8191, duration: 0 },
+                { id: "dg169", tween: [ "style", "${_P3M4}", "left", '151.25%', { fromValue: '252%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg170", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '151.25%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg171", tween: [ "style", "${_P3M4}", "left", '51.73%', { fromValue: '51.73%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg165", tween: [ "style", "${_Text4Copy}", "width", '200px', { fromValue: '200px'}], position: 10000, duration: 0 },
+                { id: "dg142", tween: [ "style", "${_deleteCopy2}", "top", '49.55%', { fromValue: '-12.19%'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg134", tween: [ "style", "${_P1M3}", "left", '-47.82%', { fromValue: '51.39%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg135", tween: [ "style", "${_P1M3}", "left", '-147.34%', { fromValue: '-47.82%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg136", tween: [ "style", "${_P1M3}", "left", '-147.34%', { fromValue: '-147.34%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg25", tween: [ "style", "${_YUJINMASTER}", "top", '343px', { fromValue: '-505px'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg176", tween: [ "style", "${_P1M7}", "left", '-47.92%', { fromValue: '51.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg177", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-47.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg178", tween: [ "style", "${_P1M7}", "left", '-147.44%', { fromValue: '-147.44%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg117", tween: [ "style", "${_s1p1Copy2}", "display", 'block', { fromValue: 'none'}], position: 9000, duration: 0 },
+                { id: "dg125", tween: [ "style", "${_P1M8}", "left", '-22.92%', { fromValue: '76.25%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg126", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-22.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg127", tween: [ "style", "${_P1M8}", "left", '-122.44%', { fromValue: '-122.44%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg85", tween: [ "style", "${_YUJINMASTER_DESC}", "opacity", '1', { fromValue: '0.5'}], position: 4070, duration: 179, easing: "easeOutBounce" },
+                { id: "dg156", tween: [ "style", "${_accept_blue}", "opacity", '1', { fromValue: '1'}], position: 0, duration: 0 },
+                { id: "dg157", tween: [ "style", "${_accept_blue}", "opacity", '0.5', { fromValue: '1'}], position: 2500, duration: 0 },
+                { id: "dg158", tween: [ "style", "${_accept_blue}", "opacity", '0.5', { fromValue: '0.5'}], position: 3250, duration: 0 },
+                { id: "dg153", tween: [ "style", "${_P3M3}", "left", '102.92%', { fromValue: '203.67%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg154", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '102.92%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg155", tween: [ "style", "${_P3M3}", "left", '3.4%', { fromValue: '3.4%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg13", tween: [ "style", "${_Text5Copy2}", "left", '7.92%', { fromValue: '7.92%'}], position: 4070, duration: 0, easing: "easeOutBounce" },
+                { id: "dg151", tween: [ "style", "${_accept_blue_payment}", "top", '49.55%', { fromValue: '-12.19%'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg97", tween: [ "style", "${_Text3}", "left", '57px', { fromValue: '57px'}], position: 7000, duration: 0 },
+                { id: "dg143", tween: [ "style", "${_deleteCopy2}", "display", 'block', { fromValue: 'none'}], position: 3250, duration: 0, easing: "easeOutBounce" },
+                { id: "dg144", tween: [ "style", "${_deleteCopy2}", "display", 'block', { fromValue: 'block'}], position: 3758, duration: 0, easing: "easeOutBounce" },
+                { id: "dg145", tween: [ "style", "${_deleteCopy2}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0, easing: "easeOutBounce" },
+                { id: "dg146", tween: [ "style", "${_deleteCopy2}", "display", 'none', { fromValue: 'none'}], position: 8191, duration: 0, easing: "easeOutBounce" },
+                { id: "dg138", tween: [ "style", "${_Text7Copy2}", "display", 'block', { fromValue: 'none'}], position: 3250, duration: 0, easing: "easeOutBounce" },
+                { id: "dg139", tween: [ "style", "${_Text7Copy2}", "display", 'block', { fromValue: 'block'}], position: 3758, duration: 0, easing: "easeOutBounce" },
+                { id: "dg140", tween: [ "style", "${_Text7Copy2}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0, easing: "easeOutBounce" },
+                { id: "dg141", tween: [ "style", "${_Text7Copy2}", "display", 'none', { fromValue: 'none'}], position: 8191, duration: 0, easing: "easeOutBounce" },
+                { id: "dg55", tween: [ "style", "${_ROCON_BANK_CARD}", "top", '198px', { fromValue: '-649px'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg137", tween: [ "style", "${_Text7Copy2}", "top", '45.12%', { fromValue: '-16.65%'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg32", tween: [ "style", "${__114_anwansoonfge}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg19", tween: [ "style", "${_ROCON_BANK_DESC}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0 },
+                { id: "dg161", tween: [ "style", "${_Text4Copy}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg129", tween: [ "style", "${_s1p1}", "opacity", '1', { fromValue: '1'}], position: 7000, duration: 0 },
+                { id: "dg78", tween: [ "style", "${_P1M5}", "left", '-693px', { fromValue: '21px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg79", tween: [ "style", "${_P1M5}", "left", '-1410px', { fromValue: '-693px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg80", tween: [ "style", "${_P1M5}", "left", '-1410px', { fromValue: '-1410px'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg130", tween: [ "style", "${_Kobuki_00}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg131", tween: [ "style", "${_Kobuki_00}", "opacity", '0.2', { fromValue: '0.2'}], position: 7000, duration: 0 },
+                { id: "dg132", tween: [ "style", "${_Kobuki_00}", "opacity", '1', { fromValue: '0.2'}], position: 9000, duration: 1000 },
+                { id: "dg100", tween: [ "style", "${__410_anwansoon2}", "opacity", '0.2', { fromValue: '0.2'}], position: 7000, duration: 0 },
+                { id: "dg101", tween: [ "style", "${__410_anwansoon2}", "opacity", '1', { fromValue: '0.2'}], position: 8000, duration: 1000 },
+                { id: "dg49", tween: [ "style", "${_accept}", "top", '247px', { fromValue: '-601px'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg17", tween: [ "style", "${_acceptCopy}", "left", '48px', { fromValue: '46px'}], position: 4070, duration: 179, easing: "easeOutBounce" },
+                { id: "dg92", tween: [ "style", "${_P3M2}", "left", '151%', { fromValue: '251.75%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg93", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '151%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg94", tween: [ "style", "${_P3M2}", "left", '51.48%', { fromValue: '51.48%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg77", tween: [ "style", "${_Text4Copy2}", "width", '200px', { fromValue: '200px'}], position: 10000, duration: 0 },
+                { id: "dg102", tween: [ "style", "${_P2M1}", "left", '3.33%', { fromValue: '106.1%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg103", tween: [ "style", "${_P2M1}", "left", '-96.19%', { fromValue: '3.33%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg104", tween: [ "style", "${_P2M1}", "left", '-96.25%', { fromValue: '-96.25%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg44", tween: [ "style", "${_yujinrobot_innoteam_header_white}", "background-position", [0.01,-0.03], { valueTemplate: '@@0@@px @@1@@px', fromValue: [0.01,-0.03]}], position: 8000, duration: 0 },
+                { id: "dg58", tween: [ "style", "${_ROCON_BANK_CARD}", "display", 'none', { fromValue: 'block'}], position: 5191, duration: 0, easing: "easeOutBounce" },
+                { id: "dg88", tween: [ "style", "${_s1p1Copy}", "opacity", '1', { fromValue: '1'}], position: 8000, duration: 0 },
+                { id: "dg86", tween: [ "style", "${_YUJINMASTER_DESC}", "top", '370px', { fromValue: '-478px'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg96", tween: [ "style", "${_Text3}", "top", '283px', { fromValue: '283px'}], position: 10500, duration: 0 },
+                { id: "dg75", tween: [ "style", "${_Text4Copy2}", "opacity", '0.2', { fromValue: '0.2'}], position: 7000, duration: 0 },
+                { id: "dg76", tween: [ "style", "${_Text4Copy2}", "opacity", '1', { fromValue: '0.2'}], position: 9000, duration: 1000 },
+                { id: "dg121", tween: [ "style", "${_Rectangle}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg122", tween: [ "style", "${_Rectangle}", "opacity", '1', { fromValue: '0.9'}], position: 9950, duration: 50 },
+                { id: "dg34", tween: [ "style", "${_fron_blue}", "display", 'none', { fromValue: 'block'}], position: 2000, duration: 0 },
+                { id: "dg35", tween: [ "style", "${_fron_blue}", "display", 'none', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg118", tween: [ "style", "${_s1p1Copy2}", "opacity", '1', { fromValue: '1'}], position: 9000, duration: 0 },
+                { id: "dg110", tween: [ "style", "${_SANDWITCH_TITLE}", "opacity", '1', { fromValue: '0'}], position: 1000, duration: 1000 },
+                { id: "dg111", tween: [ "style", "${_SANDWITCH_TITLE}", "opacity", '1', { fromValue: '1'}], position: 2000, duration: 0 },
+                { id: "dg109", tween: [ "style", "${_SANDWITCH_TITLE}", "display", 'none', { fromValue: 'block'}], position: 7000, duration: 0 },
+                { id: "dg106", tween: [ "style", "${_s1p4Copy}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg107", tween: [ "style", "${_s1p4Copy}", "display", 'none', { fromValue: 'none'}], position: 8000, duration: 0 },
+                { id: "dg108", tween: [ "style", "${_s1p4Copy}", "display", 'block', { fromValue: 'none'}], position: 8750, duration: 0 },
+                { id: "dg105", tween: [ "style", "${_nfc_logo}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg38", tween: [ "style", "${_P1M2}", "left", '-74.07%', { fromValue: '25.14%'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg39", tween: [ "style", "${_P1M2}", "left", '-173.59%', { fromValue: '-74.07%'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg40", tween: [ "style", "${_P1M2}", "left", '-173.59%', { fromValue: '-173.59%'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg128", tween: [ "style", "${_s1p1}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg14", tween: [ "style", "${_Text5Copy2}", "width", '83.07%', { fromValue: '83.07%'}], position: 4070, duration: 0, easing: "easeOutBounce" },
+                { id: "dg89", tween: [ "style", "${_s1p2Copy2}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg90", tween: [ "style", "${_s1p2Copy2}", "display", 'none', { fromValue: 'none'}], position: 9000, duration: 0 },
+                { id: "dg91", tween: [ "style", "${_s1p2Copy2}", "display", 'block', { fromValue: 'none'}], position: 9250, duration: 0 },
+                { id: "dg29", tween: [ "style", "${_coffee_sel6}", "display", 'block', { fromValue: 'block'}], position: 0, duration: 0 },
+                { id: "dg120", tween: [ "style", "${_a4_nomal_png_a}", "opacity", '1', { fromValue: '0.2'}], position: 7000, duration: 1000 },
+                { id: "dg98", tween: [ "style", "${_Text3}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg7", tween: [ "style", "${_Text2Copy}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg1", tween: [ "style", "${_s1p4Copy2}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg2", tween: [ "style", "${_s1p4Copy2}", "display", 'none', { fromValue: 'none'}], position: 9000, duration: 0 },
+                { id: "dg3", tween: [ "style", "${_s1p4Copy2}", "display", 'block', { fromValue: 'none'}], position: 9750, duration: 0 },
+                { id: "dg124", tween: [ "style", "${_Rectangle}", "top", '796px', { fromValue: '796px'}], position: 7000, duration: 0 },
+                { id: "dg18", tween: [ "style", "${_acceptCopy}", "top", '388px', { fromValue: '-601px'}], position: 4070, duration: 179, easing: "easeOutBounce" },
+                { id: "dg30", tween: [ "style", "${_Text4}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg50", tween: [ "style", "${_COFFEE_TITLE}", "opacity", '0', { fromValue: '1'}], position: 1000, duration: 1000 },
+                { id: "dg51", tween: [ "style", "${_COFFEE_TITLE}", "opacity", '0', { fromValue: '0'}], position: 2000, duration: 0 },
+                { id: "dg21", tween: [ "style", "${_ROCON_BANK_DESC}", "top", '225px', { fromValue: '-622px'}], position: 3250, duration: 821, easing: "easeOutBounce" },
+                { id: "dg27", tween: [ "style", "${_YUJINMASTER}", "left", '132px', { fromValue: '132px'}], position: 3250, duration: 0, easing: "easeOutBounce" },
+                { id: "dg119", tween: [ "style", "${_a4_nomal_png_a}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg133", tween: [ "style", "${__03_pp_anwansoon}", "display", 'block', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg70", tween: [ "style", "${_P3M1}", "display", 'none', { fromValue: 'block'}], position: 7000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg36", tween: [ "style", "${_fron_blue}", "opacity", '0', { fromValue: '1'}], position: 1000, duration: 1000 },
+                { id: "dg95", tween: [ "style", "${_P3M2}", "display", 'none', { fromValue: 'block'}], position: 7000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg31", tween: [ "style", "${_Text4}", "opacity", '1', { fromValue: '0.2'}], position: 7000, duration: 1000 },
+                { id: "dg59", tween: [ "style", "${_back_blue}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg60", tween: [ "style", "${_back_blue}", "display", 'block', { fromValue: 'none'}], position: 49, duration: 0 },
+                { id: "dg61", tween: [ "style", "${_back_blue}", "display", 'none', { fromValue: 'block'}], position: 7000, duration: 0 },
+                { id: "dg71", tween: [ "style", "${_s1p3}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg72", tween: [ "style", "${_s1p3}", "display", 'none', { fromValue: 'none'}], position: 7000, duration: 0 },
+                { id: "dg73", tween: [ "style", "${_s1p3}", "display", 'block', { fromValue: 'none'}], position: 7500, duration: 0 },
+                { id: "dg81", tween: [ "style", "${_s1p2Copy}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0 },
+                { id: "dg82", tween: [ "style", "${_s1p2Copy}", "display", 'none', { fromValue: 'none'}], position: 8000, duration: 0 },
+                { id: "dg83", tween: [ "style", "${_s1p2Copy}", "display", 'block', { fromValue: 'none'}], position: 8250, duration: 0 },
+                { id: "dg22", tween: [ "style", "${_P1M1}", "left", '-694px', { fromValue: '20px'}], position: 0, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg23", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-694px'}], position: 1000, duration: 1000, easing: "easeInOutCubic" },
+                { id: "dg24", tween: [ "style", "${_P1M1}", "left", '-1411px', { fromValue: '-1411px'}], position: 2000, duration: 0, easing: "easeInOutCubic" },
+                { id: "dg12", tween: [ "style", "${_Text5Copy2}", "top", '120px', { fromValue: '-697px'}], position: 3250, duration: 821, easing: "easeOutBounce" }            ]
+        }
+    }
+}
+};
+
+
+Edge.registerCompositionDefn(compId, symbols, fonts, resources, opts);
+
+/**
+ * Adobe Edge DOM Ready Event Handler
+ */
+$(window).ready(function() {
+     Edge.launchComposition(compId);
+});
+})(jQuery, AdobeEdge, "EDGE-1251484");
