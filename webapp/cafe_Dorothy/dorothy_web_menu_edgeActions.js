@@ -51,22 +51,48 @@ if(qs==null)
 return"";else{return qs[key];}}
 //yepnope({nope:['include/js-yaml.min.js'],complete:yamljsLoaded});
 
+yepnope.errorTimeout = 20000; // increase of time out for low speed network
+
 yepnope({nope:['include/EventEmitter2/eventemitter2.js'], complete:emitterLoaded});
 
 function emitterLoaded()
 {
-  yepnope({nope:['include/roslib.js'],complete:rosLoaded});
+  yepnope({ test:window.ROSLIB,
+            nope:'http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js',
+            complete:function(){
+                if(window.ROSLIB != undefined){
+                    rosLoaded();
+                }
+                else{
+                    yepnope("include/roslib.js");
+                    sym.$("status_text").html("roslib is not loading.Please refresh");
+                }
+            },
+            
+            });
 }
 
 function rosLoaded()
 {
-  yepnope({nope:['http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js'], complete:interationLoaded});
+  yepnope({test:window.rocon_interactions,
+           nope:'http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js',
+           complete: function(){
+               if(window.rocon_interactions != undefined){
+                interationLoaded();
+               }
+               else{
+                   yepnope("include/interactions.js");
+                   sym.$("status_text").html("rocon interaction is not loading.Please refresh");
+               } 
+           },
+           });
 }
 
 function interationLoaded()
 {
   if (rocon_interactions.display_name != null)
 	console.log("Display Name  : " + rocon_interactions.display_name);
+	
   console.log("Rosbridge URI : " + rocon_interactions.rosbridge_uri);
   console.log("Parameters   : " + JSON.stringify(rocon_interactions.parameters))
   console.log("Remappings   : " + JSON.stringify(rocon_interactions.remappings))
@@ -114,7 +140,8 @@ function eventemitterLoaded()
 {
     console.log("eventemitter2.js is loaded");
     yepnope({nope:['include/roslib.js'],complete:init_ros});
-}*/
+}
+*/
 
 function init_ros() 
 {
