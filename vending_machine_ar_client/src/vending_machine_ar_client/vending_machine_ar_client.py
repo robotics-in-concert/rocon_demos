@@ -7,7 +7,7 @@ import actionlib
 import actionlib_msgs.msg as actionlib_msgs
 import ar_track_alvar.msg as ar_track_alvar_msgs
 import rospy
-import vending_machine_control.msg as vending_machine_msgs
+import vending_machine_msgs.msg as vending_machine_msgs
 from vending_machine_control import utils
 import std_msgs.msg as std_msgs
 

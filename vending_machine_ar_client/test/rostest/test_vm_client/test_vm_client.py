@@ -10,7 +10,7 @@ import rostest
 import std_msgs.msg as std_msgs
 import sys
 import unittest
-import vending_machine_control.msg as vending_machine_msgs
+import vending_machine_msgs.msg as vending_machine_msgs
 
 '''
     Publish a tracker to simulate an order and wait for successful ordering

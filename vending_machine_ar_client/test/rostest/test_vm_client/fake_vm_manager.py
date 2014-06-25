@@ -6,7 +6,7 @@
 
 import actionlib
 import rospy
-import vending_machine_control.msg as vending_machine_msgs
+import vending_machine_msgs.msg as vending_machine_msgs
 
 class VendingMachineManager(object):
     """

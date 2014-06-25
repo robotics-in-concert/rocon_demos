@@ -21,4 +21,5 @@
   <run_depend>rospy</run_depend>
   <run_depend>uvc_camera</run_depend>
   <run_depend>vending_machine_control</run_depend>
+  <run_depend>vending_machine_msgs</run_depend>
 </package>
