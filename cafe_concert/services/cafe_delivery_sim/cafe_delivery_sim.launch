@@ -11,6 +11,8 @@
     <!-- remapping -->
     <arg name="list_order" value="/cafe/list_order"/>
     <arg name="remote_order_list" value="/cafe/remote_order_list"/>
+    <!-- hue -->
+    <arg name="hue_ip"                        value="192.168.10.143"/>
     <!-- auto door ctrl -->
     <arg name="table_id" value="4"/>
     <arg name="arduino_ip"                        value="192.168.10.227"/>
