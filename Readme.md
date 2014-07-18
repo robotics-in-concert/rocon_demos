@@ -5,7 +5,7 @@
 - Dependency installation
 
 <pre>
-> sudo apt-get install ros-hydro-turtlebot ros-hydro-rocon ros-hydro-unique-identifier ros-hydro-bondpy ros-hydro-ar-track-alvar ros-hydro-kobuki-soft
+> sudo apt-get install ros-hydro-turtlebot ros-hydro-rocon ros-hydro-unique-identifier ros-hydro-bondpy ros-hydro-ar-track-alvar ros-hydro-kobuki-soft ros-hydro-rosbridge-suite ros-hydro-rospy-message-converter ros-hydro-smach-ros
 </pre>
 
 - Setup workspace with rosinstall file
