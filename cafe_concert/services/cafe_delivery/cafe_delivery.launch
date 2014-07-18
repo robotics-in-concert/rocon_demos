@@ -7,14 +7,14 @@
 
   <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
   </node>
-  
- <include file="$(find cafe_devices_manager)/launch/devices_manager.launch">
-    <!-- remapping -->
+<!--
+  <include file="$(find cafe_devices_manager)/launch/devices_manager.launch">
+   
     <arg name="list_order" value="/cafe/list_order"/>
     <arg name="remote_order_list" value="/cafe/remote_order_list"/>
-    <!-- hue -->
+   
     <arg name="hue_ip"                        value="192.168.10.143"/>
-    <!-- auto door ctrl -->
+   
     <arg name="table_id" value="4"/>
     <arg name="arduino_ip"                        value="192.168.10.227"/>
     <arg name="door_ctrl_io_port"                 value="11"/>
@@ -23,5 +23,5 @@
     <arg name="close_door_trigger_duration"       value="1.0"/>
     <arg name="open_door_trigger_duration_timer"  value="1.0"/>
   </include>
-
+-->
 </launch>
