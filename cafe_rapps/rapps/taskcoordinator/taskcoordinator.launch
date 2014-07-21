@@ -1,7 +1,0 @@
-<launch>
-  <node pkg="cafe_task_manager" name="cafe_taskcoordinator" type="cafe_manager.py" output="screen">
-    <rosparam>
-      robot_num: 3
-    </rosparam>
-  </node>
-</launch>

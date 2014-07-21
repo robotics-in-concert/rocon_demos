@@ -1,5 +1,0 @@
-display: Waiterbot
-description: The waiter navigates around the cafe to serve beverages. 
-compatibility: rocon:/waiterbot
-launch: cafe_rapps/waiter_waiterbot.launch
-parent_name: cafe_rapps/waiter
