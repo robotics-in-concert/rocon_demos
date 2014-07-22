@@ -1,0 +1,15 @@
+<launch>
+  <arg name="rapp_package_whitelist"  default="[rocon_apps, turtlebot_rapps, realrobotshow_ctrl]"/>
+  <arg name="screen"                  default="true"/>
+  <arg name="interactions"            default="true"/>
+  <arg name="interactions_list"       default="[turtlebot_bringup/admin.interactions, turtlebot_bringup/documentation.interactions, realrobotshow_ctrl/pairing.interactions]"/>
+  <arg name="robot_type"              default="waiterbot"/>
+
+  <include file="$(find turtlebot_bringup)/launch/minimal.launch">
+    <arg name="rapp_package_whitelist"  value="$(arg rapp_package_whitelist)"/>
+    <arg name="screen"                  value="$(arg screen)"/>
+
+    <arg name="interactions"            value="$(arg interactions)"/>
+    <arg name="interactions_list"       value="$(arg interactions_list)"/>
+  </include>
+</launch>

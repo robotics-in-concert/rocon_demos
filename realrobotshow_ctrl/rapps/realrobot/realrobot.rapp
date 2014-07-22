@@ -1,0 +1,5 @@
+display:          RealRobot Show
+description:      Delivery Service in real robot exhibition
+compatibility:    rocon:/waiterbot
+public_interface: realrobotshow_ctrl/realrobot.interface
+launch:           realrobotshow_ctrl/realrobot.launch.xml

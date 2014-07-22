@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find realrobotshow_ctrl)/launch/robot_ctrl.launch">
+  </include>
+</launch>
