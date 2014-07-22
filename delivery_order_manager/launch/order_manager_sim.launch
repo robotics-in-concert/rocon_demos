@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="delivery_order_manager" type="manager.py" name="order_manager" output="screen">
+    <!-- <param name="filename" value="$(find simple_annotation_server)/yaml/annotations.yaml"/> -->
+  </node>
+
+  <node pkg="delivery_order_manager" type="dummy_waiterbot.py" name="dummy_waiterbot" output="screen">
+  </node>
+
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+  </include>
+</launch>
