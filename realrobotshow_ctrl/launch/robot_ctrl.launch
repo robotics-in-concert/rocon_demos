@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="realrobotshow_ctrl" name="robot_manager" type="delivery_robot_manager.py">
+    <remap from="~digital_input" to="/mobile_base/events/digital_input"/>
+  </node>
+</launch>

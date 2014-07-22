@@ -1,0 +1,10 @@
+- name: web_url(http://wiki.ros.org/Robots/TurtleBot/indigo)
+  display_name: Olleh
+  role: 'Kitchen'
+  compatibility: rocon:/
+  description: Real Robot show kitchen Frontend
+  #icon:
+  # remappings: []
+  pairing:
+    rapp: realrobotshow_ctrl/realrobot
+    remappings: []
