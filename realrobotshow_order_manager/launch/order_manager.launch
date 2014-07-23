@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="delivery_order_manager" type="manager.py" name="order_manager" output="screen">
+  <node pkg="realrobotshow_order_manager" type="manager.py" name="order_manager" output="screen">
     <!-- <param name="filename" value="$(find simple_annotation_server)/yaml/annotations.yaml"/> -->
   </node>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">

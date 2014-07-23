@@ -4,7 +4,7 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-    packages=['delivery_order_manager'],
+    packages=['realrobotshow_order_manager'],
     package_dir={'': 'src'},
 )
 

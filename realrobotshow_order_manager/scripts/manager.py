@@ -5,14 +5,14 @@
 #
 
 import rospy
-import delivery_order_manager
+import realrobotshow_order_manager
 
 
 if __name__ == '__main__':
 
-    rospy.init_node('delivery_order_manager')
+    rospy.init_node('realrobotshow_order_manager')
 
-    manager = delivery_order_manager.OrderManager()
+    manager = realrobotshow_order_manager.OrderManager()
 
     manager.loginfo('Initialized')
     manager.spin()

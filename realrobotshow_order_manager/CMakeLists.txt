@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(delivery_order_manager)
+project(realrobotshow_order_manager)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
