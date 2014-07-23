@@ -10,6 +10,7 @@
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet"></link>
     <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    <link href="css/index.css" rel="stylesheet"></link>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap/bootstrap.js"></script>
     <script src="js/bootstrap/bootstrap-button.js"></script>
@@ -45,9 +46,16 @@
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container-fluid">
-          <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
-          <a class="brand" href="#" style="margin-top:6px">Simple Delivery</a>
+        <div class="container-fluid sd-status-bar">
+          <ul class="nav nav-pills">
+            <li class="disabled sd-robot-status"><a href="#">Robot status: Idle</a></li>
+            <li class="disabled sd-robot-batt-status"><a href="#">Robot batt.: 100%</a></li>
+            <li class="disabled sd-laptop-batt-status"><a href="#">Laptop batt.: 100%</a></li>
+          </ul>
+          
+          <img class="sd-logo" src="img/rocon_logo.png"></img> 
+          <!-- <a class="brand" href="#" style="margin-top:6px">Simple Delivery</a> -->
+          
         </div>
       </div>
     </div>
