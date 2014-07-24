@@ -1,6 +1,8 @@
 publishers: []
 subscribers: []
 services: []
-action_clients: []
+action_clients:
+ - kitchen_order
 action_servers:
   - user_action
+

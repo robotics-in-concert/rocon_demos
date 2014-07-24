@@ -1,10 +1,12 @@
-- name: web_url(http://wiki.ros.org/Robots/TurtleBot/indigo)
+- name: web_url(http://localhost/realrobotshow/)
   display_name: Olleh
   role: 'Kitchen'
-  compatibility: rocon:/
+  compatibility: rocon:/pc
   description: Real Robot show kitchen Frontend
   #icon:
-  # remappings: []
+  remappings: 
+    - remap_from: kitchen_order
+      remap_to:
   pairing:
     rapp: realrobotshow_ctrl/realrobot
     remappings: []
