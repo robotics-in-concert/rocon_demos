@@ -12,14 +12,16 @@ import .utils
 
 STATE_INITIALIZATION = 'Initialization'
 STATE_GOTO_KITCHEN   = 'GOTO_KITCHEN'
-STATE_READY          = 'Ready'
-STATE_ON_DELIVERY    = 'ON_DELIVERY'
+STATE_AT_KITCHEN     = 'AT_KITCHEN'
+STATE_GOTO_TABLE     = 'GOTO_TABLE'
+STATE_AT_TABLE       = 'AT_TABLE'
 STATE_ERROR          = 'ERROR'
 
 # INIT
 # GOTO KITCHEN
-# READY
-# ON_SERVING
+# AT_KITCHEN
+# GOTO_TABLE
+# AT_TABLE
 # ERROR
 
 class StateManager(object):
@@ -30,8 +32,16 @@ class StateManager(object):
         self._init_variables()
         self._init_handles()
 
+    def _init_states(self):
+        self._states[STATE_INITIALIZATION] = self._state_initialization
+        self._states[STATE_GOTO_KITCHEN] = self._state_goto_kitchen
+        self._states[STATE_AT_KITCHEN] = self._state_at_kitchen
+        self._states[STATE_GOTO_TABLE] = self._state_goto_table
+        self._states[STATE_AT_TABLE]   = self._state_at_table
+        self._states[STATE_ERROR]      = self._state_on_error
+
     def _init_variables(self):
-        self._state = None
+        self._current_state = None
         self._initialized = False
         self._previous_button = None  
         self._init_requested = False
@@ -65,31 +75,45 @@ class StateManager(object):
 
         green, red = check_button_event(self._previous_button, msg)
 
-        if self._state == STATE_INITIALIZATION:
-            if green:
-                self._state_initialization()
+        if green:
+            if not self._current_state:
+                self._current_state = STATE_INITIALIZATION
 
     def _process_localized(self, msg): 
         self._initialized = True
         
-
-
     def _process_delver_order(self, goal):
         self.loginfo('Received Goal ' + str(goal))
+        r = simple_delivery_msgs.DeliverOrderResult()
+
+        if self._current_state != STATE_AT_KITCHEN
+            message = 'Robot is not at kitchen. Ignore the order!'
+            self.logwarn(message)
+
+            r = simple_delivery_msgs.DeliverOrderResult()
+            r.message = message
+            r.success = False
+            self._deliver_order_handler.set_succeeded(r)
+
+        rospy.sleep(2)
+        r.message = 'Not Yet Implemented'
+        r.success = False
+        self._deliver_order_handler.set_succeeded(r)
+
+        # request semantic navigator to go requested table
+        # self._current_state = STATE_GOTO_TABLE
 
     def spin(self):
-
         r = rospy.Rate(10)
+        self._deliver_order_handler.start()
+
         while not rospy.is_shutdown():
-            if self._state == STATE_INITIALIZATION:
-                self._state_initialization()
-            elif self._state == STATE_GOTO_KITCHEN:
-                self._state_goto_kitchen()
-            elif self._state == STATE_READY:
-                self._state_ready()
-
-
+            self._states[self._current_state]()
+            self._logging()
             r.sleep()
+
+    def _logging(self):
+        self.loginfo(self._current_state)
                 
     def loginfo(self, msg):
         rospy.loginfo('Robot State Manager : ' + str(msg))
@@ -103,16 +127,30 @@ class StateManager(object):
     
         if _initialized:
             self.loginfo('Robot Localized')
-            self._state = STATE_GOTO_KITCHEN
+            self.loginfo('Moving To kitchen')
+
+            # Request navigator to go kitchen
+
+            self._current_state = STATE_GOTO_KITCHEN
             self._init_requested = False
 
     def _state_goto_kitchen(self):
-
-        # Request Semantic Location Navigator To go Kitchen
-        self.loginfo('Moving To kitchen')
-        
+        # Wait for arriving
         # When it arrives...
-        self._state = STATE_READY
+        self._current_state = STATE_KITCHEN
 
-    def _state_ready(self):
-        self.loginfo('Ready to serve')
+    def _state_at_kitchen(self):
+        # Wait for order
+        # Delivery Order Action will change the state
+        pass
+
+    def _state_goto_table(self):
+        # Wait for arriving
+        # When it arrives...
+        self._current_state = STATE_AT_TABLE
+
+    def _state_at_table(self):
+        # Wait for Customer's confirmation
+
+    def _state_on_error(self):
+        # When it fails while navigation....

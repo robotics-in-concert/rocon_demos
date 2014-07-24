@@ -6,7 +6,7 @@
 
 import yaml
 import yocs_msgs.msg as yocs_msgs
-import ar_track_alvar.msg as ar_msgs
+import ar_track_alvar_msgs.msg as ar_msgs
 from rospy_message_converter import message_converter
 import genpy
 
