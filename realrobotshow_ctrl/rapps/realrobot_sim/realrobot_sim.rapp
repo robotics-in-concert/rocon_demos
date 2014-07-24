@@ -1,0 +1,5 @@
+display:          RealRobot Show Sim
+description:      Simulation for delivery Service in real robot exhibition
+compatibility:    rocon:/pc
+launch:           realrobotshow_ctrl/realrobot_sim.launch.xml
+parent_name:     realrobotshow_ctrl/realrobot

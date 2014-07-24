@@ -1,0 +1,5 @@
+display:          RealRobot Show real
+description:      Real for delivery Service in real robot exhibition
+compatibility:    rocon:/waiterbot
+launch:           realrobotshow_ctrl/realrobot_real.launch.xml
+parent_name:     realrobotshow_ctrl/realrobot

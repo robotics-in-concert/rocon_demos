@@ -1,13 +1,12 @@
-- name: web_app(http://localhost/realrobotshow/index.html) 
-  display_name: Realrobotshow Kitchen
+- name: web_url(http://localhost/realrobotshow/)
+  display_name: Olleh
   role: 'Kitchen'
-  compatibility: rocon:/
+  compatibility: rocon:/pc
   description: Real Robot show kitchen Frontend
   #icon:
-  #remappings: 
-  # -
-  #   remap_from:
-  #   remap_to:
+  remappings: 
+    - remap_from: kitchen_order
+      remap_to:
   pairing:
     rapp: realrobotshow_ctrl/realrobot
     remappings: []

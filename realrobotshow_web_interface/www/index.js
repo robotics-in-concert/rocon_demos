@@ -96,10 +96,33 @@
     }
 
     function processDiagnostic(data){
-      console.log("processDiagnostic");
-      console.log(data);
+      for (var i = data.status.length - 1; i >= 0; i--) {
+        var name = data.status[i].name;
+        if(name === "/Power System/Laptop Battery"){
+            var percent = getBattPecent(data.status[i].values);
+            setBattPecent('.sd-laptop-batt-status',percent);
+        }
+        else if(name === "/Power System/Battery"){
+            var percent = getBattPecent(data.status[i].values);
+            console.log('robot batt: ',percent);
+            setBattPecent('.sd-robot-batt-status',percent);
+        }
+      }
+    };
+    function setBattPecent(obj, data){
+        var text = $(obj).text();
+        $(obj).text(text.split(':')[0]+': ' + data+' %');
     }
-
+    function getBattPecent(data){
+        var percent = '-1';
+        for (var i = 0; i < data.length; i++) {
+          var key = data[i].key;
+          if(key === 'Percent'){
+             percent = data[i].value;
+          }
+        };
+        return percent;
+    };
     function settingMainMenu(){
       var table_num = 3
       for (var i = 1; i < table_num+1; i++) {
@@ -139,7 +162,7 @@
           $('.sd-main-menu').hide();
           $('.sd-delivery-status').show();
         }
-    }
+    };
 
 
 //     function processRemoteOrderUpdate(msg){
