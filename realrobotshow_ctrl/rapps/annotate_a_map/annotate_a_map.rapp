@@ -1,0 +1,6 @@
+display:          Annotate A Map
+description:      Annotate a given map
+compatibility:    rocon:/waiterbot
+launch:           realrobotshow_ctrl/annotate_a_map.launch
+public_interface: realrobotshow_ctrl/annotate_a_map.interface
+#icon:             turtlebot_rapps/make_a_map_bubble_icon.png

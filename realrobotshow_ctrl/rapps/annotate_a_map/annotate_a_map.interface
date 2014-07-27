@@ -1,0 +1,15 @@
+publishers:
+  - /tf
+  - map
+  - /annotation/ar_markers
+  - /annotation/tables
+  - /annotation/walls
+  - /annotation/columns
+subscribers: [] 
+services: 
+  - /annotation/save_column
+  - /annotation/save_tables
+  - /annotation/save_walls
+  - /annotation/save_ar_markers
+action_clients: []
+action_servers: []

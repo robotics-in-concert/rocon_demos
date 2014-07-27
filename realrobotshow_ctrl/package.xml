@@ -21,5 +21,7 @@
     <rocon_app>rapps/realrobot/realrobot.rapp</rocon_app>
     <rocon_app>rapps/realrobot_sim/realrobot_sim.rapp</rocon_app>
     <rocon_app>rapps/realrobot_real/realrobot_real.rapp</rocon_app>
+    <rocon_app>rapps/make_a_map/make_a_map.rapp</rocon_app>
+    <rocon_app>rapps/annotate_a_map/annotate_a_map.rapp</rocon_app>
   </export>
 </package>
