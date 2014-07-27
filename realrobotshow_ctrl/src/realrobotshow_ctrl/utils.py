@@ -4,6 +4,8 @@
 #   https://raw.github.com/robotics-in-concert/rocon_demos/license/LICENSE
 #
 
+import subprocess
+
 def check_button_event(prev, curr):
 
     green = False
