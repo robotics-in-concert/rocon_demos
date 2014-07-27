@@ -10,6 +10,6 @@ import realrobotshow_ctrl
 if __name__ == '__main__':
     rospy.init_node('delivery_robot_manager')
     state_manager = realrobotshow_ctrl.StateManager()
-    state_magager.loginfo("Initialized")
+    state_manager.loginfo("Initialized")
     state_manager.spin()
     state_manager.loginfo("Bye Bye")

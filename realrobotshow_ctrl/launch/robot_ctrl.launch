@@ -1,15 +1,52 @@
 <launch>
-  <arg name="resource_path" default="$(find realrobotshow_ctrl)/resource/sounds"/>
+  <arg name="map_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml"/>
+  <arg name="annotation_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml"/>
+  <arg name="initial_pose_x" value="2.0"/>
+  <arg name="initial_pose_y" value="2.0"/>
+  <arg name="initial_pose_a" value="0.0"/>
 
-  <node pkg="realrobotshow_ctrl" name="robot_manager" type="delivery_robot_manager.py">
-    <param name="nav_kitchen_timeout" value="300.0"/> 
-    <param name="nav_table_timeout"   value="300.0"/> 
-    <param name="nav_retry"           value="3"/>
-    <param name="nav_table_distance"  value="5.0"/>
-    <param name="resource_path"       value="$(arg resource_path)"/> 
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+    <!-- We only need RGB images and pseudo laser scan -->
+    <arg name="depth_registration"              value="false"/>
+    <arg name="rgb_processing"                  value="true" />
+    <arg name="ir_processing"                   value="false"/>
+    <arg name="depth_processing"                value="false"/>
+    <arg name="depth_registered_processing"     value="false"/>
+    <arg name="disparity_processing"            value="false"/>
+    <arg name="disparity_registered_processing" value="false"/>
+    <arg name="scan_processing"                 value="true" />
+  </include>
 
-    <remap from="~digital_input" to="/mobile_base/events/digital_input"/>
-    <remap from="navigate_to" to="navigator"/>
-    <remap from="deliver_order" to="delivery"/>
-  </node>
+  <!--  ************** Additional sensors *************  -->
+  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>
+
+  <!-- Reconfigure command velocity multiplexer to fit waiterbot needs. Just set the parameter doesn't work
+      if we start the waiterbot rapp with app manager; we must explicitly call the reconfigure service -->
+  <node pkg="rosservice" type="rosservice" name="reconfig_vel_mux" args="call --wait /cmd_vel_mux/set_parameters
+            '{config:{strs:[[yaml_cfg_file,$(find waiterbot_bringup)/param/vel_multiplexer.yaml]]}}'"/>
+
+  <!--  ********** Alvar AR markers tracker ***********  -->
+  <!-- This is a CPU-hungry bastard; reduce its rate --> 
+  <include file="$(find realrobotshow_ctrl)/launch/includes/ar_tracker.launch.xml">
+    <arg name="max_frequency" value="4.0"/> 
+  </include>
+
+  <!--  ************* State Manager **************  -->
+  <include file="$(find realrobotshow_ctrl)/launch/includes/master_ctrl.launch.xml">
+  </include>
+
+  <!-- ************ Database ************** -->
+  <include file="$(find realrobotshow_ctrl)/launch/includes/database.launch.xml"/>
+
+  <!--  ************** Rosnav move base ***************  -->
+  <include file="$(find realrobotshow_ctrl)/launch/includes/navigator.launch.xml"/>
+
+  <!--  ******************** Amcl *********************  -->
+  <include file="$(find realrobotshow_ctrl)/launch/includes/localization.launch.xml">
+    <arg name="scan_topic" value="scan"/>
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+
 </launch>

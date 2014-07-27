@@ -6,7 +6,8 @@
 import rospy
 import simple_delivery_msgs.msg as simple_delivery_msgs
 import yocs_msgs.msg as yocs_msgs
-import kobuki_msgs
+import kobuki_msgs.msg as kobuki_msgs
+import std_msgs.msg as std_msgs
 import actionlib
 
 from .utils import *
@@ -64,7 +65,7 @@ class StateManager(object):
 
     def _init_handles(self):
         # order handle
-        self._deliver_order_handler = actionlib.SimpleActionServer(self._kitchen_action_name, simple_delivery_msgs.msg.DeliverOrderAction, execute_cb=self._process_deliver_order, auto_start=False)
+        self._deliver_order_handler = actionlib.SimpleActionServer(self._kitchen_action_name, simple_delivery_msgs.DeliverOrderAction, execute_cb=self._process_deliver_order, auto_start=False)
 
         self._sub = {}
         self._pub = {}
@@ -73,7 +74,7 @@ class StateManager(object):
         self._sub['digital_inputs'] = rospy.Subscriber('~digital_inputs', kobuki_msgs.DigitalInputEvent, self._process_button)  # Waiterbot buttons.
 
         # Localize manager
-        self._pub['localize'] = rospy.Publisher('~localize', std_msgs.Empty)
+        self._pub['localize'] = rospy.Publisher('~localize', std_msgs.Empty, queue_size=1)
         self._sub['localized'] = rospy.Subscriber('~localized', std_msgs.Empty, self._process_localized)
 
         # semantic navigation handler
@@ -108,7 +109,7 @@ class StateManager(object):
         self.loginfo('Received Goal ' + str(goal))
         r = simple_delivery_msgs.DeliverOrderResult()
 
-        if self._current_state != STATE_AT_KITCHEN
+        if self._current_state != STATE_AT_KITCHEN:
             message = 'Robot is not at kitchen. Ignore the order!'
             self.logwarn(message)
 
