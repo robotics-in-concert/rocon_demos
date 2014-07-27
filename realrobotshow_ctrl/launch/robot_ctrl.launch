@@ -1,5 +1,15 @@
 <launch>
+  <arg name="resource_path" default="$(find realrobotshow_ctrl)/resource/sounds"/>
+
   <node pkg="realrobotshow_ctrl" name="robot_manager" type="delivery_robot_manager.py">
+    <param name="nav_kitchen_timeout" value="300.0"/> 
+    <param name="nav_table_timeout"   value="300.0"/> 
+    <param name="nav_retry"           value="3"/>
+    <param name="nav_table_distance"  value="5.0"/>
+    <param name="resource_path"       value="$(arg resource_path)"/> 
+
     <remap from="~digital_input" to="/mobile_base/events/digital_input"/>
+    <remap from="navigate_to" to="navigator"/>
+    <remap from="deliver_order" to="delivery"/>
   </node>
 </launch>

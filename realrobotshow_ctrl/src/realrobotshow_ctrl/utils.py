@@ -15,3 +15,10 @@ def check_button_event(prev, curr):
         red = True
 
     return green, red
+
+def play_sound(resource_path, sound):
+    chirp_path = subprocess.check_output(['rospack','find','rocon_apps']).replace('\n','')
+    chirp = chirp_path + '/scripts/play_sound.bash' 
+
+    sound = resource_path + '/' + sound
+    subprocess.call([chirp_path, sound])
