@@ -4,7 +4,7 @@
  -->
 <launch>
   <!-- Maps -->
-  <arg name="map_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml" />
+  <arg name="map_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml" /> <!-- map file show match with make_a_map param -->
   <arg name="annotation_file" default="$(find realrobotshow_ctrl)/resource/show_annotation.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
 

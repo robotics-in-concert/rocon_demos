@@ -3,6 +3,8 @@
   topic.
  -->
 <launch>
+  <arg name="map_path" default="$(find realrobotshow_ctrl)/resource/show_map.yaml"/>
+
   <!-- *********************** Teleoperation ********************** -->
   <param name="camera/rgb/image_color/compressed/jpeg_quality" value="22"/>
 
@@ -32,6 +34,7 @@
   </include>
   <include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>
 
- <!-- TODO  develop map_saver which provides /save_map handle -->
-  <node pkg="map_store" type="map_saver" name="map_saver" output="screen"/>
+  <node pkg="map_saver" type="map_saver" name="map_saver" output="screen">
+    <arg name="filename" value="$(arg map_path)"/>
+  </node>
 </launch>

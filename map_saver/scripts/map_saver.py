@@ -23,5 +23,5 @@ def process_save_map(req):
 if __name__ == '__main__':
     rospy.init_node('map_saver')
 
-    srv_saver = rospy.Service('/save_map', map_store_srvs.SaveMap, process_save_map)
+    srv_saver = rospy.Service('save_map', map_store_srvs.SaveMap, process_save_map)
     rospy.spin()
