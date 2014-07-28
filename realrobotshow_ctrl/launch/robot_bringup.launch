@@ -1,5 +1,5 @@
 <launch>
-  <arg name="rapp_package_whitelist"  default="[rocon_apps, turtlebot_rapps, realrobotshow_ctrl]"/>
+  <arg name="rapp_package_whitelist"  default="[rocon_apps, realrobotshow_ctrl]"/>
   <arg name="screen"                  default="true"/>
   <arg name="interactions"            default="true"/>
   <arg name="interactions_list"       default="[turtlebot_bringup/admin.interactions, turtlebot_bringup/documentation.interactions, realrobotshow_ctrl/pairing.interactions]"/>

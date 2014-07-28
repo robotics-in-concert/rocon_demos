@@ -5,6 +5,7 @@
 #
 
 import rospy 
+import subprocess
 import map_store.srv as map_store_srvs
 
 def process_save_map(req):
