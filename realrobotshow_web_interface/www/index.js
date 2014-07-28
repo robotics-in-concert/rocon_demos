@@ -100,24 +100,30 @@ function settingROSCallbacks()
 function processTableListUpdate(data){
   settingMainMenu(data.tables);
 }
+
 function processDiagnostic(data){
+  
   for (var i = data.status.length - 1; i >= 0; i--) {
     var name = data.status[i].name;
     if(name === "/Power System/Laptop Battery"){
         var percent = getBattPecent(data.status[i].values);
+        //console.log('robot batt: ',percent);
         setBattPecent('.sd-laptop-batt-status',percent);
     }
     else if(name === "/Power System/Battery"){
         var percent = getBattPecent(data.status[i].values);
-        console.log('robot batt: ',percent);
+        //console.log('robot batt: ',percent);
         setBattPecent('.sd-robot-batt-status',percent);
     }
   }
+  
 };
+
 function setBattPecent(obj, data){
     var text = $(obj).text();
     $(obj).text(text.split(':')[0]+': ' + data+' %');
 }
+
 function getBattPecent(data){
     var percent = '-1';
     for (var i = 0; i < data.length; i++) {
@@ -128,6 +134,7 @@ function getBattPecent(data){
     };
     return percent;
 };
+
 function settingMainMenu(data){
   var row_max_num = 3
   var row_num = 0;
@@ -164,6 +171,7 @@ function settingMainMenu(data){
     });
   };
 };
+
 function showMainMenu(flag){
     if(flag === true){
       $('.sd-main-menu').show();
@@ -175,280 +183,3 @@ function showMainMenu(flag){
     }
 };
 
-
-//     function processRemoteOrderUpdate(msg){
-//     	$('.'+msg.name).innerHTML = "<b>Name: </b>" + msg.name +
-// 	       "<br/><b>Estimated Time: </b>" + msg.estimated_arrival+" min." +  
-// 	       "<br/><b>Status : </b>" + STATUS_STRING[msg.status];
-//     }
-
-//     function processRemoteOrderList(msg) {
-//     	var i;
-//     	remote_nav_div.empty();
-//     	remote_orders_div.empty();
-//     	var rowdiv = document.createElement('div');
-//        rowdiv.className = 'row-fluid';
-  
-//     	for(i in msg.remote_orders) {
-//     		// add into navigation bar
-//     		var navli = createRemoteOrderLi(msg.remote_orders[i]); 
-//     		remote_nav_div.append(navli);
-		
-//     		var div = createRemoteOrderDiv(msg.remote_orders[i]);
-//            rowdiv.appendChild(div);
-		
-//            if((i+1) % 3 == 0){
-//         	   remote_orders_div.append(rowdiv);
-//         	   rowdiv = document.createElement('div');
-//         	   rowdiv.className = 'row-fluid';
-//         	   var hr = document.createElement('hr');
-//         	   remote_orders_div.append(hr);
-//              }
-//     	}
-//     	remote_orders_div.append(rowdiv);
-
-//     }
-
-//     function createRemoteOrderLi(order){
-//     	order.order_id = "Remote";
-//     	order.table_id = "remote order";
-//        var li = document.createElement('li');
-//        var p = document.createElement('p');
-//        p.className = order.name
-//        p.innerHTML = "<b>Name: </b>" + order.name +
-// 				       "<br/><b>Estimated Time: </b>" + order.estimated_arrival+" min." +  
-// 				       "<br/><b>Status : </b>" + STATUS_STRING[order.status];
-//        li.appendChild(p);
-
-//        $(li).hover(
-//             function() { this.style.background= "gray"; },
-//             function() { this.style.background= "";     }
-//         );
-//        $(li).click(function() {
-//          hero_div.empty();
-//          var hero_element = createHeroDiv(order);
-//          hero_div.append(hero_element);
-//         });
-
-//         return li;
-//       }
-//     function createRemoteOrderDiv(order){
-//     	var div = document.createElement('div');
-//         div.className = "span4";
-//         div.style.border = "thin dotted";
-//         div.style.padding = "5pt";
-//         var h = document.createElement('h3');
-//         h.innerHTML = "Order : " + order.order_id;
-//         div.appendChild(h);
-
-//         var elements_robot= createRowLine('Name: ',order.name || "");
-//         div.appendChild(elements_robot);
-
-//         var elements_table = createRowLine('Extimated Time: ' ,(order.estimated_arrival || "")+ " min.");
-//         div.appendChild(elements_table);
-
-//         var menudiv = createMenuDiv(order.menus);
-//         div.appendChild(menudiv); 
-
-//         $(div).hover(
-//             function() { this.style.background= "gray"; },
-//             function() { this.style.background= "";     }
-//         );
-
-//         $(div).click(function() {
-//           hero_div.empty();
-//           var hero_element = createHeroDiv(order);
-//           hero_div.append(hero_element);
-
-//         });
-
-//         return div;
-//     }
-
-//     function processOrderList(msg) {
-//       var i;
-
-//       nav_div.empty();
-//       hero_div.empty();
-//       orders_div.empty();
-
-//       var rowdiv = document.createElement('div');
-//       rowdiv.className = 'row-fluid';
-
-//       // create Hero 
-//       var hero_element = createHeroDiv(msg.orders[0]);
-//       hero_div.append(hero_element);
-
-//       for(i in msg.orders) {
-//         // add into navigation bar
-//         var navli = createOrderLi(msg.orders[i]); 
-//         nav_div.append(navli);
-
-//         // add into order lists
-//         var div = createOrderDiv(msg.orders[i]);
-//         rowdiv.appendChild(div);
-
-//         // next row
-//         if((i+1) % 3 == 0)
-//         {
-//           orders_div.append(rowdiv);
-//           rowdiv = document.createElement('div');
-//           rowdiv.className = 'row-fluid';
-//           var hr = document.createElement('hr');
-//           orders_div.append(hr);
-//         }
-//       }
-//       orders_div.append(rowdiv);
-//     }
-
-//     function createHeroDiv(order)
-//     {
-//       var externaldiv = document.createElement('div');
-
-//       if(order == undefined)
-//       {
-//         externaldiv.innerHTML = "No Order";
-//         return externaldiv;
-//       }
-
-//       var h1 = document.createElement('h2');
-//       h1.innerHTML = "Order : " + (order.order_id || "");
-//       externaldiv.appendChild(h1);
-//       if(order.order_id === "Remote"){
-//     	  var elements_robot= createRowLine('Name : ',order.name || "");
-//     	  externaldiv.appendChild(elements_robot);
-//     	  var elements_title = createRow('h5','row-fluid',['Estimated Time','Status'],'span6');
-//     	  externaldiv.appendChild(elements_title);
-
-//     	  var elements = createRow('div','row-fluid',[(order.estimated_arrival || "")+" min.",STATUS_STRING[order.status]],'span6');
-//     	  externaldiv.appendChild(elements);
-//        }
-//       else{
-//     	  var elements_robot= createRowLine('Robot : ',order.robot_name || "");
-//           externaldiv.appendChild(elements_robot);
-
-//           var elements_title = createRow('h5','row-fluid',['Table','Status'],'span6');
-//           externaldiv.appendChild(elements_title);
-
-//           var elements = createRow('div','row-fluid',[order.table_id || "" ,STATUS_STRING[order.status]],'span6');
-//           externaldiv.appendChild(elements);
-//       }
-
-//       var menudiv = createMenuDiv(order.menus);
-//       externaldiv.appendChild(menudiv); 
-        
-//       return externaldiv;
-//     }
-
-//     function createOrderLi(order) {
-//       var li = document.createElement('li');
-//       var p = document.createElement('p');
-//       p.innerHTML = "#" + order.order_id + 
-//       				   "<br/><b>Table : </b>" + order.table_id + 
-//       				   "<br/><b>Robot : </b>" + order.robot_name +  
-//       				   "<br/> Status : </b>" + STATUS_STRING[order.status];
-//       li.appendChild(p);
-
-//       $(li).hover(
-//           function() { this.style.background= "gray"; },
-//           function() { this.style.background= "";     }
-//       );
-//       $(li).click(function() {
-//         hero_div.empty();
-//         var hero_element = createHeroDiv(order);
-//         hero_div.append(hero_element);
-//       });
-
-//       return li;
-//     }
-
-//     function createOrderDiv(order) {
-//       var div = document.createElement('div');
-//       div.className = "span4";
-//       div.style.border = "thin dotted";
-//       div.style.padding = "5pt";
-//       var h = document.createElement('h3');
-//       h.innerHTML = "Order : " + order.order_id;
-//       div.appendChild(h);
-
-//       var elements_robot= createRowLine('Robot : ',order.robot_name | "");
-//       div.appendChild(elements_robot);
-
-//       var elements_table = createRowLine('Table : ' ,order.table_id | "");
-//       div.appendChild(elements_table);
-
-//       var elements_status = createRowLine('Status : ',STATUS_STRING[order.status] | "");
-//       div.appendChild(elements_status);
-
-//       var menudiv = createMenuDiv(order.menus);
-//       div.appendChild(menudiv); 
-
-//       $(div).hover(
-//           function() { this.style.background= "gray"; },
-//           function() { this.style.background= "";     }
-//       );
-
-//       $(div).click(function() {
-//         hero_div.empty();
-//         var hero_element = createHeroDiv(order);
-//         hero_div.append(hero_element);
-
-//       });
-
-//       return div;
-//     }
-
-//     function createRowLine(name,element)
-//     {
-//       var div = createDiv('','row-fluid');
-//       var title = document.createElement('strong');
-//       title.className = 'span4';
-//       title.innerHTML = name; 
-//       div.appendChild(title);
-
-//       var el = createDiv(element,'span8');
-// //      el.style.marginTop = '10px';
-//       div.appendChild(el);
-
-//       return div;
-//     }
-
-
-//     function createMenuDiv(menus) 
-//     {
-//       var externaldiv = document.createElement('div');
-//       var div = createRow('h5','row-fluid',['Name','Size','Qty'],'span4');
-
-//       externaldiv.appendChild(div);
-
-//       var i;
-//       for(i in menus) {
-//         var m = menus[i]; 
-//         var d= createRow('div','row-fluid',[m.name,m.size,m.qty],'span4');
-    
-//         if (m.qty === 0)continue;
-//         externaldiv.appendChild(d);
-//       }
-//       return externaldiv;
-//     }
-
-//     function createRow(rowel,rowclass,elements,elementclass)
-//     {
-//       var div = document.createElement(rowel);
-//       div.className = rowclass;
-
-//       var i;
-//       for(i in elements) { 
-//         var e = createDiv(elements[i],elementclass);
-//         div.appendChild(e);
-//       }
-//       return div;
-//     }
-
-//     function createDiv(text,elementclass) {
-//       var div = document.createElement('div'); 
-//       div.className = elementclass;
-//       div.innerHTML = text;
-
-//       return div;
-//     }
