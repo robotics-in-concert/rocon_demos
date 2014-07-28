@@ -17,7 +17,7 @@ ar_markers:
 columns: []
 tables:
 - height: 0.4000000059604645
-  name: kitchen
+  name: table3
   pose:
     header:
       frame_id: /map
@@ -30,9 +30,9 @@ tables:
       pose:
         orientation: {w: 0.684864342212677, x: 0.0, y: 0.0, z: -0.728670597076416}
         position: {x: -2.0088201141357422, y: 1.999010620117187, z: 0.25}
-  radius: 0.03999999910593033
+  radius: 0.5
 - height: 0.5
-  name: docking
+  name: kitchen 
   pose:
     header:
       frame_id: /map

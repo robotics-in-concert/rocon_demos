@@ -42,6 +42,7 @@ class StateManager(object):
         self._init_variables()
         self._init_handles()
         self._init_states()
+        self._init_led_blinkder()
 
     def _init_states(self):
         self._states = {}
@@ -66,13 +67,21 @@ class StateManager(object):
         self._nav_table_distance = rospy.get_param('~nav_table_distance', 5.0)
         self._resource_path = rospy.get_param('~resource_path')
 
+    def _init_led_blinkder(self):
+        self._red_led = kobuki_msgs.Led.RED
+        self._off_led = kobuki_msgs.Led.BLACK
+        self._green_led = kobuki_msgs.Led.GREEN
+        self._orange_led = kobuki_msgs.Led.ORANGE
+        self.last_blink_led = 2
+
     def _init_handles(self):
         # order handle
         self._deliver_order_handler = actionlib.SimpleActionServer(self._kitchen_action_name, simple_delivery_msgs.DeliverOrderAction, execute_cb=self._process_deliver_order, auto_start=False)
 
         self._sub = {}
         self._pub = {}
-        
+
+        # Debug        
         self._pub['debug'] = rospy.Publisher('~debug', std_msgs.String, queue_size=2)
         # Button
         self._sub['digital_inputs'] = rospy.Subscriber('~digital_inputs', kobuki_msgs.DigitalInputEvent, self._process_button)  # Waiterbot buttons.
@@ -85,7 +94,11 @@ class StateManager(object):
         self._navigator_handler = actionlib.SimpleActionClient(self._navigator_action_name, yocs_msgs.NavigateToAction)
 
         self.loginfo('Wait for Sematic Navigator Server to be up')
-        #self._navigator_handler.wait_for_server()
+        self._navigator_handler.wait_for_server()
+
+        # LED
+        self._pub['led1'] = rospy.Publisher('/mobile_base/commands/led1', kobuki_msgs.Led, queue_size=1)
+        self._pub['led2'] = rospy.Publisher('/mobile_base/commands/led2', kobuki_msgs.Led, queue_size=1)
 
     def _process_button(self, msg):
         # 0 = GREEN 1 = RED
@@ -137,9 +150,15 @@ class StateManager(object):
         r = rospy.Rate(10)
         self._deliver_order_handler.start()
 
+        t = 2
+
         while not rospy.is_shutdown():
             self._states[self._current_state]()
             self._logging()
+            t = (t % 5) + 1
+
+            if t == 1:
+                self._blink_leds()
             r.sleep()
 
     def _logging(self):
@@ -148,6 +167,9 @@ class StateManager(object):
                 
     def loginfo(self, msg):
         rospy.loginfo('Robot State Manager : ' + str(msg))
+
+    def logwarn(self, msg):
+        rospy.logwarn('Robot State Manager : ' + str(msg))
 
     def _request_navigator(self, location, approach_type, num_retry, timeout, distance):
         goal = yocs_msgs.NavigateToGoal()
@@ -163,9 +185,10 @@ class StateManager(object):
         self._navigator_handler.send_goal(goal, done_cb=self._navigator_done, feedback_cb=self._navigator_feedback)
         self._navigator_finished = False 
 
-    def _navigator_done(self, done):
+    def _navigator_done(self, status, result):
         self.loginfo("Navigator Done.")
-        self.loginfo(str(done))
+        self.loginfo(str(status))
+        self.loginfo(str(result))
         self._navigator_finished= True
         
     def _navigator_feedback(self, feedback):
@@ -195,7 +218,7 @@ class StateManager(object):
         # Wait for arriving
         if self._navigator_finished:
             # When it arrives...
-            self._current_state = STATE_KITCHEN
+            self._current_state = STATE_AT_KITCHEN
             play_sound(self.loginfo, self._resource_path, self._confirm_sound)
 
     def _state_at_kitchen(self):
@@ -225,3 +248,17 @@ class StateManager(object):
     def _state_on_error(self):
         # When it fails while navigation....
         pass
+
+    def _blink_leds(self):
+        self.last_blink_led = (self.last_blink_led % 2) + 1
+
+        if self._current_state == STATE_ON_ERROR:
+            led1_blink = self._off_led if self.last_blink_led == 1 else self._red_led
+            led2_blink = self._red_led if self.last_blink_led == 1 else self._off_led
+            self._pub['led1'].publish(led1_blink)
+            self._pub['led2'].publish(led2_blink)
+        else:
+            led1_blink = self._off_led if self.last_blink_led == 1 else self._green_led 
+            led2_blink = self._green_led if self.last_blink_led == 1 else self._off_led
+            self._pub['led1'].publish(led1_blink)
+            self._pub['led2'].publish(led2_blink)
