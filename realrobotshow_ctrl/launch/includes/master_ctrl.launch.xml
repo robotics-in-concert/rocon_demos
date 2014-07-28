@@ -8,7 +8,7 @@
     <param name="nav_table_distance"  value="5.0"/>
     <param name="resource_path"       value="$(arg resource_path)"/> 
 
-    <remap from="~digital_input" to="/mobile_base/events/digital_input"/>
+    <remap from="~digital_inputs" to="/mobile_base/events/digital_input"/>
     <remap from="navigate_to" to="navigator"/>
     <remap from="deliver_order" to="delivery"/>
   </node>

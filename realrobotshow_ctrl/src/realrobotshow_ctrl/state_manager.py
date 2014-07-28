@@ -40,14 +40,16 @@ class StateManager(object):
     def __init__(self):
         self._init_variables()
         self._init_handles()
+        self._init_states()
 
     def _init_states(self):
+        self._states = {}
         self._states[STATE_INITIALIZATION] = self._state_initialization
         self._states[STATE_GOTO_KITCHEN] = self._state_goto_kitchen
         self._states[STATE_AT_KITCHEN] = self._state_at_kitchen
         self._states[STATE_GOTO_TABLE] = self._state_goto_table
         self._states[STATE_AT_TABLE]   = self._state_at_table
-        self._states[STATE_ERROR]      = self._state_on_error
+        self._states[STATE_ON_ERROR]      = self._state_on_error
 
     def _init_variables(self):
         self._current_state = STATE_ON_ERROR
