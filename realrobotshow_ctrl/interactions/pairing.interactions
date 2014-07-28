@@ -1,4 +1,4 @@
-- name: web_app(http://localhost/realrobotshow/)
+- name: web_app(http://192.168.10.128/realrobotshow/)
   display_name: Delivery
   role: 'Manager'
   compatibility: rocon:/pc
@@ -6,11 +6,11 @@
   #icon:
   remappings: 
     - remap_from: kitchen_order
-      remap_to: kitchen_order
+      remap_to: turtlebot/kitchen_order
     - remap_from: diagnostics_agg
       remap_to: diagnostics_agg
     - remap_from: tables
-      remap_to: tables
+      remap_to: turtlebot/tables
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
