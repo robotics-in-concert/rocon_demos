@@ -3,7 +3,7 @@
   <arg name="screen"                  default="true"/>
   <arg name="interactions"            default="true"/>
   <arg name="interactions_list"       default="[turtlebot_bringup/admin.interactions, turtlebot_bringup/documentation.interactions, realrobotshow_ctrl/pairing.interactions]"/>
-  <ang name="robot_name"              default="$(optenv ROBOT_NAME)"/>
+  <arg name="robot_name"              default="$(optenv ROBOT_NAME)"/>
   <arg name="robot_type"              default="waiterbot"/>
   <arg name="rosbridge_address"       default="$(optenv ROS_HOSTNAME localhost)"/>
   <arg name="rosbridge_port"          default="9090"/>
