@@ -72,6 +72,7 @@ class StateManager(object):
         self._sub = {}
         self._pub = {}
         
+        self._pub['debug'] = rospy.publish('~debug', std_msgs.String)
         # Button
         self._sub['digital_inputs'] = rospy.Subscriber('~digital_inputs', kobuki_msgs.DigitalInputEvent, self._process_button)  # Waiterbot buttons.
 
@@ -92,6 +93,8 @@ class StateManager(object):
             self._previous_button = copy.deepcopy(msg)
             return
 
+        print(str(sefl._previous_button))
+        print(str(msg))
         green, red = check_button_event(self._previous_button, msg)
 
         if green:
@@ -137,7 +140,8 @@ class StateManager(object):
             r.sleep()
 
     def _logging(self):
-        self.loginfo(self._current_state)
+        #self.loginfo(self._current_state)
+        self._pub['debug'].publish(str(self._current_state))
                 
     def loginfo(self, msg):
         rospy.loginfo('Robot State Manager : ' + str(msg))
