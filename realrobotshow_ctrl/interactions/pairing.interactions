@@ -1,16 +1,14 @@
-- name: web_app(http://192.168.10.128/realrobotshow/)
+- name: web_app(http://192.168.10.210/realrobotshow/index.html)
   display_name: Delivery
   role: 'Manager'
-  compatibility: rocon:/pc
+  compatibility: rocon:/
   description: Real Robot show kitchen Frontend
   #icon:
   remappings: 
-    - remap_from: kitchen_order
-      remap_to: turtlebot/kitchen_order
     - remap_from: diagnostics_agg
       remap_to: diagnostics_agg
     - remap_from: tables
-      remap_to: turtlebot/tables
+      remap_to: table_pose_list
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__

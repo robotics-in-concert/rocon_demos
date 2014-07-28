@@ -13,6 +13,7 @@
     <remap from="deliver_order" to="delivery"/>
   </node>
 
-  <include file="$(find realrobotshow_order_manager)/launch/order_manager.launch">
-  </include>
+  <node pkg="realrobotshow_order_manager" type="manager.py" name="order_manager" output="screen">
+    <remap from="deliver_order" to="delivery"/>
+  </node>
 </launch>

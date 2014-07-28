@@ -4,7 +4,7 @@ ar_markers:
     frame_id: ''
     seq: 4217
     stamp: {nsecs: 0, secs: 0}
-  id: 8
+  id: 3
   pose:
     header:
       frame_id: /map
@@ -17,7 +17,7 @@ ar_markers:
 columns: []
 tables:
 - height: 0.4000000059604645
-  name: pickup
+  name: kitchen
   pose:
     header:
       frame_id: /map

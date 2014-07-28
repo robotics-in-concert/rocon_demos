@@ -2,11 +2,12 @@
   <arg name="rapp_package_whitelist"  default="[rocon_apps, realrobotshow_ctrl]"/>
   <arg name="screen"                  default="true"/>
   <arg name="interactions"            default="true"/>
-  <arg name="interactions_list"       default="[turtlebot_bringup/admin.interactions, turtlebot_bringup/documentation.interactions, realrobotshow_ctrl/pairing.interactions]"/>
+  <arg name="interactions_list"       default="[realrobotshow_ctrl/pairing.interactions]"/>
   <arg name="robot_name"              default="$(optenv ROBOT_NAME)"/>
   <arg name="robot_type"              default="waiterbot"/>
   <arg name="rosbridge_address"       default="$(optenv ROS_HOSTNAME localhost)"/>
   <arg name="rosbridge_port"          default="9090"/>
+  <arg name="capabilities"            default="false"/>
 
   <include file="$(find turtlebot_bringup)/launch/minimal.launch">
     <arg name="rapp_package_whitelist"  value="$(arg rapp_package_whitelist)"/>
@@ -16,5 +17,11 @@
     <arg name="interactions_list"       value="$(arg interactions_list)"/>
     <arg name="rosbridge_address" value="$(arg rosbridge_address)"/>
     <arg name="rosbridge_port" value="$(arg rosbridge_port)"/>
+    <arg name="capabilities"            value="$(arg capabilities)"/>
+  </include>
+
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+    <arg name="address" value="$(arg rosbridge_address)"/>
+    <arg name="port"    value="$(arg rosbridge_port)"/>
   </include>
 </launch>

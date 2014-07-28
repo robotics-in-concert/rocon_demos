@@ -9,6 +9,7 @@ import yocs_msgs.msg as yocs_msgs
 import kobuki_msgs.msg as kobuki_msgs
 import std_msgs.msg as std_msgs
 import actionlib
+import copy
 
 from .utils import *
 
@@ -72,7 +73,7 @@ class StateManager(object):
         self._sub = {}
         self._pub = {}
         
-        self._pub['debug'] = rospy.publish('~debug', std_msgs.String)
+        self._pub['debug'] = rospy.Publisher('~debug', std_msgs.String, queue_size=2)
         # Button
         self._sub['digital_inputs'] = rospy.Subscriber('~digital_inputs', kobuki_msgs.DigitalInputEvent, self._process_button)  # Waiterbot buttons.
 
@@ -84,18 +85,18 @@ class StateManager(object):
         self._navigator_handler = actionlib.SimpleActionClient(self._navigator_action_name, yocs_msgs.NavigateToAction)
 
         self.loginfo('Wait for Sematic Navigator Server to be up')
-        self._navigator_handler.wait_for_server()
+        #self._navigator_handler.wait_for_server()
 
     def _process_button(self, msg):
         # 0 = GREEN 1 = RED
 
-        if not self._process_button:
+        if not self._previous_button:
             self._previous_button = copy.deepcopy(msg)
             return
 
-        print(str(sefl._previous_button))
-        print(str(msg))
         green, red = check_button_event(self._previous_button, msg)
+        print(str(green))
+        print(str(red))
 
         if green:
             if not self._current_state:
@@ -106,6 +107,8 @@ class StateManager(object):
 
             if self._current_state == STATE_AT_TABLE:
                 self._customer_confirm = True
+
+        self._previous_button = copy.deepcopy(msg)
 
     def _process_localized(self, msg): 
         self._initialized = True
@@ -152,8 +155,10 @@ class StateManager(object):
         goal.location = location
         goal.approach_type = approach_type
         goal.num_retry = num_retry
-        goal.timeout = timeout
+        goal.timeout = float(timeout)
         goal.distance = distance
+
+        self.loginfo(str(goal))
 
         self._navigator_handler.send_goal(goal, done_cb=self._navigator_done, feedback_cb=self._navigator_feedback)
         self._navigator_finished = False 
@@ -175,9 +180,9 @@ class StateManager(object):
             self._pub['localize'].publish() 
             self.loginfo('Localization Request sent')
             self._init_requested = True
-            play_sound(resource_path, _confirm_sound)
+            play_sound(self.loginfo,self._resource_path, self._confirm_sound)
     
-        if _initialized:
+        if self._initialized:
             self.loginfo('Robot Localized')
             self.loginfo('Moving To kitchen')
 
@@ -191,7 +196,7 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_KITCHEN
-            play_sound(resource_path, _confirm_sound)
+            play_sound(self.loginfo, self._resource_path, self._confirm_sound)
 
     def _state_at_kitchen(self):
         # Wait for order

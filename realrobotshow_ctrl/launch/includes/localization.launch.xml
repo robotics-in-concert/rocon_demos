@@ -7,7 +7,8 @@
 
   <node pkg="yocs_localization_manager" name="localization_manager" type="localization_manager.py">
     <remap from="pose_tracker/poses"           to="predicted_robot_pose"/>
-    <remap from="initialpose"                  to="initial_pose"/>
+    <remap from="localization_manager/initialise" to="robot_manager/localize"/>
+    <remap from="localization_manager/initialised" to="robot_manager/localized"/>
   </node>
 
   <node pkg="amcl" type="amcl" name="amcl">

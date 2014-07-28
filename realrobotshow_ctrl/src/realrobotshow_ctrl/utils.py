@@ -10,17 +10,20 @@ def check_button_event(prev, curr):
 
     green = False
     red = False
-    if prev.value[0] is True and curr.value[0] is False:
+    if prev.values[0] is False and curr.values[0] is True:
         green = True
 
-    if prev.value[1] is True and curr.value[1] is False: 
+    if prev.values[1] is False and curr.values[1] is True: 
         red = True
 
     return green, red
 
-def play_sound(resource_path, sound):
+def play_sound(loginfo,resource_path, sound):
     chirp_path = subprocess.check_output(['rospack','find','rocon_apps']).replace('\n','')
-    chirp = chirp_path + '/scripts/play_sound.bash' 
+    chirp = chirp_path + '/scripts/chirp.bash' 
 
-    sound = resource_path + '/' + sound
-    subprocess.call([chirp_path, sound])
+    loginfo(str(chirp))
+
+    sound_path = resource_path + '/' + sound
+    loginfo(str(sound_path))
+    subprocess.call([chirp, sound_path])
