@@ -1,5 +1,5 @@
 <launch>
-  <arg name="resource_path" default="$(find realrobotshow_ctrl)/resource/sounds"/>
+  <arg name="resource_path" default="$(find realrobotshow_ctrl)/resources/sounds"/>
 
   <node pkg="realrobotshow_ctrl" name="robot_manager" type="delivery_robot_manager.py">
     <param name="nav_kitchen_timeout" value="300.0"/> 

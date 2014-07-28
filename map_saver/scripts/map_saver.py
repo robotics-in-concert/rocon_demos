@@ -8,7 +8,7 @@ import rospy
 import map_store.srv as map_store_srvs
 
 def process_save_map(req):
-    filename = rospy.get_param('filename', req.name) 
+    filename = rospy.get_param('filename', req.map_name) 
     tmp_name = filename + '_tmp'
 
     tmp_output = subprocess.check_output(['rosrun','map_server','map_saver','-f',tmp_name])

@@ -1,6 +1,6 @@
 <launch>
-  <arg name="map_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml"/>
-  <arg name="annotation_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml"/>
+  <arg name="map_file" default="$(find realrobotshow_ctrl)/resources/show_map.yaml"/>
+  <arg name="annotation_file" default="$(find realrobotshow_ctrl)/resources/show_map.yaml"/>
   <arg name="initial_pose_x" value="2.0"/>
   <arg name="initial_pose_y" value="2.0"/>
   <arg name="initial_pose_a" value="0.0"/>

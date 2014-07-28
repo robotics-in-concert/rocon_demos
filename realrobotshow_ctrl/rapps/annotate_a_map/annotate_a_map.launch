@@ -4,8 +4,8 @@
  -->
 <launch>
   <!-- Maps -->
-  <arg name="map_file" default="$(find realrobotshow_ctrl)/resource/show_map.yaml" /> <!-- map file show match with make_a_map param -->
-  <arg name="annotation_file" default="$(find realrobotshow_ctrl)/resource/show_annotation.yaml"/>
+  <arg name="map_file" default="$(find realrobotshow_ctrl)/resources/show_map.yaml" /> <!-- map file show match with make_a_map param -->
+  <arg name="annotation_file" default="$(find realrobotshow_ctrl)/resources/show_annotation.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
 
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
