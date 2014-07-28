@@ -4,6 +4,8 @@
   <arg name="interactions"            default="true"/>
   <arg name="interactions_list"       default="[turtlebot_bringup/admin.interactions, turtlebot_bringup/documentation.interactions, realrobotshow_ctrl/pairing.interactions]"/>
   <arg name="robot_type"              default="waiterbot"/>
+  <arg name="rosbridge_address" default="localhost"/>
+  <arg name="rosbridge_port" default="9090"/>
 
   <include file="$(find turtlebot_bringup)/launch/minimal.launch">
     <arg name="rapp_package_whitelist"  value="$(arg rapp_package_whitelist)"/>
@@ -11,5 +13,7 @@
     <arg name="robot_type"                  value="$(arg robot_type)"/>
     <arg name="interactions"            value="$(arg interactions)"/>
     <arg name="interactions_list"       value="$(arg interactions_list)"/>
+    <arg name="rosbridge_address" value="$(arg rosbridge_address)"/>
+    <arg name="rosbridge_port" value="$(arg rosbridge_port)"/>
   </include>
 </launch>

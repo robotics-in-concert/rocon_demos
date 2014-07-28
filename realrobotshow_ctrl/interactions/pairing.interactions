@@ -1,4 +1,4 @@
-- name: web_url(http://localhost/realrobotshow/)
+- name: web_app(http://localhost/realrobotshow/)
   display_name: Delivery
   role: 'Manager'
   compatibility: rocon:/pc
@@ -11,6 +11,9 @@
       remap_to: diagnostics_agg
     - remap_from: tables
       remap_to: tables
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
   pairing:
     rapp: realrobotshow_ctrl/realrobot
     remappings: []
