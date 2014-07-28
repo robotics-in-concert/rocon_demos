@@ -6,7 +6,11 @@
   #icon:
   remappings: 
     - remap_from: kitchen_order
-      remap_to:
+      remap_to: kitchen_order
+    - remap_from: diagnostics_agg
+      remap_to: diagnostics_agg
+    - remap_from: tables
+      remap_to: tables
   pairing:
     rapp: realrobotshow_ctrl/realrobot
     remappings: []
