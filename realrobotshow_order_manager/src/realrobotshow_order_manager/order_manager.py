@@ -31,7 +31,7 @@ class OrderManager(object):
 
 
     def feedback_cb(self, data):
-        self.loginfo(data.status)
+        #self.loginfo(data.status)
         feedback = simple_delivery_msgs.msg.DeliverOrderFeedback()
         feedback.status = data.status
         self._as.publish_feedback(data)

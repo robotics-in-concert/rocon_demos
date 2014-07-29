@@ -19,13 +19,18 @@ STATE_GOTO_KITCHEN   = 'GOTO_KITCHEN'
 STATE_AT_KITCHEN     = 'AT_KITCHEN'
 STATE_GOTO_TABLE     = 'GOTO_TABLE'
 STATE_AT_TABLE       = 'AT_TABLE'
+STATE_BACKTO_KITCHEN   = 'BACKTO_KITCHEN'
+STATE_REINITIALIZATION = 'REINITIALIZATION'
 STATE_ON_ERROR       = 'ON_ERROR'
+STATE_RESET          = 'RESET'
 
 # INIT
 # GOTO KITCHEN
 # AT_KITCHEN
 # GOTO_TABLE
 # AT_TABLE
+# BACKTO_KITCHEN
+# REINITIALIZATION
 # ERROR
 
 class StateManager(object):
@@ -55,12 +60,17 @@ class StateManager(object):
         self._states[STATE_AT_KITCHEN] = self._state_at_kitchen
         self._states[STATE_GOTO_TABLE] = self._state_goto_table
         self._states[STATE_AT_TABLE]   = self._state_at_table
-        self._states[STATE_ON_ERROR]      = self._state_on_error
+        self._states[STATE_BACKTO_KITCHEN]   = self._state_backto_kitchen
+        self._states[STATE_REINITIALIZATION] = self._state_reinitialization
+        self._states[STATE_ON_ERROR] = self._state_on_error
+        self._states[STATE_RESET] = self._state_reset
 
     def _init_variables(self):
         self._current_state = STATE_ON_ERROR
         self._initialized = False
         self._previous_button = None  
+        self._previous_red_button_time= None
+        self._red_count = 0
         self._init_requested = False
         self._delivery_order_received = False
         self._customer_confirm = False
@@ -126,6 +136,23 @@ class StateManager(object):
             if self._current_state == STATE_AT_TABLE:
                 self._customer_confirm = True
 
+        if red:
+            now = rospy.Time.now()
+
+            if not self._previous_red_button_time:
+                self._red_count = 1
+            else:
+                di = now - self._previous_red_button_time
+                if di.to_sec() < 5:
+                    self._red_count = self._red_count + 1
+                else:
+                    self._red_count = 1
+
+                if self._red_count == 3:
+                    self._current_state = STATE_RESET
+                    self._red_count = 0
+            self._previous_red_button_time = now
+
         self._previous_button = copy.deepcopy(msg)
 
     def _process_localized(self, msg): 
@@ -172,7 +199,7 @@ class StateManager(object):
         self._pub['debug'].publish(str(self._current_state))
 
         if self._order_in_progress:
-            feedback = yocs_msgs.NavigateToFeedback()
+            feedback = simple_delivery_msgs.DeliverOrderFeedback()
             feedback.status = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
             self._deliver_order_handler.publish_feedback(feedback)
                 
@@ -190,9 +217,6 @@ class StateManager(object):
         goal.num_retry = num_retry
         goal.timeout = float(timeout)
         goal.distance = distance
-
-        self.loginfo(str(goal))
-
         self._navigator_handler.send_goal(goal, done_cb=self._navigator_done, feedback_cb=self._navigator_feedback)
         self._navigator_finished = False 
 
@@ -201,11 +225,12 @@ class StateManager(object):
         
         if result.success == False:
             play_sound(self._resource_path, self._navi_failed_sound)
-            self._current_state = STATE_ON_ERROR
-        self._navigator_finished= True
+            self._current_state = STATE_RESET
+        else:
+            self._navigator_finished = True
         
     def _navigator_feedback(self, feedback):
-        self._navigator_feed = str("Distance : %s, Message : %s"%(str(feedback.distance),str(feedback.message)))
+        self._navigator_feed = str("Distance : %s, Remain Time : %s, Message : %s"%(str(feedback.distance),str(feedback.remain_time),str(feedback.message)))
         self.loginfo("Navigator : " + str(self._navigator_feed))
         
         if feedback.status == yocs_msgs.NavigateToFeedback.STATUS_RETRY:
@@ -234,14 +259,6 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_AT_KITCHEN
-            if self._order_in_progress:
-                self._order_in_progress = False
-                message = 'Delivery Success!'
-                r = simple_delivery_msgs.DeliverOrderResult()
-                r.message = message
-                r.success = False
-                self._deliver_order_handler.set_succeeded(r)
-
             play_sound(self._resource_path, self._bab_sound)
 
     def _state_at_kitchen(self):
@@ -264,17 +281,55 @@ class StateManager(object):
 
     def _state_at_table(self):
         # Wait for Customer's confirmation
-        if self._customer_confirm:
+        if self._customer_confirm == True:
             self._customer_confirm = False
             self.loginfo('Moving To kitchen')                                                     
             play_sound(self._resource_path, self._enjoy_meal_sound)
             self._request_navigator('kitchen', yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
             # Request navigator to go kitchen
-            self._current_state = STATE_GOTO_KITCHEN
+            self._current_state = STATE_BACKTO_KITCHEN
+
+    def _state_backto_kitchen(self):
+        if self._navigator_finished:
+            # When it arrives...
+            self._current_state = STATE_REINITIALIZATION
+            if self._order_in_progress:
+                self._order_in_progress = False
+                message = 'Delivery Success!'
+                r = simple_delivery_msgs.DeliverOrderResult()
+                r.message = message
+                r.success = True
+                self._deliver_order_handler.set_succeeded(r)
+
+    def _state_reinitialization(self):
+        if not self._init_requested:
+            self._initialized = False
+            self._pub['localize'].publish() 
+            self.loginfo('Localization Request sent')
+            self._init_requested = True
+
+        if self._initialized:
+            self.loginfo('Robot Relocalized')
+            self.loginfo('Moving To kitchen')
+                                                                                                                                      
+            self._request_navigator('kitchen', yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_kitchen_timeout, 0.0)
+            # Request navigator to go kitchen
+            self._current_state = STATE_GOTO_KITCHEN                                                                                                                                       
+            self._init_requested = False
 
     def _state_on_error(self):
         # When it fails while navigation....
         pass
+
+    def _state_reset(self):
+        if self._order_in_progress:
+            message = 'Delivery has cancelled!'
+            r = simple_delivery_msgs.DeliverOrderResult()
+            r.message = message
+            r.success = False
+            self._deliver_order_handler.set_succeeded(r)
+        self._navigator_handler.cancel_all_goals()
+        self._init_variables()
 
     def _blink_leds(self):
         self.last_blink_led = (self.last_blink_led % 2) + 1

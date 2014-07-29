@@ -51,3 +51,19 @@
   pairing:
     rapp: realrobotshow_ctrl/make_a_map
     remappings: []
+- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
+  role: 'Manager'
+  compatibility: rocon:/pc
+  display_name: Cafe Monitor
+  description: Monitors cafe robots 
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    robot1: adams
+  remappings:
+    - remap_from: map
+      remap_to: /viewer_map
+    - remap_from: tables
+      remap_to: /annotation/tables
+    - remap_from: ar_markers
+      remap_to: /annotation/ar_markers

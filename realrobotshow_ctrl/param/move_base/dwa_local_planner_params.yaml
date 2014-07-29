@@ -3,7 +3,7 @@
 DWAPlannerROS:
 
 # Robot Configuration Parameters
-  max_vel_x: 0.40  #0.3  # 0.5
+  max_vel_x: 0.35  #0.3  # 0.5
   min_vel_x: 0.0  # 0.0
 
   max_vel_y: 0.0  # diff drive robot
@@ -33,7 +33,7 @@ DWAPlannerROS:
   vtheta_samples: 20  # 20
 
 # Trajectory Scoring Parameters
-  path_distance_bias: 72.0      # 32.0   - weighting for how much it should stick to the global path plan
+  path_distance_bias: 68.0      # 32.0   - weighting for how much it should stick to the global path plan
   goal_distance_bias: 24.0      # 24.0   - wighting for how much it should attempt to reach its goal
   occdist_scale: 0.05           # 0.01   - weighting for how much the controller should avoid obstacles
   forward_point_distance: 0.325 # 0.325  - how far along to place an additional scoring point
