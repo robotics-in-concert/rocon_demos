@@ -42,15 +42,6 @@
     resource_name: rocon_icons/map_annotation_icon.png 
   pairing:
     rapp: realrobotshow_ctrl/annotate_a_map
-- name: com.github.rosjava.android_apps.make_a_map.MainActivity
-  role: 'Manager'
-  compatibility: rocon:/*/*/indigo/jellybean
-  display_name: Make A Map
-  description: Make a map by driving a TurtleBot from an Android device.
-  max: -1
-  pairing:
-    rapp: realrobotshow_ctrl/make_a_map
-    remappings: []
 - name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
   role: 'Manager'
   compatibility: rocon:/pc
