@@ -5,14 +5,23 @@ var diagnostic_sub_topic_type = "diagnostic_msgs/DiagnosticArray";
 var tables_sub_topic_type = "yocs_msgs/TableList"
 var robot_status_type = "";
 
-var defaultUrL = ""
+var defaultUrL = "";
+var discard_menu_list = [];
+
+//parameter setting
 if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
     defaultUrL = rocon_interactions.rosbridge_uri;
 }else{
     defaultUrL = 'localhost';
 }
 
+if (rocon_interactions.parameters.hasOwnProperty('discard_btn_name')){
+    discard_menu_list = rocon_interactions.parameters.discard_btn_name;
+}else{
+    discard_menu_list = [];
+}
 
+// remapping rules setting
 var diagnostic_sub_topic = "diagnostics_agg";
 var tables_sub_topic = "tables";
 var kichen_order_action = "kitchen_order"
@@ -26,16 +35,10 @@ if(tables_sub_topic in rocon_interactions.remappings)
 if(kichen_order_action in rocon_interactions.remappings)
 	kichen_order_action = rocon_interactions.remappings[kichen_order_action];
 
-var nav_div;
-var remote_nav_div;
-var orders_div;
-var remote_orders_div;
-var hero_div;
 
 var delive_order_client;
 
 $().ready(function(e){
-
   // setting ros callbacks()
   showMainMenu(true);
   settingROSCallbacks();
@@ -47,12 +50,6 @@ $().ready(function(e){
       ros.connect(va);
       return false;
   });
-
-  nav_div = $('#nav-orders');
-  remote_nav_div = $('#nav-remote-orders');
-  orders_div = $('#orders');
-  remote_orders_div = $('#remote_orders');
-  hero_div = $('#hero-unit');
   
 });
 
@@ -97,22 +94,50 @@ function settingROSCallbacks()
   );
 }
 
+function processFilterSortMenu(data){
+  var menu = [];
+  var sortable = [];
+  //filter
+  for (var i = 0; i < data.length; i++) {
+    var allow_flag = true;
+    discard_menu_list.forEach(function(discard_name){
+      if (discard_name.indexOf(data[i].name) == -1){
+        allow_flag = allow_flag&true;
+      }
+      else{
+        allow_flag = allow_flag&false;
+      }      
+    });
+    if(allow_flag){
+      menu.push(data[i]);
+    }
+    else{
+    }
+  };
+  //sort by name
+  sortable_menu = menu.sort(function (a,b) {
+    if (a.name < b.name)
+       return -1;
+    if (a.name > b.name)
+       return 1;
+  });
+  return sortable_menu;
+}
+
 function processTableListUpdate(data){
-  settingMainMenu(data.tables);
+  var menu = processFilterSortMenu(data.tables);
+  settingMainMenu(menu);
 }
 
 function processDiagnostic(data){
-  
   for (var i = data.status.length - 1; i >= 0; i--) {
     var name = data.status[i].name;
     if(name === "/Power System/Laptop Battery"){
         var percent = getBattPecent(data.status[i].values);
-        console.log('robot batt: ',percent);
         setBattPecent('.sd-laptop-batt-status',percent);
     }
     else if(name === "/Power System/Battery"){
         var percent = getBattPecent(data.status[i].values);
-        console.log('robot batt: ',percent);
         setBattPecent('.sd-robot-batt-status',percent);
     }
   }
@@ -125,7 +150,6 @@ function setBattPecent(obj, data){
 }
 
 function getBattPecent(data){
-    console.log(data)
     var percent = '-1';
     var charge = -1;
     var capacity = -1;
@@ -138,16 +162,13 @@ function getBattPecent(data){
          capacity = data[i].value;
       }
     };
-    console.log(charge);
-    console.log(capacity);
-
     if( charge === -1 || capacity === -1){
       percent = -1;  
     }
     else{
       percent = 100 * charge / capacity;
     } 
-    return percent;
+    return percent.toFixed(2);
 };
 
 function settingMainMenu(data){
@@ -160,8 +181,9 @@ function settingMainMenu(data){
       $('.sd-main-menu').append('<div class="row-fluid sd-table-row-num-' + row_num + '">');
     }
     $('.sd-table-row-num-' + row_num).append('<button type="button" class="span4 btn btn-primary btn-large sd-table-' + table_name + '">' + table_name + '</button>')  
+    
     $('.sd-table-'+table_name).click(function(data){
-      console.log(data.currentTarget.outerText);
+
       var order_location = data.currentTarget.outerText
       var goal = new ROSLIB.Goal({
         actionClient : delive_order_client,
@@ -172,9 +194,7 @@ function settingMainMenu(data){
       goal.on('feedback', function(feedback) {
         console.log(feedback);
         $('.sd-delivery-status-msg').text(feedback.status);
-        
       });
-
       goal.on('result', function(result) {
         console.log(result);
         showMainMenu(true);
