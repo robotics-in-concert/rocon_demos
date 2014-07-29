@@ -12,9 +12,10 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
+    discard_btn_name: []
   pairing:
     rapp: realrobotshow_ctrl/realrobot
-    remappings: []
+    remappings: [kitchen]
 - name: com.github.robotics_in_concert.rocon_android_apps.map_annotation.MainActivity
   compatibility: rocon:/*/*/hydro/jellybean|ice_cream_sandwich|kitkat
   role: 'Manager'
