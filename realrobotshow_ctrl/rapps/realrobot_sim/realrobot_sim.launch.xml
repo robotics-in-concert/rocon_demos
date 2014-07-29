@@ -1,6 +1,8 @@
 <launch>
+<!--   
   <include file="$(find realrobotshow_ctrl)/launch/robot_ctrl.launch">
   </include>
-  <include file="$(find realrobotshow_order_manager)/launch/order_manager_sim.launch">
-  </include>
+ -->  
+ <!-- ************ Database ************** -->                                  
+  <include file="$(find realrobotshow_ctrl)/launch/includes/database.launch.xml"/>
 </launch>
