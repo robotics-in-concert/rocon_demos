@@ -38,7 +38,8 @@ class StateManager(object):
     _retry_sound = 'moo.wav'
     _navi_failed_sound = 'angry_cat.wav'
     _order_received_sound = 'kaku.wav'
-    _enjoy_meal_sound = 'kaku.wav'
+    _at_table_sound = 'lion.wav'
+    _enjoy_meal_sound = 'meow.wav'
 
     def __init__(self):
         self._init_variables()
@@ -142,10 +143,6 @@ class StateManager(object):
             self._delivery_location = goal.location
             self._delivery_order_received = True
 
-
-        # request semantic navigator to go requested table
-        # self._current_state = STATE_GOTO_TABLE
-
     def spin(self):
         r = rospy.Rate(10)
         self._deliver_order_handler.start()
@@ -237,6 +234,7 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_AT_TABLE
+            play_sound(self._resource_path, self._at_table_sound)
             # arriving sound
 
     def _state_at_table(self):
