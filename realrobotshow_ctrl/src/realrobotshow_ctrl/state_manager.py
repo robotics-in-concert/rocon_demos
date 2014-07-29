@@ -14,7 +14,7 @@ import copy
 from .utils import *
 
 
-STATE_INITIALIZATION = 'Initialization'
+STATE_INITIALIZATION = 'INITIALIZATION'
 STATE_GOTO_KITCHEN   = 'GOTO_KITCHEN'
 STATE_AT_KITCHEN     = 'AT_KITCHEN'
 STATE_GOTO_TABLE     = 'GOTO_TABLE'
@@ -40,6 +40,7 @@ class StateManager(object):
     _order_received_sound = 'kaku.wav'
     _at_table_sound = 'lion.wav'
     _enjoy_meal_sound = 'meow.wav'
+    _bab_sound = 'pab.wav'
 
     def __init__(self):
         self._init_variables()
@@ -63,6 +64,7 @@ class StateManager(object):
         self._init_requested = False
         self._delivery_order_received = False
         self._customer_confirm = False
+        self._order_in_progress = False
 
         self._nav_kitchen_timeout = rospy.get_param('~nav_kitchen_timeout', 300.0)
         self._nav_table_timeout = rospy.get_param('~nav_table_timeout', 300.0)
@@ -79,13 +81,15 @@ class StateManager(object):
 
     def _init_handles(self):
         # order handle
-        self._deliver_order_handler = actionlib.SimpleActionServer(self._kitchen_action_name, simple_delivery_msgs.DeliverOrderAction, execute_cb=self._process_deliver_order, auto_start=False)
+        self._deliver_order_handler = actionlib.SimpleActionServer(self._kitchen_action_name, simple_delivery_msgs.DeliverOrderAction, auto_start=False)
+        self._deliver_order_handler.register_goal_callback(self._process_deliver_order)
+        self._deliver_order_handler.register_preempt_callback(self._process_deliver_order_preempt)
 
         self._sub = {}
         self._pub = {}
 
         # Debug        
-        self._pub['debug'] = rospy.Publisher('~debug', std_msgs.String, queue_size=2)
+        self._pub['debug'] = rospy.Publisher('robot_status', std_msgs.String, queue_size=2)
         # Button
         self._sub['digital_inputs'] = rospy.Subscriber('~digital_inputs', kobuki_msgs.DigitalInputEvent, self._process_button)  # Waiterbot buttons.
 
@@ -127,21 +131,26 @@ class StateManager(object):
     def _process_localized(self, msg): 
         self._initialized = True
         
-    def _process_deliver_order(self, goal):
-        self.loginfo('Received Goal ' + str(goal))
+    def _process_deliver_order(self):
+        self.loginfo('Received Goal ')
         r = simple_delivery_msgs.DeliverOrderResult()
 
         if self._current_state != STATE_AT_KITCHEN:
             message = 'Robot is not at kitchen. Ignore the order!'
             self.logwarn(message)
-
+            goal = self._deliver_order_handler.accept_new_goal()
             r = simple_delivery_msgs.DeliverOrderResult()
             r.message = message
             r.success = False
             self._deliver_order_handler.set_succeeded(r)
         else:
+            goal = self._deliver_order_handler.accept_new_goal()
+            self.loginfo(str(goal))
             self._delivery_location = goal.location
             self._delivery_order_received = True
+
+    def _process_deliver_order_preempt(self):
+        pass
 
     def spin(self):
         r = rospy.Rate(10)
@@ -151,16 +160,21 @@ class StateManager(object):
 
         while not rospy.is_shutdown():
             self._states[self._current_state]()
-            self._logging()
             t = (t % 5) + 1
 
             if t == 1:
+                self._logging()
                 self._blink_leds()
             r.sleep()
 
     def _logging(self):
         #self.loginfo(self._current_state)
         self._pub['debug'].publish(str(self._current_state))
+
+        if self._order_in_progress:
+            feedback = yocs_msgs.NavigateToFeedback()
+            feedback.status = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
+            self._deliver_order_handler.publish_feedback(feedback)
                 
     def loginfo(self, msg):
         rospy.loginfo('Robot State Manager : ' + str(msg))
@@ -191,7 +205,8 @@ class StateManager(object):
         self._navigator_finished= True
         
     def _navigator_feedback(self, feedback):
-        self.loginfo("Status : %s, Distance : %s, Message : %s"%(str(feedback.status),str(feedback.distance),str(feedback.message)))
+        self._navigator_feed = str("Distance : %s, Message : %s"%(str(feedback.distance),str(feedback.message)))
+        self.loginfo("Navigator : " + str(self._navigator_feed))
         
         if feedback.status == yocs_msgs.NavigateToFeedback.STATUS_RETRY:
             play_sound(self._resource_path, self._retry_sound)
@@ -219,15 +234,25 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_AT_KITCHEN
-            play_sound(self._resource_path, self._confirm_sound)
+            if self._order_in_progress:
+                self._order_in_progress = False
+                message = 'Delivery Success!'
+                r = simple_delivery_msgs.DeliverOrderResult()
+                r.message = message
+                r.success = False
+                self._deliver_order_handler.set_succeeded(r)
+
+            play_sound(self._resource_path, self._bab_sound)
 
     def _state_at_kitchen(self):
         # Wait for order
         if self._delivery_order_received:
             self._delivery_order_received = False
+            self._order_in_progress = True
             self._request_navigator(self._delivery_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_table_timeout, self._nav_table_distance)
             self._current_state = STATE_GOTO_TABLE
             # Make a sound
+            play_sound(self._resource_path, self._confirm_sound)
 
     def _state_goto_table(self):
         # Wait for arriving
@@ -242,6 +267,7 @@ class StateManager(object):
         if self._customer_confirm:
             self._customer_confirm = False
             self.loginfo('Moving To kitchen')                                                     
+            play_sound(self._resource_path, self._enjoy_meal_sound)
             self._request_navigator('kitchen', yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
             # Request navigator to go kitchen
             self._current_state = STATE_GOTO_KITCHEN
