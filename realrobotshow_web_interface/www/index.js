@@ -3,7 +3,7 @@ var ros = new ROSLIB.Ros();
 var kichen_order_action_type = "simple_delivery_msgs/DeliverOrderAction"
 var diagnostic_sub_topic_type = "diagnostic_msgs/DiagnosticArray";
 var tables_sub_topic_type = "yocs_msgs/TableList"
-var robot_status_type = "";
+var robot_status_sub_topic_type = "std_msgs/String";
 
 var defaultUrL = "";
 var discard_menu_list = [];
@@ -22,9 +22,14 @@ if (rocon_interactions.parameters.hasOwnProperty('discard_btn_name')){
 }
 
 // remapping rules setting
+//pub, sub
 var diagnostic_sub_topic = "diagnostics_agg";
 var tables_sub_topic = "tables";
+var robot_status_sub_topic = "robot_status"
+
+//action
 var kichen_order_action = "kitchen_order"
+
 
 if(diagnostic_sub_topic in rocon_interactions.remappings)
   diagnostic_sub_topic = rocon_interactions.remappings[diagnostic_sub_topic];
@@ -32,11 +37,23 @@ if(diagnostic_sub_topic in rocon_interactions.remappings)
 if(tables_sub_topic in rocon_interactions.remappings)
   tables_sub_topic = rocon_interactions.remappings[tables_sub_topic];
 
+if(robot_status_sub_topic in rocon_interactions.remappings)
+  robot_status_sub_topic = rocon_interactions.remappings[robot_status_sub_topic];
+
 if(kichen_order_action in rocon_interactions.remappings)
 	kichen_order_action = rocon_interactions.remappings[kichen_order_action];
 
 
 var delive_order_client;
+var robot_status;
+var robot_status_list = {
+                              "STATE_INITIALIZATION" :'Initialization',
+                              "STATE_GOTO_KITCHEN"    : 'GOTO_KITCHEN',
+                              "STATE_AT_KITCHEN"      : 'AT_KITCHEN',
+                              "STATE_GOTO_TABLE"      : 'GOTO_TABLE',
+                              "STATE_AT_TABLE"         : 'AT_TABLE',
+                              "STATE_ON_ERROR"         :'ON_ERROR',
+                             };
 
 $().ready(function(e){
   // setting ros callbacks()
@@ -79,6 +96,13 @@ function settingROSCallbacks()
       });
     tables_listener.subscribe(processTableListUpdate);
 
+    var robot_status_listener = new ROSLIB.Topic({
+      ros : ros,
+      name : robot_status_sub_topic,
+      messageType: robot_status_sub_topic_type
+      });
+    robot_status_listener.subscribe(processRobotStatusUpdate);
+
   }
 
   );
@@ -92,6 +116,17 @@ function settingROSCallbacks()
     //alert("ROS Connection Close!");
   }
   );
+}
+
+function processRobotStatusUpdate(data){
+  robot_status = data.data;
+  $(".sd-robot-status").text($(".sd-robot-status").text().split(':')[0]+': ' + robot_status);
+  if(robot_status === robot_status_list.STATE_AT_KITCHEN){
+    $(".btn").prop('disabled',false);
+  }
+  else{
+    $(".btn").prop('disabled',true);
+  }
 }
 
 function processFilterSortMenu(data){
