@@ -107,12 +107,12 @@ function processDiagnostic(data){
     var name = data.status[i].name;
     if(name === "/Power System/Laptop Battery"){
         var percent = getBattPecent(data.status[i].values);
-        //console.log('robot batt: ',percent);
+        console.log('robot batt: ',percent);
         setBattPecent('.sd-laptop-batt-status',percent);
     }
     else if(name === "/Power System/Battery"){
         var percent = getBattPecent(data.status[i].values);
-        //console.log('robot batt: ',percent);
+        console.log('robot batt: ',percent);
         setBattPecent('.sd-robot-batt-status',percent);
     }
   }
@@ -125,13 +125,28 @@ function setBattPecent(obj, data){
 }
 
 function getBattPecent(data){
+    console.log(data)
     var percent = '-1';
+    var charge = -1;
+    var capacity = -1;
     for (var i = 0; i < data.length; i++) {
       var key = data[i].key;
-      if(key === 'Percent'){
-         percent = data[i].value;
+      if(key === 'Charge (Ah)'){
+         charge = data[i].value;
+      }
+      else if(key === 'Capacity (Ah)'){
+         capacity = data[i].value;
       }
     };
+    console.log(charge);
+    console.log(capacity);
+
+    if( charge === -1 || capacity === -1){
+      percent = -1;  
+    }
+    else{
+      percent = 100 * charge / capacity;
+    } 
     return percent;
 };
 
