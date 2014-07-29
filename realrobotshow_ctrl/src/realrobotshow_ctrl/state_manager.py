@@ -35,6 +35,8 @@ class StateManager(object):
     _kitchen_location = 'kitchen'
 
     _confirm_sound = 'kaku.wav'
+    _retry_sound = 'moo.wav'
+    _navi_failed_sound = 'angry_cat.wav'
     _order_received_sound = 'kaku.wav'
     _enjoy_meal_sound = 'kaku.wav'
 
@@ -108,8 +110,6 @@ class StateManager(object):
             return
 
         green, red = check_button_event(self._previous_button, msg)
-        print(str(green))
-        print(str(red))
 
         if green:
             if not self._current_state:
@@ -186,16 +186,19 @@ class StateManager(object):
         self._navigator_finished = False 
 
     def _navigator_done(self, status, result):
-        self.loginfo("Navigator Done.")
-        self.loginfo(str(status))
-        self.loginfo(str(result))
+        self.loginfo("Navigator Result : %s, Message : %s"%(result.success,result.message)) 
+        
+        if result.success == False:
+            play_sound(self._resource_path, self._navi_failed_sound)
+            self._current_state = STATE_ON_ERROR
         self._navigator_finished= True
         
     def _navigator_feedback(self, feedback):
-        self.loginfo("Received Navigator feedback.")
-        self.loginfo(str(feedback))
+        self.loginfo("Status : %s, Distance : %s, Message : %s"%(str(feedback.status),str(feedback.distance),str(feedback.message)))
+        
+        if feedback.status == yocs_msgs.NavigateToFeedback.STATUS_RETRY:
+            play_sound(self._resource_path, self._retry_sound)
 
-        # TODO: Make a sound when it receives retry feedback
 
     def _state_initialization(self):
         if not self._init_requested:
@@ -203,7 +206,7 @@ class StateManager(object):
             self._pub['localize'].publish() 
             self.loginfo('Localization Request sent')
             self._init_requested = True
-            play_sound(self.loginfo,self._resource_path, self._confirm_sound)
+            play_sound(self._resource_path, self._confirm_sound)
     
         if self._initialized:
             self.loginfo('Robot Localized')
@@ -219,7 +222,7 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_AT_KITCHEN
-            play_sound(self.loginfo, self._resource_path, self._confirm_sound)
+            play_sound(self._resource_path, self._confirm_sound)
 
     def _state_at_kitchen(self):
         # Wait for order

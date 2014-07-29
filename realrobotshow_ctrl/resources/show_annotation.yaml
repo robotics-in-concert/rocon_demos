@@ -2,18 +2,18 @@ ar_markers:
 - confidence: 0
   header:
     frame_id: ''
-    seq: 4217
+    seq: 3553
     stamp: {nsecs: 0, secs: 0}
-  id: 3
+  id: 3 
   pose:
     header:
       frame_id: /map
-      seq: 4209
+      seq: 3528
       stamp: {nsecs: 0, secs: 0}
     pose:
-      orientation: {w: -0.49391637173819747, x: -0.49391637173819747, y: 0.5060104917182793,
-        z: 0.5060104917182793}
-      position: {x: 0.0824713134765625, y: 0.1882080078125, z: 0.40000000596046453}
+      orientation: {w: -0.497214635418258, x: -0.497214635418258, y: 0.502769933792673,
+        z: 0.502769933792673}
+      position: {x: 0.3139111328124997, y: -0.03875000000000017, z: 0.5}
 columns: []
 tables:
 - height: 0.4000000059604645
@@ -29,10 +29,10 @@ tables:
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
       pose:
         orientation: {w: 0.684864342212677, x: 0.0, y: 0.0, z: -0.728670597076416}
-        position: {x: -2.0088201141357422, y: 1.999010620117187, z: 0.25}
+        position: {x: -2.0088201141357422, y: 1.999010620117187, z: 0.20000000298023224}
   radius: 0.5
 - height: 0.5
-  name: kitchen 
+  name: kitchen
   pose:
     header:
       frame_id: /map
