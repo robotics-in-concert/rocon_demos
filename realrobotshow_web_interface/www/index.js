@@ -43,8 +43,9 @@ if(robot_status_sub_topic in rocon_interactions.remappings)
 if(kichen_order_action in rocon_interactions.remappings)
 	kichen_order_action = rocon_interactions.remappings[kichen_order_action];
 
-
-var delive_order_client;
+// public var
+var row_max_num = 3;
+var delivery_goal = "";
 var robot_status;
 var robot_status_list = {
                               "STATE_INITIALIZATION" :'Initialization',
@@ -54,6 +55,8 @@ var robot_status_list = {
                               "STATE_AT_TABLE"         : 'AT_TABLE',
                               "STATE_ON_ERROR"         :'ON_ERROR',
                              };
+//ros action
+var delive_order_client; 
 
 $().ready(function(e){
   // setting ros callbacks()
@@ -87,7 +90,7 @@ function settingROSCallbacks()
       name : diagnostic_sub_topic,
       messageType: diagnostic_sub_topic_type
       });
-    diagnostic_listener.subscribe(processDiagnostic);
+    diagnostic_listener.subscribe(processDiagnosticUpdate);
 
     var tables_listener = new ROSLIB.Topic({
       ros : ros,
@@ -164,7 +167,7 @@ function processTableListUpdate(data){
   settingMainMenu(menu);
 }
 
-function processDiagnostic(data){
+function processDiagnosticUpdate(data){
   for (var i = data.status.length - 1; i >= 0; i--) {
     var name = data.status[i].name;
     if(name === "/Power System/Laptop Battery"){
@@ -207,19 +210,20 @@ function getBattPecent(data){
 };
 
 function settingMainMenu(data){
-  var row_max_num = 3
   var row_num = 0;
   for (var i = 0; i < data.length; i++) {
     var table_name = data[i].name;
-    if(i%row_max_num === 0){
+    if(i % row_max_num === 0){
       row_num += 1;
       $('.sd-main-menu').append('<div class="row-fluid sd-table-row-num-' + row_num + '">');
     }
     $('.sd-table-row-num-' + row_num).append('<button type="button" class="span4 btn btn-primary btn-large sd-table-' + table_name + '">' + table_name + '</button>')  
     
     $('.sd-table-'+table_name).click(function(data){
-
       var order_location = data.currentTarget.outerText
+      $('.sd-goal-msg').text(order_location);
+
+      //send order
       var goal = new ROSLIB.Goal({
         actionClient : delive_order_client,
         goalMessage : {
@@ -234,10 +238,9 @@ function settingMainMenu(data){
         console.log(result);
         showMainMenu(true);
       });
-
       goal.send();
       showMainMenu(false);
-  
+      
     });
   };
 };
