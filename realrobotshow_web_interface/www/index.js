@@ -282,11 +282,11 @@ function settingMainMenu(data){
 
 function showMainMenu(flag){
     if(flag === true){
-      $('.sd-main-menu').show();
+      $('.sd-main-menu-layer').show();
       $('.sd-delivery-status').hide();
     }
     else{
-      $('.sd-main-menu').hide();
+      $('.sd-main-menu-layer').hide();
       $('.sd-delivery-status').show();
     }
 };
