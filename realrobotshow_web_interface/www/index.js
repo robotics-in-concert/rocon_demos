@@ -55,12 +55,13 @@ var robot_status_list = {
                               "STATE_AT_TABLE"         : 'AT_TABLE',
                               "STATE_ON_ERROR"         :'ON_ERROR',
                              };
+var parsing_list = ['Distance','Remain Time','Message'];
 //ros action
 var delive_order_client; 
 
 $().ready(function(e){
   // setting ros callbacks()
-  showMainMenu(true);
+  //showMainMenu(true);
   settingROSCallbacks();
   
   ros.connect(defaultUrL);
@@ -119,6 +120,31 @@ function settingROSCallbacks()
     //alert("ROS Connection Close!");
   }
   );
+}
+
+
+function parsingDeliveryStatus(data, parsing_list){
+  var parsing_data ={}
+  var main_status = data.replace(/\s/g,'').split('[')[0].split('Status:')[1];
+  var detail_status = data.replace(/\s/g,'').split('[')[1].replace(']','').split(',');
+  parsing_data["Status"] = main_status;
+  for (var i = 0; i < detail_status.length; i++) {
+    var value = detail_status[i];
+    parsing_list.forEach(function(parsing_text){
+      var parsing_text_without_space = parsing_text.replace(/\s/g,'');
+      if(value.indexOf(parsing_text_without_space ) != -1){
+        parsing_data[parsing_text]  = value.replace(parsing_text_without_space ,'').split(':')[1];
+      }
+    })
+  };
+  
+  return parsing_data;
+}
+function showDeliberyStatus(data){
+  $(".sd-delivery-status-layer").html("");
+  Object.keys(data).forEach(function(item){
+    $(".sd-delivery-status-layer").append('<h1 class="sd-delivery-status-msg">'+item+': '+data[item]+'</h1>');
+  });
 }
 
 function processRobotStatusUpdate(data){
@@ -217,7 +243,7 @@ function settingMainMenu(data){
       row_num += 1;
       $('.sd-main-menu').append('<div class="row-fluid sd-table-row-num-' + row_num + '">');
     }
-    $('.sd-table-row-num-' + row_num).append('<button type="button" class="span4 btn btn-primary btn-large sd-table-' + table_name + '">' + table_name + '</button>')  
+    $('.sd-table-row-num-' + row_num).append('<button type="button" class="span4 btn btn-primary btn-large sd-table-list sd-table-' + table_name + '">' + table_name + '</button>')  
     
     $('.sd-table-'+table_name).click(function(data){
       var order_location = data.currentTarget.outerText
@@ -230,9 +256,8 @@ function settingMainMenu(data){
           location : order_location
         }
       });
-      goal.on('feedback', function(feedback) {
-        console.log(feedback);
-        $('.sd-delivery-status-msg').text(feedback.status);
+      goal.on('feedback', function(feedback){
+        showDeliberyStatus(parsingDeliveryStatus(feedback.status, parsing_list));
       });
       goal.on('result', function(result) {
         console.log(result);
