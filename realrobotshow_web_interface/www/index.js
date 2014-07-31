@@ -61,7 +61,7 @@ var delive_order_client;
 
 $().ready(function(e){
   // setting ros callbacks()
-  //showMainMenu(true);
+  showMainMenu(true);
   settingROSCallbacks();
   
   ros.connect(defaultUrL);
