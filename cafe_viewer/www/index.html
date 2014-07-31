@@ -61,7 +61,7 @@
 
 
     <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
-    <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
+    <script type="text/javascript" src="js/interactions.js"></script>
 
     <script src="js/add_orderlist.js"></script>
 
@@ -147,7 +147,7 @@
       function addNavigators(viewer,gridClient) {
 
         var robot1_name = robot1;
-        var robot1_pose_topic = '/' + robot1 + '/robot_pose';
+        var robot1_pose_topic = 'robot_pose';
         
         gridClient.on('change', function(map_origin) {
           var robot1 = new ROS2D.Robot({
