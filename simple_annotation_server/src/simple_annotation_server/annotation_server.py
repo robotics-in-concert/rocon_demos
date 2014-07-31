@@ -103,12 +103,13 @@ class SimpleAnnotationServer(object):
             m.id = id
             id = id +1
 
-            m.type = Marker.CYLINDER
+            m.type = Marker.ARROW
             m.action = Marker.ADD
             m.pose = t.pose.pose.pose
             m.pose.position.x = t.pose.pose.pose.position.x
             m.pose.position.y = t.pose.pose.pose.position.y
             m.pose.position.z = t.height / 2
+            m.pose.orientation = t.pose.pose.pose.orientation
             m.scale.x = t.radius
             m.scale.y = t.radius
             m.scale.z = t.height
@@ -174,6 +175,7 @@ class SimpleAnnotationServer(object):
             m.pose.position.x = a.pose.pose.position.x
             m.pose.position.y = a.pose.pose.position.y
             m.pose.position.z = a.pose.pose.position.z + 0.5
+            m.pose.orientation = a.pose.pose.orientation
             m.scale.x = 0.3 
             m.scale.y = 0.3
             m.scale.z = 0.3

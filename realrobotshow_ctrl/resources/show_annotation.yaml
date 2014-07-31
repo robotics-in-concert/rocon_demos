@@ -17,26 +17,41 @@ ar_markers:
 columns: []
 tables:
 - height: 0.5
-  name: kitchen 
+  name: kitchen_back
   pose:
     header:
       frame_id: /map
-      seq: 7543
+      seq: 7197
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
       pose:
-        orientation: {w: 0.9999836811418236, x: 0.0, y: 0.0, z: 0.005712919573010417}
-        position: {x: -0.32323622328058566, y: -0.14385835795051194, z: 0.25}
+        orientation: {w: 0.9999999599432868, x: 0.0, y: 0.0, z: 0.0002830431500185187}
+        position: {x: -0.9726474689388445, y: -0.14086722812943853, z: 0.25}
   radius: 0.3
+- height: 0.5
+  name: kitchen
+  pose:
+    header:
+      frame_id: /map
+      seq: 7199
+      stamp: {nsecs: 0, secs: 0}
+    pose:
+      covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      pose:
+        orientation: {w: 0.9999836683273315, x: 0.0, y: 0.0, z: 0.005712919402867556}
+        position: {x: -0.32323622703552246, y: -0.14385835826396942, z: 0.25}
+  radius: 0.30000001192092896
 - height: 0.4000000059604645
   name: table3
   pose:
     header:
       frame_id: /map
-      seq: 7548
+      seq: 7201
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -51,7 +66,7 @@ tables:
   pose:
     header:
       frame_id: /map
-      seq: 7550
+      seq: 7202
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -66,7 +81,7 @@ tables:
   pose:
     header:
       frame_id: /map
-      seq: 7552
+      seq: 7203
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -81,7 +96,7 @@ tables:
   pose:
     header:
       frame_id: /map
-      seq: 7553
+      seq: 7204
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -96,7 +111,7 @@ tables:
   pose:
     header:
       frame_id: /map
-      seq: 7554
+      seq: 7205
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -111,7 +126,7 @@ tables:
   pose:
     header:
       frame_id: /map
-      seq: 7555
+      seq: 7206
       stamp: {nsecs: 0, secs: 0}
     pose:
       covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,

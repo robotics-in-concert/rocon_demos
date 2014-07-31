@@ -12,6 +12,7 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
+    discard_btn_name: [kitchen]
   pairing:
     rapp: realrobotshow_ctrl/realrobot
     remappings: []
@@ -42,7 +43,7 @@
     resource_name: rocon_icons/map_annotation_icon.png 
   pairing:
     rapp: realrobotshow_ctrl/annotate_a_map
-- name: web_app(http://192.168.10.166/cafe_viewer/index.html)
+- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
   role: 'Manager'
   compatibility: rocon:/pc
   display_name: Cafe Monitor
@@ -53,8 +54,8 @@
     robot1: adams
   remappings:
     - remap_from: map
-      remap_to: map
+      remap_to: /viewer_map
     - remap_from: tables
-      remap_to: table_pose_list
+      remap_to: /annotation/tables
     - remap_from: ar_markers
-      remap_to: marker_pose_list  
+      remap_to: /annotation/ar_markers
