@@ -39,6 +39,7 @@ class StateManager(object):
     _navigator_action_name = 'navigate_to'
     _kitchen_location = 'kitchen'
 
+    """
     _confirm_sound = 'kaku.wav'
     _retry_sound = 'moo.wav'
     _navi_failed_sound = 'angry_cat.wav'
@@ -46,6 +47,14 @@ class StateManager(object):
     _at_table_sound = 'lion.wav'
     _enjoy_meal_sound = 'meow.wav'
     _bab_sound = 'pab.wav'
+    """ 
+    _confirm_sound = '../sounds/kaku.wav'
+    _retry_sound = 'moo.wav'
+    _navi_failed_sound = 'try_again.wav'
+    _order_received_sound = '../sounds/kaku.wav'
+    _at_table_sound = 'pick_up_drink_push_green_button.wav'
+    _enjoy_meal_sound = 'come_to_kitchen.wav'
+    _bab_sound = '../sounds/pab.wav'
 
     def __init__(self):
         self._init_variables()
@@ -269,7 +278,7 @@ class StateManager(object):
             self._request_navigator(self._delivery_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_table_timeout, self._nav_table_distance)
             self._current_state = STATE_GOTO_TABLE
             # Make a sound
-            play_sound(self._resource_path, self._confirm_sound)
+            play_sound(self._resource_path, self._order_received_sound)
 
     def _state_goto_table(self):
         # Wait for arriving
@@ -285,7 +294,7 @@ class StateManager(object):
             self._customer_confirm = False
             self.loginfo('Moving To kitchen')                                                     
             play_sound(self._resource_path, self._enjoy_meal_sound)
-            self._request_navigator('kitchen', yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
+            self._request_navigator('kitchen_back', yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
             # Request navigator to go kitchen
             self._current_state = STATE_BACKTO_KITCHEN
 
