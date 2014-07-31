@@ -2,7 +2,7 @@
 <html>
   <head>
   <meta charset="UTF-8">
-    <title>Rocon - Cafe Viewer</title>
+    <title>Rocon - Real Robot Show Viewer</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="">
@@ -26,6 +26,35 @@
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet"></link>
     <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .sd-status-bar{
+        margin:10px;
+        font-size:27px;
+        color:white;
+      }
+      .sd-logo{
+        height:47px;
+        width:150px;
+        float:right;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap/bootstrap.js"></script>
     <script src="js/bootstrap/bootstrap-button.js"></script>
@@ -47,13 +76,9 @@
       var annotator;
 
       $().ready(function(e) {
-
         initHeader();
-        initViewer()
-        
-        nav_div= $('#nav-orders');
-        remote_nav_div =$('#remote-nav-orders'); 
-        
+        initViewer();
+        initStatusViewer();
         var nw = $('#nav-wrapper');
         nw.css('margin-top','20pt');
       });
@@ -61,7 +86,6 @@
       function initHeader()
       {
         settingROSCallbacks();
-
         ros.connect(defaultUrL);
         $('#focusedInput').val(''+defaultUrL);
       }
@@ -107,7 +131,6 @@
       function addMap(viewer) {
         var continuous = false;
         var map_topic = rocon_interactions.remappings['map'] || 'map';
-
         gridClient = new ROS2D.OccupancyGridClient({
           ros : ros,
           topic : map_topic,
@@ -144,7 +167,6 @@
       function addRegionViz(viewer,gridClient)
       {
         var table_topic = rocon_interactions.remappings['tables'] || 'tables';
-        var order_topic = rocon_interactions.remappings['list_order'] || 'list_order';
         var ar_marker_topic = rocon_interactions.remappings['ar_markers'] || 'ar_markers';
         gridClient.on('change', function(map_origin) {
           circle_region_poller = new REGIONVIZ.Circle({
@@ -152,7 +174,7 @@
             map_origin : map_origin,
             rootObject : viewer.scene,
             tableTopicName : table_topic,
-            orderTopicName : order_topic
+            //orderTopicName : order_topic
           });
 
           ar_region_poller = new REGIONVIZ.AlvarAR({
@@ -165,37 +187,10 @@
         });
       }
 
-      function settingROSCallbacks()                      
-      {
+      function settingROSCallbacks(){
         ros.on('connection',function() {
           console.log("Connected");
           // subscribe to order list
-                                                             
-          $('#focusedInput').val('Connected');
-          $('#focusedInput').attr('disabled',true);
-
-
-          var listener = new ROSLIB.Topic({
-            ros : ros,
-            name : order_pub_topic,
-            messageType: order_pub_topic_type
-            });
-          listener.subscribe(processOrderList);
-          
-          var remote_listener = new ROSLIB.Topic({
-              ros : ros,
-              name : remote_order_pub_topic,
-              messageType: remote_order_pub_topic_type
-              });
-          remote_listener.subscribe(processRemoteOrderList);
-          
-          var remote_update_listener = new ROSLIB.Topic({
-              ros : ros,
-              name : remote_order_update_pub_topic,
-              messageType: remote_order_update_pub_topic_type
-              });
-          remote_update_listener.subscribe(processRemoteOrderUpdate);
-          
         }
         );
         ros.on('error',function(e) {
@@ -208,8 +203,77 @@
           $('#focusedInput').val('Disconnected');
         }
         );
-
       }
+
+      function initStatusViewer(){
+        //topic name
+        var diagnostic_sub_topic = "diagnostics_agg";
+        var robot_status_sub_topic = "robot_status";
+        //topic type
+        var diagnostic_sub_topic_type = "diagnostic_msgs/DiagnosticArray";
+        var robot_status_sub_topic_type = "std_msgs/String";
+
+        if(diagnostic_sub_topic in rocon_interactions.remappings)
+          diagnostic_sub_topic = rocon_interactions.remappings[diagnostic_sub_topic];
+        if(robot_status_sub_topic in rocon_interactions.remappings)
+          robot_status_sub_topic = rocon_interactions.remappings[robot_status_sub_topic];
+
+        var diagnostic_listener = new ROSLIB.Topic({
+          ros : ros,
+          name : diagnostic_sub_topic,
+          messageType: diagnostic_sub_topic_type
+        });
+        diagnostic_listener.subscribe(processDiagnosticUpdate);
+
+        var robot_status_listener = new ROSLIB.Topic({
+          ros : ros,
+          name : robot_status_sub_topic,
+          messageType: robot_status_sub_topic_type
+        });
+        robot_status_listener.subscribe(processRobotStatusUpdate);
+      }
+
+      function processDiagnosticUpdate(data){
+        for (var i = data.status.length - 1; i >= 0; i--) {
+          var name = data.status[i].name;
+          if(name === "/Power System/Laptop Battery"){
+              var percent = getBattPecent(data.status[i].values);
+              setBattPecent('.sd-laptop-batt-status',percent);
+          }
+          else if(name === "/Power System/Battery"){
+              var percent = getBattPecent(data.status[i].values);
+              setBattPecent('.sd-robot-batt-status',percent);
+          }
+        }
+        
+      };
+
+      function setBattPecent(obj, data){
+          var text = $(obj).text();
+          $(obj).text(text.split(':')[0]+': ' + data+' %');
+      }
+
+      function getBattPecent(data){
+          var percent = '-1';
+          var charge = -1;
+          var capacity = -1;
+          for (var i = 0; i < data.length; i++) {
+            var key = data[i].key;
+            if(key === 'Charge (Ah)'){
+               charge = data[i].value;
+            }
+            else if(key === 'Capacity (Ah)'){
+               capacity = data[i].value;
+            }
+          };
+          if( charge === -1 || capacity === -1){
+            percent = -1;  
+          }
+          else{
+            percent = 100 * charge / capacity;
+          } 
+          return percent.toFixed(2);
+      };
 
     </script>
   </head>
@@ -217,38 +281,21 @@
     <!-- Header -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container-fluid">
-          <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
-          <a class="brand" href="#" style="margin-top:6px">Cafe Viewer</a>
-          <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
-            <input class="input-large" id="focusedInput" type="text" value=""></input>
-          </p>
+        <div class="container-fluid ">
+          <ul class="nav nav-pills ">
+            <li class="disabled sd-robot-status sd-status-bar">Robot status : Initialization</li>
+            <li class="disabled sd-robot-batt-status sd-status-bar">Robot batt. : -1%</li>
+            <li class="disabled sd-laptop-batt-status sd-status-bar" >Laptop batt. : -1%</li>
+          </ul>
+          <img class="sd-logo" src="img/rocon_logo.png"></img> 
         </div>
       </div>
+    </div>
 
     <!-- Visualizer -->
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span9" id="view"></div>
-        <div id="middle-left" class="span3">
-          <div class="well sidebar-nav" id="nav-wrapper">
-            <center>
-            <h3> Orders </h3>
-            </center>
-            <hr/>
-            <ul id="nav-orders">
-            </ul>
-          </div><!-- well -->
-          
-          <div class="well sidebar-nav" id="nav-wrapper">
-            <center>
-            <h3> Remote Orders </h3>
-            </center>
-            <hr/>
-            <ul id="remote-nav-orders">
-            </ul>
-          </div><!-- well -->
-        </div>
+        <div class="span12" id="view"></div>
       </div>
     </div>
     <hr/>
