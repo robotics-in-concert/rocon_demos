@@ -12,6 +12,7 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
+    discard_btn_name: [kitchen, kitchen_back, table2, table3, table1]
   pairing:
     rapp: realrobotshow_ctrl/realrobot
     remappings: []

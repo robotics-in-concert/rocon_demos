@@ -53,7 +53,7 @@ class StateManager(object):
     _navi_failed_sound = 'try_again.wav'
     _order_received_sound = '../sounds/kaku.wav'
     _at_table_sound = 'pick_up_drink_push_green_button.wav'
-    _enjoy_meal_sound = 'come_to_kitchen.wav'
+    _enjoy_meal_sound = 'enjoy_meal.wav'
     _bab_sound = '../sounds/pab.wav'
 
     def __init__(self):
