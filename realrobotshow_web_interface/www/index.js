@@ -6,7 +6,7 @@ var tables_sub_topic_type = "yocs_msgs/TableList"
 var robot_status_sub_topic_type = "std_msgs/String";
 
 var defaultUrL = "";
-var discard_menu_list = [];
+var discard_btn_list = "";
 
 //parameter setting
 if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
@@ -16,9 +16,9 @@ if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
 }
 
 if (rocon_interactions.parameters.hasOwnProperty('discard_btn_name')){
-    discard_menu_list = rocon_interactions.parameters.discard_btn_name;
+    discard_btn_list = rocon_interactions.parameters.discard_btn_name;
 }else{
-    discard_menu_list = [];
+    discard_btn_list = "";
 }
 
 // remapping rules setting
@@ -61,17 +61,8 @@ var delive_order_client;
 
 $().ready(function(e){
   // setting ros callbacks()
-  showMainMenu(true);
   settingROSCallbacks();
-  
   ros.connect(defaultUrL);
-
-  $('#connectbtn').on('click',function(e) {
-      var va = $('#focusedInput').val();
-      ros.connect(va);
-      return false;
-  });
-  
 });
 
 function settingROSCallbacks()
@@ -106,7 +97,9 @@ function settingROSCallbacks()
       messageType: robot_status_sub_topic_type
       });
     robot_status_listener.subscribe(processRobotStatusUpdate);
-
+    
+    settingDummyGreenButton();
+    showMainMenu(true);
   }
 
   );
@@ -122,6 +115,14 @@ function settingROSCallbacks()
   );
 }
 
+function settingDummyGreenButton(){
+  var option = {};
+  option["ros"] = ros;
+  option["topic_type"] = "kobuki_msgs/DigitalInputEvent";
+  option["topic_name"] = "mobile_base/events/digital_input";
+  initDummyGreenButton(option);
+  $(".sd-dummy-green-btn").click(pubDummyGreenButtonPressingSignal);
+}
 
 function parsingDeliveryStatus(data, parsing_list){
   var parsing_data ={}
@@ -164,7 +165,15 @@ function processFilterSortMenu(data){
   //filter
   for (var i = 0; i < data.length; i++) {
     var allow_flag = true;
-    discard_menu_list.forEach(function(discard_name){
+    var disard_btns = "";
+    if( typeof(discard_btn_list) === "string"){
+       disard_btns = discard_btn_list.replace(/\[/g,'').replace(/\]/g,'').replace(/\s/g,'').split(',');
+    }
+    else if(typeof(discard_btn_list) === "object"){
+      disard_btns = discard_btn_list;
+    }
+     
+    disard_btns.forEach(function(discard_name){
       if (discard_name.indexOf(data[i].name) == -1){
         allow_flag = allow_flag&true;
       }
@@ -172,6 +181,7 @@ function processFilterSortMenu(data){
         allow_flag = allow_flag&false;
       }      
     });
+
     if(allow_flag){
       menu.push(data[i]);
     }
