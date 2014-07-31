@@ -152,10 +152,10 @@ function processRobotStatusUpdate(data){
   robot_status = data.data;
   $(".sd-robot-status").text($(".sd-robot-status").text().split(':')[0]+': ' + robot_status);
   if(robot_status === robot_status_list.STATE_AT_KITCHEN){
-    $(".btn").prop('disabled',false);
+    $(".sd-table-list").prop('disabled',false);
   }
   else{
-    $(".btn").prop('disabled',true);
+    $(".sd-table-list").prop('disabled',true);
   }
 }
 
