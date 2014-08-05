@@ -1,2 +1,0 @@
-string beverage
-string location
