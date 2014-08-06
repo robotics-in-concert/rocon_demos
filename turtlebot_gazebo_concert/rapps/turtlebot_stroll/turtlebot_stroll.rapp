@@ -1,0 +1,6 @@
+display: Turtlebot Stroll
+description: The turtle strolls around in the environment in a square.
+compatibility: rocon:/pc
+launch: turtlebot_gazebo_concert/turtlebot_stroll.launch
+public_interface: turtlebot_gazebo_concert/turtlebot_stroll.interface
+icon: turtlebot_gazebo_concert/turtlebot_stroll.png

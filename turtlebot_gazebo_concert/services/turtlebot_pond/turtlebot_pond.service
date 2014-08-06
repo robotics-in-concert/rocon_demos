@@ -1,0 +1,7 @@
+name: Turtlebot Pond
+description: Launches the turtlebot_stroll application for turtlebots in the environment.
+author: Jihoon Lee 
+launcher_type: roslaunch
+launcher: turtlebot_gazebo_concert/turtlebot_pond
+interactions: turtlebot_gazebo_concert/turtlebot_pond
+parameters: turtlebot_gazebo_concert/turtlebot_pond

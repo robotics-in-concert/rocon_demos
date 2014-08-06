@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>concert_service_turtlebot_gazebo</name>
+  <version>0.0.0</version>
+  <description>
+    Instantiates the Gazebo Robot Service (concert_service_gazebo) for spawing/killing turtlebot as concert clients.
+  </description>
+
+  <maintainer email="jihoonlee.in@gmail.com">Jihoon Lee</maintainer>
+
+  <license>BSD</license>
+
+
+  <!-- <url type="website">http://wiki.ros.org/concert_service_turtlebot_gazebo</url> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>concert_service_gazebo</run_depend>
+  <run_depend>concert_service_utilities</run_depend>
+  <run_depend>gazebo_msgs</run_depend>
+  <run_depend>turtlebot_gazebo</run_depend>
+
+  <export>
+    <concert_service>services/turtlebot_sim/turtlebot_sim.service</concert_service>
+  </export>
+</package>

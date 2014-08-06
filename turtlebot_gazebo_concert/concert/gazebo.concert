@@ -1,0 +1,9 @@
+<concert>
+  <arg name="scheduler_type" default="compatibility_tree"/> <!-- compatibility_tree, simple -->
+
+  <launch title="concert:11311" package="turtlebot_gazebo_concert" name="concert.launch" port="11311">
+    <arg name="gazebo_services" value="turtlebot_gazebo_concert/gazebo.services"/>
+    <arg name="concert_name" value="Gazebo Concert"/>
+    <arg name="scheduler_type" value="$(arg scheduler_type)"/>
+  </launch>
+</concert>
