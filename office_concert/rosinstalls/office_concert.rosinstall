@@ -1,0 +1,15 @@
+
+## Rocon dependency
+# ros-hydro-unique-identifier ros-hydro-ar-track-alvar ros-hydro-bondpy ros-hydro-rocon
+
+- git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
+    version: hydro-devel}
+- git: {local-name: rocon_demo_msgs, uri: 'https://github.com/robotics-in-concert/rocon_demo_msgs.git',
+    version: indigo-devel}
+- git: {local-name: yocs_msgs, uri: 'https://github.com/yujinrobot/yocs_msgs.git',
+    version: hydro-devel}
+- git: {local-name: rocon_devices, uri: 'https://github.com/robotics-in-concert/rocon_devices.git',
+    version: hydro-devel}
+- git: {local-name: ar_track_alvar_msgs, uri: 'https://github.com/sniekum/ar_track_alvar_msgs.git',
+    version: indigo-devel}    
+

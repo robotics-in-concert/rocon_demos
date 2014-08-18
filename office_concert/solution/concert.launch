@@ -1,8 +1,8 @@
 <launch>
-  <arg name="services" default="cafe_concert/cafe.services"/>
+  <arg name="services" default="office_concert/office.services"/>
   <arg name="rosbridge_address" default="$(optenv ROS_HOSTNAME localhost)"/>
   <include file="$(find concert_master)/launch/concert_master.launch">
-      <arg name="concert_name" value="$(optenv HUB_WHITELIST Cafe Concert)"/>
+      <arg name="concert_name" value="$(optenv HUB_WHITELIST Office Concert)"/>
       <arg name="services" value="$(arg services)"/>
       <arg name="auto_enable_services" value="true"/>
       <arg name="conductor_auto_invite" value="true"/>

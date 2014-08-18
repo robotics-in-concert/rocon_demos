@@ -3,9 +3,9 @@
 
     <include file="$(find rocon_app_manager)/launch/concert_client.launch">
         <arg name="robot_name" value="$(arg concert_client_name)"/>
-        <arg name="concert_whitelist" value="$(optenv HUB_WHITELIST Cafe Concert)"/>
+        <arg name="concert_whitelist" value="$(optenv HUB_WHITELIST Office Concert)"/>
         <arg name="robot_type" value="pc"/>
-        <arg name="rapp_package_whitelist" value="[rocon_apps, cafe_rapps]"/>
+        <arg name="rapp_package_whitelist" value="[rocon_apps, office_rapps]"/>
         <arg name="concert_watch_period" value="1"/>
     </include>
 </launch>

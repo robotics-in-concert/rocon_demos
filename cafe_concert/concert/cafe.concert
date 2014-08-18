@@ -1,7 +1,0 @@
-<concert>
-    <launch title="concert:11311" package="cafe_concert" name="concert.launch" port="11311">
-      <arg name="services" value="cafe_concert/cafe.services"/>
-    </launch>
-
-    <launch title="cafe_backend:11312"    package="cafe_concert" name="cafe_backend.launch" port="11312"/>
-</concert>

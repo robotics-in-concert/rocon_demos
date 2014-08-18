@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <package>
-  <name>cafe_concert</name>
+  <name>office_concert</name>
   <version>0.0.0</version>
-  <description>The cafe_concert package</description>
+  <description>The office_concert package</description>
 
   <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+  <maintainer email="dwlee@yujinrobot.com">Dong wook Lee</maintainer>
 
   <license>BSD</license>
 
