@@ -1,8 +1,0 @@
-publishers: 
- - /turtle1/request_move
- - /turtle2/request_move
-subscribers:
- - order
- - /turtle1/response_move
- - /turtle2/response_move
-services: []
