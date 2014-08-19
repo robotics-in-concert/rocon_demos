@@ -1,7 +1,7 @@
 <launch>
  <include file="$(find waiterbot_bringup)/launch/minimal_with_appmanager.launch">
-    <arg name="hub_whitelist" value="$(optenv HUB_WHITELIST Cafe Concert)"/>
+    <arg name="hub_whitelist" value="$(optenv HUB_WHITELIST Office Concert)"/>
     <arg name="robot_type" value="waiterbot|turtlebot|kobuki"/>
-    <arg name="rapp_package_whitelist" value="[rocon_apps, cafe_rapps]"/>
+    <arg name="rapp_package_whitelist" value="[rocon_apps, office_rapps]"/>
   </include>
 </launch>
