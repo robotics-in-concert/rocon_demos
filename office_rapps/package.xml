@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <package>
-  <name>cafe_rapps</name>
+  <name>office_rapps</name>
   <version>0.0.0</version>
-  <description>The cafe_rapps package</description>
+  <description>The office_rapps package</description>
 
   <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+  <maintainer email="dwlee@yujinrobot.com">Dong Wook Lee</maintainer>
   <license>BSD</license>
 
   <!-- <url type="website">http://ros.org/wiki/cafe_rapps</url> -->

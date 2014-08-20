@@ -3,7 +3,7 @@
   topic.
  -->
 <launch>
-  <arg name="map_file" default="$(find cafe_concert)/maps/controlroom.yaml"/>
+  <arg name="map_file" default="$(find office_concert)/maps/controlroom.yaml"/>
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
        relative to which show the map on screnn (logically we use /map) -->
   <node pkg="tf" type="static_transform_publisher" name="dummy_map_tf_broadcaster"

@@ -2,12 +2,12 @@
 # the name is just a placemarker for the eventual concert client name.
 # All other parts of the tuple are fixed.
 
-name: "Cafe Concert"
+name: "Office Concert"
 nodes:
-  - id: cafe_taskcoordinator
-    uri: rocon:/pc/cafe_backend#cafe_rapps/taskcoordinator
+  - id: office_taskcoordinator
+    uri: rocon:/pc/office_backend#office_rapps/taskcoordinator
   - id: waiterbot
-    uri: rocon:/pc/*#cafe_rapps/waiter
+    uri: rocon:/pc/*#office_rapps/waiter
     min: 2
     max: 2
 topics:
@@ -61,23 +61,23 @@ edges:
 
 ## Task Coordinator
   - start: taskcoordinator_waiterbot_delivery_order
-    finish: cafe_taskcoordinator
+    finish: office_taskcoordinator
     remap_from: waiter_1/delivery_order
     remap_to: /adams/delivery_order
   - start: taskcoordinator_waiterbot_delivery_order
-    finish: cafe_taskcoordinator
+    finish: office_taskcoordinator
     remap_from: waiter_2/delivery_order
     remap_to: /zach/delivery_order
 # - start: taskcoordinator_waiterbot_delivery_order
-#   finish: cafe_taskcoordinator
+#   finish: office_taskcoordinator
 #   remap_from: waiter_3/delivery_order
 #   remap_to: /elgar/delivery_order
 
-  - start: cafe_taskcoordinator
+  - start: office_taskcoordinator
     finish: taskcoordinator_userdevice_send_order
     remap_from: send_order
     remap_to: /cafe/send_order
-  - start: cafe_taskcoordinator
+  - start: office_taskcoordinator
     finish: taskcoordinator_kitchen_list_order
     remap_from: list_order
     remap_to: /cafe/list_order

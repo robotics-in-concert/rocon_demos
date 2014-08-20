@@ -6,5 +6,5 @@
       base_frame: base_footprint
     </rosparam>
   </node>
-  <node pkg="cafe_rapps" name="waiter_soft" type="waiter_soft.py" output="screen"/>
+  <node pkg="office_rapps" name="waiter_soft" type="waiter_soft.py" output="screen"/>
 </launch>

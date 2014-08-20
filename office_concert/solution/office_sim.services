@@ -2,10 +2,10 @@
 - resource_name: office_concert/office_database
   overrides:
     priority: 1
-#- resource_name: office_concert/office_delivery_sim
-#  overrides:
-#    priority: 1
-- resource_name: concert_service_teleop/teleop
+- resource_name: office_concert/office_delivery_sim
   overrides:
-    priority: 3
+    priority: 1
+#- resource_name: concert_service_teleop/teleop
+#  overrides:
+#    priority: 3
 

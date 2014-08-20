@@ -14,9 +14,9 @@
   <run_depend>kobuki_soft</run_depend>
 
   <export>
-    <concert_service>services/cafe_delivery/cafe_delivery.service</concert_service>
-    <concert_service>services/cafe_delivery_sim/cafe_delivery_sim.service</concert_service>
-    <concert_service>services/cafe_database/cafe_database.service</concert_service>
+    <concert_service>services/office_database/office_database.service</concert_service>
+    <concert_service>services/office_delivery/office_delivery.service</concert_service>
+    <concert_service>services/office_delivery_sim/office_delivery_sim.service</concert_service>
     <concert_service>services/vm_delivery/vm_delivery.service</concert_service>
   </export>
 </package>
