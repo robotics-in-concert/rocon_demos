@@ -2,7 +2,7 @@
 
   <!-- <param name="/use_sim_time" value="true" /> -->
 
-  <arg name="gazebo_services" default="turtlebot_gazebo_concert/gazebo.services"/>
+  <arg name="gazebo_services" default="gazebo_solution/gazebo.services"/>
   <arg name="concert_name" default="Gazebo Concert"/>
   <arg name="scheduler_type" default="compatibility_tree"/>
 

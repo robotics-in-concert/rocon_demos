@@ -6,6 +6,5 @@
 #  overrides:
 #    priority: 1000
 
-- resource_name: concert_service_turtlebot_gazebo/turtlebot_sim
-- resource_name: turtlebot_gazebo_concert/turtlebot_pond
+- resource_name: concert_service_gazebo/gazebo_robot_world
 - resource_name: concert_service_admin/admin
