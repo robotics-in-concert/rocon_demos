@@ -44,7 +44,6 @@ class WaiterSoftBot(object):
         feedback = RobotDeliveryOrderFeedback()
         feedback.robot_status = robot_status
         self.waiter_server.publish_feedback(feedback)
-    
     def order_process_status(self,receiver_location,time_range,message,order_status):
         k = 0;
         timeout = random.randrange(time_range[0],time_range[1])
@@ -56,6 +55,13 @@ class WaiterSoftBot(object):
         feedback = RobotDeliveryOrderFeedback()
         feedback.order_status = order_status
         self.waiter_server.publish_feedback(feedback)
+
+    def feedback(self, name, robot_status, order_status, message):
+        feedback = RobotDeliveryOrderFeedback()
+        feedback.robot_status = robot_status
+        feedback.order_status = order_status
+        self.waiter_server.publish_feedback(feedback)
+        rospy.loginfo(name + " : " +  message)
 
     def execute_callback(self,data):
         #print data, type(data), dir(data)
@@ -70,45 +76,27 @@ class WaiterSoftBot(object):
         self.process_status(time_range=[time_start,time_end],message="GO_TO_FRONTDESK",robot_status=RobotDeliveryOrderFeedback.GO_TO_FRONTDESK)
 
         # Arrival at kitchen
-        feedback = RobotDeliveryOrderFeedback()
-        feedback.robot_status = RobotDeliveryOrderFeedback.ARRIVAL_AT_FRONTDESK    
-        self.waiter_server.publish_feedback(feedback)
-        rospy.loginfo(self.name + " : " +  "ARRIVAL_AT_FRONTDESK")
+        self.feedback(self.name, RobotDeliveryOrderFeedback.ARRIVAL_AT_FRONTDESK, Receiver.UNKNOWN, "ARRIVAL_AT_FRONTDESK")
         
-        #Wait for kitchen     
-        self.process_status(time_range=[time_start,time_end],message="WAITING_FOR_FRONTDEST",robot_status=RobotDeliveryOrderFeedback.WAITING_FOR_FRONTDEST)
+        #Wait for kitchen
+        self.process_status(time_range=[time_start,time_end],message="WAITING_FOR_FRONTDESK",robot_status=RobotDeliveryOrderFeedback.WAITING_FOR_FRONTDESK)
         
         #In delivery
-        # Arrival at kitchen
-        feedback = RobotDeliveryOrderFeedback()
-        feedback.robot_status = RobotDeliveryOrderFeedback.IN_DELIVER    
-        self.waiter_server.publish_feedback(feedback)
-        rospy.loginfo(self.name + " : " +  "IN_DELIVER")
+        self.feedback(self.name, RobotDeliveryOrderFeedback.IN_DELIVER, Receiver.UNKNOWN, "IN_DELIVER")
+
         for receiver in receivers:
             # Delivery order idle
-            feedback = RobotDeliveryOrderFeedback()
-            feedback.order_status = Receiver.DELIVERY_IDLE    
-            self.waiter_server.publish_feedback(feedback)
-            rospy.loginfo(receiver + " : " +  "DELIVERY_IDLE")
+            self.feedback(receiver, RobotDeliveryOrderFeedback.UNKNOWN, Receiver.DELIVERY_IDLE, "DELIVERY_IDLE")
             # Go to receiver
             self.order_process_status(receiver_location=receiver,time_range=[time_start,time_end],message="GO_TO_RECEIVER",order_status=Receiver.GO_TO_RECEIVER)
             # Arrival at receiver
-            feedback = RobotDeliveryOrderFeedback()
-            feedback.order_status = Receiver.ARRIVAL_AT_RECEIVER    
-            self.waiter_server.publish_feedback(feedback)
-            rospy.loginfo(receiver + " : " +  "ARRIVAL_AT_RECEIVER")
+            self.feedback(receiver, RobotDeliveryOrderFeedback.UNKNOWN, Receiver.ARRIVAL_AT_RECEIVER, "ARRIVAL_AT_RECEIVER")
             # Waiting confirm
             self.order_process_status(receiver_location=receiver,time_range=[time_start,time_end],message="WAITING_CONFIRM_RECEIVER",order_status=Receiver.WAITING_CONFIRM_RECEIVER)
             # Complete delivery
-            feedback = RobotDeliveryOrderFeedback()
-            feedback.order_status = Receiver.COMPLETE_DELIVERY    
-            self.waiter_server.publish_feedback(feedback)
-            rospy.loginfo(receiver + " : " +  "COMPLETE_DELIVERY")
+            self.feedback(receiver, RobotDeliveryOrderFeedback.UNKNOWN, Receiver.COMPLETE_DELIVERY, "COMPLETE_DELIVERY")
         # Complete all delivery
-        feedback = RobotDeliveryOrderFeedback()
-        feedback.robot_status = RobotDeliveryOrderFeedback.COMPLETE_ALL_DELIVERY    
-        self.waiter_server.publish_feedback(feedback)
-        rospy.loginfo(self.name + " : " +  "COMPLETE_ALL_DELIVERY")
+        self.feedback(self.name, RobotDeliveryOrderFeedback.COMPLETE_ALL_DELIVERY, Receiver.UNKNOWN, "COMPLETE_ALL_DELIVERY")
         # Returning to Docking
         self.process_status(time_range=[time_start,time_end],message="RETURNING TO DOCK", robot_status=RobotDeliveryOrderFeedback.RETURN_TO_DOCK)
         

@@ -4,8 +4,8 @@
 
 name: "Office Concert"
 nodes:
-  - id: office_taskcoordinator
-    uri: rocon:/pc/office_backend#office_rapps/taskcoordinator
+#  - id: office_taskcoordinator
+#    uri: rocon:/pc/office_backend#office_rapps/taskcoordinator
   - id: waiterbot
     uri: rocon:/pc/*#office_rapps/waiter
     min: 2
@@ -19,7 +19,7 @@ topics:
   - id: annotation_walls
     type: yocs_msgs/WallList
   - id: annotation_markers
-    type: ar_track_alvar/AlvarMarkers
+    type: ar_track_alvar_msgs/AlvarMarkers
   - id: annotation_tables
     type: yocs_msgs/TableList
 
@@ -37,7 +37,7 @@ actions:
   - id: taskcoordinator_userdevice_send_order
     type: cafe_msgs/UserOrder
   - id: taskcoordinator_waiterbot_delivery_order
-    type: cafe_msgs/DeliveryOrder
+    type: simple_delivery_msgs/RobotDeliveryOrder
 
 edges: 
 ############### Waiterbot

@@ -22,7 +22,7 @@
     - remap_from: send_order
       remap_to: /cafe/send_order
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
+- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/cafe_viewer/www/index.html)
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Monitor
@@ -46,7 +46,7 @@
     - remap_from: remote_order_update
       remap_to: /cafe/remote_order_update
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/kitchen/www/index.html)
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert_webinterfaces/kitchen/www/index.html)
+- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html)
   role: 'Cafe Manager'
   compatibility: rocon:/pc
   display_name: Cafe Kitchen 

@@ -17,7 +17,8 @@
     <rocon_app>rapps/map_database/map_database.rapp</rocon_app>
     <rocon_app>rapps/taskcoordinator/taskcoordinator.rapp</rocon_app>
     <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
-    <rocon_app>rapps/waiter_sim/waiter_sim.rapp</rocon_app>
-    <rocon_app>rapps/waiter_waiterbot/waiter_waiterbot.rapp</rocon_app>
+    <rocon_app>rapps/office_waiter_sim/office_waiter_sim.rapp</rocon_app>
+    <!-- <rocon_app>rapps/waiter_sim/waiter_sim.rapp</rocon_app> -->
+    <!-- <rocon_app>rapps/waiter_waiterbot/waiter_waiterbot.rapp</rocon_app> -->
   </export>
 </package>
