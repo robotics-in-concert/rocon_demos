@@ -61,7 +61,7 @@ File format
         ...
       - ...
 
-    # ar_track_alvar+_msgs/AlvarMarker
+    # ar_track_alvar_msgs/AlvarMarker
     ar_markers:
       - id:
         pose:
