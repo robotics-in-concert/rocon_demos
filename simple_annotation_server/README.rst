@@ -15,7 +15,7 @@ Topics
 * ``~tables`` `yocs_msgs`_/TableList
 * ``~columns`` `yocs_msgs`_/ColumnList
 * ``~walls`` `yocs_msgs`_/WallList
-* ``~ar_markers`` `ar_track_alvar`_/AlvarMarkers
+* ``~ar_markers`` `ar_track_alvar_msgs`_/AlvarMarkers
 
 .. _`yocs_msgs`: https://github.com/yujinrobot/yocs_msgs/tree/hydro-devel/msg
 
@@ -61,7 +61,7 @@ File format
         ...
       - ...
 
-    # ar_track_alvar/AlvarMarker
+    # ar_track_alvar+_msgs/AlvarMarker
     ar_markers:
       - id:
         pose:
