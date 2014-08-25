@@ -5,7 +5,7 @@
 #
 
 import rospy
-import ar_track_alvar.msg as ar_msgs
+import ar_track_alvar_msgs.msg as ar_msgs
 import simple_annotation_msgs.srv as annotation_srvs
 from visualization_msgs.msg import Marker, MarkerArray
 import yocs_msgs.msg as yocs_msgs
