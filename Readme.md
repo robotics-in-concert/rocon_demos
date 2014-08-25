@@ -22,7 +22,7 @@
   * https://docs.google.com/a/yujinrobot.com/document/d/1kZdSd3vDlq8_bFOO5chYN0bt4RtYgEQFqAcEEjs0Jd0/edit
 * Additional package install
   * yujin_tools
-    * https://docs.google.com/a/yujinrobot.com/document/d/1kZdSd3vDlq8_bFOO5chYN0bt4RtYgEQFqAcEEjs0Jd0/edit
+    * https://github.com/yujinrobot/yujin_tools
   * roslint
     * http://wiki.ros.org/roslint
     * ```> sudo apt-get install ros-<version>-roslint```
