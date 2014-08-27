@@ -58,6 +58,7 @@ class WaiterSoftBot(object):
 
     def feedback(self, name, robot_status, order_status, message):
         feedback = RobotDeliveryOrderFeedback()
+        feedback.location = name
         feedback.robot_status = robot_status
         feedback.order_status = order_status
         self.waiter_server.publish_feedback(feedback)
@@ -69,8 +70,8 @@ class WaiterSoftBot(object):
         time_start = 1
         time_end = 6
 
-        receivers = data.location
-        rospy.loginfo("Order Received : Receivers = %s",data.location)
+        receivers = data.locations
+        rospy.loginfo("Order Received : Receivers = %s",data.locations)
 
         #Go to kitchen, and return feedback ARRIVE_KITCHEN
         self.process_status(time_range=[time_start,time_end],message="GO_TO_FRONTDESK",robot_status=RobotDeliveryOrderFeedback.GO_TO_FRONTDESK)

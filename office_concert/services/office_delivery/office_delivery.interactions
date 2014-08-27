@@ -61,3 +61,9 @@
       remap_to: /cafe/remote_order_list
     - remap_from: remote_order_update
       remap_to: /cafe/remote_order_update
+
+- name: office_rapps/office_order_app_sim.launch
+  role: 'Customer'
+  compatibility: rocon:/pc
+  display_name: Dummy Order App
+  description: Dummy order app for test

@@ -58,42 +58,27 @@ class WaiterSoftBot(object):
 
         self.ar_init = True
 
-    def process_status(self,time_range,message,robot_status):
+    def process_status(self,time_range,location, message, robot_status, order_status):
         k = 0;
         timeout = random.randrange(time_range[0],time_range[1])
         while k < timeout and not rospy.is_shutdown():
             k += 1
             rospy.sleep(1)
             rospy.loginfo(self.name + " : " +  message +", [%d/%d]"%(k,timeout))
-        
-        feedback = RobotDeliveryOrderFeedback()
-        feedback.robot_status = robot_status
-        self.waiter_server.publish_feedback(feedback)
 
-    def order_process_status(self,receiver_location,time_range,message,order_status):
-        k = 0;
-        timeout = random.randrange(time_range[0],time_range[1])
-        while k < timeout and not rospy.is_shutdown():
-            k += 1
-            rospy.sleep(1)
-            rospy.loginfo(receiver_location + " : " +  message +", [%d/%d]"%(k,timeout))
+        self.feedback(location, robot_status, order_status, message)
         
+    def feedback(self, receiver_location, robot_status, order_status,  message):
         feedback = RobotDeliveryOrderFeedback()
-        feedback.order_status = order_status
-        self.waiter_server.publish_feedback(feedback)
-
-    def feedback(self, name, robot_status, order_status, message):
-        feedback = RobotDeliveryOrderFeedback()
+        feedback.location = receiver_location
         feedback.robot_status = robot_status
         feedback.order_status = order_status
         self.waiter_server.publish_feedback(feedback)
-        rospy.loginfo(name + " : " +  message)
+        rospy.loginfo(receiver_location + " : " +  message)
 
     def execute_callback(self,data):
-        #print data, type(data), dir(data)
-        #print type(data._connection_header)
         time_start = 1
-        time_end = 6
+        time_end = 5
         if self.table_init is False or self.ar_init is False:
             rospy.loginfo("Annotation data does not init, yet")
             result = RobotDeliveryOrderResult(False,"Failure!")
@@ -103,36 +88,52 @@ class WaiterSoftBot(object):
         rospy.loginfo("Order Received : Receivers = %s",data.locations)
 
         #Go to kitchen, and return feedback ARRIVE_KITCHEN
-        self.go_to(target_goal='pickup',message = "GO_TO_FRONTDESK",robot_status=RobotDeliveryOrderFeedback.GO_TO_FRONTDESK)
+        self.go_to(target_goal='pickup',
+                    message = "GO_TO_FRONTDESK",
+                    robot_status=RobotDeliveryOrderFeedback.GO_TO_FRONTDESK, 
+                    order_status=Receiver.DELIVERY_IDLE)
         
         # Arrival at kitchen
-        self.feedback(self.name, RobotDeliveryOrderFeedback.ARRIVAL_AT_FRONTDESK, Receiver.UNKNOWN, "ARRIVAL_AT_FRONTDESK")
+        self.feedback('pickup', RobotDeliveryOrderFeedback.ARRIVAL_AT_FRONTDESK, Receiver.DELIVERY_IDLE, "ARRIVAL_AT_FRONTDESK")
         
         #Wait for kitchen
-        self.process_status(time_range=[time_start,time_end],message="WAITING_FOR_FRONTDESK",robot_status=RobotDeliveryOrderFeedback.WAITING_FOR_FRONTDESK)
-        
-        #In delivery
-        self.feedback(self.name, RobotDeliveryOrderFeedback.IN_DELIVER, Receiver.UNKNOWN, "IN_DELIVER")
+        self.process_status(time_range=[time_start,time_end],
+                                location='pickup', 
+                                message="WAITING_FOR_FRONTDESK",
+                                robot_status=RobotDeliveryOrderFeedback.WAITING_FOR_FRONTDESK,
+                                order_status=Receiver.DELIVERY_IDLE)
+
         for receiver in receivers:
             # Delivery order idle
-            self.feedback(receiver, RobotDeliveryOrderFeedback.UNKNOWN, Receiver.DELIVERY_IDLE, "DELIVERY_IDLE")
+            target_goal = receiver
+            self.feedback(target_goal, RobotDeliveryOrderFeedback.IN_DELIVER, Receiver.DELIVERY_IDLE, "DELIVERY_IDLE")
             # Go to receiver
-            self.go_to(target_goal='table'+receiver,message="GO_TO_RECEIVER",order_status = Receiver.GO_TO_RECEIVER)
+            self.go_to(target_goal=target_goal,
+                        message="GO_TO_RECEIVER",
+                        robot_status = RobotDeliveryOrderFeedback.IN_DELIVER,
+                        order_status = Receiver.GO_TO_RECEIVER)
             # Arrival at receiver
-            self.feedback(receiver, RobotDeliveryOrderFeedback.UNKNOWN, Receiver.ARRIVAL_AT_RECEIVER, "ARRIVAL_AT_RECEIVER")
+            self.feedback(target_goal, RobotDeliveryOrderFeedback.IN_DELIVER, Receiver.ARRIVAL_AT_RECEIVER, "ARRIVAL_AT_RECEIVER")
             # Waiting confirm
-            self.order_process_status(receiver_location=receiver,time_range=[time_start,time_end],message="WAITING_CONFIRM_RECEIVER",order_status=Receiver.WAITING_CONFIRM_RECEIVER)
+            self.process_status(time_range=[time_start,time_end],
+                                    location=target_goal,
+                                    message="WAITING_CONFIRM_RECEIVER",
+                                    robot_status=RobotDeliveryOrderFeedback.IN_DELIVER,
+                                    order_status=Receiver.WAITING_CONFIRM_RECEIVER)
             # Complete delivery
-            self.feedback(receiver, RobotDeliveryOrderFeedback.UNKNOWN, Receiver.COMPLETE_DELIVERY, "COMPLETE_DELIVERY")
+            self.feedback(target_goal, RobotDeliveryOrderFeedback.IN_DELIVER, Receiver.COMPLETE_DELIVERY, "COMPLETE_DELIVERY")
         
         # Complete all delivery
-        self.feedback(self.name, RobotDeliveryOrderFeedback.COMPLETE_ALL_DELIVERY, Receiver.UNKNOWN, "COMPLETE_ALL_DELIVERY")
+        self.feedback("", RobotDeliveryOrderFeedback.COMPLETE_ALL_DELIVERY, Receiver.COMPLETE_DELIVERY, "COMPLETE_ALL_DELIVERY")
+        
         # Returning to Docking
-        self.go_to(target_goal ='docking',message = "RETURNING TO DOCK",robot_status=RobotDeliveryOrderFeedback.RETURN_TO_DOCK)
+        self.go_to(target_goal ='docking',
+            message = "RETURNING TO DOCK",
+            robot_status=RobotDeliveryOrderFeedback.RETURN_TO_DOCK,
+            order_status=Receiver.COMPLETE_DELIVERY)
+        
         # Complete return
-        feedback = RobotDeliveryOrderFeedback()
-        feedback.robot_status = RobotDeliveryOrderFeedback.COMPELTE_RETURN    
-        self.waiter_server.publish_feedback(feedback)
+        self.feedback("docking", RobotDeliveryOrderFeedback.COMPELTE_RETURN, Receiver.COMPLETE_DELIVERY, "COMPELTE_RETURN")
 
         rospy.loginfo(self.name+ " : END_DELIVERY_ORDER")       
         rospy.sleep(1)
@@ -141,14 +142,9 @@ class WaiterSoftBot(object):
         result = RobotDeliveryOrderResult(True,"Success!")
         self.waiter_server.set_succeeded(result)
     
-    def go_to(self,target_goal,message,robot_status=0,order_status=0):
-        rospy.loginfo(self.name + " : " + message)
-
-        feedback = RobotDeliveryOrderFeedback()
-        feedback.robot_status = robot_status
-        feedback.order_status = order_status
-        self.waiter_server.publish_feedback(feedback)
-
+    def go_to(self,target_goal,message,robot_status,order_status):
+        self.feedback(target_goal, robot_status, order_status, message)
+        
         goal = MoveBaseGoal(self.table_poses[target_goal])
         self.command_base.send_goal(goal)
         self.command_base.wait_for_result()
@@ -161,7 +157,7 @@ if __name__ == '__main__':
     try:
         # Initialize ros node
         rospy.init_node('waiterbot')
-
+        print rospy.get_name()
         waiter = WaiterSoftBot(rospy.get_name(),"delivery_order")
         rospy.loginfo('Initialized')
 
