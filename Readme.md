@@ -79,7 +79,7 @@
  ```
  > rocon_remocon
  ```
- * Hit the "Add" button and put the MASTER_URI and HOST_NAME. If you launched concert same PC, you can use the default value.
+ * Hit the "Add" button and put the MASTER_URI and HOST_NAME. If you launched concert in same PC, you can use the default value,"localhost" or pc ip instead of localhost.
  * Select "Office Concert" and double click
  * Doule click "Cafe Manager"
  * Doule click "Cafe Monitor" 
