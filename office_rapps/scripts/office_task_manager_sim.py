@@ -72,10 +72,7 @@ class DummyTaskManager(object):
         rospy.loginfo('Location:[%s] Robotstatus:[%s] Orderstatus:[%s] ' % (str(data.location), 
                                                                                         str(self.robot_status[data.robot_status]), 
                                                                                         str(self.order_status[data.order_status])))
-        order = DeliveryOrder()
-        self.publishers['order_status'].publish()
-
-
+    
     def spin(self):
         rospy.loginfo("dummy task manager start!")
         rospy.spin()
