@@ -51,4 +51,41 @@
   > . .bashrc
   ```
 ### Map Building
-  
+
+## Run
+
+### Office Concert Launch
+* Launch concert
+
+```
+>  rocon_launch office_concert office_sim.concert --screen
+```
+
+* Launch the dummy task manager
+
+```
+> rocon_launch office_rapp office_task_manager_sim.launch --screen
+```
+
+* Launch the dummy order app
+
+```
+> rocon_launch office_rapp office_order_app_sim.launch --screen
+```
+
+* Launch the monitoring viewer
+ * run the bleow command
+ 
+ ```
+ > rocon_remocon
+ ```
+ * Hit the "Add" button and put the MASTER_URI and HOST_NAME. If you launched concert same PC, you can use the default value.
+ * Select "Office Concert" and double click
+ * Doule click "Cafe Manager"
+ * Doule click "Cafe Monitor" 
+
+ 
+
+
+ 
+
