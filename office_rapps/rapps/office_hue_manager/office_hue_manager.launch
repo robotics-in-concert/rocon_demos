@@ -1,0 +1,3 @@
+<launch>
+	<include file="$(find office_hue_manager)/launch/hue_manager.launch"/>
+</launch>
