@@ -11,28 +11,21 @@ from simple_delivery_msgs.msg import *
 
 class DummyTaskManager(object):
     def __init__(self, robot_name, action_name ):
-        self.robot_status = {}
-        self.robot_status[RobotDeliveryOrderFeedback.ROBOT_IDLE] = 'ROBOT_IDLE'
-        self.robot_status[RobotDeliveryOrderFeedback.GO_TO_FRONTDESK] = 'GO_TO_FRONTDESK'
-        self.robot_status[RobotDeliveryOrderFeedback.ARRIVAL_AT_FRONTDESK] = 'ARRIVAL_AT_FRONTDESK'
-        self.robot_status[RobotDeliveryOrderFeedback.WAITING_FOR_FRONTDESK] = 'WAITING_FOR_FRONTDESK'
-        self.robot_status[RobotDeliveryOrderFeedback.IN_DELIVER] = 'IN_DELIVER'
-        self.robot_status[RobotDeliveryOrderFeedback.COMPLETE_ALL_DELIVERY] = 'COMPLETE_ALL_DELIVERY'
-        self.robot_status[RobotDeliveryOrderFeedback.RETURN_TO_DOCK] = 'RETURN_TO_DOCK'
-        self.robot_status[RobotDeliveryOrderFeedback.COMPELTE_RETURN] = 'COMPELTE_RETURN'
-        self.robot_status[RobotDeliveryOrderFeedback.UNKNOWN] = 'UNKNOWN'
+        self.delivery_status = {}
+        self.delivery_status[DeliveryStatus.IDLE] = 'IDLE'
+        self.delivery_status[DeliveryStatus.GO_TO_FRONTDESK] = 'GO_TO_FRONTDESK'
+        self.delivery_status[DeliveryStatus.ARRIVAL_AT_FRONTDESK] = 'ARRIVAL_AT_FRONTDESK'
+        self.delivery_status[DeliveryStatus.WAITING_FOR_FRONTDESK] = 'WAITING_FOR_FRONTDESK'
+        self.delivery_status[DeliveryStatus.GO_TO_RECEIVER] = 'GO_TO_RECEIVER'
+        self.delivery_status[DeliveryStatus.ARRIVAL_AT_RECEIVER] = 'ARRIVAL_AT_RECEIVER'
+        self.delivery_status[DeliveryStatus.WAITING_CONFIRM_RECEIVER] = 'WAITING_CONFIRM_RECEIVER'
+        self.delivery_status[DeliveryStatus.COMPLETE_DELIVERY] = 'COMPLETE_DELIVERY'
+        self.delivery_status[DeliveryStatus.COMPLETE_ALL_DELIVERY] = 'COMPLETE_ALL_DELIVERY'
+        self.delivery_status[DeliveryStatus.RETURN_TO_DOCK] = 'RETURN_TO_DOCK'
+        self.delivery_status[DeliveryStatus.COMPELTE_RETURN] = 'COMPELTE_RETURN'
+        self.delivery_status[DeliveryStatus.ERROR] = 'ERROR'
         
-        self.order_status = {}
-        self.order_status[Receiver.DELIVERY_IDLE] = 'DELIVERY_IDLE'
-        self.order_status[Receiver.GO_TO_RECEIVER] = 'GO_TO_RECEIVER'
-        self.order_status[Receiver.ARRIVAL_AT_RECEIVER] = 'ARRIVAL_AT_RECEIVER'
-        self.order_status[Receiver.WAITING_CONFIRM_RECEIVER] = 'WAITING_CONFIRM_RECEIVER'
-        self.order_status[Receiver.COMPLETE_DELIVERY] = 'COMPLETE_DELIVERY'
-        self.order_status[Receiver.UNKNOWN] = 'UNKNOWN'
-
-
         self.action_name = action_name
-
         self.publishers = {}
         self.subscribers = {}
         self.order_list = {}
@@ -41,7 +34,7 @@ class DummyTaskManager(object):
         self.waiter_client = actionlib.SimpleActionClient(robot_name+"/"+self.action_name,RobotDeliveryOrderAction)
 
         self.subscribers['send_order'] = rospy.Subscriber('send_order', DeliveryOrder, self._update)
-        self.publishers['order_status'] = rospy.Publisher('order_status', DeliveryOrder)
+        self.publishers['delivery_status'] = rospy.Publisher('delivery_status', DeliveryStatus)
         
 
         pass
@@ -51,11 +44,11 @@ class DummyTaskManager(object):
         rospy.loginfo('receive order, waitting action server')
         self.waiter_client.wait_for_server()
         rospy.loginfo('action server opened')
-        self.order_list[data.id] = data
+        self.order_list[data.order_id] = data
         locataions = []
         for  receiver in data.receivers:
             locataions.append(receiver.location)
-        goal = RobotDeliveryOrderGoal(locations = locataions)
+        goal = RobotDeliveryOrderGoal(locations = locataions, order_id = data.order_id)
         self.waiter_client.send_goal(goal, done_cb = self.delivery_done_cb, feedback_cb = self.delivery_feedback_cb)
         
         rospy.loginfo('send goal: %s' % str(locataions))
@@ -63,15 +56,15 @@ class DummyTaskManager(object):
         pass
 
     def delivery_done_cb(self, data1, data2):
-        print 'delivery done!!!'
-        print '-----------'
-        print data2
-        pass
+        rospy.loginfo('------------------------')
+        rospy.loginfo('delivery done!!!')
+        rospy.loginfo(data2)
 
     def delivery_feedback_cb(self, data):
-        rospy.loginfo('Location:[%s] Robotstatus:[%s] Orderstatus:[%s] ' % (str(data.location), 
-                                                                                        str(self.robot_status[data.robot_status]), 
-                                                                                        str(self.order_status[data.order_status])))
+        rospy.loginfo('Location:[%s] OrderID:[%s] DeliveryStatus:[%s] ' % (str(data.delivery_status.target_goal), 
+                                                                                        str(data.delivery_status.order_id), 
+                                                                                        str(self.delivery_status[data.delivery_status.status])))
+        self.publishers['delivery_status'].publish(data.delivery_status) 
     
     def spin(self):
         rospy.loginfo("dummy task manager start!")
