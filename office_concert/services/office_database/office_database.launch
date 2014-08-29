@@ -1,13 +1,13 @@
 <launch>
   <arg name="is_sim" default="$(optenv IS_SIM true)"/>
-  <arg name="annotation_file" default="$(find office_concert)/annotations/dorothy.yaml"/>
+  <arg name="annotation_file" default="$(find office_concert)/annotations/office.yaml"/>
   <arg name="annotation_namespace" default="/annotation"/>
 
 
-  <arg     if="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/dorothy_cafe_new_polished.yaml"/>
-  <arg unless="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/dorothy_cafe_new.yaml"/>
+  <arg     if="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/office_cropped.yaml"/>
+  <arg unless="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/office_cropped.yaml"/>
 
-  <arg name="viewer_map" value="$(find office_concert)/maps/dorothy_clean.yaml"/>
+  <arg name="viewer_map" value="$(find office_concert)/maps/office_cropped.yaml"/>
 
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
        relative to which show the map on screnn (logically we use /map) -->
