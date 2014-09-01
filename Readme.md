@@ -119,7 +119,7 @@
 ```
 
 * Launch the monitoring viewer
- * run the bleow command
+ * run the rocon_remocon through bleow command
  
  ```
  > rocon_remocon
