@@ -51,6 +51,51 @@
   > . .bashrc
   ```
 ### Map Building
+* It is necessary process for using robot in delivery service. 
+* Preparing
+  * Robot side
+   * Launch turtlebot
+  
+   ```
+   > roslaunch turtlebot_bringup minimal.launch --screen
+   ```
+   * Launch gmapping app 
+  
+   ```
+   > roslaunch turtlebot_navigation gmapping_demo.launch --screen
+   ```
+ * Monitoring PC side 
+  * Map building monitoring
+  
+   ```
+   > source /opt/ros/<ros-version>/setup.bash
+   > export ROS_MASTER_URI=http://<robot ip>:11311
+   > roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
+   ```
+  * Robot control by keyboard
+  
+   ```
+   > source /opt/ros/<ros-version>/setup.bash
+   > export ROS_MASTER_URI=http://<robot ip>:11311
+   > roslaunch turtlebot_teleop keyboard_teleop.launch --screen
+   ```
+* Making Map
+ * If preparing is finished, move the turtlebot by keyboard.
+ * Save the map if the making map finished.
+  * map save
+ 
+   ```
+   > source /opt/ros/<ros-version>/setup.bash
+   > export ROS_MASTER_URI=http://<robot ip>:11311
+   > rosrun map_server map_saver -f <saved map diectory path>/<map name>
+ ```
+ * The first saved map contain the needless part.Thus, it is croped for using easily.
+  * map crop
+  
+   ```
+   > rosrun map_server crop_map -f <saved map diectory path>/<map name> 
+   ```
+
 
 ## Run
 
