@@ -26,7 +26,7 @@
 - git: {local-name: turtlebot_viz, uri: 'https://github.com/turtlebot/turtlebot_viz.git',
     version: indigo}
 - git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
-    version: indigo}
+    version: resource_pimp}
 - git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
     version: indigo}
 - git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
