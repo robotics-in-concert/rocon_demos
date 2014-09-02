@@ -45,11 +45,17 @@ class DummyOrderApp():
     def send_dummy_order(self):
         order = DeliveryOrder()
         order.order_id = str(uuid.uuid4())
-        for location in range(1,2):
-            receiver = Receiver()
-            receiver.location = 'table'+str(location)
-            receiver.qty = 1
-            order.receivers.append(receiver)
+        
+        receiver = Receiver()
+        receiver.location = 'table2'
+        receiver.qty = 1
+        order.receivers.append(receiver)
+
+        # for location in range(1,5):
+        #     receiver = Receiver()
+        #     receiver.location = 'table'+str(location)
+        #     receiver.qty = 1
+        #     order.receivers.append(receiver)
 
         self.publishers['send_order'].publish(order)
         rospy.loginfo('send dummy order: %s' % str(order))
@@ -58,6 +64,7 @@ if __name__ == '__main__':
     try:
         # Initialize ros node
         rospy.init_node('dummy_order_app')
+        
         dummy = DummyOrderApp()
         rospy.loginfo('Initialized')
         dummy.send_dummy_order()

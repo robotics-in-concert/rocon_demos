@@ -4,12 +4,12 @@
 
 name: "Cafe Concert"
 nodes:
-  - id: cafe_taskcoordinator
-    uri: rocon:/pc#cafe_rapps/taskcoordinator
+  # - id: cafe_taskcoordinator
+  #   uri: rocon:/pc#cafe_rapps/taskcoordinator
   - id: waiterbot
     uri: rocon:/waiterbot#cafe_rapps/waiter
     min: 1
-    max: 2
+    max: 1
 topics:
 ################# Map Database
   - id: annotation_columns
@@ -58,6 +58,10 @@ edges:
     finish: waiterbot
     remap_from: marker_pose_list
     remap_to: /annotation/ar_markers
+  - start: annotation_visual_marker
+    finish: waiterbot
+    remap_from: viz_marker_pose_list
+    remap_to: /annotation/viz_markers
 
 ## Task Coordinator
   - start: taskcoordinator_waiterbot_delivery_order

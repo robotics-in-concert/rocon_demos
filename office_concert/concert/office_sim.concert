@@ -12,7 +12,9 @@
     <launch title="zach:11314"    package="office_concert" name="office_backend.launch" port="11314">
       <arg name="concert_client_name" value="zach"/>
     </launch>
-    <launch title="hue_manager:11315"    package="office_concert" name="office_backend.launch" port="11315">
+
+<!--    <launch title="hue_manager:11315"    package="office_concert" name="office_backend.launch" port="11315">
       <arg name="concert_client_name" value="hue_manager"/>
     </launch>
+-->
 </concert>

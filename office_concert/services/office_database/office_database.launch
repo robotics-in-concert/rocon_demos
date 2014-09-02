@@ -31,6 +31,7 @@
   <!-- *********************** Annotations ************************ -->
   <node pkg="simple_annotation_server" type="simple_server.py" name="annotations_manager">
     <param name="filename" value="$(arg annotation_file)"/>
+    <remap from="viz_markers" to="$(arg annotation_namespace)/viz_markers"/>
     <remap from="ar_markers" to="$(arg annotation_namespace)/ar_markers"/>
     <remap from="tables" to="$(arg annotation_namespace)/tables"/>
     <remap from="walls" to="$(arg annotation_namespace)/walls"/>

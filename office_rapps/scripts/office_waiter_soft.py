@@ -12,6 +12,7 @@ from move_base_msgs.msg import *
 from geometry_msgs.msg import PoseStamped
 import yocs_msgs.msg as yocs_msgs
 from ar_track_alvar_msgs.msg import *
+from visualization_msgs.msg import *
 
 class WaiterSoftBot(object):
     def __init__(self,robot_name,action_name):

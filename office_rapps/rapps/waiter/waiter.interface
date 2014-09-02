@@ -3,6 +3,7 @@ subscribers:
   - map_metadata
   - table_pose_list
   - marker_pose_list
+  - viz_marker_pose_list
 publishers: 
   - robot_pose
 services: []
