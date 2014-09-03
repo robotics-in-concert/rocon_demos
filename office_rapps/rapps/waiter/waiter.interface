@@ -1,12 +1,19 @@
 subscribers: 
-  - map
-  - map_metadata
-  - table_pose_list
-  - marker_pose_list
-  - viz_marker_pose_list
+  - name: map
+    type: nav_msgs/OccupancyGrid
+  - name: map_metadata
+    type: nav_msgs/MapMetaData
+  - name: table_pose_list
+    type: yocs_msgs/TableList
+  - name: marker_pose_list
+    type: ar_track_alvar_msgs/AlvarMarkers
+  - name: viz_marker_pose_list
+    type: visualization_msgs/MarkerArray
 publishers: 
-  - robot_pose
+  - name: robot_pose
+    type: geometry_msgs/PoseStamped
 services: []
 action_clients: []
 action_servers:
-  - delivery_order
+  - name: delivery_order
+    type: simple_delivery_msgs/RobotDeliveryOrderAction
