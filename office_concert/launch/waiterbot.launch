@@ -1,7 +1,8 @@
 <launch>
- <include file="$(find waiterbot_bringup)/launch/minimal_with_appmanager.launch">
-    <arg name="hub_whitelist" value="$(optenv HUB_WHITELIST Office Concert)"/>
-    <arg name="robot_type" value="waiterbot|turtlebot|kobuki"/>
-    <arg name="rapp_package_whitelist" value="[rocon_apps, office_rapps]"/>
+ <include file="$(find turtlebot_bringup)/launch/concert_client.launch">
+
+    <arg name="rapp_package_whitelist" value="[office_rapps]"/>
+    <arg name="interactions_list"      value="$(optenv INTERACTIONS_LIST [])"/>
+    <arg name="concert_whitelist"      value="$(optenv HUB_WHITELIST Office_Concert)"/>
   </include>
 </launch>
