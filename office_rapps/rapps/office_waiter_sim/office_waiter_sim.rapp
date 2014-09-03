@@ -1,5 +1,5 @@
 display: Office Waiterbot sim 
 description: The simulated waiter navigate around the office to serve package. 
 compatibility: rocon:/pc
-launch: office_waiter.launch
+launch: office_waiter_sim.launch
 parent_name: office_rapps/waiter
