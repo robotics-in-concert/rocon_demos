@@ -12,6 +12,7 @@ from std_msgs.msg import *
 
 class DummyOrderApp():
     def __init__(self):
+        self.location = '1'
         self.delivery_status = {}
         self.delivery_status[DeliveryStatus.IDLE] = 'IDLE'
         self.delivery_status[DeliveryStatus.GO_TO_FRONTDESK] = 'GO_TO_FRONTDESK'
@@ -40,14 +41,18 @@ class DummyOrderApp():
     def spin(self):
         rospy.loginfo("dummy order app start!")
         while not rospy.is_shutdown():
-            
             rospy.sleep(10)
+
+    def set_target_location(self, target_location):
+        self.location = target_location
+        rospy.loginfo("target location: [%s]" % self.location)
+
     def send_dummy_order(self):
         order = DeliveryOrder()
         order.order_id = str(uuid.uuid4())
         
         receiver = Receiver()
-        receiver.location = '1'
+        receiver.location = self.location
         receiver.qty = 1
         order.receivers.append(receiver)
 
@@ -67,6 +72,16 @@ if __name__ == '__main__':
         
         dummy = DummyOrderApp()
         rospy.loginfo('Initialized')
+        
+        target_location = '1'
+        if rospy.has_param('~target_location'):
+            target_location = rospy.get_param('~target_location')
+        else:
+            rospy.loginfo("TARGET LOCATION uses default location, 1.")
+            target_location = '1'
+        dummy.set_target_location(target_location)
+        
+
         dummy.send_dummy_order()
         dummy.spin()
         rospy.loginfo("Bye Bye")
