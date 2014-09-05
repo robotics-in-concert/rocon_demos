@@ -10,10 +10,7 @@ nodes:
     uri: rocon:/pc/*#office_rapps/waiter
     min: 2
     max: 2
-#  - id: hue_manager
-#    uri: rocon:/pc/*#office_rapps/office_hue_manager
-#    min: 1
-#    max: 1
+
 topics:
 ################# Map Database
   - id: annotation_columns

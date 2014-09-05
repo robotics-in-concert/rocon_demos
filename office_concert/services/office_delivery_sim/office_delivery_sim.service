@@ -3,7 +3,7 @@
 # All other parts of the tuple are fixed.
 
 name: Cafe Delivery Simulation
-description: "Deliver your drink"
+description: "Deliver your package"
 author: YujinRobot
 priority: 2
 launcher_type: roslaunch
