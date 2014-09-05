@@ -1,5 +1,0 @@
-display: Cafe Task Coordinator
-description: The task manager receives orders from customers and re-distributes to kitchen manager and select the pair robot for the order
-compatibility: rocon:/pc
-launch: taskcoordinator.launch
-public_interface: taskcoordinator.interface
