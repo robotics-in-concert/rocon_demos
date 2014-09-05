@@ -1,3 +1,6 @@
 <launch>
-  <node pkg="office_rapps" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen"/>
+  <arg name="waiter_name" default="adams"/>
+  <node pkg="office_rapps" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen">
+  	<param name="waiter_name" value="$(arg waiter_name)"/>
+  </node>
 </launch>

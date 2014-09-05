@@ -75,7 +75,17 @@ if __name__ == '__main__':
     try:
         # Initialize ros node
         rospy.init_node('dummy_task_manager')
-        dummy = DummyTaskManager("adams","delivery_order")
+        waiter_name = ''
+        if rospy.has_param('~waiter_name'):
+            waiter_name = rospy.get_param('~waiter_name')
+        else:
+            rospy.loginfo("waiter name uses default name, adams.")
+            waiter_name = 'adams'
+        
+        waiter_name = rospy.get_param("~waiter_name")
+
+        rospy.loginfo("waiter name: [%s]" % waiter_name)
+        dummy = DummyTaskManager(waiter_name,"delivery_order")
         rospy.loginfo('Initialized')
         dummy.spin()
         rospy.loginfo("Bye Bye")
