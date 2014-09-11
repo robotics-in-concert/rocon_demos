@@ -82,9 +82,9 @@
      > roslaunch turtlebot_teleop keyboard_teleop.launch --screen
      ```
 * Making Map
-  * If preparing is finished, move the turtlebot by keyboard.
-  * Save the map if the making map finished.
-   + save map
+  * Preparing is finished, move the turtlebot by keyboard.
+  * Making map finished, then save the map.
+    + save map
   
      ```
      > source /opt/ros/<ros-version>/setup.bash
@@ -92,7 +92,7 @@
      > rosrun map_server map_saver -f <saved map diectory path>/<map name>
      ```
   * The first saved map contain the needless part.Thus, it is croped for using easily.
-   + crop map
+    + crop map
   
      ```
      > rosrun map_server crop_map -f <saved map diectory path>/<map name> 
@@ -101,10 +101,10 @@
 
 * Map Annotating
   * Saving special point in the map in order to sementic navigation through android app.
-   + Install ```rocon remocon```
-     * http://files.yujinrobot.com/android/apks/rocon_remocon_release_indigo.apk
-   + Install ```map annotation```
-     * http://files.yujinrobot.com/android/apks/map_annotation_release_indigo.apk
+    + Install ```rocon remocon```
+      * http://files.yujinrobot.com/android/apks/rocon_remocon_release_indigo.apk
+    + Install ```map annotation```
+      * http://files.yujinrobot.com/android/apks/map_annotation_release_indigo.apk
   * Launch office concert so as to run database service.
   
    ```
