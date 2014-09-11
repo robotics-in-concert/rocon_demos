@@ -27,9 +27,8 @@
     * http://wiki.ros.org/roslint
     * ```> sudo apt-get install ros-<version>-roslint```
 * Rocon Install
-  * First, Set up ```yujin_tools```,if you do not install one.
-  ```
   
+  ```
   > yujin_init_workspace rocon_ws https://raw.githubusercontent.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall
   > cd rocon_ws
   > yujin_init_build .
@@ -38,6 +37,7 @@
   > yujin_make
   > . .bashrc
   ```
+  
 * Office concert install
   
   ```
@@ -53,48 +53,72 @@
 ### Map Building
 * It is necessary process for using robot in delivery service. 
 * Preparing
-  * Robot side
-   * Launch turtlebot
-  
-   ```
-   > roslaunch turtlebot_bringup minimal.launch --screen
-   ```
-   * Launch gmapping app 
-  
-   ```
-   > roslaunch turtlebot_navigation gmapping_demo.launch --screen
-   ```
+ * Robot side
+   + Launch turtlebot
+   
+     ```
+     > roslaunch turtlebot_bringup minimal.launch --screen
+     ```
+   
+    + Launch gmapping app 
+   
+     ```
+     > roslaunch turtlebot_navigation gmapping_demo.launch --screen
+     ```
+   
  * Monitoring PC side 
-  * Map building monitoring
-  
-   ```
-   > source /opt/ros/<ros-version>/setup.bash
-   > export ROS_MASTER_URI=http://<robot ip>:11311
-   > roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
-   ```
-  * Robot control by keyboard
-  
-   ```
-   > source /opt/ros/<ros-version>/setup.bash
-   > export ROS_MASTER_URI=http://<robot ip>:11311
-   > roslaunch turtlebot_teleop keyboard_teleop.launch --screen
-   ```
+   + Map building monitoring
+   
+     ```
+     > source /opt/ros/<ros-version>/setup.bash
+     > export ROS_MASTER_URI=http://<robot ip>:11311
+     > roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
+     ```
+    + Robot control by keyboard
+   
+     ```
+     > source /opt/ros/<ros-version>/setup.bash
+     > export ROS_MASTER_URI=http://<robot ip>:11311
+     > roslaunch turtlebot_teleop keyboard_teleop.launch --screen
+     ```
 * Making Map
- * If preparing is finished, move the turtlebot by keyboard.
- * Save the map if the making map finished.
-  * map save
- 
-   ```
-   > source /opt/ros/<ros-version>/setup.bash
-   > export ROS_MASTER_URI=http://<robot ip>:11311
-   > rosrun map_server map_saver -f <saved map diectory path>/<map name>
- ```
- * The first saved map contain the needless part.Thus, it is croped for using easily.
-  * map crop
+  * If preparing is finished, move the turtlebot by keyboard.
+  * Save the map if the making map finished.
+   + save map
+  
+     ```
+     > source /opt/ros/<ros-version>/setup.bash
+     > export ROS_MASTER_URI=http://<robot ip>:11311
+     > rosrun map_server map_saver -f <saved map diectory path>/<map name>
+     ```
+  * The first saved map contain the needless part.Thus, it is croped for using easily.
+   + crop map
+  
+     ```
+     > rosrun map_server crop_map -f <saved map diectory path>/<map name> 
+     ```
+  * Move the map file(<name>.yaml, <name>.pgm) to ```maps``` directory in concert.
+
+* Map Annotating
+  * Saving special point in the map in order to sementic navigation through android app.
+   + Install ```rocon remocon```
+     * http://files.yujinrobot.com/android/apks/rocon_remocon_release_indigo.apk
+   + Install ```map annotation```
+     * http://files.yujinrobot.com/android/apks/map_annotation_release_indigo.apk
+  * Launch office concert so as to run database service.
   
    ```
-   > rosrun map_server crop_map -f <saved map diectory path>/<map name> 
+   > rocon_lauch office_concert office_sim.concert --screen
    ```
+  
+  * Launch rocon remocon
+    * Add IP of launched concert
+    * Select office concert
+    * Select role as office manager
+  * Launch map annotation
+    * Check obtainging map about office.
+    * Register table, pickup, docking station position.
+    * Register ar marker above docking position.
 
 
 ## Run
