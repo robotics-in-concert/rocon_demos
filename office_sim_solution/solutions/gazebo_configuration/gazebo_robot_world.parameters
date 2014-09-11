@@ -22,7 +22,7 @@ types:
   - name: turtlebot
     launch: concert_service_gazebo/turtlebot.launch
     flip_rule:
-      pub:
+      pub: 
         - odom
         - camera/.*
         - scan

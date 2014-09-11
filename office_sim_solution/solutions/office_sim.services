@@ -11,3 +11,4 @@
     parameters: office_sim_solution/gazebo_robot_world.parameters
 - resource_name: concert_service_admin/admin
 - resource_name: concert_service_teleop/teleop
+- resource_name: concert_service_make_a_map/make_a_map
