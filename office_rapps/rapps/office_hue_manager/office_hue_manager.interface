@@ -1,5 +1,6 @@
 subscribers:
-  - set_color
+  - name: set_color
+    type: std_msgs/String
 publishers: []
 services: []
 action_clients: []

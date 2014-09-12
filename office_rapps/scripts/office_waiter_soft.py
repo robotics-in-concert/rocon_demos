@@ -116,7 +116,7 @@ class WaiterSoftBot(object):
                                 message="WAITING_FOR_FRONTDESK")
 
         for receiver in receivers:
-            target_goal = receiver
+            target_goal = 'table'+str(receiver)
             # Go to receiver
             self.go_to(order_id=order_id,
                         target_goal=target_goal,                   

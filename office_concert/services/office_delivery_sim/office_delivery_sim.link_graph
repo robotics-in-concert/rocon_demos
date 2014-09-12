@@ -11,7 +11,7 @@ nodes:
     min: 2
     max: 2
   - id: hue_manager
-    uri: rocon:/pc/*#office_rapps/office_hue_manager
+    uri: rocon:/pc/hue_manager#office_rapps/office_hue_manager
     min: 1
     max: 1
 
@@ -32,6 +32,9 @@ topics:
     type: nav_msgs/OccupancyGrid
   - id: map_metadata
     type: nav_msgs/MapMetaData
+
+  - id: set_color
+    type: std_msgs/String
 
 ############### Task coordinator
   - id: taskcoordinator_kitchen_list_order
@@ -67,7 +70,11 @@ edges:
     finish: waiterbot
     remap_from: viz_marker_pose_list
     remap_to: /annotation/viz_markers
-
+############### Hue Manager
+  - start: set_color
+    finish: hue_manager
+    remap_from: set_color
+    remap_to: /set_color
 
 ## Task Coordinator
   - start: taskcoordinator_waiterbot_delivery_order

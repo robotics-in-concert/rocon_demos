@@ -9,6 +9,5 @@
   </node>  
 
   <node name="office_hue_manager" pkg="office_hue_manager" type="hue_manager.py">
-    <remap from="set_color" to="$(arg set_color)"/>
   </node>  
 </launch>

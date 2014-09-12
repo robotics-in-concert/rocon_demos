@@ -13,16 +13,11 @@
 
 
   <export>
-    <rocon_app>rapps/kitchen/kitchen.rapp</rocon_app>
-    <rocon_app>rapps/map_database/map_database.rapp</rocon_app>
-    <rocon_app>rapps/taskcoordinator/taskcoordinator.rapp</rocon_app>
     <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
     <rocon_app>rapps/office_waiter_sim/office_waiter_sim.rapp</rocon_app>
     <rocon_app>rapps/office_waiter/office_waiter.rapp</rocon_app>
     <rocon_app>rapps/office_order_app_sim/office_order_app_sim.rapp</rocon_app>
     <rocon_app>rapps/office_task_manager_sim/office_task_manager_sim.rapp</rocon_app>
     <rocon_app>rapps/office_hue_manager/office_hue_manager.rapp</rocon_app>
-    <!-- <rocon_app>rapps/waiter_sim/waiter_sim.rapp</rocon_app> -->
-    <!-- <rocon_app>rapps/waiter_waiterbot/waiter_waiterbot.rapp</rocon_app> -->
   </export>
 </package>

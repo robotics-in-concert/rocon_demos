@@ -52,7 +52,7 @@ class DummyOrderApp():
         order.order_id = str(uuid.uuid4())
         
         receiver = Receiver()
-        receiver.location = self.location
+        receiver.location = str(self.location)
         receiver.qty = 1
         order.receivers.append(receiver)
 
