@@ -11,7 +11,9 @@
   <!-- <url type="website">http://ros.org/wiki/cafe_rapps</url> -->
   <buildtool_depend>catkin</buildtool_depend>
 
-
+  <run_depend>kobuki_softapps</run_depend>
+  <run_depend>robot_pose_publisher</run_depend>
+  
   <export>
     <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
     <rocon_app>rapps/office_waiter_sim/office_waiter_sim.rapp</rocon_app>
