@@ -124,11 +124,17 @@
 ## Run
 
 ### Office Concert Launch
-* Launch concert
+* Launch concert 
+   * simulation
 
-```
->  rocon_launch office_concert office_sim.concert --screen
-```
+   ```
+   >  rocon_launch office_concert office_sim.concert --screen
+   ```
+   * real 
+   
+   ```
+   >  rocon_launch office_concert office.concert --screen
+   ```
 
 * Launch the dummy task manager
 
