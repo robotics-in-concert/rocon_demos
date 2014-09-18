@@ -35,6 +35,8 @@
 > roslaunch office_sim_solution concert.launch --screen
 ```
 
+![Image of gazebo](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/gazebo.png)
+
 ### Teleoperate Robots
 
 Select a robot and teleop around
@@ -42,3 +44,4 @@ Select a robot and teleop around
 ```
 > concert_teleop
 ```
+![Image of teleop](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/teleop.png)
