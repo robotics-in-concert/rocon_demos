@@ -2,7 +2,7 @@
 
 ### Installation
 
-1. Install ROS Indigo.
+* Install ROS Indigo.
 
 ```
  > sudo apt-get install python-rosdep python-wstool ros-indigo-ros
@@ -10,7 +10,7 @@
  > rosdep update
 ```
 
-2. Workspace setup
+* Workspace setup
 
 ```
  > mkdir ~/gazeborocon
@@ -21,7 +21,7 @@
  > source ~/gazeborocon/devel/setup.bash
 ```
 
-3. Convenience
+* Convenience
 
 ```
  > echo "source ~/gazeborocon/devel/setup.bash" >> ~/.bashrc
