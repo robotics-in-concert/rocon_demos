@@ -9,6 +9,3 @@
     version: indigo}
 - git: {local-name: rocon_devices, uri: 'https://github.com/robotics-in-concert/rocon_devices.git',
     version: indigo}
-- git: {local-name: ar_track_alvar_msgs, uri: 'https://github.com/sniekum/ar_track_alvar_msgs.git',
-    version: indigo-dseevel}    
-
