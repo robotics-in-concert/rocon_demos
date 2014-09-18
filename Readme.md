@@ -18,8 +18,8 @@
  * for android remocon
 
 ### Concert PC Installation
-* Ros installation (hydro)
-  * https://docs.google.com/a/yujinrobot.com/document/d/1kZdSd3vDlq8_bFOO5chYN0bt4RtYgEQFqAcEEjs0Jd0/edit
+* Ros installation (indigo)
+  * http://wiki.ros.org/indigo/Installation/Ubuntu
 * Additional package install
   * yujin_tools
     * https://github.com/yujinrobot/yujin_tools
@@ -29,7 +29,7 @@
 * Rocon Install
   
   ```
-  > yujin_init_workspace rocon_ws https://raw.githubusercontent.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall
+  > yujin_init_workspace rocon_ws https://raw.githubusercontent.com/robotics-in-concert/rocon/indigo/rocon.rosinstall
   > cd rocon_ws
   > yujin_init_build .
   > . .bashrc
@@ -44,7 +44,7 @@
   > cd rocon_ws
   > cd src
   > wstool merge https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/office_concert/office_concert/rosinstalls/office_concert.rosinstall
-  > wstool update -j5
+  > wstool update -j10
   > cd ..
   > yujin_make --install-rosdeps
   > yujin_make
@@ -120,10 +120,41 @@
     * Register table, pickup, docking station position.
     * Register ar marker above docking position.
 
+### Usage of Hue
+ * Preparing
+   * hue bridge (X1)
+   * hue bulb (Xn)
+   * lan cable (X1)
+ * Setting
+   * Hue bridge is connected on local network using lan cabel.
+   * If it work well, 3 blue-lights on bridge turn on.
+   * Accessing below site and check ip assinged to hue bridge.
+     * https://www.meethue.com/api/nupnp
+   * Set this ip to hue manager rapp launch file.
+    
+     ```<office concert directory>/office_rapps/rapps/office_hue_manager/office_hue_manager.launch```
+ * Hue Control
+   * Hue color is changed by ```/set_color``` publish topic.
+    
+     ```
+     name: /set_color
+     type: std_msgs/String
+     ```
+   * This topic only is possible,```RED, BLUE, GREEN, WHITE, OFF```. If you send other color string, hue manager discards it.
 
 ## Run
 
 ### Office Concert Launch
+* Preparing
+   * registerd ros master uri and host name
+     ```
+     > export ROS_HOSTNAME=<your pc ip>
+     > export ROS_MASTER_URI=<concert pc ip>
+     ```
+   * registerd concert name
+     ```
+     > export HUB_WHITELIST=<concert name>
+     ```
 * Launch concert 
    * simulation
 
