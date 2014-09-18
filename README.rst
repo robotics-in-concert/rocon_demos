@@ -1,6 +1,6 @@
-# Office Gazebo Solution
+# Office Gazebo Solution #
 
-## Installation
+## Installation ##
 
 1. Install ROS Indigo.
 
@@ -12,5 +12,23 @@
 
  > mkdir ~/gazeborocon
  > cd ~/gazeborocon
- > wstool init -j5 src  
+ > wstool init -j5 src https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/gazebo_solution.rosinstall
+ > rosdep install --from-paths src -i -y
+ > catkin_make
+ > source ~/gazeborocon/devel/setup.bash
 
+3. Convenience
+
+ > echo "source ~/gazeborocon/devel/setup.bash" >> ~/.bashrc
+
+## Starting Concert ##
+
+#### Note that it may take longer time when you bring up gazebo very first time ####
+
+> roslaunch office_sim_solution concert.launch 
+
+## Teleoperate Robots
+
+Select a robot and teleop around
+
+> concert_teleop
