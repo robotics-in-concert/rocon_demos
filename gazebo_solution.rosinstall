@@ -26,13 +26,13 @@
 - git: {local-name: turtlebot_viz, uri: 'https://github.com/turtlebot/turtlebot_viz.git',
     version: indigo}
 - git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
-    version: resource_pimp}
+    version: indigo}
 - git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
     version: indigo}
 - git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
-    version: teleop_grade}
-- git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
     version: indigo}
+- git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
+    version: cyclic_flip}
 - git: {local-name: rocon_tools, uri: 'https://github.com/robotics-in-concert/rocon_tools.git',
     version: indigo}
 - git: {local-name: rocon_tutorials, uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git',
@@ -42,6 +42,10 @@
 - git: {local-name: concert_scheduling, uri: 'https://github.com/robotics-in-concert/concert_scheduling.git',
     version: master}
 - git: {local-name: concert_services, uri: 'https://github.com/robotics-in-concert/concert_services.git',
-    version: gazebo_upgrade}
+    version: make_a_map}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: gazebo_concert}
+- git: {local-name: rocon_qt_gui, uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git',
+    version: make_a_map}
+- git: {local-name: map_store, uri: 'https://github.com/ros-planning/map_store.git',
+    version: hydro-devel}
