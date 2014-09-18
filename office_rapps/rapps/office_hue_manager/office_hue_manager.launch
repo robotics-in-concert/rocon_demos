@@ -1,3 +1,6 @@
 <launch>
-	<include file="$(find office_hue_manager)/launch/hue_manager.launch"/>
+	<arg name="hue_ip"    default="192.168.10.142"/> <!-- IP of the Hue Bridge -->
+	<include file="$(find office_hue_manager)/launch/hue_manager.launch">
+		<arg name="hue_ip"   value="$(arg hue_ip)"/>
+	</include>
 </launch>
