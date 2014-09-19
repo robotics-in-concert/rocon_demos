@@ -39,9 +39,10 @@
 
 ### Teleoperate Robots
 
-Select a robot and teleop around
+Select a robot and teleop around.
 
 ```
+# Open up a new terminal
 > concert_teleop
 ```
 ![Image of teleop](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/teleop.png)
