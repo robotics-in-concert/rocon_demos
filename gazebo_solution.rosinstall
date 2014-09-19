@@ -42,10 +42,10 @@
 - git: {local-name: concert_scheduling, uri: 'https://github.com/robotics-in-concert/concert_scheduling.git',
     version: master}
 - git: {local-name: concert_services, uri: 'https://github.com/robotics-in-concert/concert_services.git',
-    version: make_a_map}
+    version: indigo}
 - git: {local-name: rocon_demos, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: gazebo_concert}
 - git: {local-name: rocon_qt_gui, uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git',
-    version: make_a_map}
+    version: indigo}
 - git: {local-name: map_store, uri: 'https://github.com/ros-planning/map_store.git',
     version: hydro-devel}
