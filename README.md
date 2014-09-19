@@ -27,11 +27,27 @@
  > echo "source ~/gazeborocon/devel/setup.bash" >> ~/.bashrc
 ```
 
+### Befor Start
+
+Make sure gazebo server has updated it's database properly.
+
+```
+> gzserver 
+```
+
+Then wait for 2~3 mins until it finishes database update. Once it finishes, make sure gzclient shows empty zone properly.
+
+```
+# in another terminal
+> gzclient 
+```
+
 ### Starting Concert 
 
 **Note that it may take longer time when you bring up gazebo very first time**
 
 ```
+# nothing is running. 
 > roslaunch office_sim_solution concert.launch --screen
 ```
 
@@ -39,7 +55,7 @@
 
 ### Teleoperate Robots
 
-Select a robot and teleop around.
+Select a robot and teleop around. Note that only Dangen(TurtleBot) provides camera stream. Kobuki and segbot do not have camera stream.
 
 ```
 # Open up a new terminal
