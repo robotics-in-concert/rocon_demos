@@ -26,8 +26,8 @@ class HueManager():
         self.hues = {}
         self.hues_init = False
         
-        self.publisher['set_hue_hsv'] = rospy.Publisher('set_hue_color_hsv', rocon_device_msgs.Hue)
-        self.publisher['set_hue_on'] = rospy.Publisher('set_hue_color_on', rocon_device_msgs.Hue)
+        self.publisher['set_hue_hsv'] = rospy.Publisher('set_hue_color_hsv', rocon_device_msgs.Hue, queue_size=1)
+        self.publisher['set_hue_on'] = rospy.Publisher('set_hue_color_on', rocon_device_msgs.Hue, queue_size=1)
         
         self.subscriber['set_color'] = rospy.Subscriber('set_color', String, self.update_color)
         self.subscriber['hue_list'] = rospy.Subscriber('hue_list', rocon_device_msgs.HueArray, self.hue_update)
