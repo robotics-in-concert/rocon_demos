@@ -1,8 +1,8 @@
 robots:
-  - name: goguma
-    type: kobuki
-    robot_rapp_whitelist: [rocon_apps, concert_service_gazebo]
-    location: [0.0, 0.0, 0.0]
+#  - name: goguma
+#    type: kobuki
+#    robot_rapp_whitelist: [rocon_apps, concert_service_gazebo]
+#    location: [0.0, 0.0, 0.0]
   - name: gamza 
     type: segbot
     robot_rapp_whitelist: [rocon_apps, concert_service_gazebo]
