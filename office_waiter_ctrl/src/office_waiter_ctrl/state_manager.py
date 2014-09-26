@@ -210,7 +210,7 @@ class StateManager(object):
         locations.extend(goal.locations)
 
         location_index = 0
-        while not self._cancel_requested and self._current_state != STATE_IDLE:
+        while not rospy.is_shutdown() and not self._cancel_requested and self._current_state != STATE_IDLE:
             state_func, next_state1, next_state2 = self._states[self._current_state]
 
             if self._current_state == STATE_GOTO_TARGET or self._current_state == STATE_GPICKUPP:
