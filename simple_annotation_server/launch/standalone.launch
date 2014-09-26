@@ -1,5 +1,0 @@
-<launch>
-  <node pkg="simple_annotation_server" type="simple_server.py" name="simple_annotation_server" output="screen">
-    <param name="filename" value="$(find simple_annotation_server)/yaml/annotations.yaml"/>
-  </node>
-</launch>
