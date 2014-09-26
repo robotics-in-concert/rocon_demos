@@ -1,8 +1,9 @@
 <launch>
-  <arg name="debug_mode"    default="false"/>
-  <arg name="resource_path" default=""/>
-  <arg name="nav_retry"     default="3"/>
-  <arg name="nav_timeout"   default="300.0"/>
+  <arg name="debug_mode"        default="false"/>
+  <arg name="resource_path"     default=""/>
+  <arg name="nav_retry"         default="3"/>
+  <arg name="nav_timeout"       default="300.0"/>
+  <arg name="nav_near_distance" default="1.0"/>
   <arg name="pickup_location"/>
   <arg name="localize_action"/>
   <arg name="docking_interactor_action"/>

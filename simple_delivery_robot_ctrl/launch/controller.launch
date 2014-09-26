@@ -26,7 +26,7 @@
   </include>
 
   <!--  ************** Additional sensors *************  -->
-  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>
+<!--  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>-->
 
   <!-- Reconfigure command velocity multiplexer to fit waiterbot needs. Just set the parameter doesn't work
       if we start the waiterbot rapp with app manager; we must explicitly call the reconfigure service -->
@@ -61,6 +61,7 @@
   <arg name="odom_topic"                  default="/odom"/>
   <arg name="move_base_param_path"        default="$(find simple_delivery_robot_ctrl)/param/move_base"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
+  <arg name="resource_path"               default=""/>
 
   <!-- State Manager -->
   <include file="$(find simple_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
@@ -81,15 +82,15 @@
     <arg name="global_frame"          value="$(arg global_frame)"/>
     <arg name="base_frame"            value="$(arg base_frame)"/>
     <arg name="global_ar_pair_topic"  value="$(arg global_ar_pair_topic)"/>
-    <arg name="predicted_robot_pose"  value="$(arg predicted_robot_pose)"/>
+    <arg name="predicted_robot_pose_topic"  value="$(arg predicted_robot_pose_topic)"/>
   </include>
 
   <!-- Localization manager -->
-  <include file="$(find yocs_localization_manager)/launch/localization.launch">
+  <include file="$(find yocs_localization_manager)/launch/localization_manager.launch">
     <arg name="global_frame"          value="$(arg global_frame)"/>
     <arg name="base_frame"            value="$(arg base_frame)"/>
     <arg name="odom_frame"            value="$(arg odom_frame)"/>
-    <arg name="predicted_robot_pose"  value="$(arg predicted_robot_pose)"/>
+    <arg name="predicted_robot_pose_topic"  value="$(arg predicted_robot_pose_topic)"/>
     <arg name="localize_action"       value="$(arg localize_action)"/>
     <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
   </include>
