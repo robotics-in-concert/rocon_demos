@@ -21,7 +21,6 @@ DELIVERY_ACTION = 'delivery_order'
 LOC_ACTION = 'localize'
 NAV_ACTION = 'navigate_to'
 DOC_ACTION = 'docking_interactor'
-SUB_TABLE = 'table'
 SUB_BUTTON = '~digital_inputs'
 
 STATUS = 'robot_status'

@@ -1,0 +1,122 @@
+<!--
+  Waiterbot controller
+  - turtlebot
+  - ir half ring
+  - yocs_docking_interactor
+  - yocs_navigator
+  - yocs_localization_manager
+ -->
+
+<launch>
+<!-- 
+**********************************
+  Hardware Configuration
+**********************************
+-->
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch"> 
+    <!-- We only need RGB images and pseudo laser scan -->
+    <arg name="depth_registration"              value="false"/>
+    <arg name="rgb_processing"                  value="true" />
+    <arg name="ir_processing"                   value="false"/>
+    <arg name="depth_processing"                value="false"/>
+    <arg name="depth_registered_processing"     value="false"/>
+    <arg name="disparity_processing"            value="false"/>
+    <arg name="disparity_registered_processing" value="false"/>
+    <arg name="scan_processing"                 value="true" />
+  </include>
+
+  <!--  ************** Additional sensors *************  -->
+  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>
+
+  <!-- Reconfigure command velocity multiplexer to fit waiterbot needs. Just set the parameter doesn't work
+      if we start the waiterbot rapp with app manager; we must explicitly call the reconfigure service -->
+  <node pkg="rosservice" type="rosservice" name="reconfig_vel_mux" args="call --wait /cmd_vel_mux/set_parameters
+            '{config:{strs:[[yaml_cfg_file,$(find waiterbot_bringup)/param/vel_multiplexer.yaml]]}}'"/>
+
+<!-- 
+**********************************
+  Software Configuration
+**********************************
+-->
+  <arg name="initial_pose_x" value="2.0"/>
+  <arg name="initial_pose_y" value="2.0"/>
+  <arg name="initial_pose_a" value="0.0"/>
+  <arg name="debug_mode"     default="$(optenv DEBUG_MODE false)"/>
+
+  <arg name="ar_tracker_max_frequency"    value="4.0"/>
+  <arg name="global_frame"                default="map"/>
+  <arg name="base_frame"                  default="base_footprint"/>
+  <arg name="odom_frame"                  default="odom"/>
+  <arg name="global_ar_pair_topic"        default="global_markers"/>
+  <arg name="predicted_robot_pose_topic"  default="predicted_robot_pose"/>
+  <arg name="localize_action"             default="localize"/>
+  <arg name="docking_interactor_action"   default="docking_interactor"/>
+  <arg name="navigator_action"            default="navigate_to"/>
+  <arg name="pickup_location"             default="frontdesk"/>
+  <arg name="delivery_order_action"       default="delivery_order"/>
+
+  <arg name="robot_cmd_feed"              default="/mobile_base/commands/velocity"/>
+  <arg name="cmd_vel_mux_input"           default="/cmd_vel_mux/inputs/navigation"/>
+  <arg name="move_base_topic"             default="move_base"/>
+  <arg name="odom_topic"                  default="/odom"/>
+  <arg name="move_base_param_path"        default="$(find office_waiter_ctrl)/param/move_base"/>
+  <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
+
+  <!-- State Manager -->
+  <include file="$(find office_waiter_ctrl)/launch/includes/master_ctrl.launch.xml">
+    <arg name="debug_mode"                  value="$(arg debug_mode)"/>
+    <arg name="resource_path"               value="$(arg resource_path)"/>
+    <arg name="pickup_location"             value="$(arg pickup_location)"/>
+    <arg name="localize_action"             value="$(arg localize_action)"/>
+    <arg name="docking_interactor_action"   value="$(arg docking_interactor_action)"/>
+    <arg name="navigator_action"            value="$(arg navigator_action)"/>
+    <arg name="delivery_order_action"       value="$(arg delivery_order_action)"/>
+  </include>
+
+
+  <!--  ********** Alvar AR marker Pairs tracker ***********  -->
+  <!-- This is a CPU-hungry bastard; reduce its rate -->
+  <include file="$(find yocs_localization_manager)/launch/ar_pair_tracker.launch">
+    <arg name="max_frequency"         value="$(arg ar_tracker_max_frequency)"/>
+    <arg name="global_frame"          value="$(arg global_frame)"/>
+    <arg name="base_frame"            value="$(arg base_frame)"/>
+    <arg name="global_ar_pair_topic"  value="$(arg global_ar_pair_topic)"/>
+    <arg name="predicted_robot_pose"  value="$(arg predicted_robot_pose)"/>
+  </include>
+
+  <!-- Localization manager -->
+  <include file="$(find office_waiter_ctrl)/launch/includes/localization.launch.xml">
+    <arg name="global_frame"          value="$(arg global_frame)"/>
+    <arg name="base_frame"            value="$(arg base_frame)"/>
+    <arg name="odom_frame"            value="$(arg odom_frame)"/>
+    <arg name="predicted_robot_pose"  value="$(arg predicted_robot_pose)"/>
+    <arg name="localize_action"       value="$(arg localize_action)"/>
+    <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
+  </include>
+
+  <!-- Navigator -->
+  <include file="$(find office_waiter_ctrl)/launch/includes/navigator.launch.xml">
+    <arg name="location_list_topic"   value="$(arg location_list_topic)"/>
+    <arg name="navigator_action"      value="$(arg navigator_action)"/>
+    <arg name="start_move_base"       value="true"/>
+    <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
+    <arg name="move_base_topic"       value="$(arg move_base_topic)"/>
+    <arg name="odom_topic"            value="$(arg odom_topic)"/>
+    <arg name="robot_cmd_feed"        value="$(arg robot_cmd_feed"/>
+    <arg name="global_frame"          value="$(arg global_frame)"/>
+    <arg name="base_frame"            value="$(arg base_frame)"/>
+    <arg name="move_base_param_path"  value="$(arg move_base_param_path)"/>
+    <arg name="vel_smoother_param"    value="$(arg vel_smoother_param)"/>
+  </include>
+
+  <!-- Docking Interactor -->
+  <include file="$(find office_waiter_ctrl)/launch/includes/docking_interactor.launch.xml">
+    <arg name="global_frame"          value="$(arg global_frame)"/>
+    <arg name="base_frame"            value="$(arg base_frame)"/>
+    <arg name="odom_topic"            value="$(arg odom_topic)"/>
+    <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
+    <arg name="start_move_base"       value="false"/>
+    <arg name="move_base_topic"       value="$(arg move_base_topic)"/>
+  </include>
+
+</launch>
