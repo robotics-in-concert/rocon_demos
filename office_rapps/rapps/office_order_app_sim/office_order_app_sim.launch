@@ -1,6 +1,0 @@
-<launch>
-  <arg name="target_location" default="1"/>
-  <node pkg="office_rapps" name="office_order_app_sim" type="office_order_app_sim.py" output="screen">
-  	<param name="target_location" value="$(arg target_location)"/>
-  </node>
-</launch>

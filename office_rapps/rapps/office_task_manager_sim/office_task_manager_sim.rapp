@@ -1,5 +1,0 @@
-display: Office Task manager Sim
-description: The simulation task manager for office simulation
-compatibility: rocon:/pc
-launch: office_task_manager_sim.launch
-

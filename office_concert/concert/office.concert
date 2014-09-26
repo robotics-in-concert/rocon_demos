@@ -1,7 +1,0 @@
-<concert>
-    <launch title="concert:11311" package="office_concert" name="concert.launch" port="11311">
-      <arg name="services" value="office_concert/office.services"/>
-    </launch>
-
-    <launch title="office_backend:11312"    package="office_concert" name="office_backend.launch" port="11312"/>
-</concert>
