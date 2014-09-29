@@ -181,8 +181,8 @@ class StateManager(object):
         r = rospy.Rate(10)
         self._current_state = STATE_IDLE
         self._as[DELIVERY_ACTION].start()
+        self._led_controller.start()
         self._led_controller.set_on_ok()
-        self.loginfo("Initialized")
 
         t = 1
         while not rospy.is_shutdown():
@@ -192,6 +192,7 @@ class StateManager(object):
             if t == 1:
                 self._log()
             r.sleep()
+        self._led_controller.stop()
 
     def _log(self):
         self._pub[STATUS].publish(str(self._current_state))
