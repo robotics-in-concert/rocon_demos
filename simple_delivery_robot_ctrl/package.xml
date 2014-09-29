@@ -24,4 +24,5 @@
   <run_depend>yocs_navigator</run_depend>
   <run_depend>yocs_docking_interactor</run_depend>
   <run_depend>yocs_localization_manager</run_depend>
+  <run_depend>waiterbot_bringup</run_depend>
 </package>

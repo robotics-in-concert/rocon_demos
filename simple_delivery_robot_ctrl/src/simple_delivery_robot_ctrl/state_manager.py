@@ -12,8 +12,8 @@ import actionlib
 import kobuki_utils
 from waiterbot_bringup import ButtonControl
 
-import yocs_msgs.msg  as yocs_msg
-import std_msgs.msg as std_msg
+import yocs_msgs.msg  as yocs_msgs
+import std_msgs.msg as std_msgs
 import kobuki_msgs.msg as kobuki_msgs
 from simple_delivery_msgs.msg import DeliveryStatus, DeliveryOrder, Receiver, RobotDeliveryOrderAction, RobotDeliveryOrderGoal, RobotDeliveryOrderResult
 
@@ -84,13 +84,13 @@ class StateManager(object):
         self._pub[STATUS] = rospy.Publisher(STATUS, std_msgs.String, queue_size=2)
 
         # Setting up action server to receive order from manager
-        self._as[DELIVERY_ACTION] = actionlib.SimpleActionServer(self._delivery_action_name, RobotDeliveryOrderAction, auto_start=False)
+        self._as[DELIVERY_ACTION] = actionlib.SimpleActionServer(DELIVERY_ACTION, RobotDeliveryOrderAction, auto_start=False)
         self._as[DELIVERY_ACTION].register_goal_callback(self._process_delivery_order)
         self._as[DELIVERY_ACTION].register_preempt_callback(self._process_delivery_order_preempt)
 
 
         self.loginfo('Wait for Localise manager to be up')
-        self._ac[LOC_ACTION] = actionlib.SimpleActionClient(LOC_ACTION, yocs_msg.LocalizeAction)
+        self._ac[LOC_ACTION] = actionlib.SimpleActionClient(LOC_ACTION, yocs_msgs.LocalizeAction)
         self._ac[LOC_ACTION].wait_for_server()
 
         self.loginfo('Wait for Docking interactor to be up')
@@ -106,7 +106,7 @@ class StateManager(object):
         self._led_controller = kobuki_utils.LedBlinker()
 
         # Button Controller
-        self._button_controller = waiterbot_bringup.ButtonControl(self._process_button)
+        self._button_controller = ButtonControl(self._process_button)
 
     def _process_button(self, green, red):
         self.loginfo("Button Pressed. Green[%s] Red[%s]"%(str(green),str(red)))
@@ -171,7 +171,7 @@ class StateManager(object):
             Reset variables, set led ok, and set idle mode
         """
         self._current_state = STATE_IDLE
-        self._led_controller.set_ok()
+        self._led_controller.set_on_ok()
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
@@ -181,7 +181,8 @@ class StateManager(object):
         r = rospy.Rate(10)
         self._current_state = STATE_IDLE
         self._as[DELIVERY_ACTION].start()
-        self._led_controller.set_ok()
+        self._led_controller.set_on_ok()
+        self.loginfo("Initialized")
 
         t = 1
         while not rospy.is_shutdown():
