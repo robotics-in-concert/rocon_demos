@@ -35,12 +35,12 @@ class SimpleAnnotationServer(object):
 
     def _init_publishers(self):
         self.publisher = {}
-        self.publisher['tables'] = rospy.Publisher('tables', yocs_msgs.TableList, latch=True)
-        self.publisher['ar_markers'] = rospy.Publisher('ar_markers', ar_msgs.AlvarMarkers, latch=True)
-        self.publisher['columns'] = rospy.Publisher('columns', yocs_msgs.ColumnList, latch=True)
-        self.publisher['walls'] = rospy.Publisher('walls', yocs_msgs.WallList, latch=True)
+        self.publisher['tables'] = rospy.Publisher('tables', yocs_msgs.TableList, latch=True, queue_size=2)
+        self.publisher['ar_markers'] = rospy.Publisher('ar_markers', ar_msgs.AlvarMarkers, latch=True, queue_size=2)
+        self.publisher['columns'] = rospy.Publisher('columns', yocs_msgs.ColumnList, latch=True, queue_size=2)
+        self.publisher['walls'] = rospy.Publisher('walls', yocs_msgs.WallList, latch=True, queue_size=2)
 
-        self.publisher['viz_markers'] = rospy.Publisher('viz_markers', MarkerArray, latch=True)
+        self.publisher['viz_markers'] = rospy.Publisher('viz_markers', MarkerArray, latch=True, queue_size=2)
 
     def _init_services(self):
         self.service = {}
