@@ -10,7 +10,7 @@
 
   <!-- <url type="website">http://ros.org/wiki/cafe_rapps</url> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <run_depend>rocon_devices</run_depend>
+<!--  <run_depend>rocon_devices</run_depend>-->
   <run_depend>kobuki_softapps</run_depend>
   <run_depend>robot_pose_publisher</run_depend>
   
