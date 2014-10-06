@@ -1,8 +1,7 @@
 <launch>
  <include file="$(find turtlebot_bringup)/launch/concert_client.launch">
-
-    <arg name="rapp_package_whitelist" value="[office_rapps]"/>
+    <arg name="rapp_package_whitelist" value="[turtlebot_rapps, office_rapps]"/>
     <arg name="interactions_list"      value="$(optenv INTERACTIONS_LIST [])"/>
-    <arg name="concert_whitelist"      value="$(optenv HUB_WHITELIST Office_Concert)"/>
+    <arg name="concert_whitelist"      value="$(optenv HUB_WHITELIST Office Concert)"/>
   </include>
 </launch>
