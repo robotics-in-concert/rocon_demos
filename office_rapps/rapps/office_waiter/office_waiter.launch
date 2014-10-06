@@ -1,5 +1,7 @@
 <launch>
-  <include file="$(find waiterbot_ctrl_office)/launch/controller.launch"/>
+<!--  <include file="$(find waiterbot_ctrl_office)/launch/controller.launch"/>-->
+  <include file="$(find simple_delivery_robot_ctrl)/launch/controller.launch"/>
+
   <node pkg="robot_pose_publisher" name="robot_pose_publisher" type="robot_pose_publisher">
     <rosparam>
       is_stamped: true

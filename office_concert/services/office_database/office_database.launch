@@ -4,10 +4,10 @@
   <arg name="annotation_namespace" default="/annotation"/>
 
 
-  <arg     if="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/office_cropped.yaml"/>
-  <arg unless="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/office_cropped.yaml"/>
+  <arg     if="$(arg is_sim)" name="map_file" value="$(find yujin_maps)/maps/yujin_rnd_extended.yaml"/>
+  <arg unless="$(arg is_sim)" name="map_file" value="$(find office_concert)/maps/yujin_rnd_extended.yaml"/>
 
-  <arg name="viewer_map" value="$(find office_concert)/maps/office_cropped.yaml"/>
+<!--  <arg name="viewer_map" value="$(find office_concert)/maps/office_cropped.yaml"/>-->
 
   <!-- Publish a dummy tf, as map viewer on Android app needs a tf reference
        relative to which show the map on screnn (logically we use /map) -->
@@ -21,12 +21,14 @@
     <remap from="static_map" to="/static_map"/>
   </node>
 
+<!--
   <node pkg="map_server" type="map_server" name="map_server_viewer" args="$(arg viewer_map)">
     <param name="frame_id" value="/viewer_map"/>
     <remap from="map" to="/viewer_map"/>
     <remap from="map_metadata" to="/viewer_map_metadata"/>
     <remap from="static_map" to="/viewer_static_map"/>
   </node>
+-->
 
   <!-- *********************** Annotations ************************ -->
   <node pkg="simple_annotation_server" type="simple_server.py" name="annotations_manager">
