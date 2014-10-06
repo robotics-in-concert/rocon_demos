@@ -34,7 +34,7 @@
     robot2: zach 
   remappings:
     - remap_from: map
-      remap_to: /viewer_map
+      remap_to: /map
     - remap_from: tables
       remap_to: /annotation/tables
     - remap_from: ar_markers
