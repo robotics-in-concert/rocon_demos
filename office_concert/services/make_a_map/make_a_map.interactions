@@ -9,4 +9,4 @@
   parameters:
     maximum_linear_velocity: 2.0
     maximum_angular_velocity: 1.57
-    capture_timeout: 45.0
+    capture_timeout: 80.0
