@@ -1,0 +1,4 @@
+wc_namespace: "/software/world_canvas"
+world: "Maze world"
+map_name: "maze"
+map_topic: "/map"

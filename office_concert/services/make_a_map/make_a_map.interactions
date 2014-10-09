@@ -10,3 +10,4 @@
     maximum_linear_velocity: 2.0
     maximum_angular_velocity: 1.57
     capture_timeout: 80.0
+    wc_namespace: "/software/world_canvas"
