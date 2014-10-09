@@ -1,0 +1,65 @@
+
+
+
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.modal {
+	width:940px;
+	left:36%;
+}
+
+.modal-drink-img-group{
+	text-align: center;
+}
+.modal-drink-img{
+	width: 20%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.menu-drink-img-group{
+	text-align: center;
+}
+
+.menu-drink-img{
+	width: 20%;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+.sd-status-bar{
+	margin:10px;
+	font-size:27px;
+	color:white;
+}
+.sd-logo{
+	height:47px;
+	width:150px;
+	float:right;
+}
+
+.sd-table-list{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 50px 5px;
+	font-size: 48px;
+
+}
+
+.sd-goal-msg{
+	font-size:45px;
+	line-height: 45px;
+}
+.sd-delivery-status-msg{
+	font-size:45px;
+	line-height: 45px;
+}
+.sd-dummy-green-btn{
+	padding: 50px 5px;
+	font-size: 48px;
+}
