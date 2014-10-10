@@ -33,70 +33,54 @@ if(send_order_pub_topic in rocon_interactions.remappings)
   send_order_pub_topic = rocon_interactions.remappings[send_order_pub_topic];
 
 // public variable
-var row_max_num = 3;
-var robot_status;
+// delivery_status_list = {
+//10 : "IDLE",
+//20 : "GO_TO_FRONTDESK",
+//30 : "ARRIVAL_AT_FRONTDESK",
+//40 : "WAITING_FOR_FRONTDESK",
+//51 : "GO_TO_RECEIVER",
+//52 : "ARRIVAL_AT_RECEIVER",
+//53 : "WAITING_CONFIRM_RECEIVER",
+//54 : "COMPLETE_DELIVERY",
+//60 : "COMPLETE_ALL_DELIVERY",
+//70 : "RETURN_TO_DOCK",
+//80 : "COMPELTE_RETURN",
+//-10 : "ERROR"
 
-var robot_status_list = {
-                              "STATE_INITIALIZATION" :'Initialization',
-                              "STATE_GOTO_KITCHEN"    : 'GOTO_KITCHEN',
-                              "STATE_AT_KITCHEN"      : 'AT_KITCHEN',
-                              "STATE_GOTO_TABLE"      : 'GOTO_TABLE',
-                              "STATE_AT_TABLE"         : 'AT_TABLE',
-                              "STATE_ON_ERROR"         :'ON_ERROR',
-                             };
-
-var delivery_status_list = {
-                              10 : "IDLE",
-                              20 : "GO_TO_FRONTDESK",
-                              30 : "ARRIVAL_AT_FRONTDESK",
-                              40 : "WAITING_FOR_FRONTDESK",
-                              51 : "GO_TO_RECEIVER",
-                              52 : "ARRIVAL_AT_RECEIVER",
-                              53 : "WAITING_CONFIRM_RECEIVER",
-                              54 : "COMPLETE_DELIVERY",
-                              60 : "COMPLETE_ALL_DELIVERY",
-                              70 : "RETURN_TO_DOCK",
-                              80 : "COMPELTE_RETURN",
-                             };
-delivery_status_list[-10] = "ERROR"
-
+//menu item setting
 var menu_list = {
                     "coke":{"name":'coke',
-                     "disable_img":"coke_disable.png",
-                     "img":"coke.png",},
+                     "disable_img":"./img/coke_disable.png",
+                     "img":"./img/coke.png",},
                      "beer":{"name":'beer',
-                     "disable_img":"beer_disable.png",
-                     "img":"beer.png",},
+                     "disable_img":"./img/beer_disable.png",
+                     "img":"./img/beer.png",},
                      "welchis":{"name":'welchis',
-                     "disable_img":"welchis_disable.png",
-                     "img":"welchis.png"},
+                     "disable_img":"./img/welchis_disable.png",
+                     "img":"./img/welchis.png"},
                     }
 
-//ui
+//ui setting
 var currentDiv = 0;
 var divList = []
-//order
+var img_path = "./img/"
+
+//order setting
 var uuid = "";
 var cur_order_list = [];
 var is_showing_modal = false;
 
 $().ready(function(e){
   initDiv();  
+  initMenu();
+  initEvent();
+
   // setting ros callbacks
   settingROSCallbacks();
   ros.connect(defaultUrL);
 });
 
-function initDiv(){
-  for (k = 0  ;k < $('.oa-ui').length ; k ++){
-    class_list = $('.oa-ui')[k].classList;
-    target_class_name = class_list[class_list.length - 1];
-    divList.push($('.'+target_class_name))
-  }
-
-  updateDiv(currentDiv);
-  initMenu();
-
+function initEvent(){
   //set event
   $(".oa-ui-prev-btn").click(function(){
     prevDiv = currentDiv - 1;
@@ -107,41 +91,145 @@ function initDiv(){
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
+  
 
+
+  //modal
   $('.modal-order-confirm').click(function(){
     sendOrder();
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
+
+  $('#confirm-modal').on('hide', function () {
+    console.log("modal hide");
+    is_showing_modal = false;
+  });
+}
+
+function initDiv(){
+  for (k = 0  ;k < $('.oa-ui').length ; k ++){
+    class_list = $('.oa-ui')[k].classList;
+    target_class_name = class_list[class_list.length - 1];
+    divList.push($('.'+target_class_name))
+  }
+  updateDiv(currentDiv);
 }
 
 function initMenu(){
   $(".menu-drink-img-group").html("");
   context = "";
   for (menu in menu_list){
-    templete = '<img src="./img/'+ menu_list[menu].disable_img +'" class="menu-drink-img ' + menu_list[menu].name +'">'
+    templete = '<img src='+ menu_list[menu].disable_img +' class="menu-drink-img ' + menu_list[menu].name +'">'
     context += templete
   }
   $(".menu-drink-img-group").html(context);
 
+  //menu
   $(".menu-drink-img").click(function(data){
     class_name = data.currentTarget.classList[data.currentTarget.classList.length -1];
-    console.log(class_name);
     img_src = $("img."+class_name).attr("src");
-    
-    //more nice
+
     if(img_src.indexOf("_disable")>0){
-      $("img."+class_name).attr("src",img_src.split("_disable.png")[0]+".png");
+      $("img."+class_name).attr("src", menu_list[class_name].img);
       cur_order_list.push(class_name);
     }
     else{
-      $("img."+class_name).attr("src",img_src.split(".png")[0]+"_disable.png");
+      $("img."+class_name).attr("src",menu_list[class_name].disable_img);
       idx = jQuery.inArray( class_name, cur_order_list)
       cur_order_list.splice(idx,1);
     }
     console.log(cur_order_list);
   });
 }
+
+
+
+// function updateDiv(target_div){
+//     $('.oa-ui').hide();
+    
+//     div_flow=1;
+    
+//     if(currentDiv === target_div){ //refresh
+//       div_flow = 0;
+      
+//       divList[target_div].show();
+//       currentDiv = target_div;
+//     }
+    
+//     else if(currentDiv > target_div){ //back
+//       div_flow = -1; 
+      
+//       if (target_div < 0){
+//        target_div += divList.length;
+//       }
+
+//       if (divList[currentDiv].selector.indexOf("arrival-layer") > 0){
+//         console.log("Play ad");
+//         $(".video-rocon-adv")[0].play();
+//         divList[target_div].show();
+//         currentDiv = target_div;
+//       }
+
+//       if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
+//         divList[0].show();
+//         currentDiv = 0;
+//       }
+
+
+//       else{
+//         $(".video-rocon-adv")[0].load();
+//         deliveryProgressControl(0);
+//         divList[target_div].show();
+//         currentDiv = target_div;  
+//       }
+//     }
+//     else{ //forward
+//       div_flow = 1; 
+      
+//       if (target_div >= divList.length){
+//         target_div -= divList.length;
+//       }
+      
+//       if (divList[currentDiv].selector.indexOf("ordered-layer") > 0){
+//         //post proc
+//         console.log("Play ad");
+//         $(".video-rocon-adv")[0].play();
+//         divList[target_div].show();
+//         currentDiv = target_div;
+//       }
+//       else if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
+//         //post proc
+//         if (is_showing_modal === true){
+//           is_showing_modal = false;
+//           divList[target_div].show();
+//           currentDiv = target_div;
+//         }
+//         else{
+//           is_showing_modal = true;
+//           showConfrimModal();  
+//           divList[currentDiv].show();
+//         }
+//       }
+//       else if (divList[currentDiv].selector.indexOf("delivery-end-layer") > 0){
+//         //post proc
+//         initMenu();
+//         cur_order_list = [];
+
+//         divList[target_div].show();
+//         currentDiv = target_div;
+//       }
+//       else{
+//         //post proc
+//         console.log("none post proc")
+//         $(".video-rocon-adv")[0].load();
+//         deliveryProgressControl(0);
+//         divList[target_div].show();
+//         currentDiv = target_div;
+//       }  
+//     }
+// }
+
 
 function updateDiv(target_div){
     $('.oa-ui').hide();
@@ -161,13 +249,20 @@ function updateDiv(target_div){
       if (target_div < 0){
        target_div += divList.length;
       }
-      if (divList[target_div].selector.indexOf("on-delivery-layer") > 0){
-        console.log("Play");
+
+      if (divList[currentDiv].selector.indexOf("arrival-layer") > 0){
+        console.log("Play ad");
         $(".video-rocon-adv")[0].play();
-        
         divList[target_div].show();
         currentDiv = target_div;
       }
+
+      if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
+        divList[0].show();
+        currentDiv = 0;
+      }
+
+
       else{
         $(".video-rocon-adv")[0].load();
         deliveryProgressControl(0);
@@ -182,14 +277,15 @@ function updateDiv(target_div){
         target_div -= divList.length;
       }
       
-      if (divList[target_div].selector.indexOf("on-delivery-layer") > 0){
-        console.log("Play");
+      if (divList[currentDiv].selector.indexOf("ordered-layer") > 0){
+        //post proc
+        console.log("Play ad");
         $(".video-rocon-adv")[0].play();
-        
         divList[target_div].show();
         currentDiv = target_div;
       }
-      else if (divList[target_div].selector.indexOf("ordered-layer") > 0){
+      else if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
+        //post proc
         if (is_showing_modal === true){
           is_showing_modal = false;
           divList[target_div].show();
@@ -201,7 +297,17 @@ function updateDiv(target_div){
           divList[currentDiv].show();
         }
       }
+      else if (divList[currentDiv].selector.indexOf("delivery-end-layer") > 0){
+        //post proc
+        initMenu();
+        cur_order_list = [];
+
+        divList[target_div].show();
+        currentDiv = target_div;
+      }
       else{
+        //post proc
+        console.log("none post proc")
         $(".video-rocon-adv")[0].load();
         deliveryProgressControl(0);
         divList[target_div].show();
@@ -209,7 +315,6 @@ function updateDiv(target_div){
       }  
     }
 }
-
 
 function deliveryProgressControl(video_src){
   if(video_src == 1){ //first step
@@ -234,7 +339,6 @@ function deliveryProgressControl(video_src){
     $(".video-delivery-progress-1").show();
     $(".video-delivery-progress-2")[0].load();
   }
-
 }
 
 function showConfrimModal(){
@@ -244,7 +348,7 @@ function showConfrimModal(){
   context = '<p class="modal-drink-img-group">';
   for (var i = cur_order_list.length - 1; i >= 0; i--) {
     menu = cur_order_list[i];
-    templete = '<img src="./img/'+ menu_list[menu].img +'" class="modal-drink-img">';
+    templete = '<img src='+ menu_list[menu].img +' class="modal-drink-img">';
     context += templete;
   };
   context += "</p>";
@@ -261,7 +365,6 @@ function sendOrder(){
     receivers : [{location: table+"", qty : 1, menus:cur_order_list}]
   });
   console.log("order: ",order, send_order_publisher)
-
   send_order_publisher.publish(order)
 }
 
@@ -321,146 +424,3 @@ function processDeliveryStatusUpdate(data){
     console.log('other delivery status')
   }
 };
-
-function showDeliberyStatus(data){
-  $(".sd-delivery-status-layer").html("");
-  Object.keys(data).forEach(function(item){
-    $(".sd-delivery-status-layer").append('<h1 class="sd-delivery-status-msg">'+item+': '+data[item]+'</h1>');
-  });
-};
-
-function processRobotStatusUpdate(data){
-  robot_status = data.data;
-  $(".sd-robot-status").text($(".sd-robot-status").text().split(':')[0]+': ' + robot_status);
-  if(robot_status === robot_status_list.STATE_AT_KITCHEN){
-    $(".sd-table-list").prop('disabled',false);
-  }
-  else{
-    $(".sd-table-list").prop('disabled',true);
-  }
-};
-
-function processFilterSortMenu(data){
-  var menu = [];
-  var sortable = [];
-  //filter
-  for (var i = 0; i < data.length; i++) {
-    var allow_flag = true;
-    var disard_btns = "";
-    if( typeof(discard_btn_list) === "string"){
-       disard_btns = discard_btn_list.replace(/\[/g,'').replace(/\]/g,'').replace(/\s/g,'').split(',');
-    }
-    else if(typeof(discard_btn_list) === "object"){
-      disard_btns = discard_btn_list;
-    }
-     
-    disard_btns.forEach(function(discard_name){
-      if (discard_name.indexOf(data[i].name) == -1){
-        allow_flag = allow_flag&true;
-      }
-      else{
-        allow_flag = allow_flag&false;
-      }      
-    });
-
-    if(allow_flag){
-      menu.push(data[i]);
-    }
-    else{
-    }
-  };
-  //sort by name
-  sortable_menu = menu.sort(function (a,b) {
-    if (a.name < b.name)
-       return -1;
-    if (a.name > b.name)
-       return 1;
-  });
-  return sortable_menu;
-};
-
-function processTableListUpdate(data){
-  var menu = processFilterSortMenu(data.tables);
-  settingMainMenu(menu);
-};
-
-function processDiagnosticUpdate(data){
-  for (var i = data.status.length - 1; i >= 0; i--) {
-    var name = data.status[i].name;
-    if(name === "/Power System/Laptop Battery"){
-        var percent = getBattPecent(data.status[i].values);
-        setBattPecent('.sd-laptop-batt-status',percent);
-    }
-    else if(name === "/Power System/Battery"){
-        var percent = getBattPecent(data.status[i].values);
-        setBattPecent('.sd-robot-batt-status',percent);
-    }
-  }
-  
-};
-
-function setBattPecent(obj, data){
-    var text = $(obj).text();
-    $(obj).text(text.split(':')[0]+': ' + data+' %');
-};
-
-function getBattPecent(data){
-    var percent = '-1';
-    var charge = -1;
-    var capacity = -1;
-    for (var i = 0; i < data.length; i++) {
-      var key = data[i].key;
-      if(key === 'Charge (Ah)'){
-         charge = data[i].value;
-      }
-      else if(key === 'Capacity (Ah)'){
-         capacity = data[i].value;
-      }
-    };
-    if( charge === -1 || capacity === -1){
-      percent = -1;  
-    }
-    else{
-      percent = 100 * charge / capacity;
-    } 
-    return percent.toFixed(2);
-};
-
-function settingMainMenu(data){
-  var row_num = 0;
-  $('.sd-main-menu').html('');
-  for (var i = 0; i < data.length; i++) {
-    var table_name = data[i].name;
-    if(i % row_max_num === 0){
-      row_num += 1;
-      $('.sd-main-menu').append('<div class="row-fluid sd-table-row-num-' + row_num + '">');
-    }
-    $('.sd-table-row-num-' + row_num).append('<button type="button" class="span4 btn btn-primary btn-large sd-table-list sd-table-' + table_name + '">' + table_name + '</button>')  
-    $('.sd-table-'+table_name).click(function(data){
-      var order_location = data.currentTarget.outerText
-      $('.sd-goal-msg').text(order_location);      
-      //send order
-      uuid = generateUUID()
-      var order = new ROSLIB.Message({
-        order_id : uuid,
-        receivers : [{location: order_location.split("table")[1], qty : 1}]
-      });
-      console.log("order: ",order, send_order_publisher)
-
-      send_order_publisher.publish(order)
-      showMainMenu(false);
-    });
-  };
-};
-
-function showMainMenu(flag){
-    if(flag === true){
-      $('.sd-main-menu-layer').show();
-      $('.sd-delivery-status').hide();
-    }
-    else{
-      $('.sd-main-menu-layer').hide();
-      $('.sd-delivery-status').show();
-    }
-};
-
