@@ -10,11 +10,11 @@
 #     priority: 3
 #     interactions: office_concert/teleop
 #     parameters: office_concert/teleop
-#- resource_name: concert_service_initialisation/make_a_map
-#  overrides:
-#     priority: 3
-#     interactions: office_concert/make_a_map
-#     parameters: office_concert/make_a_map
+- resource_name: concert_service_initialisation/initialisation
+  overrides:
+     priority: 3
+     interactions: office_concert/initialisation
+     parameters: office_concert/initialisation
 # - resource_name: office_concert/vm_delivery
 #   overrides:
 #     priority: 1
