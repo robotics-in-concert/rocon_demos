@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rocon - ROBO WORLD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet"></link>
+    <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.js"></script>
+    <script src="js/bootstrap/bootstrap-button.js"></script>
+    <script src="js/eventemitter2/eventemitter2.js"></script>
+    <script src="js/ros/roslib.js"></script>
+    <script type="text/javascript" src="js/interactions.js"></script>
+    <script type="text/javascript" src="dummy_green_button.js"></script>
+    <script type="text/javascript" src="uuid.js"></script>
+ 
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
+    <link href="index.css" rel="stylesheet"></link>
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    
+     <div class="oa-ui-main">
+     <!--  -->
+     <div class="container oa-ui title-layer">
+      <h1 class="oa-ui-title span12">Title-layer</h1>
+
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+     </div>
+
+     <!--  -->
+     <div class="container oa-ui intro-layer">
+      <h1 class="oa-ui-title span12">Intro-layer</h1>
+      
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+     </div>
+     
+     <!--  -->
+     <div class="container oa-ui menu-layer">
+      <h1 class="oa-ui-title span12">Menu-layer</h1>
+      <p class="menu-drink-img-group"></p>
+      
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+
+     </div>
+     
+     <!--  -->
+     <div class="container oa-ui ordered-layer">
+      <h1 class="oa-ui-title span12">Ordered-layer</h1>
+      
+      <h3 class="">Getting Order</h3>
+      
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+     </div>
+     
+     <!--  -->
+     <div class="container oa-ui on-delivery-layer">
+      <h1 class="oa-ui-title span12">On delivery layer</h1>
+      
+      <video class="offset1 span10 video-rocon-adv">
+        <source src="./video/rocon_cafe.mp4" type="video/mp4">
+      </video>
+
+      
+      
+      <video class="offset1 span10 video-delivery-progress-1" >
+        <source src="./video/big_buck_bunny_1080p_surround.avi" type="video/avi">
+      </video>
+        
+      <video class="offset1 span10 video-delivery-progress-2" >
+        <source src="./video/big_buck_bunny_1080p_surround.avi" type="video/avi">
+      </video>
+      
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+     </div>
+     
+     <!--  -->
+     <div class="container oa-ui arrival-layer">
+      <h1 class="oa-ui-title span12">Arrival layer</h1>
+      
+      <h3 class="">Robot Arrived to customer</h3>
+      
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+     </div>
+    
+     <!--  -->
+     <div class="container oa-ui delivery-end-layer">
+      <h1 class="oa-ui-title span12">Delivery end layer</h1>
+      
+      <h3 class="">Enjoy show</h3>
+
+      <div class="span12">
+        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
+        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+      </div>
+     </div>
+
+     <!--  -->
+     <div id="confirm-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="myModalLabel">Order List Confirm?</h4>
+      </div>
+      <div class="modal-body modal-order-list"></div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+        <button class="btn btn-primary modal-order-confirm" data-dismiss="modal" >Yes</button>
+      </div>
+     </div>
+
+     </div>
+
+<!--     
+     <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid ">
+          <ul class="nav nav-pills ">
+            <li class="disabled sd-robot-status sd-status-bar">Robot status : Initialization</li>
+            <li class="disabled sd-robot-batt-status sd-status-bar">Robot batt. : -1%</li>
+            <li class="disabled sd-laptop-batt-status sd-status-bar" >Laptop batt. : -1%</li>
+          </ul>
+          <img class="sd-logo" src="img/rocon_logo.png"></img> 
+        </div>
+      </div>
+     </div>
+
+    <div class="container sd-main-menu-layer">   
+      <div class = "sd-main-menu"></div>
+       <hr/>
+      <div class="row-fluid sd-table-row-num">
+        <button type="button" class="span12  btn btn-success sd-dummy-green-btn">Green Button</button>
+      </div>   
+    </div>
+     
+    <div class="container-fluid sd-delivery-status">
+         <div class="span8"> 
+          <h1>Goal: </h1>
+          <h1 class="sd-goal-msg">Here is delivery status</h1>
+          <hr/>
+          <h1>Status: </h1>
+          <div class = "sd-delivery-status-layer">
+          </div>
+         </div>    
+
+        <div class="span3">
+          <button type="button" class="span4 btn btn-success sd-dummy-green-btn">Green Button</button>
+        </div> 
+    </div>
+
+ --> 
+    <footer>
+        <hr/>
+        <img style="width:120px; height:50px;" src="img/yujin_logo.jpg"></img>
+        &copy 2014
+    </footer>
+
+   
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
+

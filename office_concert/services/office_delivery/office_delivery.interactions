@@ -7,11 +7,11 @@
   icon:
     resource_name: rocon_icons/google.png
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/webapp/cafe_Dorothy/dorothy_web_menu.html)
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/webapp/cafe_Dorothy/dorothy_web_menu.html)
+- name: web_app(http://192.168.10.128/office_concert/web_app/yujin_office/order_app/index.html)
   role: 'Customer'
   compatibility: rocon:/pc
-  display_name: Cafe Dorothy Delivery Order
-  description: Cafe Dorothy web menu
+  display_name: Office Delivery Order App (Table 1)
+  description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
@@ -20,13 +20,36 @@
     extra_data: 1
   remappings:
     - remap_from: send_order
-      remap_to: /cafe/send_order
+      remap_to: /send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://192.168.10.128/office_concert/web_app/yujin_office/order_app/index.html)
+  role: 'Customer'
+  compatibility: rocon:/pc
+  display_name: Office Delivery Order App (Table 2)
+  description: Exhibition web menu
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: 2
+  remappings:
+    - remap_from: send_order
+      remap_to: /send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
 - name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/cafe_viewer/www/index.html)
-  role: 'Cafe Manager'
+  role: 'Office Manager'
   compatibility: rocon:/pc
-  display_name: Cafe Monitor
-  description: Monitors cafe robots 
+  display_name: Office Monitor
+  description: Monitors Office robots 
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
@@ -47,7 +70,7 @@
       remap_to: /cafe/remote_order_update
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/kitchen/www/index.html)
 - name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html)
-  role: 'Cafe Manager'
+  role: 'Office Manager'
   compatibility: rocon:/pc
   display_name: Cafe Kitchen 
   description: Cafe Kitchen Order Status viewer
@@ -61,9 +84,3 @@
       remap_to: /cafe/remote_order_list
     - remap_from: remote_order_update
       remap_to: /cafe/remote_order_update
-
-- name: office_rapps/office_order_app_sim.launch
-  role: 'Customer'
-  compatibility: rocon:/pc
-  display_name: Dummy Order App
-  description: Dummy order app for test

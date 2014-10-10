@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rocon - Real Robot Show</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet"></link>
+    <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.js"></script>
+    <script src="js/bootstrap/bootstrap-button.js"></script>
+    <script src="js/eventemitter2/eventemitter2.js"></script>
+    <script src="js/ros/roslib.js"></script>
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
+    
+    <script type="text/javascript">
+      console.log("hello");
+      var send_order_sub_topic = "/send_order";
+      var send_order_sub_type = "simple_delivery_msgs/DeliveryOrder"
+
+      var chatter_sub_topic = "/chatter";
+      var chatter_sub_type = "std_msgs/String"
+
+      var defaultUrL = 'ws://localhost:9090';
+      var ros = new ROSLIB.Ros();
+      var send_order_publisher;
+      var chatter_publisher;
+      $().ready(function(e){
+        // setting ros callbacks()
+        settingROSCallbacks();
+        ros.connect(defaultUrL);
+      });
+
+      function processSendOrderUpdate(data){
+        console.log("SendOrderUpdate");
+        console.log(data);
+        text = "<p>SendOrderUpdate: "+JSON.stringify(data)+"</p>";
+        $(".log").append(text)
+      }
+      function processChatterUpdate(data){
+        console.log("ChatterUpdate");
+        console.log(data);
+        text = "<p>ChatterUpdate: "+JSON.stringify(data)+"</p>";
+        $(".log").append(text)
+      }
+
+      function settingROSCallbacks(){
+        ros.on('connection',function() {
+          console.log("Connected");
+          // subscribe to order list
+          send_order_subscriber = new ROSLIB.Topic({
+              ros : ros,
+              name : send_order_sub_topic,
+              messageType : send_order_sub_type
+          });
+          send_order_subscriber.subscribe(processSendOrderUpdate);
+          
+          chatter_subscriber = new ROSLIB.Topic({
+              ros : ros,
+              name : chatter_sub_topic,
+              messageType : chatter_sub_type
+          });
+          chatter_subscriber.subscribe(processChatterUpdate);
+
+          $(".order-pub").click(function(data){
+            console.log("order pub");            
+            var order = new ROSLIB.Message({
+              order_id : generateUUID(),
+              receivers : [{location: "1", qty : 1}, {location: "2", qty : 2}]
+            });
+            console.log(order);
+            console.log(send_order_publisher);
+            send_order_publisher.publish(order);
+            console.log("publishing");
+
+          })
+
+          $(".chatter-pub").click(function(data){
+            console.log("chatter pub");            
+            var text = new ROSLIB.Message({
+              data: "chatter chatter" + generateUUID()
+            });
+            console.log(text);
+            console.log(chatter_publisher);
+            chatter_publisher.publish(text);
+            console.log("publishing");
+
+          })
+          console.log(ros);
+
+        })
+      };
+
+
+
+      function generateUUID() {
+          var d = new Date().getTime();
+          var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+              var r = (d + Math.random()*16)%16 | 0;
+              d = Math.floor(d/16);
+              return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+          });
+          return uuid;
+      };
+
+    </script>
+  </head>
+  <body>
+    <h1>Sub Test</h1>
+    <div class = "log"></div>
+    <hr/>
+    <footer>
+        <img style="width:120px; height:50px;" src="img/yujin_logo.jpg"></img>
+        &copy 2014
+    </footer>
+
+   
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
+
