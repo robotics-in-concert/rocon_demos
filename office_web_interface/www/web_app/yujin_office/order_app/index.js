@@ -71,7 +71,8 @@ var cur_order_list = [];
 var is_showing_modal = false;
 
 $().ready(function(e){
-  initDiv();  
+  initDiv();
+  initIntro();
   initMenu();
   initEvent();
 
@@ -143,6 +144,9 @@ function initMenu(){
   });
 }
 
+function initIntro(){
+  $('.intro-layer-location-name').html("This table is [Table "+table+"]");
+}
 
 
 // function updateDiv(target_div){
@@ -413,7 +417,8 @@ function processDeliveryStatusUpdate(data){
       nextDiv = currentDiv + 1;
       updateDiv(nextDiv);
     }
-    else if(data.status == 60){
+    else if(data.status == 60
+    {
       nextDiv = currentDiv + 1;
       updateDiv(nextDiv);
     }
