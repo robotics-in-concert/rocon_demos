@@ -34,8 +34,8 @@ def publish_ar_marker(world, namespace):
 
     ar_ac = world_canvas_client.AnnotationCollection(world=world, types=['ar_track_alvar_msgs/AlvarMarker'], srv_namespace=namespace)
     ar_ac.loadData()
-#    ar_ac.publish(ar_topic, 'ar_track_alvar_msgs/AlvarMarkers', by_server=False, as_list=True)
-#    ar_ac.publishMarkers(viz_ar_topic)
+    ar_ac.publish(ar_topic, 'ar_track_alvar_msgs/AlvarMarkers', by_server=False, as_list=True, list_attribute='markers')
+    ar_ac.publishMarkers(viz_ar_topic)
     return ar_ac
 
 
