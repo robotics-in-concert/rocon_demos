@@ -1,0 +1,26 @@
+- 
+  header: 
+    seq: 4969
+    stamp: 
+      secs: 0
+      nsecs: 0
+    frame_id: ''
+  id: 17
+  confidence: 0
+  pose: 
+    header: 
+      seq: 4963
+      stamp: 
+        secs: 0
+        nsecs: 0
+      frame_id: /map
+    pose: 
+      position: 
+        x: 24.7621349543
+        y: 11.967203367
+        z: 0.300000011921
+      orientation: 
+        x: 0.503763111214
+        y: -0.496208351179
+        z: -0.496208351179
+        w: 0.503763111214
