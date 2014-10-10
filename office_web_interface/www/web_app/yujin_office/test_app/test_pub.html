@@ -45,7 +45,7 @@
       var chatter_pub_topic = "/chatter";
       var chatter_pub_type = "std_msgs/String"
 
-      var defaultUrL = 'ws://localhost:9090';
+      var defaultUrL = 'ws://192.168.10.128:9090';
       var ros = new ROSLIB.Ros();
       var send_order_publisher;
       var chatter_publisher;
@@ -76,8 +76,8 @@
           $(".order-pub").click(function(data){
             console.log("order pub");            
             var order = new ROSLIB.Message({
-              order_id : generateUUID(),
-              receivers : [{location: "1", qty : 1}, {location: "2", qty : 2}]
+              order_id : "",
+              receivers : []
             });
             console.log(order);
             console.log(send_order_publisher);
