@@ -1,10 +1,4 @@
 - resource_name: concert_service_admin/admin
-#- resource_name: office_concert/office_delivery
-#  overrides:
-#    priority: 1
-- resource_name: office_concert/office_database
-  overrides:
-    priority: 1
 #- resource_name: concert_service_teleop/teleop
 #  overrides:
 #     priority: 3
