@@ -417,8 +417,7 @@ function processDeliveryStatusUpdate(data){
       nextDiv = currentDiv + 1;
       updateDiv(nextDiv);
     }
-    else if(data.status == 60
-    {
+    else if(data.status == 60){
       nextDiv = currentDiv + 1;
       updateDiv(nextDiv);
     }
