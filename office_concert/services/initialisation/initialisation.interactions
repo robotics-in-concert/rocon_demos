@@ -20,6 +20,7 @@
   max: 1
   parameters:
     wc_namespace: "/software/world_canvas"
+    default_world_name: "yujin_rnd"
 
 - name: rocon_admin_app
   role: 'Cafe Manager'
