@@ -75,7 +75,6 @@
     <arg name="delivery_order_action"       value="$(arg delivery_order_action)"/>
   </include>
 
-
   <!--  ********** Alvar AR marker Pairs tracker ***********  -->
   <!-- This is a CPU-hungry bastard; reduce its rate -->
   <include file="$(find yocs_localization_manager)/launch/ar_pair_tracker.launch">
