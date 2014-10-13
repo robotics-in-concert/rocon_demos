@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(turtlebot_bringup/launch/minimal.launch"/>
+  <include file="$(simple_delivery_robot_ctrl)/launch/controller.launch"/>
+  <include file="$(simple_delivery_robot_ctrl)/launch/db.launch"/>
+</launch>

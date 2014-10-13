@@ -159,7 +159,7 @@ class StateManager(object):
         else:
             goal = self._as[DELIVERY_ACTION].accept_new_goal()  
             self.loginfo(str(goal))
-            self._order_process_thread = threading.Thread(target=self._execute_delivery, args=(goal))
+            self._order_process_thread = threading.Thread(target=self._execute_delivery, args=(goal,))
             self._order_process_thread.start()
 
     def _process_delivery_order_preempt(self):
@@ -214,7 +214,7 @@ class StateManager(object):
         while not rospy.is_shutdown() and not self._cancel_requested and self._current_state != STATE_IDLE:
             state_func, next_state1, next_state2 = self._states[self._current_state]
 
-            if self._current_state == STATE_GOTO_TARGET or self._current_state == STATE_GPICKUPP:
+            if self._current_state == STATE_GOTO_TARGET or self._current_state == STATE_GOTO_PICKUP:
                 success, message = state_func(locations[location_index])
                 location_index = location_index + 1
             else:
