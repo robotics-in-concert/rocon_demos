@@ -9,3 +9,4 @@ priority: 2
 launcher_type: roslaunch
 launcher: office_concert/office_delivery
 interactions: office_concert/office_delivery
+parameters: office_concert/office_delivery

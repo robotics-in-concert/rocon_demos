@@ -1,0 +1,8 @@
+wc_namespace: "/software/world_canvas"
+world: "yujin_rnd"
+map_name: "october"
+map_topic: "/map"
+table_topic: "/annotations/tables"
+viz_table_topic: "/annotations/viz_tables"
+ar_topic: "/annotations/ar_markers"
+viz_ar_topic: "/annotations/viz_ar_markers"

@@ -31,7 +31,7 @@ class DummyTaskManager(object):
         self.order_list = {}
         self.waiter_client = None
         
-        self.waiter_client = actionlib.SimpleActionClient(robot_name+"/"+self.action_name,RobotDeliveryOrderAction)
+        self.waiter_client = actionlib.SimpleActionClient("/" + robot_name+"/"+self.action_name,RobotDeliveryOrderAction)
 
         self.subscribers['send_order'] = rospy.Subscriber('send_order', DeliveryOrder, self._update)
         self.publishers['delivery_status'] = rospy.Publisher('delivery_status', DeliveryStatus)
