@@ -11,3 +11,6 @@
     version: indigo}
 - git: {local-name: concert_common_modules, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: concert_common_modules}
+
+- git: {local-name: concert_common_modules, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
+    version: concert_common_modules}
