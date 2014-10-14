@@ -20,9 +20,9 @@
     extra_data: 1
   remappings:
     - remap_from: send_order
-      remap_to: /send_order
+      remap_to: /services/officedelivery/send_order
     - remap_from: delivery_status
-      remap_to: /delivery_status  
+      remap_to: /services/officedelivery/delivery_status  
     - remap_from: tables
       remap_to: /annotation/tables
 
@@ -39,9 +39,9 @@
     extra_data: 2
   remappings:
     - remap_from: send_order
-      remap_to: /send_order
+      remap_to: /services/officedelivery/send_order
     - remap_from: delivery_status
-      remap_to: /delivery_status  
+      remap_to: /services/officedelivery/delivery_status  
     - remap_from: tables
       remap_to: /annotation/tables
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/cafe_viewer/www/index.html)

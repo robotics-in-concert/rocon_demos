@@ -29,8 +29,8 @@ class DummyOrderApp():
 
         self.publishers = {}
         self.subscribers = {}
-        self.publishers['send_order'] = rospy.Publisher('send_order', DeliveryOrder,latch=True)
-        self.subscribers['delivery_status'] = rospy.Subscriber('delivery_status', DeliveryStatus, self.delivery_status_update)
+        self.publishers['send_order'] = rospy.Publisher('/services/officedelivery/send_order', DeliveryOrder,latch=True)
+        self.subscribers['delivery_status'] = rospy.Subscriber('/services/officedelivery/delivery_status', DeliveryStatus, self.delivery_status_update)
         pass
 
     def delivery_status_update(self, data):

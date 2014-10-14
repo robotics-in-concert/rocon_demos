@@ -8,6 +8,11 @@
   <node pkg="office_concert" name="publish_world" type="publish_world.py">
   </node>
 
+  <arg name="waiter_name" default="adams"/>
+  <node pkg="office_rapps" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen">
+    <param name="waiter_name" value="$(arg waiter_name)"/>
+  </node>
+
 <!--
   <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
   </node>
