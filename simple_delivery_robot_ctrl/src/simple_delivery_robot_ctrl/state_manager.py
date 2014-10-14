@@ -15,7 +15,7 @@ from waiterbot_bringup import ButtonControl
 import yocs_msgs.msg  as yocs_msgs
 import std_msgs.msg as std_msgs
 import kobuki_msgs.msg as kobuki_msgs
-from simple_delivery_msgs.msg import DeliveryStatus, DeliveryOrder, Receiver, RobotDeliveryOrderAction, RobotDeliveryOrderGoal, RobotDeliveryOrderResult
+from simple_delivery_msgs.msg import DeliveryStatus, DeliveryOrder, Receiver, RobotDeliveryOrderAction, RobotDeliveryOrderGoal, RobotDeliveryOrderResult, RobotDeliveryOrderFeedback
 
 DELIVERY_ACTION = 'delivery_order'
 LOC_ACTION = 'localize'
@@ -63,6 +63,8 @@ class StateManager(object):
         self._previouse_green_button_time = None
         self._green_count = 0
 
+        self._reset_requested = False
+
     def _init_states(self):
         self._states = {}
         self._states[STATE_WAKEUP] = (self._wakeup, STATE_LOCALIZE, STATE_ON_ERROR)
@@ -73,6 +75,9 @@ class StateManager(object):
         self._states[STATE_GOTO_TARGET] = (self._goto, STATE_AT_TARGET, STATE_ON_ERROR)
         self._states[STATE_AT_TARGET] = (self._wait_for_button, STATE_GOTO_TARGET, STATE_RETURN)
         self._states[STATE_RETURN] = (self._return, STATE_IDLE, STATE_ON_ERROR)
+        self._states[STATE_ON_ERROR] = (self._on_error , STATE_RESET, STATE_ON_ERROR)
+        self._states[STATE_RESET] = (self._state_reset, STATE_IDLE, STATE_ON_ERROR)
+
 
     def _init_handles(self):    
         self._as = {}
@@ -124,7 +129,7 @@ class StateManager(object):
                     self._green_count = 1
 
             if self._current_state == STATE_ON_ERROR and self._green_count == 3:
-                self._current_state = STATE_RESET
+                self._reset_requested = True
             else:
                 if self._wait_for_button:
                     self._wait_for_button = False
@@ -170,12 +175,19 @@ class StateManager(object):
         """
             Reset variables, set led ok, and set idle mode
         """
-        self._current_state = STATE_IDLE
         self._led_controller.set_on_ok()
+        rospy.sleep(1.0)
+        return True, "Resetting!" 
 
-    def _state_on_error(self):
+    def _on_error(self):
         self._led_controller.set_on_error()
         rospy.sleep(1.0)
+
+        if self._reset_requested:
+            self._reset_requested = False
+            return True, "Reset Requested"
+        else:
+            return False, "Error"
     
     def spin(self):
         r = rospy.Rate(10)
@@ -215,6 +227,7 @@ class StateManager(object):
             state_func, next_state1, next_state2 = self._states[self._current_state]
 
             if self._current_state == STATE_GOTO_TARGET or self._current_state == STATE_GOTO_PICKUP:
+                self.loginfo("%s - %s"%(self._current_state, locations[location_index]))
                 success, message = state_func(locations[location_index])
                 location_index = location_index + 1
             else:
@@ -225,10 +238,19 @@ class StateManager(object):
             else:
                 self._current_state = next_state1 if success else next_state2
             self._send_delivery_order_feedback(success, message)
+            self.loginfo("Next State : %s"%self._current_state)
 
         if self._cancel_requested:
             self.logwarn('Order process has been cancelled..')
             self._current_state = STATE_ON_ERROR
+
+    def _send_delivery_order_feedback(self, success, message):
+        feedback = RobotDeliveryOrderFeedback()
+        feedback.delivery_status = DeliveryStatus()
+        feedback.delivery_status.order_id = message
+        feedback.delivery_status.status = 10
+        self._as[DELIVERY_ACTION].publish_feedback(feedback)
+        
             
     def _wakeup(self):
         """
@@ -251,6 +273,7 @@ class StateManager(object):
         """
           Request localizer to locate the robot. and request docking interactor to regist dock ar on global frame
         """
+        self.loginfo("Request to localize the robot")
         goal = yocs_msgs.LocalizeGoal()
         goal.command = yocs_msgs.LocalizeGoal.SPIN_AND_LOCALIZE
         self._ac[LOC_ACTION].send_goal(goal)

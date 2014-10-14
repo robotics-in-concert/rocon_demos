@@ -47,19 +47,22 @@
   <arg name="global_frame"                default="map"/>
   <arg name="base_frame"                  default="base_footprint"/>
   <arg name="odom_frame"                  default="odom"/>
-  <arg name="global_ar_pair_topic"        default="marker_pose_list"/>
-  <arg name="location_list_topic"         default="table_pose_list"/>
+  <!--<arg name="global_ar_pair_topic"        default="marker_pose_list"/>-->
+  <arg name="global_ar_pair_topic"        default="/annotations/ar_markers"/>
+  <!--<arg name="location_list_topic"         default="table_pose_list"/>-->
+  <arg name="location_list_topic"         default="/annotations/tables"/>
   <arg name="predicted_robot_pose_topic"  default="predicted_robot_pose"/>
   <arg name="localize_action"             default="localize"/>
   <arg name="docking_interactor_action"   default="docking_interactor"/>
   <arg name="navigator_action"            default="navigator"/>
-  <arg name="pickup_location"             default="frontdesk"/>
+  <arg name="pickup_location"             default="pickup"/>
   <arg name="delivery_order_action"       default="delivery_order"/>
 
   <arg name="robot_cmd_feed"              default="/mobile_base/commands/velocity"/>
   <arg name="cmd_vel_mux_input"           default="/cmd_vel_mux/input/navigation"/>
   <arg name="move_base_topic"             default="move_base"/>
   <arg name="odom_topic"                  default="/odom"/>
+  <arg name="map_topic"                   default="/map"/> <!-- remove it later -->
   <arg name="move_base_param_path"        default="$(find simple_delivery_robot_ctrl)/params/move_base"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
   <arg name="resource_path"               default=""/>
@@ -93,6 +96,8 @@
     <arg name="predicted_robot_pose_topic"  value="$(arg predicted_robot_pose_topic)"/>
     <arg name="localize_action"       value="$(arg localize_action)"/>
     <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
+    <arg name="map_topic"             value="$(arg map_topic)"/>
+    <arg name="odom_topic"            value="$(arg odom_topic)"/>
   </include>
 
   <!-- Navigator -->
@@ -103,6 +108,7 @@
     <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
     <arg name="move_base_topic"       value="$(arg move_base_topic)"/>
     <arg name="odom_topic"            value="$(arg odom_topic)"/>
+    <arg name="map_topic"             value="$(arg map_topic)"/>
     <arg name="robot_cmd_feed"        value="$(arg robot_cmd_feed)"/>
     <arg name="global_frame"          value="$(arg global_frame)"/>
     <arg name="base_frame"            value="$(arg base_frame)"/>
