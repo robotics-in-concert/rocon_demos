@@ -35,3 +35,5 @@ nosetests.xml
 
 *.avi
 *.mp4
+*.bak
+
