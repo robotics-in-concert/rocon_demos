@@ -11,9 +11,8 @@ import std_msgs.msg as std_msgs
 import actionlib
 import copy
 import kobuki_utils
+from kobuki_utils import play_sound
 from waiterbot_bringup import ButtonControl
-
-from .utils import *
 
 DELIVERY_ACTION = 'delivery_order'
 LOC_ACTION = 'localize'
@@ -42,7 +41,7 @@ STATE_RESET          = 'RESET'
 
 class StateManager(object):
     
-    _delivery_action_name = 'deliver_order'
+    _delivery_action_name = 'delivery_order'
     _navigator_action_name = 'navigate_to'
     _pickup_location = 'pickup'
     _base_location = 'base'
@@ -59,10 +58,10 @@ class StateManager(object):
     """ 
     _confirm_sound = 'kaku.wav'
     _retry_sound = 'moo.wav'
-    _navi_failed_sound = 'try_again.wav'
+    _navi_failed_sound = 'angry_cat.wav'
     _order_received_sound = 'kaku.wav'
     _at_table_sound = 'kaku.wav'
-    _enjoy_meal_sound = 'enjoy_meal.wav'
+    _enjoy_meal_sound = 'lion.wav'
     _at_base_sound = 'kaku.wav'
     _at_pickup_sound = 'pab.wav'
 
@@ -70,7 +69,6 @@ class StateManager(object):
         self._init_variables()
         self._init_handles()
         self._init_states()
-        self._init_led_blinkder()
 
     def _init_states(self):
         self._states = {}
@@ -106,11 +104,12 @@ class StateManager(object):
         self._nav_retry         = rospy.get_param('~nav_retry', 3)
         self._nav_table_distance = rospy.get_param('~nav_table_distance', 5.0)
         self._resource_path = rospy.get_param('~resource_path')
+        self.loginfo("Resource path : %s"% self._resource_path)
 
 
     def _init_handles(self):
         # order handle
-        self._deliver_order_handler = actionlib.SimpleActionServer(self._delivery_action_name, simple_delivery_msgs.RobotDeliveryOrderAction, auto_start=False)
+        self._deliver_order_handler = actionlib.SimpleActionServer(DELIVERY_ACTION, simple_delivery_msgs.RobotDeliveryOrderAction, auto_start=False)
         self._deliver_order_handler.register_goal_callback(self._process_deliver_order)
         self._deliver_order_handler.register_preempt_callback(self._process_deliver_order_preempt)
 
@@ -122,11 +121,12 @@ class StateManager(object):
 
         # Localize manager
         self.loginfo('Wait for Localise manager to be up')
+        self._ac = {}
         self._ac[LOC_ACTION] = actionlib.SimpleActionClient(LOC_ACTION, yocs_msgs.LocalizeAction)
         self._ac[LOC_ACTION].wait_for_server()
 
         # semantic navigation handler
-        self._navigator_handler = actionlib.SimpleActionClient(self._navigator_action_name, yocs_msgs.NavigateToAction)
+        self._navigator_handler = actionlib.SimpleActionClient(NAV_ACTION, yocs_msgs.NavigateToAction)
 
         self.loginfo('Wait for Sematic Navigator Server to be up')
         self._navigator_handler.wait_for_server()
@@ -135,7 +135,7 @@ class StateManager(object):
         self._led_controller = kobuki_utils.LedBlinker()
 
         # Button Controller
-        self._button_controller = ButtonControl(self._process_button)
+        self._button_controller = ButtonControl('/mobile_base/events/digital_input', self._process_button)
 
     def _process_button(self, green, red):
         self.loginfo("Button Pressed. Green[%s] Red[%s]"%(str(green),str(red)))
@@ -247,7 +247,7 @@ class StateManager(object):
         
     def _navigator_feedback(self, feedback):
         self._navigator_feed = str("Distance : %s, Remain Time : %s, Message : %s"%(str(feedback.distance),str(feedback.remain_time),str(feedback.message)))
-        self.loginfo("Navigator : " + str(self._navigator_feed))
+        #self.loginfo("Navigator : " + str(self._navigator_feed))
         
         if feedback.status == yocs_msgs.NavigateToFeedback.STATUS_RETRY:
             play_sound(self._resource_path, self._retry_sound)
@@ -300,6 +300,7 @@ class StateManager(object):
     def _state_goto_kitchen(self):
         # Wait for arriving
         if self._navigator_finished:
+            self.loginfo("AT kitchen")
             # When it arrives...
             self._current_state = STATE_AT_KITCHEN
             play_sound(self._resource_path, self._at_pickup_sound)
@@ -373,6 +374,7 @@ class StateManager(object):
             self._deliver_order_handler.set_succeeded(r)
         self._navigator_handler.cancel_all_goals()
         self._init_variables()
+        self._current_state = STATE_ON_ERROR
 
     def _blink_leds(self):
         self.last_blink_led = (self.last_blink_led % 2) + 1

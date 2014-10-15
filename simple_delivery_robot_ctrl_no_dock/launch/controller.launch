@@ -25,7 +25,7 @@
   </include>
 
   <!--  ************** Additional sensors *************  -->
-  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>
+<!--  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>-->
 
   <!-- Reconfigure command velocity multiplexer to fit waiterbot needs. Just set the parameter doesn't work
       if we start the waiterbot rapp with app manager; we must explicitly call the reconfigure service -->
@@ -47,9 +47,7 @@
   <arg name="base_frame"                  default="base_footprint"/>
   <arg name="odom_frame"                  default="odom"/>
   <arg name="global_ar_pair_topic"        default="marker_pose_list"/>
-<!--  <arg name="global_ar_pair_topic"        default="/annotations/ar_markers"/>-->
   <arg name="location_list_topic"         default="table_pose_list"/>
-<!--  <arg name="location_list_topic"         default="/annotations/tables"/>-->
   <arg name="predicted_robot_pose_topic"  default="predicted_robot_pose"/>
   <arg name="localize_action"             default="localize"/>
   <arg name="navigator_action"            default="navigator"/>
@@ -64,7 +62,7 @@
   <arg name="move_base_param_path"        default="$(find simple_delivery_robot_ctrl_no_dock)/params/move_base"/>
   <arg name="custom_move_base_param_file" default="$(find waiterbot_navigation)/param/ir_costmap_params.yaml"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
-  <arg name="resource_path"               default=""/>
+  <arg name="resource_path"               default="$(find simple_delivery_robot_ctrl_no_dock)/resource/default"/>
 
   <!-- State Manager -->
   <include file="$(find simple_delivery_robot_ctrl_no_dock)/launch/includes/master_ctrl.launch.xml">
@@ -72,7 +70,6 @@
     <arg name="resource_path"               value="$(arg resource_path)"/>
     <arg name="pickup_location"             value="$(arg pickup_location)"/>
     <arg name="localize_action"             value="$(arg localize_action)"/>
-    <arg name="docking_interactor_action"   value="$(arg docking_interactor_action)"/>
     <arg name="navigator_action"            value="$(arg navigator_action)"/>
     <arg name="delivery_order_action"       value="$(arg delivery_order_action)"/>
   </include>
