@@ -309,13 +309,13 @@ class StateManager(object):
         # Wait for kitchen's confirmation
         if self._pickup_confirm== True:
             self._pickup_confirm = False
-            self.loginfo('Moving To Table')
             play_sound(self._resource_path, self._confirm_sound)
 
             if len(self._delivery_locations) < self._delivery_location_index:
                 self.loginfo("Error. Delivery Location is not set...%s"%str(self._delivery_locations))
                 self._current_state = STATE_RESET
             else:
+                self.loginfo('Moving To Table : %s'%self._delivery_locations[self._delivery_location_index])
                 self._request_navigator(self._delivery_locations[self._delivery_location_index], yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
                 # Request navigator to go table 
                 self._current_state = STATE_GOTO_TABLE
@@ -355,7 +355,7 @@ class StateManager(object):
                 self._order_in_progress = False
                 message = 'Delivery Success!'
                 r = simple_delivery_msgs.RobotDeliveryOrderResult()
-                r.goad_id = self._delivery_order_id
+                r.goal_id = self._delivery_order_id
                 r.message = message
                 r.success = True
                 self._deliver_order_handler.set_succeeded(r)
@@ -368,7 +368,7 @@ class StateManager(object):
         if self._order_in_progress:
             message = 'Delivery has cancelled!'
             r = simple_delivery_msgs.RobotDeliveryOrderResult()
-            r.goad_id = self._delivery_order_id
+            r.goal_id = self._delivery_order_id
             r.message = message
             r.success = False
             self._deliver_order_handler.set_succeeded(r)
