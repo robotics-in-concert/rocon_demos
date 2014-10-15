@@ -79,8 +79,8 @@ if __name__ == '__main__':
         if rospy.has_param('~waiter_name'):
             waiter_name = rospy.get_param('~waiter_name')
         else:
-            rospy.loginfo("waiter name uses default name, adams.")
-            waiter_name = 'adams'
+            rospy.loginfo("waiter name uses default name, young.")
+            waiter_name = 'young'
         
         waiter_name = rospy.get_param("~waiter_name")
 
