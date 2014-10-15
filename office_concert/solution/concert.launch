@@ -1,5 +1,6 @@
 <launch>
   <arg name="services" default="office_concert/office.services"/>
+  <arg name="auto_enable_services" default="[admin, initialisation]"/>
   <arg name="rosbridge_address" default="$(optenv ROS_HOSTNAME localhost)"/>
 
   <group ns="software">
@@ -9,7 +10,7 @@
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(optenv HUB_WHITELIST Office Concert)"/>
       <arg name="services" value="$(arg services)"/>
-      <arg name="auto_enable_services" value="true"/>
+      <arg name="auto_enable_services" value="$(arg auto_enable_services)"/>
       <arg name="conductor_auto_invite" value="true"/>
       <arg name="rosbridge_address" value="$(arg rosbridge_address)"/>
       <arg name="gateway_unavailable_timeout" value="30"/>
