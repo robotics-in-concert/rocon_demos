@@ -286,6 +286,7 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_AT_BASE
+            self.loginfo("AT base")
             play_sound(self._resource_path, self._at_base_sound)
 
     def _state_at_base(self):
@@ -355,7 +356,7 @@ class StateManager(object):
                 self._order_in_progress = False
                 message = 'Delivery Success!'
                 r = simple_delivery_msgs.RobotDeliveryOrderResult()
-                r.goal_id = self._delivery_order_id
+                r.order_id = self._delivery_order_id
                 r.message = message
                 r.success = True
                 self._deliver_order_handler.set_succeeded(r)
@@ -368,7 +369,7 @@ class StateManager(object):
         if self._order_in_progress:
             message = 'Delivery has cancelled!'
             r = simple_delivery_msgs.RobotDeliveryOrderResult()
-            r.goal_id = self._delivery_order_id
+            r.order_id = self._delivery_order_id
             r.message = message
             r.success = False
             self._deliver_order_handler.set_succeeded(r)
