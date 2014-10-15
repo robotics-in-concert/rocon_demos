@@ -208,8 +208,10 @@ class StateManager(object):
         self._pub['debug'].publish(str(self._current_state))
 
         if self._order_in_progress:
-            feedback = simple_delivery_msgs.DeliverOrderFeedback()
-            feedback.status = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
+            feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
+            feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
+            feedback.delivery_status.status = 10
+            feedback.delivery_status.order_id = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
             self._deliver_order_handler.publish_feedback(feedback)
                 
     def loginfo(self, msg):
