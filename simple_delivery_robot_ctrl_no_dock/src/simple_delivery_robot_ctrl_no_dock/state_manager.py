@@ -18,7 +18,6 @@ from .utils import *
 DELIVERY_ACTION = 'delivery_order'
 LOC_ACTION = 'localize'
 NAV_ACTION = 'navigate_to'
-SUB_BUTTON = '~digital_inputs'
 
 STATE_INITIALIZATION = 'INITIALIZATION'
 STATE_GOTO_BASE      = 'GOTO_BASE'
@@ -92,9 +91,13 @@ class StateManager(object):
         self._delivery_order_received = False
         self._delivery_locations = []
         self._delivery_location_index = 0
+        self._delivery_order_id = 0
         self._pickup_confirm = False
         self._customer_confirm = False
         self._order_in_progress = False
+            
+        self._previous_red_button_time = None
+        self._red_count = 0
 
         self._nav_base_timeout = rospy.get_param('~nav_base_timeout', 300.0)
         self._nav_pickup_timeout = rospy.get_param('~nav_pickup_timeout', 300.0)
@@ -181,6 +184,7 @@ class StateManager(object):
         else:
             goal = self._deliver_order_handler.accept_new_goal()
             self.loginfo(str(goal))
+            self._delivery_order_id = goal.order_id
             self._delivery_locations = goal.locations
             self._delivery_location_index = 0
             self._delivery_order_received = True
@@ -209,8 +213,10 @@ class StateManager(object):
         self._pub['debug'].publish(str(self._current_state))
 
         if self._order_in_progress:
-            feedback = simple_delivery_msgs.DeliverOrderFeedback()
-            feedback.status = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
+            feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
+            feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
+            feedback.delivery_status.status = 10
+            feedback.delivery_status.order_id = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
             self._deliver_order_handler.publish_feedback(feedback)
                 
     def loginfo(self, msg):
@@ -347,7 +353,8 @@ class StateManager(object):
             if self._order_in_progress:
                 self._order_in_progress = False
                 message = 'Delivery Success!'
-                r = simple_delivery_msgs.DeliverOrderResult()
+                r = simple_delivery_msgs.RobotDeliveryOrderResult()
+                r.goad_id = self._delivery_order_id
                 r.message = message
                 r.success = True
                 self._deliver_order_handler.set_succeeded(r)
@@ -359,7 +366,8 @@ class StateManager(object):
     def _state_reset(self):
         if self._order_in_progress:
             message = 'Delivery has cancelled!'
-            r = simple_delivery_msgs.DeliverOrderResult()
+            r = simple_delivery_msgs.RobotDeliveryOrderResult()
+            r.goad_id = self._delivery_order_id
             r.message = message
             r.success = False
             self._deliver_order_handler.set_succeeded(r)
