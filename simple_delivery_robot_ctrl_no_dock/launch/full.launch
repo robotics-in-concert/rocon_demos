@@ -1,0 +1,15 @@
+<launch>
+  <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+  <group ns="young">
+    <include file="$(find simple_delivery_robot_ctrl_no_dock)/launch/controller.launch"/>
+  </group>
+  <include file="$(find simple_delivery_robot_ctrl_no_dock)/launch/db.launch"/>
+
+  <group ns="/services/officedelivery">
+    <arg name="waiter_name" default="young"/>
+    <node pkg="office_rapps" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen">
+      <param name="waiter_name" value="$(arg waiter_name)"/>
+    </node>
+  </group>
+
+</launch>

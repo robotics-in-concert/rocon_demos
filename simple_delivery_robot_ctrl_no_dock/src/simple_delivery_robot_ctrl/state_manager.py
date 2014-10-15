@@ -20,7 +20,6 @@ from simple_delivery_msgs.msg import DeliveryStatus, DeliveryOrder, Receiver, Ro
 DELIVERY_ACTION = 'delivery_order'
 LOC_ACTION = 'localize'
 NAV_ACTION = 'navigate_to'
-DOC_ACTION = 'docking_interactor'
 SUB_BUTTON = '~digital_inputs'
 
 STATUS = 'robot_status'
@@ -67,6 +66,11 @@ class StateManager(object):
 
     def _init_states(self):
         self._states = {}
+        self._states[STATE_ON_ERROR] = (self._on_error , STATE_RESET, STATE_ON_ERROR)
+        self._states[STATE_RESET] = (self._state_reset, STATE_IDLE, STATE_ON_ERROR)
+        self._states[STATE_GO_TO_
+
+
         self._states[STATE_WAKEUP] = (self._wakeup, STATE_LOCALIZE, STATE_ON_ERROR)
         self._states[STATE_LOCALIZE] = (self._localize, STATE_REGISTER_DOCK, STATE_ON_ERROR)
         self._states[STATE_REGISTER_DOCK] = (self._register_dock, STATE_GOTO_PICKUP, STATE_ON_ERROR)
@@ -75,8 +79,6 @@ class StateManager(object):
         self._states[STATE_GOTO_TARGET] = (self._goto, STATE_AT_TARGET, STATE_ON_ERROR)
         self._states[STATE_AT_TARGET] = (self._wait_for_button, STATE_GOTO_TARGET, STATE_RETURN)
         self._states[STATE_RETURN] = (self._return, STATE_IDLE, STATE_ON_ERROR)
-        self._states[STATE_ON_ERROR] = (self._on_error , STATE_RESET, STATE_ON_ERROR)
-        self._states[STATE_RESET] = (self._state_reset, STATE_IDLE, STATE_ON_ERROR)
 
 
     def _init_handles(self):    
@@ -97,10 +99,6 @@ class StateManager(object):
         self.loginfo('Wait for Localise manager to be up')
         self._ac[LOC_ACTION] = actionlib.SimpleActionClient(LOC_ACTION, yocs_msgs.LocalizeAction)
         self._ac[LOC_ACTION].wait_for_server()
-
-        self.loginfo('Wait for Docking interactor to be up')
-        self._ac[DOC_ACTION] = actionlib.SimpleActionClient(DOC_ACTION, yocs_msgs.DockingInteractorAction)
-        self._ac[DOC_ACTION].wait_for_server()
 
         # Setting up navigator action client to navigate around the map
         self.loginfo('Wait for Navigator server to be up')
@@ -191,7 +189,7 @@ class StateManager(object):
     
     def spin(self):
         r = rospy.Rate(10)
-        self._current_state = STATE_IDLE
+        self._current_state = STATE_ON_ERROR
         self._as[DELIVERY_ACTION].start()
         self._led_controller.start()
         self._led_controller.set_on_ok()

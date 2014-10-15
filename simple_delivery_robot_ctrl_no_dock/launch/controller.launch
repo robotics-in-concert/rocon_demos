@@ -2,7 +2,6 @@
   Waiterbot controller
   - turtlebot
   - ir half ring
-  - yocs_docking_interactor
   - yocs_navigator
   - yocs_localization_manager
  -->
@@ -53,7 +52,6 @@
 <!--  <arg name="location_list_topic"         default="/annotations/tables"/>-->
   <arg name="predicted_robot_pose_topic"  default="predicted_robot_pose"/>
   <arg name="localize_action"             default="localize"/>
-  <arg name="docking_interactor_action"   default="docking_interactor"/>
   <arg name="navigator_action"            default="navigator"/>
   <arg name="pickup_location"             default="pickup"/>
   <arg name="delivery_order_action"       default="delivery_order"/>
@@ -68,7 +66,7 @@
   <arg name="resource_path"               default=""/>
 
   <!-- State Manager -->
-  <include file="$(find simple_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
+  <include file="$(find simple_delivery_robot_ctrl_no_dock)/launch/includes/master_ctrl.launch.xml">
     <arg name="debug_mode"                  value="$(arg debug_mode)"/>
     <arg name="resource_path"               value="$(arg resource_path)"/>
     <arg name="pickup_location"             value="$(arg pickup_location)"/>
@@ -115,16 +113,4 @@
     <arg name="move_base_param_path"  value="$(arg move_base_param_path)"/>
     <arg name="vel_smoother_param"    value="$(arg vel_smoother_param)"/>
   </include>
-
-  <!-- Docking Interactor -->
-  <include file="$(find yocs_docking_interactor)/launch/docking_interactor.launch">
-    <arg name="global_frame"          value="$(arg global_frame)"/>
-    <arg name="base_frame"            value="$(arg base_frame)"/>
-    <arg name="odom_topic"            value="$(arg odom_topic)"/>
-    <arg name="cmd_vel_mux_input"     value="$(arg cmd_vel_mux_input)"/>
-    <arg name="start_move_base"       value="false"/>
-    <arg name="move_base_topic"       value="$(arg move_base_topic)"/>
-    <arg name="global_ar_pair_topic"  value="$(arg global_ar_pair_topic)"/>
-  </include>
-
 </launch>

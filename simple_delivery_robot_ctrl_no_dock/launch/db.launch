@@ -1,0 +1,16 @@
+<launch>
+  <group ns="software">
+    <node ns="world_canvas" pkg="world_canvas_server" type="annotations_server.py" name="world_canvas_server" output="screen">
+    </node>
+  </group>
+  <param name="wc_namespace"  value="/software/world_canvas"/>
+  <param name="world"         value="yujin_rnd"/>
+  <param name="map_name"      value="october"/>
+  <param name="map_topic"     value="/map"/>
+  <param name="table_topic"   value="/annotations/tables"/>
+  <param name="viz_table_topic" value="/annotations/viz_tables"/>
+  <param name="ar_topic"        value="/annotations/ar_markers"/>
+  <param name="viz_ar_topic"    value="/annotations/viz_ar_markers"/>
+  <node pkg="office_concert" name="publish_world" type="publish_world.py">
+  </node>
+</launch>
