@@ -1,7 +1,4 @@
 - resource_name: concert_service_admin/admin
-- resource_name: office_concert/office_database
-  overrides:
-    priority: 1
 - resource_name: office_concert/office_delivery_sim
   overrides:
     priority: 1
@@ -10,7 +7,4 @@
      priority: 3
      interactions: office_concert/initialisation
      parameters: office_concert/initialisation
-#- resource_name: concert_service_teleop/teleop
-#  overrides:
-#    priority: 3
 
