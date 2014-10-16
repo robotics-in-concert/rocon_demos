@@ -1,5 +1,5 @@
 - name: concert_make_a_map
-  role: 'Cafe Manager'
+  role: 'Manager'
   compatibility: rocon:/pc/*/hydro|indigo/*
   display_name: Concert Make a Map
   description: Select and teleop a robot in the concert
@@ -13,7 +13,7 @@
     wc_namespace: "/software/world_canvas"
 
 - name: concert_map_annotation
-  role: 'Cafe Manager'
+  role: 'Manager'
   compatibility: rocon:/pc/*/hydro|indigo/*
   display_name: Concert Map Annotation
   description: Annotates table and global marker
@@ -23,7 +23,7 @@
     default_world_name: "yujin_rnd"
 
 - name: concert_admin_app
-  role: 'Cafe Manager'
+  role: 'Manager'
   compatibility: rocon:/pc/*/hydro|indigo/precise|quantal|raring|saucy|trusty
   display_name: Concert Service Administration
   description: Configure, enable/disable services
