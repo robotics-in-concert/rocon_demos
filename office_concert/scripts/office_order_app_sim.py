@@ -11,8 +11,8 @@ from simple_delivery_msgs.msg import *
 from std_msgs.msg import *
 
 class DummyOrderApp():
-    def __init__(self):
-        self.location = '1'
+    def __init__(self, location):
+        self.location = location
         self.delivery_status = {}
         self.delivery_status[DeliveryStatus.IDLE] = 'IDLE'
         self.delivery_status[DeliveryStatus.GO_TO_FRONTDESK] = 'GO_TO_FRONTDESK'
@@ -31,7 +31,6 @@ class DummyOrderApp():
         self.subscribers = {}
         self.publishers['send_order'] = rospy.Publisher('/services/officedelivery/send_order', DeliveryOrder,latch=True)
         self.subscribers['delivery_status'] = rospy.Subscriber('/services/officedelivery/delivery_status', DeliveryStatus, self.delivery_status_update)
-        pass
 
     def delivery_status_update(self, data):
         rospy.loginfo('Location:[%s] OrderID:[%s] DeliveryStatus:[%s] ' % (str(data.target_goal), 
@@ -70,16 +69,13 @@ if __name__ == '__main__':
         # Initialize ros node
         rospy.init_node('dummy_order_app')
         
-        dummy = DummyOrderApp()
         rospy.loginfo('Initialized')
         
-        target_location = '1'
+        target_location = 'table4'
         if rospy.has_param('~target_location'):
-            target_location = rospy.get_param('~target_location')
-        else:
-            rospy.loginfo("TARGET LOCATION uses default location, 1.")
-            target_location = '1'
-        dummy.set_target_location(target_location)
+            target_location = rospy.get_param('~target_location', 'table2')
+
+        dummy = DummyOrderApp(target_location)
         
 
         dummy.send_dummy_order()
