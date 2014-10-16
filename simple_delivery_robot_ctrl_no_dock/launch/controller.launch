@@ -62,7 +62,7 @@
   <arg name="move_base_param_path"        default="$(find simple_delivery_robot_ctrl_no_dock)/params/move_base"/>
   <arg name="custom_move_base_param_file" default="$(find waiterbot_navigation)/param/ir_costmap_params.yaml"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
-  <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/defaults"/>
+  <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sounds_korean"/>
 
   <!-- State Manager -->
   <include file="$(find simple_delivery_robot_ctrl_no_dock)/launch/includes/master_ctrl.launch.xml">
