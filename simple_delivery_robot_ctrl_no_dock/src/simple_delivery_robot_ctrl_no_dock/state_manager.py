@@ -218,19 +218,19 @@ class StateManager(object):
             if self._current_state == STATE_AT_BASE:
                 feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
             elif self._current_state == STATE_GOTO_KITCHEN:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.GO_TO_FRONTDESK
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_FRONTDESK
             elif self._current_state == STATE_AT_KITCHEN:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.WAITING_FOR_FRONTDESK
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_FRONTDESK
             elif self._current_state == STATE_GOTO_TABLE:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.GO_TO_RECEIVER
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
             elif self._current_state == STATE_AT_TABLE:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.WAITING_FOR_RECEIVER
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_RECEIVER
             elif self._current_state == STATE_BACKTO_BASE:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.RETURN_TO_DOCK
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.RETURN_TO_DOCK
             elif self._current_state == STATE_REINITIALIZATION:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.COMPELETE_RETURN
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPELETE_RETURN
             elif self._current_state == STATE_ON_ERROR:
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.ERROR
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ERROR
             feedback.delivery_status.order_id = self._delivery_order_id
             feedback.delivery_status.target_goal = self._target_location
             self._deliver_order_handler.publish_feedback(feedback)
@@ -307,14 +307,6 @@ class StateManager(object):
             play_sound(self._resource_path, self._at_base_sound)
 
     def _state_at_base(self):
-        if self._delivery_order_received:
-            self._delivery_order_received = False
-            self._order_in_progress = True
-            self._request_navigator(self._pickup_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_pickup_timeout, 0.0)
-            self._current_state = STATE_GOTO_KITCHEN
-            # Make a sound
-            play_sound(self._resource_path, self._order_received_sound)
-
         if self._order_in_progress:
             self._order_in_progress = False
             message = 'Delivery Success!'
@@ -323,6 +315,14 @@ class StateManager(object):
             r.message = message
             r.success = True
             self._deliver_order_handler.set_succeeded(r)
+
+        if self._delivery_order_received:
+            self._delivery_order_received = False
+            self._order_in_progress = True
+            self._request_navigator(self._pickup_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_pickup_timeout, 0.0)
+            self._current_state = STATE_GOTO_KITCHEN
+            # Make a sound
+            play_sound(self._resource_path, self._order_received_sound)
 
     def _state_goto_kitchen(self):
         # Wait for arriving
@@ -369,7 +369,7 @@ class StateManager(object):
                 self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
                 feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
                 feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.COMPLETE_DELIVERY
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPLETE_DELIVERY
                 feedback.delivery_status.order_id = self._delivery_order_id
                 feedback.delivery_status.target_goal= self._target_location
                 self._deliver_order_handler.publish_feedback(feedback)
@@ -381,7 +381,7 @@ class StateManager(object):
 
                 feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
                 feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
-                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.COMPLETE_ALL_DELIVERY
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPLETE_ALL_DELIVERY
                 feedback.delivery_status.order_id = self._delivery_order_id
                 feedback.delivery_status.target_goal= self._target_location
                 self._deliver_order_handler.publish_feedback(feedback)
