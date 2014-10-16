@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Rocon - ROBO WORLD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -31,32 +32,34 @@
      <div class="container oa-ui title-layer">
       <h1 class="oa-ui-title span12">Title-layer</h1>
 
-      <div class="span12">
+      <!-- <div class="span12">
         <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
         <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
-      </div>
+      </div> -->
      </div>
 
      <!--  -->
      <div class="container oa-ui intro-layer">
       <h1 class="oa-ui-title span12">Intro-layer</h1>
-      <h2 class="intro-layer-location-name">This Table is 1</h2>
+      <h2 class="test-width">This Table is 1</h2>
+      <h2 class="test-height">This Table is 1</h2>
+      <img class="intro-layer-img-button" src="./img/intro_button_release.png">
+
       <div class="span12">
         <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
-        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
+        <!-- <button class="btn btn-primary oa-ui-next-btn" type="button">next</button> -->
       </div>
      </div>
      
      <!--  -->
      <div class="container oa-ui menu-layer">
       <h1 class="oa-ui-title span12">Menu-layer</h1>
-      <p class="menu-drink-img-group"></p>
+      <p class="menu-layer-drink-img-group"></p>
       
-      <div class="span12">
-        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
-        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
-      </div>
-
+      <p class="menu-layer-button-img-group">
+        <img class="menu-layer-button-img cancel-img-btn" src="./img/cancel_disable.png">
+        <img class="menu-layer-button-img order-img-btn" src="./img/order_disable.png">
+      </p>
      </div>
      
      <!--  -->
@@ -74,25 +77,15 @@
      <!--  -->
      <div class="container oa-ui on-delivery-layer">
       <h1 class="oa-ui-title span12">On delivery layer</h1>
-      
-      <video class="offset1 span10 video-rocon-adv">
-        <source src="./video/rocon_cafe.mp4" type="video/mp4">
-      </video>
+      <p class="video-rocon-adv-group">
+        <video class="video-rocon-adv" preload="auto" poster="" controls>
 
-      
-      
-      <video class="offset1 span10 video-delivery-progress-1" >
-        <source src="./video/big_buck_bunny_1080p_surround.avi" type="video/avi">
-      </video>
-        
-      <video class="offset1 span10 video-delivery-progress-2" >
-        <source src="./video/big_buck_bunny_1080p_surround.avi" type="video/avi">
-      </video>
-      
-      <div class="span12">
-        <button class="btn btn-primary oa-ui-prev-btn" type="button">prev</button>
-        <button class="btn btn-primary oa-ui-next-btn" type="button">next</button>
-      </div>
+          <source src="./video/introducing_gocart.mp4" type="video/mp4">
+        </video>
+      </p>
+      <p class="image-delivery-status-group">
+        <img class="on-delivery-layer-status-img status-img" src="./img/prepairing_status.png"> 
+      </p>
      </div>
      
      <!--  -->
@@ -121,15 +114,22 @@
 
      <!--  -->
      <div id="confirm-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <!-- <div class="modal-header">
+        
         <h4 id="myModalLabel">Order List Confirm?</h4>
+      </div> -->
+      <div class="modal-body modal-order-list">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <p class="modal-drink-img-group"></p>
+        <p class="modal-button-img-group">
+          <img class="modal-button-img no-img-btn" src="./img/no_release.png" data-dismiss="modal">
+          <img class="modal-button-img yes-img-btn" src="./img/yes_release.png" data-dismiss="modal">
+        </p>
       </div>
-      <div class="modal-body modal-order-list"></div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
         <button class="btn btn-primary modal-order-confirm" data-dismiss="modal" >Yes</button>
-      </div>
+      </div> -->
      </div>
 
      </div>
@@ -172,12 +172,6 @@
     </div>
 
  --> 
-    <footer>
-        <hr/>
-        <img style="width:120px; height:50px;" src="img/yujin_logo.jpg"></img>
-        &copy 2014
-    </footer>
-
    
     <!-- Le javascript
     ================================================== -->
