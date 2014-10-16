@@ -56,6 +56,7 @@ class StateManager(object):
     _enjoy_meal_sound = 'meow.wav'
     _bab_sound = 'pab.wav'
     """ 
+    _init_sound = 'init.wav'
     _confirm_sound = 'confirm.wav'
     _retry_sound = 'retry.wav'
     _navi_failed_sound = 'navi_failed.wav'
@@ -198,6 +199,7 @@ class StateManager(object):
         self._current_state = STATE_ON_ERROR
         self._deliver_order_handler.start()
         self._led_controller.start()
+        play_sound(self._resource_path, self._init_sound)
 
         t = 2
         while not rospy.is_shutdown():
@@ -228,7 +230,7 @@ class StateManager(object):
             elif self._current_state == STATE_BACKTO_BASE:
                 feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.RETURN_TO_DOCK
             elif self._current_state == STATE_REINITIALIZATION:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPELETE_RETURN
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPLETE_RETURN
             elif self._current_state == STATE_ON_ERROR:
                 feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ERROR
             feedback.delivery_status.order_id = self._delivery_order_id
