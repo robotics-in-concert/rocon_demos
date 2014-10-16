@@ -10,7 +10,7 @@
 
   <group ns="/services/officedelivery">
     <arg name="waiter_name" default="young"/>
-    <node pkg="office_rapps" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen">
+    <node pkg="office_concert" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen">
       <param name="waiter_name" value="$(arg waiter_name)"/>
     </node>
   </group>

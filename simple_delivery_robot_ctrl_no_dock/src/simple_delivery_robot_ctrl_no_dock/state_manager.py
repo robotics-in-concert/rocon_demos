@@ -257,7 +257,7 @@ class StateManager(object):
         if not self._init_requested:
             self._initialized = False
             goal = yocs_msgs.LocalizeGoal()
-            goal.command = yocs_msgs.LocalizeGoal.SPIN_AND_LOCALIZE
+            goal.command = yocs_msgs.LocalizeGoal.STAND_AND_LOCALIZE
             self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done)
             self.loginfo('Localization Request sent')
             self._init_requested = True
