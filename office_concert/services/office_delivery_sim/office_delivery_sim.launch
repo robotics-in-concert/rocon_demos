@@ -5,6 +5,12 @@
     <!--<param name="map_id" value="34d253c0-8090-4129-a7e9-56a225c782a3"/>-->
   </node>
 
+  <node pkg="office_concert" name="publish_world" type="publish_world.py">
+  </node>
+  
+  <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
+  </include>
+
 <!-- 
   <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
   </node>

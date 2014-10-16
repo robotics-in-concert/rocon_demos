@@ -1,36 +1,146 @@
+/*layer background css*/
 
-
-
-html, body{
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+.oa-ui{
+  background: url(./img/common_bg.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
-.modal {
-	width:940px;
-	left:36%;
+.title-layer{
+  background: url(./img/title_layer_bg.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
+.ordered-layer{
+  background: url(./img/ordered_layer_bg.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.arrival-layer{
+  background: url(./img/arrival_layer_bg.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.intro-layer{
+  background: url(./img/intro_layer_bg.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-order-list{
+  background: url(./img/confirm_modal_bg.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/*intro-layer css*/
+
+.intro-layer-img-button{
+	position: absolute;
+	left: 47%;
+	top: 73%;
+	z-index: 100;
+	width: 9%;
+}
+
+
+/*menu-layer css*/
+.menu-layer-drink-img-group{
+	text-align: center;
+}
+
+.menu-layer-drink-img{
+	width: 14%;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 13%;
+	z-index: 100;
+}
+
+.menu-layer-button-img-group{
+	text-align: center;
+}
+
+.menu-layer-button-img{
+	width: 18%;
+	margin-left: 8%;
+	margin-right: 8%;
+	margin-top: 1%;
+	z-index: 100;
+}
+
+
+/*on-delivery-layer css*/
+.video-rocon-adv-group{
+	text-align: center;
+}
+
+.video-rocon-adv{
+	width: 56%;
+	margin-top: 11%
+}
+.image-delivery-status-group{
+	text-align: center;	
+}
+.on-delivery-layer-status-img{
+	width: 28%;
+}
+
+
+
+/*modal css*/
+.modal{
+	border-radius: 15px;  
+	width: 800px;
+	margin-left: -400px;	
+}
+.modal-body{
+	border-radius: 15px;  
+	max-height: 700px;	
+}
 .modal-drink-img-group{
 	text-align: center;
 }
 .modal-drink-img{
-	width: 20%;
+	width: 18%;
 	margin-left: 5%;
 	margin-right: 5%;
+	margin-top: 18%;
 }
 
-.menu-drink-img-group{
+.modal-button-img-group{
 	text-align: center;
 }
-
-.menu-drink-img{
-	width: 20%;
-	margin-left: 3%;
-	margin-right: 3%;
+.modal-button-img{
+	width: 18%;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 1%;
 }
+
+
+
 
 .sd-status-bar{
 	margin:10px;

@@ -49,15 +49,18 @@ if(send_order_pub_topic in rocon_interactions.remappings)
 
 //menu item setting
 var menu_list = {
-                    "coke":{"name":'coke',
-                     "disable_img":"./img/coke_disable.png",
-                     "img":"./img/coke.png",},
-                     "beer":{"name":'beer',
-                     "disable_img":"./img/beer_disable.png",
-                     "img":"./img/beer.png",},
-                     "welchis":{"name":'welchis',
-                     "disable_img":"./img/welchis_disable.png",
-                     "img":"./img/welchis.png"},
+                    "water":{"name":'water',
+                     "disable_img":"./img/water_disable.png",
+                     "img_qty_1"   :"./img/water_qty_1.png",
+                     "img_qty_2"   :"./img/water_qty_2.png",},
+                    "juice":{"name":'juice',
+                     "disable_img" :"./img/juice_disable.png",
+                     "img_qty_1"    :"./img/juice_qty_1.png",
+                     "img_qty_2"    :"./img/juice_qty_2.png",},
+                    "coffee":{"name":'coffee',
+                     "disable_img"  :"./img/coffee_disable.png",
+                     "img_qty_1"    :"./img/coffee_qty_1.png",
+                     "img_qty_2"    :"./img/coffee_qty_2.png"},
                     }
 
 //ui setting
@@ -71,6 +74,7 @@ var cur_order_list = [];
 var is_showing_modal = false;
 
 $().ready(function(e){
+
   initDiv();
   initIntro();
   initMenu();
@@ -83,6 +87,7 @@ $().ready(function(e){
 
 function initEvent(){
   //set event
+  // common
   $(".oa-ui-prev-btn").click(function(){
     prevDiv = currentDiv - 1;
     updateDiv(prevDiv);
@@ -92,148 +97,147 @@ function initEvent(){
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
-  
 
-
-  //modal
-  $('.modal-order-confirm').click(function(){
-    sendOrder();
+  // title-layer
+  $(".title-layer").click(function(){
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
 
+  // intro-layer
+  $(".intro-layer-img-button").mouseup(function(){
+    console.log("mouse up");
+    $(".intro-layer-img-button").attr('src','./img/intro_button_release.png');
+    nextDiv = currentDiv + 1;
+    updateDiv(nextDiv);
+  });
+  $(".intro-layer-img-button").mousedown(function(){
+    console.log("mouse down");
+    $(".intro-layer-img-button").attr('src','./img/intro_button_press.png');
+  });
+
+  //menu-layer
+
+  $("img."+'cancel-img-btn').mouseup(function(){
+    $("img."+'cancel-img-btn').attr('src','./img/cancel_release.png');
+    nextDiv = currentDiv - 1;
+    updateDiv(nextDiv);
+  });
+  $("img."+'cancel-img-btn').mousedown(function(){
+    $("img."+'cancel-img-btn').attr('src','./img/cancel_press.png');
+  });
+
+  $("img."+'order-img-btn').mouseup(function(){
+    $("img."+'order-img-btn').attr('src','./img/order_release.png');
+    nextDiv = currentDiv + 1;
+    updateDiv(nextDiv);
+  });
+  $("img."+'order-img-btn').mousedown(function(){
+    $("img."+'order-img-btn').attr('src','./img/order_press.png');
+  });
+ 
+  //modal
   $('#confirm-modal').on('hide', function () {
     console.log("modal hide");
     is_showing_modal = false;
   });
+
+   $("img.yes-img-btn").mouseup(function(){
+    $('img.yes-img-btn').attr('src','./img/yes_release.png');
+    sendOrder();
+    nextDiv = currentDiv + 1;
+    updateDiv(nextDiv);
+  });
+  $("img.yes-img-btn").mousedown(function(){
+    $('img.yes-img-btn').attr('src','./img/yes_press.png');
+  });
+  
+  $("img.no-img-btn").mouseup(function(){
+    $('img.no-img-btn').attr('src','./img/no_release.png');
+  });
+  $("img.no-img-btn").mousedown(function(){
+    $('img.no-img-btn').attr('src','./img/no_press.png');
+  });
+
 }
 
 function initDiv(){
   for (k = 0  ;k < $('.oa-ui').length ; k ++){
     class_list = $('.oa-ui')[k].classList;
     target_class_name = class_list[class_list.length - 1];
+    $('.'+target_class_name).css("height",$( window ).height());
+    $('.'+target_class_name).css("width",$( window ).width());
+
+    $('.test-width').html($( window ).width());
+    $('.test-height').html($( window ).height());
+    
     divList.push($('.'+target_class_name))
   }
   updateDiv(currentDiv);
 }
 
 function initMenu(){
-  $(".menu-drink-img-group").html("");
+  //init menu layer
+  $(".menu-layer-drink-img-group").html("");
   context = "";
   for (menu in menu_list){
-    templete = '<img src='+ menu_list[menu].disable_img +' class="menu-drink-img ' + menu_list[menu].name +'">'
+    templete = '<img src='+ menu_list[menu].disable_img +' class="menu-layer-drink-img ' + menu_list[menu].name +'">'
     context += templete
   }
-  $(".menu-drink-img-group").html(context);
+  $(".menu-layer-drink-img-group").html(context);
 
-  //menu
-  $(".menu-drink-img").click(function(data){
+  $("img."+'cancel-img-btn').attr("src",'./img/cancel_disable.png');
+  $("img."+'order-img-btn').attr("src",'./img/order_disable.png');
+
+  cur_order_list = []
+
+  //init menu layer event
+  $(".menu-layer-drink-img").click(function(data){
+    console.log(data.currentTarget.classList)
     class_name = data.currentTarget.classList[data.currentTarget.classList.length -1];
     img_src = $("img."+class_name).attr("src");
-
-    if(img_src.indexOf("_disable")>0){
-      $("img."+class_name).attr("src", menu_list[class_name].img);
-      cur_order_list.push(class_name);
+    console.log(class_name)
+    if (cur_order_list.length > 1){
+      for (var i = cur_order_list.length - 1; i >= 0; i--) {
+        idx = jQuery.inArray( class_name, cur_order_list)
+        if (idx >= 0 ){
+          cur_order_list.splice(idx,1);
+          $("img."+class_name).attr("src",menu_list[class_name].disable_img);
+        }  
+      };
     }
     else{
-      $("img."+class_name).attr("src",menu_list[class_name].disable_img);
-      idx = jQuery.inArray( class_name, cur_order_list)
-      cur_order_list.splice(idx,1);
+      if(img_src.indexOf("_disable")>0){
+        $("img."+class_name).attr("src", menu_list[class_name].img_qty_1);
+        cur_order_list.push(class_name);
+      }
+      else if(img_src.indexOf("_qty_1")>0){
+        $("img."+class_name).attr("src", menu_list[class_name].img_qty_2);
+        cur_order_list.push(class_name);
+      }
+      else{
+        $("img."+class_name).attr("src",menu_list[class_name].disable_img);
+        idx = jQuery.inArray( class_name, cur_order_list)
+        cur_order_list.splice(idx,1);
+        cur_order_list.splice(idx,1);
+      }
     }
-    console.log(cur_order_list);
+
+    if( cur_order_list.length === 0){
+      $("img."+'cancel-img-btn').attr("src",'./img/cancel_disable.png');
+      $("img."+'order-img-btn').attr("src",'./img/order_disable.png');
+    }
+    else{
+      $("img."+'cancel-img-btn').attr("src",'./img/cancel_release.png');
+      $("img."+'order-img-btn').attr("src",'./img/order_release.png');
+    }
   });
+  
 }
 
 function initIntro(){
   $('.intro-layer-location-name').html("This table is [Table "+table+"]");
 }
-
-
-// function updateDiv(target_div){
-//     $('.oa-ui').hide();
-    
-//     div_flow=1;
-    
-//     if(currentDiv === target_div){ //refresh
-//       div_flow = 0;
-      
-//       divList[target_div].show();
-//       currentDiv = target_div;
-//     }
-    
-//     else if(currentDiv > target_div){ //back
-//       div_flow = -1; 
-      
-//       if (target_div < 0){
-//        target_div += divList.length;
-//       }
-
-//       if (divList[currentDiv].selector.indexOf("arrival-layer") > 0){
-//         console.log("Play ad");
-//         $(".video-rocon-adv")[0].play();
-//         divList[target_div].show();
-//         currentDiv = target_div;
-//       }
-
-//       if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
-//         divList[0].show();
-//         currentDiv = 0;
-//       }
-
-
-//       else{
-//         $(".video-rocon-adv")[0].load();
-//         deliveryProgressControl(0);
-//         divList[target_div].show();
-//         currentDiv = target_div;  
-//       }
-//     }
-//     else{ //forward
-//       div_flow = 1; 
-      
-//       if (target_div >= divList.length){
-//         target_div -= divList.length;
-//       }
-      
-//       if (divList[currentDiv].selector.indexOf("ordered-layer") > 0){
-//         //post proc
-//         console.log("Play ad");
-//         $(".video-rocon-adv")[0].play();
-//         divList[target_div].show();
-//         currentDiv = target_div;
-//       }
-//       else if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
-//         //post proc
-//         if (is_showing_modal === true){
-//           is_showing_modal = false;
-//           divList[target_div].show();
-//           currentDiv = target_div;
-//         }
-//         else{
-//           is_showing_modal = true;
-//           showConfrimModal();  
-//           divList[currentDiv].show();
-//         }
-//       }
-//       else if (divList[currentDiv].selector.indexOf("delivery-end-layer") > 0){
-//         //post proc
-//         initMenu();
-//         cur_order_list = [];
-
-//         divList[target_div].show();
-//         currentDiv = target_div;
-//       }
-//       else{
-//         //post proc
-//         console.log("none post proc")
-//         $(".video-rocon-adv")[0].load();
-//         deliveryProgressControl(0);
-//         divList[target_div].show();
-//         currentDiv = target_div;
-//       }  
-//     }
-// }
-
 
 function updateDiv(target_div){
     $('.oa-ui').hide();
@@ -243,8 +247,18 @@ function updateDiv(target_div){
     if(currentDiv === target_div){ //refresh
       div_flow = 0;
       
-      divList[target_div].show();
-      currentDiv = target_div;
+      if (divList[currentDiv].selector.indexOf("on-delivery-layer") > 0){
+        //post proc
+        console.log("Play ad");
+        $(".video-rocon-adv")[0].play();
+        divList[target_div].show();
+        currentDiv = target_div;
+      }
+      else{
+        divList[target_div].show();
+        currentDiv = target_div;  
+      }
+      
     }
     
     else if(currentDiv > target_div){ //back
@@ -262,11 +276,11 @@ function updateDiv(target_div){
       }
 
       if (divList[currentDiv].selector.indexOf("menu-layer") > 0){
+        //post proc
+        initMenu()
         divList[0].show();
         currentDiv = 0;
       }
-
-
       else{
         $(".video-rocon-adv")[0].load();
         deliveryProgressControl(0);
@@ -285,6 +299,7 @@ function updateDiv(target_div){
         //post proc
         console.log("Play ad");
         $(".video-rocon-adv")[0].play();
+        deliveryProgressControl(1);
         divList[target_div].show();
         currentDiv = target_div;
       }
@@ -294,12 +309,18 @@ function updateDiv(target_div){
           is_showing_modal = false;
           divList[target_div].show();
           currentDiv = target_div;
+          waittingUpdateDiv(3000);
         }
         else{
           is_showing_modal = true;
           showConfrimModal();  
           divList[currentDiv].show();
         }
+      }
+      else if (divList[currentDiv].selector.indexOf("arrival-layer") > 0){
+          waittingUpdateDiv(3000);
+          divList[target_div].show();
+          currentDiv = target_div;
       }
       else if (divList[currentDiv].selector.indexOf("delivery-end-layer") > 0){
         //post proc
@@ -320,44 +341,44 @@ function updateDiv(target_div){
     }
 }
 
+function waittingUpdateDiv(timeout){
+  console.log("waittingUpdateDiv");
+  
+  setTimeout(function(){
+    nextDiv = currentDiv + 1;
+    updateDiv(nextDiv)
+  },timeout);
+}
+
 function deliveryProgressControl(video_src){
+
   if(video_src == 1){ //first step
-    console.log("play 1");
-    $(".video-delivery-progress-1")[0].play();
-    $(".video-delivery-progress-1").show();
-    
-    $(".video-delivery-progress-2")[0].load();
-    $(".video-delivery-progress-2").hide();
+    console.log("play 1: prepairing");
+    $("img."+'on-delivery-layer-status-img').attr('src','./img/prepairing_status.png');
+    $("img."+'on-delivery-layer-status-img').show();
   }
   else if(video_src == 2){ //secend step
-    console.log("play 2");
-    $(".video-delivery-progress-2")[0].play();
-    $(".video-delivery-progress-2").show();
-    
-    $(".video-delivery-progress-1")[0].load();
-    $(".video-delivery-progress-1").hide();
+    console.log("play 2: delivery");
+    $("img."+'on-delivery-layer-status-img').attr('src','./img/on_delivery_status.png');
+    $("img."+'on-delivery-layer-status-img').show();
   }
   else{ //all stop
     console.log("stop 1 and stop 2");
-    $(".video-delivery-progress-1")[0].load();
-    $(".video-delivery-progress-1").show();
-    $(".video-delivery-progress-2")[0].load();
+    $("img."+'on-delivery-layer-status-img').hide();
   }
 }
 
 function showConfrimModal(){
   console.log("showConfrimModal");
-  $('.modal-order-list').html("");
+  $('.modal-drink-img-group').html("");
   
-  context = '<p class="modal-drink-img-group">';
+  context = '';
   for (var i = cur_order_list.length - 1; i >= 0; i--) {
     menu = cur_order_list[i];
-    templete = '<img src='+ menu_list[menu].img +' class="modal-drink-img">';
+    templete = '<img src='+ menu_list[menu].img_qty_1 +' class="modal-drink-img">';
     context += templete;
-  };
-  context += "</p>";
-  
-  $('.modal-order-list').html(context);
+  };  
+  $('.modal-drink-img-group').html(context);
   $('#confirm-modal').modal('show');
 }
 
@@ -368,8 +389,8 @@ function sendOrder(){
     order_id : uuid,
     receivers : [{location: table+"", qty : 1, menus:cur_order_list}]
   });
-  console.log("order: ",order, send_order_publisher)
   send_order_publisher.publish(order)
+  console.log("order: ",order, send_order_publisher)
 }
 
 function settingROSCallbacks(){

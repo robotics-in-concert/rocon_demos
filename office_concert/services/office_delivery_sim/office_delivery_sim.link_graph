@@ -61,15 +61,15 @@ edges:
   - start: annotation_tables
     finish: waiterbot
     remap_from: table_pose_list
-    remap_to: /annotations/tables
+    remap_to: /annotation/tables
   - start: annotation_markers
     finish: waiterbot
     remap_from: marker_pose_list
-    remap_to: /annotations/ar_markers
+    remap_to: /annotation/ar_markers
   - start: annotation_visual_marker
     finish: waiterbot
     remap_from: viz_marker_pose_list
-    remap_to: /annotations/viz_markers
+    remap_to: /annotation/viz_markers
 ############### Hue Manager
   - start: set_color
     finish: hue_manager

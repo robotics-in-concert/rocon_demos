@@ -143,8 +143,28 @@
    * This topic only is possible,```RED, BLUE, GREEN, WHITE, OFF```. If you send other color string, hue manager discards it.
 
 ## Run
-
 ### Office Concert Launch
+* Preparing
+   * registerd ros master uri and host name
+     ```
+     > export ROS_HOSTNAME=<your pc ip>
+     > export ROS_MASTER_URI=<concert pc ip>
+     ```
+   * registerd concert name
+     ```
+     > export HUB_WHITELIST=<concert name>
+     ```
+   * setting rocon authoring tool
+     * run the rocon_authoring tool
+       * https://github.com/robotics-in-concert/rocon_authoring/blob/master/README.md
+     * open browser and enter ```http://localhost:9999/```
+     * hit ```import``` button and import the workflow.
+     * check the loaded blocks and save workspace to the same title.
+     * all workflows import and then exit rocon authoring tools.
+       
+        
+
+### Office Concert Launch with Dummy script
 * Preparing
    * registerd ros master uri and host name
      ```

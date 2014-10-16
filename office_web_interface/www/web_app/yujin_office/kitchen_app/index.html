@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <title>Rocon - Cafe Viewer</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ROS related -->
+    <script type="text/javascript" src="js/easeljs/easeljs.js"></script>
+    <script type="text/javascript" src="js/eventemitter2/eventemitter2.js"></script>
+    <script type="text/javascript" src="js/ros/roslib.js"></script>
+    <script type="text/javascript" src="js/ros/ros2d.js"></script>
+    <script type="text/javascript" src="js/ros/nav2d.js"></script>
+    <script type="text/javascript" src="js/ros/worldlib.js"></script>
+    <script type="text/javascript" src="js/annotator/annotator.js"></script>
+    <script type="text/javascript" src="js/annotator/circle.js"></script>
+    <script type="text/javascript" src="js/region_viz/regionviz.js"></script>
+    <script type="text/javascript" src="js/region_viz/circle.js"></script>
+    <script type="text/javascript" src="js/region_viz/alvar_ar.js"></script>
+    <script type="text/javascript" src="js/model/Robot.js"></script>
+    <script type="text/javascript" src="js/model/OccupancyGridSrvClient.js"></script>
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet"></link>
+    <link href="css/bootstrap-button.css" rel="stylesheet"></link>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.js"></script>
+    <script src="js/bootstrap/bootstrap-button.js"></script>
+
+
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"></link>
+    <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
+
+    <script src="js/add_orderlist.js"></script>
+
+    <script type="text/javascript">
+      var ros = new ROSLIB.Ros();
+      var defaultUrL = rocon_interactions.rosbridge_uri;
+      var robot1 = rocon_interactions.parameters['robot1'];
+      var robot2 = rocon_interactions.parameters['robot2'];
+      var viewer;
+      var gridClient;
+      var circle_region_poller;
+      var ar_region_poller;
+      var annotator;
+
+      $().ready(function(e) {
+
+        initHeader();
+        initViewer()
+        
+        nav_div= $('#nav-orders');
+        remote_nav_div =$('#remote-nav-orders'); 
+        
+        var nw = $('#nav-wrapper');
+        nw.css('margin-top','20pt');
+      });
+
+      function initHeader()
+      {
+        settingROSCallbacks();
+
+        ros.connect(defaultUrL);
+        $('#focusedInput').val(''+defaultUrL);
+      }
+
+      function initViewer() {
+
+        viewer = createViewer();
+        gridClient = addMap(viewer);
+        addRegionViz(viewer,gridClient);
+        addNavigators(viewer,gridClient);
+      }
+
+      function createViewer() {
+        div = $('#view');
+        div.css('margin-top','20pt');
+
+        var width = div.width();
+        var half_window = $(document).height() -200;
+        var height = half_window;// < 200?200:half_window;
+
+        viewer = new ROS2D.Viewer({
+          divID : 'view',
+          width: width,
+          height: height,
+          background: '#DDDDDD'
+        });
+
+        viewer.scene.mouseEnabled = true;
+        createjs.Touch.enable(viewer.scene);
+        
+
+        $(window).resize(function(e) {
+          var half_window = $(document).height()-200;
+          var height = half_window;// < 200?200:half_window;
+
+          viewer.resizeCanvas(width,height);
+          viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
+        });
+
+        return viewer;
+      }
+
+      function addMap(viewer) {
+        var continuous = false;
+        var map_topic = rocon_interactions.remappings['map'] || 'map';
+
+        gridClient = new ROS2D.OccupancyGridClient({
+          ros : ros,
+          topic : map_topic,
+          rootObject : viewer.scene,
+        });
+
+        // Scale the canvas to fit to the map
+        gridClient.on('change', function(map_origin) {
+          viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
+        });
+        return gridClient;
+      }
+
+      function addNavigators(viewer,gridClient) {
+
+        var robot1_name = robot1;
+        var robot2_name = robot2;
+        var robot1_pose_topic = '/' + robot1 + '/robot_pose';
+        var robot2_pose_topic = '/' + robot2 + '/robot_pose';
+        
+        gridClient.on('change', function(map_origin) {
+          var robot1 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : robot1_name,
+            size       : 20,
+            topicName  : robot1_pose_topic, 
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(255,64,128,0.66),
+            rootObject : viewer.scene
+          });
+
+          var robot2 = new ROS2D.Robot({
+            ros: ros,
+            map_origin : map_origin,
+            name       : robot2_name,
+            size       : 20,
+            topicName  : robot2_pose_topic,
+            topicType  : 'geometry_msgs/PoseStamped',
+            fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
+            rootObject : viewer.scene
+          });
+        });
+      }
+
+      function addRegionViz(viewer,gridClient)
+      {
+        var table_topic = rocon_interactions.remappings['tables'] || 'tables';
+        var order_topic = rocon_interactions.remappings['list_order'] || 'list_order';
+        var ar_marker_topic = rocon_interactions.remappings['ar_markers'] || 'ar_markers';
+        gridClient.on('change', function(map_origin) {
+          circle_region_poller = new REGIONVIZ.Circle({
+            ros: ros,
+            map_origin : map_origin,
+            rootObject : viewer.scene,
+            tableTopicName : table_topic,
+            orderTopicName : order_topic
+          });
+
+          ar_region_poller = new REGIONVIZ.AlvarAR({
+            ros: ros,
+            map_origin : map_origin,
+            rootObject : viewer.scene,
+            topicName : ar_marker_topic
+          });
+
+        });
+      }
+
+      function settingROSCallbacks()                      
+      {
+        ros.on('connection',function() {
+          console.log("Connected");
+          // subscribe to order list
+                                                             
+          $('#focusedInput').val('Connected');
+          $('#focusedInput').attr('disabled',true);
+
+
+          var listener = new ROSLIB.Topic({
+            ros : ros,
+            name : order_pub_topic,
+            messageType: order_pub_topic_type
+            });
+          listener.subscribe(processOrderList);
+          
+          var remote_listener = new ROSLIB.Topic({
+              ros : ros,
+              name : remote_order_pub_topic,
+              messageType: remote_order_pub_topic_type
+              });
+          remote_listener.subscribe(processRemoteOrderList);
+          
+          var remote_update_listener = new ROSLIB.Topic({
+              ros : ros,
+              name : remote_order_update_pub_topic,
+              messageType: remote_order_update_pub_topic_type
+              });
+          remote_update_listener.subscribe(processRemoteOrderUpdate);
+          
+        }
+        );
+        ros.on('error',function(e) {
+          console.log("Error!",e);
+        }
+        );
+                                                     
+        ros.on('close',function() {
+          console.log("Connection Close!");
+          $('#focusedInput').val('Disconnected');
+        }
+        );
+
+      }
+
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
+          <a class="brand" href="#" style="margin-top:6px">Cafe Viewer</a>
+          <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
+            <input class="input-large" id="focusedInput" type="text" value=""></input>
+          </p>
+        </div>
+      </div>
+
+    <!-- Visualizer -->
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9" id="view"></div>
+        <div id="middle-left" class="span3">
+          <div class="well sidebar-nav" id="nav-wrapper">
+            <center>
+            <h3> Orders </h3>
+            </center>
+            <hr/>
+            <ul id="nav-orders">
+            </ul>
+          </div><!-- well -->
+          
+          <div class="well sidebar-nav" id="nav-wrapper">
+            <center>
+            <h3> Remote Orders </h3>
+            </center>
+            <hr/>
+            <ul id="remote-nav-orders">
+            </ul>
+          </div><!-- well -->
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <footer>
+      <img style="width:90px; height:25px;" src="img/yujin_logo.jpg"></img>
+      &copy 2014
+    </footer>
+  </body>
+</html>
