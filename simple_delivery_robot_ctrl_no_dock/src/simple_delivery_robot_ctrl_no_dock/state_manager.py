@@ -56,14 +56,14 @@ class StateManager(object):
     _enjoy_meal_sound = 'meow.wav'
     _bab_sound = 'pab.wav'
     """ 
-    _confirm_sound = 'kaku.wav'
-    _retry_sound = 'moo.wav'
-    _navi_failed_sound = 'angry_cat.wav'
-    _order_received_sound = 'kaku.wav'
-    _at_table_sound = 'kaku.wav'
-    _enjoy_meal_sound = 'lion.wav'
-    _at_base_sound = 'kaku.wav'
-    _at_pickup_sound = 'pab.wav'
+    _confirm_sound = 'confirm.wav'
+    _retry_sound = 'retry.wav'
+    _navi_failed_sound = 'navi_failed.wav'
+    _order_received_sound = 'order_received.wav'
+    _at_table_sound = 'at_table.wav'
+    _enjoy_meal_sound = 'enjoy_meal.wav'
+    _at_base_sound = 'at_base.wav'
+    _at_pickup_sound = 'at_pickup.wav'
 
     def __init__(self):
         self._init_variables()
@@ -257,7 +257,7 @@ class StateManager(object):
         if not self._init_requested:
             self._initialized = False
             goal = yocs_msgs.LocalizeGoal()
-            goal.command = yocs_msgs.LocalizeGoal.STAND_AND_LOCALIZE
+            goal.command = yocs_msgs.LocalizeGoal.SPIN_AND_LOCALIZE
             self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done)
             self.loginfo('Localization Request sent')
             self._init_requested = True
@@ -286,6 +286,7 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_AT_BASE
+            self.loginfo("AT base")
             play_sound(self._resource_path, self._at_base_sound)
 
     def _state_at_base(self):
@@ -309,13 +310,13 @@ class StateManager(object):
         # Wait for kitchen's confirmation
         if self._pickup_confirm== True:
             self._pickup_confirm = False
-            self.loginfo('Moving To Table')
             play_sound(self._resource_path, self._confirm_sound)
 
             if len(self._delivery_locations) < self._delivery_location_index:
                 self.loginfo("Error. Delivery Location is not set...%s"%str(self._delivery_locations))
                 self._current_state = STATE_RESET
             else:
+                self.loginfo('Moving To Table : %s'%self._delivery_locations[self._delivery_location_index])
                 self._request_navigator(self._delivery_locations[self._delivery_location_index], yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
                 # Request navigator to go table 
                 self._current_state = STATE_GOTO_TABLE
@@ -355,7 +356,7 @@ class StateManager(object):
                 self._order_in_progress = False
                 message = 'Delivery Success!'
                 r = simple_delivery_msgs.RobotDeliveryOrderResult()
-                r.goad_id = self._delivery_order_id
+                r.order_id = self._delivery_order_id
                 r.message = message
                 r.success = True
                 self._deliver_order_handler.set_succeeded(r)
@@ -368,7 +369,7 @@ class StateManager(object):
         if self._order_in_progress:
             message = 'Delivery has cancelled!'
             r = simple_delivery_msgs.RobotDeliveryOrderResult()
-            r.goad_id = self._delivery_order_id
+            r.order_id = self._delivery_order_id
             r.message = message
             r.success = False
             self._deliver_order_handler.set_succeeded(r)

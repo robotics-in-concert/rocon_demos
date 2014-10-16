@@ -12,3 +12,4 @@ global_costmap:
 
    static_layer:
       first_map_only: true
+
