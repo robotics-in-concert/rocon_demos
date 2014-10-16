@@ -102,7 +102,7 @@ class StateManager(object):
         
         self._nav_table_timeout = rospy.get_param('~nav_table_timeout', 300.0)
         self._nav_retry         = rospy.get_param('~nav_retry', 3)
-        self._nav_table_distance = rospy.get_param('~nav_table_distance', 5.0)
+        self._nav_table_distance = rospy.get_param('~nav_table_distance', 0.5)
         self._resource_path = rospy.get_param('~resource_path')
         self.loginfo("Resource path : %s"% self._resource_path)
 
@@ -340,7 +340,7 @@ class StateManager(object):
             if self._delivery_location_index < len(self._delivery_locations):
                 location = self._delivery_locations[self._delivery_location_index]
                 self.loginfo('Moving to next destination[%s]'%str(location))
-                self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, self._nav_table_distance)
+                self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
                 self._current_state = STATE_GOTO_TABLE
             else: # if it has finished delivery. moving back to base
                 self.loginfo('Moving back to base')
