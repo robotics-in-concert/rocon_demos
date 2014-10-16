@@ -61,7 +61,7 @@ edges:
   - start: annotation_visual_marker
     finish: waiterbot
     remap_from: viz_marker_pose_list
-    remap_to: /annotation/viz_markers
+    remap_to: /annotation/viz_tables
 
 ## Task Coordinator
   - start: taskcoordinator_waiterbot_delivery_order

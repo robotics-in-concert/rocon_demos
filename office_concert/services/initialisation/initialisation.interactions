@@ -22,7 +22,7 @@
     wc_namespace: "/software/world_canvas"
     default_world_name: "yujin_rnd"
 
-- name: rocon_admin_app
+- name: concert_admin_app
   role: 'Cafe Manager'
   compatibility: rocon:/pc/*/hydro|indigo/precise|quantal|raring|saucy|trusty
   display_name: Concert Service Administration
