@@ -20,15 +20,15 @@ base_local_planner: "dwa_local_planner/DWAPlannerROS"
 ## recovery behaviors; we avoid spinning, but we need a fall-back replanning
 #recovery_behavior_enabled: true
 
-#recovery_behaviors:
-  #- name: 'super_conservative_reset1'
-    #type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  #- name: 'conservative_reset1'
-    #type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  #- name: 'aggressive_reset1'
-    #type: 'clear_costmap_recovery/ClearCostmapRecovery'
+recovery_behaviors:
+  - name: 'super_conservative_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  - name: 'conservative_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  - name: 'aggressive_reset'
+    type: 'rotate_recovery/RotateRecovery'
   #- name: 'clearing_rotation1'
-    #type: 'rotate_recovery/RotateRecovery'
+  #  type: 'rotate_recovery/RotateRecovery'
   #- name: 'super_conservative_reset2'
     #type: 'clear_costmap_recovery/ClearCostmapRecovery'
   #- name: 'conservative_reset2'
