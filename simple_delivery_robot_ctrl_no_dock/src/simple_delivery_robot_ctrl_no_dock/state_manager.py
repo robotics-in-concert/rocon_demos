@@ -215,8 +215,24 @@ class StateManager(object):
         if self._order_in_progress:
             feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
             feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
-            feedback.delivery_status.status = 10
-            feedback.delivery_status.order_id = str("Status : " + self._current_state + "  [" + str(self._navigator_feed) + "]")
+            if self._current_state == STATE_AT_BASE:
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
+            elif self._current_state == STATE_GOTO_KITCHEN:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.GO_TO_FRONTDESK
+            elif self._current_state == STATE_AT_KITCHEN:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.WAITING_FOR_FRONTDESK
+            elif self._current_state == STATE_GOTO_TABLE:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.GO_TO_RECEIVER
+            elif self._current_state == STATE_AT_TABLE:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.WAITING_FOR_RECEIVER
+            elif self._current_state == STATE_BACKTO_BASE:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.RETURN_TO_DOCK
+            elif self._current_state == STATE_REINITIALIZATION:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.COMPELETE_RETURN
+            elif self._current_state == STATE_ON_ERROR:
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.ERROR
+            feedback.delivery_status.order_id = self._delivery_order_id
+            feedback.delivery_status.target_goal = self._target_location
             self._deliver_order_handler.publish_feedback(feedback)
                 
     def loginfo(self, msg):
@@ -233,6 +249,7 @@ class StateManager(object):
         goal.num_retry = num_retry
         goal.timeout = float(timeout)
         goal.distance = distance
+        self._target_location = location
         self._navigator_handler.send_goal(goal, done_cb=self._navigator_done, feedback_cb=self._navigator_feedback)
         self._navigator_finished = False 
 
@@ -297,7 +314,16 @@ class StateManager(object):
             self._current_state = STATE_GOTO_KITCHEN
             # Make a sound
             play_sound(self._resource_path, self._order_received_sound)
-        
+
+        if self._order_in_progress:
+            self._order_in_progress = False
+            message = 'Delivery Success!'
+            r = simple_delivery_msgs.RobotDeliveryOrderResult()
+            r.order_id = self._delivery_order_id
+            r.message = message
+            r.success = True
+            self._deliver_order_handler.set_succeeded(r)
+
     def _state_goto_kitchen(self):
         # Wait for arriving
         if self._navigator_finished:
@@ -341,25 +367,38 @@ class StateManager(object):
                 location = self._delivery_locations[self._delivery_location_index]
                 self.loginfo('Moving to next destination[%s]'%str(location))
                 self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
+                feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
+                feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.COMPLETE_DELIVERY
+                feedback.delivery_status.order_id = self._delivery_order_id
+                feedback.delivery_status.target_goal= self._target_location
+                self._deliver_order_handler.publish_feedback(feedback)
                 self._current_state = STATE_GOTO_TABLE
             else: # if it has finished delivery. moving back to base
                 self.loginfo('Moving back to base')
                 # Request navigator to go back to reinitialization positino 
                 self._request_navigator(self._reinit_location, yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
+
+                feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
+                feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
+                feedback.delivery_status.status = simple_delivery_msgs.delivery_status.COMPLETE_ALL_DELIVERY
+                feedback.delivery_status.order_id = self._delivery_order_id
+                feedback.delivery_status.target_goal= self._target_location
+                self._deliver_order_handler.publish_feedback(feedback)
                 self._current_state = STATE_BACKTO_BASE
 
     def _state_backto_base(self):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_REINITIALIZATION
-            if self._order_in_progress:
-                self._order_in_progress = False
-                message = 'Delivery Success!'
-                r = simple_delivery_msgs.RobotDeliveryOrderResult()
-                r.order_id = self._delivery_order_id
-                r.message = message
-                r.success = True
-                self._deliver_order_handler.set_succeeded(r)
+
+
+
+
+
+
+
+
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
