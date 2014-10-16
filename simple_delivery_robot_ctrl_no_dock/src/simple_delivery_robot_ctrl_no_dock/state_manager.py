@@ -56,14 +56,14 @@ class StateManager(object):
     _enjoy_meal_sound = 'meow.wav'
     _bab_sound = 'pab.wav'
     """ 
-    _confirm_sound = 'kaku.wav'
-    _retry_sound = 'moo.wav'
-    _navi_failed_sound = 'angry_cat.wav'
-    _order_received_sound = 'kaku.wav'
-    _at_table_sound = 'kaku.wav'
-    _enjoy_meal_sound = 'lion.wav'
-    _at_base_sound = 'kaku.wav'
-    _at_pickup_sound = 'pab.wav'
+    _confirm_sound = 'confirm.wav'
+    _retry_sound = 'retry.wav'
+    _navi_failed_sound = 'navi_failed.wav'
+    _order_received_sound = 'order_received.wav'
+    _at_table_sound = 'at_table.wav'
+    _enjoy_meal_sound = 'enjoy_meal.wav'
+    _at_base_sound = 'at_base.wav'
+    _at_pickup_sound = 'at_pickup.wav'
 
     def __init__(self):
         self._init_variables()
@@ -257,7 +257,7 @@ class StateManager(object):
         if not self._init_requested:
             self._initialized = False
             goal = yocs_msgs.LocalizeGoal()
-            goal.command = yocs_msgs.LocalizeGoal.STAND_AND_LOCALIZE
+            goal.command = yocs_msgs.LocalizeGoal.SPIN_AND_LOCALIZE
             self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done)
             self.loginfo('Localization Request sent')
             self._init_requested = True
