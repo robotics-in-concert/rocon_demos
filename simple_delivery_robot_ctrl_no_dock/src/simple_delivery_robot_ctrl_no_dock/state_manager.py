@@ -354,6 +354,12 @@ class StateManager(object):
             self._current_state = STATE_AT_TABLE
             # arriving sound
             play_sound(self._resource_path, self._at_table_sound)
+            feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
+            feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ARRIVAL_AT_RECEIVER
+            feedback.delivery_status.order_id = self._delivery_order_id
+            feedback.delivery_status.target_goal= self._target_location
+            self._deliver_order_handler.publish_feedback(feedback)
 
     def _state_at_table(self):
         # Wait for Customer's confirmation
