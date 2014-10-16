@@ -1,0 +1,8 @@
+[Desktop Entry]
+  Name=Rocon Remocon
+  Comment=Bringup Remocon
+  Exec=/home/jihoonl/research/ros/waiterbot/src/office_concert/office_concert/launcher/rocon_remocon.bash
+  Icon=/home/jihoonl/research/ros/turtlebot/src/rocon_tools/rocon_bubble_icons/icons/joystick.png
+  Terminal=false
+  Type=Application
+  Categories=Utility;Application;
