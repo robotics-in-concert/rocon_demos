@@ -224,7 +224,7 @@ class StateManager(object):
             elif self._current_state == STATE_GOTO_TABLE:
                 feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
             elif self._current_state == STATE_AT_TABLE:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_RECEIVER
+                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_CONFIRM_RECEIVER
             elif self._current_state == STATE_BACKTO_BASE:
                 feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.RETURN_TO_DOCK
             elif self._current_state == STATE_REINITIALIZATION:
