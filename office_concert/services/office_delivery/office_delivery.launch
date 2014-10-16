@@ -8,10 +8,15 @@
   <node pkg="office_concert" name="publish_world" type="publish_world.py">
   </node>
 
+<!-- 
   <arg name="waiter_name" default="young"/>
   <node pkg="office_concert" name="office_task_manager_sim" type="office_task_manager_sim.py" output="screen">
     <param name="waiter_name" value="$(arg waiter_name)"/>
   </node>
+ -->
+
+  <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
+  </include>
 
 <!--
   <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">

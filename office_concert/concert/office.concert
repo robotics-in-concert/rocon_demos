@@ -3,5 +3,9 @@
       <arg name="services" value="office_concert/office.services"/>
     </launch>
 
+    <launch title="hue_manager:11315"    package="office_concert" name="office_backend.launch" port="11315">
+      <arg name="concert_client_name" value="hue_manager"/>
+    </launch>
+
 <!--    <launch title="office_backend:11312"    package="office_concert" name="office_backend.launch" port="11312"/>-->
 </concert>

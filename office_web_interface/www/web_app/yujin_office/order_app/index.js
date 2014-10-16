@@ -385,9 +385,10 @@ function showConfrimModal(){
 function sendOrder(){
   console.log("send_order: ", cur_order_list);
   uuid = generateUUID()
+  //hardcoded
   var order = new ROSLIB.Message({
     order_id : uuid,
-    receivers : [{location: table+"", qty : 1, menus:cur_order_list}]
+    receivers : [{location: "table4"+"", qty : 1, menus:cur_order_list}]
   });
   send_order_publisher.publish(order)
   console.log("order: ",order, send_order_publisher)
@@ -425,22 +426,29 @@ function settingROSCallbacks(){
   );
 };
 
+current_order_status = 10
 function processDeliveryStatusUpdate(data){
   console.log(data);
   if (data.order_id == uuid) {
-    if (data.status >= 20 && data.status <= 40){
-      deliveryProgressControl(1); 
+    if(current_order_status != data.status){
+      current_order_status = data.status;
+      if (current_order_status.status >= 20 && current_order_status <= 40){
+        deliveryProgressControl(1); 
+      }
+      else if(current_order_status == 51){
+        deliveryProgressControl(2);
+      }
+      else if(current_order_status == 53){
+        nextDiv = currentDiv + 1;
+        updateDiv(nextDiv);
+      }
+      else if(current_order_status == 60){
+        nextDiv = currentDiv + 1;
+        updateDiv(nextDiv);
+      }
     }
-    else if(data.status == 51){
-      deliveryProgressControl(2);
-    }
-    else if(data.status == 52){
-      nextDiv = currentDiv + 1;
-      updateDiv(nextDiv);
-    }
-    else if(data.status == 60){
-      nextDiv = currentDiv + 1;
-      updateDiv(nextDiv);
+    else{
+      console.log("same order status");
     }
   }
   else{

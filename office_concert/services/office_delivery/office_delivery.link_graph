@@ -10,6 +10,10 @@ nodes:
     uri: rocon:/turtlebot#office_rapps/waiter
     min: 1
     max: 1
+  - id: hue_manager
+    uri: rocon:/pc/hue_manager#office_rapps/office_hue_manager
+    min: 1
+    max: 1
 topics:
 ################# Map Database
   - id: annotation_columns
@@ -28,6 +32,8 @@ topics:
   - id: map_metadata
     type: nav_msgs/MapMetaData
 
+  - id: set_color
+    type: rocon_device_msgs/SetColor
 ############### Task coordinator
   - id: taskcoordinator_kitchen_list_order
     type: cafe_msgs/OrderList
@@ -90,3 +96,9 @@ edges:
     finish: taskcoordinator_kitchen_list_order
     remap_from: list_order
     remap_to: /cafe/list_order
+
+############### Hue Manager
+  - start: set_color
+    finish: hue_manager
+    remap_from: set_color
+    remap_to: /set_color
