@@ -49,7 +49,7 @@
     - remap_from: tables
       remap_to: /annotation/tables
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/cafe_viewer/www/index.html)
+- name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/kitchen_app/index.html)
   role: 'Office Manager'
   compatibility: rocon:/pc
   display_name: Office Monitor
@@ -59,6 +59,7 @@
     rosbridge_port: __ROSBRIDGE_PORT__
     robot1: adams
     robot2: zach 
+    robot3: young 
   remappings:
     - remap_from: map
       remap_to: /map
@@ -66,22 +67,6 @@
       remap_to: /annotation/tables
     - remap_from: ar_markers
       remap_to: /annotation/ar_markers
-    - remap_from: list_order
-      remap_to: /cafe/list_order
-    - remap_from: list_remote_order
-      remap_to: /cafe/remote_order_list
-    - remap_from: remote_order_update
-      remap_to: /cafe/remote_order_update
-#- name: web_app(http://localhost/cafe_concert_webinterfaces/kitchen/www/index.html)
-- name: web_app(http://chimek.yujinrobot.com/rocon/cafe_concert/kitchen/www/index.html)
-  role: 'Office Manager'
-  compatibility: rocon:/pc
-  display_name: Cafe Kitchen 
-  description: Cafe Kitchen Order Status viewer
-  parameters:
-    rosbridge_address: __ROSBRIDGE_ADDRESS__
-    rosbridge_port: __ROSBRIDGE_PORT__
-  remappings:
     - remap_from: list_order
       remap_to: /cafe/list_order
     - remap_from: list_remote_order

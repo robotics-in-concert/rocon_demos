@@ -120,7 +120,7 @@ class WaiterSoftBot(object):
                             message="WAITING_FOR_FRONTDESK")
 
         for receiver in receivers:
-            target_goal = 'table' + str(receiver)
+            target_goal =  str(receiver)
             # Go to receiver
             self.go_to(order_id=order_id,
                        target_goal=target_goal,
@@ -146,7 +146,7 @@ class WaiterSoftBot(object):
                    message="RETURN_TO_DOCK")
 
         # Complete return
-        self.feedback(order_id, 'docking', DeliveryStatus.COMPELTE_RETURN, "COMPELTE_RETURN")
+        self.feedback(order_id, 'docking', DeliveryStatus.COMPLETE_RETURN, "COMPLETE_RETURN")
         rospy.loginfo(self.name + " : END_DELIVERY_ORDER")
         rospy.sleep(1)
 
