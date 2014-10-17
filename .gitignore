@@ -33,7 +33,5 @@ nosetests.xml
 .project
 .pydevproject
 
-*.avi
-*.mp4
 *.bak
 
