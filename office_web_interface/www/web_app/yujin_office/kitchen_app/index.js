@@ -89,8 +89,10 @@ function addNavigators(viewer,gridClient) {
 
   var robot1_name = robot1;
   var robot2_name = robot2;
+  var robot3_name = robot3;
   var robot1_pose_topic = '/' + robot1 + '/robot_pose';
   var robot2_pose_topic = '/' + robot2 + '/robot_pose';
+  var robot3_pose_topic = '/' + robot3 + '/robot_pose';
   
   gridClient.on('change', function(map_origin) {
     var robot1 = new ROS2D.Robot({
@@ -114,6 +116,17 @@ function addNavigators(viewer,gridClient) {
       fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
       rootObject : viewer.scene
     });
+     var robot3 = new ROS2D.Robot({
+      ros: ros,
+      map_origin : map_origin,
+      name       : robot3_name,
+      size       : 20,
+      topicName  : robot3_pose_topic,
+      topicType  : 'geometry_msgs/PoseStamped',
+      fillColor  : createjs.Graphics.getRGB(100,64,255,0.66),
+      rootObject : viewer.scene
+    });
+
   });
 }
 
