@@ -1,7 +1,53 @@
 /*layer background css*/
+.delivery-end-layer{
+  background: url(./img/8_service_end.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;  
+}
 
-.oa-ui{
-  background: url(./img/common_bg.png); 
+.arrival-layer{
+  background: url(./img/7_waiterbot_arrival.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+.ordered-layer{
+  background: url(./img/5_order_completion.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+.on-delivery-layer{
+  background: url(./img/6_order_status-01.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+.menu-layer{
+  background: url(./img/3_order.png); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+.intro-layer{
+  background: url(./img/2_intro.png); 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -10,34 +56,7 @@
 }
 
 .title-layer{
-  background: url(./img/title_layer_bg.png); 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.ordered-layer{
-  background: url(./img/ordered_layer_bg.png); 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.arrival-layer{
-  background: url(./img/arrival_layer_bg.png); 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.intro-layer{
-  background: url(./img/intro_layer_bg.png); 
+  background: url(./img/1_main.png); 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -46,13 +65,15 @@
 }
 
 .modal-order-list{
-  background: url(./img/confirm_modal_bg.png); 
+  background: url(./img/4_modalbox.png); 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   width: 100%;
   height: 100%;
 }
+
+
 
 /*intro-layer css*/
 
@@ -111,13 +132,11 @@
 
 /*modal css*/
 .modal{
-	border-radius: 15px;  
-	width: 800px;
-	margin-left: -400px;	
+	width: 700px;
+	margin-left: -350px;	
 }
 .modal-body{
-	border-radius: 15px;  
-	max-height: 700px;	
+	max-height: 600px;	
 }
 .modal-drink-img-group{
 	text-align: center;
@@ -138,9 +157,6 @@
 	margin-right: 5%;
 	margin-top: 1%;
 }
-
-
-
 
 .sd-status-bar{
 	margin:10px;

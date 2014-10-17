@@ -50,17 +50,17 @@ if(send_order_pub_topic in rocon_interactions.remappings)
 //menu item setting
 var menu_list = {
                     "water":{"name":'water',
-                     "disable_img":"./img/water_disable.png",
-                     "img_qty_1"   :"./img/water_qty_1.png",
-                     "img_qty_2"   :"./img/water_qty_2.png",},
+                     "disable_img":"./img/3_order_1_water_disabled.png",
+                     "img_qty_1"   :"./img/3_order_1_water_1cup.png",
+                     "img_qty_2"   :"./img/3_order_1_water_2cup.png",},
                     "juice":{"name":'juice',
-                     "disable_img" :"./img/juice_disable.png",
-                     "img_qty_1"    :"./img/juice_qty_1.png",
-                     "img_qty_2"    :"./img/juice_qty_2.png",},
+                     "disable_img" :"./img/3_order_2_juice_disabled.png",
+                     "img_qty_1"    :"./img/3_order_2_juice_1cup.png",
+                     "img_qty_2"    :"./img/3_order_2_juice_2cup.png",},
                     "coffee":{"name":'coffee',
-                     "disable_img"  :"./img/coffee_disable.png",
-                     "img_qty_1"    :"./img/coffee_qty_1.png",
-                     "img_qty_2"    :"./img/coffee_qty_2.png"},
+                     "disable_img"  :"./img/3_order_3_coffee_disabled.png",
+                     "img_qty_1"    :"./img/3_order_3_coffee_1cup.png",
+                     "img_qty_2"    :"./img/3_order_3_coffee_2cup.png"},
                     }
 
 //ui setting
@@ -107,33 +107,33 @@ function initEvent(){
   // intro-layer
   $(".intro-layer-img-button").mouseup(function(){
     console.log("mouse up");
-    $(".intro-layer-img-button").attr('src','./img/intro_button_release.png');
+    $(".intro-layer-img-button").attr('src','./img/2_intro_button_off.png');
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
   $(".intro-layer-img-button").mousedown(function(){
     console.log("mouse down");
-    $(".intro-layer-img-button").attr('src','./img/intro_button_press.png');
+    $(".intro-layer-img-button").attr('src','./img/2_intro_button_on.png');
   });
 
   //menu-layer
 
   $("img."+'cancel-img-btn').mouseup(function(){
-    $("img."+'cancel-img-btn').attr('src','./img/cancel_release.png');
+    $("img."+'cancel-img-btn').attr('src','./img/3_order_button_cancel_off.png');
     nextDiv = currentDiv - 1;
     updateDiv(nextDiv);
   });
   $("img."+'cancel-img-btn').mousedown(function(){
-    $("img."+'cancel-img-btn').attr('src','./img/cancel_press.png');
+    $("img."+'cancel-img-btn').attr('src','./img/3_order_button_cancel_on.png');
   });
 
   $("img."+'order-img-btn').mouseup(function(){
-    $("img."+'order-img-btn').attr('src','./img/order_release.png');
+    $("img."+'order-img-btn').attr('src','./img/3_order_button_order_off.png');
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
   $("img."+'order-img-btn').mousedown(function(){
-    $("img."+'order-img-btn').attr('src','./img/order_press.png');
+    $("img."+'order-img-btn').attr('src','./img/3_order_button_order_on.png');
   });
  
   //modal
@@ -143,20 +143,20 @@ function initEvent(){
   });
 
    $("img.yes-img-btn").mouseup(function(){
-    $('img.yes-img-btn').attr('src','./img/yes_release.png');
+    $('img.yes-img-btn').attr('src','./img/4_modalbox_button_yes_off.png');
     sendOrder();
     nextDiv = currentDiv + 1;
     updateDiv(nextDiv);
   });
   $("img.yes-img-btn").mousedown(function(){
-    $('img.yes-img-btn').attr('src','./img/yes_press.png');
+    $('img.yes-img-btn').attr('src','./img/4_modalbox_button_yes_on.png');
   });
   
   $("img.no-img-btn").mouseup(function(){
-    $('img.no-img-btn').attr('src','./img/no_release.png');
+    $('img.no-img-btn').attr('src','./img/4_modalbox_button_no_off.png');
   });
   $("img.no-img-btn").mousedown(function(){
-    $('img.no-img-btn').attr('src','./img/no_press.png');
+    $('img.no-img-btn').attr('src','./img/4_modalbox_button_no_on.png');
   });
 
 }
@@ -186,8 +186,8 @@ function initMenu(){
   }
   $(".menu-layer-drink-img-group").html(context);
 
-  $("img."+'cancel-img-btn').attr("src",'./img/cancel_disable.png');
-  $("img."+'order-img-btn').attr("src",'./img/order_disable.png');
+  $("img."+'cancel-img-btn').attr("src",'./img/3_order_button_cancel_disabled.png');
+  $("img."+'order-img-btn').attr("src",'./img/3_order_button_order_disabled.png');
 
   cur_order_list = []
 
@@ -211,7 +211,7 @@ function initMenu(){
         $("img."+class_name).attr("src", menu_list[class_name].img_qty_1);
         cur_order_list.push(class_name);
       }
-      else if(img_src.indexOf("_qty_1")>0){
+      else if(img_src.indexOf("_1cup")>0){
         $("img."+class_name).attr("src", menu_list[class_name].img_qty_2);
         cur_order_list.push(class_name);
       }
@@ -224,12 +224,12 @@ function initMenu(){
     }
 
     if( cur_order_list.length === 0){
-      $("img."+'cancel-img-btn').attr("src",'./img/cancel_disable.png');
-      $("img."+'order-img-btn').attr("src",'./img/order_disable.png');
+      $("img."+'cancel-img-btn').attr("src",'./img/3_order_button_cancel_disabled.png');
+      $("img."+'order-img-btn').attr("src",'./img/3_order_button_order_disabled.png');
     }
     else{
-      $("img."+'cancel-img-btn').attr("src",'./img/cancel_release.png');
-      $("img."+'order-img-btn').attr("src",'./img/order_release.png');
+      $("img."+'cancel-img-btn').attr("src",'./img/3_order_button_cancel_off.png');
+      $("img."+'order-img-btn').attr("src",'./img/3_order_button_order_off.png');
     }
   });
   
@@ -354,12 +354,12 @@ function deliveryProgressControl(video_src){
 
   if(video_src == 1){ //first step
     console.log("play 1: prepairing");
-    $("img."+'on-delivery-layer-status-img').attr('src','./img/prepairing_status.png');
+    $("img."+'on-delivery-layer-status-img').attr('src','./img/6_order status_ready.png');
     $("img."+'on-delivery-layer-status-img').show();
   }
   else if(video_src == 2){ //secend step
     console.log("play 2: delivery");
-    $("img."+'on-delivery-layer-status-img').attr('src','./img/on_delivery_status.png');
+    $("img."+'on-delivery-layer-status-img').attr('src','./img/6_order status_delivery.png');
     $("img."+'on-delivery-layer-status-img').show();
   }
   else{ //all stop
@@ -388,7 +388,7 @@ function sendOrder(){
   //hardcoded
   var order = new ROSLIB.Message({
     order_id : uuid,
-    receivers : [{location: "table4"+"", qty : 1, menus:cur_order_list}]
+    receivers : [{location: table+"", qty : 1, menus:cur_order_list}]
   });
   send_order_publisher.publish(order)
   console.log("order: ",order, send_order_publisher)

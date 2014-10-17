@@ -7,7 +7,7 @@
   icon:
     resource_name: rocon_icons/google.png
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/webapp/cafe_Dorothy/dorothy_web_menu.html)
-- name: web_app(http://192.168.10.128/office_concert/web_app/yujin_office/order_app/index.html)
+- name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/order_app/index.html)
   role: 'Customer'
   compatibility: rocon:/pc
   display_name: Office Delivery Order App (Table 1)
@@ -17,7 +17,7 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: 1
+    extra_data: table1
   remappings:
     - remap_from: send_order
       #remap_to: /services/officedelivery/send_order
@@ -28,17 +28,17 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
-- name: web_app(http://192.168.10.128/office_concert/web_app/yujin_office/order_app/index.html)
+- name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/order_app/index.html)
   role: 'Customer'
   compatibility: rocon:/pc
-  display_name: Office Delivery Order App (Table 2)
+  display_name: Office Delivery Order App (Table 4)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: 2
+    extra_data: table4
   remappings:
     - remap_from: send_order
       #remap_to: /services/officedelivery/send_order
