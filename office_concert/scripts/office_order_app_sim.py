@@ -24,7 +24,7 @@ class DummyOrderApp():
         self.delivery_status[DeliveryStatus.COMPLETE_DELIVERY] = 'COMPLETE_DELIVERY'
         self.delivery_status[DeliveryStatus.COMPLETE_ALL_DELIVERY] = 'COMPLETE_ALL_DELIVERY'
         self.delivery_status[DeliveryStatus.RETURN_TO_DOCK] = 'RETURN_TO_DOCK'
-        self.delivery_status[DeliveryStatus.COMPELTE_RETURN] = 'COMPELTE_RETURN'
+        self.delivery_status[DeliveryStatus.COMPLETE_RETURN] = 'COMPELTE_RETURN'
         self.delivery_status[DeliveryStatus.ERROR] = 'ERROR'
 
         self.publishers = {}
@@ -71,7 +71,7 @@ if __name__ == '__main__':
         
         rospy.loginfo('Initialized')
         
-        target_location = 'table4'
+        target_location = 'table1'
         if rospy.has_param('~target_location'):
             target_location = rospy.get_param('~target_location', 'table2')
 

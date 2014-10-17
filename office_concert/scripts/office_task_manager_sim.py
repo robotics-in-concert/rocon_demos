@@ -22,7 +22,7 @@ class DummyTaskManager(object):
         self.delivery_status[DeliveryStatus.COMPLETE_DELIVERY] = 'COMPLETE_DELIVERY'
         self.delivery_status[DeliveryStatus.COMPLETE_ALL_DELIVERY] = 'COMPLETE_ALL_DELIVERY'
         self.delivery_status[DeliveryStatus.RETURN_TO_DOCK] = 'RETURN_TO_DOCK'
-        self.delivery_status[DeliveryStatus.COMPELTE_RETURN] = 'COMPELTE_RETURN'
+        self.delivery_status[DeliveryStatus.COMPLETE_RETURN] = 'COMPELTE_RETURN'
         self.delivery_status[DeliveryStatus.ERROR] = 'ERROR'
         
         self.action_name = action_name

@@ -7,8 +7,8 @@
   description: Select a robot and make a map in the concert
   max: 1
   parameters:
-    maximum_linear_velocity: 2.0
-    maximum_angular_velocity: 1.57
+    maximum_linear_velocity: 1.5
+    maximum_angular_velocity: 1.0
     capture_timeout: 80.0
     wc_namespace: "/software/world_canvas"
 
