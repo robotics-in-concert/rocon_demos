@@ -9,7 +9,7 @@ def publish_map(world, namespace):
     map_topic = rospy.get_param('map_topic')
 
     # Get the 2D map for the given world
-    map_ac = world_canvas_client.AnnotationCollection(world=world, types=['nav_msgs/OccupancyGrid'], srv_namespace=namespace)
+    map_ac = world_canvas_client.AnnotationCollection(world=world, types=['nav_msgs/OccupancyGrid'], srv_namespace=namespace, names=[map_name])
     map_ac.loadData()
 
     # Publish the map on server side; topic type is get from the annotation info
