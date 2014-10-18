@@ -73,3 +73,14 @@
       remap_to: /cafe/remote_order_list
     - remap_from: remote_order_update
       remap_to: /cafe/remote_order_update
+
+- name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/screen_viewer/index.html)
+  role: 'Office Manager'
+  compatibility: rocon:/pc
+  display_name: Screen Viewer
+  description: Screen viewer 
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    screen: 1
+  remappings: []

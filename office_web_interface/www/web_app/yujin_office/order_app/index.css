@@ -73,6 +73,25 @@
   height: 100%;
 }
 
+/*title-layer ccss*/
+.rosbridge-ip-info{
+    position: absolute;
+    right: 1%;
+    top: 1%;
+    font-size: 30px;
+    color:white;
+    opacity: .5;
+}
+
+.rosbridge-connection-info{
+    position: absolute;
+    right: 1%;
+    top: 5%;
+    font-size: 30px;
+    color:white;
+    opacity: .5;
+}
+
 
 
 /*intro-layer css*/

@@ -83,6 +83,7 @@ $().ready(function(e){
   // setting ros callbacks
   settingROSCallbacks();
   ros.connect(defaultUrL);
+  $(".rosbridge-ip-info").html(defaultUrL);
 });
 
 function initEvent(){
@@ -397,6 +398,7 @@ function sendOrder(){
 function settingROSCallbacks(){
   ros.on('connection',function() {
     console.log("Connected");
+    $(".rosbridge-connection-info").html("Connection");
     // subscribe to order list    
     var delivery_status_listener = new ROSLIB.Topic({
       ros : ros,
@@ -416,11 +418,13 @@ function settingROSCallbacks(){
   );
   ros.on('error',function(e) {
     console.log("Error!",e);
+    $(".rosbridge-connection-info").html("Error: "+ e);
   }
   );
 
   ros.on('close',function() {
     console.log("Connection Close!");
+    $(".rosbridge-connection-info").html("Connection Close!");
     //alert("ROS Connection Close!");
   }
   );
