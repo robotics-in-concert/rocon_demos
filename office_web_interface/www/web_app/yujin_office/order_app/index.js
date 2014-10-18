@@ -6,7 +6,7 @@ var delivery_status_sub_type = "simple_delivery_msgs/DeliveryStatus";
 var defaultUrL = "";
 var discard_btn_list = "";
 var table = "";
-
+var config_values = {};
 //parameter setting
 if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
     defaultUrL = rocon_interactions.rosbridge_uri;
@@ -17,8 +17,10 @@ if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
 if (rocon_interactions.parameters.hasOwnProperty('extra_data')){
     table = rocon_interactions.parameters.extra_data;
 }else{
-    table = "1";
+    table = "table1";
 }
+
+config_values['table'] = table;
 
 // remapping rules setting
 //pub, sub
@@ -84,6 +86,7 @@ $().ready(function(e){
   settingROSCallbacks();
   ros.connect(defaultUrL);
   $(".rosbridge-ip-info").html(defaultUrL);
+  initConfig(config_values);
 });
 
 function initEvent(){
@@ -237,7 +240,7 @@ function initMenu(){
 }
 
 function initIntro(){
-  $('.intro-layer-location-name').html("This table is [Table "+table+"]");
+  $('.intro-layer-location-name').html("This table is [Table "+config_values['table']+"]");
 }
 
 function updateDiv(target_div){
@@ -389,7 +392,7 @@ function sendOrder(){
   //hardcoded
   var order = new ROSLIB.Message({
     order_id : uuid,
-    receivers : [{location: table+"", qty : 1, menus:cur_order_list}]
+    receivers : [{location: config_values['table']+"", qty : 1, menus:cur_order_list}]
   });
   send_order_publisher.publish(order)
   console.log("order: ",order, send_order_publisher)
