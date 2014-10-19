@@ -12,6 +12,8 @@ subscribers:
 publishers: 
   - name: robot_pose
     type: geometry_msgs/PoseStamped
+  - name: robot_status
+    type: simple_delivery_msgs/RobotStatus
 services: []
 action_clients: []
 action_servers:
