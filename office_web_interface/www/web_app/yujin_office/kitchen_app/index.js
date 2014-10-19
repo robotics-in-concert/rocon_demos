@@ -271,7 +271,7 @@ function showVideo(){
   show_video_publisher.publish(left_video);
   var right_video = new ROSLIB.Message({
     screen_id : "right",
-    video_url : "TV_right_3_GoCart.mp4"
+    video_url : "TV_Right_3_GoCart.mp4"
   });
   show_video_publisher.publish(right_video);
 }
