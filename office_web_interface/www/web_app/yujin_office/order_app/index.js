@@ -133,8 +133,14 @@ function initEvent(){
 
   $("img."+'order-img-btn').mouseup(function(){
     $("img."+'order-img-btn').attr('src','./img/3_order_button_order_off.png');
-    nextDiv = currentDiv + 1;
-    updateDiv(nextDiv);
+    if (cur_order_list.length){
+      nextDiv = currentDiv + 1;
+      updateDiv(nextDiv);  
+    }
+    else{
+      $("img."+'order-img-btn').attr('src','./img/3_order_button_order_disabled.png');
+    }
+    
   });
   $("img."+'order-img-btn').mousedown(function(){
     $("img."+'order-img-btn').attr('src','./img/3_order_button_order_on.png');
