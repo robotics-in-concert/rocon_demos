@@ -10,9 +10,14 @@ var circle_region_poller;
 var ar_region_poller;
 var annotator;
 
-var order_list_sub_topic_name = '/order_list'
-var order_list_sub_topic_type = 'simple_delivery_msgs/OrderList'
+//set sub
+var order_list_sub_topic_name = '/order_list';
+var order_list_sub_topic_type = 'simple_delivery_msgs/OrderList';
 
+//set pub
+var show_video_publisher = '';
+var show_video_pub_topic_name = '/show_video';
+var show_video_pub_topic_type = 'simple_media_msgs/ShowVideo';
 
 delivery_status_list = {
 "10" : "IDLE",
@@ -148,8 +153,7 @@ function addNavigators(viewer,gridClient) {
   });
 }
 
-function addRegionViz(viewer,gridClient)
-{
+function addRegionViz(viewer,gridClient){
   var table_topic = rocon_interactions.remappings['tables'] || 'tables';
   var order_topic = rocon_interactions.remappings['list_order'] || 'list_order';
   var ar_marker_topic = rocon_interactions.remappings['ar_markers'] || 'ar_markers';
@@ -176,11 +180,37 @@ function settingROSCallbacks()
 {
   ros.on('connection',function() {
     console.log("Connected");
+    initGoCart();
     // subscribe to order list                                                       
     $('#focusedInput').val('Connected');
     $('#focusedInput').attr('disabled',true);
+    settingSubscriber();
+    settingPublisher();
+    }
+  );
+  ros.on('error',function(e) {
+    console.log("Error!",e);
+  }
+  );                                               
+  ros.on('close',function() {
+    console.log("Connection Close!");
+    $('#focusedInput').val('Disconnected');
+  }
+  );
+}
 
-    var listener = new ROSLIB.Topic({
+function settingPublisher(){
+   //setting publisher
+    show_video_publisher = new ROSLIB.Topic({
+        ros : ros,
+        name : show_video_pub_topic_name,
+        messageType : show_video_pub_topic_type
+    });
+}
+
+
+function settingSubscriber(){
+   var listener = new ROSLIB.Topic({
       ros : ros,
       name : order_pub_topic,
       messageType: order_pub_topic_type
@@ -193,26 +223,11 @@ function settingROSCallbacks()
       messageType: order_list_sub_topic_type
     });
     order_list_listener.subscribe(processOrderList);
-
-    }
-  );
-  ros.on('error',function(e) {
-    console.log("Error!",e);
-  }
-  );
-                                               
-  ros.on('close',function() {
-    console.log("Connection Close!");
-    $('#focusedInput').val('Disconnected');
-  }
-  );
-
 }
 
 function processOrderList(msg) {
   console.log(msg);
   var i;
-
   nav_div.empty();
   for(i in msg.orders) {
       // add into navigation bar
@@ -241,3 +256,32 @@ function createOrderLi(order) {
 
   return li;
 }
+
+function initGoCart(){
+  $(".call-gocart-btn").click(function(){
+    callGoCart();
+    showVideo();
+  });
+}
+function showVideo(){
+  var left_video = new ROSLIB.Message({
+    screen_id : "left",
+    video_url : "TV_Left_3_GoCart.mp4"
+  });
+  show_video_publisher.publish(left_video);
+  var right_video = new ROSLIB.Message({
+    screen_id : "right",
+    video_url : "TV_right_3_GoCart.mp4"
+  });
+  show_video_publisher.publish(right_video);
+}
+function callGoCart(){
+  /*
+  var order = new ROSLIB.Message({
+    order_id : uuid,
+    receivers : [{location: config_values['table']+"", qty : 1, menus:cur_order_list}]
+  });
+  send_order_publisher.publish(order)  
+  */
+}
+

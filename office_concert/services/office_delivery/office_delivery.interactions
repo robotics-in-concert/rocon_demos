@@ -82,5 +82,5 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    screen: 1
+    screen: left
   remappings: []

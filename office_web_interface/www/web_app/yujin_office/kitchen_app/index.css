@@ -1,3 +1,8 @@
 .order-list{
     overflow: auto;
 }
+
+.call-gocart-btn{
+    height: 81px;
+    font-size: 41px;
+}
