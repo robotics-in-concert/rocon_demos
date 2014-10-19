@@ -20,6 +20,7 @@
   <run_depend>roscpp</run_depend>
   <run_depend>yocs_msgs</run_depend>
   <run_depend>kobuki_utils</run_depend>
+  <run_depend>diagnostics_msgs</run_depend>
   <run_depend>yocs_msgs</run_depend>
   <run_depend>yocs_navigator</run_depend>
   <run_depend>yocs_localization_manager</run_depend>

@@ -5,6 +5,7 @@
 #
 import rospy
 import simple_delivery_msgs.msg as simple_delivery_msgs
+import diagnostic_msgs.msg as diagnostic_msgs
 import yocs_msgs.msg as yocs_msgs
 import kobuki_msgs.msg as kobuki_msgs
 import std_msgs.msg as std_msgs
@@ -17,6 +18,8 @@ from waiterbot_bringup import ButtonControl
 DELIVERY_ACTION = 'delivery_order'
 LOC_ACTION = 'localize'
 NAV_ACTION = 'navigate_to'
+STATUS = 'robot_status'
+DIAGNOSTIC = '/diagnostics_agg'
 
 STATE_INITIALIZATION = 'INITIALIZATION'
 STATE_GOTO_BASE      = 'GOTO_BASE'
@@ -97,6 +100,7 @@ class StateManager(object):
             
         self._previous_red_button_time = None
         self._red_count = 0
+        self._robot_battery_status = 0
 
         self._nav_base_timeout = rospy.get_param('~nav_base_timeout', 300.0)
         self._nav_pickup_timeout = rospy.get_param('~nav_pickup_timeout', 300.0)
@@ -118,7 +122,9 @@ class StateManager(object):
         self._pub = {}
 
         # Debug        
-        self._pub['debug'] = rospy.Publisher('robot_status', std_msgs.String, queue_size=2)
+        self._pub[STATUS] = rospy.Publisher(STATUS, simple_delivery_msgs.RobotStatus, queue_size=2)
+        self._sub[DIAGNOSTIC] = rospy.Subscriber(DIAGNOSTIC, diagnostic_msgs.DiagnosticArray, self._process_diagnostics)
+        
 
         # Localize manager
         self.loginfo('Wait for Localise manager to be up')
@@ -137,6 +143,21 @@ class StateManager(object):
 
         # Button Controller
         self._button_controller = ButtonControl('/mobile_base/events/digital_input', self._process_button)
+
+    def _process_diagnostics(self, msg):
+        for s in msg.status:
+            if s.name == '/Power System/Battery':
+                charge = 0
+                capa = 0
+                for v in s.values:
+                    if v.key == 'Charge (Ah)':
+                        charge = v.value
+                    elif v.key == 'Capacity (Ah)':
+                        capa = v.value
+                battery_percent = 100 * float(charge) / float(capa);
+                self._robot_battery_status = battery_percent
+                break
+
 
     def _process_button(self, green, red):
         self.loginfo("Button Pressed. Green[%s] Red[%s]"%(str(green),str(red)))
@@ -212,30 +233,30 @@ class StateManager(object):
 
     def _logging(self):
         #self.loginfo(self._current_state)
-        self._pub['debug'].publish(str(self._current_state))
 
+        feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
+        feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
+        if self._current_state == STATE_AT_BASE:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
+        elif self._current_state == STATE_GOTO_KITCHEN:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_FRONTDESK
+        elif self._current_state == STATE_AT_KITCHEN:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_FRONTDESK
+        elif self._current_state == STATE_GOTO_TABLE:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
+        elif self._current_state == STATE_AT_TABLE:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_CONFIRM_RECEIVER
+        elif self._current_state == STATE_BACKTO_BASE:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.RETURN_TO_DOCK
+        elif self._current_state == STATE_REINITIALIZATION:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPLETE_RETURN
+        elif self._current_state == STATE_ON_ERROR:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ERROR
         if self._order_in_progress:
-            feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
-            feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
-            if self._current_state == STATE_AT_BASE:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
-            elif self._current_state == STATE_GOTO_KITCHEN:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_FRONTDESK
-            elif self._current_state == STATE_AT_KITCHEN:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_FRONTDESK
-            elif self._current_state == STATE_GOTO_TABLE:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
-            elif self._current_state == STATE_AT_TABLE:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_CONFIRM_RECEIVER
-            elif self._current_state == STATE_BACKTO_BASE:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.RETURN_TO_DOCK
-            elif self._current_state == STATE_REINITIALIZATION:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPLETE_RETURN
-            elif self._current_state == STATE_ON_ERROR:
-                feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ERROR
             feedback.delivery_status.order_id = self._delivery_order_id
             feedback.delivery_status.target_goal = self._target_location
             self._deliver_order_handler.publish_feedback(feedback)
+        self._pub[STATUS].publish(feedback.delivery_status.status, self._robot_battery_status)
                 
     def loginfo(self, msg):
         rospy.loginfo('Robot State Manager : ' + str(msg))
@@ -399,14 +420,6 @@ class StateManager(object):
         if self._navigator_finished:
             # When it arrives...
             self._current_state = STATE_REINITIALIZATION
-
-
-
-
-
-
-
-
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
