@@ -6,7 +6,7 @@ var delivery_status_sub_type = "simple_delivery_msgs/DeliveryStatus";
 var defaultUrL = "";
 var discard_btn_list = "";
 var table = "";
-
+var config_values = {};
 //parameter setting
 if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
     defaultUrL = rocon_interactions.rosbridge_uri;
@@ -17,8 +17,10 @@ if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
 if (rocon_interactions.parameters.hasOwnProperty('extra_data')){
     table = rocon_interactions.parameters.extra_data;
 }else{
-    table = "1";
+    table = "table1";
 }
+
+config_values['table'] = table;
 
 // remapping rules setting
 //pub, sub
@@ -83,6 +85,8 @@ $().ready(function(e){
   // setting ros callbacks
   settingROSCallbacks();
   ros.connect(defaultUrL);
+  $(".rosbridge-ip-info").html(defaultUrL);
+  initConfig(config_values);
 });
 
 function initEvent(){
@@ -129,8 +133,14 @@ function initEvent(){
 
   $("img."+'order-img-btn').mouseup(function(){
     $("img."+'order-img-btn').attr('src','./img/3_order_button_order_off.png');
-    nextDiv = currentDiv + 1;
-    updateDiv(nextDiv);
+    if (cur_order_list.length){
+      nextDiv = currentDiv + 1;
+      updateDiv(nextDiv);  
+    }
+    else{
+      $("img."+'order-img-btn').attr('src','./img/3_order_button_order_disabled.png');
+    }
+    
   });
   $("img."+'order-img-btn').mousedown(function(){
     $("img."+'order-img-btn').attr('src','./img/3_order_button_order_on.png');
@@ -236,7 +246,7 @@ function initMenu(){
 }
 
 function initIntro(){
-  $('.intro-layer-location-name').html("This table is [Table "+table+"]");
+  $('.intro-layer-location-name').html("This table is [Table "+config_values['table']+"]");
 }
 
 function updateDiv(target_div){
@@ -388,7 +398,7 @@ function sendOrder(){
   //hardcoded
   var order = new ROSLIB.Message({
     order_id : uuid,
-    receivers : [{location: table+"", qty : 1, menus:cur_order_list}]
+    receivers : [{location: config_values['table']+"", qty : 1, menus:cur_order_list}]
   });
   send_order_publisher.publish(order)
   console.log("order: ",order, send_order_publisher)
@@ -397,6 +407,7 @@ function sendOrder(){
 function settingROSCallbacks(){
   ros.on('connection',function() {
     console.log("Connected");
+    $(".rosbridge-connection-info").html("Connection");
     // subscribe to order list    
     var delivery_status_listener = new ROSLIB.Topic({
       ros : ros,
@@ -416,11 +427,13 @@ function settingROSCallbacks(){
   );
   ros.on('error',function(e) {
     console.log("Error!",e);
+    $(".rosbridge-connection-info").html("Error: "+ e);
   }
   );
 
   ros.on('close',function() {
     console.log("Connection Close!");
+    $(".rosbridge-connection-info").html("Connection Close!");
     //alert("ROS Connection Close!");
   }
   );

@@ -69,10 +69,9 @@
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  width: 100%;
-  height: 100%;
 }
 
+/*title-layer css*/
 
 
 /*intro-layer css*/
@@ -129,14 +128,46 @@
 }
 
 
+/*config-layer ccss*/
+.config-layer{
+    position: absolute;
+    background-color: #ffffff;
+    width:20%;
+    height:100%;
+    opacity: .8;
+    z-index: 1000;
+}
+
+.rosbridge-ip-info{
+    position: absolute;
+    right: 1%;
+    top: 1%;
+    font-size: 15px;
+    color:white;
+    opacity: .5;
+    z-index: 1000;
+}
+
+.rosbridge-connection-info{
+    position: absolute;
+    right: 1%;
+    top: 3%;
+    font-size: 15px;
+    color:white;
+    opacity: .5;
+    z-index: 1000;
+}
+
 
 /*modal css*/
 .modal{
 	width: 700px;
-	margin-left: -350px;	
+	margin-left: -350px;
+  border-radius: 30px;
 }
 .modal-body{
 	max-height: 600px;	
+   border-radius: 30px;
 }
 .modal-drink-img-group{
 	text-align: center;
@@ -158,34 +189,3 @@
 	margin-top: 1%;
 }
 
-.sd-status-bar{
-	margin:10px;
-	font-size:27px;
-	color:white;
-}
-.sd-logo{
-	height:47px;
-	width:150px;
-	float:right;
-}
-
-.sd-table-list{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding: 50px 5px;
-	font-size: 48px;
-
-}
-
-.sd-goal-msg{
-	font-size:45px;
-	line-height: 45px;
-}
-.sd-delivery-status-msg{
-	font-size:45px;
-	line-height: 45px;
-}
-.sd-dummy-green-btn{
-	padding: 50px 5px;
-	font-size: 48px;
-}
