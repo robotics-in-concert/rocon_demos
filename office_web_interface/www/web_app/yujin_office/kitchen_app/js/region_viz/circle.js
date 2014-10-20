@@ -16,8 +16,6 @@ REGIONVIZ.Circle = function(options) {
   that.waitColor = createjs.Graphics.getRGB(200,54,15,0.6);
   that.tableTopicName = options.tableTopicName || '/table_pose_list';
   that.tabletopicType = options.tableTopicType || '/yocs_msgs/TableList';
-  that.orderTopicName = options.orderTopicName || 'list_order';
-  that.orderTopicType = options.orderTopicType || '/cafe_msgs/OrderList';
   that.tables = [];
   that.circle_viz = {};
   that.texts = {};
@@ -30,11 +28,7 @@ REGIONVIZ.Circle = function(options) {
     stage = that.rootObject.getStage();
   }
   
-  that.sub_orders = new ROSLIB.Topic({
-    ros: that.ros,
-    name : that.orderTopicName,
-    messageType : that.orderTopicType
-  });
+  
   
  
   that.sub_table = new ROSLIB.Topic({
@@ -89,47 +83,7 @@ REGIONVIZ.Circle = function(options) {
     console.log('Viewer : Annotations initialized');
   });
   
-  that.sub_orders.subscribe(function(msg) {
-    console.log(msg);
-    if(that.is_initialized == false) {
-      console.log('Viewer : Annotations are not initialized yet');
-      return;
-    }
-    
-    // determine whether tables should pulse or not
-    var pulse = {};
-    for(o in msg.orders) {
-      var order = msg.orders[o];
-      var circle_name = 'table' + order.table_id;
-      var circle = that.circle_viz[circle_name];
-      if(order.status == 0) {
-        pulse[circle_name] = 'on_wait';
-      }        
-      else if(order.status >= 1 && order.status <= 5) {
-         pulse[circle_name] = 'on_serve';
-      }  
-    }
-    
-    for(c in that.circle_viz) {
-      var circle = that.circle_viz[c];
-
-      if(c in pulse) {
-        if(pulse[c] == 'on_wait') {
-          circle.graphics.clear().beginFill(that.waitColor).drawCircle(0,0,circle.radius);
-        }
-        else if(pulse[c] == 'on_serve') {
-          circle.graphics.clear().beginFill(that.pulseColor).drawCircle(0,0,circle.radius);
-          circle.is_pulse = true;
-        }
-      }else {
-        circle.graphics.clear().beginFill(that.color).drawCircle(0,0,circle.radius);
-        circle.is_pulse = false;        
-      }
-    }
-  });
-
-
-
+  
   var createCircle = function(x,y,radius, name) {
     var circle = new createjs.Shape();
     circle.graphics.beginFill(that.color).drawCircle(0,0,radius);

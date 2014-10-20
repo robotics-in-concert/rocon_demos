@@ -181,7 +181,6 @@ function addNavigators(viewer,gridClient) {
 
 function addRegionViz(viewer,gridClient){
   var table_topic = rocon_interactions.remappings['tables'] || 'tables';
-  var order_topic = rocon_interactions.remappings['list_order'] || 'list_order';
   var ar_marker_topic = rocon_interactions.remappings['ar_markers'] || 'ar_markers';
   gridClient.on('change', function(map_origin) {
     circle_region_poller = new REGIONVIZ.Circle({
@@ -189,7 +188,6 @@ function addRegionViz(viewer,gridClient){
       map_origin : map_origin,
       rootObject : viewer.scene,
       tableTopicName : table_topic,
-      orderTopicName : order_topic
     });
 
     ar_region_poller = new REGIONVIZ.AlvarAR({
