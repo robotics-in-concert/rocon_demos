@@ -64,7 +64,8 @@ config_values['go_cart_hue_2'] = 5+"";
 $().ready(function(e) {
 
   initHeader();
-  initViewer()
+  initViewer();
+  initGoCart();
   nav_div= $('#nav-orders');
   var nw = $('#nav-wrapper');
   nw.css('margin-top','20pt');
@@ -205,7 +206,6 @@ function settingROSCallbacks()
 {
   ros.on('connection',function() {
     console.log("Connected");
-    initGoCart();
     // subscribe to order list                                                       
     $('#focusedInput').val('Connected');
     $('#focusedInput').attr('disabled',true);
@@ -270,14 +270,14 @@ function settingSubscriber(){
       messageType: gocart_status_sub_topic_type
     });
 
-    gocart_status_listener.subscribe(processOrderList);
+    gocart_status_listener.subscribe(processGoCartStatus);
 }
 
 function processGoCartStatus(data){
   console.log(data);
-  $(".go-cart-status").html(data.status_desc);
+  $(".go-cart-status").html(data.status_desc+"");
   console.log(data.status_desc);
-  if (data.status == 3){
+  if (data.statuzs == 3){
     $(".on-doing-gocart").hide();
     $(".idle-gocart").show();
   }
