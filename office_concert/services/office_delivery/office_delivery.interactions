@@ -70,7 +70,7 @@
 # Restock service remappings
     - remap_from: nav_ctrl
       remap_to: /waypoint_navigation/nav_ctrl
-    - remap_from: nav_status
+    - remap_from: nav_ctrl_status
       remap_to: /waypoint_navigation/nav_ctrl_status
 
 - name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/screen_viewer/index.html)
