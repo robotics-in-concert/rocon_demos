@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import rospy
-import yocs_msgs.msg as yocs_msg
+import yocs_msgs.msg as yocs_msgs
 
 class GocartBot(object):
 

@@ -13,6 +13,8 @@
 <!--  <run_depend>rocon_devices</run_depend>-->
   <run_depend>kobuki_softapps</run_depend>
   <run_depend>robot_pose_publisher</run_depend>
+  <run_depend>yocs_msgs</run_depend>
+  <run_depend>rocon_apps</run_depend>
   
   <export>
     <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
