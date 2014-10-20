@@ -1,6 +1,6 @@
 - name: web_url(http://www.google.com)
   role: 'Customer'
-  compatibility: rocon:/pc
+  compatibility: rocon:/*
   display_name: 'Web Search'
   description: 'Web Surfer'
   max: -1
@@ -9,7 +9,7 @@
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/webapp/cafe_Dorothy/dorothy_web_menu.html)
 - name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/order_app/index.html)
   role: 'Customer'
-  compatibility: rocon:/pc
+  compatibility: rocon:/*/*/indigo
   display_name: Office Delivery Order App (Table 1)
   description: Exhibition web menu
   icon:
@@ -30,7 +30,7 @@
 
 - name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/order_app/index.html)
   role: 'Customer'
-  compatibility: rocon:/pc
+  compatibility: rocon:/*/*/indigo 
   display_name: Office Delivery Order App (Table 4)
   description: Exhibition web menu
   icon:
@@ -51,7 +51,7 @@
 #- name: web_app(http://localhost/cafe_concert_webinterfaces/cafe_viewer/www/index.html)
 - name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/kitchen_app/index.html)
   role: 'Office Manager'
-  compatibility: rocon:/pc
+  compatibility: rocon:/*/*/indigo
   display_name: Office Monitor
   description: Monitors Office robots 
   parameters:
@@ -67,16 +67,15 @@
       remap_to: /annotation/tables
     - remap_from: ar_markers
       remap_to: /annotation/ar_markers
-    - remap_from: list_order
-      remap_to: /cafe/list_order
-    - remap_from: list_remote_order
-      remap_to: /cafe/remote_order_list
-    - remap_from: remote_order_update
-      remap_to: /cafe/remote_order_update
+# Restock service remappings
+    - remap_from: nav_ctrl
+      remap_to: /waypoint_navigation/nav_ctrl
+    - remap_from: nav_status
+      remap_to: /waypoint_navigation/nav_ctrl_status
 
 - name: web_app(http://192.168.10.23/office_concert/web_app/yujin_office/screen_viewer/index.html)
   role: 'Office Manager'
-  compatibility: rocon:/pc
+  compatibility: rocon:/*/*/indigo
   display_name: Screen Viewer
   description: Screen viewer 
   parameters:
