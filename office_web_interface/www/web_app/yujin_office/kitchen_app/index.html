@@ -2,7 +2,7 @@
 <html>
   <head>
   <meta charset="UTF-8">
-    <title>Rocon - Kitchen Viewer</title>
+    <title>Rocon - Delivery Viewer</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="">
@@ -35,7 +35,7 @@
     <script type="text/javascript" src="http://robotics-in-concert.github.io/rocon_tools/js/hydro/interactions.js"></script>
 
     <script src="js/add_orderlist.js"></script>
-
+    <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <link href="index.css" rel="stylesheet"></link>
   </head>
@@ -45,13 +45,17 @@
       <div class="navbar-inner">
         <div class="container-fluid">
           <img class="brand" style="height:35px; width:120px;" src="img/rocon_logo.png"></img>
-          <a class="brand" href="#" style="margin-top:6px">Cafe Viewer</a>
+          <a class="brand" href="#" style="margin-top:6px">Delivery Viewer</a>
           <p class="input-prepend navbar-text pull-right" style="margin-top:7px">
             <input class="input-large" id="focusedInput" type="text" value=""></input>
           </p>
         </div>
       </div>
-
+    <p class='oa-ui-connection-info rosbridge-ip-info'>ws://localhost:9090</p>
+    <p class='oa-ui-connection-info rosbridge-connection-info'>connection</p>
+    <div class='container config-layer '>
+        <h1>Config</h1>
+    </div>
     <!-- Visualizer -->
     <div class="container-fluid">
       <div class="row-fluid">

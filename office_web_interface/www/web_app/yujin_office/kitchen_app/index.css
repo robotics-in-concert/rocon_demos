@@ -6,3 +6,34 @@
     height: 81px;
     font-size: 41px;
 }
+
+
+/*config-layer css*/
+.config-layer{
+    position: absolute;
+    background-color: #ffffff;
+    width:20%;
+    height:100%;
+    opacity: .8;
+    z-index: 1000;
+}
+
+.rosbridge-ip-info{
+    position: absolute;
+    right: 1%;
+    top: 1%;
+    font-size: 15px;
+    color:white;
+    opacity: .5;
+    z-index: 1000;
+}
+
+.rosbridge-connection-info{
+    position: absolute;
+    right: 1%;
+    top: 3%;
+    font-size: 15px;
+    color:white;
+    opacity: .5;
+    z-index: 1000;
+}

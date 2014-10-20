@@ -19,6 +19,10 @@ var show_video_publisher = '';
 var show_video_pub_topic_name = '/show_video';
 var show_video_pub_topic_type = 'simple_media_msgs/ShowVideo';
 
+var touch_sensor_event_publisher = '';
+var touch_sensor_event_pub_topic_name = '/touch_sensor_event';
+var touch_sensor_event_pub_topic_type = 'std_msgs/String';
+
 delivery_status_list = {
 "10" : "IDLE",
 "20" : "GO_TO_FRONTDESK",
@@ -34,6 +38,7 @@ delivery_status_list = {
 "-10" : "ERROR"
 }
 
+var config_values = {};
 
 $().ready(function(e) {
 
@@ -49,6 +54,7 @@ function initHeader()
   settingROSCallbacks();
   ros.connect(defaultUrL);
   $('#focusedInput').val(''+defaultUrL);
+  initConfig(config_values);
 }
 
 function initViewer() {
@@ -206,6 +212,11 @@ function settingPublisher(){
         name : show_video_pub_topic_name,
         messageType : show_video_pub_topic_type
     });
+    touch_sensor_event_publisher = new ROSLIB.Topic({
+        ros : ros,
+        name : touch_sensor_event_pub_topic_name,
+        messageType : touch_sensor_event_pub_topic_type
+    });
 }
 
 
@@ -260,21 +271,43 @@ function createOrderLi(order) {
 function initGoCart(){
   $(".call-gocart-btn").click(function(){
     callGoCart();
-    showVideo();
+    showVideo(2);
   });
 }
-function showVideo(){
+function showVideo(video_mode){
+  left_video = "TV_Default.mp4";
+  right_video = "TV_Default.mp4";
+  if(video_mode == 0){
+    left_video = "TV_Left_1_Robosem.mp4";
+    right_video = "TV_Right_1_Robosem.mp4";
+  }
+  else if (video_mode == 1){
+    left_video = "TV_Left_2_Waiterbot.mp4";
+    right_video = "TV_Right_2_Waiterbot.mp4";
+  }
+  else if (video_mode == 2){
+    left_video = "TV_Left_3_GoCart.mp4";
+    right_video = "TV_Right_3_GoCart.mp4";
+  }
+  else{
+    left_video = "TV_Default.mp4";
+    right_video = "TV_Default.mp4";
+  }
+
+  
   var left_video = new ROSLIB.Message({
     screen_id : "left",
-    video_url : "TV_Left_3_GoCart.mp4"
+    video_url : left_video
   });
+
   show_video_publisher.publish(left_video);
   var right_video = new ROSLIB.Message({
     screen_id : "right",
-    video_url : "TV_Right_3_GoCart.mp4"
+    video_url : right_video
   });
   show_video_publisher.publish(right_video);
 }
+
 function callGoCart(){
   /*
   var order = new ROSLIB.Message({
@@ -285,3 +318,86 @@ function callGoCart(){
   */
 }
 
+function callTouchSensorEvent(sensor_id){
+  var sensor_event = new ROSLIB.Message({
+    data : sensor_id+"",
+  });
+  touch_sensor_event_publisher.publish(sensor_event)
+}
+
+
+
+var config_mode = 0;
+
+function initConfig(configs){
+    $('.brand').click(function(){
+
+        config_mode += 1;
+        if (config_mode > 2){
+            config_mode = 0;
+        }
+        doConfig(config_mode);
+
+    });
+    $(".config-layer").hide();
+    doConfig(config_mode);
+    settingConfigValue(configs);
+}
+
+function settingConfigValue(configs){  
+    context = '';
+    for (value in configs){
+        
+        context += '<div class="input-prepend"><span class="add-on span1">'+value+'</span>'
+        context += '<input class="span1 config-'+value+'" id="prependedInput" type="text" value="'+configs[value]+'">'
+        context += '</div>'
+    }
+    context += '<button class="span2 btn btn-primary save-config-values" type="button">Save</button>';
+    context += '<button class="span2 btn btn-primary right-touch-sensor-event" type="button">RightTouch</button>';
+    context += '<button class="span2 btn btn-primary left-touch-sensor-event" type="button">LeftTouch</button>';
+    context += '<button class="span2 btn btn-primary show-welcome-video-event" type="button">ShowWelcome</button>';
+    context += '<button class="span2 btn btn-primary show-delivery-video-event" type="button">ShowDelivery</button>';
+    context += '<button class="span2 btn btn-primary show-restock-video-event" type="button">ShowRestock</button>';
+    context += '<button class="span2 btn btn-primary show-default-video-event" type="button">ShowDefault</button>';
+    $(".config-layer").append(context);
+    
+    $(".save-config-values").click(function(){
+        for (value in configs){
+            configs[value] = $(".config-"+value).val();
+        }
+    });
+    $(".right-touch-sensor-event").click(function(){
+        callTouchSensorEvent(4);
+    });
+    
+    $(".left-touch-sensor-event").click(function(){
+        callTouchSensorEvent(3);
+    });
+
+    $(".show-welcome-video-event").click(function(){
+        showVideo(0);
+    });
+    $(".show-delivery-video-event").click(function(){
+        showVideo(1);
+    });
+    $(".show-restock-video-event").click(function(){
+        showVideo(2);
+    });
+    $(".show-default-video-event").click(function(){
+        showVideo(-1);
+    });
+}
+
+function doConfig(mode){
+    if (mode == 0 ){
+        $(".oa-ui-connection-info").css('opacity',.0);
+        $(".config-layer").hide("slide");
+    }
+    else if(mode == 1){
+        $(".oa-ui-connection-info").css('opacity',.8);
+        $(".config-layer").hide();
+    }
+    else{
+        $(".config-layer").show("slide");
+    }
+}
