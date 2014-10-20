@@ -22,5 +22,6 @@
     <rocon_app>rapps/office_task_manager_sim/office_task_manager_sim.rapp</rocon_app>
     <rocon_app>rapps/office_hue_manager/office_hue_manager.rapp</rocon_app>
     <rocon_app>rapps/office_robosem/office_robosem.rapp</rocon_app>
+    <rocon_app>rapps/dummy_gocart/waypoint_navigation.rapp</rocon_app>
   </export>
 </package>
