@@ -90,7 +90,7 @@ class WaiterSoftBot(object):
         rospy.loginfo(target_goal + " : " + message)
 
     def execute_callback(self, data):
-        time_start = 3
+        time_start = 5
         time_end = 5
         order_id = data.order_id
         receivers = data.locations
