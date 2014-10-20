@@ -1,6 +1,6 @@
 <launch>
   <arg name="services" default="office_concert/office.services"/>
-  <arg name="auto_enable_services" default="[admin, initialisation, restock]"/>
+  <arg name="auto_enable_services" default="[admin, initialisation]"/>
   <arg name="rosbridge_address" default="$(optenv ROSBRIDGE_ADDRESS localhost)"/>
 
   <group ns="software">

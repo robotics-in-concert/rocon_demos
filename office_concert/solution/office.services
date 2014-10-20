@@ -5,6 +5,8 @@
     interactions: office_concert/initialisation
     parameters: office_concert/initialisation
 - resource_name: office_concert/office_delivery
+  overrides:
+    priority: 100
 # - resource_name: office_concert/vm_delivery
 #   overrides:
 #     priority: 1

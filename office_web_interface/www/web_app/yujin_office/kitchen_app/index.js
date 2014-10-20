@@ -14,14 +14,32 @@ var annotator;
 var order_list_sub_topic_name = '/order_list';
 var order_list_sub_topic_type = 'simple_delivery_msgs/OrderList';
 
+var gocart_status_sub_topic_name = 'nav_ctrl_status';
+var gocart_status_sub_topic_type = 'yocs_msgs/NavigationControlStatus';
+
 //set pub
 var show_video_publisher = '';
 var show_video_pub_topic_name = '/show_video';
 var show_video_pub_topic_type = 'simple_media_msgs/ShowVideo';
 
+var set_color_publisher = '';
+var set_color_pub_topic_name = '/set_color';
+var set_color_pub_topic_type = 'rocon_device_msgs/SetColor';
+
+var gocart_move_publisher = '';
+var gocart_move_pub_topic_name = 'nav_ctrl';
+var gocart_move_pub_topic_type = 'yocs_msgs/NavigationControl';
+
 var touch_sensor_event_publisher = '';
 var touch_sensor_event_pub_topic_name = '/touch_sensor_event';
 var touch_sensor_event_pub_topic_type = 'std_msgs/String';
+
+
+if(gocart_status_sub_topic_name in rocon_interactions.remappings)
+  gocart_status_sub_topic_name = rocon_interactions.remappings[gocart_status_sub_topic_name];
+
+if(gocart_move_pub_topic_name in rocon_interactions.remappings)
+  gocart_move_pub_topic_name = rocon_interactions.remappings[gocart_move_pub_topic_name];
 
 delivery_status_list = {
 "10" : "IDLE",
@@ -39,6 +57,8 @@ delivery_status_list = {
 }
 
 var config_values = {};
+config_values['go_cart_hue_1'] = 4+"";
+config_values['go_cart_hue_2'] = 5+"";
 
 $().ready(function(e) {
 
@@ -217,6 +237,17 @@ function settingPublisher(){
         name : touch_sensor_event_pub_topic_name,
         messageType : touch_sensor_event_pub_topic_type
     });
+    gocart_move_publisher = new ROSLIB.Topic({
+        ros : ros,
+        name : gocart_move_pub_topic_name,
+        messageType : gocart_move_pub_topic_type
+    });
+
+    set_color_publisher = new ROSLIB.Topic({
+        ros : ros,
+        name : set_color_pub_topic_name,
+        messageType : set_color_pub_topic_type
+    });
 }
 
 
@@ -234,6 +265,18 @@ function settingSubscriber(){
       messageType: order_list_sub_topic_type
     });
     order_list_listener.subscribe(processOrderList);
+
+    var gocart_status_listener = new ROSLIB.Topic({
+      ros : ros,
+      name : gocart_status_sub_topic_name,
+      messageType: gocart_status_sub_topic_type
+    });
+
+    gocart_status_listener.subscribe(processOrderList);
+}
+
+function processGoCartStatus(data){
+  console.log(data);
 }
 
 function processOrderList(msg) {
@@ -272,7 +315,22 @@ function initGoCart(){
   $(".call-gocart-btn").click(function(){
     callGoCart();
     showVideo(2);
+    setColor("RED");
   });
+}
+
+function setColor(color_name){
+  var target_color = new ROSLIB.Message({
+    id : config_values['go_cart_hue_1'],
+    color : color_name
+  }); 
+  set_color_publisher.publish(target_color);
+
+  target_color = new ROSLIB.Message({
+    id : config_values['go_cart_hue_2'],
+    color : color_name
+  }); 
+  set_color_publisher.publish(target_color);
 }
 function showVideo(video_mode){
   left_video = "TV_Default.mp4";
@@ -293,8 +351,7 @@ function showVideo(video_mode){
     left_video = "TV_Default.mp4";
     right_video = "TV_Default.mp4";
   }
-
-  
+ 
   var left_video = new ROSLIB.Message({
     screen_id : "left",
     video_url : left_video
@@ -309,13 +366,12 @@ function showVideo(video_mode){
 }
 
 function callGoCart(){
-  /*
   var order = new ROSLIB.Message({
-    order_id : uuid,
-    receivers : [{location: config_values['table']+"", qty : 1, menus:cur_order_list}]
-  });
-  send_order_publisher.publish(order)  
-  */
+    goal_name : "go_to_kitchen",
+    control : 1
+  }); 
+  gocart_move_publisher.publish(order);
+  console.log("Call gocart");
 }
 
 function callTouchSensorEvent(sensor_id){
@@ -325,10 +381,7 @@ function callTouchSensorEvent(sensor_id){
   touch_sensor_event_publisher.publish(sensor_event)
 }
 
-
-
 var config_mode = 0;
-
 function initConfig(configs){
     $('.brand').click(function(){
 
@@ -353,12 +406,14 @@ function settingConfigValue(configs){
         context += '</div>'
     }
     context += '<button class="span2 btn btn-primary save-config-values" type="button">Save</button>';
-    context += '<button class="span2 btn btn-primary right-touch-sensor-event" type="button">RightTouch</button>';
-    context += '<button class="span2 btn btn-primary left-touch-sensor-event" type="button">LeftTouch</button>';
-    context += '<button class="span2 btn btn-primary show-welcome-video-event" type="button">ShowWelcome</button>';
-    context += '<button class="span2 btn btn-primary show-delivery-video-event" type="button">ShowDelivery</button>';
-    context += '<button class="span2 btn btn-primary show-restock-video-event" type="button">ShowRestock</button>';
-    context += '<button class="span2 btn btn-primary show-default-video-event" type="button">ShowDefault</button>';
+    context += '</hr>'
+    context += '<button class="span2 btn btn-primary right-touch-sensor-event" type="button">Right Touch</button>';
+    context += '<button class="span2 btn btn-primary left-touch-sensor-event" type="button">Left Touch</button>';
+    context += '<button class="span2 btn btn-primary show-welcome-video-event" type="button">Show Welcome</button>';
+    context += '<button class="span2 btn btn-primary show-delivery-video-event" type="button">Show Delivery</button>';
+    context += '<button class="span2 btn btn-primary show-restock-video-event" type="button">Show Restock</button>';
+    context += '<button class="span2 btn btn-primary show-default-video-event" type="button">Show Default</button>';
+    context += '<button class="span2 btn btn-primary set-color-white" type="button">Hue White</button>';
     $(".config-layer").append(context);
     
     $(".save-config-values").click(function(){
@@ -386,6 +441,10 @@ function settingConfigValue(configs){
     $(".show-default-video-event").click(function(){
         showVideo(-1);
     });
+    $(".set-color-white").click(function(){
+        setColor("WHITE");
+    });
+
 }
 
 function doConfig(mode){
