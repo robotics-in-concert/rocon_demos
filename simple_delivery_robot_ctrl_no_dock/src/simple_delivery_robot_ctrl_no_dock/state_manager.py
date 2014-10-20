@@ -252,6 +252,8 @@ class StateManager(object):
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.COMPLETE_RETURN
         elif self._current_state == STATE_ON_ERROR:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ERROR
+        else:
+            feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ERROR
         if self._order_in_progress:
             feedback.delivery_status.order_id = self._delivery_order_id
             feedback.delivery_status.target_goal = self._target_location
