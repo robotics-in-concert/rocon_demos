@@ -22,20 +22,20 @@ base_global_planner: "navfn/NavfnROS"
 
 #We plan to integrate recovery behaviors for turtlebot but currently those belong to gopher and still have to be adapted.
 ## recovery behaviors; we avoid spinning, but we need a fall-back replanning
-#recovery_behavior_enabled: true
+recovery_behavior_enabled: true
 
 recovery_behaviors:
   - name: 'super_conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'aggressive_reset'
+  - name: 'rotate_reset1'
     type: 'rotate_recovery/RotateRecovery'
-  - name: 'conservative_reset'
+  - name: 'conservative_reset1'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
   - name: 'super_save'
     type: 'stepback_recovery/StepbackRecovery'
-  - name: 'conservative_reset'
+  - name: 'conservative_reset2'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'clearing_rotation1'
+  - name: 'rotate_reset2'
     type: 'rotate_recovery/RotateRecovery'
   #- name: 'super_conservative_reset2'
     #type: 'clear_costmap_recovery/ClearCostmapRecovery'
