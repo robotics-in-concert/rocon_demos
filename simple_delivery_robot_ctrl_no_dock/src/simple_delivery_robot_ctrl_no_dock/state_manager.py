@@ -61,8 +61,8 @@ class StateManager(object):
     """ 
     _init_sound = 'init.wav'
     _confirm_sound = 'confirm.wav'
-    _retry_sound = 'retry.wav'
-    _navi_failed_sound = 'navi_failed.wav'
+    _retry_sound = 'navi_failed.wav'
+    _navi_failed_sound = 'retry.wav'
     _order_received_sound = 'order_received.wav'
     _at_table_sound = 'at_table.wav'
     _enjoy_meal_sound = 'enjoy_meal.wav'
