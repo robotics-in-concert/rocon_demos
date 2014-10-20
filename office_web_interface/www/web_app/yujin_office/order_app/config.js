@@ -41,10 +41,12 @@ function doConfig(mode){
     if (mode == 0 ){
         $(".oa-ui-connection-info").css('opacity',.0);
         $(".config-layer").hide("slide");
+        $(".oa-ui-title").hide();
     }
     else if(mode == 1){
         $(".oa-ui-connection-info").css('opacity',.8);
         $(".config-layer").hide();
+        $(".oa-ui-title").show();
     }
     else{
         $(".config-layer").show("slide");

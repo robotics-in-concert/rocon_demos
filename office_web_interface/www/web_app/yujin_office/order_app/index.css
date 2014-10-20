@@ -91,11 +91,11 @@
 }
 
 .menu-layer-drink-img{
-	width: 14%;
-	margin-left: 5%;
-	margin-right: 5%;
-	margin-top: 13%;
-	z-index: 100;
+  width: 13%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 16%;
+  z-index: 100;
 }
 
 .menu-layer-button-img-group{
@@ -117,8 +117,8 @@
 }
 
 .video-rocon-adv{
-	width: 56%;
-	margin-top: 11%
+  width: 53%;
+  margin-top: 15%;
 }
 .image-delivery-status-group{
 	text-align: center;	
@@ -158,6 +158,9 @@
     z-index: 1000;
 }
 
+.oa-ui-title{
+  position: absolute;
+}
 
 /*modal css*/
 .modal{
