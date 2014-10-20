@@ -2,10 +2,16 @@
     overflow: auto;
 }
 
-.call-gocart-btn{
+.idle-gocart{
     height: 81px;
     font-size: 41px;
 }
+
+.on-doing-gocart{
+    height: 81px;
+    font-size: 41px;
+}
+
 
 
 /*config-layer css*/

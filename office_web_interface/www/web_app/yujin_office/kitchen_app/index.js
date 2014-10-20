@@ -1,5 +1,6 @@
 var ros = new ROSLIB.Ros();
 var defaultUrL = rocon_interactions.rosbridge_uri;
+var gocart_current_target_goal = "";
 var robot1 = rocon_interactions.parameters['robot1'];
 var robot2 = rocon_interactions.parameters['robot2'];
 var robot3 = rocon_interactions.parameters['robot3'];
@@ -248,7 +249,6 @@ function settingPublisher(){
     });
 }
 
-
 function settingSubscriber(){
    var listener = new ROSLIB.Topic({
       ros : ros,
@@ -275,6 +275,16 @@ function settingSubscriber(){
 
 function processGoCartStatus(data){
   console.log(data);
+  $(".go-cart-status").html(data.status_desc);
+  console.log(data.status_desc);
+  if (data.status == 3){
+    $(".on-doing-gocart").hide();
+    $(".idle-gocart").show();
+  }
+  else if(data.status == 4){
+    $(".on-doing-gocart").hide();
+    $(".idle-gocart").show();
+  }
 }
 
 function processOrderList(msg) {
@@ -310,11 +320,33 @@ function createOrderLi(order) {
 }
 
 function initGoCart(){
-  $(".call-gocart-btn").click(function(){
-    callGoCart();
+  $(".on-doing-gocart").hide();
+  $(".idle-gocart").show();
+  
+  $(".go-to-kitchen").click(function(){
+    callGoCart("go_to_kitchen", 1);
     showVideo(2);
     setColor("RED");
+    $(".on-doing-gocart").show();
+    $(".idle-gocart").hide();
   });
+
+  $(".go-to-base").click(function(){
+    callGoCart("go_to_base", 1);
+    showVideo(2);
+    setColor("GREEN");
+    $(".on-doing-gocart").show();
+    $(".idle-gocart").hide();
+  });
+
+   $(".pause-gocart").click(function(){
+    callGoCart(gocart_current_target_goal, 2);
+  });
+
+   $(".stop-gocart").click(function(){
+    callGoCart(gocart_current_target_goal, 0);
+  });
+
 }
 
 function setColor(color_name){
@@ -363,10 +395,11 @@ function showVideo(video_mode){
   show_video_publisher.publish(right_video);
 }
 
-function callGoCart(){
+function callGoCart(goal_name, control){
+  gocart_current_target_goal = goal_name;
   var order = new ROSLIB.Message({
-    goal_name : "go_to_kitchen",
-    control : 1
+    goal_name : goal_name,
+    control : control
   }); 
   gocart_move_publisher.publish(order);
   console.log("Call gocart");
