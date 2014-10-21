@@ -40,8 +40,23 @@ delivery_status_list = {
 $().ready(function(e) {
     $('.video-screen-viewer').css("height",$( window ).height()).css("width",$( window ).width());
     initRos();
+    initScreen();
     initConfig(config_values);
 });
+
+function initScreen(){
+  console.log(config_values['screen_id'])
+  if(config_values['screen_id'].indexOf('left')>=0){
+    $(".video-screen-viewer").attr("src",config_values['res_path']+"TV_Left_0_Default.mp4");
+  }
+  else if(config_values['screen_id'].indexOf('right')>=0){    
+    $(".video-screen-viewer").attr("src",config_values['res_path']+"TV_Right_0_Default.mp4");
+  }
+  else{
+    $(".video-screen-viewer").attr("src",config_values['res_path']+"TV_Default.mp4");
+    console.log
+  }
+}
 
 function initRos()
 {
