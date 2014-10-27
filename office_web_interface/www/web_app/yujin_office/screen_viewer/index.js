@@ -38,7 +38,7 @@ delivery_status_list = {
 
 
 $().ready(function(e) {
-    $('.video-screen-viewer').css("height",$( window ).height()).css("width",$( window ).width());
+    
     initRos();
     initScreen();
     initConfig(config_values);
@@ -46,6 +46,8 @@ $().ready(function(e) {
 
 function initScreen(){
   console.log(config_values['screen_id'])
+  $('.video-screen-viewer').css("height",$( window ).height()).css("width",$( window ).width());
+  
   if(config_values['screen_id'].indexOf('left')>=0){
     $(".video-screen-viewer").attr("src",config_values['res_path']+"TV_Left_0_Default.mp4");
   }
