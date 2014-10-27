@@ -1,19 +1,32 @@
 var ros = new ROSLIB.Ros();
 
-var send_order_pub_type = "simple_delivery_msgs/DeliveryOrder"
-var delivery_status_sub_type = "simple_delivery_msgs/DeliveryStatus";
-
 var defaultUrL = "";
-var discard_btn_list = "";
 var table = "";
 var config_values = {};
+
+//pub
+var send_order_publisher;
+var send_order_pub_topic = "send_order";
+var send_order_pub_type = "simple_delivery_msgs/DeliveryOrder"
+
+//sub
+var delivery_status_sub_topic = "delivery_status";
+var delivery_status_sub_type = "simple_delivery_msgs/DeliveryStatus";
+
+// remapping rules setting
+if(delivery_status_sub_topic in rocon_interactions.remappings)
+  delivery_status_sub_topic = rocon_interactions.remappings[delivery_status_sub_topic];
+
+if(send_order_pub_topic in rocon_interactions.remappings)
+  send_order_pub_topic = rocon_interactions.remappings[send_order_pub_topic];
+
+
 //parameter setting
 if (rocon_interactions.hasOwnProperty('rosbridge_uri')){
     defaultUrL = rocon_interactions.rosbridge_uri;
 }else{
     defaultUrL = 'localhost';
 }
-
 if (rocon_interactions.parameters.hasOwnProperty('extra_data')){
     table = rocon_interactions.parameters.extra_data;
 }else{
@@ -21,18 +34,6 @@ if (rocon_interactions.parameters.hasOwnProperty('extra_data')){
 }
 
 config_values['table'] = table;
-
-// remapping rules setting
-//pub, sub
-var send_order_pub_topic = "send_order";
-var delivery_status_sub_topic = "delivery_status";
-var send_order_publisher;
-
-if(delivery_status_sub_topic in rocon_interactions.remappings)
-  delivery_status_sub_topic = rocon_interactions.remappings[delivery_status_sub_topic];
-
-if(send_order_pub_topic in rocon_interactions.remappings)
-  send_order_pub_topic = rocon_interactions.remappings[send_order_pub_topic];
 
 // public variable
 // delivery_status_list = {
@@ -168,7 +169,6 @@ function initEvent(){
   $("img.no-img-btn").mousedown(function(){
     $('img.no-img-btn').attr('src','./img/4_modalbox_button_no_on.png');
   });
-
 }
 
 function initDiv(){
@@ -241,8 +241,7 @@ function initMenu(){
       $("img."+'cancel-img-btn').attr("src",'./img/3_order_button_cancel_off.png');
       $("img."+'order-img-btn').attr("src",'./img/3_order_button_order_off.png');
     }
-  });
-  
+  }); 
 }
 
 function initIntro(){

@@ -12,7 +12,7 @@ var ar_region_poller;
 var annotator;
 
 //set sub
-var order_list_sub_topic_name = '/order_list';
+var order_list_sub_topic_name = 'order_list';
 var order_list_sub_topic_type = 'simple_delivery_msgs/OrderList';
 
 var gocart_status_sub_topic_name = 'nav_ctrl_status';
@@ -20,11 +20,11 @@ var gocart_status_sub_topic_type = 'yocs_msgs/NavigationControlStatus';
 
 //set pub
 var show_video_publisher = '';
-var show_video_pub_topic_name = '/show_video';
+var show_video_pub_topic_name = 'show_video';
 var show_video_pub_topic_type = 'simple_media_msgs/ShowVideo';
 
 var set_color_publisher = '';
-var set_color_pub_topic_name = '/set_color';
+var set_color_pub_topic_name = 'set_color';
 var set_color_pub_topic_type = 'rocon_device_msgs/SetColor';
 
 var gocart_move_publisher = '';
@@ -32,15 +32,33 @@ var gocart_move_pub_topic_name = 'nav_ctrl';
 var gocart_move_pub_topic_type = 'yocs_msgs/NavigationControl';
 
 var touch_sensor_event_publisher = '';
-var touch_sensor_event_pub_topic_name = '/touch_sensor_event';
+var touch_sensor_event_pub_topic_name = 'touch_sensor_event';
 var touch_sensor_event_pub_topic_type = 'std_msgs/String';
 
+
+//remapping pub
+if(show_video_pub_topic_name in rocon_interactions.remappings)
+  show_video_pub_topic_name = rocon_interactions.remappings[show_video_pub_topic_name];
+
+if(set_color_pub_topic_name in rocon_interactions.remappings)
+  set_color_pub_topic_name = rocon_interactions.remappings[set_color_pub_topic_name];
+
+if(gocart_move_pub_topic_name in rocon_interactions.remappings)
+  gocart_move_pub_topic_name = rocon_interactions.remappings[gocart_move_pub_topic_name];
+
+if(touch_sensor_event_pub_topic_name in rocon_interactions.remappings)
+  touch_sensor_event_pub_topic_name = rocon_interactions.remappings[touch_sensor_event_pub_topic_name];
+
+if(order_list_sub_topic_name in rocon_interactions.remappings)
+  order_list_sub_topic_name = rocon_interactions.remappings[order_list_sub_topic_name];
+
+//remapping sub
+if(show_video_pub_topic_name in rocon_interactions.remappings)
+  show_video_pub_topic_name = rocon_interactions.remappings[show_video_pub_topic_name];
 
 if(gocart_status_sub_topic_name in rocon_interactions.remappings)
   gocart_status_sub_topic_name = rocon_interactions.remappings[gocart_status_sub_topic_name];
 
-if(gocart_move_pub_topic_name in rocon_interactions.remappings)
-  gocart_move_pub_topic_name = rocon_interactions.remappings[gocart_move_pub_topic_name];
 
 delivery_status_list = {
 "10" : "IDLE",
@@ -250,13 +268,6 @@ function settingPublisher(){
 }
 
 function settingSubscriber(){
-   var listener = new ROSLIB.Topic({
-      ros : ros,
-      name : order_pub_topic,
-      messageType: order_pub_topic_type
-      });
-    listener.subscribe(processOrderList);
-
     var order_list_listener = new ROSLIB.Topic({
       ros : ros,
       name : order_list_sub_topic_name,

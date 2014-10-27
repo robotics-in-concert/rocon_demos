@@ -8,16 +8,7 @@ var res_path = './video/'
 config_values['res_path'] = './video/';
 config_values['screen_id'] = screen_id;
 
-// var robot2 = rocon_interactions.parameters['robot2'];
-// var robot3 = rocon_interactions.parameters['robot3'];
-
-// var viewer;
-// var gridClient;
-// var circle_region_poller;
-// var ar_region_poller;
-// var annotator;
-
-var show_video_sub_topic_name = '/show_video'
+var show_video_sub_topic_name = 'show_video'
 var show_video_sub_topic_type = 'simple_media_msgs/ShowVideo'
 
 
