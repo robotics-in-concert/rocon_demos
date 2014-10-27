@@ -486,7 +486,6 @@ function settingConfigValue(configs){
     $(".set-color-white").click(function(){
         setColor("WHITE");
     });
-
 }
 
 function doConfig(mode){

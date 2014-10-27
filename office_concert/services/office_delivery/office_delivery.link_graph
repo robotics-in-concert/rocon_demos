@@ -51,12 +51,7 @@ topics:
   - id: taskcoordinator_kitchen_list_order
     type: cafe_msgs/OrderList
 
-actions:
-############### Task coordinator
-  - id: taskcoordinator_userdevice_send_order
-    type: cafe_msgs/UserOrder
-  - id: taskcoordinator_waiterbot_delivery_order
-    type: cafe_msgs/DeliveryOrder
+actions: []
 
 edges: 
 ############### Waiterbot
@@ -81,34 +76,6 @@ edges:
     finish: waiterbot
     remap_from: viz_marker_pose_list
     remap_to: /annotation/viz_tables
-
-## Task Coordinator
-  - start: taskcoordinator_waiterbot_delivery_order
-    finish: cafe_taskcoordinator
-    remap_from: waiter_1/delivery_order
-    remap_to: /adams/delivery_order
-#  - start: taskcoordinator_waiterbot_delivery_order
-#    finish: cafe_taskcoordinator
-#    remap_from: waiter_2/delivery_order
-#    remap_to: /elgar/delivery_order
-  - start: taskcoordinator_waiterbot_delivery_order
-    finish: cafe_taskcoordinator
-    remap_from: waiter_3/delivery_order
-    remap_to: /zach/delivery_order
-
-# - start: taskcoordinator_waiterbot_delivery_order
-#   finish: cafe_taskcoordinator
-#   remap_from: waiter_3/delivery_order
-#   remap_to: /elgar/delivery_order
-
-  - start: cafe_taskcoordinator
-    finish: taskcoordinator_userdevice_send_order
-    remap_from: send_order
-    remap_to: /cafe/send_order
-  - start: cafe_taskcoordinator
-    finish: taskcoordinator_kitchen_list_order
-    remap_from: list_order
-    remap_to: /cafe/list_order
 
 ############### Hue Manager
   - start: set_color
