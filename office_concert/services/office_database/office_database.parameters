@@ -1,8 +1,0 @@
-ar_topic: /annotations/ar_markers
-map_name: october
-map_topic: /map
-table_topic: /annotations/tables
-viz_ar_topic: /annotations/viz_ar_markers
-viz_table_topic: /annotations/viz_tables
-wc_namespace: /software/world_canvas
-world: yujin_rnd
