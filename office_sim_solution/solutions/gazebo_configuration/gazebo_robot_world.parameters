@@ -1,40 +1,11 @@
 robots:
-#  - name: goguma
-#    type: kobuki
-#    robot_rapp_whitelist: [rocon_apps, concert_service_gazebo]
-#    location: [0.0, 0.0, 0.0]
-  - name: gamza 
-    type: segbot
-    robot_rapp_whitelist: [rocon_apps, concert_service_gazebo]
-    location: [-4.0, -2.0, 3.14159265359]
+  - name: goguma
+    type: kobuki
+    robot_rapp_whitelist: [rocon_apps]
+    location: [0.0, 1.0, 0.0]
   - name: dangeun
     type: turtlebot
-    robot_rapp_whitelist: [rocon_apps, concert_service_gazebo]
-    location: [0.0, 4.0, 0.0]
-types:
-  - name: kobuki 
-    launch: concert_service_gazebo/kobuki.launch
-    flip_rule:
-      pub:
-        - odom
-      sub:
-        - mobile_base/.*
-  - name: turtlebot
-    launch: concert_service_gazebo/turtlebot.launch
-    flip_rule:
-      pub: 
-        - odom
-        - camera/.*
-        - scan
-      sub:
-        - cmd_vel_mux/.*
-  - name: segbot
-    launch: concert_service_gazebo/segbot.launch 
-    flip_rule:
-      pub:
-        - odom
-        - scan_filtered
-      sub:
-        - cmd_vel
+    robot_rapp_whitelist: [rocon_apps, turtlebot_rapps]
+    location: [0.0, 0.0, 0.0]
 
 world_file: office_sim_solution/yujin_office.world

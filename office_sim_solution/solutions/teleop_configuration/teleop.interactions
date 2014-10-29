@@ -1,0 +1,15 @@
+########################################################################
+# Teleoperations
+########################################################################
+
+- name: concert_teleop
+  role: 'User'
+  compatibility: rocon:/pc/*/hydro|indigo/*
+  display_name: Concert Teleop
+  description: Select and teleop a robot in the concert
+  max: -1
+  parameters:
+    maximum_linear_velocity: 2.0
+    maximum_angular_velocity: 1.57
+    capture_timeout: 45.0
+
