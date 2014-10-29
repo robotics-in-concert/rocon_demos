@@ -277,7 +277,7 @@ function processGoCartStatus(data){
   console.log(data);
   $(".go-cart-status").html(data.status_desc+"");
   console.log(data.status_desc);
-  if (data.statuzs == 3){
+  if (data.status == 0){
     $(".on-doing-gocart").hide();
     $(".idle-gocart").show();
   }
@@ -332,7 +332,7 @@ function initGoCart(){
   });
 
   $(".go-to-base").click(function(){
-    callGoCart("go_to_base", 1);
+    callGoCart("go_to_storage", 1);
     showVideo(2);
     setColor("GREEN");
     $(".on-doing-gocart").show();
