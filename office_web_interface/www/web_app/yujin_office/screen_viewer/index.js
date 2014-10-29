@@ -11,6 +11,9 @@ config_values['screen_id'] = screen_id;
 var show_video_sub_topic_name = 'show_video'
 var show_video_sub_topic_type = 'simple_media_msgs/ShowVideo'
 
+if(show_video_sub_topic_name in rocon_interactions.remappings)
+  show_video_sub_topic_name = rocon_interactions.remappings[show_video_sub_topic_name];
+
 
 delivery_status_list = {
 "10" : "IDLE",
