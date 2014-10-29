@@ -8,16 +8,7 @@ var res_path = './video/'
 config_values['res_path'] = './video/';
 config_values['screen_id'] = screen_id;
 
-// var robot2 = rocon_interactions.parameters['robot2'];
-// var robot3 = rocon_interactions.parameters['robot3'];
-
-// var viewer;
-// var gridClient;
-// var circle_region_poller;
-// var ar_region_poller;
-// var annotator;
-
-var show_video_sub_topic_name = '/show_video'
+var show_video_sub_topic_name = 'show_video'
 var show_video_sub_topic_type = 'simple_media_msgs/ShowVideo'
 
 
@@ -38,7 +29,7 @@ delivery_status_list = {
 
 
 $().ready(function(e) {
-    $('.video-screen-viewer').css("height",$( window ).height()).css("width",$( window ).width());
+    
     initRos();
     initScreen();
     initConfig(config_values);
@@ -46,6 +37,8 @@ $().ready(function(e) {
 
 function initScreen(){
   console.log(config_values['screen_id'])
+  $('.video-screen-viewer').css("height",$( window ).height()).css("width",$( window ).width());
+  
   if(config_values['screen_id'].indexOf('left')>=0){
     $(".video-screen-viewer").attr("src",config_values['res_path']+"TV_Left_0_Default.mp4");
   }

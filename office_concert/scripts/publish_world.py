@@ -10,7 +10,7 @@ def publish_map(world, namespace):
 
     # Get the 2D map for the given world
     map_ac = world_canvas_client.AnnotationCollection(world=world, types=['nav_msgs/OccupancyGrid'], srv_namespace=namespace, names=[map_name])
-    map_ac.loadData()
+    map_ac.load_data()
 
     # Publish the map on server side; topic type is get from the annotation info
     map_ac.publish(map_topic, None, False, False)   # i.e. by_server=True, as_list=False
@@ -22,9 +22,9 @@ def publish_location(world, namespace):
     viz_table_topic = rospy.get_param('viz_table_topic')
 
     table_ac = world_canvas_client.AnnotationCollection(world=world, types=['yocs_msgs/Table'], srv_namespace=namespace)
-    table_ac.loadData()
+    table_ac.load_data()
     table_ac.publish(table_topic, 'yocs_msgs/TableList', by_server=False, as_list=True)
-    table_ac.publishMarkers(viz_table_topic)
+    table_ac.publish_markers(viz_table_topic)
     return table_ac
 
 
@@ -33,9 +33,9 @@ def publish_ar_marker(world, namespace):
     viz_ar_topic = rospy.get_param('viz_ar_topic')
 
     ar_ac = world_canvas_client.AnnotationCollection(world=world, types=['ar_track_alvar_msgs/AlvarMarker'], srv_namespace=namespace)
-    ar_ac.loadData()
+    ar_ac.load_data()
     ar_ac.publish(ar_topic, 'ar_track_alvar_msgs/AlvarMarkers', by_server=False, as_list=True, list_attribute='markers')
-    ar_ac.publishMarkers(viz_ar_topic)
+    ar_ac.publish_markers(viz_ar_topic)
     return ar_ac
 
 
