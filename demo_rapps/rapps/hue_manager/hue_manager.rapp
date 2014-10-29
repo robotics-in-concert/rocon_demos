@@ -1,0 +1,6 @@
+display: HueManager
+description: The hue controller 
+compatibility: rocon:/pc
+launch: hue_manager.launch
+public_interface: hue_manager.interface
+public_parameters: hue_manager.parameters

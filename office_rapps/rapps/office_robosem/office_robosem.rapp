@@ -1,5 +1,0 @@
-display: OfficeRobosem
-description: The robosem bridge controller 
-compatibility: rocon:/pc
-launch: office_robosem.launch
-public_interface: office_robosem.interface

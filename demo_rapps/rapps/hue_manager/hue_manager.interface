@@ -1,0 +1,7 @@
+subscribers:
+  - name: set_color
+    type: rocon_device_msgs/SetColor
+publishers: []
+services: []
+action_clients: []
+action_servers: []

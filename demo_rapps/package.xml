@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>demo_rapps</name>
+  <version>0.0.0</version>
+  <description>The demo_rapps package</description>
+
+  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+  <maintainer email="dwlee@yujinrobot.com">Dong Wook Lee</maintainer>
+  <license>BSD</license>
+
+  <!-- <url type="website">http://ros.org/wiki/cafe_rapps</url> -->
+  <buildtool_depend>catkin</buildtool_depend>
+<!--  <run_depend>rocon_devices</run_depend>-->
+  <run_depend>kobuki_softapps</run_depend>
+  <run_depend>robot_pose_publisher</run_depend>
+  <run_depend>yocs_msgs</run_depend>
+  <run_depend>rocon_apps</run_depend>
+
+  <export>
+    <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
+    <rocon_app>rapps/waiter_sim/waiter_sim.rapp</rocon_app>
+    <rocon_app>rapps/waiter_real/waiter_real.rapp</rocon_app>
+    <rocon_app>rapps/hue_manager/hue_manager.rapp</rocon_app>
+    <rocon_app>rapps/robosem_bridge/robosem_bridge.rapp</rocon_app>
+    <rocon_app>rapps/dummy_order_app/dummy_order_app.rapp</rocon_app>
+    <rocon_app>rapps/dummy_task_manager/dummy_task_manager.rapp</rocon_app>
+    <rocon_app>rapps/dummy_gocart/waypoint_navigation.rapp</rocon_app>
+  </export>
+</package>

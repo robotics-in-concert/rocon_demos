@@ -1,0 +1,19 @@
+<launch>
+  <arg name="world" default="yujin_rnd"/>
+  <arg name="table_file" default="$(find demo_concert)/annotations/tables.yaml"/>
+  <arg name="ar_file" default="$(find demo_concert)/annotations/ar_markers.yaml"/>
+  <arg name="map_name" default="october"/>
+
+  <group ns="/software/world_canvas">
+    <node pkg="world_canvas_server" type="save_tables.py" name="save_table" output="screen">
+      <param name="file"     type="string" value="$(arg table_file)"/>
+      <param name="world"    type="string" value="$(arg world)"/>
+      <param name="map_name"  type="string"  value="$(arg map_name)"/>
+    </node>
+    <node pkg="world_canvas_server" type="save_markers.py" name="save_markers" output="screen">
+      <param name="file"     type="string" value="$(arg ar_file)"/>
+      <param name="world"    type="string" value="$(arg world)"/>
+      <param name="map_name"  type="string"  value="$(arg map_name)"/>
+    </node>
+  </group>
+</launch>
