@@ -4,7 +4,9 @@
      priority: 3
      interactions: office_concert/initialisation
      parameters: office_concert/initialisation
-- resource_name: office_concert/office_delivery
-# - resource_name: office_concert/vm_delivery
-#   overrides:
-#     priority: 1
+#- resource_name: office_concert/office_delivery
+- resource_name: concert_service_gazebo/gazebo_robot_world
+  overrides:
+    priority: 1
+    name: gazebo
+    parameters: office_concert/gazebo
