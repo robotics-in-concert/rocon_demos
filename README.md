@@ -24,7 +24,7 @@
 * Convenience
 
 ```
- > echo "source ~/gazeborocon/devel/setup.bash" >> ~/.bashrc
+ > echo "source ~/rocon/devel/setup.bash" >> ~/.bashrc
 ```
 
 ### Starting Concert 
