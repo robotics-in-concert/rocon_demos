@@ -1,6 +1,6 @@
 robots:
-  - name: gamza
+  - name: young
     type: turtlebot
-    robot_rapp_whitelist: [rocon_apps, turtlebot_rapps]
+    robot_rapp_whitelist: [rocon_apps, turtlebot_rapps, office_rapps]
     location: [0.0, 0.0, 0.0]
-world_file: office_concert/minimap.world
+world_file: office_concert/empty_world.world
