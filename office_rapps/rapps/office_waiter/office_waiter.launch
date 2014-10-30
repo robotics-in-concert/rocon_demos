@@ -13,52 +13,13 @@
     </node>
   </group>
   <group if="$(arg sim)">
-    <arg name="localize_action" value="localize"/>
-    <arg name="navigator_action" value="navigate_to"/>
-    <arg name="pickup_location" value="pickup"/>
-    <arg name="delivery_order_action" value="delivery_order"/>
-    <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sounds_korean"/>
-
-    <node pkg="simple_delivery_robot_ctrl_no_dock" name="office_waiterbot_state_manager" type="waiterbot.py">
-      <param name="simulation"      value="$(arg sim)"/>
-      <param name="pickup_location" value="$(arg pickup_location)"/>
-      <param name="resource_path"   value="$(arg resource_path)"/>
-      <remap from="navigate_to" to="$(arg navigator_action)"/>
-      <remap from="delivery_order" to="$(arg delivery_order_action)"/>
-    </node>
-
-    <include file="$(find yocs_localization_manager)/launch/localization_manager.launch">
-      <arg name="simulation" value="$(arg sim)"/>
-      <arg name="localize_action" value="$(arg localize_action)"/>
-      <arg name="predicted_robot_pose_topic" value="predicted_robot_pose"/>
-      <arg name="odom_topic"  value="odom"/>
-      <arg name="odom_frame" value="$(arg application_namespace)/odom"/>
-      <arg name="base_frame" value="$(arg application_namespace)/base_footprint"/>     
-      <arg name="global_frame"  value="map"/>
-      <arg name="initial_pose_x" value="24.131"/>
-      <arg name="initial_pose_y" value="11.846"/>
-      <arg name="initial_pose_a"  value="0.103"/>
+    <include file="$(find simple_delivery_robot_ctrl_no_dock)/launch/controller_sim.launch">
+      <arg name="application_namespace" value="$(arg application_namespace)"/>
     </include>
 
     <node pkg="robot_pose_publisher" name="robot_pose_publisher" type="robot_pose_publisher">
       <param name="is_stamped" value="true"/>
       <param name="base_frame" value="$(arg application_namespace)/base_footprint"/>
     </node>
-
-    <include file="$(find yocs_navigator)/launch/navigator.launch">
-      <arg name="sim"                 value="$(arg sim)"/>
-      <arg name="location_list_topic" value="table_pose_list"/>
-      <arg name="navigator_action"  value="$(arg navigator_action)"/>
-      <arg name="start_move_base" value="true"/>
-      <arg name="cmd_vel_mux_input" value="cmd_vel_mux/input/navi"/>
-      <arg name="move_base_topic" value="move_base"/>
-      <arg name="odom_topic"  value="odom"/>
-      <arg name="map_topic" value="/map"/>
-      <arg name="robot_cmd_feed" value="mobile_base/commands/velocity"/>
-      <arg name="global_frame"  value="map"/>
-      <arg name="odom_frame" value="$(arg application_namespace)/odom"/>
-      <arg name="base_frame" value="$(arg application_namespace)/base_footprint"/>
-      <arg name="move_base_param_path" value="$(find simple_delivery_robot_ctrl_no_dock)/params/move_base"/>
-    </include>
   </group>
 </launch>
