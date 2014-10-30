@@ -6,11 +6,8 @@
 #  overrides:
 #    priority: 1000
 
-- resource_name: concert_service_gazebo/gazebo_robot_world
-  overrides:
-    parameters: office_sim_solution/gazebo_robot_world.parameters
 - resource_name: concert_service_admin/admin
 - resource_name: concert_service_teleop/teleop
   overrides:
-    parameters: office_sim_solution/teleop.parameters
-    interactions: office_sim_solution/teleop.interactions
+    parameters: turtlebot_concert/teleop.parameters
+    interactions: turtlebot_concert/teleop.interactions

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
-  <name>office_sim_solution</name>
+  <name>turtlebot_concert</name>
   <version>0.0.0</version>
   <description>
-    Office Simulation
+  Turtlebot Concert
   </description>
 
   <maintainer email="jihoonlee.in@gmail.com">Jihoon Lee</maintainer>
