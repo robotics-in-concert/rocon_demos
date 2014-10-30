@@ -159,7 +159,7 @@ function addMap(viewer) {
 
 
 function addRobotStatus() {
-  var robots = [robot1, robot2, robot3];
+  var robots = [robot2, robot3, robot1];
   var robot_status_topic_type = 'simple_delivery_msgs/RobotStatus';
   for (var i = robots.length - 1; i >= 0; i--) {
     new RobotStatus({
@@ -459,7 +459,6 @@ function initConfig(configs){
 function settingConfigValue(configs){  
     context = '';
     for (value in configs){
-        
         context += '<div class="input-prepend"><span class="add-on span1">'+value+'</span>'
         context += '<input class="span1 config-'+value+'" id="prependedInput" type="text" value="'+configs[value]+'">'
         context += '</div>'
@@ -528,8 +527,8 @@ RobotStatus = function(options) {
   robot_status.topicType = options.topicType || 'simple_delivery_msgs/RobotStatus';
 
   context = '';
-  context += '<div class="span1">'
-  context += '<span class="add-on">'+robot_status.robot_name+'</span>'
+  context += '<div class="span2">'
+  context += '<h4 class=' + robot_status.robot_name + '-robot-status>'+robot_status.robot_name+' : None'+ '</h4>'
   context += '<div class="progress"><div class="bar '+robot_status.robot_name+'-battery-status" style="width: 0%;">None</div></div>'
   context += '</div>'
   $('.robots-status').append(context);
@@ -540,11 +539,13 @@ RobotStatus = function(options) {
     messageType : robot_status.topicType,
     throttle_rate : 100
   });
+
   robot_status.status_listener.subscribe(function(msg){
      battery = Number((msg.battery_status.toFixed(1)));
      if ($('.'+robot_status.robot_name+'-battery-status').length){
         $('.'+robot_status.robot_name+'-battery-status').css('width', battery+'%');
         $('.'+robot_status.robot_name+'-battery-status').html(battery);
+        $('.'+robot_status.robot_name+'-robot-status').html(robot_status.robot_name+' : '+ delivery_status_list[msg.robot_status]);
      }
   })
 }  
