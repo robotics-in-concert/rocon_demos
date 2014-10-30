@@ -31,12 +31,18 @@
 
 ```
 # nothing is running. 
-> roslaunch turtlebot concert.launch --screen
+> roslaunch turtlebot_concert concert.launch --screen
+```
+
+### Start turtlebot
+
+```
+> roslaunch turtlebot_bringup concert_client.launch --screen 
 ```
 
 ### Teleoperate Robots
 
-Select a robot and teleop around. Note that only Dangen(TurtleBot) provides camera stream. Kobuki and segbot do not have camera stream.
+Select a robot and teleop around. 
 
 ```
 # Open up a new terminal
