@@ -57,8 +57,7 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    robot1: adams
-    robot2: zach 
+    robot1: young 
   remappings:
     - remap_from: map
       remap_to: /map
