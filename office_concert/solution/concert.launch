@@ -6,7 +6,11 @@
   <group ns="software">
     <node ns="world_canvas" pkg="world_canvas_server" type="annotations_server.py" name="world_canvas_server" output="screen"> 
     </node>
+    <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
+      <arg name="auto_run_workflows" value="office_delivery_wf welcome_wf"/>
+    </include>
   </group>
+  
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(optenv HUB_WHITELIST Office Concert)"/>
       <arg name="services" value="$(arg services)"/>

@@ -7,10 +7,6 @@
 
   <node pkg="office_concert" name="publish_world" type="publish_world.py">
   </node>
-  
-  <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
-    <arg name="auto_run_workflows" value="office_delivery_wf welcome_wf"/>
-  </include>
 
 <!-- 
   <node name="remote_order_manager" pkg="cafe_remote_order_manager" type="manager.py">
