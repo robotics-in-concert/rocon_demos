@@ -103,6 +103,7 @@ function initViewer() {
   gridClient = addMap(viewer);
   addRegionViz(viewer,gridClient);
   addNavigators(viewer,gridClient);
+  addRobotStatus();
 }
 
 function createViewer() {
@@ -111,7 +112,7 @@ function createViewer() {
   div.css('margin-top','20pt');
 
   var width = div.width();
-  var half_window = $(document).height() -200;
+  var half_window = $(document).height() -300;
   var height = half_window;// < 200?200:half_window;
   $(".order-list").css('max-height',height);
   viewer = new ROS2D.Viewer({
@@ -127,7 +128,7 @@ function createViewer() {
 
   $(window).resize(function(e) {
     console.log("resize event");
-    var half_window = $(document).height()-200;
+    var half_window = $(document).height()-300;
     var height = half_window;// < 200?200:half_window;
     
     viewer.resizeCanvas(width,height);
@@ -152,6 +153,22 @@ function addMap(viewer) {
     viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
   });
   return gridClient;
+}
+
+
+
+
+function addRobotStatus() {
+  var robots = [robot1, robot2, robot3];
+  var robot_status_topic_type = 'simple_delivery_msgs/RobotStatus';
+  for (var i = robots.length - 1; i >= 0; i--) {
+    new RobotStatus({
+      ros : ros,
+      robot_name : robots[i],
+      topicName : '/'+robots[i]+'/robot_status',
+      topicType : robot_status_topic_type,
+    })
+  };
 }
 
 function addNavigators(viewer,gridClient) {
@@ -501,3 +518,33 @@ function doConfig(mode){
         $(".config-layer").show("slide");
     }
 }
+
+RobotStatus = function(options) {
+  var robot_status = this;
+  options = options || {};
+  robot_status.ros = options.ros;
+  robot_status.robot_name = options.robot_name || 'None';
+  robot_status.topicName = options.topicName || 'robot_status';
+  robot_status.topicType = options.topicType || 'simple_delivery_msgs/RobotStatus';
+
+  context = '';
+  context += '<div class="span1">'
+  context += '<span class="add-on">'+robot_status.robot_name+'</span>'
+  context += '<div class="progress"><div class="bar '+robot_status.robot_name+'-battery-status" style="width: 0%;">None</div></div>'
+  context += '</div>'
+  $('.robots-status').append(context);
+
+  robot_status.status_listener = new ROSLIB.Topic({
+    ros: robot_status.ros,
+    name: robot_status.topicName,
+    messageType : robot_status.topicType,
+    throttle_rate : 100
+  });
+  robot_status.status_listener.subscribe(function(msg){
+     battery = Number((msg.battery_status.toFixed(1)));
+     if ($('.'+robot_status.robot_name+'-battery-status').length){
+        $('.'+robot_status.robot_name+'-battery-status').css('width', battery+'%');
+        $('.'+robot_status.robot_name+'-battery-status').html(battery);
+     }
+  })
+}  
