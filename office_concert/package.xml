@@ -17,6 +17,7 @@
     <concert_service>services/office_database/office_database.service</concert_service>
     <concert_service>services/office_delivery/office_delivery.service</concert_service>
     <concert_service>services/office_delivery_sim/office_delivery_sim.service</concert_service>
+    <concert_service>services/welcome/welcome.service</concert_service>
     <concert_service>services/vm_delivery/vm_delivery.service</concert_service>
   </export>
 </package>

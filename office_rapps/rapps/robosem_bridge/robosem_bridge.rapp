@@ -1,0 +1,6 @@
+display: RobosemBridge
+description: The robosem bridge to controll
+compatibility: rocon:/pc
+launch: robosem_bridge.launch
+public_interface: robosem_bridge.interface
+public_parameters: robosem_bridge.parameters

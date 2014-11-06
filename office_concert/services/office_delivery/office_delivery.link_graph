@@ -14,10 +14,6 @@ nodes:
     uri: rocon:/pc/hue_manager#office_rapps/office_hue_manager
     min: 1
     max: 1
-  - id: robosem_bridge
-    uri: rocon:/pc/robosem_bridge#office_rapps/office_robosem
-    min: 1
-    max: 1
 
 topics:
 ################# Map Database
@@ -39,13 +35,6 @@ topics:
 
   - id: set_color
     type: rocon_device_msgs/SetColor
-
-  - id: play_tts
-    type: std_msgs/String
-  - id: robot_motion
-    type: std_msgs/String
-  - id: touch_sensor_event
-    type: std_msgs/String
 
 ############### Task coordinator
   - id: taskcoordinator_kitchen_list_order
@@ -82,22 +71,4 @@ edges:
     finish: hue_manager
     remap_from: set_color
     remap_to: /set_color
-
-############### Robosem Bridge
-  - start: play_tts
-    finish: robosem_bridge
-    type: std_msgs/String
-    remap_from: play_tts
-    remap_to: /play_tts
-  - start: robot_motion
-    finish: robosem_bridge
-    type: std_msgs/String
-    remap_from: robot_motion
-    remap_to: /robot_motion
-
-  - start: touch_sensor_event
-    finish: robosem_bridge
-    type: std_msgs/String
-    remap_from: touch_sensor_event
-    remap_to: /touch_sensor_event
 

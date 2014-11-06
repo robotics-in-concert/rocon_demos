@@ -29,7 +29,7 @@ class DummyOrderApp():
 
         self.publishers = {}
         self.subscribers = {}
-        self.publishers['send_order'] = rospy.Publisher('/services/officedelivery/send_order', DeliveryOrder,latch=True)
+        self.publishers['send_order'] = rospy.Publisher('/send_order', DeliveryOrder,latch=True)
         self.subscribers['delivery_status'] = rospy.Subscriber('/services/officedelivery/delivery_status', DeliveryStatus, self.delivery_status_update)
 
     def delivery_status_update(self, data):
@@ -71,7 +71,7 @@ if __name__ == '__main__':
         
         rospy.loginfo('Initialized')
         
-        target_location = 'table6'
+        target_location = 'table2'
         if rospy.has_param('~target_location'):
             target_location = rospy.get_param('~target_location', 'table2')
 

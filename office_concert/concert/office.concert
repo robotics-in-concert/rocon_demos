@@ -1,20 +1,25 @@
 <concert>
+<!--
     <launch title="concert:11311" package="office_concert" name="concert.launch" port="11311">
       <arg name="services" value="office_concert/office.services"/>
     </launch>
-
+-->
+<!--
     <launch title="go_cart:11314"    package="office_concert" name="office_backend.launch" port="11314">
       <arg name="concert_client_name" value="go_cart"/>
     </launch>
+-->
 
 
     <launch title="hue_manager:11315"    package="office_concert" name="office_backend.launch" port="11315">
       <arg name="concert_client_name" value="hue_manager"/>
     </launch>
 
+<!--
     <launch title="robosem_bridge:11316"    package="office_concert" name="office_backend.launch" port="11316">
       <arg name="concert_client_name" value="robosem_bridge"/>
     </launch>
+-->
 
 
 <!--    <launch title="office_backend:11312"    package="office_concert" name="office_backend.launch" port="11312"/>-->

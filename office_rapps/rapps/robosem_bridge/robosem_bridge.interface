@@ -1,0 +1,11 @@
+subscribers:
+  - name: play_tts
+    type: std_msgs/String
+  - name: robot_motion
+    type: std_msgs/String
+publishers: 
+  - name: touch_sensor_event
+    type: std_msgs/String
+services: []
+action_clients: []
+action_servers: []

@@ -7,6 +7,9 @@
 - resource_name: office_concert/office_delivery
   overrides:
     priority: 100
+- resource_name: office_concert/welcome
+  overrides:
+    priority: 99
 # - resource_name: office_concert/vm_delivery
 #   overrides:
 #     priority: 1

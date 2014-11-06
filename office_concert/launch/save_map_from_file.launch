@@ -1,13 +1,13 @@
 <launch>
-  <arg name="world" default="yujin_rnd"/>
-  <arg name="map_file" default="$(find office_concert)/maps/map.yaml"/>
+  <arg name="world" default="roboworld"/>
+  <arg name="map_file" default="$(find office_concert)/maps/second.yaml"/>
 
   <group ns="/software/world_canvas">
     <node pkg="world_canvas_server" type="save_map.py" name="save_map" output="screen">
       <!-- TODO: load map from a PNG and metadata files, as map_server does -->
       <param name="file"     type="string" value="$(arg map_file)"/>
       <param name="world"    type="string" value="$(arg world)"/>
-      <param name="map_name" type="string" value="october"/>
+      <param name="map_name" type="string" value="second"/>
     </node>
   </group>
 </launch>
