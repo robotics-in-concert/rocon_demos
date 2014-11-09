@@ -1,5 +1,0 @@
-display: Waypoint Navigation dummy app
-description: The simulated gocart navigate around the some place to serve package. 
-compatibility: rocon:/pc
-launch: waypoint_navigation.launch
-parent_name: rocon_apps/waypoint_navigation

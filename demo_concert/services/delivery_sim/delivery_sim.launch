@@ -1,7 +1,0 @@
-<launch>
-  <node pkg="concert_service_link_graph" name="office_delivery" type="static_link_graph_service.py">
-    <param name="filename" value="$(find office_concert)/services/office_delivery_sim/office_delivery_sim.link_graph"/>
-  </node>
-  <node pkg="office_concert" name="publish_world" type="publish_world.py">
-  </node>
-</launch>

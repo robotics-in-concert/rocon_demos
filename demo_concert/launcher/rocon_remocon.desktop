@@ -1,8 +1,0 @@
-[Desktop Entry]
-  Name=Rocon Remocon
-  Comment=Bringup Remocon
-  Exec=/home/yujin/demos/demo201410/src/office_concert/office_concert/launcher/rocon_remocon.bash
-  Icon=/home/yujin/demos/demo201410/src/rocon_tools/rocon_bubble_icons/icons/joystick.png
-  Terminal=false
-  Type=Application
-  Categories=Utility;Application;
