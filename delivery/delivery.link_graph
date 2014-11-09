@@ -2,12 +2,12 @@
 # the name is just a placemarker for the eventual concert client name.
 # All other parts of the tuple are fixed.
 
-name: "Delivery Sevice Simulation"
+name: "Demo Concert"
 nodes:
   - id: waiterbot
-    uri: rocon:/pc/*#concert_common_rapps/waiter
-    min: 2
-    max: 2
+    uri: rocon:/turtlebot#concert_common_rapps/waiter
+    min: 1
+    max: 1
 
 topics:
 ################# Map Database
@@ -18,7 +18,7 @@ topics:
   - id: annotation_walls
     type: yocs_msgs/WallList
   - id: annotation_markers
-    type: ar_track_alvar_msgs/AlvarMarkers
+    type: ar_track_alvar/AlvarMarkers
   - id: annotation_tables
     type: yocs_msgs/TableList
 
@@ -50,4 +50,4 @@ edges:
   - start: annotation_visual_marker
     finish: waiterbot
     remap_from: viz_marker_pose_list
-    remap_to: /annotation/viz_markers
+    remap_to: /annotation/viz_tables

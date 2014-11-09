@@ -2,11 +2,11 @@
 # the name is just a placemarker for the eventual concert client name.
 # All other parts of the tuple are fixed.
 
-name: delivery_sim
-description: "Deliver yours in simulation"
+name: Delivery
+description: "Deliver yours"
 author: YujinRobot
 priority: 2
 launcher_type: roslaunch
-launcher: concert_common_services/delivery_sim
+launcher: concert_common_services/delivery
 interactions: concert_common_services/delivery
 parameters: concert_common_services/delivery
