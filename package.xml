@@ -1,22 +1,26 @@
+<?xml version="1.0"?>
 <package>
-  <name>concert_common_services</name>
+  <name>concert_common_rapps</name>
   <version>0.0.0</version>
-  <description>
-      Services to use commonly in demo
-  </description>
-  <maintainer email="dwlee@yujinrobot.com">Dongwook Lee</maintainer>
+  <description>The concert common rapps package</description>
+
+  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+  <maintainer email="dwlee@yujinrobot.com">Dong Wook Lee</maintainer>
   <license>BSD</license>
-  <author>Dongwook Lee</author>
 
+  <!-- <url type="website">http://ros.org/wiki/cafe_rapps</url> -->
   <buildtool_depend>catkin</buildtool_depend>
+<!--  <run_depend>rocon_devices</run_depend>-->
+  <run_depend>kobuki_softapps</run_depend>
+  <run_depend>robot_pose_publisher</run_depend>
+  <run_depend>yocs_msgs</run_depend>
+  <run_depend>rocon_apps</run_depend>
 
-  <run_depend>rospy</run_depend>
-  <run_depend>kobuki_soft</run_depend>
-  <run_depend>concert_service_link_graph</run_depend>
-  
   <export>
-    <concert_service>delivery/delivery.service</concert_service>
-    <concert_service>delivery_sim/delivery_sim.service</concert_service>
-    <concert_service>welcome/welcome.service</concert_service>
+    <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
+    <rocon_app>rapps/waiter_sim/waiter_sim.rapp</rocon_app>
+    <rocon_app>rapps/waiter_real/waiter_real.rapp</rocon_app>
+    <rocon_app>rapps/robosem_bridge/robosem_bridge.rapp</rocon_app>
+    <rocon_app>rapps/dummy_gocart/waypoint_navigation.rapp</rocon_app>
   </export>
 </package>

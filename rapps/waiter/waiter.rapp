@@ -1,0 +1,5 @@
+display: Waiter
+description: The robot navigate around the cafe to serve beverages. 
+#compatibility: rocon:/waiterbot
+#launch: waiter.launch
+public_interface: waiter.interface

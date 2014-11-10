@@ -1,0 +1,5 @@
+display: Real Waiterbot
+description: The waiter navigate around the some place to serve package. 
+compatibility: rocon:/turtlebot
+launch: waiter_real.launch
+parent_name: concert_common_rapps/waiter

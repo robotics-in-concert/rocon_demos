@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="demo_rapps" name="dummy_gocart" type="dummy_waypoint_navigation.py" output="screen"/>
+</launch>
