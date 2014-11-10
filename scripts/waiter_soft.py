@@ -26,6 +26,9 @@ class WaiterSoftBot(object):
         self.command_base.wait_for_server()
         self.waiter_server = actionlib.SimpleActionServer(self.action_name, RobotDeliveryOrderAction, execute_cb=self.execute_callback, auto_start=False)
 
+        self.publisher = {}
+        self.publisher['robot_status'] = rospy.Publisher('robot_status', RobotStatus, queue_size = 10, latch = True)
+        
         self.subscriber = {}
         self.subscriber['table_list'] = rospy.Subscriber('table_pose_list', yocs_msgs.TableList, self.process_table_pose)
         self.subscriber['ar_list'] = rospy.Subscriber('marker_pose_list', AlvarMarkers, self.process_alvar_markers)
@@ -35,6 +38,8 @@ class WaiterSoftBot(object):
 
         self.ar_poses = {}
         self.ar_init = False
+
+        self.battery_status = 100
 
     def spin(self):
         self.waiter_server.start()
@@ -51,6 +56,8 @@ class WaiterSoftBot(object):
             pose_stamped.header = table.pose.header
             self.table_poses[table.name] = pose_stamped
         self.table_init = True
+        if self.ar_init and self.table_init:
+            self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.IDLE, self.battery_status))
 
     def process_alvar_markers(self, msg):
         if not self.ar_init:
@@ -59,6 +66,8 @@ class WaiterSoftBot(object):
             self.ar_poses[m.id] = m.pose
 
         self.ar_init = True
+        if self.ar_init and self.table_init:
+            self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.IDLE, self.battery_status))
 
     def process_status(self, time_range, order_id, target_goal, status,  message):
         k = 0
@@ -69,9 +78,11 @@ class WaiterSoftBot(object):
             rospy.loginfo(self.name + " : " + message + ", [%d/%d]" % (k, timeout))
 
         self.feedback(order_id, target_goal, status,  message)
+        self.publisher['robot_status'].publish(RobotStatus(status, self.battery_status))
 
     def go_to(self, order_id, target_goal, status,  message):
         self.feedback(order_id, target_goal, status,  message)
+        self.publisher['robot_status'].publish(RobotStatus(status, self.battery_status))
 
         goal = MoveBaseGoal(self.table_poses[target_goal])
         self.command_base.send_goal(goal)
@@ -91,7 +102,7 @@ class WaiterSoftBot(object):
 
     def execute_callback(self, data):
         time_start = 5
-        time_end = 5
+        time_end = 6
         order_id = data.order_id
         receivers = data.locations
 
@@ -100,7 +111,6 @@ class WaiterSoftBot(object):
             result = RobotDeliveryOrderResult(order_id, False, "Failure!")
             self.waiter_server.set_succeeded(result)
             return
-
         rospy.loginfo("Order Received : Receivers = %s", data.locations)
 
         # Go to kitchen, and return feedback ARRIVE_KITCHEN
@@ -111,6 +121,7 @@ class WaiterSoftBot(object):
 
         # Arrival at kitchen
         self.feedback(order_id, 'pickup', DeliveryStatus.ARRIVAL_AT_FRONTDESK, "ARRIVAL_AT_FRONTDESK")
+        self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.ARRIVAL_AT_FRONTDESK, self.battery_status))
 
         # Wait for kitchen
         self.process_status(time_range=[time_start, time_end],
@@ -120,7 +131,7 @@ class WaiterSoftBot(object):
                             message="WAITING_FOR_FRONTDESK")
 
         for receiver in receivers:
-            target_goal =  str(receiver)
+            target_goal = str(receiver)
             # Go to receiver
             self.go_to(order_id=order_id,
                        target_goal=target_goal,
@@ -128,6 +139,7 @@ class WaiterSoftBot(object):
                        message="GO_TO_RECEIVER")
             # Arrival at receiver
             self.feedback(order_id, target_goal, DeliveryStatus.ARRIVAL_AT_RECEIVER, "ARRIVAL_AT_RECEIVER")
+            self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.ARRIVAL_AT_RECEIVER, self.battery_status))
             # Waiting confirm
             self.process_status(time_range=[time_start, time_end],
                                 order_id=order_id,
@@ -136,9 +148,11 @@ class WaiterSoftBot(object):
                                 message="WAITING_CONFIRM_RECEIVER")
             # Complete delivery
             self.feedback(order_id, target_goal, DeliveryStatus.COMPLETE_DELIVERY, "COMPLETE_DELIVERY")
+            self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.COMPLETE_DELIVERY, self.battery_status))
 
         # Complete all delivery
         self.feedback(order_id, target_goal, DeliveryStatus.COMPLETE_ALL_DELIVERY, "COMPLETE_ALL_DELIVERY")
+        self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.COMPLETE_ALL_DELIVERY, self.battery_status))
         # Returning to Docking
         self.go_to(order_id=order_id,
                    target_goal='docking',
@@ -147,11 +161,13 @@ class WaiterSoftBot(object):
 
         # Complete return
         self.feedback(order_id, 'docking', DeliveryStatus.COMPLETE_RETURN, "COMPLETE_RETURN")
+        self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.COMPLETE_RETURN, self.battery_status))
         rospy.loginfo(self.name + " : END_DELIVERY_ORDER")
         rospy.sleep(1)
 
         # Closing off the delivery
         self.feedback(order_id, 'docking', DeliveryStatus.IDLE, "IDLE")
+        self.publisher['robot_status'].publish(RobotStatus(DeliveryStatus.IDLE, self.battery_status))
         rospy.loginfo(self.name + " : IDLE")
         rospy.sleep(1)
 
