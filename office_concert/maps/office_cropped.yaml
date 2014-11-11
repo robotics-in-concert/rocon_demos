@@ -1,6 +1,0 @@
-free_thresh: 0.196
-image: office_cropped.pgm
-negate: 0
-occupied_thresh: 0.65
-origin: [-4.049999999999999, -7.15, 0.0]
-resolution: 0.05

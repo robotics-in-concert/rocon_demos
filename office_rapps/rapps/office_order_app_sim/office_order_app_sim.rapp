@@ -1,5 +1,0 @@
-display: Office Order Application Sim
-description: The simulation app for test office order app
-compatibility: rocon:/pc
-launch: office_order_app_sim.launch
-

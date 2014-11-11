@@ -1,6 +1,0 @@
-<launch>
-	<arg name="robosem_ip"    default="192.168.10.28"/> <!-- IP of the ROBOSEM Bridge -->
-	<include file="$(find robosem_bridge)/launch/robosem_bridge.launch">
-		<arg name="robosem_ip"   value="$(arg robosem_ip)"/>
-	</include>
-</launch>

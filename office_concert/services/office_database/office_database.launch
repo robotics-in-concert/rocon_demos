@@ -1,4 +1,0 @@
-<launch>
-  <node pkg="office_concert" name="publish_world" type="publish_world.py">
-  </node>
-</launch>

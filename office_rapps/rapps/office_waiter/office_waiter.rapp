@@ -1,5 +1,0 @@
-display: Office Waiter
-description: The waiter navigate around the office to serve beverages. 
-compatibility: rocon:/turtlebot
-launch: office_waiter.launch
-parent_name: office_rapps/waiter
