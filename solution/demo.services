@@ -1,15 +1,10 @@
 - resource_name: concert_service_admin/admin
-- resource_name: concert_service_initialisation/initialisation
-  overrides:
-    priority: 3
-    interactions: demo_concert/initialisation
-    parameters: demo_concert/initialisation
-- resource_name: demo_concert/delivery
+- resource_name: concert_common_services/delivery
   overrides:
     priority: 100
-# - resource_name: demo_concert/vm_delivery
-#   overrides:
-#     priority: 1
+- resource_name: concert_common_services/welcome
+  overrides:
+    priority: 99
 - resource_name: concert_service_waypoint_navigation/waypoint_navigation
   overrides:
     priority: 3

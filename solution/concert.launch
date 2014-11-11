@@ -1,6 +1,6 @@
 <launch>
   <arg name="services" default="demo_concert/demo.services"/>
-  <arg name="auto_enable_services" default="[admin, delivery_sim, welcome]"/>
+  <arg name="auto_enable_services" default="[admin]"/>
   <arg name="rosbridge_address" default="$(optenv ROSBRIDGE_ADDRESS localhost)"/>
 
   <group ns="software">
