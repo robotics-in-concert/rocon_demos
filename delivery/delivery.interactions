@@ -45,7 +45,7 @@
       remap_to: /annotation/tables
 
 - name: web_app(http://192.168.10.23/concert_common_web_interface/kitchen_app/index.html)
-  role: 'Demo Manager'
+  role: 'Manager'
   compatibility: rocon:/*/*/indigo
   display_name: Monitor
   description: Monitors robots and order list
