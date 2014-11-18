@@ -7,7 +7,7 @@
     <node ns="world_canvas" pkg="world_canvas_server" type="annotations_server.py" name="world_canvas_server" output="screen"> 
     </node>
     <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
-      <arg name="auto_run_workflows" value="office_delivery_wf welcome_wf common_func"/>
+      <arg name="auto_run_workflows" value="common_func delivery_wf welcome_wf"/>
     </include>
     <include file="$(find rocon_hue)/launch/hue_manager.launch">
       <arg name="hue_ip"   value="192.168.10.27"/>
