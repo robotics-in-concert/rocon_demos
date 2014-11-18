@@ -8,6 +8,15 @@
     * concert_common_services/welcome
 * Restock
     * concert_services/concert_service_waypoint_navigation
+## Rapps
+* Robosem Bridge
+   * concert_common_rapps/robosem_bridge
+* Real Waiterbot 
+   * concert_common_rapps/waiter_real
+* Simulation Waiterbot
+   * concert_common_rapps/waiter_sim
+* Dummy Gocart
+   * concert_common_rapps/dummy_gocart
 
 ## Rocon Install
 * https://github.com/robotics-in-concert/rocon_demos/tree/office_concert#concert-pc-installation
