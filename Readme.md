@@ -1,9 +1,13 @@
 # Demo concert
 ## Services
 * Delivery
+    * concert_common_services/delivery
 * Delivery Simulation
+    * concert_common_services/delivery_sim
 * Welcome
+    * concert_common_services/welcome
 * Restock
+    * concert_services/concert_service_waypoint_navigation
 
 ## Demo Concert Install
     
