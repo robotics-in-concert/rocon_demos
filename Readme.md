@@ -6,7 +6,7 @@
 * Restock
 
 ## Demo Concert Install
-    ```
+    
     > cd <your rocon workspace>
     > cd src
     > wstool merge https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/rosinstall/demo_concert.rosinstall
@@ -15,7 +15,7 @@
     > yujin_make --install-rosdeps
     > yujin_make
     > . .bashrc
-    ```
+    
 ## Run
 * Preparing
    * Register ros master uri and host name
