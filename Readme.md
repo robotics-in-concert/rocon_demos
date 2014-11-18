@@ -9,6 +9,9 @@
 * Restock
     * concert_services/concert_service_waypoint_navigation
 
+## Rocon Install
+* https://github.com/robotics-in-concert/rocon_demos/tree/office_concert#concert-pc-installation
+
 ## Demo Concert Install
     
     > cd <your rocon workspace>
