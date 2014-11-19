@@ -62,3 +62,12 @@ Select a robot and teleop around. Note that only Dangen(TurtleBot) provides came
 > concert_teleop
 ```
 ![Image of teleop](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/teleop.png)
+
+### Test Dummy furo
+
+```
+# Open up a new termianl 
+> roslaunch dummy_furo concert_client.launch simulation:=true --screen --port=11315
+```
+
+To test real robot, simulation:=false
