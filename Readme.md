@@ -57,6 +57,12 @@
      * Open browser and enter ```http://localhost:9999/``` in adress bar.
      * Hit ```import items``` button and import workflow files in each services directory.
      * Click the loaded workflow and check the blocks.
+   * Importing yujin db
+     * Call ros service for importing yujin rnd database to world canvas
+         ```
+         > rosservice call /software/world_canvas/yaml_import "filename: '<rocon_ws>/src/demo_concert/annotations/yujin_rnd_fulldb.yaml'"
+         ```
+      
 
 * Running
   * Simulation 
