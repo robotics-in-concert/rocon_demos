@@ -59,6 +59,7 @@
      * Click the loaded workflow and check the blocks.
    * Importing yujin db
      * Call ros service for importing yujin rnd database to world canvas
+     
          ```
          > rosservice call /software/world_canvas/yaml_import "filename: '<rocon_ws>/src/demo_concert/annotations/yujin_rnd_fulldb.yaml'"
          ```
