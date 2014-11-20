@@ -19,5 +19,5 @@
     version: master}
 
 
-- git: {local-name: sample_concerts/demo_concert, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
+- git: {local-name: demo_concert, uri: 'https://github.com/robotics-in-concert/rocon_demos.git',
     version: demo_concert}

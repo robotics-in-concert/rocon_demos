@@ -9,6 +9,19 @@
 * Restock
     * concert_services/concert_service_waypoint_navigation
 
+## Rapps
+* Robosem Bridge
+   * concert_common_rapps/robosem_bridge
+* Real Waiterbot 
+   * concert_common_rapps/waiter_real
+* Simulation Waiterbot
+   * concert_common_rapps/waiter_sim
+* Dummy Gocart
+   * concert_common_rapps/dummy_gocart
+
+## Rocon Install
+* https://github.com/robotics-in-concert/rocon_demos/tree/office_concert#concert-pc-installation
+
 ## Demo Concert Install
     
     > cd <your rocon workspace>
@@ -35,9 +48,22 @@
      ```
    * Setting rocon authoring tool
      * Run the [rocon_authoring tool](https://github.com/robotics-in-concert/rocon_authoring/blob/master/README.md)
+        
+        ```
+        > roscd rocon_authoring
+        > npm update
+        > MONGO_URL=mongodb://localhost:27017/cento_authoring PORT=9999 ROS_WS_URL=ws://127.0.0.1:9090 node rocon_authoring.js
+        ```
      * Open browser and enter ```http://localhost:9999/``` in adress bar.
      * Hit ```import items``` button and import workflow files in each services directory.
      * Click the loaded workflow and check the blocks.
+   * Importing yujin db
+     * Call ros service for importing yujin rnd database to world canvas
+     
+         ```
+         > rosservice call /software/world_canvas/yaml_import "filename: '<rocon_ws>/src/demo_concert/annotations/yujin_rnd_fulldb.yaml'"
+         ```
+      
 
 * Running
   * Simulation 
