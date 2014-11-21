@@ -52,7 +52,7 @@
         ```
         > roscd rocon_authoring
         > npm update
-        > MONGO_URL=mongodb://localhost:27017/cento_authoring PORT=9999 ROS_WS_URL=ws://127.0.0.1:9090 node rocon_authoring.js
+        > roslaunch rocon_authoring rocon_authoring.launch --screen
         ```
      * Open browser and enter ```http://localhost:9999/``` in adress bar.
      * Hit ```import items``` button and import workflow files in each services directory.
