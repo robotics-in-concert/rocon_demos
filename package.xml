@@ -20,7 +20,6 @@
     <rocon_app>rapps/waiter/waiter.rapp</rocon_app>
     <rocon_app>rapps/waiter_sim/waiter_sim.rapp</rocon_app>
     <rocon_app>rapps/waiter_real/waiter_real.rapp</rocon_app>
-    <rocon_app>rapps/robosem_bridge/robosem_bridge.rapp</rocon_app>
     <rocon_app>rapps/dummy_gocart/waypoint_navigation.rapp</rocon_app>
   </export>
 </package>
