@@ -9,9 +9,9 @@
     <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
       <arg name="auto_run_workflows" value="common_func delivery_wf welcome_wf"/>
     </include>
-    <include file="$(find rocon_hue)/launch/hue_manager.launch">
+    <include file="$(find rocon_hue)/launch/hue_bridge_server.launch">
       <arg name="hue_ip"   value="192.168.10.27"/>
-      <arg name="set_color"   value="/set_color"/>
+      <arg name="set_hue"   value="/set_hue"/>
     </include>
   </group>
 

@@ -4,8 +4,9 @@
      priority: 3
      # interactions: demo_concert/initialisation
      # parameters: demo_concert/initialisation
-- resource_name: concert_common_services/delivery_sim
+- resource_name: concert_common_services/delivery
   overrides:
+    name: "delivery_sim"
     priority: 100
 - resource_name: concert_common_services/welcome
   overrides:
