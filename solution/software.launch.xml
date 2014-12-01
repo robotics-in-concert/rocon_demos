@@ -1,0 +1,10 @@
+<launch>
+  <arg name="auto_run_workflows" default="common_func delivery_wf welcome_wf"/>
+  <group ns="software">
+    <node ns="world_canvas" pkg="world_canvas_server" type="annotations_server.py" name="world_canvas_server"> 
+    </node>
+    <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
+      <arg name="auto_run_workflows" value="$(arg auto_run_workflows)"/>
+    </include>
+  </group>
+</launch>

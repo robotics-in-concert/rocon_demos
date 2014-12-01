@@ -1,22 +1,13 @@
 <launch>
-  <arg name="services" default="demo_concert/demo.services"/>
-  <arg name="auto_enable_services" default="[admin]"/>
-  <arg name="rosbridge_address" default="$(optenv ROSBRIDGE_ADDRESS localhost)"/>
-
-  <group ns="software">
-    <node ns="world_canvas" pkg="world_canvas_server" type="annotations_server.py" name="world_canvas_server" output="screen"> 
-    </node>
-    <include file="$(find rocon_authoring)/launch/rocon_authoring.launch">
-      <arg name="auto_run_workflows" value="common_func delivery_wf welcome_wf"/>
-    </include>
-    <include file="$(find rocon_hue)/launch/hue_bridge_server.launch">
-      <arg name="hue_ip"   value="192.168.10.27"/>
-      <arg name="set_hue"   value="/set_hue"/>
-    </include>
-  </group>
+  <arg name="services"              default="demo_concert/demo.services"/>
+  <arg name="auto_enable_services"  default="$(env CONCERT_AUTO_ENABLE_SERVICES)"/>
+  <arg name="rosbridge_address"     default="$(env CONCERT_ROSBRIDGE_ADDRESS)"/>
+  <arg name="concert_name"          default="$(env CONCERT_NAME)"/> 
+    
+  <include file="$(find demo_concert)/solution/software.launch.xml"/>
 
   <include file="$(find concert_master)/launch/concert_master.launch">
-      <arg name="concert_name" value="$(optenv HUB_WHITELIST Demo Concert)"/>
+      <arg name="concert_name" value="$(arg concert_name)"/>
       <arg name="services" value="$(arg services)"/>
       <arg name="auto_enable_services" value="$(arg auto_enable_services)"/>
       <arg name="conductor_auto_invite" value="true"/>

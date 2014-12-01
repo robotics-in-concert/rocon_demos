@@ -2,7 +2,9 @@
 <package>
   <name>demo_concert</name>
   <version>0.0.0</version>
-  <description>The demo concert package</description>
+  <description>
+    Yujin Robot Rnd Office Concert
+  </description>
 
   <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
   <maintainer email="dwlee@yujinrobot.com">Dong wook Lee</maintainer>
@@ -10,7 +12,11 @@
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <run_depend>concert_service_link_graph</run_depend>
-  <run_depend>kobuki_soft</run_depend>
-
+  <run_depend>concert_master</run_depend>
+  <run_depend>rocon_authoring</run_depend>
+  <run_depend>world_canvas_server</run_depend>
+  <run_depend>concert_service_admin</run_depend>
+  <run_depend>concert_service_indoor_2d_map_prep</run_depend>
+  <run_depend>concert_service_waypoint_navigation</run_depend>
+  <run_depend>concert_common_services</run_depend>
 </package>
