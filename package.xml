@@ -15,10 +15,7 @@
   <run_depend>concert_service_link_graph</run_depend>
   
   <export>
-    
     <concert_service>services/delivery/delivery.service</concert_service>
-    <concert_service>services/delivery_sim/delivery_sim.service</concert_service>
     <concert_service>services/welcome/welcome.service</concert_service>
-
   </export>
 </package>
