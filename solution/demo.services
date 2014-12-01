@@ -1,12 +1,17 @@
 - resource_name: concert_service_admin/admin
+- resource_name: concert_service_teleop/teleop
+  overrides:
+    name: "Teleop"
 - resource_name: concert_common_services/delivery
   overrides:
+    name: "delivery"
     priority: 100
 - resource_name: concert_common_services/welcome
   overrides:
+    name: "welcome"
     priority: 99
 - resource_name: concert_service_waypoint_navigation/waypoint_navigation
   overrides:
     priority: 3
-    name: "Restock"
+    name: "restock"
     description: "Deliver items from storage to kitchen"
