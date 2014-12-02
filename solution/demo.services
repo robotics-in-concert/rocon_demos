@@ -4,7 +4,7 @@
     name: "Teleop"
 - resource_name: concert_service_indoor_2d_map_prep/indoor_2d_map_prep
   overrides:
-    name: "initialisation"
+    name: "indoor_2d_map_prep"
     interactions: demo_concert/initialisation
     parameters: demo_concert/initialisation
 - resource_name: concert_common_services/delivery

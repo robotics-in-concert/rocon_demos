@@ -2,6 +2,7 @@
   <arg name="services"              default="demo_concert/demo.services"/>
   <arg name="auto_enable_services"  default="$(env CONCERT_AUTO_ENABLE_SERVICES)"/>
   <arg name="rosbridge_address"     default="$(env CONCERT_ROSBRIDGE_ADDRESS)"/>
+  <arg name="webserver_address"     default="$(env CONCERT_WEBSERVER_ADDRESS)"/>
   <arg name="concert_name"          default="$(env CONCERT_NAME)"/> 
     
   <include file="$(find demo_concert)/solution/software.launch.xml"/>
@@ -13,6 +14,7 @@
       <arg name="conductor_auto_invite" value="true"/>
       <arg name="enable_rosbridge"  value="true"/>
       <arg name="rosbridge_address" value="$(arg rosbridge_address)"/>
+      <arg name="webserver_address" value="$(arg webserver_address)"/>
       <arg name="gateway_unavailable_timeout" value="30"/>
   </include>
   <group ns="concert">
