@@ -5,7 +5,7 @@
 name: "Demo Concert"
 nodes:
   - id: robosem_bridge
-    uri: rocon:/pc/robosem_bridge#concert_common_rapps/robosem_bridge
+    uri: rocon:/pc/robosem_bridge#robosem_bridge/robosem_bridge
     min: 1
     max: 1
 
