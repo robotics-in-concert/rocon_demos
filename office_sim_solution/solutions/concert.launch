@@ -4,7 +4,7 @@
   <arg name="gazebo_services" default="office_sim_solution/office_sim.services"/>
   <arg name="concert_name" default="Office Simulation Concert"/>
   <arg name="scheduler_type" default="compatibility_tree"/>
-  <arg name="auto_enable_services" default="[admin, teleop]"/>
+  <arg name="auto_enable_services" default="all"/>
 
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(arg concert_name)"/>
