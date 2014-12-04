@@ -75,12 +75,14 @@ To test real robot, simulation:=false
 ### Rocon Remocon
 
 1. Launch rocon remocon 
-![Image of remocon](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/rocon_remocon.png)
 
 ```
 # Open up a new terminal
 > rocon_remocon 
 ```
+
+![Image of remocon](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/rocon_remocon.png)
+
 
 2. Add Concert
 ![Image of add](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/add_concert.png)
