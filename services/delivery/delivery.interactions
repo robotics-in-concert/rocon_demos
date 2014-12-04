@@ -1,14 +1,14 @@
 - name: web_url(http://www.google.com)
   role: 'Customer'
-  compatibility: rocon:/*
+  compatibility: rocon:/*/*/*/chrome|firefox
   display_name: 'Web Search'
   description: 'Web Surfer'
   max: -1
   icon:
     resource_name: rocon_icons/google.png
-- name: web_app(http://192.168.10.23/concert_common_web_interface/order_app/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_order_app/index.html)
   role: 'Customer'
-  compatibility: rocon:/*/*/indigo
+  compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Delivery Order App (Table 1)
   description: Exhibition web menu
   icon:
@@ -25,9 +25,10 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
-- name: web_app(http://192.168.10.23/concert_common_web_interface/order_app/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_order_app/index.html)
   role: 'Customer'
-  compatibility: rocon:/*/*/indigo 
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Delivery Order App (Table 4)
   description: Exhibition web menu
   icon:
@@ -44,9 +45,9 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
-- name: web_app(http://192.168.10.23/concert_common_web_interface/kitchen_app/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_kitchen_app/index.html)
   role: 'Manager'
-  compatibility: rocon:/*/*/indigo
+  compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Monitor
   description: Monitors robots and order list
   parameters:
@@ -78,9 +79,9 @@
     - remap_from: nav_ctrl_status
       remap_to: /waypoint_navigation/nav_ctrl_status
 
-- name: web_app(http://192.168.10.23/concert_common_web_interface/screen_viewer/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_screen_viewer/index.html)
   role: 'Manager'
-  compatibility: rocon:/*/*/indigo
+  compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Screen Viewer
   description: Screen control to show video
   parameters:

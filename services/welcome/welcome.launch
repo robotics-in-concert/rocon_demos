@@ -1,5 +1,5 @@
 <launch>
   <node pkg="concert_service_link_graph" name="welcome" type="static_link_graph_service.py">
-    <param name="filename" value="$(find concert_common_services)/welcome/welcome.link_graph"/>
+    <param name="filename" value="$(find concert_common_services)/services/welcome/welcome.link_graph"/>
   </node>
 </launch>

@@ -7,4 +7,4 @@ description: "Welcome for your visit"
 author: YujinRobot
 priority: 2
 launcher_type: roslaunch
-launcher: concert_common_services/welcome.launch
+launcher: concert_common_services/welcome
