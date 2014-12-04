@@ -64,8 +64,10 @@
   <arg name="odom_topic"                  default="/odom"/>
   <arg name="map_topic"                   default="/map"/> <!-- remove it later -->
   <arg name="move_base_param_path"        default="$(find simple_delivery_robot_ctrl)/params/move_base"/>
+  <arg name="custom_move_base_param_file" default="$(find waiterbot_navigation)/param/ir_costmap_params.yaml"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
   <arg name="resource_path"               default=""/>
+  <arg name="volume"                      default="50"/>
 
   <!-- State Manager -->
   <include file="$(find simple_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
@@ -113,6 +115,7 @@
     <arg name="global_frame"          value="$(arg global_frame)"/>
     <arg name="base_frame"            value="$(arg base_frame)"/>
     <arg name="move_base_param_path"  value="$(arg move_base_param_path)"/>
+    <arg name="custom_param_file"     value="$(arg custom_move_base_param_file)"/>
     <arg name="vel_smoother_param"    value="$(arg vel_smoother_param)"/>
   </include>
 

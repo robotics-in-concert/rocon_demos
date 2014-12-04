@@ -1,6 +1,6 @@
 <launch>
   <group ns="software">
-    <node ns="world_canvas" pkg="world_canvas_server" type="annotations_server.py" name="world_canvas_server" output="screen">
+    <node ns="world_canvas" pkg="world_canvas_server" type="world_canvas_server" name="world_canvas_server" output="screen">
     </node>
   </group>
   <param name="wc_namespace"  value="/software/world_canvas"/>
@@ -11,6 +11,7 @@
   <param name="viz_table_topic" value="/annotations/viz_tables"/>
   <param name="ar_topic"        value="/annotations/ar_markers"/>
   <param name="viz_ar_topic"    value="/annotations/viz_ar_markers"/>
-  <node pkg="office_concert" name="publish_world" type="publish_world.py">
+
+  <node pkg="concert_common_services" name="publish_world" type="publish_world.py">
   </node>
 </launch>
