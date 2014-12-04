@@ -8,3 +8,4 @@ author: YujinRobot
 priority: 2
 launcher_type: roslaunch
 launcher: concert_common_services/welcome
+interactions: concert_common_services/welcome
