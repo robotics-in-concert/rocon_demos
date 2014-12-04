@@ -7,6 +7,10 @@
       <arg name="concert_client_name" value="robosem_bridge"/>
     </launch>
 
+    <launch title="hue_bridge:11317"    package="demo_concert" name="demo_backend.launch" port="11317">
+      <arg name="concert_client_name" value="hue_bridge"/>
+    </launch>
+
     <launch title="adams:11313"    package="demo_concert" name="demo_backend.launch" port="11313">
       <arg name="concert_client_name" value="adams"/>
     </launch>
