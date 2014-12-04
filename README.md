@@ -71,3 +71,21 @@ Select a robot and teleop around. Note that only Dangen(TurtleBot) provides came
 ```
 
 To test real robot, simulation:=false
+
+### Rocon Remocon
+
+1. Launch rocon remocon 
+![Image of remocon](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/rocon_remocon.png)
+
+```
+# Open up a new terminal
+> rocon_remocon 
+```
+
+2. Add Concert
+![Image of add](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/add_concert.png)
+
+3. Select role and start available apps
+
+![Image of role](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/role.png)
+![Image of user](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/gazebo_concert/imgs/user.png)
