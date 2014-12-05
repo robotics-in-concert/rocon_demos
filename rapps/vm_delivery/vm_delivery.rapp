@@ -1,0 +1,3 @@
+display: Vending machinage Delivery 
+description: The robot navigate to the vending machine and bring back a drink. 
+public_interface: vm_delivery.interface
