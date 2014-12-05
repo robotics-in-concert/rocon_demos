@@ -70,7 +70,7 @@
   <arg name="volume"                      default="50"/>
 
   <!-- State Manager -->
-  <include file="$(find simple_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
+  <include file="$(find vm_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
     <arg name="debug_mode"                  value="$(arg debug_mode)"/>
     <arg name="resource_path"               value="$(arg resource_path)"/>
     <arg name="pickup_location"             value="$(arg pickup_location)"/>

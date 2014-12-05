@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
-  <name>simple_delivery_robot_ctrl</name>
+  <name>vm_delivery_robot_ctrl</name>
   <version>0.0.0</version>
   <description>
-    Delivery robot task manager
+    Deliver drink from vending machine!
   </description>
 
   <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
@@ -25,8 +25,8 @@
   <run_depend>yocs_docking_interactor</run_depend>
   <run_depend>yocs_localization_manager</run_depend>
   <run_depend>waiterbot_bringup</run_depend>
-  <run_depend>concert_common_rapps</run_depend>
+
   <export>
-    <rocon_app>rapps/pickup_delivery/pickup_delivery.rapp</rocon_app>
+    <rocon_app>rapps/vm_delivery/vm_delivery.rapp</rocon_app>
   </export>
 </package>

@@ -25,4 +25,9 @@
   <run_depend>yocs_navigator</run_depend>
   <run_depend>yocs_localization_manager</run_depend>
   <run_depend>waiterbot_bringup</run_depend>
+  <run_depend>concert_common_rapps</run_depend>
+
+  <export>
+    <rocon_app>rapps/pickup_delivery/pickup_delivery.rapp</rocon_app>
+  </export>
 </package>

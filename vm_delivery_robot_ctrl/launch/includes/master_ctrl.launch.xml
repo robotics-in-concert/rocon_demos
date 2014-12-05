@@ -1,0 +1,26 @@
+<launch>
+  <arg name="debug_mode"        default="false"/>
+  <arg name="resource_path"     default=""/>
+  <arg name="nav_retry"         default="3"/>
+  <arg name="nav_timeout"       default="300.0"/>
+  <arg name="nav_near_distance" default="1.0"/>
+  <arg name="pickup_location"/>
+  <arg name="localize_action"/>
+  <arg name="docking_interactor_action"/>
+  <arg name="navigator_action"/>
+  <arg name="delivery_order_action"/>
+
+  <node pkg="vm_delivery_robot_ctrl" name="waiterbot_state_manager" type="waiterbot.py">
+    <remap from="localize"            to="$(arg localize_action)"/>
+    <remap from="navigate_to"         to="$(arg navigator_action)"/>
+    <remap from="docking_interactor"  to="$(arg docking_interactor_action)"/>
+    <remap from="delivery_order"      to="$(arg delivery_order_action)"/>
+
+    <param name="pickup_location"     value="$(arg pickup_location)"/>
+    <param name="debug_mode"          value="$(arg debug_mode)"/>
+    <param name="resource_path"       value="$(arg resource_path)"/>
+    <param name="nav_retry"           value="$(arg nav_retry)"/>
+    <param name="nav_timeout"         value="$(arg nav_timeout)"/>
+    <param name="nav_near_distance"   value="$(arg nav_near_distance)"/> <!-- unused yet-->
+  </node>
+</launch>
