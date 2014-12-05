@@ -9,13 +9,26 @@ nodes:
     min: 1
     max: 1
 
+  - id: hue_bridge
+    uri: rocon:/pc/hue_bridge#rocon_hue/hue_bridge
+    min: 1
+    max: 1
+
 topics:
   - id: play_tts
     type: std_msgs/String
   - id: robot_motion
     type: std_msgs/String
+
   - id: touch_sensor_event
     type: std_msgs/String
+
+  - id: set_hue
+    type: rocon_device_msgs/Hue
+
+  - id: list_hue
+    type: rocon_device_msgs/HueArray
+
 actions: []
 edges: 
 ############### Robosem Bridge
@@ -35,3 +48,15 @@ edges:
     type: std_msgs/String
     remap_from: touch_sensor_event
     remap_to: /touch_sensor_event
+
+  - start: set_hue
+    finish: hue_bridge
+    type: rocon_device_msgs/Hue
+    remap_from: set_hue
+    remap_to: /set_hue
+
+  - start: list_hue
+    finish: hue_bridge
+    type: rocon_device_msgs/HueArray
+    remap_from: list_hue
+    remap_to: /list_hue
