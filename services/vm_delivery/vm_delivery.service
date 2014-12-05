@@ -1,0 +1,12 @@
+# Concert client tuples are of the platform-system-robot-name-app where
+# the name is just a placemarker for the eventual concert client name.
+# All other parts of the tuple are fixed.
+
+name: vm delivery
+description: "Deliver yours"
+author: YujinRobot
+priority: 2
+launcher_type: roslaunch
+launcher: concert_common_services/vm_delivery
+interactions: concert_common_services/vm_delivery
+parameters: concert_common_services/vm_delivery

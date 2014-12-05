@@ -2,10 +2,10 @@
 # the name is just a placemarker for the eventual concert client name.
 # All other parts of the tuple are fixed.
 
-name: "Demo Concert"
+name: "Pickup Delivery"
 nodes:
-  - id: waiterbot
-    uri: rocon:/*#concert_common_rapps/waiter
+  - id: deliverybot
+    uri: rocon:/*#concert_common_rapps/pickup_delivery
     min: 1
     max: 1
 
