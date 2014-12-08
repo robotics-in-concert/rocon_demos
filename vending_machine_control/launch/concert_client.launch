@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find rocon_app_manager)/launch/concert_client.launch">
+    <arg name="robot_name" value="$(env ROBOT_NAME)"/>
+    <arg name="robot_type" value="$(env ROBOT_TYPE)"/>
+    <arg name="rapp_package_whitelist" value="[]"/>
+    <arg name="interactions" value="false"/>
+    <arg name="capabilities" value="false"/>
+  </include>
+</launch>
