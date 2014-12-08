@@ -5,7 +5,7 @@
     <param name="trigger_time" value="500"/>
     <param name="dispensing_time" value="8000"/>
     <param name="dispensed_signal_time" value="1000"/>
-    <remap from="arduino/drink_order" to="/drink_order"/>
-    <remap from="arduino/order_result" to="/order_result"/>
+    <remap from="vending_machine/drink_order" to="drink_order"/>
+    <remap from="vending_machine/order_result" to="order_result"/>
   </node>
 </launch>
