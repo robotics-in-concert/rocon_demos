@@ -29,25 +29,25 @@ topics:
 
 actions: []
 edges: 
-############### Waiterbot
+############### deliverybot
   - start: map
-    finish: waiterbot
+    finish: deliverybot
     remap_from: map
     remap_to: /map
   - start: map_metadata          
-    finish: waiterbot
+    finish: deliverybot
     remap_from: map_metadata
     remap_to: /map_metadata
 
   - start: annotation_tables
-    finish: waiterbot
+    finish: deliverybot
     remap_from: table_pose_list
     remap_to: /annotation/tables
   - start: annotation_markers
-    finish: waiterbot
+    finish: deliverybot
     remap_from: marker_pose_list
     remap_to: /annotation/ar_markers
   - start: annotation_visual_marker
-    finish: waiterbot
+    finish: deliverybot
     remap_from: viz_marker_pose_list
     remap_to: /annotation/viz_tables

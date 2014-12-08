@@ -8,7 +8,10 @@ nodes:
     uri: rocon:/*#concert_common_rapps/vm_delivery
     min: 1
     max: 1
-
+  - id: vm
+    uri: rocon:/*#concert_common_rapps/drink_giver
+    min: 1
+    max: 1
 topics:
 ################# Map Database
   - id: annotation_columns
@@ -26,6 +29,13 @@ topics:
     type: nav_msgs/OccupancyGrid
   - id: map_metadata
     type: nav_msgs/MapMetaData
+
+
+################ Drink Giver
+  - id: drink_order
+    type: std_msgs/Int8
+  - id: drink_order_result
+    type: std_msgs/Int8
 
 actions: []
 edges: 
@@ -51,3 +61,22 @@ edges:
     finish: waiterbot
     remap_from: viz_marker_pose_list
     remap_to: /annotation/viz_tables
+
+  - start: waiterbot
+    finish: drink_order
+    remap_from: drink_order
+    remap_to: /vm_delivery/drink_order
+  - start: drink_order_result
+    finish: waiterbot
+    remap_from: drink_order_result
+    remap_to: /vm_delivery/drink_order_result
+
+############### VM
+  - start: vm
+    finish: drink_order_result
+    remap_from: order_result
+    remap_to: /vm_delivery/drink_order_result
+  - start: drink_order
+    finish: vm
+    remap_from: drink_order
+    remap_to: /vm_delivery/drink_order

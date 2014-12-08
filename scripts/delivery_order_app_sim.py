@@ -71,7 +71,7 @@ if __name__ == '__main__':
         
         rospy.loginfo('Initialized')
         
-        target_location = rospy.get_param('~target_location', 'vending')
+        target_location = rospy.get_param('~target_location', 'table4')
 
         dummy = DummyOrderApp(target_location)
         
