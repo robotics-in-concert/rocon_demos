@@ -21,6 +21,8 @@ LOC_ACTION = 'localize'
 NAV_ACTION = 'navigate_to'
 STATUS = 'robot_status'
 DIAGNOSTIC = '/diagnostics_agg'
+VM_ORDER_RESULT = 'drink_order_result'
+VM_DRINK_ORDER = 'drink_order'
 
 STATE_IN_DOCK        = 'IN_DOCK'
 STATE_WAKEUP         = 'WAKE_UP'
@@ -134,6 +136,10 @@ class StateManager(object):
         self._sub = {}
         self._pub = {}
 
+        # VM controller
+        self._sub[VM_ORDER_RESULT] = rospy.Subscriber(VM_ORDER_RESULT, std_msgs.Int8, self._process_vm_order_result)
+        self._pub[VM_DRINK_ORDER] = rospy.Publisher(VM_DRINK_ORDER, std_msgs.Int8, queue_size=2)
+
         # Debug        
         self._pub[STATUS] = rospy.Publisher(STATUS, simple_delivery_msgs.RobotStatus, queue_size=2)
         self._sub[DIAGNOSTIC] = rospy.Subscriber(DIAGNOSTIC, diagnostic_msgs.DiagnosticArray, self._process_diagnostics)
@@ -159,6 +165,9 @@ class StateManager(object):
 
         # Button Controller
         self._button_controller = ButtonControl('/mobile_base/events/digital_input', self._process_button)
+
+    def _process_vm_order_result(self, msg):
+        rospy.loginfo("Process %s"%str(msg))
 
     def _process_diagnostics(self, msg):
         for s in msg.status:
