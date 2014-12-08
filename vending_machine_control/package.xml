@@ -18,8 +18,13 @@
 
   <run_depend>actionlib</run_depend>
   <run_depend>actionlib_msgs</run_depend>
+  <run_depend>concert_common_rapps</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>rosserial_python</run_depend>
   <run_depend>vending_machine_msgs</run_depend>
+
+  <export>
+    <rocon_app>rapps/drink_giver/vm_drink_dispense.rapp</rocon_app>
+  </export>
 </package>
