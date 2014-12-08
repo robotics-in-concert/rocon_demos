@@ -1,0 +1,5 @@
+display: Vending Machine Drink Dispenser
+description: Vending machine dispenses a drink
+launch: vm_drink_dispense.launch.xml
+compatibility: rocon:/pc
+parent_name: concert_common_rapps/drink_giver

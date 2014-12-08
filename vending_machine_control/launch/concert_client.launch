@@ -5,5 +5,6 @@
     <arg name="rapp_package_whitelist" value="[]"/>
     <arg name="interactions" value="false"/>
     <arg name="capabilities" value="false"/>
+    <arg name="robot_unique_name" value="false"/>
   </include>
 </launch>
