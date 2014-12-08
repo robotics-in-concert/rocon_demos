@@ -1,0 +1,7 @@
+subscribers: 
+  - name: drink_order
+    type: std_msgs/Int8
+publishers: 
+  - name: order_result
+    type: std_msgs/Int8
+services: []

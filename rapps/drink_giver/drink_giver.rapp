@@ -1,0 +1,3 @@
+display: Drink giver 
+description: This rapp provides interface for drink
+public_interface: drink_giver.interface
