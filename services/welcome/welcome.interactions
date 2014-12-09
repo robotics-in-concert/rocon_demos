@@ -7,7 +7,16 @@
   icon:
     resource_name: rocon_icons/google.png
 
-- name: com.example.dwlee.beacon_awareness_ex.BeaconAwarenessExMainActivity
+- name: web_url(http://www.google.com)
+  role: 'Customer'
+  compatibility: rocon:/*/*/*/jellybean|ice_cream_sandwich|kitkat
+  display_name: 'Web Search'
+  description: 'Web Surfer in Android'
+  max: -1
+  icon:
+    resource_name: rocon_icons/google.png
+
+- name: com.github.robotics_in_concert.rocon_android_apps.beacon_awareness_ex.BeaconAwarenessExMainActivity
   role: 'Customer'
   compatibility: rocon:/*/*/*/jellybean|ice_cream_sandwich|kitkat
   display_name: Beacon Awareness
@@ -17,4 +26,4 @@
     - remap_from: beacons
       remap_to: /beacons
   parameters:
-    device_map: {"11:22:33:44:55:66":"entrance", "aa:bb:cc:dd:ee:ff":"meetingroom"}
+    beacon_map: {"D0:FF:50:66:93:3F":"black", "88:33:14:DE:D0:ED":"white", "D0:39:72:A3:DE:75":"gray"}
