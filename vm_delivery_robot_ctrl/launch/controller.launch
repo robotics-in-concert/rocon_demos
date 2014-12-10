@@ -51,12 +51,18 @@
 <!--  <arg name="global_ar_pair_topic"        default="/annotations/ar_markers"/>-->
   <arg name="location_list_topic"         default="table_pose_list"/>
 <!--  <arg name="location_list_topic"         default="/annotations/tables"/>-->
-  <arg name="predicted_robot_pose_topic"  default="predicted_robot_pose"/>
-  <arg name="localize_action"             default="localize"/>
-  <arg name="docking_interactor_action"   default="docking_interactor"/>
-  <arg name="navigator_action"            default="navigator"/>
-  <arg name="pickup_location"             default="pickup"/>
-  <arg name="delivery_order_action"       default="delivery_order"/>
+  <arg name="predicted_robot_pose_topic"    default="predicted_robot_pose"/>
+  <arg name="pickup_location"               default="pickup"/>
+  <arg name="vending_machine_ar_id"            default="3"/>
+  <arg name="ar_pair_spotted_markers_topic" default="spotted_markers"/>
+  <arg name="delivery_order_action"         default="delivery_order"/>
+
+  <!-- Actions for state manager -->
+  <arg name="docking_interactor_action"     default="docking_interactor"/>
+  <arg name="navigator_action"              default="navigator"/>
+  <arg name="vm_interactor_action"          default="vm_interactor"/>
+  <arg name="localize_action"               default="localize"/>
+
 
   <arg name="robot_cmd_feed"              default="/mobile_base/commands/velocity"/>
   <arg name="cmd_vel_mux_input"           default="/cmd_vel_mux/input/navigation"/>
@@ -78,16 +84,18 @@
     <arg name="docking_interactor_action"   value="$(arg docking_interactor_action)"/>
     <arg name="navigator_action"            value="$(arg navigator_action)"/>
     <arg name="delivery_order_action"       value="$(arg delivery_order_action)"/>
+    <arg name="vm_interactor_action"        value="$(arg vm_interactor_action)"/>
   </include>
 
   <!--  ********** Alvar AR marker Pairs tracker ***********  -->
   <!-- This is a CPU-hungry bastard; reduce its rate -->
   <include file="$(find yocs_localization_manager)/launch/ar_pair_tracker.launch">
-    <arg name="max_frequency"         value="$(arg ar_tracker_max_frequency)"/>
-    <arg name="global_frame"          value="$(arg global_frame)"/>
-    <arg name="base_frame"            value="$(arg base_frame)"/>
-    <arg name="global_ar_pair_topic"  value="$(arg global_ar_pair_topic)"/>
+    <arg name="max_frequency"               value="$(arg ar_tracker_max_frequency)"/>
+    <arg name="global_frame"                value="$(arg global_frame)"/>
+    <arg name="base_frame"                  value="$(arg base_frame)"/>
+    <arg name="global_ar_pair_topic"        value="$(arg global_ar_pair_topic)"/>
     <arg name="predicted_robot_pose_topic"  value="$(arg predicted_robot_pose_topic)"/>
+    <arg name="spotted_marker_topic"        value="$(arg ar_pair_spotted_markers_topic)"/>
   </include>
 
   <!-- Localization manager -->
@@ -128,6 +136,19 @@
     <arg name="start_move_base"       value="false"/>
     <arg name="move_base_topic"       value="$(arg move_base_topic)"/>
     <arg name="global_ar_pair_topic"  value="$(arg global_ar_pair_topic)"/>
+  </include>
+
+  <!-- Vending Machine Interactor -->
+  <include file="$(find yocs_vm_interactor)/launch/vm_interactor.launch">
+    <arg name="vending_machine_ar_id"         value="$(arg vending_machine_ar_id)"/>
+    <arg name="vm_interactor_action"          value="$(arg vm_interactor_action)"/>
+    <arg name="cmd_vel_mux_input"             value="$(arg cmd_vel_mux_input)"/>
+    <arg name="predicted_robot_pose_topic"    value="$(arg predicted_robot_pose_topic)"/>
+    <arg name="spotted_markers_topic"         value="$(arg ar_pair_spotted_markers_topic)"/>
+    <arg name="vel_smoother_param"            value="$(arg vel_smoother_param)"/>
+    <arg name="robot_cmd_feed"                value="$(arg robot_cmd_feed)"/>
+    <arg name="odom_topic"                    value="$(arg odom_topic)"/>
+    <arg name="base_frame"                    value="$(arg base_frame)"/>
   </include>
 
 </launch>

@@ -25,6 +25,7 @@
   <run_depend>yocs_docking_interactor</run_depend>
   <run_depend>yocs_localization_manager</run_depend>
   <run_depend>waiterbot_bringup</run_depend>
+  <run_depend>vending_machine_msgs</run_depend>
 
   <export>
     <rocon_app>rapps/vm_delivery/vm_delivery.rapp</rocon_app>

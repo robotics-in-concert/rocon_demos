@@ -5,6 +5,7 @@
 #
 import rospy
 import simple_delivery_msgs.msg as simple_delivery_msgs
+import vending_machine_msgs.msg as vending_machine_msgs
 import diagnostic_msgs.msg as diagnostic_msgs
 import yocs_msgs.msg as yocs_msgs
 import kobuki_msgs.msg as kobuki_msgs
@@ -19,17 +20,17 @@ DELIVERY_ACTION = 'delivery_order'
 DOC_ACTION = 'docking_interactor'
 LOC_ACTION = 'localize'
 NAV_ACTION = 'navigate_to'
+VM_ACTION = 'vm_interactor'
 STATUS = 'robot_status'
 DIAGNOSTIC = '/diagnostics_agg'
-VM_ORDER_RESULT = 'drink_order_result'
-VM_DRINK_ORDER = 'drink_order'
 
 STATE_IN_DOCK        = 'IN_DOCK'
 STATE_WAKEUP         = 'WAKE_UP'
 STATE_LOCALISE       = 'LOCALISE'
 STATE_REGISTER_DOCK  = 'REGISTER_DOCK'
-STATE_GOTO_PICKUP    = 'GOTO_PICKUP'
-STATE_AT_PICKUP      = 'AT_PICKUP'
+STATE_GOTO_VM        = 'GOTO_VM'
+STATE_APPROACH_VM    = 'APROACH_VM'
+STATE_AT_VM          = 'AT_VM'
 STATE_GOTO_TABLE     = 'GOTO_TABLE'
 STATE_AT_TABLE       = 'AT_TABLE'
 STATE_BACKTO_BASE    = 'BACKTO_BASE'
@@ -49,18 +50,8 @@ STATE_CALL_AUTODOCK  = 'CALL_AUTODOCK'
 class StateManager(object):
     
     _pickup_location = 'pickup'
-    _base_location = 'base'
-    _reinit_location = 'base_front'
+    _vm_location  = 'vm'
 
-    """
-    _confirm_sound = 'kaku.wav'
-    _retry_sound = 'moo.wav'
-    _navi_failed_sound = 'angry_cat.wav'
-    _order_received_sound = 'kaku.wav'
-    _at_table_sound = 'lion.wav'
-    _enjoy_meal_sound = 'meow.wav'
-    _bab_sound = 'pab.wav'
-    """ 
     _init_sound = 'init.wav'
     _confirm_sound = 'confirm.wav'
     _retry_sound = 'navi_failed.wav'
@@ -83,8 +74,9 @@ class StateManager(object):
         self._states[STATE_WAKEUP]          = self._state_wakeup
         self._states[STATE_LOCALISE]        = self._state_localise
         self._states[STATE_REGISTER_DOCK]   = self._state_register_dock
-        self._states[STATE_GOTO_PICKUP]     = self._state_goto_pickup
-        self._states[STATE_AT_PICKUP]       = self._state_at_pickup
+        self._states[STATE_GOTO_VM]         = self._state_goto_vm
+        self._states[STATE_APPROACH_VM]     = self._state_approach_vm
+        self._states[STATE_AT_VM]           = self._state_at_vm
         self._states[STATE_GOTO_TABLE]      = self._state_goto_table
         self._states[STATE_AT_TABLE]        = self._state_at_table
         self._states[STATE_BACKTO_BASE]     = self._state_backto_base
@@ -108,6 +100,8 @@ class StateManager(object):
         self._navigator_requested = False
         self._target_location = ""
 
+        self._vm_interactor_requested = False
+        self._vm_interactor_finished = False
 
         self._pickup_confirm = False
         self._customer_confirm = False
@@ -136,29 +130,31 @@ class StateManager(object):
         self._sub = {}
         self._pub = {}
 
-        # VM controller
-        self._sub[VM_ORDER_RESULT] = rospy.Subscriber(VM_ORDER_RESULT, std_msgs.Int8, self._process_vm_order_result)
-        self._pub[VM_DRINK_ORDER] = rospy.Publisher(VM_DRINK_ORDER, std_msgs.Int8, queue_size=2)
-
         # Debug        
         self._pub[STATUS] = rospy.Publisher(STATUS, simple_delivery_msgs.RobotStatus, queue_size=2)
         self._sub[DIAGNOSTIC] = rospy.Subscriber(DIAGNOSTIC, diagnostic_msgs.DiagnosticArray, self._process_diagnostics)
         
         # Localize manager
-        self.loginfo('Wait for Localise manager to be up')
         self._ac = {}
+        self.loginfo('Wait for Localise manager to be up')
         self._ac[LOC_ACTION] = actionlib.SimpleActionClient(LOC_ACTION, yocs_msgs.LocalizeAction)
         self._ac[LOC_ACTION].wait_for_server()
 
         # semantic navigation handler
-        self._ac[NAV_ACTION] = actionlib.SimpleActionClient(NAV_ACTION, yocs_msgs.NavigateToAction)
-
         self.loginfo('Wait for Sematic Navigator Server to be up')
+        self._ac[NAV_ACTION] = actionlib.SimpleActionClient(NAV_ACTION, yocs_msgs.NavigateToAction)
         self._ac[NAV_ACTION].wait_for_server()
 
-        self._ac[DOC_ACTION] = actionlib.SimpleActionClient(DOC_ACTION, yocs_msgs.DockingInteractorAction)
+        # Dock Interactor
         self.loginfo('Wait for Docking Interactor Server to be up')
+        self._ac[DOC_ACTION] = actionlib.SimpleActionClient(DOC_ACTION, yocs_msgs.DockingInteractorAction)
         self._ac[DOC_ACTION].wait_for_server()
+
+        # VM Interactor 
+        self.loginfo('Wait for Vending Machine Interactor')
+        self._ac[VM_ACTION] = actionlib.SimpleActionClient(VM_ACTION, vending_machine_msgs.InteractorAction)
+        self._ac[VM_ACTION].wait_for_server()
+        
 
         # Led Controller
         self._led_controller = kobuki_utils.LedBlinker()
@@ -194,8 +190,8 @@ class StateManager(object):
             if self._current_state == STATE_ON_ERROR:
                 self._current_state = STATE_CALL_AUTODOCK
 
-            if self._current_state == STATE_AT_PICKUP:
-                self._pickup_confirm = True
+            #if self._current_state == STATE_AT_:
+            #    self._pickup_confirm = True
 
             if self._current_state == STATE_AT_TABLE:
                 self._customer_confirm = True
@@ -242,7 +238,7 @@ class StateManager(object):
 
     def spin(self):
         r = rospy.Rate(10)
-        self._current_state = STATE_IN_DOCK
+        self._current_state = STATE_APPROACH_VM
         self._deliver_order_handler.start()
         self._led_controller.start()
         self.play_sound(self._init_sound)
@@ -264,9 +260,9 @@ class StateManager(object):
 
         if self._current_state == STATE_IN_DOCK:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
-        elif self._current_state == STATE_WAKEUP or self._current_state == STATE_LOCALISE or self._current_state == STATE_REGISTER_DOCK or self._current_state == STATE_GOTO_PICKUP:
+        elif self._current_state == STATE_WAKEUP or self._current_state == STATE_LOCALISE or self._current_state == STATE_REGISTER_DOCK or self._current_state == STATE_GOTO_VM:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_FRONTDESK
-        elif self._current_state == STATE_AT_PICKUP:
+        elif self._current_state == STATE_AT_VM:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_FRONTDESK
         elif self._current_state == STATE_GOTO_TABLE:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
@@ -320,6 +316,22 @@ class StateManager(object):
         if feedback.status == yocs_msgs.NavigateToFeedback.STATUS_RETRY:
             self.play_sound(self._retry_sound)
 
+    def _request_vm_interactor(self, command, drinks=[]):
+        goal = vending_machine_msgs.InteractorGoal()
+        goal.command = command
+        goal.drinks = drinks
+
+        self._vm_interactor_finished = False
+        self._ac[VM_ACTION].send_goal(goal, done_cb=self._vm_interactor_done)
+
+    def _vm_interactor_done(self, status, result):
+        self.loginfo("Vending interactor result : %s, message : %s"%(result.success, result.message))
+
+        if result.success == False:
+            self.play_sound(self._retry_sound)
+            self._current_state = STATE_RESET
+        else:
+            self._vm_interactor_finished = True
 
     def _state_in_dock(self):
         if self._delivery_order_received:
@@ -329,17 +341,20 @@ class StateManager(object):
 
     def _state_wakeup(self):
         if not self._dock_interactor_requested:
-            goal = yocs_msgs.DockingInteractorGoal()
-            goal.command = yocs_msgs.DockingInteractorGoal.WAKE_UP
-            goal.distance = 0.8
-            self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._request_dock_interactor(yocs_msgs.DockingInteractorGoal.WAKE_UP, 0.8)
             self._dock_interactor_requested = True
             self.loginfo("Wake up!")
 
         if self._dock_interactor_finished:
-            self._dock_interactor_finished = False
             self._dock_interactor_requested = False
             self._current_state = STATE_LOCALISE
+
+    def _request_dock_interactor(self, command, distance):
+        goal = yocs_msgs.DockingInteractorGoal()
+        goal.command = command 
+        goal.distance = distance
+        self._dock_interactor_finished = False
+        self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
             
     def _dock_interactor_done(self, status, result):
         self.loginfo("Docking Interactor result : %s, Message : %s"%(result.success,result.message))
@@ -374,49 +389,49 @@ class StateManager(object):
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
-            goal = yocs_msgs.DockingInteractorGoal()
-            goal.command = yocs_msgs.DockingInteractorGoal.REGISTER_DOCK_IN_GLOBAL_FRAME
-            goal.distance = 0.5
-            self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._request_dock_interactor(yocs_msgs.DockingInteractorGoal.REGISTER_DOCK_IN_GLOBAL_FRAME, 0.5)
             self._dock_interactor_requested = True
 
         if self._dock_interactor_finished:
             self._dock_interactor_requested = False
-            self._dock_interactor_finished = False
             self.loginfo('Dock has been registered in global frame')
             self._led_controller.set_on_ok()
+            self._current_state = STATE_GOTO_VM
 
-            self._current_state = STATE_GOTO_PICKUP
-            #self._current_state = STATE_BACKTO_BASE
-
-    def  _state_goto_pickup(self):
+    def  _state_goto_vm(self):
         if not self._navigator_requested:
             self.play_sound(self._order_received_sound)
-            self._request_navigator(self._pickup_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_pickup_timeout, 0.0)
+            self._request_navigator(self._vm_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_pickup_timeout, 0.0)
             self._navigator_requested = True
 
         if self._navigator_finished:
             self._navigator_requested = False
-            self.loginfo('At pickup')
-        
-            self._current_state = STATE_AT_PICKUP
-            # play_sound at pickup
-            self.play_sound(self._at_pickup_sound)
+            self._current_state = STATE_APPROACH_VM
     
-    def _state_at_pickup(self):
-        # Wait for pickup's confirmation
-        if self._pickup_confirm== True:
-            self._pickup_confirm = False
-            self.play_sound(self._confirm_sound)
 
-            if len(self._delivery_locations) < self._delivery_location_index:
-                self.loginfo("Error. Delivery Location is not set...%s"%str(self._delivery_locations))
-                self._current_state = STATE_RESET
-            else:
-                self.loginfo('Moving To Table : %s'%self._delivery_locations[self._delivery_location_index])
-                self._request_navigator(self._delivery_locations[self._delivery_location_index], yocs_msgs.NavigateToGoal.APPROACH_ON, 3, 300, 0.0)
-                # Request navigator to go table 
-                self._current_state = STATE_GOTO_TABLE
+    def _state_approach_vm(self):
+        if not self._vm_interactor_requested:
+            self._request_vm_interactor(vending_machine_msgs.InteractorGoal.APPROACH_VM)
+            self._vm_interactor_requested = True
+
+        if self._vm_interactor_finished:
+            self.loginfo("Approached VM")
+            self._vm_interactor_finished = False
+            self._current_state = STATE_AT_VM
+
+    def _state_at_vm(self):
+        if not self._vm_interactor_requested:
+            drinks = [] 
+            self._request_vm_interactor(vending_machine_msgs.InteractorGoal.ORDER_DRINK, drinks)
+            self._vm_interactor_requested = True
+ 
+        if self._vm_interactor_finished:
+            self._vm_interactor_requested = False
+            self.loginfo("Drink Received")
+            location = self._delivery_locations[self._delivery_location_index]
+            self.loginfo('Moving to next destination[%s]'%str(location))
+            self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
+            self._current_state = STATE_GOTO_TABLE
 
     def _state_goto_table(self):
         # Wait for arriving

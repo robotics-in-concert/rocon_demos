@@ -1,7 +1,7 @@
 <launch>
   <include file="$(find waiterbot_bringup)/launch/minimal.launch"/>
   <group ns="young">
-    <include file="$(find simple_delivery_robot_ctrl)/launch/controller.launch">
+    <include file="$(find vm_delivery_robot_ctrl)/launch/controller.launch">
       <arg name="global_ar_pair_topic"        value="/annotations/ar_markers"/>
       <arg name="location_list_topic"         default="/annotations/tables"/>
     </include>
