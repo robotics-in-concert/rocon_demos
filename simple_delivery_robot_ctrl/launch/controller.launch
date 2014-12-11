@@ -26,7 +26,7 @@
   </include>
 
   <!--  ************** Additional sensors *************  -->
-<!--  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>-->
+  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>
 
   <!-- Reconfigure command velocity multiplexer to fit waiterbot needs. Just set the parameter doesn't work
       if we start the waiterbot rapp with app manager; we must explicitly call the reconfigure service -->

@@ -31,6 +31,7 @@ STATE_REGISTER_DOCK  = 'REGISTER_DOCK'
 STATE_GOTO_VM        = 'GOTO_VM'
 STATE_APPROACH_VM    = 'APROACH_VM'
 STATE_AT_VM          = 'AT_VM'
+STATE_BACK_FROM_VM   = 'BACK_FROM_VM'
 STATE_GOTO_TABLE     = 'GOTO_TABLE'
 STATE_AT_TABLE       = 'AT_TABLE'
 STATE_BACKTO_BASE    = 'BACKTO_BASE'
@@ -77,6 +78,7 @@ class StateManager(object):
         self._states[STATE_GOTO_VM]         = self._state_goto_vm
         self._states[STATE_APPROACH_VM]     = self._state_approach_vm
         self._states[STATE_AT_VM]           = self._state_at_vm
+        self._states[STATE_BACK_FROM_VM]    = self._state_back_from_vm
         self._states[STATE_GOTO_TABLE]      = self._state_goto_table
         self._states[STATE_AT_TABLE]        = self._state_at_table
         self._states[STATE_BACKTO_BASE]     = self._state_backto_base
@@ -196,6 +198,9 @@ class StateManager(object):
             if self._current_state == STATE_AT_TABLE:
                 self._customer_confirm = True
 
+            if self._current_state == STATE_AT_VM:
+                self._current_state = STATE_APPROACH_VM
+
         if red:
             now = rospy.Time.now()
 
@@ -238,7 +243,8 @@ class StateManager(object):
 
     def spin(self):
         r = rospy.Rate(10)
-        self._current_state = STATE_APPROACH_VM
+        #self._current_state = STATE_LOCALISE
+        self._current_state = STATE_IN_DOCK
         self._deliver_order_handler.start()
         self._led_controller.start()
         self.play_sound(self._init_sound)
@@ -378,6 +384,7 @@ class StateManager(object):
             self.loginfo('Robot localised')
             self.loginfo('Register Dock in the global frame')
             self._current_state = STATE_REGISTER_DOCK
+            #self._current_state = STATE_APPROACH_VM
             
     def _localize_done(self, status, result):
         self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
@@ -416,10 +423,13 @@ class StateManager(object):
 
         if self._vm_interactor_finished:
             self.loginfo("Approached VM")
-            self._vm_interactor_finished = False
+            self._vm_interactor_requested = False
             self._current_state = STATE_AT_VM
 
     def _state_at_vm(self):
+        self._current_state = STATE_BACK_FROM_VM
+        pass
+        '''
         if not self._vm_interactor_requested:
             drinks = [] 
             self._request_vm_interactor(vending_machine_msgs.InteractorGoal.ORDER_DRINK, drinks)
@@ -432,6 +442,17 @@ class StateManager(object):
             self.loginfo('Moving to next destination[%s]'%str(location))
             self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
             self._current_state = STATE_GOTO_TABLE
+        '''
+
+    def _state_back_from_vm(self):
+        if not self._vm_interactor_requested:
+            self._request_vm_interactor(vending_machine_msgs.InteractorGoal.BACK_FROM_VM)
+            self._vm_interactor_requested = True
+            
+        if self._vm_interactor_finished:
+            self.loginfo('Back from VM')
+            self._vm_interactor_requested = False
+            self._current_state = STATE_BACKTO_BASE
 
     def _state_goto_table(self):
         # Wait for arriving
@@ -489,6 +510,15 @@ class StateManager(object):
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
             self.loginfo("Done!!!")
+
+            self._order_in_progress = False
+            message = 'Delivery Success!'
+            r = simple_delivery_msgs.RobotDeliveryOrderResult()
+            r.order_id = self._delivery_order_id
+            r.message = message
+            r.success = True
+            self._deliver_order_handler.set_succeeded(r)
+
 
     def _state_on_error(self):
         self._led_controller.set_on_error()

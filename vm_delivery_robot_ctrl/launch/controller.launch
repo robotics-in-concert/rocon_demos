@@ -26,7 +26,7 @@
   </include>
 
   <!--  ************** Additional sensors *************  -->
-<!--  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>-->
+  <include file="$(find waiterbot_sensors)/launch/ir_sensors.launch"/>
 
   <!-- Reconfigure command velocity multiplexer to fit waiterbot needs. Just set the parameter doesn't work
       if we start the waiterbot rapp with app manager; we must explicitly call the reconfigure service -->
@@ -53,7 +53,7 @@
 <!--  <arg name="location_list_topic"         default="/annotations/tables"/>-->
   <arg name="predicted_robot_pose_topic"    default="predicted_robot_pose"/>
   <arg name="pickup_location"               default="pickup"/>
-  <arg name="vending_machine_ar_id"            default="3"/>
+  <arg name="vending_machine_ar_id"            default="16"/>
   <arg name="ar_pair_spotted_markers_topic" default="spotted_markers"/>
   <arg name="delivery_order_action"         default="delivery_order"/>
 
@@ -145,7 +145,6 @@
     <arg name="cmd_vel_mux_input"             value="$(arg cmd_vel_mux_input)"/>
     <arg name="predicted_robot_pose_topic"    value="$(arg predicted_robot_pose_topic)"/>
     <arg name="spotted_markers_topic"         value="$(arg ar_pair_spotted_markers_topic)"/>
-    <arg name="vel_smoother_param"            value="$(arg vel_smoother_param)"/>
     <arg name="robot_cmd_feed"                value="$(arg robot_cmd_feed)"/>
     <arg name="odom_topic"                    value="$(arg odom_topic)"/>
     <arg name="base_frame"                    value="$(arg base_frame)"/>
