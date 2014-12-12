@@ -7,9 +7,13 @@
     name: "indoor_2d_map_prep"
     interactions: demo_concert/initialisation
     parameters: demo_concert/initialisation
-- resource_name: concert_common_services/delivery
+- resource_name: concert_common_services/pickup_delivery
   overrides:
-    name: "delivery"
+    name: "pickup_delivery"
+    priority: 100
+- resource_name: concert_common_services/vm_delivery
+  overrides:
+    name: "vm_delivery"
     priority: 100
 - resource_name: concert_common_services/welcome
   overrides:

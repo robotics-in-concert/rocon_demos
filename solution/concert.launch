@@ -15,7 +15,7 @@
       <arg name="enable_rosbridge"  value="true"/>
       <arg name="rosbridge_address" value="$(arg rosbridge_address)"/>
       <arg name="webserver_address" value="$(arg webserver_address)"/>
-      <arg name="gateway_unavailable_timeout" value="30"/>
+      <arg name="gateway_unavailable_timeout" value="60"/>
   </include>
   <group ns="concert">
     <node pkg="rocon_tf_reconstructor" name="rocon_tf_reconstructor" type="rocon_tf_reconstructor"/>
