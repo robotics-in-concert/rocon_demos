@@ -37,11 +37,11 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
-- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_kitchen_app/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_monitor/index.html)
   role: 'Manager'
   compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Monitor
-  description: Monitors robots and order list
+  description: Monitors status of robots and delivery order
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
