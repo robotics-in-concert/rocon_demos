@@ -1,0 +1,5 @@
+display: Waiterbot sim
+description: The simulated waiterbot navigate around the some place to serve package. 
+compatibility: rocon:/pc
+launch: vm_delivery_sim.launch
+parent_name: concert_common_rapps/vm_delivery
