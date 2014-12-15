@@ -4,6 +4,7 @@
   <arg name="nav_retry"         default="3"/>
   <arg name="nav_timeout"       default="300.0"/>
   <arg name="nav_near_distance" default="1.0"/>
+  <arg name="volume"            default="100"/>
   <arg name="pickup_location"/>
   <arg name="localize_action"/>
   <arg name="docking_interactor_action"/>
@@ -24,5 +25,6 @@
     <param name="nav_retry"           value="$(arg nav_retry)"/>
     <param name="nav_timeout"         value="$(arg nav_timeout)"/>
     <param name="nav_near_distance"   value="$(arg nav_near_distance)"/> <!-- unused yet-->
+    <param name="volume"              value="$(arg volume)"/>
   </node>
 </launch>

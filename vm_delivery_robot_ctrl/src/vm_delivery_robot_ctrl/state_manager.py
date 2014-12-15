@@ -29,6 +29,7 @@ STATE_WAKEUP         = 'WAKE_UP'
 STATE_LOCALISE       = 'LOCALISE'
 STATE_REGISTER_DOCK  = 'REGISTER_DOCK'
 STATE_GOTO_VM        = 'GOTO_VM'
+STATE_LOCALISE_AT_VM = 'LOCALISE_AT_VM'
 STATE_APPROACH_VM    = 'APROACH_VM'
 STATE_AT_VM          = 'AT_VM'
 STATE_BACK_FROM_VM   = 'BACK_FROM_VM'
@@ -76,6 +77,7 @@ class StateManager(object):
         self._states[STATE_LOCALISE]        = self._state_localise
         self._states[STATE_REGISTER_DOCK]   = self._state_register_dock
         self._states[STATE_GOTO_VM]         = self._state_goto_vm
+        self._states[STATE_LOCALISE_AT_VM]  = self._state_localise_at_vm
         self._states[STATE_APPROACH_VM]     = self._state_approach_vm
         self._states[STATE_AT_VM]           = self._state_at_vm
         self._states[STATE_BACK_FROM_VM]    = self._state_back_from_vm
@@ -241,8 +243,8 @@ class StateManager(object):
 
     def spin(self):
         r = rospy.Rate(10)
-        self._current_state = STATE_LOCALISE
-        #self._current_state = STATE_IN_DOCK
+        #self._current_state = STATE_LOCALISE_AT_VM
+        self._current_state = STATE_IN_DOCK
         self._deliver_order_handler.start()
         self._led_controller.start()
         self.play_sound(self._init_sound)
@@ -374,6 +376,7 @@ class StateManager(object):
             self._localised = False
             goal = yocs_msgs.LocalizeGoal()
             goal.command = yocs_msgs.LocalizeGoal.STAND_AND_LOCALIZE
+            goal.distortion = 0.2
             self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done)
             self.loginfo('Localisation Request sent')
             self._localise_requested = True
@@ -382,7 +385,6 @@ class StateManager(object):
             self.loginfo('Robot localised')
             self.loginfo('Register Dock in the global frame')
             self._current_state = STATE_REGISTER_DOCK
-            self._current_state = STATE_APPROACH_VM
             
     def _localize_done(self, status, result):
         self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
@@ -411,8 +413,22 @@ class StateManager(object):
 
         if self._navigator_finished:
             self._navigator_requested = False
+            self._current_state = STATE_LOCALISE_AT_VM
+
+    def _state_localise_at_vm(self):
+        if not self._localise_requested:
+            self._localised = False
+            goal = yocs_msgs.LocalizeGoal()
+            goal.command = yocs_msgs.LocalizeGoal.STAND_AND_LOCALIZE
+            goal.distortion = 0.0
+            self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done)
+            self.loginfo('Localisation Request sent')
+            self._localise_requested = True
+
+        if self._localised:
+            self.loginfo('Robot localised')
+            self.loginfo('Register Dock in the global frame')
             self._current_state = STATE_APPROACH_VM
-    
 
     def _state_approach_vm(self):
         if not self._vm_interactor_requested:
@@ -425,8 +441,7 @@ class StateManager(object):
             self._current_state = STATE_AT_VM
 
     def _state_at_vm(self):
-        #self._current_state = STATE_BACK_FROM_VM
-        pass
+        self._current_state = STATE_BACK_FROM_VM
         '''
         if not self._vm_interactor_requested:
             drinks = [] 
@@ -450,7 +465,8 @@ class StateManager(object):
         if self._vm_interactor_finished:
             self.loginfo('Back from VM')
             self._vm_interactor_requested = False
-            self._current_state = STATE_BACKTO_BASE
+           # self._current_state = STATE_BACKTO_BASE
+            self._current_state = STATE_GOTO_TABLE
 
     def _state_goto_table(self):
         # Wait for arriving
