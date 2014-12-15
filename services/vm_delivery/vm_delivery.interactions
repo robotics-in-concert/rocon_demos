@@ -1,4 +1,12 @@
-- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_order/index.html)
+- name: web_url(http://www.google.com)
+  role: 'Customer'
+  compatibility: rocon:/*/*/*/chrome|firefox
+  display_name: 'Web Search'
+  description: 'Web Surfer'
+  max: -1
+  icon:
+    resource_name: rocon_icons/google.png
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/vm_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Delivery Order App (Table 1)
@@ -17,7 +25,7 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
-- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_order/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/vm_delivery_order/index.html)
   role: 'Customer'
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
@@ -40,7 +48,7 @@
 - name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_monitor/index.html)
   role: 'Manager'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Monitor
+  display_name: Delivery Monitor
   description: Monitors status of robots and delivery order
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
@@ -71,15 +79,17 @@
     - remap_from: nav_ctrl_status
       remap_to: /waypoint_navigation/nav_ctrl_status
 
-- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_screen_viewer/index.html)
-  role: 'Manager'
-  compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Screen Viewer
-  description: Screen control to show video
-  parameters:
-    rosbridge_address: __ROSBRIDGE_ADDRESS__
-    rosbridge_port: __ROSBRIDGE_PORT__
-    screen: left
-  remappings:  
-    - remap_from: show_video
-      remap_to: /show_video
+# disable screen viewer until we need
+#
+#- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/rocon_web_screen_viewer/index.html)
+#  role: 'Manager'
+#  compatibility: rocon:/*/*/indigo/chrome|firefox
+#  display_name: Screen Viewer
+#  description: Screen control to show video
+#  parameters:
+#    rosbridge_address: __ROSBRIDGE_ADDRESS__
+#    rosbridge_port: __ROSBRIDGE_PORT__
+#    screen: left
+#  remappings:  
+#    - remap_from: show_video
+#      remap_to: /show_video
