@@ -3,7 +3,8 @@
   <group ns="young">
     <include file="$(find vm_delivery_robot_ctrl)/launch/controller.launch">
       <arg name="global_ar_pair_topic"        value="/annotations/ar_markers"/>
-      <arg name="location_list_topic"         default="/annotations/tables"/>
+      <arg name="location_list_topic"         value="/annotations/tables"/>
+      <arg name="vending_machine_ar_id"          value="3"/>
     </include>
   </group>
   <include file="$(find vm_delivery_robot_ctrl)/launch/db.launch"/>

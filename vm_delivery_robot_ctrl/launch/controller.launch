@@ -55,6 +55,7 @@
   <arg name="pickup_location"               default="pickup"/>
   <arg name="vending_machine_ar_id"            default="16"/>
   <arg name="ar_pair_spotted_markers_topic" default="spotted_markers"/>
+  <arg name="ar_pair_relative_target_pose_topic"  default="relative_target_pose"/>
   <arg name="delivery_order_action"         default="delivery_order"/>
 
   <!-- Actions for state manager -->
@@ -73,7 +74,7 @@
   <arg name="custom_move_base_param_file" default="$(find waiterbot_navigation)/param/ir_costmap_params.yaml"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
   <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sounds_korean"/>
-  <arg name="volume"                      default="50"/>
+  <arg name="volume"                      default="80"/>
 
   <!-- State Manager -->
   <include file="$(find vm_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
@@ -96,6 +97,7 @@
     <arg name="global_ar_pair_topic"        value="$(arg global_ar_pair_topic)"/>
     <arg name="predicted_robot_pose_topic"  value="$(arg predicted_robot_pose_topic)"/>
     <arg name="spotted_marker_topic"        value="$(arg ar_pair_spotted_markers_topic)"/>
+    <arg name="relative_target_pose_topic"        value="$(arg ar_pair_relative_target_pose_topic)"/>
   </include>
 
   <!-- Localization manager -->
@@ -145,6 +147,7 @@
     <arg name="cmd_vel_mux_input"             value="$(arg cmd_vel_mux_input)"/>
     <arg name="predicted_robot_pose_topic"    value="$(arg predicted_robot_pose_topic)"/>
     <arg name="spotted_markers_topic"         value="$(arg ar_pair_spotted_markers_topic)"/>
+    <arg name="relative_target_pose_topic"    value="$(arg ar_pair_relative_target_pose_topic)"/>
     <arg name="robot_cmd_feed"                value="$(arg robot_cmd_feed)"/>
     <arg name="odom_topic"                    value="$(arg odom_topic)"/>
     <arg name="base_frame"                    value="$(arg base_frame)"/>

@@ -192,12 +192,10 @@ class StateManager(object):
             if self._current_state == STATE_ON_ERROR:
                 self._current_state = STATE_CALL_AUTODOCK
 
-            #if self._current_state == STATE_AT_:
-            #    self._pickup_confirm = True
-
             if self._current_state == STATE_AT_TABLE:
                 self._customer_confirm = True
 
+            # Debugging
             if self._current_state == STATE_AT_VM:
                 self._current_state = STATE_APPROACH_VM
 
@@ -243,8 +241,8 @@ class StateManager(object):
 
     def spin(self):
         r = rospy.Rate(10)
-        #self._current_state = STATE_LOCALISE
-        self._current_state = STATE_IN_DOCK
+        self._current_state = STATE_LOCALISE
+        #self._current_state = STATE_IN_DOCK
         self._deliver_order_handler.start()
         self._led_controller.start()
         self.play_sound(self._init_sound)
@@ -384,7 +382,7 @@ class StateManager(object):
             self.loginfo('Robot localised')
             self.loginfo('Register Dock in the global frame')
             self._current_state = STATE_REGISTER_DOCK
-            #self._current_state = STATE_APPROACH_VM
+            self._current_state = STATE_APPROACH_VM
             
     def _localize_done(self, status, result):
         self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
@@ -427,7 +425,7 @@ class StateManager(object):
             self._current_state = STATE_AT_VM
 
     def _state_at_vm(self):
-        self._current_state = STATE_BACK_FROM_VM
+        #self._current_state = STATE_BACK_FROM_VM
         pass
         '''
         if not self._vm_interactor_requested:
