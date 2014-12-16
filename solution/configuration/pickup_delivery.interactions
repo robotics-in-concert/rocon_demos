@@ -1,0 +1,52 @@
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/pickup_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: Pickup Delivery Order
+  description: Delivery from pickup to a desk 
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    discard_btn_name: [pickup, docking, docking, vm]
+  remappings:
+    - remap_from: send_order      
+      remap_to: /send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_monitor/index.html)
+  role: 'Manager'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: Delivery Monitor
+  description: Monitors status of robots and delivery order
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    robot1: adams
+    robot2: zach 
+    robot3: young 
+  remappings:
+    - remap_from: map
+      remap_to: /map
+    - remap_from: tables
+      remap_to: /annotation/tables
+    - remap_from: ar_markers
+      remap_to: /annotation/ar_markers
+# Order list remappings
+    - remap_from: order_list
+      remap_to: /order_list
+# Control order remappings
+    - remap_from: show_video
+      remap_to: /show_video
+    - remap_from: set_color
+      remap_to: /set_color
+    - remap_from: touch_sensor_event
+      remap_to: /touch_sensor_event
+# Restock service remappings
+    - remap_from: nav_ctrl
+      remap_to: /waypoint_navigation/nav_ctrl
+    - remap_from: nav_ctrl_status
+      remap_to: /waypoint_navigation/nav_ctrl_status

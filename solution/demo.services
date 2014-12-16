@@ -11,14 +11,19 @@
   overrides:
     name: "pickup_delivery"
     priority: 100
+    interactions: demo_concert/pickup_delivery
+    parameters: demo_concert/pickup_delivery
 - resource_name: concert_common_services/vm_delivery
   overrides:
     name: "vm_delivery"
     priority: 100
+    interactions: demo_concert/vm_delivery
+    parameters: demo_concert/vm_delivery
 - resource_name: concert_common_services/welcome
   overrides:
     name: "welcome"
     priority: 99
+    interactions: demo_concert/welcome
 - resource_name: concert_service_waypoint_navigation/waypoint_navigation
   overrides:
     priority: 3
