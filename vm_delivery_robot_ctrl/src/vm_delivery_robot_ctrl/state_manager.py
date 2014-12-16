@@ -199,7 +199,7 @@ class StateManager(object):
 
             # Debugging
             if self._current_state == STATE_AT_VM:
-                self._current_state = STATE_APPROACH_VM
+                self._current_state = STATE_LOCALISE_AT_VM
 
         if red:
             now = rospy.Time.now()
@@ -235,6 +235,7 @@ class StateManager(object):
             self._delivery_order_id = goal.order_id
             self._delivery_locations = goal.locations
             self._delivery_location_index = 0
+            self._delivery_menus = goal.menus
             self._delivery_order_received = True
 
     def _process_deliver_order_preempt(self):
@@ -427,7 +428,7 @@ class StateManager(object):
 
         if self._localised:
             self.loginfo('Robot localised')
-            self.loginfo('Register Dock in the global frame')
+            self.loginfo('Localised in front of vending machine')
             self._current_state = STATE_APPROACH_VM
 
     def _state_approach_vm(self):
@@ -441,21 +442,29 @@ class StateManager(object):
             self._current_state = STATE_AT_VM
 
     def _state_at_vm(self):
-        self._current_state = STATE_BACK_FROM_VM
-        '''
         if not self._vm_interactor_requested:
-            drinks = [] 
+            drinks = self._get_drink_ids(self._delivery_menus)
             self._request_vm_interactor(vending_machine_msgs.InteractorGoal.ORDER_DRINK, drinks)
             self._vm_interactor_requested = True
  
         if self._vm_interactor_finished:
             self._vm_interactor_requested = False
             self.loginfo("Drink Received")
-            location = self._delivery_locations[self._delivery_location_index]
-            self.loginfo('Moving to next destination[%s]'%str(location))
-            self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
-            self._current_state = STATE_GOTO_TABLE
-        '''
+            self._current_state = STATE_BACK_FROM_VM
+
+    def _get_drink_ids(self, drinks):
+
+        ids = []
+        for d in drinks:
+            if d == "COKE":
+                ids.append(vending_machine_msgs.DrinkType.COKE)
+            elif d == "CIDER":
+                ids.append(vending_machine_msgs.DrinkType.CIDER)
+            else:
+                self.loginfo("Wrong Type[%s]. Order coke instead"%drink)
+                ids.append(vending_machine_msgs.DrinkType.COKE)
+
+        return ids
 
     def _state_back_from_vm(self):
         if not self._vm_interactor_requested:
@@ -465,7 +474,9 @@ class StateManager(object):
         if self._vm_interactor_finished:
             self.loginfo('Back from VM')
             self._vm_interactor_requested = False
-           # self._current_state = STATE_BACKTO_BASE
+            location = self._delivery_locations[self._delivery_location_index]
+            self.loginfo('Moving to next destination[%s]'%str(location))
+            self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
             self._current_state = STATE_GOTO_TABLE
 
     def _state_goto_table(self):
@@ -474,7 +485,7 @@ class StateManager(object):
             # When it arrives...
             self._current_state = STATE_AT_TABLE
             # arriving sound
-            play_sound(self._resource_path, self._at_table_sound)
+            self.play_sound(self._at_table_sound)
             feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
             feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ARRIVAL_AT_RECEIVER
@@ -486,7 +497,7 @@ class StateManager(object):
         # Wait for Customer's confirmation
         if self._customer_confirm == True:
             self._customer_confirm = False
-            play_sound(self._resource_path, self._enjoy_meal_sound)
+            self.play_sound(self._enjoy_meal_sound)
 
             # If it goes to multiple delivery location..
             self._delivery_location_index = self._delivery_location_index + 1
@@ -568,4 +579,5 @@ class StateManager(object):
             self.loginfo("Done!!!")
 
     def play_sound(self, sound):
+        self.loginfo('volume : %s'%self._volume)
         play_sound(self._resource_path, sound, self._volume)
