@@ -14,7 +14,13 @@ nodes:
     min: 1
     max: 1
 
+  - id: motion_checker
+    uri: rocon:/pc/motion_checker#rocon_ninja_block/motion_checker
+    min: 1
+    max: 1
+
 topics:
+  #robosem
   - id: play_tts
     type: std_msgs/String
   - id: robot_motion
@@ -22,14 +28,21 @@ topics:
 
   - id: touch_sensor_event
     type: std_msgs/String
-
+  #hue
   - id: set_hue
     type: rocon_device_msgs/Hue
 
   - id: list_hue
     type: rocon_device_msgs/HueArray
 
-actions: []
+  #motion checker
+  - id: ninja_block_data
+    type: rocon_ninja_block/NBDevice
+
+actions: 
+  - id: check_motion
+    type: rocon_ninja_block/CheckMotion
+
 edges: 
 ############### Robosem Bridge
   - start: play_tts
@@ -48,7 +61,7 @@ edges:
     type: std_msgs/String
     remap_from: touch_sensor_event
     remap_to: /touch_sensor_event
-
+############### Hue
   - start: set_hue
     finish: hue_bridge
     type: rocon_device_msgs/Hue
@@ -60,3 +73,15 @@ edges:
     type: rocon_device_msgs/HueArray
     remap_from: list_hue
     remap_to: /list_hue
+############### Motion Checker
+  - start: check_motion
+    finish: motion_checker
+    type: std_msgs/String
+    remap_from: check_motion
+    remap_to: /check_motion
+
+  - start: motion_checker
+    finish: ninja_block_data
+    type: rocon_ninja_block/NBDevice
+    remap_from: ninja_block_data
+    remap_to: /ninja_block_data
