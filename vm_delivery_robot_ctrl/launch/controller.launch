@@ -56,6 +56,7 @@
   <arg name="vending_machine_ar_id"            default="16"/>
   <arg name="ar_pair_spotted_markers_topic" default="spotted_markers"/>
   <arg name="ar_pair_relative_target_pose_topic"  default="relative_target_pose"/>
+  <arg name="ar_pair_target_offset"         default="0.33"/>
   <arg name="delivery_order_action"         default="delivery_order"/>
 
   <!-- Actions for state manager -->
@@ -98,7 +99,8 @@
     <arg name="global_ar_pair_topic"        value="$(arg global_ar_pair_topic)"/>
     <arg name="predicted_robot_pose_topic"  value="$(arg predicted_robot_pose_topic)"/>
     <arg name="spotted_marker_topic"        value="$(arg ar_pair_spotted_markers_topic)"/>
-    <arg name="relative_target_pose_topic"        value="$(arg ar_pair_relative_target_pose_topic)"/>
+    <arg name="relative_target_pose_topic"  value="$(arg ar_pair_relative_target_pose_topic)"/>
+    <arg name="ar_pair_target_offset"       value="$(arg ar_pair_target_offset)"/>
   </include>
 
   <!-- Localization manager -->

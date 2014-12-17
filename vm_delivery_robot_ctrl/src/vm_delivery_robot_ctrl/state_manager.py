@@ -417,6 +417,8 @@ class StateManager(object):
             self._current_state = STATE_LOCALISE_AT_VM
 
     def _state_localise_at_vm(self):
+
+
         if not self._localise_requested:
             self._localised = False
             goal = yocs_msgs.LocalizeGoal()
@@ -442,6 +444,10 @@ class StateManager(object):
             self._current_state = STATE_AT_VM
 
     def _state_at_vm(self):
+        rospy.sleep(3.0)
+        self._current_state = STATE_BACK_FROM_VM
+
+        '''
         if not self._vm_interactor_requested:
             drinks = self._get_drink_ids(self._delivery_menus)
             self._request_vm_interactor(vending_machine_msgs.InteractorGoal.ORDER_DRINK, drinks)
@@ -451,6 +457,7 @@ class StateManager(object):
             self._vm_interactor_requested = False
             self.loginfo("Drink Received")
             self._current_state = STATE_BACK_FROM_VM
+        '''
 
     def _get_drink_ids(self, drinks):
 
@@ -560,6 +567,7 @@ class StateManager(object):
         self._ac[NAV_ACTION].cancel_all_goals()
         self._ac[DOC_ACTION].cancel_all_goals()
         self._ac[LOC_ACTION].cancel_all_goals()
+        self._ac[VM_ACTION].cancel_all_goals()
         self._init_variables()
         self.play_sound(self._reset_sound)
         self._current_state = STATE_ON_ERROR
