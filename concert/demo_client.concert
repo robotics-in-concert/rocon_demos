@@ -1,0 +1,13 @@
+<concert>
+    <launch title="robosem_bridge:11316"    package="demo_concert" name="demo_backend.launch" port="11316">
+      <arg name="concert_client_name" value="robosem_bridge"/>
+    </launch>
+
+    <launch title="hue_bridge:11317"    package="demo_concert" name="demo_backend.launch" port="11317">
+      <arg name="concert_client_name" value="hue_bridge"/>
+    </launch>
+
+    <launch title="motion_checker:11318"    package="demo_concert" name="demo_backend.launch" port="11318">
+      <arg name="concert_client_name" value="motion_checker"/>
+    </launch>
+</concert>
