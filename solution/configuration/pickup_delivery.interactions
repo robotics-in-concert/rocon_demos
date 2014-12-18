@@ -11,7 +11,7 @@
     discard_btn_name: [pickup, docking, docking, vm]
   remappings:
     - remap_from: send_order      
-      remap_to: /send_order
+      remap_to: /pickup_send_order
     - remap_from: delivery_status
       remap_to: /delivery_status  
     - remap_from: tables
@@ -28,6 +28,7 @@
     robot1: adams
     robot2: zach 
     robot3: young 
+    robot4: pickup_waiter
   remappings:
     - remap_from: map
       remap_to: /map
