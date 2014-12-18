@@ -112,6 +112,7 @@ class WaiterSoftBot(object):
             self.waiter_server.set_succeeded(result)
             return
         rospy.loginfo("Order Received : Receivers = %s", data.locations)
+        rospy.loginfo("Order Received : Menus = %s", data.menus)
 
         # Go to kitchen, and return feedback ARRIVE_KITCHEN
         self.go_to(order_id=order_id,
