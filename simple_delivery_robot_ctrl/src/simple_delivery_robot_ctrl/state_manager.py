@@ -415,7 +415,7 @@ class StateManager(object):
             # When it arrives...
             self._current_state = STATE_AT_TABLE
             # arriving sound
-            play_sound(self._resource_path, self._at_table_sound)
+            self.play_sound(self._at_table_sound)
             feedback = simple_delivery_msgs.RobotDeliveryOrderFeedback()
             feedback.delivery_status = simple_delivery_msgs.DeliveryStatus()
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.ARRIVAL_AT_RECEIVER
@@ -427,7 +427,7 @@ class StateManager(object):
         # Wait for Customer's confirmation
         if self._customer_confirm == True:
             self._customer_confirm = False
-            play_sound(self._resource_path, self._enjoy_meal_sound)
+            self.play_sound(self._enjoy_meal_sound)
 
             # If it goes to multiple delivery location..
             self._delivery_location_index = self._delivery_location_index + 1
@@ -464,6 +464,14 @@ class StateManager(object):
             self._dock_interactor_finished = False
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
+            self._order_in_progress = False
+            message = 'Delivery Success!'
+
+            r = simple_delivery_msgs.RobotDeliveryOrderResult()
+            r.order_id = self._delivery_order_id
+            r.message = message
+            r.success = True
+            self._deliver_order_handler.set_succeeded(r)
             self.loginfo("Done!!!")
 
     def _state_on_error(self):
@@ -498,6 +506,13 @@ class StateManager(object):
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
             self.loginfo("Done!!!")
+
+
+
+
+
+
+
 
     def play_sound(self, sound):
         play_sound(self._resource_path, sound, self._volume)

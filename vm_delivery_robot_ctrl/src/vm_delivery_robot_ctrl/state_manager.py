@@ -402,6 +402,7 @@ class StateManager(object):
 
         if self._dock_interactor_finished:
             self._dock_interactor_requested = False
+            self._dock_interactor_finished= False
             self.loginfo('Dock has been registered in global frame')
             self._led_controller.set_on_ok()
             self._current_state = STATE_GOTO_VM
@@ -444,10 +445,6 @@ class StateManager(object):
             self._current_state = STATE_AT_VM
 
     def _state_at_vm(self):
-        rospy.sleep(3.0)
-        self._current_state = STATE_BACK_FROM_VM
-
-        '''
         if not self._vm_interactor_requested:
             drinks = self._get_drink_ids(self._delivery_menus)
             self._request_vm_interactor(vending_machine_msgs.InteractorGoal.ORDER_DRINK, drinks)
@@ -457,7 +454,6 @@ class StateManager(object):
             self._vm_interactor_requested = False
             self.loginfo("Drink Received")
             self._current_state = STATE_BACK_FROM_VM
-        '''
 
     def _get_drink_ids(self, drinks):
 
@@ -468,7 +464,7 @@ class StateManager(object):
             elif d == "CIDER":
                 ids.append(vending_machine_msgs.DrinkType.CIDER)
             else:
-                self.loginfo("Wrong Type[%s]. Order coke instead"%drink)
+                self.loginfo("Wrong Type[%s]. Order coke instead"%d)
                 ids.append(vending_machine_msgs.DrinkType.COKE)
 
         return ids
@@ -530,10 +526,7 @@ class StateManager(object):
 
     def _state_backto_base(self):
         if not self._dock_interactor_requested:
-            goal = yocs_msgs.DockingInteractorGoal()
-            goal.command = yocs_msgs.DockingInteractorGoal.RETURN_TO_DOCK
-            goal.distance = 0.5
-            self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._request_dock_interactor(yocs_msgs.DockingInteractorGoal.RETURN_TO_DOCK, 0.5)
             self._dock_interactor_requested = True
             self.loginfo("Returning back to base!")
 
