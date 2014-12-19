@@ -9,14 +9,14 @@
 - name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/vm_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Delivery Order App (Table 1)
+  display_name: Delivery Order App (Yeonhee)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: table1
+    extra_data: yeonhee
   remappings:
     - remap_from: send_order      
       remap_to: /send_order
