@@ -10,14 +10,52 @@
 - name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/vm_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Delivery Order App (Table 1)
+  display_name: VM Delivery Order App (meeting_room)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: table1
+    extra_data: meeting_room
+  remappings:
+    - remap_from: send_order      
+      remap_to: /vm_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/vm_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: VM Delivery Order App (yeonhee)
+  description: Exhibition web menu
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: yeonhee
+  remappings:
+    - remap_from: send_order 
+      remap_to: /vm_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/vm_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: VM Delivery Order App (conf_room)
+  description: Exhibition web menu
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: conf_room
   remappings:
     - remap_from: send_order      
       remap_to: /vm_send_order
@@ -30,7 +68,7 @@
   role: 'Customer'
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Delivery Order App (Table 4)
+  display_name: VM Delivery Order App (Table 4)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
@@ -49,7 +87,7 @@
 - name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_monitor/index.html)
   role: 'Manager'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Delivery Monitor
+  display_name: VM Delivery Monitor
   description: Monitors status of robots and delivery order
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
