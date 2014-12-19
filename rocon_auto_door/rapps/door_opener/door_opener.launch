@@ -1,0 +1,10 @@
+<launch>
+  <arg name="arduino_ip"                        default="192.168.10.227"/> <!-- IP of the Arduino Yun -->
+  <arg name="door_ctrl_io_port"                 default="11"/> <!-- number of the port the remote is connected to -->
+
+  <include file="$(find rocon_auto_door)/launch/auto_door.launch">
+    <arg name="arduino_ip" value="$(arg arduino_ip)"/>
+    <arg name="door_ctrl_io_port" value="$(arg door_ctrl_io_port)"/>
+  </include>
+
+</launch>
