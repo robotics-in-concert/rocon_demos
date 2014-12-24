@@ -1,5 +1,5 @@
 <launch>
-  <arg name="auto_run_workflows" default="common_func welcome_wf pickup_delivery_wf vm_delivery_wf"/>
+  <arg name="auto_run_workflows" default="--web --engine --workflow common_func --workflow welcome_wf --workflow pickup_delivery_wf --workflow vm_delivery_wf"/>
   <group ns="software">
     <node ns="world_canvas" pkg="world_canvas_server" type="world_canvas_server" name="world_canvas_server">
     </node>
