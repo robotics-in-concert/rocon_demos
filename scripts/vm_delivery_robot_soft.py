@@ -179,7 +179,11 @@ if __name__ == '__main__':
     try:
         # Initialize ros node
         rospy.init_node('waiterbot')
-        print rospy.get_name()
+        rospy.loginfo(rospy.get_name())
+
+        volume = rospy.get_param('~volume' , 75)
+        rospy.loginfo("delivery robot sound volume: " + str(volume))
+        
         waiter = WaiterSoftBot(rospy.get_name(), "delivery_order")
         rospy.loginfo('Initialized')
 
