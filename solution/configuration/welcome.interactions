@@ -1,3 +1,13 @@
+- name: web_url(https://a.ninja.is/home)
+  role: 'Manager'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: Ninja block Setting
+  description: Setting and checking the ninja block devices. It needs ninja block account.
+  icon:
+    resource_name: rocon_icons/rocon.png
+  parameters: []
+  remappings: []
+
 - name: com.github.robotics_in_concert.rocon_android_apps.beacon_awareness.BeaconAwarenessMainActivity
   role: 'Customer'
   compatibility: rocon:/*/*/*/jellybean|ice_cream_sandwich|kitkat
@@ -7,5 +17,7 @@
   remappings:
     - remap_from: beacons
       remap_to: /beacons
+    - remap_from: start_app
+      remap_to: /start_app
   parameters:
     beacon_map: '{{"mac":"D0:FF:50:66:93:3F","color":"black","location":"meeting_room"},{"mac":"88:33:14:DE:D0:ED","color":"white","location":"conf_room"},{"mac":"D0:39:72:A3:DE:75","color":"gray","location":"entrance"}}'
