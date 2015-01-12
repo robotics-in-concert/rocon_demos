@@ -21,9 +21,9 @@ def publish_location(world, namespace):
     table_topic = rospy.get_param('table_topic')
     viz_table_topic = rospy.get_param('viz_table_topic')
 
-    table_ac = world_canvas_client.AnnotationCollection(world=world, types=['yocs_msgs/Table'], srv_namespace=namespace)
+    table_ac = world_canvas_client.AnnotationCollection(world=world, types=['yocs_msgs/Waypoint'], srv_namespace=namespace)
     table_ac.load_data()
-    table_ac.publish(table_topic, 'yocs_msgs/TableList', by_server=False, as_list=True)
+    table_ac.publish(table_topic, 'yocs_msgs/WaypointList', by_server=False, as_list=True)
     table_ac.publish_markers(viz_table_topic)
     return table_ac
 

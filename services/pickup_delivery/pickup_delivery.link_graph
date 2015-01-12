@@ -20,7 +20,7 @@ topics:
   - id: annotation_markers
     type: ar_track_alvar/AlvarMarkers
   - id: annotation_tables
-    type: yocs_msgs/TableList
+    type: yocs_msgs/WaypointList
 
   - id: map
     type: nav_msgs/OccupancyGrid
