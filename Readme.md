@@ -54,9 +54,15 @@
         > npm update
         > roslaunch rocon_authoring rocon_authoring.launch --screen
         ```
-     * Open browser and enter ```http://localhost:9999/``` in adress bar.
-     * Hit ```import items``` button and import workflow files in each services directory.
-     * Click the loaded workflow and check the blocks.
+     * Open browser and enter ```http://localhost:9999/``` in adress bar and hit new button marked as red
+        ![start_page](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/start_page_of_authoring.png)
+     * Hit ```import items``` button marked as red and import workflow files(xxx.json) in each services directory. For example, if you want to launch ```pickup_delivery```, you should import ```pickup_delivery_wf.json``` in ```concert_common_services/services/pickup_delivery```
+        ![authoring_page](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/authoring_page.png)
+        ![importing_page](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/import.png)
+        
+        
+        
+     
    * Importing yujin db
      * Call ros service for importing yujin rnd database to world canvas
      
