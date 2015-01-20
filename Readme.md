@@ -70,8 +70,17 @@
                   ```
   * Order by order app
        *  Launch [Web remocon](http://toyweb.cafe24.com:3008/rocon_web_remocon/index.html)
-       *  Add the your master ip of concert(default: localhost)
+          ![web remocon intro](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_intro.png)
+       *  Hit the ```+``` and add the your master ip of concert (default: ws://localhost:9090)
        *  Connect to concert
+          ![add master](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_add_master_ip.png)
+       
+          
        *  For launching order app, choose the role ```customer```, interaction ```pickup delivery order``` and start app
+          ![pickup order app launching](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_monitoring_app_launch.png)
+          ![pickup order app](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_order_app.png)
+          
        *  Similary, for launching monitoring app, choose the role ```manager```, interaction ```pickup delivery monitor``` and start app
+          ![pickup monitoring launching](https://github.com/robotics-in-concert/rocon_demos/blob/demo_concert/imgs/web_remocon_monitoring_app_launch.png)
+          ![pickup monitoring](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_monitoring_app.png)
        *  Send pick up order to robot, hit the some point in order app, and check robot movement in the monitoring app
