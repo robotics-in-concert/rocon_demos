@@ -1,9 +1,9 @@
 # Demo concert
 ## Services
 * Pickup Delivery
-    * concert_common_services/delivery
+    * concert_common_services/pickup_delivery
 * VM Delivery
-    * concert_common_services/delivery
+    * concert_common_services/vm_delivery
 * Welcome
     * concert_common_services/welcome
 
