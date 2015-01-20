@@ -1,4 +1,4 @@
-- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/pickup_delivery_order/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/pickup_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Pickup Delivery Order
@@ -17,7 +17,7 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
-- name: web_app(http://__WEBSERVER_ADDRESS__/concert_common_web_interface/concert_delivery_monitor/index.html)
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_delivery_monitor/index.html)
   role: 'Manager'
   compatibility: rocon:/*/*/indigo/chrome|firefox
   display_name: Delivery Monitor
