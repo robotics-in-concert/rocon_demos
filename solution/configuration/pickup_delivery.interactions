@@ -8,7 +8,7 @@
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    discard_btn_name: [pickup, docking, docking, vm]
+    discard_btn_name: [pickup, docking, docking, vm, base, base_front]
   remappings:
     - remap_from: send_order      
       remap_to: /pickup_send_order
