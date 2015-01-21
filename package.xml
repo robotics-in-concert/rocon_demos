@@ -13,6 +13,7 @@
   <run_depend>rospy</run_depend>
   <run_depend>kobuki_soft</run_depend>
   <run_depend>concert_service_link_graph</run_depend>
+  <run_depend>concert_software_farmer</run_depend>
   
   <export>
     <concert_service>services/pickup_delivery/pickup_delivery.service</concert_service>
