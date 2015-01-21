@@ -48,9 +48,9 @@
     > ./rocon_authoring_cli.js -a <FULL_PATH_TO_WORKFLOW>
 ```
    * Demo concert includes three workflows
-      * <Path to concert_common_services>/services/pickup_delivery/pickup_delivery_wf.json
-      * <Path to concert_common_services>/services/vm_delivery/vm_delivery_wf.json
-      * <Path to concert_common_services>/services/welcom/welcom_wf.json
+      * `<Path to concert_common_services>/services/pickup_delivery/pickup_delivery_wf.json`
+      * `<Path to concert_common_services>/services/vm_delivery/vm_delivery_wf.json`
+      * `<Path to concert_common_services>/services/welcom/welcom_wf.json`
    * Use the following command to verify whether workflows are loaded or not.
 ```    
     > ./rocon_authoring_cli.js -l
