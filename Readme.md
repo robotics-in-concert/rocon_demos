@@ -60,21 +60,20 @@
           ```
           >  rocon_launch demo_concert pickup_sim.concert --screen
           ```
-       *  If you run concert the first time. you have to import the database about worldcanvas(map, wayporint, etc.)
+       *  If you run concert the first time, you have to import the database about worldcanvas(map, wayporint, etc.)
           * Importing yujin db at worldcanvas
-             * Run the pick up service above command
+             * Run the pick up service with above command
              * Call ros service for importing yujin rnd database to world canvas
                   
                   ```
                   > rosservice call /software/world_canvas/yaml_import "filename: '<rocon_ws>/src/demo_concert/annotations/yujin_rnd_fulldb.yaml'"
                   ```
-  * Order by order app
+  * Pick up oreder by order app
        *  Launch [Web remocon](http://toyweb.cafe24.com:3008/rocon_web_remocon/index.html)
           ![web remocon intro](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_intro.png)
        *  Hit the ```+``` and add the your master ip of concert (default: ws://localhost:9090)
-       *  Connect to concert
+       *  Click the ```connect``` to connect concert
           ![add master](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_add_master_ip.png)
-       
           
        *  For launching order app, choose the role ```customer```, interaction ```pickup delivery order``` and start app
           ![pickup order app launching](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_monitoring_app_launch.png)
@@ -83,4 +82,4 @@
        *  Similary, for launching monitoring app, choose the role ```manager```, interaction ```pickup delivery monitor``` and start app
           ![pickup monitoring launching](https://github.com/robotics-in-concert/rocon_demos/blob/demo_concert/imgs/web_remocon_monitoring_app_launch.png)
           ![pickup monitoring](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_monitoring_app.png)
-       *  Send pick up order to robot, hit the some point in order app, and check robot movement in the monitoring app
+       *  Hit any point button in order app for send pick up order to robot, and check robot movement(triangle) in the monitoring app
