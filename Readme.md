@@ -65,7 +65,7 @@
 #### Pick up only solution
 * Configure the pick up service environment
 ```    
-    > cd <rocon_ws>/src/demo_concert/configuration
+    > roscd demo_concert/configurations
     > source pickup_online_webapp.sh
 ```    
 
