@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import roslib; roslib.load_manifest('world_canvas_client_py')
 import rospy
+from concert_software_farmer import SoftwareFarmClient, FailedToStartSoftwareException
 
 import world_canvas_client
 
@@ -38,14 +39,24 @@ def publish_ar_marker(world, namespace):
     ar_ac.publish_markers(viz_ar_topic)
     return ar_ac
 
-
 if __name__ == '__main__':
     rospy.init_node('world_canvas_client')
     world = rospy.get_param('world')
-    namespace = rospy.get_param('wc_namespace')
+    #namespace = rospy.get_param('wc_namespace')
 
-    map_ac = publish_map(world, namespace)
-    table_ac = publish_location(world, namespace)
-    ar_ac = publish_ar_marker(world, namespace)
-    rospy.loginfo("Done")
-    rospy.spin()
+    try:
+        sfc = SoftwareFarmClient()
+        success, namespace = sfc.allocate("concert_software_common/world_canvas_server")
+
+        if not success:
+            raise FailedToStartSoftwareException("Failed to allocate software")
+
+        rospy.loginfo("Publish World : world canvas namespace : %s"%namespace)
+        map_ac = publish_map(world, namespace)
+        table_ac = publish_location(world, namespace)
+        ar_ac = publish_ar_marker(world, namespace)
+        rospy.loginfo("Done")
+        rospy.spin()
+        sfc.deallocate("concert_software_common/world_canvas_server")
+    except FailedToStartSoftwareException as e:
+        rospy.logerr("Publish World : %s"%str(e))
