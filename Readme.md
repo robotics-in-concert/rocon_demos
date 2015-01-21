@@ -75,7 +75,7 @@
 ```    
    
 * Pickup order
-   * Open [Web Remocon](http://remocon.robotconcert.org)
+   * Open Web Remocon(http://remocon.robotconcert.org)
    ![web remocon intro](https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/imgs/web_remocon_intro.png)
 
    *  Click the ```+``` and add the your master ip of concert (default: ws://localhost:9090)
