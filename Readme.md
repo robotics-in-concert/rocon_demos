@@ -7,10 +7,11 @@
 * Welcome
     * concert_common_services/welcome
 
-## Rocon Install
-* https://github.com/robotics-in-concert/rocon_demos/tree/office_concert#concert-pc-installation
+## Installation
+#### Rocon Install
+* https://github.com/robotics-in-concert/rocon#installation
 
-## Demo Concert Install
+#### Demo Concert Install
     
     > cd <your rocon workspace>
     > cd src
@@ -21,33 +22,38 @@
     > yujin_make
     > . .bashrc
     
-## Preparing
-   * Register ros master uri and host name if you want to change it
-   
-     ```
-     > export ROS_HOSTNAME=<your pc ip>
-     > export ROS_MASTER_URI=<concert pc ip>
-     ```
-   * Register concert name if you want to change it
-   
-     ```
-     > export CONCERT_NAME=<concert name>
-     ```
-   * Importing workflows to rocon_authoring
-     * [Install Node and update rocon_authoring tool](https://github.com/robotics-in-concert/rocon_authoring/blob/master/README.md)
-     *  Importing workflows in local database.
-         *  A workflow file is in service directory and type of its name is ```XXX.json```(Ex. vm_delivery_wf.json, pickup_delivery_wf.js).
-         *  User can use command line interface for importing,deleting workflows and showing workflow list.
-            
-             ```
-             > cd <rocon workspace>/src/rocon_authoring
-             > ./rocon_authoring_cli.js -a <workflows fullpath>
-             > ./rocon_authoring_cli.js -l
-             ```
-         *  The option ```-a``` is adding a workflow and ```-l``` is showing list of workflows. you can get workflow full path in ```concert_common_services/services/<service directory>
-      
+#### Authoring tool installation
 
-## Running concert
+* [Install Node](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-debian-linux-mint-elementary-os-etc)
+* Install rocon_authoring dependency
+
+   > roscd rocon_authoring
+   > rocon_authoring
+   > npm update
+* Note that `npm update` would ask sudo access to install node-canvas dependency
+
+## Preparation
+
+* Configure ROS environment variables and concert name
+  ```
+  > export ROS_HOSTNAME=<your pc ip>
+  > export ROS_MASTER_URI=<concert pc ip>
+  > export CONCERT_NAME=<concert name>
+  ```
+*  Import workflows in local database
+   ```
+   > roscd rocon_authoring
+   > ./rocon_authoring_cli.js -a <FULL_PATH_TO_WORKFLOW>
+   ```
+   * Demo concert includes three workflows
+      * <Path to concert_common_services>/services/pickup_delivery/pickup_delivery_wf.json
+      * <Path to concert_common_services>/services/vm_delivery/vm_delivery_wf.json
+      * <Path to concert_common_services>/services/welcom/welcom_wf.json
+   * Use the following command to verify whether workflows are loaded or not.
+   
+   > ./rocon_authoring_cli.js -l
+
+## Execution
   * Pick up service 
       * Set the pick up service environment
          
