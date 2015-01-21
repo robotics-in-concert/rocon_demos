@@ -35,16 +35,16 @@
 ## Preparation
 
 * Configure ROS environment variables and concert name
-  ```
+
   > export ROS_HOSTNAME=<your pc ip>
   > export ROS_MASTER_URI=<concert pc ip>
   > export CONCERT_NAME=<concert name>
-  ```
+
 *  Import workflows in local database
-   ```
+
    > roscd rocon_authoring
    > ./rocon_authoring_cli.js -a <FULL_PATH_TO_WORKFLOW>
-   ```
+
    * Demo concert includes three workflows
       * <Path to concert_common_services>/services/pickup_delivery/pickup_delivery_wf.json
       * <Path to concert_common_services>/services/vm_delivery/vm_delivery_wf.json
