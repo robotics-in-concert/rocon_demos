@@ -2,7 +2,7 @@
 : ${CONCERT_AUTO_ENABLE_SERVICES:=[admin]}
 : ${CONCERT_AUTO_ENABLE_WORKFLOWS:='--web --engine'}
 : ${CONCERT_ROSBRIDGE_ADDRESS:=localhost}
-: ${CONCERT_WEBSERVER_ADDRESS:=localhost}
+: ${CONCERT_WEBSERVER_ADDRESS:=webapp.robotconcert.org}
 : ${CONCERT_NAME:='Yujinrobot'}
 
 
