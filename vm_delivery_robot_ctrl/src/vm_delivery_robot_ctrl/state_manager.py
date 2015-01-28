@@ -551,6 +551,7 @@ class StateManager(object):
 
     def _state_reset(self):
         if self._order_in_progress:
+            self.loginfo("Order Cancelling")
             message = 'Delivery has cancelled!'
             r = simple_delivery_msgs.RobotDeliveryOrderResult()
             r.order_id = self._delivery_order_id

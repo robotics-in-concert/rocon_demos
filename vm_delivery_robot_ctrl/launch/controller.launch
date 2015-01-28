@@ -75,7 +75,7 @@
   <arg name="custom_move_base_param_file" default="$(find waiterbot_navigation)/param/ir_costmap_params.yaml"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
   <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sounds_korean"/>
-  <arg name="volume"                      default="80"/>
+  <arg name="volume"                      default="85"/>
 
   <!-- State Manager -->
   <include file="$(find vm_delivery_robot_ctrl)/launch/includes/master_ctrl.launch.xml">
