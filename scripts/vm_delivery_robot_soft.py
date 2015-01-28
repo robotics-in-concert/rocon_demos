@@ -30,7 +30,7 @@ class WaiterSoftBot(object):
         self.publisher['robot_status'] = rospy.Publisher('robot_status', RobotStatus, queue_size = 10, latch = True)
         
         self.subscriber = {}
-        self.subscriber['table_list'] = rospy.Subscriber('table_pose_list', yocs_msgs.TableList, self.process_table_pose)
+        self.subscriber['table_list'] = rospy.Subscriber('table_pose_list', yocs_msgs.WaypointList, self.process_table_pose)
         self.subscriber['ar_list'] = rospy.Subscriber('marker_pose_list', AlvarMarkers, self.process_alvar_markers)
 
         self.table_poses = {}
@@ -50,10 +50,10 @@ class WaiterSoftBot(object):
         if not self.table_init:
             rospy.loginfo('table_pose message received')
 
-        for table in msg.tables:
+        for table in msg.waypoints:
             pose_stamped = PoseStamped()
-            pose_stamped.pose = table.pose.pose.pose
-            pose_stamped.header = table.pose.header
+            pose_stamped.pose = table.pose
+            pose_stamped.header = table.header
             self.table_poses[table.name] = pose_stamped
         self.table_init = True
         if self.ar_init and self.table_init:
