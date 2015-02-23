@@ -29,20 +29,22 @@
   > sudo apt-get install ros-indigo-turtlebot-*
 ```
 
-### Starting Concert 
+## Concert Mode
+
+* Start concert
 
 ```
 # nothing is running. 
 > roslaunch turtlebot_concert concert.launch --screen
 ```
 
-### Start turtlebot
+* Start turtlebot
 
 ```
 > roslaunch turtlebot_bringup concert_client.launch concert_whitelist:="[Turtlebot Concert]" --screen
 ```
 
-### Teleoperate Robots
+* Teleoperate Robots
 
 Select a robot and teleop around. 
 
@@ -50,7 +52,7 @@ Select a robot and teleop around.
 # Open up a new terminal
 > rocon_remocon
 
-# 1. select a concert. ROS_MASTER_URI=<CONCERT_PC IP> ROS_HOSTNAME=<MY PC>
+# 1. add and select concert. ROS_MASTER_URI=<CONCERT_PC IP> ROS_HOSTNAME=<MY PC>
 # 2. Choose role
 # 3. Select Concert Teleop 
 ```
