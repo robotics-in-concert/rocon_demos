@@ -11,3 +11,6 @@
   overrides:
     parameters: turtlebot_concert/teleop.parameters
     interactions: turtlebot_concert/teleop.interactions
+- resource_name: chatter_concert/chatter
+  overrides:
+    interactions: turtlebot_concert/chatter.interactions

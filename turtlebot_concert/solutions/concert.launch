@@ -4,6 +4,8 @@
   <arg name="services" default="turtlebot_concert/turtlebot_concert.services"/>
   <arg name="concert_name" default="Turtlebot Concert"/>
   <arg name="scheduler_type" default="compatibility_tree"/>
+  <arg name="webserver_address" default="webapp.robotconcert.org"/>
+  <arg name="disable_zeroconf" default="false"/>
 
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(arg concert_name)"/>
@@ -12,5 +14,8 @@
       <arg name="conductor_local_clients_only" value="false" />
       <arg name="default_auto_enable_services" value="all"/>
       <arg name="scheduler_type" value="$(arg scheduler_type)"/>
+      <arg name="webserver_address" value="$(arg webserver_address)"/>
+      <arg name="disable_zeroconf" value="$(arg disable_zeroconf)"/>
+      <arg name="enable_rosbridge" value="true"/>
   </include>
 </launch>
