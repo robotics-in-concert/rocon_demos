@@ -14,3 +14,4 @@
   overrides:
     parameters: office_sim_solution/teleop.parameters
     interactions: office_sim_solution/teleop.interactions
+- resource_name: concert_service_indoor_2d_map_prep/indoor_2d_map_prep
