@@ -27,6 +27,13 @@
 
 ```
   > sudo apt-get install ros-indigo-turtlebot-*
+  > mkdir ~/turtlebot
+  > cd ~/turtlebot
+  > wstool init -j5 src https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/turtlebot_concert/turtlebot.rosinstall
+  > rosdep install --from-paths src -i -y
+  > catkin_make
+  > source ~/turtlebot/devel/setup.bash
+
 ```
 
 ## Concert Mode
