@@ -25,8 +25,8 @@
     video_steamer_host: __ROSBRIDGE_ADDRESS__
     video_steamer_port: 8080
   remappings:
-    - remap_from: compressed_image
-      remap_to: /teleop/compressed_image
+    - remap_from: image
+      remap_to: /teleop/image
     - remap_from: cmd_vel
       remap_to: /teleop/cmd_vel
     - remap_from: available_teleops
