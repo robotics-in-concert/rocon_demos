@@ -13,3 +13,23 @@
     maximum_angular_velocity: 1.57
     capture_timeout: 45.0
 
+- name: web_app(http://__WEBSERVER_ADDRESS__/concert_teleop_web/index.html)
+  role: 'User'
+  compatibility: rocon:/*/*/*/chrome
+  display_name: Web Teleop
+  description: Teleop on web browser
+  max: -1
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    video_steamer_host: __ROSBRIDGE_ADDRESS__
+    video_steamer_port: 8080
+  remappings:
+    - remap_from: compressed_image
+      remap_to: /teleop/compressed_image
+    - remap_from: cmd_vel
+      remap_to: /teleop/cmd_vel
+    - remap_from: available_teleops
+      remap_to: /services/teleop/available_teleops
+    - remap_from: capture_teleop
+      remap_to: /services/teleop/capture_teleop
