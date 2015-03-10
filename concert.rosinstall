@@ -4,7 +4,7 @@
 - git: {local-name: rocon, uri: 'https://github.com/robotics-in-concert/rocon.git',
     version: indigo}
 - git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
-    version: disable_zeroconf_option}
+    version: normal_image}
 - git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
     version: indigo}
 - git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
@@ -12,15 +12,15 @@
 - git: {local-name: rocon_tools, uri: 'https://github.com/robotics-in-concert/rocon_tools.git',
     version: indigo}
 - git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
-    version: disable_zeroconf_option}
+    version: normal_image}
 - git: {local-name: rocon_tutorials, uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git',
-    version: disable_zeroconf}
-- git: {local-name: concert_services, uri: 'https://github.com/robotics-in-concert/concert_services.git',
     version: indigo}
+- git: {local-name: concert_services, uri: 'https://github.com/robotics-in-concert/concert_services.git',
+    version: normal_image}
 - git: {local-name: concert_software_farm, uri: 'https://github.com/robotics-in-concert/concert_software_farm.git',
     version: indigo}
 - git: {local-name: rocon_qt_gui, uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git',
-    version: indigo}
+    version: normal_image}
 - git: {local-name: concert_scheduling, uri: 'https://github.com/robotics-in-concert/concert_scheduling.git',
     version: master}
 - git: {local-name: std_capabilities, uri: 'https://github.com/robotics-in-concert/std_capabilities.git',

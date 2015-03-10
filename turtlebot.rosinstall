@@ -1,0 +1,49 @@
+- git: {local-name: kobuki_desktop, uri: 'https://github.com/yujinrobot/kobuki_desktop.git',
+    version: indigo}
+- git: {local-name: yocs_msgs, uri: 'https://github.com/yujinrobot/yocs_msgs.git',
+    version: indigo}
+- git: {local-name: yujin_ocs, uri: 'https://github.com/yujinrobot/yujin_ocs.git',
+    version: indigo}
+- git: {local-name: kobuki_msgs, uri: 'https://github.com/yujinrobot/kobuki_msgs.git',
+    version: indigo}
+- git: {local-name: kobuki_core, uri: 'https://github.com/yujinrobot/kobuki_core.git',
+    version: indigo}
+- git: {local-name: kobuki, uri: 'https://github.com/yujinrobot/kobuki.git', version: indigo}
+- git: {local-name: turtlebot_msgs, uri: 'https://github.com/turtlebot/turtlebot_msgs.git',
+    version: indigo}
+- git: {local-name: turtlebot, uri: 'https://github.com/turtlebot/turtlebot.git',
+    version: indigo}
+- git: {local-name: turtlebot_simulator, uri: 'https://github.com/turtlebot/turtlebot_simulator.git',
+    version: indigo}
+- git: {local-name: turtlebot_apps, uri: 'https://github.com/turtlebot/turtlebot_apps.git',
+    version: normal_image}
+- git: {local-name: turtlebot_interactions, uri: 'https://github.com/turtlebot/turtlebot_interactions.git',
+    version: indigo}
+- git: {local-name: rocon_concert, uri: 'https://github.com/robotics-in-concert/rocon_concert.git',
+    version: indigo}
+- git: {local-name: rocon_app_platform, uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git',
+    version: normal_image}
+- git: {local-name: rocon_msgs, uri: 'https://github.com/robotics-in-concert/rocon_msgs.git',
+    version: indigo}
+- git: {local-name: rocon_multimaster, uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git',
+    version: indigo}
+- git: {local-name: rocon_tools, uri: 'https://github.com/robotics-in-concert/rocon_tools.git',
+    version: indigo}
+- git: {local-name: rocon_tutorials, uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git',
+    version: indigo}
+- git: {local-name: concert_scheduling, uri: 'https://github.com/robotics-in-concert/concert_scheduling.git',
+    version: master}
+- git: {local-name: concert_services, uri: 'https://github.com/robotics-in-concert/concert_services.git',
+    version: normal_image}
+- git: {local-name: yujin_maps, uri: 'https://github.com/yujinrobot/yujin_maps.git',
+    version: master}
+- git: {local-name: image_transport_plugins, uri: 'https://github.com/ros-perception/image_transport_plugins.git',
+    version: indigo-devel }
+- git: {local-name: rocon, uri: 'https://github.com/jihoonl/rocon.git',
+    version: indigo}
+- git: {local-name: rocon_qt_gui, uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git',
+    version: normal_image}
+- git: {local-name: turtlebot_create, uri: 'https://github.com/turtlebot/turtlebot_create.git',
+    version: indigo}
+- git: {local-name: turtlebot_create_desktop, uri: 'https://github.com/turtlebot/turtlebot_create_desktop.git',
+    version: indigo}
