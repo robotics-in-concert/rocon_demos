@@ -55,6 +55,16 @@
 ```    
     > ./rocon_authoring_cli.js -l
 ```
+
+  * If importing workflows is success, you can see following message.
+
+```    
+    > d51b32f66455688b095416dbb6ab45c3 : common_func
+      7e0b3debffa794ca7121cb1d5395dfe7 : pickup_delivery_wf
+      <uuid> : <workflow name 1>
+      <uuid> : <workflow name 2>
+      ...
+```
 * Import world canvas database
 ```    
     > roslaunch demo_concert concert.launch --screen
