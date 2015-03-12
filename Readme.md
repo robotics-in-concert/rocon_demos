@@ -58,7 +58,7 @@
 * Import world canvas database
 ```    
     > roslaunch demo_concert concert.launch --screen
-    > rosservice call /software/world_canvas/yaml_import \`rospack find demo_concert\`/annotations/yujin_rnd_fulldb.yaml
+    > rosservice call /software/world_canvas/yaml_import `rospack find demo_concert`/annotations/yujin_rnd_fulldb.yaml
 ```    
 ## Execution
 
