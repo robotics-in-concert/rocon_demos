@@ -38,6 +38,8 @@
 
 ## Concert Mode
 
+Please note that you have to configure GATEWAY_NETWORK_INTERFACE environment variable if multiple network interface are available. `e.g) export GATEWAY_NETWORK_INTERFACE=eth0`
+
 * Start concert
 
 ```
@@ -46,6 +48,8 @@
 ```
 
 * Start turtlebot
+ 
+Please note that you have to configure GATEWAY_NETWORK_INTERFACE environment variable if multiple network interface are available. `e.g) export GATEWAY_NETWORK_INTERFACE=wlan0`. Also it assumes turtlebot is starting in different computer than concert. If you are starting turtlebot and concert in the same laptop, you need to have different ROS_MASTER_URI for turtlebot.
 
 ```
 > roslaunch turtlebot_bringup concert_client.launch concert_whitelist:="[Turtlebot Concert]" --screen
