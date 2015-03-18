@@ -23,16 +23,16 @@
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
     video_steamer_host: __ROSBRIDGE_ADDRESS__
-    video_steamer_port: 8080
+    video_steamer_port: 80
     capture_timeout: 45.0
     #Not implemented in webapp yet
     #maximum_linear_velocity: 2.0  
     #maximum_angular_velocity: 1.57
   remappings:
     - remap_from: image
-      remap_to: /teleop/image
+      remap_to: /turtlebot/teleop/image
     - remap_from: cmd_vel
-      remap_to: /teleop/cmd_vel
+      remap_to: /turtlebot/teleop/cmd_vel
     - remap_from: available_teleops
       remap_to: /services/teleop/available_teleops
     - remap_from: capture_teleop
