@@ -29,3 +29,5 @@
     version: master}
 - git: {local-name: rosbridge_suite, uri: 'https://github.com/creativa77/rosbridge_suite.git',
     version: rocon-web-proxy}
+- git: {local-name: web_video_server, uri: 'https://github.com/creativa77/web_video_server.git',
+    version: develop}
