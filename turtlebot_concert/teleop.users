@@ -1,0 +1,15 @@
+###############################################################################
+# Users
+###############################################################################
+
+- user: 'jcerruti@creativa77.com'
+  role: 'User'
+- user: 'hrkim@yujinrobot.com'
+  role: 'User'
+- user: 'jihoonl@yujinrobot.com'
+  role: 'User'
+- user: 'pablorm@creativa77.com'
+  role: 'User'
+- user: 'jchoclin@creativa77.com'
+  role: 'User'
+

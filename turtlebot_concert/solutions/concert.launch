@@ -6,7 +6,7 @@
   <arg name="scheduler_type" default="compatibility_tree"/>
   <arg name="webserver_address" default="webapp.robotconcert.org"/>
   <arg name="disable_zeroconf" default="false"/>
-  <arg name="proxy_uri"/>
+  <arg name="proxy_uri" if="$(arg enable_proxy)"/>
 
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(arg concert_name)"/>
@@ -18,7 +18,15 @@
       <arg name="webserver_address" value="$(arg webserver_address)"/>
       <arg name="disable_zeroconf" value="$(arg disable_zeroconf)"/>
       <arg name="enable_rosbridge" value="true"/>
+      <arg name="rosbridge_port" value="9091"/>
       <arg name="enable_proxy" value="true"/>
-      <arg name="proxy_uri" value="$(arg proxy_uri)"/>
+      <arg name="proxy_uri" value="$(arg proxy_uri)" if="$(arg enable_proxy)"/>
+      <arg name="enable_user_auth" value="true"/>
   </include>
+  <node name="rosauth" pkg="rosauth" type="ros_mac_authentication">
+     <param name="/ros_mac_authentication/secret_file_users_location" value="$(find turtlebot_concert)/secret_file_users"/>
+  </node>
+  <node name="rocon_authorization" pkg="rocon_authorization" type="users_manager">
+    <param name="users" value="$(find turtlebot_concert)/teleop.users"/>
+  </node>
 </launch>
