@@ -21,13 +21,9 @@
       <arg name="rosbridge_port" value="9091"/>
       <arg name="enable_proxy" value="true"/>
       <arg name="proxy_uri" value="$(arg proxy_uri)" if="$(arg enable_proxy)"/>
-      <arg name="enable_user_auth" value="true"/>
+      <arg name="enable_authentication" value="true"/>
       <arg name="enable_authorization" value="true"/>
+      <arg name="secret_users_file" value="$(find turtlebot_concert)/secret_file_users"/>
+      <arg name="users_roles" value="$(find turtlebot_concert)/teleop.users"/>
   </include>
-  <node name="rosauth" pkg="rosauth" type="ros_mac_authentication">
-     <param name="/ros_mac_authentication/secret_file_users_location" value="$(find turtlebot_concert)/secret_file_users"/>
-  </node>
-  <node name="rocon_authorization" pkg="rocon_authorization" type="users_manager">
-    <param name="users" value="$(find turtlebot_concert)/teleop.users"/>
-  </node>
 </launch>
