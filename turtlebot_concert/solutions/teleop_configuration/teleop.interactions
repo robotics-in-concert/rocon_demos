@@ -23,7 +23,7 @@
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
     video_steamer_host: __ROSBRIDGE_ADDRESS__
-    video_steamer_port: 80
+    video_steamer_port: 8080
     capture_timeout: 45.0
     #Not implemented in webapp yet
     #maximum_linear_velocity: 2.0  
