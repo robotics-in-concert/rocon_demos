@@ -12,6 +12,8 @@
   role: 'Web Apps'
 - user: 'hrkim@yujinrobot.com'
   role: 'User'
+- user: 'user@yujinrobot.com'
+  role: 'User'
 - user: 'hrkim@yujinrobot.com'
   role: 'Docs'
 - user: 'hrkim@yujinrobot.com'
