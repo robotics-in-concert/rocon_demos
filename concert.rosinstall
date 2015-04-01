@@ -29,7 +29,7 @@
 - git: {local-name: rosbridge_suite, uri: 'https://github.com/creativa77/rosbridge_suite.git',
     version: rocon-web-proxy}
 - git: {local-name: rosauth, uri: 'https://github.com/creativa77/rosauth.git', version: multiple_user_authentication}
-- git: {local-name: rocon_authentication, uri: 'https://github.com/creativa77/rocon_authorization.git',
+- git: {local-name: rocon_authorization, uri: 'https://github.com/creativa77/rocon_authorization.git',
     version: master}
 - git: {local-name: web_video_server, uri: 'https://github.com/creativa77/web_video_server.git',
     version: develop}
