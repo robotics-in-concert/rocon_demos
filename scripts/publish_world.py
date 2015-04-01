@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     try:
         sfc = SoftwareFarmClient()
-        success, namespace = sfc.allocate("concert_software_common/world_canvas_server")
+        success, namespace, _unused_parameters = sfc.allocate("concert_software_common/world_canvas_server")
 
         if not success:
             raise FailedToStartSoftwareException("Failed to allocate software")
