@@ -1,1 +1,4 @@
 allocation_timeout: 45.0
+enable_web_video: true
+web_video_server_address: localhost
+web_video_server_port: 8080

@@ -1,0 +1,9 @@
+<launch>
+  <arg name="server_url" default="ws://toyweb.cafe24.com:9090/ws"/>
+  <node pkg="web_video_server" name="web_video_server" type="web_video_server"></node>
+
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket_client.launch">
+    <arg name="webserver_uri" value="$(arg server_url)"/>
+  </include>
+ <node name="rosapi" pkg="rosapi" type="rosapi" />
+</launch>
