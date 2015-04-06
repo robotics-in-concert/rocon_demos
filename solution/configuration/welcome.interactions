@@ -1,6 +1,6 @@
 - name: web_url(https://a.ninja.is/home)
   role: 'Manager'
-  compatibility: rocon:/*/*/indigo/chrome|firefox
+  compatibility: rocon:/*/*/*/chrome|firefox
   display_name: Ninja block Setting
   description: Setting and checking the ninja block devices. It needs ninja block account.
   icon:
@@ -20,4 +20,7 @@
     - remap_from: start_app
       remap_to: /start_app
   parameters:
-    beacon_map: '{{"mac":"D0:FF:50:66:93:3F","color":"black","location":"meeting_room"},{"mac":"88:33:14:DE:D0:ED","color":"white","location":"conf_room"},{"mac":"D0:39:72:A3:DE:75","color":"gray","location":"entrance"}}'
+    black: '{"mac":"D0:FF:50:66:93:3F","location":"meeting_room","app_list":["VM Delivery Order App (meeting_room)","Pickup Delivery Order", "Web Search"]}'
+    white: '{"mac":"88:33:14:DE:D0:ED","location":"conf_room","app_list":["VM Delivery Order App (conf_room)", "Pickup Delivery Order"]}'
+    gray: '{"mac":"D0:39:72:A3:DE:75","location":"entrance","app_list":[]}'
+
