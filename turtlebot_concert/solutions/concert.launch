@@ -21,8 +21,9 @@
       <arg name="rosbridge_port" value="9091"/>
       <arg name="enable_proxy" value="true"/>
       <arg name="proxy_uri" value="$(arg proxy_uri)" if="$(arg enable_proxy)"/>
-      <arg name="enable_authentication" value="true"/>
+      <arg name="authentication_method" value="user_id_password"/>
       <arg name="enable_authorization" value="true"/>
+      <arg name="enable_authentication" value="true"/>
       <arg name="secret_users_file" value="$(find turtlebot_concert)/secret_file_users"/>
       <arg name="users_roles" value="$(find turtlebot_concert)/teleop.users"/>
   </include>
