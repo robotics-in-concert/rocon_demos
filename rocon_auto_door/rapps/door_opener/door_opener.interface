@@ -1,0 +1,9 @@
+subscribers:
+  - name: door_status
+    type: std_msgs/String
+publishers: 
+  - name: door_ctrl
+    type: std_msgs/Bool
+services: []
+action_clients: []
+action_servers: []

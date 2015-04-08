@@ -14,4 +14,7 @@
   <run_depend>python-requests</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
+  <export>
+    <rocon_app>rapps/door_opener/door_opener.rapp</rocon_app>
+  </export>
 </package>
