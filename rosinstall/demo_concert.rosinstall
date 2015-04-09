@@ -9,8 +9,7 @@
 - git: {local-name: concert_common_web_interface, uri: 'https://github.com/robotics-in-concert/rocon_web_gui.git',
     version: concert_common_web_interface}
 
-# it just change uri address. This repo will change after that rocon_authoring serperation task is completed, 
-- git: {local-name: rocon_authoring, uri: 'https://github.com/robotics-in-concert/rocon_service_composer_blockly.git',
+- git: {local-name: concert_workflow_engine, uri: 'https://github.com/robotics-in-concert/concert_workflow_engine.git',
     version: master}
 
 - git: {local-name: rocon_devices, uri: 'https://github.com/robotics-in-concert/rocon_devices.git',
