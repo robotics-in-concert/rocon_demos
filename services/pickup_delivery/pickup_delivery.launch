@@ -1,4 +1,6 @@
 <launch>
   <node pkg="concert_common_services" name="publish_world" type="publish_world.py">
   </node>
+  <node pkg="concert_service_workflows" name="blockly_workflows" type="blockly_workflows_service.py">
+  </node>
 </launch>
