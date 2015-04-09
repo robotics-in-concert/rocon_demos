@@ -6,9 +6,11 @@
   <arg name="scheduler_type" default="compatibility_tree"/>
   <arg name="webserver_address" default="localhost:8888"/>
   <arg name="disable_zeroconf" default="false"/>
+  <arg name="enable_proxy" default="false" />
   <arg name="proxy_uri" if="$(arg enable_proxy)"/>
   <arg name="enable_authentication" default="true"/>
   <arg name="enable_authorization" default="true" />
+
 
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(arg concert_name)"/>
@@ -25,6 +27,7 @@
       <arg name="proxy_uri" value="$(arg proxy_uri)" if="$(arg enable_proxy)"/>
       <arg name="enable_authentication" value="$(arg enable_authentication)"/>
       <arg name="enable_authorization" value="$(arg enable_authorization)"/>
+      <arg name="authentication_methods" value="userid_password"/>
       <arg name="secret_users_file" value="$(find turtlebot_concert)/secret_file_users"/>
       <arg name="users_roles" value="$(find turtlebot_concert)/teleop.users"/>
   </include>
