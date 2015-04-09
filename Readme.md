@@ -1,12 +1,4 @@
 # Demo concert
-## Services
-* Pickup Delivery
-    * concert_common_services/pickup_delivery
-* VM Delivery
-    * concert_common_services/vm_delivery
-* Welcome
-    * concert_common_services/welcome
-
 ## Installation
 #### Rocon Install
 * https://github.com/robotics-in-concert/rocon#installation
@@ -19,16 +11,16 @@
     > wstool update -j10
     > cd ..
     > yujin_make --install-rosdeps
-    > yujin_make
+    > yujin_makell
     > . .bashrc
 ```    
-#### Authoring tool installation
+#### Workflow engine installation
 
 1. [Install Node](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-debian-linux-mint-elementary-os-etc)
-2. Install rocon_authoring dependency
+2. Install concert_workflow_engine dependency
 
 ```  
-    > roscd rocon_authoring
+    > roscd concert_workflow_engine/concert_workflow_engine_blockly
     > npm update
 ```
 
@@ -41,29 +33,6 @@
      > export ROS_HOSTNAME=<your pc ip>
      > export ROS_MASTER_URI=<concert pc ip>
      > export CONCERT_NAME=<concert name>
-```
-*  Import workflows in local database
-```    
-    > roscd rocon_authoring
-    > ./rocon_authoring_cli.js -a <FULL_PATH_TO_WORKFLOW>
-```
-   * Demo concert includes three workflows
-      * `<Path to concert_common_services>/services/pickup_delivery/pickup_delivery_wf.json`
-      * `<Path to concert_common_services>/services/vm_delivery/vm_delivery_wf.json`
-      * `<Path to concert_common_services>/services/welcom/welcom_wf.json`
-   * Use the following command to verify whether workflows are loaded or not.
-```    
-    > ./rocon_authoring_cli.js -l
-```
-
-  * If importing workflows is success, you can see following message.
-
-```    
-    > d51b32f66455688b095416dbb6ab45c3 : common_func
-      7e0b3debffa794ca7121cb1d5395dfe7 : pickup_delivery_wf
-      <uuid> : <workflow name 1>
-      <uuid> : <workflow name 2>
-      ...
 ```
 * Import world canvas database
 ```    
