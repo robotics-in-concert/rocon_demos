@@ -24,6 +24,7 @@
     name: "welcome"
     priority: 99
     interactions: demo_concert/welcome
+    parameters: demo_concert/welcome
 - resource_name: concert_service_waypoint_navigation/waypoint_navigation
   overrides:
     priority: 3

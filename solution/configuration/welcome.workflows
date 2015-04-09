@@ -1,0 +1,5 @@
+workflows:
+  - workflow: demo_concert/common_func.json
+    order: 1
+  - workflow: demo_concert/welcome_without_prezi_wf.json
+    order: 2
