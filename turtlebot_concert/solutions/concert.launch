@@ -10,7 +10,7 @@
   <arg name="proxy_uri" if="$(arg enable_proxy)"/>
   <arg name="enable_authentication" default="true"/>
   <arg name="enable_authorization" default="true" />
-  <arg name="authentication_methods" if="$(arg enable_authentication)"/>
+  <arg name="authentication_methods" default="userid_password" if="$(arg enable_authentication)"/>
 
   <include file="$(find concert_master)/launch/concert_master.launch">
       <arg name="concert_name" value="$(arg concert_name)"/>
