@@ -2,16 +2,22 @@
 ## Installation
 #### Rocon Install
 * https://github.com/robotics-in-concert/rocon#installation
+* Troubleshooting
+  * When following error occurred, please refer to [installation of ros](http://wiki.ros.org/indigo/Installation/Ubuntu)
 
 #### Demo Concert Install
 ```    
     > cd <your rocon workspace>
     > cd src
+    (Try to launch simulation demo concert)
+    > wstool merge https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/rosinstall/demo_concert_sim.rosinstall
+    (Try to launch real demo concert)
     > wstool merge https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/rosinstall/demo_concert.rosinstall
+    
     > wstool update -j10
     > cd ..
     > yujin_make --install-rosdeps
-    > yujin_makell
+    > yujin_make
     > . .bashrc
 ```    
 #### Workflow engine installation
@@ -30,15 +36,11 @@
 
 * Configure ROS environment variables and concert name
 ```
-     > export ROS_HOSTNAME=<your pc ip>
-     > export ROS_MASTER_URI=<concert pc ip>
-     > export CONCERT_NAME=<concert name>
+     > export ROS_HOSTNAME=<your pc ip> (ex. export ROS_HOSTNAME=192.168.10.24)
+     > export ROS_MASTER_URI=<concert pc ip> (ex. export ROS_HOSTNAME=http://192.168.10.24:11311)
+     > export CONCERT_NAME=<concert name>  (ex. export CONCERT_NAME=demo_concert)
 ```
-* Import world canvas database
-```    
-    > roslaunch demo_concert concert.launch --screen
-    > rosservice call /software/world_canvas/yaml_import `rospack find demo_concert`/annotations/yujin_rnd_fulldb.yaml
-```    
+
 ## Execution
 
 #### Pick up only solution
@@ -47,6 +49,26 @@
     > roscd demo_concert/configurations
     > source pickup_online_webapp.sh
 ```    
+
+* Import world canvas database
+ * Launch the concert for importing world canvas annotation.
+ 
+      ```    
+      > roslaunch demo_concert concert.launch --screen
+      ```
+ * Open new termianl.
+  
+      ```
+      > cd <your rocon workspace>
+      > . .bashrc
+      > rosservice call /software/world_canvas/yaml_import `rospack find demo_concert`/annotations/yujin_rnd_fulldb.yaml
+      ``` 
+ * When you check following message,terminate concert by ```ctrl+c```.
+  
+      ```
+      result: True
+      message: ''
+      ```
 
 * Start pick up service with following command
 ```         
