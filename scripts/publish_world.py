@@ -57,6 +57,6 @@ if __name__ == '__main__':
         ar_ac = publish_ar_marker(world, namespace)
         rospy.loginfo("Done")
         rospy.spin()
-        sfc.deallocate("concert_software_common/world_canvas_server")
-    except FailedToStartSoftwareException as e:
+
+    except (FailedToStartSoftwareException, SoftwareReleaseTimeoutException) as e:
         rospy.logerr("Publish World : %s"%str(e))
