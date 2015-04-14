@@ -17,10 +17,10 @@
 #### Workflow engine installation
 
 1. [Install Node](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-debian-linux-mint-elementary-os-etc)
-2. Install concert_workflow_engine dependency
+2. Install concert_workflow_engine_blockly dependency
 
 ```  
-    > roscd concert_workflow_engine/concert_workflow_engine_blockly
+    > roscd concert_workflow_engine_blockly
     > npm update
 ```
 
