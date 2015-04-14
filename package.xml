@@ -13,7 +13,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>concert_master</run_depend>
-  <run_depend>rocon_authoring</run_depend>
+  <run_depend>concert_workflow_engine_blockly</run_depend>
   <run_depend>world_canvas_server</run_depend>
   <run_depend>concert_service_admin</run_depend>
   <run_depend>concert_service_indoor_2d_map_prep</run_depend>
