@@ -63,14 +63,14 @@
       > . .bashrc
       > rosservice call /software/world_canvas/yaml_import `rospack find demo_concert`/annotations/yujin_rnd_fulldb.yaml
       ``` 
- * When you check following message,terminate concert by ```ctrl+c```.
+ * When you check following message, terminate the concert by ```ctrl+c``` at the terminal launched it.
   
       ```
       result: True
       message: ''
       ```
 
-* Start pick up service with following command
+* Re-Start pick up service with following command
 ```         
     >  rocon_launch demo_concert pickup_sim.concert --screen
 ```    
