@@ -1,0 +1,16 @@
+<package>
+  <name>concert_common_test_services</name>
+  <version>0.0.0</version>
+  <description>
+      Services made by composer
+  </description>
+  <maintainer email="dwlee@yujinrobot.com">Dongwook Lee</maintainer>
+  <license>BSD</license>
+  <author>Dongwook Lee</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <export>
+  </export>
+
+</package>
