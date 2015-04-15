@@ -9,6 +9,7 @@
 ```    
     > cd <your rocon workspace>
     > cd src
+    
     (Try to launch simulation demo concert)
     > wstool merge https://raw.githubusercontent.com/robotics-in-concert/rocon_demos/demo_concert/rosinstall/demo_concert_sim.rosinstall
     (Try to launch real demo concert)
