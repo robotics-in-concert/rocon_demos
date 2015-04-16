@@ -30,9 +30,9 @@
     #maximum_angular_velocity: 1.57
   remappings:
     - remap_from: image
-      remap_to: /teleop/image
+      remap_to: /turtlebot/teleop/image
     - remap_from: cmd_vel
-      remap_to: /teleop/cmd_vel
+      remap_to: /turtlebot/teleop/cmd_vel
     - remap_from: available_teleops
       remap_to: /services/teleop/available_teleops
     - remap_from: capture_teleop
