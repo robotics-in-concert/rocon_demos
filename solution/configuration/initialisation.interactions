@@ -11,6 +11,7 @@
     maximum_angular_velocity: 1.0
     capture_timeout: 80.0
     wc_namespace: "/software/world_canvas"
+    service_name: __name__
 
 - name: concert_map_annotation
   role: 'System Manager'
