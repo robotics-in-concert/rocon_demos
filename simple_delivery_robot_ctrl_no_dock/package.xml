@@ -28,6 +28,5 @@
   <run_depend>concert_common_rapps</run_depend>
 
   <export>
-    <rocon_app>rapps/pickup_delivery/pickup_delivery.rapp</rocon_app>
   </export>
 </package>
