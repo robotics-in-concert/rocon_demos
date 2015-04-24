@@ -23,6 +23,5 @@
     <rocon_app>rapps/vm_delivery_sim/vm_delivery_sim.rapp</rocon_app>
     <rocon_app>rapps/drink_giver/drink_giver.rapp</rocon_app>
     <rocon_app>rapps/drink_giver_sim/drink_giver_sim.rapp</rocon_app>
-    <rocon_app>rapps/dummy_gocart/waypoint_navigation.rapp</rocon_app>
   </export>
 </package>
