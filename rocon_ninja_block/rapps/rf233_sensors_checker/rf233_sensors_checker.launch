@@ -1,0 +1,20 @@
+<launch>  
+  
+  <node pkg="rocon_ninja_block" name="rf233_sensors_checker" type="rf233_sensors_checker.py" output="screen">
+  </node>
+
+  <arg name="nb_bridge_server_host"  default= "192.168.10.32"/> <!-- host web server host in ninja block -->
+  <arg name="nb_bridge_server_port"  default= "6666"/> <!-- host web server port in ninja block -->
+  <arg name="nb_bridge_public_key"  default= "b6c15b792b6aa13b8dc01425bdec6d9ba941af40"/> <!-- public key for using ninja block cloud rest api-->
+  <arg name="nb_bridge_callback_host"  default= "61.32.117.202"/> <!-- callback url url when register url for receiving device event -->
+  <arg name="nb_bridge_callback_port"  default= "6666"/> <!-- callback url port when register url for receiving device event -->
+  
+  <include file="$(find rocon_ninja_block)/launch/nb_bridge.launch">
+    <arg name="nb_bridge_server_host" value="$(arg nb_bridge_server_host)"/>
+    <arg name="nb_bridge_server_port" value="$(arg nb_bridge_server_port)"/>
+    <arg name="nb_bridge_public_key" value="$(arg nb_bridge_public_key)"/>
+    <arg name="nb_bridge_callback_host" value="$(arg nb_bridge_callback_host)"/>
+    <arg name="nb_bridge_callback_port" value="$(arg nb_bridge_callback_port)"/>
+  </include>
+
+</launch>
