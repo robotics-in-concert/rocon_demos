@@ -1,0 +1,5 @@
+display: Motion checker
+description: The motion checker using pid motion sensor and ninja block
+compatibility: rocon:/pc
+launch: motion_checker.launch
+public_interface: motion_checker.interface
