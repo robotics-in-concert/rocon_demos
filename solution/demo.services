@@ -2,6 +2,7 @@
 - resource_name: concert_service_teleop/teleop
   overrides:
     name: "Teleop"
+    parameters: demo_concert/teleop
 - resource_name: concert_service_indoor_2d_map_prep/indoor_2d_map_prep
   overrides:
     name: "indoor_2d_map_prep"
