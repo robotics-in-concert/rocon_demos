@@ -463,6 +463,8 @@ class StateManager(object):
                 ids.append(vending_machine_msgs.DrinkType.COKE)
             elif d == "CIDER":
                 ids.append(vending_machine_msgs.DrinkType.CIDER)
+            elif d == "WELCHS":
+                ids.append(vending_machine_msgs.DrinkType.CIDER)
             else:
                 self.loginfo("Wrong Type[%s]. Order coke instead"%d)
                 ids.append(vending_machine_msgs.DrinkType.COKE)
