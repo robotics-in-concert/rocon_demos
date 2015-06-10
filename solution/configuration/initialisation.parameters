@@ -1,1 +1,4 @@
 allocation_timeout: 80.0
+maximum_linear_velocity: 0.9
+maximum_angular_velocity: 0.9
+wc_namespace_param: '/services/indoor_2d_map_prep/wc_namespace'

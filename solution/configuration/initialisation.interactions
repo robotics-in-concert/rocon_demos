@@ -7,10 +7,10 @@
   description: Select a robot and make a map in the concert
   max: 1
   parameters:
-    maximum_linear_velocity: 1.5
-    maximum_angular_velocity: 1.0
-    capture_timeout: 80.0
-    wc_namespace: "/software/world_canvas"
+    maximum_linear_velocity: __maximum_linear_velocity__
+    maximum_angular_velocity: __maximum_angular_velocity__
+    capture_timeout: __allocation_timeout__
+    wc_namespace_param: __wc_namespace_param__
     service_name: __name__
 
 - name: concert_map_annotation
@@ -20,8 +20,8 @@
   description: Annotates table and global marker
   max: 1
   parameters:
-    wc_namespace: "/software/world_canvas"
-    default_world_name: "yujin_rnd"
+    wc_namespace_param: __wc_namespace_param__
+
 
 - name: concert_admin_app
   role: 'System Manager'
