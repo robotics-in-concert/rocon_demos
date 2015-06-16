@@ -38,7 +38,7 @@ STATE_AT_TABLE       = 'AT_TABLE'
 STATE_BACKTO_BASE    = 'BACKTO_BASE'
 STATE_ON_ERROR       = 'ON_ERROR'
 STATE_RESET          = 'RESET'
-STATE_RESET_AND_CALL_AUTODOCK = 'RESET_AND_CALL_AUTODOCK'
+STATE_LOCALIZE_ERROR_RESET= 'LOCALIZE_ERROR_RESET'
 STATE_CALL_AUTODOCK  = 'CALL_AUTODOCK'
 
 # INIT
@@ -395,7 +395,7 @@ class StateManager(object):
         if result.success:
             self._localised = True 
         else:
-            self._current_state = STATE_RESET_AND_CALL_AUTODOCK
+            self._current_state = STATE_LOCALIZE_ERROR_RESET
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
@@ -420,14 +420,12 @@ class StateManager(object):
             self._current_state = STATE_LOCALISE_AT_VM
 
     def _state_localise_at_vm(self):
-
-
         if not self._localise_requested:
             self._localised = False
             goal = yocs_msgs.LocalizeGoal()
             goal.command = yocs_msgs.LocalizeGoal.STAND_AND_LOCALIZE
             goal.distortion = 0.0
-            self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done)
+            self._ac[LOC_ACTION].send_goal(goal, done_cb=self._localize_done_at_vm)
             self.loginfo('Localisation Request sent')
             self._localise_requested = True
 
@@ -435,6 +433,14 @@ class StateManager(object):
             self.loginfo('Robot localised')
             self.loginfo('Localised in front of vending machine')
             self._current_state = STATE_APPROACH_VM
+
+    def _localize_done_at_vm(self, status, result):
+        self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
+
+        if result.success:
+            self._localised = True
+        else:
+            self._current_state = STATE_RESET
 
     def _state_approach_vm(self):
         if not self._vm_interactor_requested:
@@ -573,9 +579,33 @@ class StateManager(object):
         self._reset()
         self._current_state = STATE_ON_ERROR
 
-    def _state_reset_and_call_autodock(self):
-        self._reset()
-        self._current_state = STATE_CALL_AUTODOCK
+    def _state_localise_error_reset(self):
+        self.loginfo("failed to localise it self. Going back to dock")
+        if not self._dock_interactor_requested:
+            goal = yocs_msgs.DockingInteractorGoal()
+            goal.command = yocs_msgs.DockingInteractorGoal.CALL_AUTODOCK
+            self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._dock_interactor_requested = True
+            self.loginfo("Calling auto dock!")
+
+        if self._dock_interactor_finished:
+            self._dock_interactor_finished = False
+            self._dock_interactor_requested = False
+            self._current_state = STATE_IN_DOCK
+            if self._order_in_progress:
+                self.loginfo("Order Cancelling")
+                message = 'Delivery has cancelled! It failed to localize'
+                r = simple_delivery_msgs.RobotDeliveryOrderResult()
+                r.order_id = self._delivery_order_id
+                r.message = message
+                r.success = False
+                self._deliver_order_handler.set_succeeded(r)
+            self._ac[NAV_ACTION].cancel_all_goals()
+            self._ac[DOC_ACTION].cancel_all_goals()
+            self._ac[LOC_ACTION].cancel_all_goals()
+            self._init_variables()
+            self.play_sound(self._reset_sound)
+            self.loginfo("Done!!!")
 
     def _state_call_autodock(self):
         if not self._dock_interactor_requested:

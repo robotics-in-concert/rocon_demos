@@ -33,6 +33,7 @@ STATE_AT_TABLE       = 'AT_TABLE'
 STATE_BACKTO_BASE    = 'BACKTO_BASE'
 STATE_ON_ERROR       = 'ON_ERROR'
 STATE_RESET          = 'RESET'
+STATE_LOCALIZE_ERROR_RESET= 'LOCALIZE_ERROR_RESET'
 STATE_CALL_AUTODOCK  = 'CALL_AUTODOCK'
 
 # INIT
@@ -88,6 +89,7 @@ class StateManager(object):
         self._states[STATE_BACKTO_BASE]     = self._state_backto_base
         self._states[STATE_ON_ERROR]        = self._state_on_error
         self._states[STATE_RESET]           = self._state_reset
+        self._states[STATE_LOCALIZE_ERROR_RESET]   = self._state_localise_error_reset
         self._states[STATE_CALL_AUTODOCK]   = self._state_call_autodock
 
     def _init_variables(self):
@@ -124,7 +126,8 @@ class StateManager(object):
         self._volume  = rospy.get_param('~volume', 100)
         self.loginfo("Resource path : %s"% self._resource_path)
 
-        self._debug = rospy.get_param('~debug', False)
+        #self._debug = rospy.get_param('~debug', False)
+        self._debug = True
 
 
     def _init_handles(self):
@@ -378,7 +381,7 @@ class StateManager(object):
         if result.success:
             self._localised = True 
         else:
-            self._current_state = STATE_RESET
+            self._current_state = STATE_LOCALIZE_ERROR_RESET
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
@@ -495,6 +498,34 @@ class StateManager(object):
         self._led_controller.set_on_error()
         rospy.sleep(1.0)
 
+    def _state_localise_error_reset(self):
+        self.loginfo("failed to localise it self. Going back to dock")
+        if not self._dock_interactor_requested:
+            goal = yocs_msgs.DockingInteractorGoal()
+            goal.command = yocs_msgs.DockingInteractorGoal.CALL_AUTODOCK
+            self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._dock_interactor_requested = True
+            self.loginfo("Calling auto dock!")
+
+        if self._dock_interactor_finished:
+            self._dock_interactor_finished = False
+            self._dock_interactor_requested = False
+            self._current_state = STATE_IN_DOCK
+            if self._order_in_progress:
+                self.loginfo("Order Cancelling")
+                message = 'Delivery has cancelled! It failed to localize'
+                r = simple_delivery_msgs.RobotDeliveryOrderResult()
+                r.order_id = self._delivery_order_id
+                r.message = message
+                r.success = False
+                self._deliver_order_handler.set_succeeded(r)
+            self._ac[NAV_ACTION].cancel_all_goals()
+            self._ac[DOC_ACTION].cancel_all_goals()
+            self._ac[LOC_ACTION].cancel_all_goals()
+            self._init_variables()
+            self.play_sound(self._reset_sound)
+            self.loginfo("Done!!!")
+
     def _state_reset(self):
         if self._order_in_progress:
             self.loginfo("Order Cancelling")
@@ -524,13 +555,6 @@ class StateManager(object):
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
             self.loginfo("Done!!!")
-
-
-
-
-
-
-
 
     def play_sound(self, sound):
         play_sound(self._resource_path, sound, self._volume)
