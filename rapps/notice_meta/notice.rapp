@@ -1,0 +1,3 @@
+display: Notice
+description: client notices environment in a various ways 
+public_interface: notice.interface

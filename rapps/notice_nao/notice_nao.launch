@@ -1,0 +1,19 @@
+<launch>
+  <!--  
+    Right now, the android app is hard coded to look for /cmd_vel as the input
+    topic.
+   -->
+  <arg name="application_namespace"/>
+  <arg name="simulation" default="false"/>
+  <group unless="$(arg simulation)">
+    <!-- Make a slower camera feed available. -->
+    <node pkg="rocon_naos" type="notice_nao.py" name="nao_notice" output="screen">
+    </node>
+
+    <node pkg="rostopic" type="rostopic"  name="notifier" args="pub /speech std_msgs/String 'Nao is ready to notice you' --once"/>
+  </group>
+
+  <!-- for gazebo simulation -->
+  <group if="$(arg simulation)">
+  </group>
+</launch>

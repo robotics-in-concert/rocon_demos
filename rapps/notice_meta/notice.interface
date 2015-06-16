@@ -1,0 +1,5 @@
+subscribers: 
+  - name: /notice
+    type: rocon_demo_msgs/Notice
+publishers: []
+services: []
