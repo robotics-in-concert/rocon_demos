@@ -38,6 +38,7 @@ STATE_AT_TABLE       = 'AT_TABLE'
 STATE_BACKTO_BASE    = 'BACKTO_BASE'
 STATE_ON_ERROR       = 'ON_ERROR'
 STATE_RESET          = 'RESET'
+STATE_RESET_AND_CALL_AUTODOCK = 'RESET_AND_CALL_AUTODOCK'
 STATE_CALL_AUTODOCK  = 'CALL_AUTODOCK'
 
 # INIT
@@ -86,6 +87,7 @@ class StateManager(object):
         self._states[STATE_BACKTO_BASE]     = self._state_backto_base
         self._states[STATE_ON_ERROR]        = self._state_on_error
         self._states[STATE_RESET]           = self._state_reset
+        self._states[STATE_RESET_AND_CALL_AUTODOCK]           = self._state_reset_and_call_autodock
         self._states[STATE_CALL_AUTODOCK]   = self._state_call_autodock
 
     def _init_variables(self):
@@ -393,7 +395,7 @@ class StateManager(object):
         if result.success:
             self._localised = True 
         else:
-            self._current_state = STATE_RESET
+            self._current_state = STATE_RESET_AND_CALL_AUTODOCK
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
@@ -551,7 +553,7 @@ class StateManager(object):
         self._led_controller.set_on_error()
         rospy.sleep(1.0)
 
-    def _state_reset(self):
+    def _reset(self):
         if self._order_in_progress:
             self.loginfo("Order Cancelling")
             message = 'Delivery has cancelled!'
@@ -566,7 +568,14 @@ class StateManager(object):
         self._ac[VM_ACTION].cancel_all_goals()
         self._init_variables()
         self.play_sound(self._reset_sound)
+
+    def _state_reset(self):
+        self._reset()
         self._current_state = STATE_ON_ERROR
+
+    def _state_reset_and_call_autodock(self):
+        self._reset()
+        self._current_state = STATE_CALL_AUTODOCK
 
     def _state_call_autodock(self):
         if not self._dock_interactor_requested:
