@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="concert_common_rapps" name="dummy_notice" type="dummy_notice_request.py">
+  </node>
+</launch>
