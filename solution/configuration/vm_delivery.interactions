@@ -68,14 +68,14 @@
   role: 'Customer'
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: VM Delivery Order App (Table 4)
+  display_name: VM Delivery Order App (dwlee)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: table4
+    extra_data: dwlee
   remappings:
     - remap_from: send_order
       remap_to: /vm_send_order
