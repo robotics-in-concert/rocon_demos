@@ -124,6 +124,8 @@ class StateManager(object):
         self._volume  = rospy.get_param('~volume', 100)
         self.loginfo("Resource path : %s"% self._resource_path)
 
+        self._debug = rospy.get_param('~debug', False)
+
 
     def _init_handles(self):
         # order handle
@@ -225,7 +227,22 @@ class StateManager(object):
             self._delivery_order_id = goal.order_id
             self._delivery_locations = goal.locations
             self._delivery_location_index = 0
-            self._delivery_order_received = True
+
+            if not self._debug:
+                self._delivery_order_received = True
+            else:
+                self._delivery_order_received = False
+                self._dock_interactor_finished = False
+                self._dock_interactor_requested = False
+                self._current_state = STATE_IN_DOCK
+                self._order_in_progress = False
+                message = 'Delivery Success in debug mode!'
+                r = simple_delivery_msgs.RobotDeliveryOrderResult()
+                r.order_id = self._delivery_order_id
+                r.message = message
+                r.success = True
+                self._deliver_order_handler.set_succeeded(r)
+                self.loginfo("Done!!!")
 
     def _process_deliver_order_preempt(self):
         self.loginfo("Delivery order preemption requested")
@@ -378,7 +395,7 @@ class StateManager(object):
             self._led_controller.set_on_ok()
 
             self._current_state = STATE_GOTO_PICKUP
-            #self._current_state = STATE_BACKTO_BASE
+            #self._current_state = STATE_BACKTO_BASE # Localizer Test
 
     def  _state_goto_pickup(self):
         if not self._navigator_requested:
