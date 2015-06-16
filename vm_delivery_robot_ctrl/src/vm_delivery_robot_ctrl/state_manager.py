@@ -38,7 +38,7 @@ STATE_AT_TABLE       = 'AT_TABLE'
 STATE_BACKTO_BASE    = 'BACKTO_BASE'
 STATE_ON_ERROR       = 'ON_ERROR'
 STATE_RESET          = 'RESET'
-STATE_LOCALIZE_ERROR_RESET= 'LOCALIZE_ERROR_RESET'
+STATE_LOCALISE_ERROR_RESET= 'LOCALISE_ERROR_RESET'
 STATE_CALL_AUTODOCK  = 'CALL_AUTODOCK'
 
 # INIT
@@ -87,7 +87,7 @@ class StateManager(object):
         self._states[STATE_BACKTO_BASE]     = self._state_backto_base
         self._states[STATE_ON_ERROR]        = self._state_on_error
         self._states[STATE_RESET]           = self._state_reset
-        self._states[STATE_RESET_AND_CALL_AUTODOCK]           = self._state_reset_and_call_autodock
+        self._states[STATE_LOCALISE_ERROR_RESET]  = self._state_localise_error_reset
         self._states[STATE_CALL_AUTODOCK]   = self._state_call_autodock
 
     def _init_variables(self):
@@ -351,6 +351,7 @@ class StateManager(object):
     def _state_wakeup(self):
         if not self._dock_interactor_requested:
             self._request_dock_interactor(yocs_msgs.DockingInteractorGoal.WAKE_UP, 0.8)
+            self._dock_interactor_finished = False
             self._dock_interactor_requested = True
             self.loginfo("Wake up!")
 
@@ -392,10 +393,10 @@ class StateManager(object):
     def _localize_done(self, status, result):
         self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
 
-        if result.success:
-            self._localised = True 
-        else:
-            self._current_state = STATE_LOCALIZE_ERROR_RESET
+        #if result.success:
+        #    self._localised = True 
+        #else:
+        self._current_state = STATE_LOCALISE_ERROR_RESET
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
@@ -580,11 +581,12 @@ class StateManager(object):
         self._current_state = STATE_ON_ERROR
 
     def _state_localise_error_reset(self):
-        self.loginfo("failed to localise it self. Going back to dock")
         if not self._dock_interactor_requested:
+            self.loginfo("failed to localise it self. Going back to dock")
             goal = yocs_msgs.DockingInteractorGoal()
             goal.command = yocs_msgs.DockingInteractorGoal.CALL_AUTODOCK
             self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._dock_interactor_finished = False
             self._dock_interactor_requested = True
             self.loginfo("Calling auto dock!")
 
@@ -612,6 +614,7 @@ class StateManager(object):
             goal = yocs_msgs.DockingInteractorGoal()
             goal.command = yocs_msgs.DockingInteractorGoal.CALL_AUTODOCK
             self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
+            self._dock_interactor_finished = False
             self._dock_interactor_requested = True
             self.loginfo("Calling auto dock!")
 

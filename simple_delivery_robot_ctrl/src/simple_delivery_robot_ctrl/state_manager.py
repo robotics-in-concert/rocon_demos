@@ -127,7 +127,7 @@ class StateManager(object):
         self.loginfo("Resource path : %s"% self._resource_path)
 
         #self._debug = rospy.get_param('~debug', False)
-        self._debug = True
+        self._debug = False
 
 
     def _init_handles(self):
@@ -378,10 +378,10 @@ class StateManager(object):
     def _localize_done(self, status, result):
         self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
 
-        if result.success:
-            self._localised = True 
-        else:
-            self._current_state = STATE_LOCALIZE_ERROR_RESET
+        #if result.success:
+        #    self._localised = True 
+        #else:
+        self._current_state = STATE_LOCALIZE_ERROR_RESET
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
@@ -499,8 +499,8 @@ class StateManager(object):
         rospy.sleep(1.0)
 
     def _state_localise_error_reset(self):
-        self.loginfo("failed to localise it self. Going back to dock")
         if not self._dock_interactor_requested:
+            self.loginfo("failed to localise it self. Going back to dock")
             goal = yocs_msgs.DockingInteractorGoal()
             goal.command = yocs_msgs.DockingInteractorGoal.CALL_AUTODOCK
             self._ac[DOC_ACTION].send_goal(goal, done_cb=self._dock_interactor_done)
