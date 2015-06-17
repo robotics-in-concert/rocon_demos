@@ -72,6 +72,11 @@ class StateManager(object):
         self._init_handles()
         self._init_states()
 
+        self._logfile = rospy.get_param('~log_file', 'robot_order.log')
+        self._logger = RobotOrderLogger(self._logfile, 'a')
+        self._logger.log("VM Delivery Order")
+
+
     def _init_states(self):
         self._states = {}
         self._states[STATE_IN_DOCK]         = self._state_in_dock
@@ -127,12 +132,7 @@ class StateManager(object):
         self._volume  = rospy.get_param('~volume', 100)
         self.loginfo("Resource path : %s"% self._resource_path)
 
-        sef._debug = False
-
-        self._logfile = rospy.get_param('~log_file', 'robot_order.log')
-        self._logger = RobotOrderLogger(self._logfile, 'a')
-        self._logger.log("VM Delivery Order")
-
+        self._debug = False
 
     def _init_handles(self):
         # order handle

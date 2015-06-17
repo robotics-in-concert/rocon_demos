@@ -9,7 +9,7 @@ class RobotOrderLogger(object):
         self._file = open(file_name, mode)
 
     def close(self):
-        self._file.write("------")
+        self._file.write("------\n")
         self._file.close()
 
     def log_start(self, goal):
@@ -17,7 +17,9 @@ class RobotOrderLogger(object):
         self._file.write(s)
         
     def log_result(self, r):
-        s = "[%s][%s] Finished Order [%s][%s][%s]"%(datetime.now(), rospy.Time.now(), r.order_id, r.success, r.message)
+        s = "[%s][%s] Finished Order [%s][%s][%s]\n"%(datetime.now(), rospy.Time.now(), r.order_id, r.success, r.message)
         self._file.write(s)
     
     def log(self, msg):
+        s = "[%s][%s] %s\n"%(datetime.now(), rospy.Time.now(), str(msg))
+        self._file.write(s)

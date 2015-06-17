@@ -77,6 +77,10 @@ class StateManager(object):
         self._init_handles()
         self._init_states()
 
+        self._log_file = rospy.get_param('~log_file','robot_order.log')
+        self._logger = RobotOrderLogger(self._log_file, 'a')
+        self._logger.log("Pickup Delivery Order")
+
     def _init_states(self):
         self._states = {}
         self._states[STATE_IN_DOCK]         = self._state_in_dock
@@ -130,9 +134,9 @@ class StateManager(object):
         #self._debug = rospy.get_param('~debug', False)
         self._debug = False
 
-        self._log_file = rospy.get_param('~log_file','robot_order.log')
-        self._logger = RobotOrderLogger(self._log_file, 'a')
-        self._logger.log("Pickup Delivery Order")
+
+
+
 
 
     def _init_handles(self):
