@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <name>simple_order_logger</name>
+  <version>0.0.0</version>
+  <description>The order_loger package</description>
+
+  <maintainer email="jihoonlee.in@gmail.com">Jihoon Lee</maintainer>
+
+  <license>TODO</license>
+
+  <!-- <url type="website">http://wiki.ros.org/order_loger</url> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>rospy</run_depend>
+
+</package>

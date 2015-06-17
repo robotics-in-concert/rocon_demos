@@ -14,6 +14,7 @@ import copy
 import kobuki_utils
 from kobuki_utils import play_sound
 from waiterbot_bringup import ButtonControl
+from simple_order_logger import RobotOrderLogger
 
 DELIVERY_ACTION = 'delivery_order'
 DOC_ACTION = 'docking_interactor'
@@ -129,6 +130,8 @@ class StateManager(object):
         #self._debug = rospy.get_param('~debug', False)
         self._debug = False
 
+        self._logger = RobotOrderLogger('~/.ros/waiterbot_order.log', 'a')
+
 
     def _init_handles(self):
         # order handle
@@ -223,6 +226,7 @@ class StateManager(object):
             r.order_id = goal.order_id
             r.message = message
             r.success = False
+            self.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
         else:
             goal = self._deliver_order_handler.accept_new_goal()
@@ -230,6 +234,8 @@ class StateManager(object):
             self._delivery_order_id = goal.order_id
             self._delivery_locations = goal.locations
             self._delivery_location_index = 0
+
+            self._logger.log_start(goal)
 
             if not self._debug:
                 self._delivery_order_received = True
@@ -244,6 +250,7 @@ class StateManager(object):
                 r.order_id = self._delivery_order_id
                 r.message = message
                 r.success = True
+                self._logger.log_result(r)
                 self._deliver_order_handler.set_succeeded(r)
                 self.loginfo("Done!!!")
 
@@ -266,6 +273,7 @@ class StateManager(object):
             if t == 1:
                 self._logging()
             r.sleep()
+        self._logger.close()
 
     def _logging(self):
         #self.loginfo(self._current_state)
@@ -491,6 +499,7 @@ class StateManager(object):
             r.order_id = self._delivery_order_id
             r.message = message
             r.success = True
+            self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
             self.loginfo("Done!!!")
 
@@ -518,6 +527,7 @@ class StateManager(object):
                 r.order_id = self._delivery_order_id
                 r.message = message
                 r.success = False
+                self._logger.log_result(r)
                 self._deliver_order_handler.set_succeeded(r)
             self._ac[NAV_ACTION].cancel_all_goals()
             self._ac[DOC_ACTION].cancel_all_goals()
@@ -534,6 +544,7 @@ class StateManager(object):
             r.order_id = self._delivery_order_id
             r.message = message
             r.success = False
+            self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
         self._ac[NAV_ACTION].cancel_all_goals()
         self._ac[DOC_ACTION].cancel_all_goals()
