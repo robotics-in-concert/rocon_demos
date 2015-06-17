@@ -13,7 +13,7 @@ class RobotOrderLogger(object):
         self._file.close()
 
     def log_start(self, goal):
-        s = "[%s][%s] Received Order ID : %s, Location : %s\n"%(datetime.now(), rospy.Time.now(), goal.order_id, goal.locations)
+        s = "[%s][%s] Received Order ID : %s, Location : %s Menus : %s\n"%(datetime.now(), rospy.Time.now(), goal.order_id, goal.locations, goal.menus)
         self._file.write(s)
         
     def log_result(self, r):
