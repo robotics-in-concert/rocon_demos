@@ -12,7 +12,7 @@
     </rosparam>
   </node>
   
-  <node pkg="concert_common_rapps" name="waiter_soft" type="vm_delivery_robot_soft.py" output="screen">
+  <node pkg="concert_demo_sim_rapps" name="waiter_soft" type="vm_delivery_robot_soft.py" output="screen">
     <param name="volume"                        value="$(arg volume)"/>
   </node>
 

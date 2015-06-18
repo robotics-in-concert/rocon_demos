@@ -2,4 +2,4 @@ display: Drink giver Sim
 description: This is a simulated vending machine
 compatibility: rocon:/pc
 launch: drink_giver_sim.launch
-parent_name: concert_common_rapps/drink_giver
+parent_name: concert_demo_rapps/drink_giver
