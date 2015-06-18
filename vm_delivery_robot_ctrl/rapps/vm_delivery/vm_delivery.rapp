@@ -2,4 +2,4 @@ display: vm deliverybot
 description: The waiter navigate to vending machine and bring you a drink
 compatibility: rocon:/waiterbot
 launch: vm_delivery.launch
-parent_name: concert_common_rapps/vm_delivery
+parent_name: concert_demo_rapps/vm_delivery
