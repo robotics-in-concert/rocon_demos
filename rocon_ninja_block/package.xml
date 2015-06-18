@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package>
+  <name>rocon_ninja_block</name>
+  <version>0.1.0</version>
+  <description>The rocon_ninja_block package</description>
+  
+  <maintainer email="dwlee@yujinrobot.com">dwlee</maintainer>
+  <author>DongWook Lee</author>
+  <license>BSD</license>
+ 
+  <url type="website"></url>
+  <url type="repository">https://github.com/robotics-in-concert/rocon_devices</url>
+  <url type="bugtracker">https://github.com/robotics-in-concert/rocon_devices/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>diagnostic_msgs</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>python-rospkg</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+  <run_depend>python-flask</run_depend>
+
+
+  <export>
+    <rocon_app>rapps/motion_checker/motion_checker.rapp</rocon_app>
+    <rocon_app>rapps/rf233_sensors_checker/rf233_sensors_checker.rapp</rocon_app>
+  </export>
+</package>

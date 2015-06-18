@@ -1,0 +1,17 @@
+<launch>
+  <!-- mandatory parameters -->
+  <arg name="nb_bridge_server_host"  default= "192.168.10.24"/> <!-- host web server host in ninja block -->
+  <arg name="nb_bridge_server_port"  default= "5555"/> <!-- host web server port in ninja block -->
+  <arg name="nb_bridge_public_key"  default= "4c7eff0d6a0185b9c370417d51281b262f2afc3e"/> <!-- public key for using ninja block cloud rest api-->
+  <arg name="nb_bridge_callback_host"  default= "61.32.117.202"/> <!-- callback url url when register url for receiving device event -->
+  <arg name="nb_bridge_callback_port"  default= "5555"/> <!-- callback url port when register url for receiving device event -->
+  
+  <node pkg="rocon_ninja_block" type="nb_bridge.py" name="rocon_ninja_block_bridge">
+    <!-- parameters -->
+    <param name="nb_bridge_server_host"     value="$(arg nb_bridge_server_host)"/>
+    <param name="nb_bridge_server_port"     value="$(arg nb_bridge_server_port)"/>
+    <param name="nb_bridge_public_key"      value="$(arg nb_bridge_public_key)"/>
+    <param name="nb_bridge_callback_host"  value="$(arg nb_bridge_callback_host)"/>
+    <param name="nb_bridge_callback_port"  value="$(arg nb_bridge_callback_port)"/>
+  </node>
+</launch>

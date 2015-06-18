@@ -1,0 +1,24 @@
+<launch>  
+  <arg name="time_interval"  default= "30"/> <!-- reset time for validation detected motion [min]-->
+  <arg name="monitoring_list"  default= "[motion_detector_1, motion_detector_2]"/> 
+
+  <node pkg="rocon_ninja_block" name="motion_checker" type="motion_checker.py" output="screen">
+     <param name="time_interval" value="$(arg time_interval)"/>
+     <rosparam param="monitoring_list" subst_value="True">$(arg monitoring_list)</rosparam>
+  </node>
+
+  <arg name="nb_bridge_server_host"  default= "192.168.10.24"/> <!-- host web server host in ninja block -->
+  <arg name="nb_bridge_server_port"  default= "5555"/> <!-- host web server port in ninja block -->
+  <arg name="nb_bridge_public_key"  default= "4c7eff0d6a0185b9c370417d51281b262f2afc3e"/> <!-- public key for using ninja block cloud rest api-->
+  <arg name="nb_bridge_callback_host"  default= "61.32.117.202"/> <!-- callback url url when register url for receiving device event -->
+  <arg name="nb_bridge_callback_port"  default= "5555"/> <!-- callback url port when register url for receiving device event -->
+  
+  <include file="$(find rocon_ninja_block)/launch/nb_bridge.launch">
+    <arg name="nb_bridge_server_host" value="$(arg nb_bridge_server_host)"/>
+    <arg name="nb_bridge_server_port" value="$(arg nb_bridge_server_port)"/>
+    <arg name="nb_bridge_public_key" value="$(arg nb_bridge_public_key)"/>
+    <arg name="nb_bridge_callback_host" value="$(arg nb_bridge_callback_host)"/>
+    <arg name="nb_bridge_callback_port" value="$(arg nb_bridge_callback_port)"/>
+  </include>
+
+</launch>

@@ -1,0 +1,9 @@
+subscribers: 
+  - name: ninja_block_data
+    type: rocon_ninja_block/NBDevice
+publishers: []
+services: []
+action_clients: []
+action_servers: 
+  - name: check_motion
+    type: rocon_ninja_block/CheckMotionAction

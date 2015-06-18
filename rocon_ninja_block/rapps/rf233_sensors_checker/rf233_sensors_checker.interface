@@ -1,0 +1,9 @@
+subscribers: 
+  - name: ninja_block_data
+    type: rocon_ninja_block/NBDevice
+publishers: 
+  - name: rf233_sensor_event
+    type: std_msgs/String
+services: []
+action_clients: []
+action_servers: []

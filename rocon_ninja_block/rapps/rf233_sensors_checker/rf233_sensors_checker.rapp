@@ -1,0 +1,5 @@
+display: RF233 Sensors Checker
+description: The trigerring of RF233 sensors (motion sensor , door open checker, rf remocon)
+compatibility: rocon:/pc
+launch: rf233_sensors_checker.launch
+public_interface: rf233_sensors_checker.interface
