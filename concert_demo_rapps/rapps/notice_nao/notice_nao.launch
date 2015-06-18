@@ -7,7 +7,7 @@
   <arg name="simulation" default="false"/>
   <group unless="$(arg simulation)">
     <!-- Make a slower camera feed available. -->
-    <node pkg="concert_common_rapps" type="notice_nao.py" name="nao_notice" output="screen">
+    <node pkg="concert_demo_rapps" type="notice_nao.py" name="nao_notice" output="screen">
     </node>
 
     <node pkg="rostopic" type="rostopic"  name="notifier" args="pub /speech std_msgs/String 'Nao is ready to notice you' --once"/>
