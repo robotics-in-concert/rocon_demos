@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>concert_demo_sim_rapps</name>
+  <version>0.0.0</version>
+  <description>The concert_demo_sim_rapps package</description>
+  <maintainer email="dwlee@yujinrobot.com">Dwlee</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+    <rocon_app>rapps/pickup_delivery_sim/pickup_delivery_sim.rapp</rocon_app>
+    <rocon_app>rapps/vm_delivery_sim/vm_delivery_sim.rapp</rocon_app>
+    <rocon_app>rapps/drink_giver_sim/drink_giver_sim.rapp</rocon_app>
+  </export>
+</package>

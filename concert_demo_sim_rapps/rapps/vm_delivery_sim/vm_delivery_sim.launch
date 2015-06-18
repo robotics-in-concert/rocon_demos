@@ -1,0 +1,19 @@
+<launch>
+  <arg name="volume"                      default="75"/>  <!--delivery robot sound volume -->  
+  <include file="$(find kobuki_softapps)/launch/nav.launch">
+    <arg name="delta_x" value="-23.938"/>
+    <arg name="delta_y" value="-11.841"/>
+    <arg name="delta_yaw" value="-0.008"/>
+  </include>
+  <node pkg="robot_pose_publisher" name="robot_pose_publisher" type="robot_pose_publisher">
+    <rosparam>
+      is_stamped: true
+      base_frame: base_footprint
+    </rosparam>
+  </node>
+  
+  <node pkg="concert_common_rapps" name="waiter_soft" type="vm_delivery_robot_soft.py" output="screen">
+    <param name="volume"                        value="$(arg volume)"/>
+  </node>
+
+</launch>
