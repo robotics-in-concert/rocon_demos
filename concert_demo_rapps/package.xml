@@ -15,10 +15,15 @@
   <run_depend>robot_pose_publisher</run_depend>
   <run_depend>yocs_msgs</run_depend>
   <run_depend>rocon_apps</run_depend>
+  <run_depend>rocon_demo_msgs</run_depend>
+  <run_depend>naoqi_msgs</run_depend>
+  <run_depend>actionlib</run_depend>
 
   <export>
     <rocon_app>rapps/pickup_delivery/pickup_delivery.rapp</rocon_app>
     <rocon_app>rapps/vm_delivery/vm_delivery.rapp</rocon_app>
     <rocon_app>rapps/drink_giver/drink_giver.rapp</rocon_app>
+    <rocon_app>rapps/notice_meta/notice.rapp</rocon_app>
+    <rocon_app>rapps/notice_nao/notice_nao.rapp</rocon_app>
   </export>
 </package>

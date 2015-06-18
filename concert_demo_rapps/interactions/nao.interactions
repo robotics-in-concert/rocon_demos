@@ -1,0 +1,10 @@
+
+- name: concert_common_rapps/dummy_notice_request.launch
+  role: Pairing
+  compatibility: rocon:/pc/*/hydro|indigo/precise|quantal|raring|saucy|trusty
+  display_name: Notice Nao!
+  description:  Type texts to make nao notice around
+  max: -1
+  remappings: []
+  pairing:
+    rapp: concert_common_rapps/notice
