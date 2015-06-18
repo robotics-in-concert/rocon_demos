@@ -1,13 +1,29 @@
 <concert>
+    <arg name="is_simulation"  default="false"/>
+
     <launch title="robosem_bridge:11316"    package="demo_concert" name="demo_backend.launch" port="11316">
       <arg name="concert_client_name" value="robosem_bridge"/>
+      <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
 
     <launch title="hue_bridge:11317"    package="demo_concert" name="demo_backend.launch" port="11317">
       <arg name="concert_client_name" value="hue_bridge"/>
+      <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
 
     <launch title="motion_checker:11318"    package="demo_concert" name="demo_backend.launch" port="11318">
       <arg name="concert_client_name" value="motion_checker"/>
+      <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
+
+    <launch title="door_opener:11319"    package="demo_concert" name="demo_backend.launch" port="11319">
+      <arg name="concert_client_name" value="door_opener"/>
+      <arg name="is_simulation" value="$(arg is_simulation)"/>
+    </launch>
+<!--
+    <launch title="rf233_sensors_checker:11320"    package="demo_concert" name="demo_backend.launch" port="11320">
+      <arg name="concert_client_name" value="rf233_sensors_checker"/>
+      <arg name="is_simulation" value="$(arg is_simulation)"/>
+    </launch>
+-->
 </concert>
