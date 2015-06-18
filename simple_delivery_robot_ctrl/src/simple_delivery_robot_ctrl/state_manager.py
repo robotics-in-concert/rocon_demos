@@ -392,10 +392,10 @@ class StateManager(object):
     def _localize_done(self, status, result):
         self.loginfo("Localize result : %s, Message : %s"%(result.success,result.message))
 
-        #if result.success:
-        #    self._localised = True 
-        #else:
-        self._current_state = STATE_LOCALIZE_ERROR_RESET
+        if result.success:
+            self._localised = True 
+        else:
+            self._current_state = STATE_LOCALIZE_ERROR_RESET
 
     def _state_register_dock(self):
         if not self._dock_interactor_requested:
