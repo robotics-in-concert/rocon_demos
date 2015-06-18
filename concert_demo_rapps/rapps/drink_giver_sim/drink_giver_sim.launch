@@ -1,3 +1,0 @@
-<launch>
-  <node pkg="concert_common_rapps" name="vm_soft" type="dummy_vending_machine.py" output="screen"/>
-</launch>
