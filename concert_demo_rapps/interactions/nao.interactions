@@ -1,5 +1,5 @@
 
-- name: concert_common_rapps/dummy_notice_request.launch
+- name: concert_demo_rapps/dummy_notice_request.launch
   role: Pairing
   compatibility: rocon:/pc/*/hydro|indigo/precise|quantal|raring|saucy|trusty
   display_name: Notice Nao!

@@ -2,4 +2,4 @@ display:          Nao Notice
 description:      Nao notices around 
 compatibility:    rocon:/aldebaran_nao
 launch:           notice_nao.launch
-parent_name:      concert_common_rapps/notice
+parent_name:      concert_demo_rapps/notice
