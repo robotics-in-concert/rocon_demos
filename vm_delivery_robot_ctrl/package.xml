@@ -27,6 +27,7 @@
   <run_depend>waiterbot_bringup</run_depend>
   <run_depend>vending_machine_msgs</run_depend>
   <run_depend>simple_order_logger</run_depend>
+  <run_depend>concert_demo_rapps</run_depend>
 
   <export>
     <rocon_app>rapps/vm_delivery/vm_delivery.rapp</rocon_app>
