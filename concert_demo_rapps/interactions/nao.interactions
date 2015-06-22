@@ -7,4 +7,4 @@
   max: -1
   remappings: []
   pairing:
-    rapp: concert_common_rapps/notice
+    rapp: concert_demo_rapps/notice
