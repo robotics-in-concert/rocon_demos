@@ -66,7 +66,8 @@
   <arg name="move_base_param_path"        default="$(find simple_delivery_robot_ctrl)/params/move_base"/>
   <arg name="custom_move_base_param_file" default="$(find waiterbot_navigation)/param/ir_costmap_params.yaml"/>
   <arg name="vel_smoother_param"          default="$(find waiterbot_bringup)/param/vel_smoother.yaml"/>
-  <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sounds_korean"/>
+  <!--<arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sounds_korean"/>-->
+  <arg name="resource_path"               default="$(find waiterbot_bringup)/resources/sound_2015"/>
   <arg name="volume"                      default="75"/>
 
   <!-- State Manager -->
