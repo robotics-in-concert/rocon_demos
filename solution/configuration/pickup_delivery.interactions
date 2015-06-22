@@ -1,3 +1,15 @@
+- name: web_app(http://192.168.10.32:9999)
+  role: 'Manager'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: Workflow engine Monitoring
+  description: Workflow status viewer.It displays enabled workflow, resource pool, request status.
+
+- name: web_app(http://192.168.10.32:9999/prezi?prezi_id=32iuijp9zylz&channel=office_prezi&prezi_auto_load=true)
+  role: 'Manager'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: Office Solution Viewer
+  description: Office soulution viewer with prezi
+
 - name: web_app(http://__WEBSERVER_ADDRESS__/pickup_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
