@@ -293,7 +293,7 @@ class StateManager(object):
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
         elif self._current_state == STATE_WAKEUP or self._current_state == STATE_LOCALISE or self._current_state == STATE_REGISTER_DOCK or self._current_state == STATE_GOTO_VM:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_FRONTDESK
-        elif self._current_state == STATE_AT_VM:
+        elif self._current_state == STATE_AT_VM or self._current_state == STATE_APPROACH_VM:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_FRONTDESK
         elif self._current_state == STATE_GOTO_TABLE:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
