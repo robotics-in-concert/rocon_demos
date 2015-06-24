@@ -93,7 +93,7 @@
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
     robot1: adams
-    robot2: zach 
+    robot2: bach 
     robot3: young 
   remappings:
     - remap_from: map
@@ -103,8 +103,10 @@
     - remap_from: ar_markers
       remap_to: /annotation/ar_markers
 # Order list remappings
-    - remap_from: order_list
-      remap_to: /order_list
+    - remap_from: pickup_order_list
+      remap_to: /pickup_order_list
+    - remap_from: vm_order_list
+      remap_to: /vm_order_list
 # Control order remappings
     - remap_from: show_video
       remap_to: /show_video
