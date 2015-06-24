@@ -508,6 +508,7 @@ class StateManager(object):
             self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
             self.loginfo("Done!!!")
+            self.play_sound(self._at_base_sound)
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
