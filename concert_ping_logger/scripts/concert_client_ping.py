@@ -5,7 +5,7 @@ import rospy
 import concert_ping_logger
 
 if __name__ == '__main__':
-    rospy.init_node('concert_ping')
+    rospy.init_node('concert_ping',anonymous=True)
 
     argv = sys.argv
 
