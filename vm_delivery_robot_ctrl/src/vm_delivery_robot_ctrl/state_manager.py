@@ -293,7 +293,7 @@ class StateManager(object):
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.IDLE
         elif self._current_state == STATE_WAKEUP or self._current_state == STATE_LOCALISE or self._current_state == STATE_REGISTER_DOCK or self._current_state == STATE_GOTO_VM:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_FRONTDESK
-        elif self._current_state == STATE_AT_VM:
+        elif self._current_state == STATE_AT_VM or self._current_state == STATE_APPROACH_VM or self._current_state == STATE_BACK_FROM_VM:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.WAITING_FOR_FRONTDESK
         elif self._current_state == STATE_GOTO_TABLE:
             feedback.delivery_status.status = simple_delivery_msgs.DeliveryStatus.GO_TO_RECEIVER
@@ -577,7 +577,7 @@ class StateManager(object):
             r.success = True
             self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
-
+            self.play_sound(self._at_base_sound)
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
