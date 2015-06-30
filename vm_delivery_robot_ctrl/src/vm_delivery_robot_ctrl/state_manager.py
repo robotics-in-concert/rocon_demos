@@ -568,6 +568,8 @@ class StateManager(object):
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
             self.loginfo("Done!!!")
+            self.play_sound(self._at_base_sound)
+            rospy.sleep(0.1)
 
             self._order_in_progress = False
             message = 'Delivery Success!'
@@ -577,13 +579,19 @@ class StateManager(object):
             r.success = True
             self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
-            self.play_sound(self._at_base_sound)
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
         rospy.sleep(1.0)
 
     def _reset(self):
+        self._ac[NAV_ACTION].cancel_all_goals()
+        self._ac[DOC_ACTION].cancel_all_goals()
+        self._ac[LOC_ACTION].cancel_all_goals()
+        self._ac[VM_ACTION].cancel_all_goals()
+        self.play_sound(self._reset_sound)
+        self._logging()
+
         if self._order_in_progress:
             self.loginfo("Order Cancelling")
             message = 'Delivery has cancelled!'
@@ -593,12 +601,7 @@ class StateManager(object):
             r.success = False
             self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
-        self._ac[NAV_ACTION].cancel_all_goals()
-        self._ac[DOC_ACTION].cancel_all_goals()
-        self._ac[LOC_ACTION].cancel_all_goals()
-        self._ac[VM_ACTION].cancel_all_goals()
         self._init_variables()
-        self.play_sound(self._reset_sound)
 
     def _state_reset(self):
         self._reset()
@@ -618,6 +621,12 @@ class StateManager(object):
             self._dock_interactor_finished = False
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
+            self._ac[NAV_ACTION].cancel_all_goals()
+            self._ac[DOC_ACTION].cancel_all_goals()
+            self._ac[LOC_ACTION].cancel_all_goals()
+            self.play_sound(self._reset_sound)
+            rospy.sleep(0.1)
+
             if self._order_in_progress:
                 self.loginfo("Order Cancelling")
                 message = 'Delivery has cancelled! It failed to localize'
@@ -627,11 +636,8 @@ class StateManager(object):
                 r.success = False
                 self._logger.log_result(r)
                 self._deliver_order_handler.set_succeeded(r)
-            self._ac[NAV_ACTION].cancel_all_goals()
-            self._ac[DOC_ACTION].cancel_all_goals()
-            self._ac[LOC_ACTION].cancel_all_goals()
+
             self._init_variables()
-            self.play_sound(self._reset_sound)
             self.loginfo("Done!!!")
 
     def _state_call_autodock(self):
