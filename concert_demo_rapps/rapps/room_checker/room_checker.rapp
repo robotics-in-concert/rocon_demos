@@ -1,0 +1,4 @@
+display: Room Checker
+description: It is able to check empty room via iot motion detector sensor
+public_interface: room_checker.interface
+public_parameters: room_checker.parameters

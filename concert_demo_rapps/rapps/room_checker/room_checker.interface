@@ -1,0 +1,9 @@
+subscribers: []
+publishers: 
+  - name: empty_room
+    type: std_msgs/String
+services: []
+action_clients: []
+action_servers:
+  - name: check_empty_room
+    type: room_chcker_msgs/CheckEmptyRoomAction
