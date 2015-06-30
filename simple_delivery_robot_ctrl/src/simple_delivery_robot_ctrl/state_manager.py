@@ -256,6 +256,7 @@ class StateManager(object):
                 r.order_id = self._delivery_order_id
                 r.message = message
                 r.success = True
+
                 self._logger.log_result(r)
                 self._deliver_order_handler.set_succeeded(r)
                 self.loginfo("Done!!!")
@@ -500,7 +501,10 @@ class StateManager(object):
             self._current_state = STATE_IN_DOCK
             self._order_in_progress = False
             message = 'Delivery Success!'
+            self._logging()
+            self.play_sound(self._at_base_sound)
 
+            rospy.sleep(0.1)
             r = simple_delivery_msgs.RobotDeliveryOrderResult()
             r.order_id = self._delivery_order_id
             r.message = message
@@ -508,7 +512,6 @@ class StateManager(object):
             self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
             self.loginfo("Done!!!")
-            self.play_sound(self._at_base_sound)
 
     def _state_on_error(self):
         self._led_controller.set_on_error()
@@ -527,8 +530,15 @@ class StateManager(object):
             self._dock_interactor_finished = False
             self._dock_interactor_requested = False
             self._current_state = STATE_IN_DOCK
+            self._ac[NAV_ACTION].cancel_all_goals()
+            self._ac[DOC_ACTION].cancel_all_goals()
+            self._ac[LOC_ACTION].cancel_all_goals()
+            self.play_sound(self._reset_sound)
+            self._logging()
+
             if self._order_in_progress:
                 self.loginfo("Order Cancelling")
+                rospy.sleep(0.1)
                 message = 'Delivery has cancelled! It failed to localize'
                 r = simple_delivery_msgs.RobotDeliveryOrderResult()
                 r.order_id = self._delivery_order_id
@@ -536,16 +546,21 @@ class StateManager(object):
                 r.success = False
                 self._logger.log_result(r)
                 self._deliver_order_handler.set_succeeded(r)
-            self._ac[NAV_ACTION].cancel_all_goals()
-            self._ac[DOC_ACTION].cancel_all_goals()
-            self._ac[LOC_ACTION].cancel_all_goals()
+
             self._init_variables()
-            self.play_sound(self._reset_sound)
             self.loginfo("Done!!!")
 
     def _state_reset(self):
+        self._ac[NAV_ACTION].cancel_all_goals()
+        self._ac[DOC_ACTION].cancel_all_goals()
+        self._ac[LOC_ACTION].cancel_all_goals()
+        self.play_sound(self._reset_sound)
+        self._current_state = STATE_ON_ERROR
+        self._logging()
+
         if self._order_in_progress:
             self.loginfo("Order Cancelling")
+            rospy.sleep(0.1)
             message = 'Delivery has cancelled!'
             r = simple_delivery_msgs.RobotDeliveryOrderResult()
             r.order_id = self._delivery_order_id
@@ -553,12 +568,7 @@ class StateManager(object):
             r.success = False
             self._logger.log_result(r)
             self._deliver_order_handler.set_succeeded(r)
-        self._ac[NAV_ACTION].cancel_all_goals()
-        self._ac[DOC_ACTION].cancel_all_goals()
-        self._ac[LOC_ACTION].cancel_all_goals()
         self._init_variables()
-        self.play_sound(self._reset_sound)
-        self._current_state = STATE_ON_ERROR
 
     def _state_call_autodock(self):
         if not self._dock_interactor_requested:
