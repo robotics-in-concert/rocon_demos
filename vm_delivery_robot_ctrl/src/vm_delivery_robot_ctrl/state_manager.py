@@ -366,6 +366,7 @@ class StateManager(object):
 
     def _state_in_dock(self):
         if self._delivery_order_received:
+            self.play_sound(self._order_received_sound)
             self._delivery_order_received = False
             self._order_in_progress = True
             self._current_state = STATE_WAKEUP
@@ -434,7 +435,6 @@ class StateManager(object):
 
     def  _state_goto_vm(self):
         if not self._navigator_requested:
-            self.play_sound(self._order_received_sound)
             self._request_navigator(self._vm_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_pickup_timeout, 0.0)
             self._navigator_requested = True
 

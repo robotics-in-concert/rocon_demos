@@ -352,6 +352,7 @@ class StateManager(object):
             self._delivery_order_received = False
             self._order_in_progress = True
             self._current_state = STATE_WAKEUP
+            self.play_sound(self._order_received_sound)
 
     def _state_wakeup(self):
         if not self._dock_interactor_requested:
@@ -417,7 +418,6 @@ class StateManager(object):
 
     def  _state_goto_pickup(self):
         if not self._navigator_requested:
-            self.play_sound(self._order_received_sound)
             self._request_navigator(self._pickup_location, yocs_msgs.NavigateToGoal.APPROACH_ON, self._nav_retry, self._nav_pickup_timeout, 0.0)
             self._navigator_requested = True
 
