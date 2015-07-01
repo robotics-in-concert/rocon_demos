@@ -1,6 +1,4 @@
 <launch>  
-
-  <include file="$(find rocon_smartthings_bridge)/launch/smartthings_bridge.launch"></include>
   
   <arg name="time_interval"  default= "1"/> <!-- reset time for validation detected motion [min]-->
   <arg name="rooms"  default= ""/> 
