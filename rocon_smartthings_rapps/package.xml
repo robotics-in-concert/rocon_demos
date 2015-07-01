@@ -4,6 +4,7 @@
   <version>0.0.0</version>
   <description>The rocon_smartthings_rapps package</description>
   <maintainer email="dwlee@yujinrobot.com">Dwlee</maintainer>
+  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
 
   <license>BSD</license>
 
