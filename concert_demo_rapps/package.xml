@@ -27,6 +27,5 @@
     <rocon_app>rapps/notice_meta/notice.rapp</rocon_app>
     <rocon_app>rapps/notice_nao/notice_nao.rapp</rocon_app>
     <rocon_app>rapps/room_checker/room_checker.rapp</rocon_app>
-    <rocon_app>rapps/room_checker_ninjablock/room_checker_ninjablock.rapp</rocon_app>
   </export>
 </package>
