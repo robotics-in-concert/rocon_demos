@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>rocon_smartthings_rapps</name>
+  <version>0.0.0</version>
+  <description>The rocon_smartthings_rapps package</description>
+  <maintainer email="dwlee@yujinrobot.com">Dwlee</maintainer>
+  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>concert_demo_rapps</run_depend>
+  <run_depend>room_checker_msgs</run_depend>
+
+  <export>
+    <rocon_app>rapps/room_checker_smartthings/room_checker_smartthings.rapp</rocon_app>
+  </export>
+</package>

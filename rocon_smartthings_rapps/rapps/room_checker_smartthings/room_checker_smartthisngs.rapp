@@ -1,0 +1,5 @@
+display: Room Checker SmartThings
+description: It is able to check empty room with motion detector sensor connected to smartthings iot bridge
+compatibility: rocon:/pc
+launch: room_checker_smartthings.launch
+parent_name: concert_demo_rapps/room_checker

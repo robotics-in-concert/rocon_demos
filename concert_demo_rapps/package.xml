@@ -18,6 +18,7 @@
   <run_depend>rocon_demo_msgs</run_depend>
   <run_depend>naoqi_msgs</run_depend>
   <run_depend>actionlib</run_depend>
+  <run_depend>room_checker_msgs</run_depend>
 
   <export>
     <rocon_app>rapps/pickup_delivery/pickup_delivery.rapp</rocon_app>
@@ -25,5 +26,6 @@
     <rocon_app>rapps/drink_giver/drink_giver.rapp</rocon_app>
     <rocon_app>rapps/notice_meta/notice.rapp</rocon_app>
     <rocon_app>rapps/notice_nao/notice_nao.rapp</rocon_app>
+    <rocon_app>rapps/room_checker/room_checker.rapp</rocon_app>
   </export>
 </package>
