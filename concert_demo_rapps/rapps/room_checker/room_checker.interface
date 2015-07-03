@@ -6,4 +6,4 @@ services: []
 action_clients: []
 action_servers:
   - name: check_empty_room
-    type: room_chcker_msgs/CheckEmptyRoomAction
+    type: room_checker_msgs/CheckEmptyRoomAction
