@@ -2,7 +2,7 @@
     <arg name="concert_client_name" default="dude"/>
     <arg name="concert_name"          default="$(env CONCERT_NAME)"/> 
     <arg name="is_simulation"       default="false"/>
-    <arg name="iot_bridge_name"       default=""/>
+    <arg name="iot_bridge_name"       default="$(env ROCON_IOT_BRIDGE_NAME)"/>
     
     <arg name="rapp_package_whitelist"  if="$(arg is_simulation)" value="[rocon_apps, concert_demo_rapps, concert_demo_sim_rapps, robosem_bridge, rocon_hue, rocon_$(arg iot_bridge_name)_rapps, rocon_auto_door]"/>
     <arg name="rapp_package_whitelist"  unless="$(arg is_simulation)" value="[concert_demo_rapps, robosem_bridge, rocon_hue, rocon_$(arg iot_bridge_name)_rapps, rocon_auto_door, rocon_rtsp_camera_relay, rocon_apps]"/>
