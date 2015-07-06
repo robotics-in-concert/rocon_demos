@@ -11,8 +11,8 @@
       <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
 
-    <launch title="motion_checker:11318"    package="demo_concert" name="demo_backend.launch" port="11318">
-      <arg name="concert_client_name" value="motion_checker"/>
+    <launch title="room_checker:11318"    package="demo_concert" name="demo_backend.launch" port="11318">
+      <arg name="concert_client_name" value="room_checker"/>
       <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
 
