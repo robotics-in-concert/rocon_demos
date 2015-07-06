@@ -20,7 +20,7 @@ class EmptyRoomChecker():
 
     def __init__(self, time_interval=5, room_list=[]):
         self.subcriber = {}
-        self.subcriber['devices'] = rospy.Subscriber("devices", rocon_device_msgs.Devices, self._update)
+        self.subcriber['devices'] = rospy.Subscriber("/devices", rocon_device_msgs.Devices, self._update)
         # create empty room
         # self.publisher['empty_room']
         self.check_motion_as = actionlib.SimpleActionServer('check_empty_room', CheckEmptyRoomAction, execute_cb=self._check_empty_room, auto_start=False)
