@@ -2,8 +2,12 @@
     <arg name="concert_client_name" default="dude"/>
     <arg name="concert_name"          default="$(env CONCERT_NAME)"/> 
     <arg name="is_simulation"       default="false"/>
-    <arg name="rapp_package_whitelist"  if="$(arg is_simulation)" value="[rocon_apps, concert_demo_rapps, concert_demo_sim_rapps, robosem_bridge, rocon_hue, rocon_ninjablock_rapps, rocon_auto_door]"/>
-    <arg name="rapp_package_whitelist"  unless="$(arg is_simulation)" value="[concert_demo_rapps, robosem_bridge, rocon_hue, rocon_ninjablock_rapps, rocon_auto_door, rocon_rtsp_camera_relay, rocon_apps]"/>
+    <arg name="iot_bridge_name"       default=""/>
+    
+    <arg name="rapp_package_whitelist"  if="$(arg is_simulation)" value="[rocon_apps, concert_demo_rapps, concert_demo_sim_rapps, robosem_bridge, rocon_hue, rocon_($arg iot_bridge_name)_rapps, rocon_auto_door]"/>
+    <arg name="rapp_package_whitelist"  unless="$(arg is_simulation)" value="[concert_demo_rapps, robosem_bridge, rocon_hue, rocon_($arg iot_bridge_name)_rapps, rocon_auto_door, rocon_rtsp_camera_relay, rocon_apps]"/>
+
+    <include file="$(find demo_concert)/launch/$(arg iot_bridge_name)_bridge.launch"></include>
 
     <include file="$(find rocon_app_manager)/launch/concert_client.launch">
         <arg name="robot_name" value="$(arg concert_client_name)"/>

@@ -11,9 +11,10 @@
       <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
 
-    <launch title="room_checker:11318"    package="demo_concert" name="demo_backend.launch" port="11318">
+    <launch title="room_checker:11318"    package="demo_concert" name="demo_backend_with_iot_bridge.launch" port="11318">
       <arg name="concert_client_name" value="room_checker"/>
       <arg name="is_simulation" value="$(arg is_simulation)"/>
+      <arg name="iot_bridge_name" value="ninjablock"/>
     </launch>
 
     <launch title="door_opener:11319"    package="demo_concert" name="demo_backend.launch" port="11319">
