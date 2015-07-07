@@ -79,7 +79,7 @@ class EmptyRoomChecker():
             rospy.sleep(0.1)
 
 if __name__ == '__main__':
-    rospy.init_node('empty_room_checker')
+    rospy.init_node('empty_room_checker_with_ninjablock')
     time_interval = 5
     room_list = []
     time_interval = rospy.get_param('~time_interval', 5)
