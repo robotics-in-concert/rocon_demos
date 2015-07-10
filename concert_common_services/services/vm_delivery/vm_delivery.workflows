@@ -1,0 +1,2 @@
+workflows:
+  - workflow: concert_common_services/vm_delivery_wf.wf

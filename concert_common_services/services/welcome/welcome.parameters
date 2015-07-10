@@ -1,1 +1,2 @@
-workflows:
+alloc_timeout: '3600000'
+workflows: concert_common_services/welcome.workflows

@@ -1,12 +1,8 @@
-# Concert client tuples are of the platform-system-robot-name-app where
-# the name is just a placemarker for the eventual concert client name.
-# All other parts of the tuple are fixed.
-
 name: welcome
-description: "Welcome for your visit"
-author: YujinRobot
-priority: 2
-launcher_type: roslaunch
-launcher: concert_common_services/welcome
+description: welcome for visitor
+author: dwlee
+priority: 100
 interactions: concert_common_services/welcome
 parameters: concert_common_services/welcome
+launcher_type: roslaunch
+launcher: concert_common_services/welcome
