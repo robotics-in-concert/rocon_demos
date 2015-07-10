@@ -1,3 +1,2 @@
 workflows:
-  - workflow: demo_concert/vm_delivery_without_prezi_wf.json
-    order: 1
+  - workflow: demo_concert/vm_delivery_wf.wf

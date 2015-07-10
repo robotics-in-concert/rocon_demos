@@ -1,1 +1,2 @@
+alloc_timeout: '3600000'
 workflows: demo_concert/welcome.workflows
