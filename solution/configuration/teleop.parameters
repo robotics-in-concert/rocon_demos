@@ -1,7 +1,7 @@
 # parameter for teleop service
 maximum_linear_velocity: 0.9
 maximum_angular_velocity: 0.9
-allocation_timeout: 15.0
+allocation_timeout: 45.0
 enable_web_video: false
 web_video_server_address: localhost
 web_video_server_port: 8080
