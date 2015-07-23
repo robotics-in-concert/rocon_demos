@@ -31,3 +31,4 @@
     priority: 3
     name: "restock"
     description: "Deliver items from storage to kitchen"
+- resource_name: concert_common_test_services/test_service
