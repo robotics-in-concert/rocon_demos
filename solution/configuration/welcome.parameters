@@ -1,2 +1,3 @@
 alloc_timeout: '3600000'
+robot_ip:192.168.10.59
 workflows: demo_concert/welcome.workflows
