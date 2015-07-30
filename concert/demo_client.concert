@@ -1,8 +1,8 @@
 <concert>
     <arg name="is_simulation"  default="false"/>
 
-    <launch title="robosem_bridge:11316"    package="demo_concert" name="demo_backend.launch" port="11316">
-      <arg name="concert_client_name" value="robosem_bridge"/>
+    <launch title="rapix_bridge:11316"    package="demo_concert" name="demo_backend.launch" port="11316">
+      <arg name="concert_client_name" value="rapix_bridge"/>
       <arg name="is_simulation" value="$(arg is_simulation)"/>
     </launch>
 
