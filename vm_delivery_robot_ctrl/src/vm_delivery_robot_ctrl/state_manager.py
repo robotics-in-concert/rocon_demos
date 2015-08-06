@@ -58,9 +58,10 @@ class StateManager(object):
 
     _init_sound = 'init.wav'
     _confirm_sound = 'confirm.wav'
-    _retry_sound = 'navi_failed.wav'
-    _reset_sound = 'try_again.wav'
-    _navi_failed_sound = 'retry.wav'
+    _retry_sound = 'moo.wav'
+    _reset_sound = 'reset.wav'
+    _navi_failed_sound = 'navi_failed.wav'
+    _vm_failed_sound = 'vm_failed.wav'
     _order_received_sound = 'order_received.wav'
     _at_table_sound = 'at_table.wav'
     _enjoy_meal_sound = 'enjoy_meal.wav'
@@ -359,7 +360,7 @@ class StateManager(object):
         self.loginfo("Vending interactor result : %s, message : %s"%(result.success, result.message))
 
         if result.success == False:
-            self.play_sound(self._retry_sound)
+            self.play_sound(self._vm_failed_sound)
             self._current_state = STATE_RESET
         else:
             self._vm_interactor_finished = True
@@ -585,6 +586,7 @@ class StateManager(object):
         rospy.sleep(1.0)
 
     def _reset(self):
+        rospy.sleep(2.0)
         self._ac[NAV_ACTION].cancel_all_goals()
         self._ac[DOC_ACTION].cancel_all_goals()
         self._ac[LOC_ACTION].cancel_all_goals()
