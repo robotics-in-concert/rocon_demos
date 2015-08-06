@@ -63,9 +63,9 @@ class StateManager(object):
     """ 
     _init_sound = 'init.wav'
     _confirm_sound = 'confirm.wav'
-    _retry_sound = 'navi_failed.wav'
-    _reset_sound = 'try_again.wav'
-    _navi_failed_sound = 'retry.wav'
+    _retry_sound = 'moo.wav'
+    _reset_sound = 'reset.wav'
+    _navi_failed_sound = 'navi_failed.wav'
     _order_received_sound = 'order_received.wav'
     _at_table_sound = 'at_table.wav'
     _enjoy_meal_sound = 'enjoy_meal.wav'
@@ -551,6 +551,7 @@ class StateManager(object):
             self.loginfo("Done!!!")
 
     def _state_reset(self):
+        rospy.sleep(2.0)
         self._ac[NAV_ACTION].cancel_all_goals()
         self._ac[DOC_ACTION].cancel_all_goals()
         self._ac[LOC_ACTION].cancel_all_goals()
