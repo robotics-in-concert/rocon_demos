@@ -29,14 +29,14 @@
 - name: web_app(http://__WEBSERVER_ADDRESS__/vm_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: VM Delivery Order App (yeonhee)
+  display_name: VM Delivery Order App (svc_team)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: yeonhee
+    extra_data: svc_team
   remappings:
     - remap_from: send_order 
       remap_to: /vm_send_order
@@ -68,14 +68,14 @@
   role: 'Customer'
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: VM Delivery Order App (dwlee)
+  display_name: VM Delivery Order App (sw_team)
   description: Exhibition web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: dwlee
+    extra_data: sw_team
   remappings:
     - remap_from: send_order
       remap_to: /vm_send_order
@@ -94,7 +94,7 @@
     rosbridge_port: __ROSBRIDGE_PORT__
     robot1: adams
     robot2: bach 
-    robot3: young 
+    robot3: verdi 
   remappings:
     - remap_from: map
       remap_to: /map
