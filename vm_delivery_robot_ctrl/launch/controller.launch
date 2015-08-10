@@ -56,7 +56,8 @@
   <arg name="vending_machine_ar_id"            default="16"/>
   <arg name="ar_pair_spotted_markers_topic" default="spotted_markers"/>
   <arg name="ar_pair_relative_target_pose_topic"  default="relative_target_pose"/>
-  <arg name="ar_pair_target_offset"         default="0.33"/>
+  <arg name="ar_pair_target_offset"         default="0.17"/>
+  <!--<arg name="ar_pair_target_offset"         default="0.33"/>-->
   <arg name="delivery_order_action"         default="delivery_order"/>
 
   <!-- Actions for state manager -->

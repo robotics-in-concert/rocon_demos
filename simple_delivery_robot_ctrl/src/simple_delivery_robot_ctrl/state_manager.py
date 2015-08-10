@@ -241,9 +241,11 @@ class StateManager(object):
             self._delivery_locations = goal.locations
             self._delivery_location_index = 0
 
+            self.loginfo("Here")
             self._logger.log_start(goal)
 
             if not self._debug:
+                self.loginfo("Order received = True")
                 self._delivery_order_received = True
             else:
                 self._delivery_order_received = False
@@ -349,6 +351,7 @@ class StateManager(object):
 
     def _state_in_dock(self):
         if self._delivery_order_received:
+            self.loginfo("state in dock received order")
             self._delivery_order_received = False
             self._order_in_progress = True
             self._current_state = STATE_WAKEUP

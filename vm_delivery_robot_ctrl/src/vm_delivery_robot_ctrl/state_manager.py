@@ -475,6 +475,8 @@ class StateManager(object):
             self.loginfo("Approached VM")
             self._vm_interactor_requested = False
             self._current_state = STATE_AT_VM
+            #rospy.sleep(3.0)
+            #self._current_state = STATE_BACK_FROM_VM
 
     def _state_at_vm(self):
         if not self._vm_interactor_requested:
@@ -515,6 +517,8 @@ class StateManager(object):
             self.loginfo('Moving to next destination[%s]'%str(location))
             self._request_navigator(location, yocs_msgs.NavigateToGoal.APPROACH_NEAR, 3, 300, self._nav_table_distance)
             self._current_state = STATE_GOTO_TABLE
+            #self._current_state = STATE_BACKTO_BASE
+
 
     def _state_goto_table(self):
         # Wait for arriving
