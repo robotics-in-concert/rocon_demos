@@ -3,7 +3,7 @@
     <arg name="robot_name" value="$(env ROBOT_NAME)"/>
     <arg name="robot_type" value="$(env ROBOT_TYPE)"/>
     <arg name="concert_whitelist" value="$(env CONCERT_WHITELIST)"/>
-    <arg name="rapp_package_whitelist" value="[]"/>
+    <arg name="rapp_package_whitelist" value="[concert_demo_rapps, vending_machine_control]"/>
     <arg name="interactions" value="false"/>
     <arg name="capabilities" value="false"/>
     <arg name="robot_unique_name" value="true"/>
