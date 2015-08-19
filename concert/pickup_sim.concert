@@ -9,7 +9,7 @@
     </launch>
 
     <launch title="bach:11314"    package="demo_concert" name="demo_backend.launch" port="11314">
-      <arg name="concert_client_name" value="bach"/>
+      <arg name="concert_client_name" value="young"/>
       <arg name="is_simulation" value="true"/>
     </launch>
     

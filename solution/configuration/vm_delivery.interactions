@@ -93,7 +93,7 @@
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
     robot1: adams
-    robot2: bach 
+    robot2: young 
     robot3: verdi 
   remappings:
     - remap_from: map
