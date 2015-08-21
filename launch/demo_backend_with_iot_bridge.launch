@@ -15,5 +15,6 @@
         <arg name="robot_type" value="pc"/>
         <arg name="rapp_package_whitelist" value="$(arg rapp_package_whitelist)"/>
         <arg name="concert_watch_period" value="1"/>
+        <arg name="screen"  value="true"/>
     </include>
 </launch>
