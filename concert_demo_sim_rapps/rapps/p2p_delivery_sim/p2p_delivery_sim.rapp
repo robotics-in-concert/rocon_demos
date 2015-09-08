@@ -1,0 +1,5 @@
+display: P2P delivery sim
+description: The simulated waiterbots of p2p delivery service. 
+compatibility: rocon:/pc
+launch: p2p_delivery_sim.launch
+parent_name: concert_demo_rapps/p2p_delivery
