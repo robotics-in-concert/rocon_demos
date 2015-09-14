@@ -1,3 +1,0 @@
-<launch>
-    <include file="$(find rocon_smartthings_bridge)/launch/smartthings_bridge.launch"></include>
-</launch>

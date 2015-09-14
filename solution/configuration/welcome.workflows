@@ -1,3 +1,0 @@
-workflows:
-  - workflow: demo_concert/common_func.wf
-  - workflow: demo_concert/welcome_wf.wf
