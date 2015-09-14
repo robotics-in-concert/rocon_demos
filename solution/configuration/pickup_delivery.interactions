@@ -29,6 +29,25 @@
     - remap_from: tables
       remap_to: /annotation/tables
 
+- name: web_app(http://__WEBSERVER_ADDRESS__/vm_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: VM Delivery Order App (sw_team)
+  description: Head office web menu
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: sw_team
+  remappings:
+    - remap_from: send_order
+      remap_to: /pickup_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status
+    - remap_from: tables
+      remap_to: /annotation/tables
+
 - name: web_app(http://__WEBSERVER_ADDRESS__/concert_delivery_monitor/index.html)
   role: 'Manager'
   compatibility: rocon:/*/*/indigo/chrome|firefox
