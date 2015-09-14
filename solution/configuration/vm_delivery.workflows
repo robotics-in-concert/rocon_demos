@@ -1,2 +1,0 @@
-workflows:
-  - workflow: demo_concert/vm_delivery_with_cancel_wf.wf
