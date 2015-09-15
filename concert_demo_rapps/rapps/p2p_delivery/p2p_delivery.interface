@@ -1,0 +1,19 @@
+subscribers: 
+  - name: map
+    type: nav_msgs/OccupancyGrid
+  - name: map_metadata
+    type: nav_msgs/MapMetaData
+  - name: location_list
+    type: yocs_msgs/WaypointList
+  - name: global_marker_list
+    type: ar_track_alvar_msgs/AlvarMarkers
+publishers: 
+  - name: robot_pose
+    type: geometry_msgs/PoseStamped
+  - name: robot_status
+    type: simple_delivery_msgs/RobotStatus
+services: []
+action_clients: []
+action_servers:
+  - name: p2p_delivery_order
+    type: simple_delivery_msgs/P2PDeliveryOrderAction
