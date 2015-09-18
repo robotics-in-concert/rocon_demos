@@ -1,0 +1,18 @@
+<launch>
+  <include file="$(find waiterbot_bringup)/launch/minimal.launch"/>
+  <group ns="young">
+    <include file="$(find simple_delivery_robot_ctrl)/launch/controller.launch">
+      <arg name="global_ar_pair_topic"        value="/annotations/ar_markers"/>
+      <arg name="location_list_topic"         default="/annotations/tables"/>
+    </include>
+  </group>
+  <include file="$(find simple_delivery_robot_ctrl)/launch/db.launch"/>
+
+  <group ns="/services/delivery">
+    <arg name="waiter_name" default="young"/>
+    <node pkg="concert_common_services" name="task_manager_sim" type="delivery_task_manager_sim.py" output="screen">
+      <param name="waiter_name" value="$(arg waiter_name)"/>
+    </node>
+  </group>
+
+</launch>
