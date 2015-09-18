@@ -1,4 +1,3 @@
-name : p2p_delivery
 display: P2P Delivery  
 description: Point to point delivery with message. 
 public_interface: p2p_delivery.interface
