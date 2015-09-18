@@ -23,7 +23,7 @@ class P2PDeliveryRobot(object):
         self.command_base = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         self.loginfo('Wait for movebase')
         self.command_base.wait_for_server()
-        self.delivery_server = actionlib.SimpleActionServer(self.action_name, P2PRobotDeliveryOrderAction, execute_callback, auto_start=False)
+        self.delivery_server = actionlib.SimpleActionServer(self.action_name, P2PRobotDeliveryOrderActionAction, execute_callback, auto_start=False)
 
         self.pub = {}
         self.pub['robot_status'] = rospy.Publisher('robot_status', RobotStatus, queue_size=10, latch=True)
@@ -83,7 +83,7 @@ class P2PDeliveryRobot(object):
         self.loginfo("IDLE")
         rospy.sleep(1)
 
-        result = P2PRobotDeliveryOrderResult(order_id, True, "Success!")
+        result = P2PRobotDeliveryOrderActionResult(order_id, True, "Success!")
         self.delivery_server.set_succeeded(result)
 
     def spin(self):
@@ -118,7 +118,7 @@ class P2PDeliveryRobot(object):
         return True
 
     def feedback(self, order_id, target_goal, status,  message):
-        feedback = RobotDeliveryOrderFeedback()
+        feedback = P2PDeliveryOrderActionFeedback()
         feedback.delivery_status.order_id = order_id
         feedback.delivery_status.target_goal = target_goal
         feedback.delivery_status.status = status
