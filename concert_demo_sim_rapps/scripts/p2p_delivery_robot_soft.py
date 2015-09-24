@@ -23,7 +23,7 @@ class P2PDeliveryRobot(object):
         self.command_base = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         self.loginfo('Wait for movebase')
         self.command_base.wait_for_server()
-        self.delivery_server = actionlib.SimpleActionServer(self.action_name, P2PDeliveryOrderActionAction, self.execute_callback, auto_start=False)
+        self.delivery_server = actionlib.SimpleActionServer(self.action_name, P2PDeliveryOrderAction, self.execute_callback, auto_start=False)
 
         self.locations = {}
         self.locations_init = False
@@ -44,46 +44,46 @@ class P2PDeliveryRobot(object):
         time_start = 5
         time_end = 6
         order_id = goal.order_id
-        caller = goal.from_
-        recipient = goal.to
+        caller = goal.sender
+        recipient = goal.receiver
         message = goal.message
 
         self.loginfo('Order Received [%s -> %s]'%(caller, recipient))
 
         # Go to the caller, and return feedback arrive caller
-        self.goto(order_id, target_goal=caller, status=P2PDeliveryStatus.GO_TO_PICKUP, message="Go to caller")
+        self.go_to(order_id, target_goal=caller, status=P2PDeliveryStatus.GO_TO_PICKUP, message="Go to caller")
 
         # Arrival at caller
         self.feedback(order_id, caller, P2PDeliveryStatus.ARRIVAL_AT_PICKUP, "Arrived at caller")
         self.pub['robot_status'].publish(RobotStatus(P2PDeliveryStatus.ARRIVAL_AT_PICKUP, self.battery_status))
 
         # Wait for Caller's confirmation
-        self.process_status(time_range=[time_start, time_end], order_id=order_id, target_goal=caller, status=P2PDeliveryStatus.WAITING_FOR_PICKUP_CONFIRM)
+        self.process_status(time_range=[time_start, time_end], order_id=order_id, target_goal=caller, status=P2PDeliveryStatus.WAITING_FOR_PICKUP_CONFIRM, message=message)
 
         # Go to receiver
         self.go_to(order_id=order_id, target_goal=recipient, status=P2PDeliveryStatus.GO_TO_RECEIVER, message="Go to recipient")
 
         # arrival at receiver
-        self.feedback(order_id, recipient, P2PDeliveryStatus.ARRIVAL_AT_RECEIVER, "Arrival at receiver") 
+        self.feedback(order_id, recipient, P2PDeliveryStatus.ARRIVAL_AT_RECEIVER, "Arrival at receiver")
         self.pub['robot_status'].publish(RobotStatus(P2PDeliveryStatus.ARRIVAL_AT_RECEIVER, self.battery_status))
-        
+
         # Wait for Receiver's confirmation
-        self.process_status(time_range=[time_start, time_end], order_id=order_id, target_goal=receiver, status=P2PDeliveryStatus.WAITING_FOR_RECEIVER_CONFIRM)
+        self.process_status(time_range=[time_start, time_end], order_id=order_id, target_goal=recipient, status=P2PDeliveryStatus.WAITING_FOR_RECEIVER_CONFIRM, message=message)
 
         # Complete Delivery
-        self.feedback(order_id, target_goal, P2PDeliveryStatus.COMPLETE_DELIVERY, "COMPLETE_DELIVERY")
-        self.publisher['robot_status'].publish(RobotStatus(P2PDeliveryStatus.COMPLETE_DELIVERY, self.battery_status))
+        self.feedback(order_id, recipient, P2PDeliveryStatus.COMPLETE_DELIVERY, "COMPLETE_DELIVERY")
+        self.pub['robot_status'].publish(RobotStatus(P2PDeliveryStatus.COMPLETE_DELIVERY, self.battery_status))
 
         # Complete all delivery
-        self.feedback(order_id, target_goal, P2PDeliveryStatus.COMPLETE_ALL_DELIVERY, "COMPLETE_ALL_DELIVERY")
-        self.publisher['robot_status'].publish(RobotStatus(P2PDeliveryStatus.COMPLETE_ALL_DELIVERY, self.battery_status))
+        #self.feedback(order_id, recipient, P2PDeliveryStatus.COMPLETE_ALL_DELIVERY, "COMPLETE_ALL_DELIVERY")
+        #self.publisher['robot_status'].publish(RobotStatus(P2PDeliveryStatus.COMPLETE_ALL_DELIVERY, self.battery_status))
 
         # Returning to Docking
         self.go_to(order_id=order_id, target_goal='docking', status=P2PDeliveryStatus.RETURN_TO_DOCK, message="RETURN_TO_DOCK")
         self.loginfo("IDLE")
         rospy.sleep(1)
 
-        result = P2PRobotDeliveryOrderActionResult(order_id, True, "Success!")
+        result = P2PDeliveryOrderResult(order_id, True, "Success!")
         self.delivery_server.set_succeeded(result)
 
     def spin(self):
@@ -112,19 +112,19 @@ class P2PDeliveryRobot(object):
         self.feedback(order_id, target_goal, status, message)
         self.pub['robot_status'].publish(RobotStatus(status, self.battery_status))
 
-        goal = MoveBaseGoal(self.table_poses[target_goal])
+        goal = MoveBaseGoal(self.locations[target_goal])
         self.command_base.send_goal(goal)
         self.command_base.wait_for_result()
         resp = self.command_base.get_result()
         return True
 
     def feedback(self, order_id, target_goal, status, message):
-        feedback = P2PDeliveryOrderActionFeedback()
+        feedback = P2PDeliveryOrderFeedback()
         feedback.delivery_status.order_id = order_id
         feedback.delivery_status.target_goal = target_goal
         feedback.delivery_status.status = status
 
-        self.waiter_server.publish_feedback(feedback)
+        self.delivery_server.publish_feedback(feedback)
         #self.loginfo("%s - %s"(target_goal, message)
 
     def loginfo(self, msg):
@@ -146,7 +146,7 @@ class P2PDeliveryRobot(object):
             self.global_markers[m.id] = m.pose
 
         if not self.global_markers_init:
-            self.loginfo('received global markers') 
+            self.loginfo('received global markers')
             self.global_markers_init = True
 
 
