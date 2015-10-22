@@ -1,7 +1,7 @@
 alloc_timeout: '3600000'
 action_timeout: '300000'
 ar_topic: /annotation/ar_markers
-map_name: rnd_test4
+map_name: head_0914
 map_topic: /map
 table_topic: /annotation/tables
 viz_ar_topic: /annotation/viz_ar_markers

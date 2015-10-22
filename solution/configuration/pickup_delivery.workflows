@@ -1,2 +1,2 @@
 workflows:
-  - workflow: demo_concert/pickup_delivery_with_cancel_wf.wf
+  - workflow: demo_concert/pickup_delivery_wf.wf

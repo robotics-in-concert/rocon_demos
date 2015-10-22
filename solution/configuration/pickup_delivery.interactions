@@ -4,11 +4,81 @@
   display_name: Workflow engine Monitoring
   description: Workflow status viewer.It displays enabled workflow, resource pool, request status.
 
-- name: web_app(http://192.168.10.32:9999/prezi?prezi_id=32iuijp9zylz&channel=office_prezi&prezi_auto_load=true)
-  role: 'Manager'
+- name: web_app(http://__WEBSERVER_ADDRESS__/cafe_delivery_order/index.html)
+  role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: Office Solution Viewer
-  description: Office soulution viewer with prezi
+  display_name: ROCON smart cafe order-sofa1
+  description: Robot delivery order app 
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: sofa1
+  remappings:
+    - remap_from: send_order      
+      remap_to: /pickup_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://__WEBSERVER_ADDRESS__/cafe_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: ROCON smart cafe order-table1
+  description: Robot delivery order app 
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: table1
+  remappings:
+    - remap_from: send_order      
+      remap_to: /pickup_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://__WEBSERVER_ADDRESS__/cafe_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: ROCON smart cafe order-table2
+  description: Robot delivery order app 
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: table2
+  remappings:
+    - remap_from: send_order      
+      remap_to: /pickup_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
+
+- name: web_app(http://__WEBSERVER_ADDRESS__/cafe_delivery_order/index.html)
+  role: 'Customer'
+  compatibility: rocon:/*/*/indigo/chrome|firefox
+  display_name: ROCON smart cafe order-conf
+  description: Robot delivery order app 
+  icon:
+    resource_name: rocon_icons/coffee.png
+  parameters:
+    rosbridge_address: __ROSBRIDGE_ADDRESS__
+    rosbridge_port: __ROSBRIDGE_PORT__
+    extra_data: conf_room
+  remappings:
+    - remap_from: send_order      
+      remap_to: /pickup_send_order
+    - remap_from: delivery_status
+      remap_to: /delivery_status  
+    - remap_from: tables
+      remap_to: /annotation/tables
 
 - name: web_app(http://__WEBSERVER_ADDRESS__/pickup_delivery_order/index.html)
   role: 'Customer'
@@ -32,14 +102,14 @@
 - name: web_app(http://__WEBSERVER_ADDRESS__/vm_delivery_order/index.html)
   role: 'Customer'
   compatibility: rocon:/*/*/indigo/chrome|firefox
-  display_name: VM Delivery Order App (sw_team)
+  display_name: VM Delivery Order App (sofa1)
   description: Head office web menu
   icon:
     resource_name: rocon_icons/coffee.png
   parameters:
     rosbridge_address: __ROSBRIDGE_ADDRESS__
     rosbridge_port: __ROSBRIDGE_PORT__
-    extra_data: sw_team
+    extra_data: sofa1
   remappings:
     - remap_from: send_order
       remap_to: /pickup_send_order
