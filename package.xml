@@ -3,11 +3,10 @@
   <name>demo_concert</name>
   <version>0.0.0</version>
   <description>
-    Yujin Robot Rnd Office Concert
+    Yujin Robot Roboworld 2015 Concert
   </description>
 
-  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
-  <maintainer email="dwlee@yujinrobot.com">Dong wook Lee</maintainer>
+  <maintainer email="hrkim@yujinrobot.com">HyungRyul Kim</maintainer>
 
   <license>BSD</license>
 
@@ -19,4 +18,5 @@
   <run_depend>concert_service_indoor_2d_map_prep</run_depend>
   <run_depend>concert_service_waypoint_navigation</run_depend>
   <run_depend>concert_common_services</run_depend>
+  <run_depend>concert_common_test_services</run_depend>
 </package>
