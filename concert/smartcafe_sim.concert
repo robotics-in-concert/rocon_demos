@@ -1,0 +1,16 @@
+<concert>
+    <launch title="concert:11311" package="demo_concert" name="concert.launch" port="11311">
+      <arg name="services" value="demo_concert/demo.services"/>
+    </launch>
+    
+    <launch title="adams:11313"    package="demo_concert" name="demo_backend.launch" port="11313">
+      <arg name="concert_client_name" value="adams"/>
+      <arg name="is_simulation" value="true"/>
+    </launch>
+
+    <launch title="bach:11314"    package="demo_concert" name="demo_backend.launch" port="11314">
+      <arg name="concert_client_name" value="young"/>
+      <arg name="is_simulation" value="true"/>
+    </launch>
+    
+</concert>
